@@ -1,0 +1,9 @@
+# OSX
+.DS_Store
+
+# IDEs
+/.vscode/
+/.idea/
+
+.gradle
+.gradle_user_home

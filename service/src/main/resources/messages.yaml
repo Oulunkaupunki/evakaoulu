@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2021 City of Oulu
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+fi.oulu.evakaoulu:
+  MessageProvider:
+    DECISION_HEADER:
+      fi: Tampereen varhaiskasvatukseen liittyvät päätökset
+    DECISION_CONTENT:
+      fi: |
+        Olette hakeneet lapsellenne varhaiskasvatus- tai kerhopaikkaa Tampereen varhaiskasvatuksesta. Päätös on luettavissa alla olevasta liitteestä.
+
+        Varhaiskasvatus tai kerhopaikka on hakemuksen tehneen huoltajan hyväksyttävissä Tampereen kaupungin varhaiskasvatuksen sähköisessä palvelussa osoitteessa varhaiskasvatus.tampere.fi. Paikkaa ei voi hyväksyä Suomi.fi-viestit -palvelussa.
+
+        Huomioittehan, että vastaus päätökseen tulee antaa kahden viikon kuluessa.
+    FEE_DECISION_HEADER:
+      fi: Tampereen varhaiskasvatukseen liittyvät päätökset
+    FEE_DECISION_CONTENT:
+      fi: |
+        Olette saaneet päätöksen varhaiskasvatuksen asiakasmaksusta Tampereen kaupungilta. Päätös on luettavissa alla olevasta liitteestä.
+
+        Varhaiskasvatuksen asiakasmaksu on voimassa toistaiseksi ja perheellä on velvollisuus ilmoittaa, mikäli perheen tulot olennaisesti muuttuvat (+/- 10 %).
+
+        Lisätietoja varhaiskasvatuksen asiakasmaksuista
+
+        https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/asiakasmaksut.html
+    VOUCHER_VALUE_DECISION_HEADER:
+      fi: Tampereen varhaiskasvatukseen liittyvät päätökset
+    VOUCHER_VALUE_DECISION_CONTENT:
+      fi: |
+        Olette saaneet päätöksen palvelusetelin omavastuuosuudesta Tampereen kaupungilta. Päätös on luettavissa alla olevasta liitteestä.
+
+        Omavastuuosuus on voimassa toistaiseksi ja perheellä on velvollisuus ilmoittaa, mikäli perheen tulot olennaisesti muuttuvat (+/- 10 %).
+
+        Lisätietoja:
+
+        https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/asiakasmaksut.html

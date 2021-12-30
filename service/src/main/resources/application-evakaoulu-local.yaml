@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2021 City of Oulu
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+# used with the trevaka-local profile, overlaying eVaka's local profile properties
+# profile priority defined by "last wins" -strategy of spring.profiles.active declarations (build file/env var)
+---
+debug: true
+
+spring:
+  devtools:
+    livereload:
+      enabled: false
+  main:
+    logStartupInfo: false
+logging:
+  level:
+    fi:
+      espoo:
+        evaka: DEBUG
+        evaka.invoicing.integration.IntegrationClient: DEBUG
+      oulu:
+        evakaoulu: DEBUG
+    org:
+      springframework:
+        boot:
+          autoconfigure: INFO
+
+evaka:
+  aws:
+    region: eu-west-1
+  five_years_old_daycare:
+    enabled: false
+  integration:
+    koski:
+      enabled: false
+
+trevaka:
+  ipaas:
+    username: user
+    password: pass
+  invoice:
+    url: http://localhost:${server.port}/salesOrder

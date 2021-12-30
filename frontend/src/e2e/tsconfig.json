@@ -1,0 +1,16 @@
+{
+  "extends": "../../../evaka/frontend/tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "..",
+    "composite": true,
+    "outDir": "../../dist/e2e",
+    "noImplicitAny": false,
+    "types": [
+      "jest",
+      "node"
+    ],
+    "jsx": "react"
+  },
+  "include": [ "../../webpack.d.ts" ]
+}

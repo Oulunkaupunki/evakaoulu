@@ -8,7 +8,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 import React from 'react'
 import { EmployeeCustomizations } from 'lib-customizations/types'
-import ouluLogo from './city-logo.svg'
+import OuluLogo from './city-logo.svg'
 import featureFlags from './featureFlags'
 
 const customizations: EmployeeCustomizations = {

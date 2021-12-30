@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-# used with the trevaka-local profile, overlaying eVaka's local profile properties
+# used with the evakaoulu-local profile, overlaying eVaka's local profile properties
 # profile priority defined by "last wins" -strategy of spring.profiles.active declarations (build file/env var)
 ---
 debug: true
@@ -35,7 +35,7 @@ evaka:
     koski:
       enabled: false
 
-trevaka:
+evakaoulu:
   ipaas:
     username: user
     password: pass

@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 
 /**
- * All trevaka-specific configuration properties.
+ * All evakaoulu-specific configuration properties.
  */
 @ConstructorBinding
 @ConfigurationProperties(prefix = "evakaoulu", ignoreUnknownFields = false)

@@ -42,7 +42,7 @@ dependencies {
 }
 
 springBoot {
-    mainClass.set("fi.tampere.trevaka.TrevakaMainKt")
+    mainClass.set("fi.oulu.evakaoulu.EVakaOuluMainKt")
 }
 
 allprojects {
@@ -62,9 +62,9 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 tasks {
     test {
         useJUnitPlatform()
-        systemProperty("spring.profiles.active", "integration-test,trevaka")
+        systemProperty("spring.profiles.active", "integration-test,evakaoulu")
     }
     bootRun {
-        systemProperty("spring.profiles.active", "local,trevaka-local")
+        systemProperty("spring.profiles.active", "local,evakaoulu-local")
     }
 }

@@ -2,6 +2,6 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-rootProject.name = "trevaka-service"
+rootProject.name = "evakaoulu-service"
 includeBuild("../evaka/service")
 includeBuild("../evaka/evaka-bom")

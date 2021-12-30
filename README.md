@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2021 City of Oulu
 SPDX-License-Identifier: LGPL-2.1-or-later
 -->
 
-# treVaka
+# eVakaOulu
 eVakaOulu aka eVaka Oulu – ERP for early childhood education in Oulu
 
 This repository contains the code for customizing, configuring and extending the Espoo eVaka ERP for use in Oulu early education.

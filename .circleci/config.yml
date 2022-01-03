@@ -232,7 +232,7 @@ commands:
             EVAKA_CUSTOMIZATIONS: tampere
           command: |
             export APP_COMMIT="$CIRCLE_SHA1"
-            ICONS=pro yarn build
+            ICONS=free yarn build
 
   load_base_image:
     steps:

@@ -27,8 +27,8 @@ ARG build=none
 ARG commit=none
 ENV APP_BUILD "$build"
 ENV APP_COMMIT "$commit"
-LABEL fi.tampere.build="$build" \
-      fi.tampere.commit="$commit"
+LABEL fi.ouka.build="$build" \
+      fi.ouka.commit="$commit"
 
 EXPOSE 8888
 

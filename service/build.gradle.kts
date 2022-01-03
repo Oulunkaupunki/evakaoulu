@@ -42,7 +42,7 @@ dependencies {
 }
 
 springBoot {
-    mainClass.set("fi.oulu.evakaoulu.EVakaOuluMainKt")
+    mainClass.set("fi.ouka.evakaoulu.EVakaOuluMainKt")
 }
 
 allprojects {

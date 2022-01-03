@@ -198,13 +198,13 @@ commands:
       - run:
           name: link customizations
           working_directory: *workspace_evaka_frontend
-          command: ln -v -s $(readlink -f ../../frontend/tampere) src/lib-customizations/tampere
+          command: ln -v -s $(readlink -f ../../frontend/oulu) src/lib-customizations/oulu
       - run:
           name: yarn build
           working_directory: *workspace_evaka_frontend
           environment:
             SENTRY_NO_PROGRESS_BAR: "1"
-            EVAKA_CUSTOMIZATIONS: tampere
+            EVAKA_CUSTOMIZATIONS: oulu
           command: |
             export APP_COMMIT="$CIRCLE_SHA1"
             ICONS=free yarn build
@@ -546,7 +546,7 @@ jobs:
             echo 'src/*' >> .eslintignore
             echo '!src/lib-customizations' >> .eslintignore
             echo 'src/lib-customizations/*' >> .eslintignore
-            echo '!src/lib-customizations/tampere' >> .eslintignore
+            echo '!src/lib-customizations/oulu' >> .eslintignore
             yarn lint
 
   frontend_upload_archive:

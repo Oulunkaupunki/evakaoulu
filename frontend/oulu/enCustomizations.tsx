@@ -19,8 +19,10 @@ const customerContactText = function () {
     <>
       {' '}
       customer service of the Early childhood education at:{' '}
-      <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>{' '}
-      / <a href="tel:+358855845300">08 558 45300</a> (Mon-Fri between 9am and 12noon).
+      <a href="mailto:varhaiskasvatus@ouka.fi">
+        varhaiskasvatus@ouka.fi
+      </a> / <a href="tel:+358855845300">08 558 45300</a> (Mon-Fri between 9am
+      and 12noon).
     </>
   )
 }
@@ -250,7 +252,8 @@ const en: DeepPartial<Translations> = {
   map: {
     mainInfo: `In this view you can locate on the map all of Oulu’s early childhood education units and clubs. Regional service voucher units and clubs can also be found on the map.`,
     privateUnitInfo: <></>,
-    serviceVoucherLink: 'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit',
+    serviceVoucherLink:
+      'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit',
     searchPlaceholder: 'E.g. Amurin päiväkoti'
   },
   decisions: {

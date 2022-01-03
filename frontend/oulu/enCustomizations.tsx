@@ -20,10 +20,9 @@ const customerContactText = function () {
       {' '}
       customer service of the Early childhood education at:{' '}
       <a href="mailto:varhaiskasvatus@ouka.fi">
-          varhaiskasvatus@ouka.fi
+        varhaiskasvatus@ouka.fi
       </a>{' '}
-      / <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a> (Mon-Fri between 9am and
-      12noon).
+      / <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a> (Mon-Fri between 9am and 12noon).
     </>
   )
 }

@@ -21,7 +21,8 @@ const customerContactText = function () {
       Varhaiskasvatuksen asiakaspalveluun:{' '}
       <a href="mailto:varhaiskasvatus@ouka.fi">
         varhaiskasvatus@ouka.fi
-      </a> / <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a> (ma-pe klo 9-12).
+      </a> / <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a>{' '}
+      (ma-pe klo 9-12).
     </>
   )
 }

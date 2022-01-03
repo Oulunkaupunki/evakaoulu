@@ -15,7 +15,6 @@ aliases:
   - &workspace_oulu_frontend /home/circleci/repo/frontend
   - &workspace_proxy /home/circleci/repo/evaka/proxy
   - &workspace_service /home/circleci/repo/service
-  - &workspace_message_service /home/circleci/repo/evaka/message-service
   - &workspace_auth /home/circleci/repo/auth
   - &workspace_compose /home/circleci/repo/compose
   - &workspace_evaka_compose /home/circleci/repo/evaka/compose
@@ -98,20 +97,6 @@ aliases:
         - service/.gradle
         - .gradle-user-home
 
-  - &restore_message_service_gradle
-    restore_cache:
-      keys:
-        - gradle-home-message-service-v1-{{ checksum "evaka/message-service/build.gradle.kts" }}-{{ checksum "evaka/message-service/gradle.properties" }}-{{ checksum "evaka/message-service/settings.gradle.kts" }}
-        - gradle-home-message-service-v1-
-        - gradle-home-message-service-
-
-  - &store_message_service_gradle
-    save_cache:
-      key: gradle-home-message-service-v1-{{ checksum "evaka/message-service/build.gradle.kts" }}-{{ checksum "evaka/message-service/gradle.properties" }}-{{ checksum "evaka/message-service/settings.gradle.kts" }}
-      paths:
-        - message-service/.gradle
-        - .gradle-user-home
-
 executors:
   base_executor:
     <<: *default_config
@@ -160,21 +145,6 @@ commands:
           name: Restore << parameters.path >>
           key: workspace-{{ .Environment.CIRCLE_WORKFLOW_WORKSPACE_ID }}-<< parameters.path >>
 
-  store_build_customizations:
-    steps:
-      - save_cache:
-          name: Store private build customizations
-          key: build-customization-v1-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - customizations
-  restore_build_customizations:
-    steps:
-      - restore_cache:
-          name: Restore private build customizations
-          keys:
-            # Not really intended to be a real cache, so use exact matches
-            - build-customization-v1-{{ .Branch }}-{{ .Revision }}
-
   store_frontend_comm_deps:
     steps:
       - save_cache:
@@ -200,10 +170,15 @@ commands:
 
   setup_authenticated_remote_docker:
     description: Setup remote Docker execution environment with Docker Hub authentication
+    parameters:
+      docker_layer_caching:
+        type: boolean
+        default: *docker_layer_caching
+
     steps:
       - setup_remote_docker:
           version: *remote_docker_version
-          docker_layer_caching: *docker_layer_caching
+          docker_layer_caching: << parameters.docker_layer_caching >>
       #- login_docker_hub
 
   setup_git:
@@ -420,7 +395,8 @@ jobs:
           working_directory: *workspace_root
           command: |
             aws s3 sync s3://evakaoulu-dev-deployment/customizations/ ./customizations/
-      - store_build_customizations
+      - save:
+          path: customizations
       - run:
           name: Fetch commercial frontend dependencies
           working_directory: *workspace_evaka_frontend
@@ -546,7 +522,8 @@ jobs:
       - *restore_repo
       - *restore_frontend_deps
       - restore_frontend_comm_deps
-      - restore_build_customizations
+      - restore:
+          path: customizations
       - run:
           working_directory: *workspace_evaka_frontend
           command: yarn install --immutable
@@ -671,63 +648,15 @@ jobs:
           image: evakaoulu/service
           dir: *workspace_service
 
-  message_service_build:
-    executor: openjdk_executor
-    steps:
-      - *restore_repo
-      - *restore_message_service_gradle
-      - run:
-          name: Install Java 17
-          command: |
-            sudo apt-get update && sudo apt-get install openjdk-17-jdk
-            sudo update-java-alternatives --set java-1.17.0-openjdk-amd64
-            java -version
-      - run:
-          working_directory: *workspace_message_service
-          command: ./gradlew build
-      - *store_message_service_gradle
-      - save:
-          path: evaka/message-service/build/libs/evaka-message-service.jar
-
-  message_service_build_image:
-    executor: base_executor
-    steps:
-      - *restore_repo
-      - restore:
-          path: evaka/message-service/build/libs/evaka-message-service.jar
-      - setup_remote_docker:
-          version: *remote_docker_version
-          docker_layer_caching: *docker_layer_caching
-      - run:
-          name: Unzip executable
-          working_directory: *workspace_message_service
-          command: unzip -q build/libs/evaka-message-service.jar -d target
-      - load_base_image
-      - build_docker_image:
-          image: evakaoulu/message-service
-          dir: *workspace_message_service
-      - save:
-          path: evaka/message-service/image.tar
-
-  message_service_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    steps:
-      - *restore_repo
-      - restore:
-          path: evaka/message-service/image.tar
-      - setup_remote_docker:
-          version: *remote_docker_version
-      - aws-cli/install
-      - push_docker_image:
-          image: evakaoulu/message-service
-          dir: *workspace_message_service
-
   auth_build_image:
     executor: base_executor
     steps:
       - *restore_repo
-      - setup_authenticated_remote_docker
+      - setup_authenticated_remote_docker:
+          docker_layer_caching: true
+      - restore:
+          path: customizations
+      - run: cp customizations/footer-logo-citizen.png auth/OuluLogo.png
       - build_docker_image:
           image: evakaoulu/auth
           dir: *workspace_auth
@@ -850,23 +779,9 @@ workflows:
             - service_build_image
             - e2e-test-playwright
 
-      - message_service_build:
-          requires:
-            - checkout_repo
-      - message_service_build_image:
-          requires:
-            - build_base_image
-            - message_service_build
-      - message_service_push_image:
-          context:
-            - eVakaOulu-dev
-          requires:
-            - message_service_build_image
-            - e2e-test-playwright
-
       - auth_build_image:
           requires:
-            - checkout_repo
+            - fetch_private_dependencies
       - auth_push_image:
           context:
             - eVakaOulu-dev
@@ -883,7 +798,6 @@ workflows:
             - frontend_upload_archive
             - proxy_push_image
             - service_push_image
-            - message_service_push_image
             - auth_push_image
           filters:
             branches:
@@ -897,7 +811,6 @@ workflows:
             - frontend_upload_archive
             - proxy_push_image
             - service_push_image
-            - message_service_push_image
             - auth_push_image
           filters:
             branches:

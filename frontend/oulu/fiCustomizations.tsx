@@ -19,10 +19,8 @@ const customerContactText = function () {
     <>
       {' '}
       Varhaiskasvatuksen asiakaspalveluun:{' '}
-      <a href="mailto:varhaiskasvatus@ouka.fi">
-        varhaiskasvatus@ouka.fi
-      </a>{' '}
-      / <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a> (ma-pe klo 9-12).
+      <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>{' '}
+      / <a href="tel:+358855845300">08 558 45300</a> (ma-pe klo 9-12).
     </>
   )
 }
@@ -244,15 +242,13 @@ const fi: DeepPartial<Translations> = {
   },
   footer: {
     cityLabel: '© Oulun kaupunki',
-    privacyPolicyLink:
-      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja',
+    privacyPolicyLink: 'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja',
     sendFeedbackLink: 'https://www.ouka.fi/palaute'
   },
   map: {
     mainInfo: `Tässä näkymässä voit hakea kartalta kaikki Oulun varhaiskasvatusyksiköt sekä kerhot. Kartalta löytyvät myös seudulliset palveluseteliyksiköt ja -kerhot.`,
     privateUnitInfo: <></>,
-    serviceVoucherLink:
-      'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit',
+    serviceVoucherLink: 'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit',
     searchPlaceholder: 'Esim. Amurin päiväkoti'
   },
   decisions: {

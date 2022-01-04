@@ -222,7 +222,7 @@ describe('Citizen applications page', () => {
     )
     await waitUntilEqual(
       () => page.find('[data-qa="diet-expanding-info-text"] a').getAttribute('href'),
-      'https://www.oulu.fi/sosiaali-ja-terveyspalvelut/erityisruokavaliot.html'
+      'https://www.tampere.fi/sosiaali-ja-terveyspalvelut/erityisruokavaliot.html'
     )
     // Click cancel and check text for an existing application
     await page.find('[data-qa="cancel-application-button"]').click()

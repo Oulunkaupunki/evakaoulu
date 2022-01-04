@@ -727,7 +727,7 @@ workflows:
             - apigw_build
       - apigw_push_image:
           context:
-            - eVakaOulu-dev
+            - evakaoulu-dev
           requires:
             - apigw_build_image
             - e2e-test-playwright
@@ -739,7 +739,7 @@ workflows:
 
       - frontend_upload_archive:
           context:
-            - eVakaOulu-dev
+            - evakaoulu-dev
           requires:
             - frontend_build
             - e2e-test-playwright
@@ -760,7 +760,7 @@ workflows:
             - checkout_repo
       - proxy_push_image:
           context:
-            - eVakaOulu-dev
+            - evakaoulu-dev
           requires:
             - proxy_build_image
             - e2e-test-playwright
@@ -774,7 +774,7 @@ workflows:
             - service_build
       - service_push_image:
           context:
-            - eVakaOulu-dev
+            - evakaoulu-dev
           requires:
             - service_build_image
             - e2e-test-playwright
@@ -784,14 +784,14 @@ workflows:
             - fetch_private_dependencies
       - auth_push_image:
           context:
-            - eVakaOulu-dev
+            - evakaoulu-dev
           requires:
             - auth_build_image
             - e2e-test-playwright
 
       - trigger_deploy:
           context:
-            - eVakaOulu-infra
+            - evakaoulu-infra
           requires:
             - check_licenses
             - apigw_push_image

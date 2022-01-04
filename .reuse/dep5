@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: eVakaOulu
-Source: https://github.com/Oulunkaupunki/eVakaOulu
+Upstream-Name: evakaoulu
+Source: https://github.com/Oulunkaupunki/evakaoulu
 
 Files: .github/*
 Copyright: 2017-2020 City of Oulu

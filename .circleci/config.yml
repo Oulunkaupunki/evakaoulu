@@ -684,7 +684,7 @@ jobs:
           name: Trigger deploy
           command: |
             curl --request POST \
-              --url https://circleci.com/api/v2/project/github/Oulunkaupunki/eVakaOulu-infra/pipeline \
+              --url https://circleci.com/api/v2/project/github/Oulunkaupunki/evakaoulu-infra/pipeline \
               --user ''$CIRCLE_TOKEN':' \
               --header 'content-type: application/json' \
               --data '{"branch":"main","parameters":{"workflow":"deploy_pipeline","version":"'$CIRCLE_SHA1'"}}'
@@ -708,7 +708,7 @@ workflows:
       - checkout_repo
       - fetch_private_dependencies:
           context:
-            - eVakaOulu-dev
+            - evakaoulu-dev
           requires:
             - checkout_repo
       - check_licenses:

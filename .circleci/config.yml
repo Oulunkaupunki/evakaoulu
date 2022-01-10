@@ -185,12 +185,12 @@ commands:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "c1:be:36:91:9c:6a:0e:58:4e:2d:a2:52:bb:bf:85:49"
+            - "28:10:ed:11:bc:33:ba:47:8b:94:95:ec:df:c6:3d:e7"
       - run: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run:
           name: Setup git
           command: |
-            git config user.email "89396184+evakaoulu-ci@users.noreply.github.com"
+            git config user.email "97439387+evakaoulu-ci@users.noreply.github.com"
             git config user.name "evakaoulu-ci"
 
   build_frontend:

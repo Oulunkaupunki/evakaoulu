@@ -47,3 +47,4 @@ evakaoulu:
     password: pass
   invoice:
     url: http://localhost:${wiremock.server.port}/mock/ipaas/salesOrder
+wiremock.server.httpsPort: -1

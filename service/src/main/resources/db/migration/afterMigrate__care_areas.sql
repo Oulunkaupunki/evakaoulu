@@ -4,24 +4,24 @@
 INSERT INTO care_area
   (name, area_code, sub_cost_center, short_name)
 VALUES
-  ('Haukipudas', NULL, NULL, 'Haukipudas'),
-  ('Jääli', NULL, NULL, 'Jääli'),
-  ('Kaakkuri', NULL, NULL, 'Kaakkuri'),
-  ('Karjasilta-Höyhtyä', NULL, NULL, 'Karjasilta-Höyhtyä'),
-  ('Kastelli', NULL, NULL, 'Kastelli'),
-  ('Kaukovainio', NULL, NULL, 'Kaukovainio'),
-  ('Kello-Kiviniemi', NULL, NULL, 'Kello-Kiviniemi'),
-  ('Keskusta', NULL, NULL, 'Keskusta'),
-  ('Kiiminki', NULL, NULL, 'Kiiminki'),
-  ('Korvensuora', NULL, NULL, 'Korvensuora'),
-  ('Maikkula', NULL, NULL, 'Maikkula'),
-  ('Myllyoja', NULL, NULL, 'Myllyoja'),
-  ('Oulunsalo', NULL, NULL, 'Oulunsalo'),
-  ('Patenniemi-Rajakylä', NULL, NULL, 'Patenniemi-Rajakylä'),
-  ('Ritaharju-Kuivasjärvi-Pöllökangas', NULL, NULL, 'Ritaharju-Kuivasjärvi-Pöllökangas'),
-  ('Tuira-Toppila', NULL, NULL, 'Tuira-Toppila'),
-  ('Yli-Ii', NULL, NULL, 'Yli-Ii'),
-  ('Yli-Kiiminki', NULL, NULL, 'Yli-Kiiminki')
+  ('Haukipudas', NULL, NULL, 'haukipudas'),
+  ('Jääli', NULL, NULL, 'jaali'),
+  ('Kaakkuri', NULL, NULL, 'kaakkuri'),
+  ('Karjasilta-Höyhtyä', NULL, NULL, 'karjasilta-hoyhtya'),
+  ('Kastelli', NULL, NULL, 'kastelli'),
+  ('Kaukovainio', NULL, NULL, 'kaukovainio'),
+  ('Kello-Kiviniemi', NULL, NULL, 'kello-kiviniemi'),
+  ('Keskusta', NULL, NULL, 'keskusta'),
+  ('Kiiminki', NULL, NULL, 'kiiminki'),
+  ('Korvensuora', NULL, NULL, 'korvensuora'),
+  ('Maikkula', NULL, NULL, 'maikkula'),
+  ('Myllyoja', NULL, NULL, 'myllyoja'),
+  ('Oulunsalo', NULL, NULL, 'oulunsalo'),
+  ('Patenniemi-Rajakylä', NULL, NULL, 'patenniemi-rajakyla'),
+  ('Ritaharju-Kuivasjärvi-Pöllökangas', NULL, NULL, 'ritaharju-kuivasjarvi-pollokangas'),
+  ('Tuira-Toppila', NULL, NULL, 'tuira-toppila'),
+  ('Yli-Ii', NULL, NULL, 'yli-ii'),
+  ('Yli-Kiiminki', NULL, NULL, 'yli-kiiminki')
 ON CONFLICT (name) DO
 UPDATE SET
   name = EXCLUDED.name,

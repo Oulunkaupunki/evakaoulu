@@ -218,11 +218,11 @@ describe('Citizen applications page', () => {
     await dietInfo.click()
     await waitUntilEqual(
       () => page.find('[data-qa="diet-expanding-info-text"]').innerText,
-      'Erityisruokavaliosta huoltaja toimittaa varhaiskasvatuspaikkaan lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman Selvitys erityisruokavaliosta -lomakkeen, joka on määräaikainen.'
+      'Erityisruokavaliosta huoltaja toimittaa varhaiskasvatuspaikkaan lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman lomakkeen Oulun kaupungin sivuilta, joka on määräaikainen.'
     )
     await waitUntilEqual(
       () => page.find('[data-qa="diet-expanding-info-text"] a').getAttribute('href'),
-      'https://www.tampere.fi/sosiaali-ja-terveyspalvelut/erityisruokavaliot.html'
+      'https://www.ouka.fi/oulu/paivahoito-ja-esiopetus'
     )
     // Click cancel and check text for an existing application
     await page.find('[data-qa="cancel-application-button"]').click()

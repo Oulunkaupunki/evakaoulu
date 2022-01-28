@@ -26,13 +26,13 @@ describe('Citizen footer', () => {
   test('Oulu policy link', async () => {
     await waitUntilEqual(
       () => page.find('[data-qa="footer-policy-link"]').getAttribute('href'),
-      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja'
+      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus'
     )
   })
   test('Oulu feedback link', async () => {
     await waitUntilEqual(
       () => page.find('[data-qa="footer-feedback-link"]').getAttribute('href'),
-      'https://www.ouka.fi/palaute'
+      'https://e-kartta.ouka.fi/efeedback'
     )
   })
 })

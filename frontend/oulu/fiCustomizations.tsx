@@ -244,7 +244,8 @@ const fi: DeepPartial<Translations> = {
   },
   footer: {
     cityLabel: '© Oulun kaupunki',
-    privacyPolicyLink: 'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus',
+    privacyPolicyLink:
+      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus',
     sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
   },
   map: {

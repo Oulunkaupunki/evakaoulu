@@ -220,7 +220,8 @@ const fi: DeepPartial<Translations> = {
         dietInfo: (
           <>
             Erityisruokavaliosta huoltaja toimittaa varhaiskasvatuspaikkaan
-            lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman lomakkeen{' '}
+            lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman
+            lomakkeen{' '}
             <ExternalLink
               href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus"
               text="Oulun kaupungin sivuilta"

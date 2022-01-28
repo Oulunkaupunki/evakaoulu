@@ -246,8 +246,8 @@ const en: DeepPartial<Translations> = {
   },
   footer: {
     cityLabel: '© City of Oulu',
-    privacyPolicyLink: 'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja',
-    sendFeedbackLink: 'https://www.ouka.fi/palaute'
+    privacyPolicyLink: 'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus',
+    sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
   },
   map: {
     mainInfo: `In this view you can locate on the map all of Oulu’s early childhood education units and clubs. Regional service voucher units and clubs can also be found on the map.`,

@@ -53,7 +53,7 @@ const fi: DeepPartial<Translations> = {
       unitPreference: {
         units: {
           serviceVoucherLink:
-            'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit'
+            'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli'
         }
       },
       heading: {
@@ -222,8 +222,8 @@ const fi: DeepPartial<Translations> = {
             Erityisruokavaliosta huoltaja toimittaa varhaiskasvatuspaikkaan
             lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman{' '}
             <ExternalLink
-              href="https://www.tampere.fi/sosiaali-ja-terveyspalvelut/erityisruokavaliot.html"
-              text="Selvitys erityisruokavaliosta -lomakkeen"
+              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus"
+              text="Oulun kaupungin sivuilta"
               newTab
             />
             , joka on määräaikainen.
@@ -244,8 +244,8 @@ const fi: DeepPartial<Translations> = {
   },
   footer: {
     cityLabel: '© Oulun kaupunki',
-    privacyPolicyLink: 'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja',
-    sendFeedbackLink: 'https://www.ouka.fi/palaute'
+    privacyPolicyLink: 'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus',
+    sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
   },
   map: {
     mainInfo: `Tässä näkymässä voit hakea kartalta kaikki Oulun varhaiskasvatusyksiköt sekä kerhot. Kartalta löytyvät myös seudulliset palveluseteliyksiköt ja -kerhot.`,

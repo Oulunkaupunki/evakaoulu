@@ -223,8 +223,8 @@ const en: DeepPartial<Translations> = {
             For special diets, a custodian shall submit to the early childhood
             education location{' '}
             <ExternalLink
-              href="https://www.tampere.fi/sosiaali-ja-terveyspalvelut/erityisruokavaliot.html"
-              text="the form ‘Clarification of a special diet’"
+              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus"
+              text="the website of the City of Oulu"
               newTab
             />
             , filled in and signed by a doctor or a nutritional therapist, which

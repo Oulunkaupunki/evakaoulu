@@ -250,11 +250,11 @@ const fi: DeepPartial<Translations> = {
     sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
   },
   map: {
-    mainInfo: `Tässä näkymässä voit hakea kartalta kaikki Oulun varhaiskasvatusyksiköt sekä kerhot. Kartalta löytyvät myös seudulliset palveluseteliyksiköt ja -kerhot.`,
+    mainInfo: `Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja kerhopaikkoja. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.`,
     privateUnitInfo: <></>,
     serviceVoucherLink:
-      'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit',
-    searchPlaceholder: 'Esim. Amurin päiväkoti'
+      'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli',
+    searchPlaceholder: 'Esim. Ainolan päiväkoti'
   },
   decisions: {
     summary: (

@@ -254,8 +254,8 @@ const en: DeepPartial<Translations> = {
     mainInfo: `In this view you can locate on the map all of Oulu’s early childhood education units and clubs. Regional service voucher units and clubs can also be found on the map.`,
     privateUnitInfo: <></>,
     serviceVoucherLink:
-      'https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus/paivakodit.html#palvelusetelipaivakodit',
-    searchPlaceholder: 'E.g. Amurin päiväkoti'
+      'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli',
+    searchPlaceholder: 'E.g. Ainola daycare'
   },
   decisions: {
     summary: (

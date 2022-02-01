@@ -26,7 +26,7 @@ describe('Citizen map page', () => {
     let mapMainInfo = page.find('[data-qa="map-main-info"]')
     await waitUntilEqual(
       () => mapMainInfo.innerText,
-      'Tässä näkymässä voit hakea kartalta kaikki Oulun varhaiskasvatusyksiköt sekä kerhot. Kartalta löytyvät myös seudulliset palveluseteliyksiköt ja -kerhot.'
+      'Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja kerhopaikkoja. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.'
     )
     let privateUnitInfo = mapMainInfo.findAll('span')
     await waitUntilEqual(() => privateUnitInfo.first().innerText, '')

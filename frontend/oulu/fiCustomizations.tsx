@@ -238,16 +238,16 @@ const fi: DeepPartial<Translations> = {
     summary: (
       <>
         <P width="800px">
-        Lapsen huoltaja voi tehdä lapselle hakemuksen varhaiskasvatukseen
-        ja avoimen varhaiskasvatuksen kerhoihin tai ilmoittaa lapsen
-        esiopetukseen. Samalla hakemuksella voi hakea myös varhaiskasvatuksen
-        palveluseteliä, hakemalla varhaiskasvatuspaikkaa yksityisestä
-        päiväkodista. Huoltajan ja lasten tiedot haetaan tähän näkymään
-        automaattisesti Väestötietojärjestelmästä.
+          Lapsen huoltaja voi tehdä lapselle hakemuksen varhaiskasvatukseen ja
+          avoimen varhaiskasvatuksen kerhoihin tai ilmoittaa lapsen
+          esiopetukseen. Samalla hakemuksella voi hakea myös varhaiskasvatuksen
+          palveluseteliä, hakemalla varhaiskasvatuspaikkaa yksityisestä
+          päiväkodista. Huoltajan ja lasten tiedot haetaan tähän näkymään
+          automaattisesti Väestötietojärjestelmästä.
         </P>
         <P width="800px">
-          Jos lapsella on jo paikka Oulun varhaiskasvatuksessa ja halutaan 
-          hakea siirtoa toiseen yksikköön, tehdään lapselle uusi hakemus.
+          Jos lapsella on jo paikka Oulun varhaiskasvatuksessa ja halutaan hakea
+          siirtoa toiseen yksikköön, tehdään lapselle uusi hakemus.
         </P>
       </>
     )

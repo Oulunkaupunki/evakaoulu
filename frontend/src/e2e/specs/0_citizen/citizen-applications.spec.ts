@@ -40,7 +40,8 @@ const customerContactTelHref = 'tel:+358855845300'
 describe('Citizen applications page', () => {
   test('Applications and ApplicationCreation customizations', async () => {
     await header.selectTab('applications')
-    await waitUntilEqual(() => page.find('h1 + p').innerText, 'Lapsen huoltaja voi tehdä lapselleen hakemuksen varhaiskasvatukseen ja kerhoon. Huoltajan lasten tiedot haetaan tähän näkymään automaattisesti Väestötietojärjestelmästä.')
+    await waitUntilEqual(() => page.find('h1 + p').innerText, 'Lapsen huoltaja voi tehdä lapselle hakemuksen varhaiskasvatukseen ja avoimen varhaiskasvatuksen kerhoihin tai ilmoittaa lapsen esiopetukseen. Samalla hakemuksella voi hakea myös varhaiskasvatuksen palveluseteliä, hakemalla varhaiskasvatuspaikkaa yksityisestä päiväkodista. Huoltajan ja lasten tiedot haetaan tähän näkymään automaattisesti Väestötietojärjestelmästä.')
+    await waitUntilEqual(() => page.find('h1 + p + p').innerText, 'Jos lapsella on jo paikka Oulun varhaiskasvatuksessa ja halutaan hakea siirtoa toiseen yksikköön, tehdään lapselle uusi hakemus.')
     await page.find(`[data-qa="new-application-${enduserChildFixturePorriHatterRestricted.id}"]`).click()
     // Check that only daycare and club options are visible
     let applicationRadios = await page.findAll('[data-qa^="type-radio-"]')

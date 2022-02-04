@@ -124,9 +124,7 @@ const customizations: EmployeeCustomizations = {
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'REASON_3', 'OTHER'],
   unitProviderTypes: [
     'MUNICIPAL',
-    'PURCHASED',
-    'PRIVATE',
-    'PRIVATE_SERVICE_VOUCHER'
+    'PRIVATE'
   ]
 }
 

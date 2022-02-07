@@ -17,12 +17,13 @@ import ExternalLink from 'lib-components/atoms/ExternalLink'
 const customerContactText = function () {
   return (
     <>
-      {' '}
-      Varhaiskasvatuksen asiakaspalveluun:{' '}
+      {' '}p.{' '}
+      <a href="tel:+358855845300">08 558 45300 </a>{' '}
+      TAI {' '}
       <a href="mailto:varhaiskasvatus@ouka.fi">
         varhaiskasvatus@ouka.fi
-      </a> / <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a>{' '}
-      (ma-pe klo 9-12).
+      </a> 
+      .
     </>
   )
 }
@@ -32,18 +33,24 @@ const fi: DeepPartial<Translations> = {
     creation: {
       daycareInfo:
         'Varhaiskasvatushakemuksella haetaan paikkaa kunnallisesta päiväkodista tai perhepäivähoidosta, ostopalvelupäiväkodista tai palvelusetelillä tuetusta päiväkodista.',
+      preschoolLabel:
+      'Ilmoittautuminen esiopetukseen ja / tai valmistavaan opetukseen',
+      preschoolInfo: 
+      'Ilmoittautumisen yhteydessä voidaan hakea myös esiopetukseen liittyvään varhaiskasvatukseen. Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen loma- ja työaikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
+      clubLabel: 
+        'Hakemus avoimeen varhaiskasvatukseen',
       clubInfo:
-        'Kerhohakemuksella haetaan paikkaa kunnallisista tai palvelusetelillä tuetuista kerhoista.',
+        'Hakemuksella avoimeen varhaiskasvatukseen haetaan kahden ja kolmen kerran kerhoihin sekä perhekerhoon.',
       applicationInfo: (
         <P>
-          Huoltaja voi tehdä muutoksia hakemukseen verkkopalvelussa siihen asti,
-          kun hakemus otetaan asiakaspalvelussa käsittelyyn. Tämän jälkeen
-          muutokset tai hakemuksen peruminen on mahdollista ottamalla yhteyttä
+          Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus 
+          on ottanut sen käsittelyyn. Tämän jälkeen muutokset tai hakemuksen 
+          peruminen tehdään ottamalla yhteyttä varhaiskasvatuksen palveluohjaukseen 
           {customerContactText()}
         </P>
       ),
       duplicateWarning:
-        'Lapsella on jo samantyyppinen, keskeneräinen hakemus. Palaa Hakemukset-näkymään ja muokkaa olemassa olevaa hakemusta tai ota yhteyttä Varhaiskasvatuksen asiakaspalveluun.',
+        'Lapsella on jo samantyyppinen, keskeneräinen hakemus. Palaa Hakemukset-näkymään ja muokkaa olemassa olevaa hakemusta tai ota yhteyttä varhaiskasvatuksen palveluohjaukseen.',
       transferApplicationInfo: {
         DAYCARE:
           'Lapsella on jo paikka Oulun varhaiskasvatuksessa. Tällä hakemuksella voit hakea siirtoa toiseen varhaiskasvatusta tarjoavaan yksikköön Oulussa.'

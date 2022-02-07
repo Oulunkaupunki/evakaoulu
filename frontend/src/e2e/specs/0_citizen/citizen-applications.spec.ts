@@ -33,7 +33,7 @@ afterEach(async () => {
   await page.close()
 })
 
-const customerContactText = 'Varhaiskasvatuksen asiakaspalveluun: varhaiskasvatus@ouka.fi / 08 558 45300 - valitse numero 1 (ma-pe klo 9-12).'
+const customerContactText = 'p. 08 558 45300 TAI varhaiskasvatus@ouka.fi.'
 const customerContactEmailHref = 'mailto:varhaiskasvatus@ouka.fi'
 const customerContactTelHref = 'tel:+358855845300'
 
@@ -52,19 +52,30 @@ describe('Citizen applications page', () => {
     )
     await waitUntilEqual(
       () => applicationRadios.nth(1).find('label').innerText,
-      'Kerhohakemus'
+      'Ilmoittautuminen esiopetukseen ja / tai valmistavaan opetukseen'
+    )
+    await waitUntilEqual(
+      () => applicationRadios.nth(2).find('label').innerText,
+      'Hakemus avoimeen varhaiskasvatukseen'
     )
     // Check all texts, including expanding infos
     await page.find('[data-qa="daycare-expanding-info"]').click()
-    await waitUntilEqual(() => page.find('[data-qa="daycare-expanding-info-text"]').innerText, 'Varhaiskasvatushakemuksella haetaan paikkaa kunnallisesta päiväkodista tai perhepäivähoidosta, ostopalvelupäiväkodista tai palvelusetelillä tuetusta päiväkodista.')
+    await waitUntilEqual(
+      () => page.find('[data-qa="daycare-expanding-info-text"]').innerText, 'Varhaiskasvatushakemuksella haetaan paikkaa kunnallisesta päiväkodista tai perhepäivähoidosta, ostopalvelupäiväkodista tai palvelusetelillä tuetusta päiväkodista.'
+    )
+    await page.find('[data-qa="preschool-expanding-info"]').click()
+    await waitUntilEqual(
+      () => page.find('[data-qa="preschool-expanding-info-text"]').innerText,
+      'Ilmoittautumisen yhteydessä voidaan hakea myös esiopetukseen liittyvään varhaiskasvatukseen. Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen loma- ja työaikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.'
+    )
     await page.find('[data-qa="club-expanding-info"]').click()
     await waitUntilEqual(
       () => page.find('[data-qa="club-expanding-info-text"]').innerText,
-      'Kerhohakemuksella haetaan paikkaa kunnallisista tai palvelusetelillä tuetuista kerhoista.'
+      'Hakemuksella avoimeen varhaiskasvatukseen haetaan kahden ja kolmen kerran kerhoihin sekä perhekerhoon.'
     )
     await waitUntilEqual(
       () => page.find('[data-qa="application-options-area"] p:last-of-type').innerText,
-      `Huoltaja voi tehdä muutoksia hakemukseen verkkopalvelussa siihen asti, kun hakemus otetaan asiakaspalvelussa käsittelyyn. Tämän jälkeen muutokset tai hakemuksen peruminen on mahdollista ottamalla yhteyttä ${customerContactText}`
+      `Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn. Tämän jälkeen muutokset tai hakemuksen peruminen tehdään ottamalla yhteyttä varhaiskasvatuksen palveluohjaukseen ${customerContactText}`
     )
     await waitUntilEqual(
       () => page.find('[data-qa="application-options-area"] p:last-of-type a:first-of-type').getAttribute( 'href'),

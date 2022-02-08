@@ -76,6 +76,28 @@ const fi: DeepPartial<Translations> = {
           } 
         },
         units: {
+          info: {
+            DAYCARE: (
+              <>
+                <P>
+                  Voit hakea 1-3 paikkaa toivomassasi järjestyksessä.
+                  Hakutoiveet eivät takaa paikkaa toivotussa yksikössä, mutta
+                  mahdollisuus toivotun paikan saamiseen kasvaa antamalla
+                  useamman vaihtoehdon.
+                </P>
+                <P>
+                  Näet eri varhaiskasvatusyksiköiden sijainnin valitsemalla
+                  ‘Yksiköt kartalla’.
+                </P>
+                <P>
+                  Palveluseteliä haetaan valitsemalla hakutoiveeksi se
+                  palveluseteliyksikkö, johon halutaan hakea.
+                  Palveluseteliyksikköön haettaessa myös yksikön esimies saa
+                  tiedon hakemuksesta.
+                </P>
+              </>
+            )
+          },
           serviceVoucherLink:
             'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli'
         }
@@ -248,14 +270,13 @@ const fi: DeepPartial<Translations> = {
         info: {
           DAYCARE: (
             <P>
-              Kunnallisen varhaiskasvatuksen asiakasmaksu ja palvelusetelin
-              omavastuuosuus perustuu varhaiskasvatuksen asiakasmaksuista
-              annettuun lakiin (Laki varhaiskasvatuksen asiakasmaksuista
-              (1503/2016)). Asiakasmaksu määräytyy perheen koon, palveluntarpeen
-              sekä bruttotulojen mukaan. Uusien asiakkaiden tulee täyttää
-              asiakasmaksulomake ja toimittaa tarvittavat liitteet
-              Varhaiskasvatuksen asiakasmaksuihin viimeistään kuukauden kuluessa
-              hoidon alkamisesta.
+              Kunnallisen varhaiskasvatuksen asiakasmaksut ja palvelusetelin 
+              omavastuuosuus määräytyvät prosenttiosuutena perheen bruttotuloista. 
+              Maksut vaihtelevat perheen koon ja tulojen sekä varhaiskasvatusajan 
+              mukaan. Mikäli varhaiskasvatuspaikan hinta yksityisellä on enemmän 
+              kuin palvelusetelin arvo, erotuksen maksaa perhe. Perhe toimittaa 
+              tuloselvityksen bruttotuloistaan tuloselvityslomakkeella 
+              mahdollisimman pian siitä, kun lapsi on aloittanut varhaiskasvatuksessa.
             </P>
           )
         },

@@ -59,21 +59,21 @@ const fi: DeepPartial<Translations> = {
             DAYCARE: (
               <>
                 <P>
-                  Lapsella on sisarusperuste samaan varhaiskasvatuspaikkaan, 
-                  jossa hänen sisaruksensa on päätöksentekohetkellä. Tavoitteena 
-                  on sijoittaa sisarukset samaan varhaiskasvatuspaikkaan perheen 
-                  niin toivoessa. Jos haet paikkaa sisaruksille, jotka eivät 
-                  vielä ole varhaiskasvatuksessa, kirjoita tieto hakemuksen 
-                  Muut lisätiedot -kohtaan.
+                  Lapsella on sisarusperuste samaan varhaiskasvatuspaikkaan,
+                  jossa hänen sisaruksensa on päätöksentekohetkellä. Tavoitteena
+                  on sijoittaa sisarukset samaan varhaiskasvatuspaikkaan perheen
+                  niin toivoessa. Jos haet paikkaa sisaruksille, jotka eivät
+                  vielä ole varhaiskasvatuksessa, kirjoita tieto hakemuksen Muut
+                  lisätiedot -kohtaan.
                 </P>
                 <P>
-                  Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä 
-                  valitse alla olevissa hakutoiveissa ensisijaiseksi toiveeksi 
+                  Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä
+                  valitse alla olevissa hakutoiveissa ensisijaiseksi toiveeksi
                   sama varhaiskasvatusyksikkö, jossa lapsen sisarus on.
                 </P>
               </>
             )
-          } 
+          }
         },
         units: {
           info: {
@@ -107,16 +107,16 @@ const fi: DeepPartial<Translations> = {
           DAYCARE: (
             <>
               <P>
-                Hakemus on jätettävä viimeistään neljä kuukautta ennen kuin 
-                tarvitsette paikan. Mikäli tarvitsette varhaiskasvatusta kiireellisesti 
-                työn tai opiskelujen vuoksi, käsittelyaika on kaksi viikkoa 
-                hakemuksen saapumisesta. 
+                Hakemus on jätettävä viimeistään neljä kuukautta ennen kuin
+                tarvitsette paikan. Mikäli tarvitsette varhaiskasvatusta
+                kiireellisesti työn tai opiskelujen vuoksi, käsittelyaika on
+                kaksi viikkoa hakemuksen saapumisesta.
               </P>
               <P>
-                Saatte kirjallisen päätöksen varhaiskasvatuspaikasta 
-                Suomi.fi-viestit -palveluun tai postitse, mikäli et ole 
-                ottanut Suomi.fi-palvelua käyttöön. Päätös on nähtävillä 
-                myös eVaka-palvelussa kohdassa Hakeminen - Päätökset.
+                Saatte kirjallisen päätöksen varhaiskasvatuspaikasta
+                Suomi.fi-viestit -palveluun tai postitse, mikäli et ole ottanut
+                Suomi.fi-palvelua käyttöön. Päätös on nähtävillä myös
+                eVaka-palvelussa kohdassa Hakeminen - Päätökset.
                 Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte
                 lisätietoa{' '}
                 <ExternalLink
@@ -159,9 +159,9 @@ const fi: DeepPartial<Translations> = {
         startDate: {
           instructions: (
             <>
-              Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi siihen 
-              saakka, kunnes palveluohjaus on ottanut hakemuksen käsittelyyn. 
-              Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla 
+              Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi siihen
+              saakka, kunnes palveluohjaus on ottanut hakemuksen käsittelyyn.
+              Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
               yhteyttä varhaiskasvatuksen palveluohjaukseen
               {customerContactText()}
             </>
@@ -177,18 +177,19 @@ const fi: DeepPartial<Translations> = {
           attachmentsMessage: {
             text: (
               <P fitted={true}>
-                Mikäli varhaiskasvatuspaikan tarve johtuu äkillisestä 
-                työllistymisestä tai opiskelusta, tulee paikkaa hakea 
-                viimeistään kaksi viikkoa ennen kuin tarve alkaa. 
-                Hakemuksen liitteenä tulee olla selvitys työ- tai 
-                opiskelupaikasta molemmilta samassa taloudessa asuvilta 
-                huoltajilta.  Kahden viikon käsittelyaika alkaa siitä, 
-                kun olemme vastaanottaneet hakemuksen tarvittavine 
-                liitteineen. Jos et voi lisätä liitteitä hakemukselle 
-                sähköisesti, lähetä ne sähköpostilla osoitteeseen{' '}
-                <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>
-                {' '}tai postilla osoitteeseen 
-                Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.
+                Mikäli varhaiskasvatuspaikan tarve johtuu äkillisestä
+                työllistymisestä tai opiskelusta, tulee paikkaa hakea
+                viimeistään kaksi viikkoa ennen kuin tarve alkaa. Hakemuksen
+                liitteenä tulee olla selvitys työ- tai opiskelupaikasta
+                molemmilta samassa taloudessa asuvilta huoltajilta. Kahden
+                viikon käsittelyaika alkaa siitä, kun olemme vastaanottaneet
+                hakemuksen tarvittavine liitteineen. Jos et voi lisätä liitteitä
+                hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen{' '}
+                <a href="mailto:varhaiskasvatus@ouka.fi">
+                  varhaiskasvatus@ouka.fi
+                </a>{' '}
+                tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL
+                75, 90015 Oulun kaupunki.
               </P>
             )
           }
@@ -199,32 +200,36 @@ const fi: DeepPartial<Translations> = {
           message: {
             text: (
               <P fitted={true}>
-                Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat 
-                vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti 
-                iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee 
-                olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin 
-                tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta 
-                huoltajilta. Jos et voi lisätä liitteitä hakemukselle 
+                Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
+                vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti
+                iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla
+                selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin
+                tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta
+                huoltajilta. Jos et voi lisätä liitteitä hakemukselle
                 sähköisesti, lähetä ne sähköpostilla osoitteeseen{' '}
-                <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>
-                {' '}tai postilla osoitteeseen 
-                Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.
+                <a href="mailto:varhaiskasvatus@ouka.fi">
+                  varhaiskasvatus@ouka.fi
+                </a>{' '}
+                tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL
+                75, 90015 Oulun kaupunki.
               </P>
             )
           },
           attachmentsMessage: {
             text: (
               <P fitted={true}>
-                Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat 
-                vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti 
-                iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee 
-                olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin 
-                tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta 
-                huoltajilta. Jos et voi lisätä liitteitä hakemukselle 
+                Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
+                vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti
+                iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla
+                selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin
+                tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta
+                huoltajilta. Jos et voi lisätä liitteitä hakemukselle
                 sähköisesti, lähetä ne sähköpostilla osoitteeseen{' '}
-                <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>
-                {' '}tai postilla osoitteeseen 
-                Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.
+                <a href="mailto:varhaiskasvatus@ouka.fi">
+                  varhaiskasvatus@ouka.fi
+                </a>{' '}
+                tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL
+                75, 90015 Oulun kaupunki.
               </P>
             )
           }
@@ -270,13 +275,14 @@ const fi: DeepPartial<Translations> = {
         info: {
           DAYCARE: (
             <P>
-              Kunnallisen varhaiskasvatuksen asiakasmaksut ja palvelusetelin 
-              omavastuuosuus määräytyvät prosenttiosuutena perheen bruttotuloista. 
-              Maksut vaihtelevat perheen koon ja tulojen sekä varhaiskasvatusajan 
-              mukaan. Mikäli varhaiskasvatuspaikan hinta yksityisellä on enemmän 
-              kuin palvelusetelin arvo, erotuksen maksaa perhe. Perhe toimittaa 
-              tuloselvityksen bruttotuloistaan tuloselvityslomakkeella 
-              mahdollisimman pian siitä, kun lapsi on aloittanut varhaiskasvatuksessa.
+              Kunnallisen varhaiskasvatuksen asiakasmaksut ja palvelusetelin
+              omavastuuosuus määräytyvät prosenttiosuutena perheen
+              bruttotuloista. Maksut vaihtelevat perheen koon ja tulojen sekä
+              varhaiskasvatusajan mukaan. Mikäli varhaiskasvatuspaikan hinta
+              yksityisellä on enemmän kuin palvelusetelin arvo, erotuksen maksaa
+              perhe. Perhe toimittaa tuloselvityksen bruttotuloistaan
+              tuloselvityslomakkeella mahdollisimman pian siitä, kun lapsi on
+              aloittanut varhaiskasvatuksessa.
             </P>
           )
         },

@@ -10,7 +10,6 @@ import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 
-
 @SpringBootTest(
     webEnvironment = WebEnvironment.RANDOM_PORT,
     classes = [IntegrationTestConfiguration::class]

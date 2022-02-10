@@ -73,10 +73,6 @@ class InvoiceConfiguration {
 
     @Bean
     fun invoiceProductProvider(): InvoiceProductProvider = OuluInvoiceProductProvider()
-
-    @Bean
-    fun invoiceGenerator(productProvider: InvoiceProductProvider): InvoiceGenerator =
-        InvoiceGenerator(DefaultDraftInvoiceGenerator(productProvider))
 }
 
 class OuluIncomeTypesProvider : IncomeTypesProvider {

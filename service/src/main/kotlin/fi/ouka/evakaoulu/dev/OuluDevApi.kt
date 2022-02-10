@@ -30,7 +30,7 @@ class OuluDevApi(
     }
 
     @PostMapping("/reset-oulu-db-for-e2e-tests")
-    fun resetTampereDatabaseForE2ETests(db: Database): ResponseEntity<Unit> {
+    fun resetOuluDatabaseForE2ETests(db: Database): ResponseEntity<Unit> {
         // Run async jobs before database reset to avoid database locks/deadlocks
         asyncJobRunner.runPendingJobsSync()
         asyncJobRunner.waitUntilNoRunningJobs(timeout = Duration.ofSeconds(20))

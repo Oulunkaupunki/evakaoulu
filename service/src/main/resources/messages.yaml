@@ -5,16 +5,16 @@
 fi.ouka.evakaoulu:
   MessageProvider:
     DECISION_HEADER:
-      fi: Tampereen varhaiskasvatukseen liittyvät päätökset
+      fi: Oulun varhaiskasvatukseen liittyvät päätökset
     DECISION_CONTENT:
       fi: |
-        Olette hakeneet lapsellenne varhaiskasvatus- tai kerhopaikkaa Tampereen varhaiskasvatuksesta. Päätös on luettavissa alla olevasta liitteestä.
+        Olette hakeneet lapsellenne varhaiskasvatus- tai kerhopaikkaa Oulun varhaiskasvatuksesta. Päätös on luettavissa alla olevasta liitteestä.
 
-        Varhaiskasvatus tai kerhopaikka on hakemuksen tehneen huoltajan hyväksyttävissä Tampereen kaupungin varhaiskasvatuksen sähköisessä palvelussa osoitteessa varhaiskasvatus.ouka.fi. Paikkaa ei voi hyväksyä Suomi.fi-viestit -palvelussa.
+        Varhaiskasvatus tai kerhopaikka on hakemuksen tehneen huoltajan hyväksyttävissä Oulun kaupungin varhaiskasvatuksen sähköisessä palvelussa osoitteessa varhaiskasvatus.ouka.fi. Paikkaa ei voi hyväksyä Suomi.fi-viestit -palvelussa.
 
         Huomioittehan, että vastaus päätökseen tulee antaa kahden viikon kuluessa.
     FEE_DECISION_HEADER:
-      fi: Tampereen varhaiskasvatukseen liittyvät päätökset
+      fi: Oulun varhaiskasvatukseen liittyvät päätökset
     FEE_DECISION_CONTENT:
       fi: |
         Olette saaneet päätöksen varhaiskasvatuksen asiakasmaksusta Oulun kaupungilta. Päätös on luettavissa alla olevasta liitteestä.
@@ -25,7 +25,7 @@ fi.ouka.evakaoulu:
 
         https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut
     VOUCHER_VALUE_DECISION_HEADER:
-      fi: Tampereen varhaiskasvatukseen liittyvät päätökset
+      fi: Oulun varhaiskasvatukseen liittyvät päätökset
     VOUCHER_VALUE_DECISION_CONTENT:
       fi: |
         Olette saaneet päätöksen palvelusetelin omavastuuosuudesta Oulun kaupungilta. Päätös on luettavissa alla olevasta liitteestä.

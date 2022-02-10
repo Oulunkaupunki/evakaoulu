@@ -338,29 +338,32 @@ WHERE EXISTS(
     WHERE acl.employee_id = e.id
     AND acl.role IN ('UNIT_SUPERVISOR', 'SPECIAL_EDUCATION_TEACHER'));
 
+
+UPDATE fee_thresholds SET temporary_fee = 2900 WHERE temporary_fee IS NULL;
+UPDATE fee_thresholds SET temporary_fee_part_day = 1500 WHERE temporary_fee_part_day IS NULL;
+UPDATE fee_thresholds SET temporary_fee_sibling = 1500 WHERE temporary_fee_sibling IS NULL;
+UPDATE fee_thresholds SET temporary_fee_sibling_part_day = 800 WHERE temporary_fee_sibling_part_day IS NULL;
+
 INSERT INTO fee_thresholds (
     valid_during,
     min_income_threshold_2, min_income_threshold_3, min_income_threshold_4, min_income_threshold_5, min_income_threshold_6,
     income_multiplier_2, income_multiplier_3, income_multiplier_4, income_multiplier_5, income_multiplier_6,
     max_income_threshold_2, max_income_threshold_3, max_income_threshold_4, max_income_threshold_5, max_income_threshold_6,
-    income_threshold_increase_6_plus,
-    sibling_discount_2, sibling_discount_2_plus,
-    max_fee, min_fee
+    income_threshold_increase_6_plus,sibling_discount_2, sibling_discount_2_plus, max_fee, min_fee,
+    temporary_fee, temporary_fee_part_day, temporary_fee_sibling, temporary_fee_sibling_part_day
 ) VALUES (
     daterange('2000-01-01', '2020-07-31', '[]'),
     210200, 271300, 308000, 344700, 381300,
     0.1070, 0.1070, 0.1070, 0.1070, 0.1070,
     479900, 541000, 577700, 614400, 651000,
-    14200,
-    0.5, 0.8,
-    28900, 2700
+    14200, 0.5, 0.8, 28900, 2700,
+    2900, 1500, 1500, 800
 ),
 (
     daterange('2020-08-01', NULL),
     213600, 275600, 312900, 350200, 387400,
     0.1070, 0.1070, 0.1070, 0.1070, 0.1070,
     482300, 544300, 581600, 618900, 656100,
-    14200,
-    0.5, 0.8,
-    28800, 2700
+    14200, 0.5, 0.8, 28800, 2700,
+    2900, 1500, 1500, 800
 );

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2021 City of Oulu
+// SPDX-FileCopyrightText: 2021 City of Tampere
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+
 
 @SpringBootTest(
     webEnvironment = WebEnvironment.RANDOM_PORT,

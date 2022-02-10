@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2021 City of Oulu
+// SPDX-FileCopyrightText: 2021 City of Tampere
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
@@ -51,13 +51,13 @@ internal class EmailMessageProviderTest : AbstractIntegrationTest() {
         @JvmStatic
         fun getPreschoolMethods(): CartesianProductTest.Sets {
             val preschoolMethods = getAllMethods(
-                    IEmailMessageProvider::class.java,
-                    withPrefix("getPreschool"),
-                    withParametersAssignableTo(Boolean::class.java),
-                    withReturnType(String::class.java))
+                IEmailMessageProvider::class.java,
+                withPrefix("getPreschool"),
+                withParametersAssignableTo(Boolean::class.java),
+                withReturnType(String::class.java))
             return CartesianProductTest.Sets()
-                    .addAll(preschoolMethods)
-                    .add(true, false)
+                .addAll(preschoolMethods)
+                .add(true, false)
         }
     }
 }

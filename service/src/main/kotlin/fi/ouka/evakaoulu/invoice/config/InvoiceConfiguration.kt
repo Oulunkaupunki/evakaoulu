@@ -4,9 +4,11 @@
 
 package fi.ouka.evakaoulu.invoice.config
 
+import fi.espoo.evaka.invoicing.domain.FeeAlteration
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
-import fi.espoo.evaka.invoicing.service.IncomeTypesProvider
+import fi.espoo.evaka.invoicing.service.*
+import fi.espoo.evaka.placement.PlacementType
 import fi.ouka.evakaoulu.EVakaOuluProperties
 import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
 import fi.ouka.evakaoulu.util.basicAuthInterceptor
@@ -28,25 +30,23 @@ const val WEB_SERVICE_TEMPLATE_INVOICE = "webServiceTemplateInvoice"
 const val HTTP_CLIENT_INVOICE = "httpClientInvoice"
 
 internal val SOAP_PACKAGES = arrayOf(
-    "fi.tampere.messages.ipaas.commontypes.v1",
-    "fi.tampere.messages.sapsd.salesorder.v11",
-    "fi.tampere.services.sapsd.salesorder.v1",
+    "fi.oulu.messages.ipaas.commontypes.v1",
+    "fi.oulu.messages.sapsd.salesorder.v11",
+    "fi.oulu.services.sapsd.salesorder.v1",
 )
 
 @Profile("evakaoulu")
 @Configuration
 class InvoiceConfiguration {
     @Primary
-    @Bean(name = ["trevakaInvoiceIntegrationClient"])
+    @Bean(name = ["evakaOuluInvoiceIntegrationClient"])
     fun invoiceIntegrationClient(
-        @Qualifier(WEB_SERVICE_TEMPLATE_INVOICE) webServiceTemplate: WebServiceTemplate,
-        properties: EVakaOuluProperties
+        @Qualifier(WEB_SERVICE_TEMPLATE_INVOICE) webServiceTemplate: WebServiceTemplate, properties: EVakaOuluProperties
     ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(webServiceTemplate, properties.invoice)
 
     @Bean(WEB_SERVICE_TEMPLATE_INVOICE)
     fun webServiceTemplate(
-        @Qualifier(HTTP_CLIENT_INVOICE) httpClient: HttpClient,
-        properties: EVakaOuluProperties
+        @Qualifier(HTTP_CLIENT_INVOICE) httpClient: HttpClient, properties: EVakaOuluProperties
     ): WebServiceTemplate {
         val messageFactory = SaajSoapMessageFactory().apply {
             setSoapVersion(SoapVersion.SOAP_12)
@@ -64,14 +64,19 @@ class InvoiceConfiguration {
     }
 
     @Bean(HTTP_CLIENT_INVOICE)
-    fun httpClient(properties: EVakaOuluProperties) = HttpClientBuilder.create()
-        .addInterceptorFirst(RemoveSoapHeadersInterceptor())
-        .addInterceptorFirst(basicAuthInterceptor(properties.ipaas.username, properties.ipaas.password))
-        .build()
+    fun httpClient(properties: EVakaOuluProperties) =
+        HttpClientBuilder.create().addInterceptorFirst(RemoveSoapHeadersInterceptor())
+            .addInterceptorFirst(basicAuthInterceptor(properties.ipaas.username, properties.ipaas.password)).build()
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()
 
+    @Bean
+    fun invoiceProductProvider(): InvoiceProductProvider = OuluInvoiceProductProvider()
+
+    @Bean
+    fun invoiceGenerator(productProvider: InvoiceProductProvider): InvoiceGenerator =
+        InvoiceGenerator(DefaultDraftInvoiceGenerator(productProvider))
 }
 
 class OuluIncomeTypesProvider : IncomeTypesProvider {
@@ -96,4 +101,61 @@ class OuluIncomeTypesProvider : IncomeTypesProvider {
             "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false),
         )
     }
+}
+
+class OuluInvoiceProductProvider : InvoiceProductProvider {
+
+    override val products = Product.values().map { ProductWithName(it.key, it.nameFi) }
+    override val dailyRefund = Product.FREE_OF_CHARGE.key
+    override val partMonthSickLeave = Product.SICK_LEAVE_50.key
+    override val fullMonthSickLeave = Product.SICK_LEAVE_100.key
+    override val fullMonthAbsence = Product.ABSENCE.key
+
+    override fun mapToProduct(placementType: PlacementType): ProductKey {
+        val product = when (placementType) {
+            PlacementType.DAYCARE, PlacementType.DAYCARE_PART_TIME, PlacementType.DAYCARE_FIVE_YEAR_OLDS, PlacementType.DAYCARE_PART_TIME_FIVE_YEAR_OLDS -> Product.DAYCARE
+            PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
+            PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
+            PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
+            PlacementType.SCHOOL_SHIFT_CARE -> Product.SCHOOL_SHIFT_CARE
+            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.CLUB -> error("No product mapping found for placement type $placementType")
+        }
+        return product.key
+    }
+
+    override fun mapToFeeAlterationProduct(productKey: ProductKey, feeAlterationType: FeeAlteration.Type): ProductKey {
+        val product = when (findProduct(productKey) to feeAlterationType) {
+            Product.DAYCARE to FeeAlteration.Type.DISCOUNT, Product.DAYCARE to FeeAlteration.Type.RELIEF, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.DISCOUNT, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.RELIEF -> Product.DAYCARE_DISCOUNT
+            Product.DAYCARE to FeeAlteration.Type.INCREASE, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.INCREASE -> Product.CORRECTION
+            else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
+        }
+        return product.key
+    }
+
+}
+
+fun findProduct(key: ProductKey) = Product.values().find { it.key == key } ?: error("Product with key $key not found")
+
+enum class Product(val nameFi: String, val code: String) {
+    DAYCARE("Varhaiskasvatus", "500218"), DAYCARE_DISCOUNT(
+        "Alennus", "500687"
+    ),
+    PRESCHOOL_WITH_DAYCARE(
+        "Esiopetusta täydentävä varhaiskasvatus", "500220"
+    ),
+    TEMPORARY_CARE("Tilapäinen varhaiskasvatus", "500576"), SCHOOL_SHIFT_CARE(
+        "Koululaisen vuorohoito", "500949"
+    ),
+    SICK_LEAVE_50("Laskuun vaikuttava poissaolo 50%", "500283"), SICK_LEAVE_100(
+        "Laskuun vaikuttava poissaolo 100%", "500248"
+    ),
+    ABSENCE("Poissaolovähennys 50%", "500210"), FREE_OF_CHARGE("Maksuton päivä", "503696"), CORRECTION(
+        "Oikaisu", "500177"
+    ),
+    FREE_MONTH("Maksuton kuukausi", "500156"), OVER_CONTRACT(
+        "Sopimuksen ylitys", "500538"
+    ),
+    UNANNOUNCED_ABSENCE("Ilmoittamaton päivystysajan poissaolo", "507292");
+
+    val key = ProductKey(this.name)
 }

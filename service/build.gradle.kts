@@ -27,6 +27,10 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel")
     implementation("org.jdbi:jdbi3-core")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude( "com.vaadin.external.google", "android-json")
+    }
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit-pioneer:junit-pioneer:${TrevakaServiceDeps.junitPioneer}") // for CartesianProductTest
     testImplementation("org.mockito.kotlin:mockito-kotlin")

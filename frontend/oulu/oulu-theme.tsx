@@ -12,7 +12,7 @@ const theme: Theme = {
   colors: {
     main: {
       m1: '#00417D',
-      m2: '#29549A',
+      m2: '#001E96',
       m3: '#4676BE',
       m4: '#E5EEF8',
       m2Hover: '#00417D',

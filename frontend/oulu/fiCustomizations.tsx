@@ -33,7 +33,8 @@ const fi: DeepPartial<Translations> = {
         'Ilmoittautuminen esiopetukseen ja / tai valmistavaan opetukseen',
       preschoolInfo:
         'Ilmoittautumisen yhteydessä voidaan hakea myös esiopetukseen liittyvään varhaiskasvatukseen.  Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen loma- ja työaikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
-      preschoolDaycareInfo: '',
+      preschoolDaycareInfo:
+        '',
       clubLabel: 'Hakemus avoimeen varhaiskasvatukseen',
       clubInfo:
         'Hakemuksella avoimeen varhaiskasvatukseen haetaan kahden ja kolmen kerran kerhoihin sekä perhekerhoon.',

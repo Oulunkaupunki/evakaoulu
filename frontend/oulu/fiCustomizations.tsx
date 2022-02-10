@@ -6,13 +6,13 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 */
 }
 
-import { P } from 'lib-components/typography'
+import React from 'react'
+import ExternalLink from 'lib-components/atoms/ExternalLink'
 import UnorderedList from 'lib-components/atoms/UnorderedList'
+import { P } from 'lib-components/typography'
 import { Gap } from 'lib-components/white-space'
 import { Translations } from 'lib-customizations/citizen'
 import { DeepPartial } from 'lib-customizations/types'
-import React from 'react'
-import ExternalLink from 'lib-components/atoms/ExternalLink'
 
 const customerContactText = function () {
   return (
@@ -32,7 +32,9 @@ const fi: DeepPartial<Translations> = {
       preschoolLabel:
         'Ilmoittautuminen esiopetukseen ja / tai valmistavaan opetukseen',
       preschoolInfo:
-        'Ilmoittautumisen yhteydessä voidaan hakea myös esiopetukseen liittyvään varhaiskasvatukseen. Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen loma- ja työaikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
+        'Ilmoittautumisen yhteydessä voidaan hakea myös esiopetukseen liittyvään varhaiskasvatukseen.  Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen loma- ja työaikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
+      preschoolDaycareInfo:
+        '',
       clubLabel: 'Hakemus avoimeen varhaiskasvatukseen',
       clubInfo:
         'Hakemuksella avoimeen varhaiskasvatukseen haetaan kahden ja kolmen kerran kerhoihin sekä perhekerhoon.',
@@ -210,11 +212,12 @@ const fi: DeepPartial<Translations> = {
           CLUB: 'Jos lapsella on tuen tarve, Oulun varhaiskasvatuksesta otetaan yhteyttä hakemuksen jättämisen jälkeen.'
         },
         partTime: {
-          true: 'Osapäiväinen'
+          true: 'Osapäiväinen',
+          false: 'Kokoaikainen'
         },
         dailyTime: {
           label: {
-            DAYCARE: 'Palveluntarve'
+            DAYCARE: 'Palveluntarpeen vaihtoehdot'
           }
         }
       },

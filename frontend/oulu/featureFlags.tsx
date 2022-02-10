@@ -11,13 +11,13 @@ import { FeatureFlags } from 'lib-customizations/types'
 const featureFlags: FeatureFlags = {
   childIncomeEnabled: true,
   daycareApplication: {
-    dailyTimesEnabled: false
+    dailyTimesEnabled: true
   },
   groupsTableServiceNeedsEnabled: true,
   evakaLogin: true,
   financeBasicsPage: true,
   urgencyAttachmentsEnabled: false,
-  preschoolEnabled: false,
+  preschoolEnabled: true,
   assistanceActionOtherEnabled: false,
   experimental: {
     messageAttachments: true,

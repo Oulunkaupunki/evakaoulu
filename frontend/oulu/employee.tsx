@@ -21,6 +21,11 @@ const customizations: EmployeeCustomizations = {
           preschool: 'Esiopetusta täydentävä toiminta'
         }
       },
+      footer: {
+        cityLabel: 'Oulun kaupunki',
+        linkLabel: 'Oulun varhaiskasvatus',
+        linkHref: 'https://www.ouka.fi/oulu/paivahoito-ja-esiopetus'
+      },
       childInformation: {
         assistanceNeed: {
           fields: {

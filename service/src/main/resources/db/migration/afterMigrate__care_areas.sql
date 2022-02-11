@@ -21,7 +21,7 @@ VALUES
   ('Ritaharju-Kuivasjärvi-Pöllökangas', NULL, NULL, 'ritaharju-kuivasjarvi-pollokangas'),
   ('Tuira-Toppila', NULL, NULL, 'tuira-toppila'),
   ('Yli-Ii', NULL, NULL, 'yli-ii'),
-  ('Yli-Kiiminki', NULL, NULL, 'yli-kiiminki')
+  ('Ylikiiminki', NULL, NULL, 'ylikiiminki')
 ON CONFLICT (name) DO
 UPDATE SET
   name = EXCLUDED.name,

@@ -73,6 +73,19 @@ const fi: DeepPartial<Translations> = {
                   sama varhaiskasvatusyksikkö, jossa lapsen sisarus on.
                 </P>
               </>
+            ),
+            CLUB: (
+              <>
+                <P>
+                  Tavoitteena on sijoittaa sisarukset samaan kerhoryhmään
+                  perheen niin toivoessa.
+                </P>
+                <P>
+                  Täytä nämä tiedot vain, jos käytät sisarusperustetta. Valitse
+                  alla olevissa hakutoiveissa ensisijaiseksi toiveeksi sama
+                  avoimen varhaiskasvatuksen yksikkö, jossa lapsen sisarus on.
+                </P>
+              </>
             )
           }
         },
@@ -97,6 +110,24 @@ const fi: DeepPartial<Translations> = {
                   tiedon hakemuksesta.
                 </P>
               </>
+            ),
+            CLUB: (
+              <>
+                <P>
+                  Voit hakea 1-3 paikkaa toivomassasi järjestyksessä.
+                  Hakutoiveet eivät takaa paikkaa toivotussa kerhossa, mutta
+                  mahdollisuus toivotun paikan saamiseen kasvaa antamalla
+                  useamman vaihtoehdon.
+                </P>
+                <P>
+                  Näet eri kerhojen sijainnin valitsemalla ‘Yksiköt kartalla’.
+                </P>
+                <P>Yksiköt kartalla -linkki avaa kartan Oulun näkymään.</P>
+                <P>
+                  Yksikön kieli -jätetään toistaiseksi ennalleen, kunnes saamme
+                  tehtyä oman päätöksen.
+                </P>
+              </>
             )
           },
           serviceVoucherLink:
@@ -104,6 +135,9 @@ const fi: DeepPartial<Translations> = {
         }
       },
       heading: {
+        title: {
+          CLUB: 'Hakemus avoimeen varhaiskasvatukseen'
+        },
         info: {
           DAYCARE: (
             <>
@@ -133,31 +167,42 @@ const fi: DeepPartial<Translations> = {
           CLUB: (
             <>
               <P>
-                Kerhopaikkaa voi hakea ympäri vuoden. Kerhohakemuksella voi
-                hakea kunnallista tai palvelusetelillä tuettua kerhopaikkaa.
-                Kirjallinen ilmoitus kerhopaikasta lähetään Suomi.fi-viestit
-                -palveluun. Mikäli haluatte ilmoituksen sähköisenä
-                tiedoksiantona, teidän tulee ottaa Suomi.fi-viestit -palvelu
-                käyttöön. Palvelusta ja sen käyttöönotosta saatte lisätietoa{' '}
-                <ExternalLink
-                  text="https://www.suomi.fi/viestit"
-                  href="https://www.suomi.fi/viestit"
-                  newTab
-                />
-                . Mikäli ette ota Suomi.fi-viestit -palvelua käyttöön, ilmoitus
-                kerhopaikasta lähetetään teille postitse. Paikka myönnetään
-                yhdeksi toimintakaudeksi kerrallaan.
+                Avoimen varhaiskasvatuksen kerhopaikka myönnetään siihen saakka,
+                kunnes paikka irtisanotaan tai lapsi siirtyy varhaiskasvatukseen
+                tai esiopetukseen. Avoimen toiminnan valintajärjestys on
+                seuraava: lapset, jotka luopuvat varhaiskasvatuspaikasta,
+                sisarukset, uudet hakijat hakujärjestyksessä huomioiden tuen
+                tarvitsijat. Päätös kerhopaikasta tulee Suomi.fi-palveluun tai
+                postitse, mikäli ette ole ottanut palvelua käyttöön. Päätös on
+                nähtävillä myös eVaka-palvelussa kohdassa Hakeminen - Päätökset.
               </P>
               <P>
-                Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kyseisen
-                kauden päättyessä hakemus poistetaan järjestelmästä.
+                Avoimen varhaiskasvatuksen kerhotoiminta on maksutonta, eikä
+                siihen osallistuminen vaikuta Kelan maksamaan kotihoidontukeen.
               </P>
+              <P>
+                Lisätietoja kerhoista Oulun kaupungin verkkosivuilta:{' '}
+                <ExternalLink
+                  text="Avoin varhaiskasvatus - kerhot ja leikkikoulut"
+                  href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/avoin-varhaiskasvatus"
+                  newTab
+                />
+              </P>
+              <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
           )
         }
       },
       serviceNeed: {
         startDate: {
+          header: {
+            CLUB: 'Avoimen varhaiskasvatuksen alkaminen'
+          },
+          info: {
+            CLUB: [
+              'Avoimen varhaiskasvatuksen kerhot noudattavat pääsääntöisesti esiopetuksen työ- ja loma-aikoja. Lapsi voi osallistua yhteen kaksi tai kolme kertaa viikossa kokoontuvaan kerhoon ja lisäksi perhekerhoon.'
+            ]
+          },
           instructions: (
             <>
               Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi siihen
@@ -208,7 +253,7 @@ const fi: DeepPartial<Translations> = {
         assistanceNeedInstructions: {
           DAYCARE:
             'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
-          CLUB: 'Jos lapsella on tuen tarve, Oulun varhaiskasvatuksesta otetaan yhteyttä hakemuksen jättämisen jälkeen.'
+          CLUB: 'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.'
         },
         partTime: {
           true: 'Osapäiväinen',
@@ -234,10 +279,9 @@ const fi: DeepPartial<Translations> = {
             . Mikäli osoitteenne on muuttumassa, voit lisätä tulevan osoitteen
             erilliseen kohtaan hakemuksella; lisää tuleva osoite sekä lapselle
             että huoltajalle. Virallisena osoitetietoa pidetään vasta, kun se on
-            päivittynyt väestötietojärjestelmään. Varhaiskasvatus- ja
-            palvelusetelipäätös sekä tieto avoimen varhaiskasvatuksen
-            kerhopaikasta toimitetaan automaattisesti myös eri osoitteessa
-            asuvalle väestötiedoista löytyvälle huoltajalle.
+            päivittynyt väestötietojärjestelmään. Päätökset esiopetus- ja
+            varhaiskasvatuspaikoista toimitetaan automaattisesti myös eri
+            osoitteessa asuvalle väestötiedoista löytyvälle huoltajalle.
           </P>
         ),
         futureAddressInfo:

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 City of Oulu
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 package fi.ouka.evakaoulu.database
 
 import fi.espoo.evaka.shared.db.Database

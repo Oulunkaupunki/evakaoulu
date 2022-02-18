@@ -280,7 +280,7 @@ private fun validFeeDecision() = FeeDecisionDetailed(
         FeeDecisionChildDetailed(
             child = PersonDetailed(
                 PersonId(UUID.randomUUID()), LocalDate.of(2018, 1, 1), null,
-                "Matti", "Meikäläinen",
+                "Jaakko", "Oululainen",
                 null, "", "", "",
                 "", null, "", null, restrictedDetailsEnabled = false
             ),
@@ -311,8 +311,8 @@ private fun validFeeDecision() = FeeDecisionDetailed(
     FeeDecisionType.NORMAL,
     headOfFamily = PersonDetailed(
         PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
-        "Maija", "Meikäläinen",
-        "310382-956D", "Meikäläisenkuja 6 B 7", "33730", "TAMPERE",
+        "Anu", "Oululainen",
+        "310382-956D", "Oululaisenkatu 6 B 7", "90100", "OULU",
         "", null, "", null, restrictedDetailsEnabled = false
     ),
     partner = null,
@@ -343,8 +343,8 @@ private fun validVoucherValueDecision() = VoucherValueDecisionDetailed(
     decisionType = VoucherValueDecisionType.NORMAL,
     headOfFamily = PersonDetailed(
         PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
-        "Maija", "Meikäläinen",
-        "310382-956D", "Meikäläisenkuja 6 B 7", "33730", "TAMPERE",
+        "Anu", "Oululainen",
+        "310382-956D", "Oululaisenkatu 6 B 7", "90100", "OULU",
         "", null, "", null, restrictedDetailsEnabled = false
     ),
     partner = null,
@@ -360,7 +360,7 @@ private fun validVoucherValueDecision() = VoucherValueDecisionDetailed(
     ),
     PersonDetailed(
         PersonId(UUID.randomUUID()), LocalDate.of(2018, 1, 1), null,
-        "Matti", "Meikäläinen",
+        "Jaakko", "Oululainen",
         null, "", "", "",
         "", null, "", null, restrictedDetailsEnabled = false
     ),

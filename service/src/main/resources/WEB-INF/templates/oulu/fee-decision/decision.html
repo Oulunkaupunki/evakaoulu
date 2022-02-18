@@ -19,13 +19,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <footer th:replace="~{ oulu/shared/common :: footer}"></footer>
 
 <div class="page first-page">
-    <div class="address">
-        <div th:text="${headFullName}"></div>
-        <div th:if="${isElementaryFamily}" th:text="${partnerFullName}"></div>
-        <div th:text="${sendAddress.row1}"></div>
-        <div th:text="${sendAddress.row2}"></div>
-        <div th:if="${not #strings.isEmpty(sendAddress.row3)}" th:text="${sendAddress.row3}"></div>
-    </div>
 
     <h1 th:if="${isReliefDecision}" th:text="#{text.relief.title}"></h1>
     <h1 th:unless="${isReliefDecision}" th:text="#{text.title}"></h1>
@@ -39,38 +32,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
        th:utext="${not #strings.isEmpty(validTo)} ? #{text.relief.decision_retroactive(${totalFee}, ${validFrom}, ${validTo})} : #{text.relief.decision(${totalFee}, ${validFrom})}"></p>
     <p th:unless="${isReliefDecision}"
        th:utext="${not #strings.isEmpty(validTo)} ? #{text.decision_retroactive(${totalFee}, ${validFrom}, ${validTo})} : #{text.decision(${totalFee}, ${validFrom})}"></p>
-
-    <p th:text="#{text.table.intro}"></p>
-
-    <table class="narrow">
-        <tbody>
-        <tr>
-            <td th:text="${headFullName}"></td>
-
-            <td class="text-right" th:switch="${headIncomeEffect}">
-                <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{text.income.max_fee_accepted}"></span>
-                <span th:case="'INCOMPLETE'" th:text="#{text.income.incomplete}"></span>
-                <span th:case="'INCOME'" th:text="${headIncomeTotal}"></span>
-                <span th:case="'NOT_AVAILABLE'" th:text="#{text.income.not_available}"></span>
-            </td>
-        </tr>
-        <tr th:if="${hasPartner}">
-            <td th:text="${partnerFullName}"></td>
-            <td class="text-right" th:switch="${partnerIncomeEffect}">
-                <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{text.income.max_fee_accepted}"></span>
-                <span th:case="'INCOMPLETE'" th:text="#{text.income.incomplete}"></span>
-                <span th:case="'INCOME'" th:text="${partnerIncomeTotal}"></span>
-                <span th:case="'NOT_AVAILABLE'" th:text="#{text.income.not_available}"></span>
-            </td>
-        </tr>
-        </tbody>
-        <tbody th:if="${showTotalIncome}">
-        <tr>
-            <td><strong class="semi" th:text="#{decision.combined}"></strong></td>
-            <td class="text-right" th:text="${totalIncome}"></td>
-        </tr>
-        </tbody>
-    </table>
 
     <p>
         <span th:text="#{decision.familySize}"></span>
@@ -112,10 +73,37 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         </tbody>
     </table>
 
-    <h2 th:text="#{text.reference}"></h2>
-    <p>
-        <a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrl}"></a>
-    </p>
+    <p th:text="#{text.table.intro}"></p>
+
+    <table class="narrow">
+        <tbody>
+        <tr>
+            <td th:text="${headFullName}"></td>
+
+            <td class="text-right" th:switch="${headIncomeEffect}">
+                <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{text.income.max_fee_accepted}"></span>
+                <span th:case="'INCOMPLETE'" th:text="#{text.income.incomplete}"></span>
+                <span th:case="'INCOME'" th:text="${headIncomeTotal}"></span>
+                <span th:case="'NOT_AVAILABLE'" th:text="#{text.income.not_available}"></span>
+            </td>
+        </tr>
+        <tr th:if="${hasPartner}">
+            <td th:text="${partnerFullName}"></td>
+            <td class="text-right" th:switch="${partnerIncomeEffect}">
+                <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{text.income.max_fee_accepted}"></span>
+                <span th:case="'INCOMPLETE'" th:text="#{text.income.incomplete}"></span>
+                <span th:case="'INCOME'" th:text="${partnerIncomeTotal}"></span>
+                <span th:case="'NOT_AVAILABLE'" th:text="#{text.income.not_available}"></span>
+            </td>
+        </tr>
+        </tbody>
+        <tbody th:if="${showTotalIncome}">
+        <tr>
+            <td><strong class="semi" th:text="#{decision.combined}"></strong></td>
+            <td class="text-right" th:text="${totalIncome}"></td>
+        </tr>
+        </tbody>
+    </table>
 
 
 </div>
@@ -125,34 +113,31 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <div class="legal-content">
         <p th:text="#{text.legal.p1}"></p>
         <p th:text="#{text.legal.p2}"></p>
+        <p th:text="#{text.reference}"></p>
+        <p>
+            <a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrl}"></a>
+        </p>
+        <p th:text="#{text.reference.p2}"></p>
+        <p th:text="#{text.legal.p3}"></p>
     </div>
-
-    <div th:utext="#{decision.legalInstructions}"></div>
 
     <div class="decision-details-container">
         <p>
             <strong th:text="#{decision.sentDate}">Päätöspäivä</strong>
             <span th:text="${approvedAt}"></span>
         </p>
-        <p>
-            <strong th:text="#{decision.decisionMethodTitle}">Tiedoksiantotapa:</strong>
-            <span th:text="#{decision.decisionMethod.sent}">Lähetetty</span>
-        </p>
-        <p>
-            <strong th:text="#{decision.approver.prefix}">Päätöksentekijä</strong>
-        </p>
         <div>
+            <span th:text="#{decision.approver.prefix}">Päätöksentekijä: ></span>
             <span th:text="${approverFirstName}"></span>
             <span th:text="${approverLastName}"></span>
         </div>
-        <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>
+<!--        <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>-->
         <div th:utext="#{decision.approver.additionalInfo}">(allekirjoitettu koneellisesti)</div>
-
-        <p th:utext="#{decision.approver.details}"></p>
+        <div th:utext="#{decision.approver.details}"></div>
 
     </div>
 
-    <p th:text="#{decision.inform.guardians}">Tiedoksi: Huoltajat</p>
+    <div th:utext="#{decision.legalInstructions}"></div>
 
 </div>
 

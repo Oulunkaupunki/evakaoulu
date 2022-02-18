@@ -265,16 +265,10 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <div class="headerLeft">
             <div class="left-column">
                 <div class="left-column">
-                    <p>
-                        <span th:text="${isReliefDecision} ? #{heading.relief.1} : #{heading.1}"></span>
-                        <span th:text="${isReliefDecision} ? #{heading.relief.2} : #{heading.2}"></span>
-                    </p>
-                    <p>
-                        <span th:text="#{heading.3}"></span>
-                    </p>
-                    <p>
-                        <span th:text="#{heading.4(${approvedAt})}"></span>
-                    </p>
+                    <div th:text="${isReliefDecision} ? #{heading.relief.1} : #{heading.1}"></div>
+                    <div th:text="${isReliefDecision} ? #{heading.relief.2} : #{heading.2}"></div>
+                    <div th:text="#{heading.3}"></div>
+                    <div th:text="#{heading.4(${approvedAt})}"></div>
                 </div>
             </div>
         </div>

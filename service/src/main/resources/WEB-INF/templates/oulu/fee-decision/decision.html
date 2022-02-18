@@ -20,6 +20,14 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 <div class="page first-page">
 
+    <div class="address">
+        <div th:text="${headFullName}"></div>
+        <div th:if="${isElementaryFamily}" th:text="${partnerFullName}"></div>
+        <div th:text="${sendAddress.row1}"></div>
+        <div th:text="${sendAddress.row2}"></div>
+        <div th:if="${not #strings.isEmpty(sendAddress.row3)}" th:text="${sendAddress.row3}"></div>
+    </div>
+
     <h1 th:if="${isReliefDecision}" th:text="#{text.relief.title}"></h1>
     <h1 th:unless="${isReliefDecision}" th:text="#{text.title}"></h1>
 
@@ -33,35 +41,16 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <p th:unless="${isReliefDecision}"
        th:utext="${not #strings.isEmpty(validTo)} ? #{text.decision_retroactive(${totalFee}, ${validFrom}, ${validTo})} : #{text.decision(${totalFee}, ${validFrom})}"></p>
 
-    <p>
-        <span th:text="#{decision.familySize}"></span>
-        <span th:text="${familySize}"></span>
-    </p>
-
     <table class="narrow">
         <tbody th:each="part: ${parts}">
         <tr>
             <td colspan="2" th:text="${part.childName}"></td>
-        </tr>
-        <tr>
             <td th:text="${part.serviceNeedDescription}"></td>
             <td class="text-right" th:text="${part.feeFormatted}"></td>
         </tr>
-        <tr th:each="alteration: ${part.feeAlterations}">
-            <td>
-                <th:block th:switch="${alteration.type.name}">
-                    <span th:case="'DISCOUNT'" th:text="#{text.feeAlterationType.DISCOUNT}"></span>
-                    <span th:case="'INCREASE'" th:text="#{text.feeAlterationType.INCREASE}"></span>
-                    <span th:case="'RELIEF'" th:text="#{text.feeAlterationType.RELIEF}"></span>
-                </th:block>
-                <span>
-                    <th:block th:text="${alteration.amount}"/><th:block th:text="${alteration.isAbsolute}? '€' : '%'"/>
-                </span>
-            </td>
-            <td class="text-right" th:text="${alteration.effectFormatted}"></td>
-        </tr>
         <tr>
             <td th:text="#{text.table.finalFee}"></td>
+            <td></td>
             <td class="text-right" th:text="${part.finalFeeFormatted}"></td>
         </tr>
         </tbody>

@@ -307,7 +307,7 @@ private fun validFeeDecision() = FeeDecisionDetailed(
     ),
     validDuring = DateRange(LocalDate.now(), null),
     FeeDecisionStatus.WAITING_FOR_SENDING,
-    decisionNumber = null,
+    decisionNumber = 12345,
     FeeDecisionType.NORMAL,
     headOfFamily = PersonDetailed(
         PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,

@@ -31,7 +31,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <h1 th:if="${isReliefDecision}" th:text="#{text.relief.title}"></h1>
     <h1 th:unless="${isReliefDecision}" th:text="#{text.title}"></h1>
 
-
     <p th:if="${decisionType == 'RELIEF_ACCEPTED'}" th:text="#{text.relief.accepted}"></p>
     <p th:if="${decisionType == 'RELIEF_PARTLY_ACCEPTED'}" th:text="#{text.relief.partlyAccepted}"></p>
     <p th:if="${decisionType == 'RELIEF_REJECTED'}" th:text="#{text.relief.rejected}"></p>
@@ -48,27 +47,23 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             <td th:text="${part.serviceNeedDescription}"></td>
             <td class="text-right" th:text="${part.feeFormatted}"></td>
         </tr>
-        <tr>
-            <td th:text="#{text.table.finalFee}"></td>
-            <td></td>
-            <td class="text-right" th:text="${part.finalFeeFormatted}"></td>
-        </tr>
         </tbody>
         <tbody>
         <tr>
             <td><strong class="semi" th:text="#{text.table.combined}"></strong></td>
+            <td></td>
+            <td></td>
             <td class="text-right"><strong class="semi" th:text="${totalFee}"></strong></td>
         </tr>
         </tbody>
     </table>
 
-    <p th:text="#{text.table.intro}"></p>
+    <h2 th:text="#{text.table.intro}"></h2>
 
     <table class="narrow">
         <tbody>
         <tr>
             <td th:text="${headFullName}"></td>
-
             <td class="text-right" th:switch="${headIncomeEffect}">
                 <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{text.income.max_fee_accepted}"></span>
                 <span th:case="'INCOMPLETE'" th:text="#{text.income.incomplete}"></span>
@@ -94,20 +89,12 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         </tbody>
     </table>
 
-
-</div>
-
-<div class="page">
-
     <div class="legal-content">
         <p th:text="#{text.legal.p1}"></p>
         <p th:text="#{text.legal.p2}"></p>
-        <p th:text="#{text.reference}"></p>
-        <p>
-            <a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrl}"></a>
-        </p>
-        <p th:text="#{text.reference.p2}"></p>
-        <p th:text="#{text.legal.p3}"></p>
+        <span th:text="#{text.reference}"></span>
+        <span><a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrlText}"></a></span>
+        <span th:text="#{text.reference.p2}"></span>
     </div>
 
     <div class="decision-details-container">
@@ -120,17 +107,16 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             <span th:text="${approverFirstName}"></span>
             <span th:text="${approverLastName}"></span>
         </div>
-<!--        <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>-->
         <div th:utext="#{decision.approver.additionalInfo}">(allekirjoitettu koneellisesti)</div>
+        <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>
         <div th:utext="#{decision.approver.details}"></div>
 
     </div>
 
-    <div th:utext="#{decision.legalInstructions}"></div>
-
 </div>
 
 <div class="page last-page">
+    <div th:utext="#{decision.legalInstructions}"></div>
     <div th:replace="~{oulu/shared/daycare-correction :: correction}"></div>
 </div>
 

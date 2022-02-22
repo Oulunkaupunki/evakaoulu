@@ -17,18 +17,16 @@ afterEach(async () => {
 })
 
 describe('Citizen map page', () => {
-  test('Unit type filters', async () => {
-    await page.find('[data-qa="map-filter-preschool"]').waitUntilHidden()
+  test('Has unit type filters for preschool, daycare and club', async () => {
+    await page.find('[data-qa="map-filter-preschool"]').waitUntilVisible()
     await page.find('[data-qa="map-filter-daycare"]').waitUntilVisible()
     await page.find('[data-qa="map-filter-club"]').waitUntilVisible()
   })
-  test('Map main info', async () => {
-    let mapMainInfo = page.find('[data-qa="map-main-info"]')
-    await waitUntilEqual(
-      () => mapMainInfo.innerText,
-      'Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja kerhopaikkoja. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.'
-    )
-    let privateUnitInfo = mapMainInfo.findAll('span')
-    await waitUntilEqual(() => privateUnitInfo.first().innerText, '')
+  test('Has unit provider filters only for municipal and private', async () => {
+    await page.find('[data-qa="map-filter-show-more"]').click()
+    await page.find('[data-qa="map-filter-provider-municipal"]').waitUntilVisible()
+    await page.find('[data-qa="map-filter-provider-private"]').waitUntilVisible()
+    await page.find('[data-qa="map-filter-provider-purchased"]').waitUntilHidden()
+    await page.find('[data-qa="map-filter-provider-private_service_voucher"]').waitUntilHidden()
   })
 })

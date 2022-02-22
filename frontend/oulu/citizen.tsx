@@ -32,7 +32,8 @@ const customizations: CitizenCustomizations = {
   },
   routeLinkRootUrl: 'https://oulu.digitransit.fi/',
   mapConfig,
-  featureFlags
+  featureFlags,
+  unitProviderTypes: ['MUNICIPAL', 'PRIVATE']
 }
 
 export default customizations

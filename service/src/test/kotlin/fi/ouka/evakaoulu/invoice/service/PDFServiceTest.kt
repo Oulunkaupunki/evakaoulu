@@ -379,7 +379,7 @@ private fun validVoucherValueDecision() = VoucherValueDecisionDetailed(
         voucherValueCoefficient = BigDecimal.ONE,
         feeDescriptionFi = "eka",
         feeDescriptionSv = "toka",
-        voucherValueDescriptionFi = "kolmas",
+        voucherValueDescriptionFi = "VarhaiskasvatusXXX",
         voucherValueDescriptionSv = "neljäs"
     ),
     baseCoPayment = 1,

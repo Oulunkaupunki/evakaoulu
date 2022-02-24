@@ -28,11 +28,11 @@ const fi: DeepPartial<Translations> = {
   applications: {
     creation: {
       daycareInfo:
-        'Varhaiskasvatushakemuksella haetaan paikkaa kunnallisesta päiväkodista tai perhepäivähoidosta, ostopalvelupäiväkodista tai palvelusetelillä tuetusta päiväkodista.',
+        'Varhaiskasvatushakemuksella haetaan paikkaa kunnalliseen päiväkotiin tai perhepäivähoitoon. Samalla hakemuksella voi hakea myös varhaiskasvatuksen palveluseteliä yksityiseen varhaiskasvatukseen valitsemalla Hakutoiveet-kohtaan se yksityinen yksikkö, johon palveluseteliä halutaan hakea.',
       preschoolLabel:
         'Ilmoittautuminen esiopetukseen ja / tai valmistavaan opetukseen',
       preschoolInfo:
-        'Ilmoittautumisen yhteydessä voidaan hakea myös esiopetukseen liittyvään varhaiskasvatukseen.  Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen loma- ja työaikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
+        'Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen työ- ja loma-aikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
       preschoolDaycareInfo: '',
       clubLabel: 'Hakemus avoimeen varhaiskasvatukseen',
       clubInfo:
@@ -356,11 +356,16 @@ const fi: DeepPartial<Translations> = {
     sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
   },
   map: {
-    mainInfo: `Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja kerhopaikkoja. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.`,
+    mainInfo: `Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja avoimen varhaiskasvatuksen yksiköitä. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.`,
     privateUnitInfo: <></>,
     serviceVoucherLink:
       'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli',
-    searchPlaceholder: 'Esim. Ainolan päiväkoti'
+    searchPlaceholder: 'Esim. Ainolan päiväkoti',
+    careTypes: {
+      CLUB: 'Avoin varhaiskasvatus',
+      DAYCARE: 'Varhaiskasvatus',
+      PRESCHOOL: 'Esiopetus'
+    }
   },
   decisions: {
     summary: (

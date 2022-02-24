@@ -37,7 +37,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <div>
         <span th:if="${#strings.isEmpty(validTo)}" th:utext="#{decision.details.child(${child.firstName}, ${child.lastName}, ${#temporals.format(child.dateOfBirth, 'd.M.yyyy')}, ${validFrom})}"></span>
         <span th:if="${not #strings.isEmpty(validTo)}" th:utext="#{decision.details.child2(${child.firstName}, ${child.lastName}, ${#temporals.format(child.dateOfBirth, 'd.M.yyyy')}, ${validFrom}, ${validTo})}"></span>
-
         <span th:text="#{decision.details.unitTitle(${placementUnit.name})}"></span>
     </div>
 
@@ -48,31 +47,55 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <tbody>
             <tr>
                 <td th:text="#{decision.serviceNeed}"></td>
-                <td class="text-left">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="text-right">
                     <span th:text="${voucherValueDescription}"></span>
                 </td>
             </tr>
             <tr>
                 <td th:text="#{decision.familySize}">
                 </td>
-                <td class="text-left" th:text="${familySize}">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="text-right" th:text="${familySize}">
                 </td>
             </tr>
             <tr>
                 <td th:text="#{decision.baseValue}"></td>
-                <td class="text-left" th:text="${value}"></td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="text-right">
+                    <span th:text="${value}"></span>
+                    <span th:text="#{decision.currency}"></span>
+                </td>
             </tr>
             <tr th:each="alteration: ${feeAlterations}">
-                <td class="text-left" th:switch="${alteration.type.name}">
+                <td class="text-right" th:switch="${alteration.type.name}">
                     <span th:case="'DISCOUNT'" th:text="#{text.feeAlterationType.DISCOUNT}"></span>
                     <span th:case="'INCREASE'" th:text="#{text.feeAlterationType.INCREASE}"></span>
                     <span th:case="'RELIEF'" th:text="#{text.feeAlterationType.RELIEF}"></span>
                 </td>
-                <td class="text-left" th:text="${alteration.effectFormatted}"></td>
+                <td class="text-right">
+                    <span th:text="${alteration.effectFormatted}"></span>
+                </td>
             </tr>
             <tr>
                 <td th:text="#{decision.coPayment}"></td>
-                <td class="text-left">– <span th:text="${coPayment}"></span></td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="text-right">
+                    <span th:text="${coPayment}"></span>
+                    <span th:text="#{decision.currency}"></span>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -82,7 +105,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <tbody>
             <tr>
                 <td th:text="${headFullName}"></td>
-                <td class="text-left" th:switch="${headIncomeEffect}">
+                <td></td>
+                <td></td>
+                <td class="text-right" th:switch="${headIncomeEffect}">
                     <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{decision.income.maxFeeAccepted}"></span>
                     <span th:case="'INCOMPLETE'" th:text="#{decision.income.notAvailable}"></span>
                     <span th:case="'INCOME'" th:text="${headIncomeTotal}"></span>
@@ -91,7 +116,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             </tr>
             <tr th:if="${hasPartner}">
                 <td th:text="${partnerFullName}"></td>
-                <td class="text-left" th:switch="${partnerIncomeEffect}">
+                <td></td>
+                <td></td>
+                <td class="text-right" th:switch="${partnerIncomeEffect}">
                     <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{decision.income.maxFeeAccepted}"></span>
                     <span th:case="'INCOMPLETE'" th:text="#{decision.income.notAvailable}"></span>
                     <span th:case="'INCOME'" th:text="${partnerIncomeTotal}"></span>
@@ -100,7 +127,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             </tr>
             <tr th:if="${showTotalIncome}">
                 <td th:text="#{decision.combined}"></td>
-                <td class="text-left" th:text="${totalIncome}"></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">
+                    <span th:text="${totalIncome}"></span>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -126,14 +157,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <span><a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrlText}"></a></span>
         <span th:text="#{text.reference.p2}"></span>
     </div>
-</div>
-
-<div class="page last-page">
     <div class="decision-details-container">
-        <p>
+        <div>
             <strong th:text="#{decision.sentDate}">Päätöspäivä</strong>
-            <span th:text="${approvedAt}"></span>
-        </p>
+            <strong th:text="${approvedAt}"></strong>
+        </div>
 
         <div>
             <span th:text="#{decision.approver.prefix}">Päätöksentekijä</span>
@@ -144,8 +172,12 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>
         <div th:utext="#{decision.approver.details}"></div>
     </div>
+</div>
+
+<div class="page last-page">
+
     <div th:utext="#{decision.legalInstructions}"></div>
-    <div th:replace="~{oulu/shared/daycare-correction :: correction}"></div>
+    <div th:replace="~{oulu/shared/voucher-value-correction :: correction}"></div>
 </div>
 </body>
 </html>

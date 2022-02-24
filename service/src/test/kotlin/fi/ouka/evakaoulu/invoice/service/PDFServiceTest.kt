@@ -158,7 +158,7 @@ internal class PDFServiceTest : AbstractIntegrationTest() {
     @Test
     fun generateVoucherValueDecisionPdfWithIncome() {
         val decision = validVoucherValueDecision().copy(headOfFamilyIncome = testDecisionIncome)
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision = decision, settings = settings, lang = DocumentLang.fi)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -196,23 +196,23 @@ internal class PDFServiceTest : AbstractIntegrationTest() {
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 
-    @Test
-    fun generateVoucherValueDecisionPdfEmptyAddress() {
-        val decision = validVoucherValueDecision().copy(
-            headOfFamily = PersonDetailed(
-                PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
-                "Maija", "Meikäläinen",
-                "310382-956D", "", "", "",
-                "", null, "", null, restrictedDetailsEnabled = false
-            )
-        )
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
-
-        val bytes = pdfService.generateVoucherValueDecisionPdf(data)
-
-        val filepath = "${reportsPath}/PDFServiceTest-voucher-value-decision-empty-address.pdf"
-        FileOutputStream(filepath).use { it.write(bytes) }
-    }
+//    @Test
+//    fun generateVoucherValueDecisionPdfEmptyAddress() {
+//        val decision = validVoucherValueDecision().copy(
+//            headOfFamily = PersonDetailed(
+//                PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
+//                "Maija", "Meikäläinen",
+//                "310382-956D", "", "", "",
+//                "", null, "", null, restrictedDetailsEnabled = false
+//            )
+//        )
+//        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+//
+//        val bytes = pdfService.generateVoucherValueDecisionPdf(data)
+//
+//        val filepath = "${reportsPath}/PDFServiceTest-voucher-value-decision-empty-address.pdf"
+//        FileOutputStream(filepath).use { it.write(bytes) }
+//    }
 
     @Test
     fun generateReliefAcceptedVoucherValueDecisionPdfValidTo() {
@@ -339,7 +339,7 @@ private fun validVoucherValueDecision() = VoucherValueDecisionDetailed(
     LocalDate.now(),
     null,
     VoucherValueDecisionStatus.WAITING_FOR_SENDING,
-    decisionNumber = null,
+    decisionNumber = 12345,
     decisionType = VoucherValueDecisionType.NORMAL,
     headOfFamily = PersonDetailed(
         PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,

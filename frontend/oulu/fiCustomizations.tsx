@@ -54,6 +54,11 @@ const fi: DeepPartial<Translations> = {
       }
     },
     editor: {
+      sentInfo: {
+        title: 'Hakemus on lähetetty',
+        text: 'Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn.',
+        ok: 'Selvä!'
+      },
       unitPreference: {
         siblingBasis: {
           info: {
@@ -105,7 +110,7 @@ const fi: DeepPartial<Translations> = {
                 </P>
                 <P>
                   Palveluseteliä haetaan valitsemalla hakutoiveeksi se
-                  palveluseteliyksikkö, johon halutaan hakea.
+                  yksityinen varhaiskasvatusyksikkö, johon halutaan hakea.
                   Palveluseteliyksikköön haettaessa myös yksikön esimies saa
                   tiedon hakemuksesta.
                 </P>
@@ -149,7 +154,7 @@ const fi: DeepPartial<Translations> = {
               </P>
               <P>
                 Saatte kirjallisen päätöksen varhaiskasvatuspaikasta
-                Suomi.fi-viestit -palveluun tai postitse, mikäli et ole ottanut
+                Suomi.fi-viestit -palveluun tai postitse, mikäli ette ole ottaneet
                 Suomi.fi-palvelua käyttöön. Päätös on nähtävillä myös
                 eVaka-palvelussa kohdassa Hakeminen - Päätökset.
                 Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte
@@ -303,14 +308,15 @@ const fi: DeepPartial<Translations> = {
           )
         },
         links: (
-          <P>
-            Lisätietoa varhaiskasvatuksen asiakasmaksuista löydät{' '}
-            <ExternalLink
-              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut"
-              text="Oulun kaupungin sivuilta"
-              newTab
-            />
-          </P>
+          <><P>
+            Tuloselvityslomake löytyy eVakassa Käyttäjä-valikosta kohdasta Tulotiedot.
+          </P><P>
+              Lisätietoa asiakasmaksuista löydät Oulun kaupungin nettisivuilta:{' '}
+              <ExternalLink
+                href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut"
+                text="Varhaiskasvatuksen asiakasmaksut"
+                newTab />
+            </P></>
         )
       },
       additionalDetails: {

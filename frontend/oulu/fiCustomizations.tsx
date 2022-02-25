@@ -154,8 +154,8 @@ const fi: DeepPartial<Translations> = {
               </P>
               <P>
                 Saatte kirjallisen päätöksen varhaiskasvatuspaikasta
-                Suomi.fi-viestit -palveluun tai postitse, mikäli ette ole ottaneet
-                Suomi.fi-palvelua käyttöön. Päätös on nähtävillä myös
+                Suomi.fi-viestit -palveluun tai postitse, mikäli ette ole
+                ottaneet Suomi.fi-palvelua käyttöön. Päätös on nähtävillä myös
                 eVaka-palvelussa kohdassa Hakeminen - Päätökset.
                 Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte
                 lisätietoa{' '}
@@ -308,15 +308,20 @@ const fi: DeepPartial<Translations> = {
           )
         },
         links: (
-          <><P>
-            Tuloselvityslomake löytyy eVakassa Käyttäjä-valikosta kohdasta Tulotiedot.
-          </P><P>
+          <>
+            <P>
+              Tuloselvityslomake löytyy eVakassa Käyttäjä-valikosta kohdasta
+              Tulotiedot.
+            </P>
+            <P>
               Lisätietoa asiakasmaksuista löydät Oulun kaupungin nettisivuilta:{' '}
               <ExternalLink
                 href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut"
                 text="Varhaiskasvatuksen asiakasmaksut"
-                newTab />
-            </P></>
+                newTab
+              />
+            </P>
+          </>
         )
       },
       additionalDetails: {

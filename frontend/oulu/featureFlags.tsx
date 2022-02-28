@@ -16,7 +16,7 @@ const featureFlags: FeatureFlags = {
   groupsTableServiceNeedsEnabled: true,
   evakaLogin: true,
   financeBasicsPage: true,
-  urgencyAttachmentsEnabled: false,
+  urgencyAttachmentsEnabled: true,
   preschoolEnabled: true,
   assistanceActionOtherEnabled: false,
   experimental: {

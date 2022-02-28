@@ -242,7 +242,9 @@ const fi: DeepPartial<Translations> = {
                 tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL
                 75, 90015 Oulun kaupunki.
               </P>
-            )
+            ),
+            subtitle:
+              'Lisää tähän työ- tai opiskelutodistus molemmilta vanhemmilta.'
           }
         },
         shiftCare: {

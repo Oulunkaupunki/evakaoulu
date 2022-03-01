@@ -34,7 +34,6 @@ internal class DvvModificationsServiceClientIT : AbstractIntegrationTest() {
 
         verify(
             getRequestedFor(urlEqualTo("/mock/modifications/kirjausavain/2021-04-01"))
-                .withBasicAuth(BasicCredentials("user", "pass"))
         )
     }
 
@@ -54,7 +53,6 @@ internal class DvvModificationsServiceClientIT : AbstractIntegrationTest() {
 
         verify(
             postRequestedFor(urlEqualTo("/mock/modifications/muutokset"))
-                .withBasicAuth(BasicCredentials("user", "pass"))
         )
     }
 

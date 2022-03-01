@@ -36,8 +36,8 @@ evaka:
       enabled: false
 
 evakaoulu:
-  ipaas:
+  intime:
     username: user
     password: pass
-  invoice:
-    url: http://localhost:${server.port}/salesOrder
+    address: address
+    path: path

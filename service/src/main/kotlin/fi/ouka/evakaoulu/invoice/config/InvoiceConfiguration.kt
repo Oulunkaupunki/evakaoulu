@@ -9,31 +9,12 @@ import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.espoo.evaka.invoicing.service.*
 import fi.espoo.evaka.placement.PlacementType
-import fi.ouka.evakaoulu.EVakaOuluProperties
+import fi.ouka.evakaoulu.EvakaOuluProperties
 import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
-import fi.ouka.evakaoulu.util.basicAuthInterceptor
-import org.apache.http.client.HttpClient
-import org.apache.http.impl.client.HttpClientBuilder
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
-import org.springframework.oxm.jaxb.Jaxb2Marshaller
-import org.springframework.ws.client.core.WebServiceTemplate
-import org.springframework.ws.soap.SoapVersion
-import org.springframework.ws.soap.saaj.SaajSoapMessageFactory
-import org.springframework.ws.transport.http.HttpComponentsMessageSender
-import org.springframework.ws.transport.http.HttpComponentsMessageSender.RemoveSoapHeadersInterceptor
-
-const val WEB_SERVICE_TEMPLATE_INVOICE = "webServiceTemplateInvoice"
-const val HTTP_CLIENT_INVOICE = "httpClientInvoice"
-
-internal val SOAP_PACKAGES = arrayOf(
-    "fi.oulu.messages.ipaas.commontypes.v1",
-    "fi.oulu.messages.sapsd.salesorder.v11",
-    "fi.oulu.services.sapsd.salesorder.v1",
-)
 
 @Profile("evakaoulu")
 @Configuration
@@ -41,32 +22,8 @@ class InvoiceConfiguration {
     @Primary
     @Bean(name = ["evakaOuluInvoiceIntegrationClient"])
     fun invoiceIntegrationClient(
-        @Qualifier(WEB_SERVICE_TEMPLATE_INVOICE) webServiceTemplate: WebServiceTemplate, properties: EVakaOuluProperties
-    ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(webServiceTemplate, properties.invoice)
-
-    @Bean(WEB_SERVICE_TEMPLATE_INVOICE)
-    fun webServiceTemplate(
-        @Qualifier(HTTP_CLIENT_INVOICE) httpClient: HttpClient, properties: EVakaOuluProperties
-    ): WebServiceTemplate {
-        val messageFactory = SaajSoapMessageFactory().apply {
-            setSoapVersion(SoapVersion.SOAP_12)
-            afterPropertiesSet()
-        }
-        val marshaller = Jaxb2Marshaller().apply {
-            setPackagesToScan(*SOAP_PACKAGES)
-            afterPropertiesSet()
-        }
-        return WebServiceTemplate(messageFactory).apply {
-            this.marshaller = marshaller
-            unmarshaller = marshaller
-            setMessageSender(HttpComponentsMessageSender(httpClient))
-        }
-    }
-
-    @Bean(HTTP_CLIENT_INVOICE)
-    fun httpClient(properties: EVakaOuluProperties) =
-        HttpClientBuilder.create().addInterceptorFirst(RemoveSoapHeadersInterceptor())
-            .addInterceptorFirst(basicAuthInterceptor(properties.ipaas.username, properties.ipaas.password)).build()
+        properties: EvakaOuluProperties
+    ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(properties.intime)
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()

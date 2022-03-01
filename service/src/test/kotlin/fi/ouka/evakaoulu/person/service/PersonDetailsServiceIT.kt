@@ -42,7 +42,6 @@ internal class PersonDetailsServiceIT : AbstractIntegrationTest() {
         assertThat(person).returns("070644-937X", { it.socialSecurityNumber })
         verify(
             postRequestedFor(urlEqualTo("/mock/vtj"))
-                .withBasicAuth(BasicCredentials("user", "pass"))
                 .withHeader("Content-Type", equalTo("text/xml; charset=UTF-8"))
                 .withHeader("SOAPAction", equalTo("\"\""))
         )

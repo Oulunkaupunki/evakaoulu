@@ -42,9 +42,9 @@ evaka:
       xroad:
         address: http://localhost:${wiremock.server.port}/mock/vtj
 evakaoulu:
-  ipaas:
+  intime:
     username: user
     password: pass
-  invoice:
-    url: http://localhost:${wiremock.server.port}/mock/ipaas/salesOrder
+    address: address
+    path: path
 wiremock.server.httpsPort: -1

@@ -6,11 +6,10 @@ package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
-import fi.ouka.evakaoulu.InvoiceProperties
-import org.springframework.ws.client.core.WebServiceTemplate
+import fi.ouka.evakaoulu.IntimeProperties
 
 class EVakaOuluInvoiceClient(
-    private val webServiceTemplate: WebServiceTemplate, private val properties: InvoiceProperties
+    private val properties: IntimeProperties
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
         TODO("Not yet implemented")

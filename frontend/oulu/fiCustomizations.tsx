@@ -61,8 +61,7 @@ const fi: DeepPartial<Translations> = {
       },
       unitPreference: {
         siblingBasis: {
-          title:
-            'Haku sisarusperusteella',
+          title: 'Haku sisarusperusteella',
           info: {
             DAYCARE: (
               <>
@@ -88,9 +87,9 @@ const fi: DeepPartial<Translations> = {
                   perheen niin toivoessa.
                 </P>
                 <P>
-                  Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä 
-                  valitse alla olevassa Hakutoiveet-kohdassa ensisijaiseksi 
-                  toiveeksi sama avoimen varhaiskasvatuksen yksikkö, jossa 
+                  Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä
+                  valitse alla olevassa Hakutoiveet-kohdassa ensisijaiseksi
+                  toiveeksi sama avoimen varhaiskasvatuksen yksikkö, jossa
                   lapsen sisarus on.
                 </P>
               </>
@@ -128,7 +127,7 @@ const fi: DeepPartial<Translations> = {
                   useamman vaihtoehdon.
                 </P>
                 <P>
-                  Näet avoimen varhaiskasvatusyksiköiden sijainnin valitsemalla 
+                  Näet avoimen varhaiskasvatusyksiköiden sijainnin valitsemalla
                   ‘Yksiköt kartalla’.
                 </P>
               </>
@@ -181,11 +180,12 @@ const fi: DeepPartial<Translations> = {
                 nähtävillä myös eVaka-palvelussa kohdassa Hakeminen - Päätökset.
               </P>
               <P>
-                Avoin varhaiskasvatustoiminta on maksutonta, eikä siihen 
-                osallistuminen vaikuta Kelan maksamaan kotihoidontukeen.  
+                Avoin varhaiskasvatustoiminta on maksutonta, eikä siihen
+                osallistuminen vaikuta Kelan maksamaan kotihoidontukeen.
               </P>
               <P>
-                Lisätietoja avoimesta varhaiskasvatuksesta Oulun kaupungin verkkosivuilta:{' '}
+                Lisätietoja avoimesta varhaiskasvatuksesta Oulun kaupungin
+                verkkosivuilta:{' '}
                 <ExternalLink
                   text="Avoin varhaiskasvatus - kerhot ja leikkikoulut"
                   href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/avoin-varhaiskasvatus"
@@ -218,7 +218,7 @@ const fi: DeepPartial<Translations> = {
           )
         },
         clubDetails: {
-          wasOnDaycare: 
+          wasOnDaycare:
             'Lapsella on varhaiskasvatuspaikka, josta luopuu kerhopaikan saadessaan',
           wasOnDaycareInfo:
             'Jos lapsi on ollut kunnallisessa päiväkodissa tai perhepäivähoidossa ja hän luopuu paikastaan kerhon alkaessa, hänellä on suurempi mahdollisuus saada kerhopaikka.',

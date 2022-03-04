@@ -66,9 +66,10 @@ const customizations: EmployeeCustomizations = {
       unit: {
         placementProposals: {
           rejectReasons: {
-            REASON_1: 'Päiväkoti täynnä',
-            REASON_2: 'Sisäilma tai muu rakenteellinen syy',
-            REASON_3: 'Henkilökuntaa tilapäisesti vähennetty'
+            REASON_1:
+              'Tilarajoite, sovittu varhaiskasvatuksen aluepäällikön kanssa',
+            REASON_2:
+              'Yksikön kokonaistilanne, sovittu varhaiskasvatuksen aluepäällikön kanssa'
           },
           infoTitle: '',
           infoText: ''
@@ -126,7 +127,7 @@ const customizations: EmployeeCustomizations = {
     'CLUB',
     'SCHOOL_SHIFT_CARE'
   ],
-  placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'REASON_3', 'OTHER'],
+  placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
   unitProviderTypes: ['MUNICIPAL', 'PRIVATE']
 }
 

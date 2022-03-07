@@ -83,9 +83,10 @@ const fi: DeepPartial<Translations> = {
             PRESCHOOL: (
               <>
                 <P>
-                Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden alkamista. 
-                Esiopetus on maksutonta. Lukuvuoden 2022-2023 esiopetukseen 
-                ilmoittaudutaan 10.-23.1.2022. Esiopetus alkaa 15.8.2022.
+                  Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
+                  alkamista. Esiopetus on maksutonta. Lukuvuoden 2022-2023
+                  esiopetukseen ilmoittaudutaan 10.-23.1.2022. Esiopetus alkaa
+                  15.8.2022.
                 </P>
                 <P>
                   Päätökset tulevat{' '}
@@ -145,15 +146,17 @@ const fi: DeepPartial<Translations> = {
                 <P>
                   Voit hakea 1-3 paikka paikkaa toivomassasi järjestyksessä.
                   Hakutoiveet eivät takaa paikkaa toivotussa yksikössä, mutta
-                  mahdollisuus toivotun paikan saamiseen kasvaa antamalla useamman vaihtoehdon.
+                  mahdollisuus toivotun paikan saamiseen kasvaa antamalla
+                  useamman vaihtoehdon.
                 </P>
                 <P>
-                  Näet eri yksiköiden sijainnin valitsemalla ‘Yksiköt kartalla’. 
+                  Näet eri yksiköiden sijainnin valitsemalla ‘Yksiköt kartalla’.
                 </P>
                 <P>
-                  Palveluseteliä haetaan valitsemalla hakutoiveeksi se palveluseteliyksikkö, 
-                  johon halutaan hakea. Palveluseteliyksikköön haettaessa myös 
-                  yksikön esimies saa tiedon hakemuksesta. 
+                  Palveluseteliä haetaan valitsemalla hakutoiveeksi se
+                  palveluseteliyksikkö, johon halutaan hakea.
+                  Palveluseteliyksikköön haettaessa myös yksikön esimies saa
+                  tiedon hakemuksesta.
                 </P>
               </>
             ),
@@ -251,9 +254,9 @@ const fi: DeepPartial<Translations> = {
           },
           instructions: (
             <>
-              Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi 
-              siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn. 
-              Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla 
+              Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi siihen
+              saakka, kunnes palveluohjaus on ottanut sen käsittelyyn. Tämän
+              jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
               yhteyttä varhaiskasvatuksen palveluohjaukseen
               {customerContactText()}
             </>
@@ -306,7 +309,8 @@ const fi: DeepPartial<Translations> = {
           DAYCARE:
             'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
           CLUB: 'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
-          PRESCHOOL: 'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukea toteutetaan lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon esiopetuspaikkaa osoitettaessa.'
+          PRESCHOOL:
+            'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukea toteutetaan lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon esiopetuspaikkaa osoitettaessa.'
         },
         partTime: {
           true: 'Osapäiväinen',
@@ -319,12 +323,12 @@ const fi: DeepPartial<Translations> = {
           connectedDaycareInfo: (
             <>
               <P>
-                Voit hakea lapselle tarvittaessa esiopetukseen liittyvää 
-                maksullista varhaiskasvatusta. Jos haluat aloittaa 
-                varhaiskasvatuksen myöhemmin kuin esiopetus alkaa, 
-                kirjoita haluttu aloituspäivämäärä hakemuksen “Muut lisätiedot” 
-                -kohtaan. Palveluseteliä yksityiseen päiväkotiin haetaan 
-                valitsemalla hakutoiveeksi se palveluseteliyksikkö, johon halutaan hakea. 
+                Voit hakea lapselle tarvittaessa esiopetukseen liittyvää
+                maksullista varhaiskasvatusta. Jos haluat aloittaa
+                varhaiskasvatuksen myöhemmin kuin esiopetus alkaa, kirjoita
+                haluttu aloituspäivämäärä hakemuksen “Muut lisätiedot” -kohtaan.
+                Palveluseteliä yksityiseen päiväkotiin haetaan valitsemalla
+                hakutoiveeksi se palveluseteliyksikkö, johon halutaan hakea.
               </P>
               <P>
                 Saat varhaiskasvatuspaikasta kirjallisen päätöksen{' '}
@@ -336,7 +340,7 @@ const fi: DeepPartial<Translations> = {
                   Suomi.fi-viestit
                 </a>{' '}
                 -palveluun tai postitse, mikäli et ole ottanut Suomi.fi-viestit
-                -palvelua käyttöön. Päätös on nähtävillä myös eVaka-palvelussa 
+                -palvelua käyttöön. Päätös on nähtävillä myös eVaka-palvelussa
                 kohdassa Hakeminen - Päätökset.
               </P>
             </>
@@ -346,8 +350,7 @@ const fi: DeepPartial<Translations> = {
               'Esiopetusta tarjotaan päiväkodeissa ja kouluissa neljä tuntia päivässä. Ilmoita lapsen tarvitsema varhaiskasvatusaika siten, että se sisältää myös esiopetusajan (esim. 7.00–17.00). Aika tarkennetaan varhaiskasvatuksen alkaessa. Päivittäisen varhaiskasvatusajan vaihdellessa päivittäin tai viikoittain (esim. vuorohoidossa), ilmoita tarve tarkemmin hakemuksen Muut lisätiedot -kohdassa.'
           }
         },
-        preparatory:
-          'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
+        preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
         preparatoryInfo:
           'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään Pienten kielireppu -kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma tai päätös perusopetukseen valmistavasta opetuksesta. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti. Valmistavaa opetusta annetaan kuusivuotiaille ja se koostuu päivittäin neljästä esiopetustunnista ja yhdestä suomen kielen tunnista. Valmistava opetus on maksutonta.'
       },

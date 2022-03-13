@@ -13,7 +13,6 @@ import fi.espoo.evaka.decision.DecisionStatus
 import fi.espoo.evaka.decision.DecisionType
 import fi.espoo.evaka.decision.DecisionUnit
 import fi.espoo.evaka.decision.createDecisionPdf
-import fi.espoo.evaka.emailclient.IEmailMessageProvider
 import fi.espoo.evaka.identity.ExternalIdentifier
 import fi.espoo.evaka.pis.service.PersonDTO
 import fi.espoo.evaka.setting.SettingType
@@ -45,9 +44,6 @@ class DecisionServiceTest : AbstractIntegrationTest () {
 
     @Autowired
     private lateinit var messageProvider: IMessageProvider
-
-    @Autowired
-    private lateinit var emailMessageProvider: IEmailMessageProvider
 
     @Autowired
     private lateinit var templateProvider: ITemplateProvider

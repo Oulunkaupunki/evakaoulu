@@ -6,7 +6,6 @@ package fi.ouka.evakaoulu
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 
@@ -14,7 +13,6 @@ import org.springframework.test.context.DynamicPropertySource
     webEnvironment = WebEnvironment.RANDOM_PORT,
     classes = [IntegrationTestConfiguration::class]
 )
-@AutoConfigureWireMock(port = 0)
 abstract class AbstractIntegrationTest {
 
     companion object {

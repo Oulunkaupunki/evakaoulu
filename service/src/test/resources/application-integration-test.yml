@@ -20,31 +20,30 @@ evaka:
     sfi:
       enabled: false
     dvv_modifications:
-      url: http://localhost:${wiremock.server.port}/mock/modifications
+      url: url
       user_id: user
       password: pass
       xroad_client_id: evakaoulu
       product_code: evakaoulu
     koski:
       enabled: false
-      url: http://localhost:${wiremock.server.port}/mock/koski
+      url: url
       source_system: evakaoulu
       user: user
       secret: pass
     varda:
-      url: http://localhost:${wiremock.server.port}/mock/varda
+      url: url
       source_system: evakaoulu
-      basic_auth: dXNlcjpwYXNz # user:pass
+      basic_auth: auth
     vtj:
       enabled: true
       username: user
       password: pass
       xroad:
-        address: http://localhost:${wiremock.server.port}/mock/vtj
+        address: address
 evakaoulu:
   intime:
     username: user
     password: pass
     address: address
     path: path
-wiremock.server.httpsPort: -1

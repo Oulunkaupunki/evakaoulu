@@ -35,13 +35,16 @@ import fi.espoo.evaka.shared.EmployeeId
 import fi.espoo.evaka.shared.FeeDecisionId
 import fi.espoo.evaka.shared.PersonId
 import fi.espoo.evaka.shared.VoucherValueDecisionId
+import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.domain.HelsinkiDateTime
-import fi.ouka.evakaoulu.AbstractIntegrationTest
+import fi.ouka.evakaoulu.message.config.MessageConfiguration
+import fi.ouka.evakaoulu.template.config.TemplateConfiguration
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
-import org.springframework.beans.factory.annotation.Autowired
 import org.thymeleaf.context.Context
 import java.io.FileOutputStream
 import java.math.BigDecimal
@@ -56,10 +59,17 @@ private val settings = mapOf(
     SettingType.DECISION_MAKER_TITLE to "Asiakaspalvelupäällikkö"
 )
 
-internal class PDFServiceTest : AbstractIntegrationTest() {
-
-    @Autowired
+@Tag("PDFGenerationTest")
+internal class PDFServiceTest {
     private lateinit var pdfService: PDFService
+
+    @BeforeEach
+    fun setup() {
+        pdfService = PDFService(
+            MessageConfiguration().messageProvider(),
+            TemplateConfiguration().templateProvider(),
+            PDFConfig.templateEngine())
+    }
 
     @Test
     fun render() {

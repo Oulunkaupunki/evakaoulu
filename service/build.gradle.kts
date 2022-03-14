@@ -72,3 +72,10 @@ tasks {
         systemProperty("spring.profiles.active", "local,evakaoulu-local")
     }
 }
+
+tasks.register<Test>("pdfGenerationTest"){
+    useJUnitPlatform {
+        includeTags("PDFGenerationTest")
+    }
+}
+

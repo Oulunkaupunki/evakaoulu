@@ -22,14 +22,17 @@ import fi.espoo.evaka.shared.DaycareId
 import fi.espoo.evaka.shared.DecisionId
 import fi.espoo.evaka.shared.PersonId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
+import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import fi.espoo.voltti.pdfgen.PDFService
-import fi.ouka.evakaoulu.AbstractIntegrationTest
+import fi.ouka.evakaoulu.message.config.MessageConfiguration
+import fi.ouka.evakaoulu.template.config.TemplateConfiguration
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
-import org.springframework.beans.factory.annotation.Autowired
 import java.io.FileOutputStream
 import java.nio.file.Paths
 import java.time.LocalDate
@@ -40,16 +43,18 @@ private val settings = mapOf(
     SettingType.DECISION_MAKER_TITLE to "Asiakaspalvelupäällikkö"
 )
 
-class DecisionServiceTest : AbstractIntegrationTest () {
-
-    @Autowired
+@Tag("PDFGenerationTest")
+class DecisionServiceTest {
     private lateinit var messageProvider: IMessageProvider
-
-    @Autowired
     private lateinit var templateProvider: ITemplateProvider
-
-    @Autowired
     private lateinit var pdfService: PDFService
+
+    @BeforeEach
+    fun setup() {
+        messageProvider = MessageConfiguration().messageProvider()
+        templateProvider = TemplateConfiguration().templateProvider()
+        pdfService = PDFService(PDFConfig.templateEngine())
+    }
 
     @ParameterizedTest
     @EnumSource(

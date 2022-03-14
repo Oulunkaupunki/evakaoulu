@@ -371,7 +371,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             <div style="text-indent: 6em">
                 <strong th:text="#{decision.unitsupervisor}">Päiväkodin johtaja</strong>
                 <div th:text="${manager.name}"></div>
-                <div th:text="#{decision.unitmanagertitle}"></div>
                 <div th:if="${not #strings.isEmpty(manager.phone)}"
                      th:text="|#{decision.phone.prefix} ${manager.phone}|">
                 </div>
@@ -392,9 +391,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                 <a th:href="'mailto:' + #{decision.approver.email.email}"
                    th:text="#{decision.approver.email.email}"></a>
             </div>
-            <div th:if="${not #strings.isEmpty(manager.phone)}"
-                 th:text="|#{decision.phone.prefix} ${manager.phone}|">
-            </div>
+            <div th:text="#{footer.p3}"></div>
         </p>
 
         <p>
@@ -417,7 +414,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <span th:fragment="placement-dates">
   <span th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
                   + ' – ' +
-                  ${#temporals.format(decision.endDate, 'd.M.yyyy')}"></span>
+                  ${#temporals.format(decision.endDate, 'd.M.yyyy')} + '.'"></span>
 </span>
 
 

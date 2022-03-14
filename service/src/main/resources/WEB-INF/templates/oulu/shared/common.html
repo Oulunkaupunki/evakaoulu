@@ -90,8 +90,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         }
 
         .page .decision-details-container {
-            margin-top: 5mm;
-            margin-bottom: 15mm;
+            margin-top: 2mm;
+            margin-bottom: 5mm;
         }
 
         .page.first-page h1 {
@@ -255,14 +255,13 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                     <strong th:text="#{header.1}"></strong>
                     <span th:text="#{header.2}"></span>
                 </div>
-                <div th:text="#{header.date(${approvedAt})}"></div>
                 <div>
-                    <span th:text="#{startDate}"></span>
-                    <span th:text="${startDate}"></span>
+                    <span th:text="#{header.date}"></span>
+                    <span th:replace="~{oulu/shared/common :: format-date(${decision.sentDate})}"></span>
                 </div>
                 <div>
-                    <span th:text="#{decisionNumber}"></span>
-                    <span th:text="${decisionNumber}"></span>
+                    <span th:text="#{header.decisionNumber}"></span>
+                    <span th:text="${decision.decisionNumber}"></span>
                 </div>
             </div>
         </div>
@@ -386,29 +385,18 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <p>
             <strong th:if="${type == 'notice'}" th:text="#{notice.approver.prefix}">Ilmoituksentekijä</strong>
             <strong th:unless="${type == 'notice'}" th:text="#{decision.approver.prefix}">Päätöksentekijä</strong>
+            <div th:text="${manager.name}"></div>
+            <div th:text="#{decision.approver.additionalInfo}"></div>
+            <div th:text="#{decision.unitmanagertitle}"></div>
+            <div>
+                <a th:href="'mailto:' + #{decision.approver.email.email}"
+                   th:text="#{decision.approver.email.email}"></a>
+            </div>
+            <div th:if="${not #strings.isEmpty(manager.phone)}"
+                 th:text="|#{decision.phone.prefix} ${manager.phone}|">
+            </div>
         </p>
-        <th:block th:if="${type == 'notice'}">
-            <div th:text="${decision.createdBy}"></div>
-            <div th:text="#{notice.approver.title}">Koordinaattori</div>
-            <div th:text="#{decision.approver.additionalInfo}">(allekirjoitettu koneellisesti)</div>
-        </th:block>
-        <th:block th:unless="${type == 'notice'}">
-            <div th:if="${not #strings.isEmpty(decisionMakerName)}" th:text="${decisionMakerName}"></div>
-            <div th:if="${not #strings.isEmpty(decisionMakerTitle)}" th:text="${decisionMakerTitle}">Asiakaspalvelupäällikkö</div>
-            <div th:if="${not #strings.isEmpty(decisionMakerName) or not #strings.isEmpty(decisionMakerTitle)}"
-                 th:text="#{decision.approver.additionalInfo}">(allekirjoitettu koneellisesti)</div>
-        </th:block>
-        <br/>
-        <p>
-            <strong th:if="${type == 'notice'}" th:utext="#{notice.approver.help}">Lisätietoja kerhopaikasta:</strong>
-            <strong th:unless="${type == 'notice'}" th:utext="#{decision.approver.help}">Lisätietoja myönnetystä varhaiskasvatuspaikasta:</strong>
-        </p>
-        <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>
-        <div>
-            <a th:href="'mailto:' + #{decision.approver.email.email}"
-               th:text="#{decision.approver.email.email}"></a>
-        </div>
-        <div th:utext="#{decision.approver.phoneNumber}"></div>
+
         <p>
             <strong th:if="${type == 'notice'}" th:text="#{notice.sentDate}">Ilmoituspäivä</strong>
             <strong th:unless="${type == 'notice'}" th:text="#{decision.sentDate}">Päätöspäivä</strong>

@@ -472,6 +472,9 @@ const fi: DeepPartial<Translations> = {
       ></ExternalLink>
     )
   },
+  loginPage: {
+    title: 'Oulun kaupungin varhaiskasvatus'
+  },
   map: {
     mainInfo: `Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja avoimen varhaiskasvatuksen yksiköitä. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.`,
     privateUnitInfo: <></>,

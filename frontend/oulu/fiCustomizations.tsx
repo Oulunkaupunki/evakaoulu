@@ -80,29 +80,6 @@ const fi: DeepPartial<Translations> = {
                 </P>
               </>
             ),
-            PRESCHOOL: (
-              <>
-                <P>
-                  Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
-                  alkamista. Esiopetus on maksutonta. Lukuvuoden 2022-2023
-                  esiopetukseen ilmoittaudutaan 10.-23.1.2022. Esiopetus alkaa
-                  15.8.2022.
-                </P>
-                <P>
-                  Päätökset tulevat{' '}
-                  <a
-                    href="https://www.suomi.fi/viestit"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Suomi.fi-viestit
-                  </a>{' '}
-                  -palveluun tai postitse, mikäli et ole ottanut Suomi.fi
-                  -palvelua käyttöön.
-                </P>
-                <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
-              </>
-            ),
             CLUB: (
               <>
                 <P>
@@ -209,6 +186,27 @@ const fi: DeepPartial<Translations> = {
               <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
           ),
+          PRESCHOOL: (
+            <>
+              <P>
+                Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
+                alkamista. Esiopetus on maksutonta. Lukuvuoden 2022-2023
+                esiopetukseen ilmoittaudutaan 10.-23.1.2022. Esiopetus alkaa
+                15.8.2022.
+              </P>
+              <P>
+                Päätökset tulevat{' '}
+                <ExternalLink
+                  text="Suomi.fi-viestit"
+                  href="https://www.suomi.fi/viestit"
+                  newTab
+                />{' '}
+                -palveluun tai postitse, mikäli et ole ottanut Suomi.fi
+                -palvelua käyttöön.
+              </P>
+              <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
+            </>
+          ),
           CLUB: (
             <>
               <P>
@@ -246,7 +244,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Suomen- ja ruotsinkielinen esiopetus alkaa 11.8.2022. Jos tarvitsette varhaiskasvatusta 1.8.2022 lähtien ennen esiopetuksen alkua, voitte hakea sitä tällä hakemuksella valitsemalla ”Haen myös esiopetukseen liittyvää varhaiskasvatusta”.'
+              'Esiopetus alkaa 15.8.2022. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, voitte hakea sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus. Uutta varhaiskasvatushakemusta ei tarvitse tehdä, mikäli lapsella on jo paikka Oulun varhaiskasvatuksessa ja lapsi jatkaa esiopetuksessa samassa päiväkodissa.'
             ],
             CLUB: [
               'Avoimen varhaiskasvatuksen kerhot noudattavat pääsääntöisesti esiopetuksen työ- ja loma-aikoja. Lapsi voi osallistua yhteen kaksi tai kolme kertaa viikossa kokoontuvaan kerhoon ja lisäksi perhekerhoon.'
@@ -355,6 +353,7 @@ const fi: DeepPartial<Translations> = {
           'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään Pienten kielireppu -kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma tai päätös perusopetukseen valmistavasta opetuksesta. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti. Valmistavaa opetusta annetaan kuusivuotiaille ja se koostuu päivittäin neljästä esiopetustunnista ja yhdestä suomen kielen tunnista. Valmistava opetus on maksutonta.'
       },
       contactInfo: {
+        familyInfo: undefined,
         info: (
           <P data-qa="contact-info-text">
             Henkilötiedot on haettu väestötiedoista, eikä niitä voi muuttaa
@@ -388,6 +387,15 @@ const fi: DeepPartial<Translations> = {
               perhe. Perhe toimittaa tuloselvityksen bruttotuloistaan
               tuloselvityslomakkeella mahdollisimman pian siitä, kun lapsi on
               aloittanut varhaiskasvatuksessa.
+            </P>
+          ),
+          PRESCHOOL: (
+            <P>
+              Esiopetus on maksutonta, mutta siihen liittyvä varhaiskasvatus on
+              maksullista. Jos lapsi osallistuu esiopetukseen liittyvään
+              varhaiskasvatukseen, perhe toimittaa tuloselvityksen
+              bruttotuloistaan tulonselvityslomakkeella mahdollisimman pian
+              siitä, kun lapsi on aloittanut varhaiskasvatuksessa.
             </P>
           )
         },

@@ -7,6 +7,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 }
 
 import React from 'react'
+
 import ExternalLink from 'lib-components/atoms/ExternalLink'
 import UnorderedList from 'lib-components/atoms/UnorderedList'
 import { P } from 'lib-components/typography'
@@ -246,9 +247,22 @@ const en: DeepPartial<Translations> = {
   },
   footer: {
     cityLabel: '© City of Oulu',
-    privacyPolicyLink:
-      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus',
-    sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
+    privacyPolicyLink: (
+      <ExternalLink
+        href="https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus"
+        text="Privacy Notices"
+        newTab={true}
+        data-qa="footer-policy-link"
+      ></ExternalLink>
+    ),
+    sendFeedbackLink: (
+      <ExternalLink
+        href="https://e-kartta.ouka.fi/efeedback"
+        text="Give feedback"
+        newTab={true}
+        data-qa="footer-feedback-link"
+      ></ExternalLink>
+    )
   },
   map: {
     mainInfo: `In this view you can locate on the map all of Oulu’s early childhood education units and clubs. Regional service voucher units and clubs can also be found on the map.`,

@@ -7,6 +7,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 }
 
 import React from 'react'
+
 import ExternalLink from 'lib-components/atoms/ExternalLink'
 import UnorderedList from 'lib-components/atoms/UnorderedList'
 import { P } from 'lib-components/typography'
@@ -454,9 +455,22 @@ const fi: DeepPartial<Translations> = {
   },
   footer: {
     cityLabel: '© Oulun kaupunki',
-    privacyPolicyLink:
-      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus',
-    sendFeedbackLink: 'https://e-kartta.ouka.fi/efeedback'
+    privacyPolicyLink: (
+      <ExternalLink
+        href="https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus"
+        text="Tietosuojaselosteet"
+        newTab={true}
+        data-qa="footer-policy-link"
+      ></ExternalLink>
+    ),
+    sendFeedbackLink: (
+      <ExternalLink
+        href="https://e-kartta.ouka.fi/efeedback"
+        text="Lähetä palautetta"
+        newTab={true}
+        data-qa="footer-policy-link"
+      ></ExternalLink>
+    )
   },
   map: {
     mainInfo: `Tässä näkymässä voit hakea kartalta Oulun varhaiskasvatus-, esiopetus- ja avoimen varhaiskasvatuksen yksiköitä. Tietoa yksityisistä päiväkodeista löydät Oulun kaupungin nettisivuilta.`,

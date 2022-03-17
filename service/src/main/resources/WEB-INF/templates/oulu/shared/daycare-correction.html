@@ -22,6 +22,19 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 </th:block>
 
+<th:block th:fragment="daycare-voucher-correction">
+    <h2 th:text="#{title}"></h2>
+    <div class="correction-content">
+        <p th:utext="#{daycare.voucher.p1}"></p>
+        <p th:utext="#{daycare.voucher.p2}"></p>
+    </div>
+
+    <div class="correction-content">
+        <div th:utext="#{address.content}">Oikaisuvaatimus toimitetaan joko....</div>
+    </div>
+
+</th:block>
+
 <th:block th:fragment="correction">
     <h2 th:text="#{title}"></h2>
     <div class="correction-content">

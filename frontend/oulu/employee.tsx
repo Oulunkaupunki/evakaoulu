@@ -129,6 +129,13 @@ const customizations: EmployeeCustomizations = {
     'CLUB',
     'SCHOOL_SHIFT_CARE'
   ],
+  absenceTypes: [
+    'OTHER_ABSENCE',
+    'SICKLEAVE',
+    'PLANNED_ABSENCE',
+    'FORCE_MAJEURE',
+    'FREE_ABSENCE'
+  ],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
   unitProviderTypes: ['MUNICIPAL', 'PRIVATE']
 }

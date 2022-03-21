@@ -412,11 +412,16 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 </div>
 
 <span th:fragment="placement-dates">
-  <span th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
+    <th:block th:switch="${decision.type.toString()}">
+        <span th:case="'CLUB'"
+             th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
+                  + ' alkaen.'" />
+        <span th:case="*"
+             th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
                   + ' – ' +
-                  ${#temporals.format(decision.endDate, 'd.M.yyyy')} + '.'"></span>
+                  ${#temporals.format(decision.endDate, 'd.M.yyyy')} + '.'" />
+    </th:block>
 </span>
-
 
 <span th:fragment="decision-date">
     <div class="detail" th:if="${type == 'notice'}"

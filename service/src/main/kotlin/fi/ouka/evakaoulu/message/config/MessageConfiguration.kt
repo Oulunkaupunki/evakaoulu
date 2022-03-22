@@ -53,20 +53,20 @@ internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMes
 
     override fun getDefaultDecisionAddress(lang: MessageLanguage): DecisionSendAddress = when (lang) {
         MessageLanguage.FI -> DecisionSendAddress(
-            street = "PL 487",
-            postalCode = "33101",
-            postOffice = "Tampere",
-            row1 = "Varhaiskasvatus ja esiopetus",
+            street = "PL 75",
+            postalCode = "90015",
+            postOffice = "Oulu",
+            row1 = "Varhaiskasvatuksen palveluohjaus",
             row2 = "Asiakaspalvelu",
-            row3 = "PL 487, 33101 Tampere"
+            row3 = "PL 75, 90015 Oulu"
         )
         MessageLanguage.SV -> DecisionSendAddress(
-            street = "PL 487",
-            postalCode = "33101",
-            postOffice = "Tampere",
-            row1 = "Varhaiskasvatus ja esiopetus",
+            street = "PL 75",
+            postalCode = "90015",
+            postOffice = "Oulu",
+            row1 = "Varhaiskasvatuksen palveluohjaus",
             row2 = "Asiakaspalvelu",
-            row3 = "PL 487, 33101 Tampere"
+            row3 = "PL 75, 90015 Oulu"
         )
     }
 

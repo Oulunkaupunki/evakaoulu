@@ -74,6 +74,8 @@ class DecisionServiceTest {
             isTransferApplication = false,
             serviceNeed = when (decisionType) {
                 DecisionType.CLUB -> null
+                DecisionType.PRESCHOOL -> null
+                DecisionType.PREPARATORY_EDUCATION -> null
                 else -> ServiceNeed(
                     startTime = "08:00",
                     endTime = "16:00",

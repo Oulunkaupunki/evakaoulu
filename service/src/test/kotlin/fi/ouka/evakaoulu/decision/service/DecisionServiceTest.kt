@@ -59,7 +59,7 @@ class DecisionServiceTest {
     @ParameterizedTest
     @EnumSource(
         value = DecisionType::class,
-        names = ["PRESCHOOL", "PRESCHOOL_DAYCARE", "PREPARATORY_EDUCATION"],
+        names = [],
         mode = EnumSource.Mode.EXCLUDE
     )
     fun createDecisionPdf(decisionType: DecisionType) {

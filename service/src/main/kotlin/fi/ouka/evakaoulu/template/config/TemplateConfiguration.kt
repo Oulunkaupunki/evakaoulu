@@ -23,10 +23,6 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
     override fun getDaycareVoucherDecisionPath(): String = "oulu/daycare/voucher/decision"
     override fun getDaycareTransferDecisionPath(): String = "oulu/daycare/decision"
     override fun getDaycareDecisionPath(): String = "oulu/daycare/decision"
-
-    override fun getPreschoolDecisionPath(): String =
-        throw UnsupportedOperationException("Preschool decision is not supported")
-
-    override fun getPreparatoryDecisionPath(): String =
-        throw UnsupportedOperationException("Preparatory decision is not supported")
+    override fun getPreschoolDecisionPath(): String = "oulu/preschool/decision"
+    override fun getPreparatoryDecisionPath(): String = "oulu/preschool/decision"
 }

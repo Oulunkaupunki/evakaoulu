@@ -354,6 +354,10 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             <div style="text-indent: 6em">
                 <strong th:text="#{decision.placement.unit}">Varhaiskasvatusyksikkö</strong>
                 <th:block th:switch="${decision.type.toString()}">
+                    <div th:case="'PREPARATORY_EDUCATION'"
+                         th:text="${#strings.isEmpty(decision.unit.preschoolDecisionName)} ? ${decision.unit.name} : ${decision.unit.preschoolDecisionName}" />
+                    <div th:case="'PRESCHOOL'"
+                         th:text="${#strings.isEmpty(decision.unit.preschoolDecisionName)} ? ${decision.unit.name} : ${decision.unit.preschoolDecisionName}" />
                     <div th:case="'PRESCHOOL_DAYCARE'"
                          th:text="${#strings.isEmpty(decision.unit.preschoolDecisionName)} ? ${decision.unit.name} : ${decision.unit.preschoolDecisionName}" />
                     <div th:case="'CLUB'"
@@ -416,6 +420,18 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <span th:case="'CLUB'"
              th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
                   + ' alkaen.'" />
+        <span th:case="'PRESCHOOL_DAYCARE'"
+              th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
+                  + ' – ' +
+                  ${#temporals.format(decision.endDate, 'd.M.yyyy')} +  ' on'" />
+        <span th:case="'PREPARATORY_EDUCATION'"
+              th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
+                  + ' – ' +
+                  ${#temporals.format(decision.endDate, 'd.M.yyyy')} +  ' on'" />
+        <span th:case="'PRESCHOOL'"
+                      th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
+                  + ' – ' +
+                  ${#temporals.format(decision.endDate, 'd.M.yyyy')} +  ' on'" />
         <span th:case="*"
              th:text="${#temporals.format(decision.startDate, 'd.M.yyyy')}
                   + ' – ' +

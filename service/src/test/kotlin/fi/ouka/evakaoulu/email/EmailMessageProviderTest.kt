@@ -38,15 +38,6 @@ internal class EmailMessageProviderTest : AbstractIntegrationTest() {
             .doesNotContainIgnoringCase("esbo")
     }
 
-    @CartesianProductTest(factory = "getPreschoolMethods")
-    fun getPreschoolMessagesThrowError(method: Method, withinApplicationPeriod: Boolean) {
-        val exception = assertThrows<InvocationTargetException> {
-            method.invoke(emailMessageProvider, withinApplicationPeriod)
-        }
-        Assertions.assertEquals(Error::class.java, exception.cause?.javaClass)
-        Assertions.assertEquals("Preschool not in use!", exception.cause?.message)
-    }
-
     companion object {
         @JvmStatic
         fun getPreschoolMethods(): CartesianProductTest.Sets {

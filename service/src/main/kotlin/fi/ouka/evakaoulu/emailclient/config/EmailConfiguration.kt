@@ -170,11 +170,15 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
     }
 
     override fun getPreschoolApplicationReceivedEmailHtml(withinApplicationPeriod: Boolean): String {
-        throw Error("Preschool not in use!")
+        return """
+            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+        """.trimIndent()
     }
 
     override fun getPreschoolApplicationReceivedEmailText(withinApplicationPeriod: Boolean): String {
-        throw Error("Preschool not in use!")
+        return """
+            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+        """.trimIndent()
     }
 
 }

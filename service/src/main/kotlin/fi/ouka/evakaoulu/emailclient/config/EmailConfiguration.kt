@@ -21,7 +21,8 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
     override val subjectForPendingDecisionEmail: String = "Toimenpiteitäsi odotetaan"
     override val subjectForClubApplicationReceivedEmail: String = "Hakemus vastaanotettu"
     override val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu"
-    override val subjectForPreschoolApplicationReceivedEmail: String = ""
+    override val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu"
+
 
     override fun getPendingDecisionEmailHtml(): String {
         return """
@@ -53,18 +54,18 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Kirjallinen ilmoitus myönnetystä kerhopaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, ilmoitus lähetetään hänelle postitse.</p> 
             
-            <p>Myönnetyn kerhopaikan voi hyväksyä / hylätä sähköisesti Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>. Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kauden päättyessä hakemus poistetaan järjestelmästä.</p>
+            <p>Myönnetyn kerhopaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>. Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kauden päättyessä hakemus poistetaan järjestelmästä.</p>
             
             <p>Lisätietoa hakemuksen käsittelystä ja kerhopaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:</p>
             
             <p>
-            Tampereen kaupunki<br/>
+            Oulun kaupunki<br/>
             Sivistyspalvelut<br/>
             Varhaiskasvatus ja esiopetus<br/>
             Asiakaspalvelu<br/>
             <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
-            Puh. <a href="tel:+358855845300">08&nbsp;558&nbsp;45300</a> (ma–pe klo 9–12)<br/>
-            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
+            Puh. <a href="tel:+0855845300">08 558 45300</a>- valitse numero 1 (ma–pe klo 9–12)<br/>
+            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">https://www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
             </p>
             
             <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
@@ -77,11 +78,11 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
 
             lapsenne kerhohakemus on vastaanotettu.
             
-            Hakemuksen tehnyt huoltaja voi muokata hakemusta Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes se on otettu käsittelyyn asiakaspalvelussa.
+            Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes se on otettu käsittelyyn asiakaspalvelussa.
 
             Kirjallinen ilmoitus myönnetystä kerhopaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, ilmoitus lähetetään hänelle postitse.
             
-            Myönnetyn kerhopaikan voi hyväksyä / hylätä sähköisesti Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi. Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kauden päättyessä hakemus poistetaan järjestelmästä.
+            Myönnetyn kerhopaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi. Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kauden päättyessä hakemus poistetaan järjestelmästä.
             
             Lisätietoa hakemuksen käsittelystä ja kerhopaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:
             
@@ -103,7 +104,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>lapsenne varhaiskasvatushakemus on vastaanotettu.</p>
             
-            <p>Varhaiskasvatushakemuksella on neljän (4) kuukauden hakuaika. Hakemuksen tehnyt huoltaja voi muokata hakemusta Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> siihen saakka, kunnes se on otettu käsittelyyn.</p>
+            <p>Varhaiskasvatushakemuksella on neljän (4) kuukauden hakuaika. Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> siihen saakka, kunnes se on otettu käsittelyyn.</p>
             
             <p>Saatte tiedon lapsenne varhaiskasvatuspaikasta noin kuukautta ennen palvelutarpeen alkamista tai hakemuksen lakisääteisen järjestelyajan päättymistä. Hakemuksen lakisääteinen järjestelyaika on neljä (4) kuukautta hakemuksen saapumisesta.</p> 
             
@@ -111,23 +112,22 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Kirjallinen päätös varhaiskasvatuspaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, päätös lähetetään hänelle postitse.</p>
             
-            <p>Myönnetyn varhaiskasvatuspaikan voi hyväksyä / hylätä sähköisesti Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>. Mikäli haette paikkaa palvelusetelipäiväkodista, olkaa yhteydessä kyseiseen päiväkotiin viimeistään hakemuksen jättämisen jälkeen.</p>
+            <p>Myönnetyn varhaiskasvatuspaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>. Mikäli haette paikkaa palvelusetelipäiväkodista, olkaa yhteydessä kyseiseen päiväkotiin viimeistään hakemuksen jättämisen jälkeen.</p>
             
-            <p>Ilta- ja vuorohoitoa haettaessa, hakemuksen liitteeksi tulee toimittaa molempien samassa taloudessa asuvien huoltajien todistukset työnantajalta vuorotyöstä tai oppilaitoksesta iltaisin tapahtuvasta opiskelusta. Hakemusta käsitellään vuorohoidon hakemuksena vasta sen jälkeen, kun edellä mainitut todistukset on toimitettu. Tarvittavat liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa postitse osoitteeseen Tampereen kaupunki, Varhaiskasvatuksen asiakaspalvelu, PL 487, 33101 Tampere.</p> 
+            <p>Ilta- ja vuorohoitoa haettaessa, hakemuksen liitteeksi tulee toimittaa molempien samassa taloudessa asuvien huoltajien todistukset työnantajalta vuorotyöstä tai oppilaitoksesta iltaisin tapahtuvasta opiskelusta. Hakemusta käsitellään vuorohoidon hakemuksena vasta sen jälkeen, kun edellä mainitut todistukset on toimitettu. Tarvittavat liitteet voi lisätä suoraan sähköiselle hakemukselle.</p> 
             
             <p>Hakiessanne lapsellenne siirtoa toiseen varhaiskasvatusyksikköön, hakemuksella ei ole hakuaikaa. Siirrot pystytään toteuttamaan pääsääntöisesti elokuusta alkaen. Mikäli lapsen nykyinen hoitopaikka irtisanotaan, myös siirtohakemus poistuu.</p> 
             
             <p>Lisätietoa hakemuksen käsittelystä ja varhaiskasvatuspaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:</p>
             
             <p>
-            Tampereen kaupunki<br/>
+            Oulun kaupunki<br/>
             Sivistyspalvelut<br/>
             Varhaiskasvatus ja esiopetus<br/>
             Asiakaspalvelu<br/>
-            <a href="mailto:varhaiskasvatus.asiakaspalvelu@tampere.fi">varhaiskasvatus.asiakaspalvelu@tampere.fi</a><br/>
-            Puh. <a href="tel:+358408007260">040&nbsp;800&nbsp;7260</a>, ma–pe klo 9–12<br/>
-            Postiosoite: PL 487, 33101 Tampere<br/>
-            <a href="https://www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus.html">www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus.html</a>
+            <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
+            Puh. <a href="tel:+0855845300">08 558 45300</a>- valitse numero 1 (ma–pe klo 9–12)<br/>
+            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">https://www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
             </p>
             
             <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
@@ -140,44 +140,76 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
 
             lapsenne varhaiskasvatushakemus on vastaanotettu.
             
-            Varhaiskasvatushakemuksella on neljän (4) kuukauden hakuaika. Hakemuksen tehnyt huoltaja voi muokata hakemusta Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.tampere.fi siihen saakka, kunnes se on otettu käsittelyyn.
+            Varhaiskasvatushakemuksella on neljän (4) kuukauden hakuaika. Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes se on otettu käsittelyyn.
             
             Saatte tiedon lapsenne varhaiskasvatuspaikasta noin kuukautta ennen palvelutarpeen alkamista tai hakemuksen lakisääteisen järjestelyajan päättymistä. Hakemuksen lakisääteinen järjestelyaika on neljä (4) kuukautta hakemuksen saapumisesta.
             
-            Mikäli hakemuksenne on kiireellinen, ottakaa yhteyttä viipymättä Varhaiskasvatuksen asiakaspalveluun: varhaiskasvatus.asiakaspalvelu@tampere.fi, puh. 040 800 7260 (ma–pe klo 9–12). Hakuaika kiireellisissä hakemuksissa on minimissään kaksi (2) viikkoa ja se alkaa siitä päivästä, kun olette olleet yhteydessä asiakaspalveluun.
+            Mikäli hakemuksenne on kiireellinen, ottakaa yhteyttä viipymättä Varhaiskasvatuksen asiakaspalveluun: varhaiskasvatus@ouka.fi, puh. 08 558 45300 (ma–pe klo 9–12). Hakuaika kiireellisissä hakemuksissa on minimissään kaksi (2) viikkoa ja se alkaa siitä päivästä, kun olette olleet yhteydessä asiakaspalveluun.
             
             Kirjallinen päätös varhaiskasvatuspaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, päätös lähetetään hänelle postitse.
             
-            Myönnetyn varhaiskasvatuspaikan voi hyväksyä / hylätä sähköisesti Tampereen varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.tampere.fi. Mikäli haette paikkaa palvelusetelipäiväkodista, olkaa yhteydessä kyseiseen päiväkotiin viimeistään hakemuksen jättämisen jälkeen.
+            Myönnetyn varhaiskasvatuspaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi. Mikäli haette paikkaa palvelusetelipäiväkodista, olkaa yhteydessä kyseiseen päiväkotiin viimeistään hakemuksen jättämisen jälkeen.
             
-            Ilta- ja vuorohoitoa haettaessa, hakemuksen liitteeksi tulee toimittaa molempien samassa taloudessa asuvien huoltajien todistukset työnantajalta vuorotyöstä tai oppilaitoksesta iltaisin tapahtuvasta opiskelusta. Hakemusta käsitellään vuorohoidon hakemuksena vasta sen jälkeen, kun edellä mainitut todistukset on toimitettu. Tarvittavat liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa postitse osoitteeseen Tampereen kaupunki, Varhaiskasvatuksen asiakaspalvelu, PL 487, 33101 Tampere.
+            Ilta- ja vuorohoitoa haettaessa, hakemuksen liitteeksi tulee toimittaa molempien samassa taloudessa asuvien huoltajien todistukset työnantajalta vuorotyöstä tai oppilaitoksesta iltaisin tapahtuvasta opiskelusta. Hakemusta käsitellään vuorohoidon hakemuksena vasta sen jälkeen, kun edellä mainitut todistukset on toimitettu. Tarvittavat liitteet voi lisätä suoraan sähköiselle hakemukselle.
             
             Hakiessanne lapsellenne siirtoa toiseen varhaiskasvatusyksikköön, hakemuksella ei ole hakuaikaa. Siirrot pystytään toteuttamaan pääsääntöisesti elokuusta alkaen. Mikäli lapsen nykyinen hoitopaikka irtisanotaan, myös siirtohakemus poistuu.
             
             Lisätietoa hakemuksen käsittelystä ja varhaiskasvatuspaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:
             
-            Tampereen kaupunki
+            Oulun kaupunki
             Sivistyspalvelut
             Varhaiskasvatus ja esiopetus
             Asiakaspalvelu
-            varhaiskasvatus.asiakaspalvelu@tampere.fi
-            Puh. 040 800 7260, ma–pe klo 9–12
-            Postiosoite: PL 487, 33101 Tampere
-            www.tampere.fi/varhaiskasvatus-ja-koulutus/varhaiskasvatus.html
-            
+            varhaiskasvatus@ouka.fi
+            Puh. 08 558 45300 - valitse numero 1 (ma–pe klo 9–12)
+            https://www.ouka.fi/oulu/paivahoito-ja-esiopetus
+                       
             Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.
         """.trimIndent()
     }
 
     override fun getPreschoolApplicationReceivedEmailHtml(withinApplicationPeriod: Boolean): String {
         return """
+            <p>Hyvä huoltaja,</p>
+            
+            <p>lapsenne esikouluhakemus on vastaanotettu.</p>
+            
             <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+            
+            <p>
+            Oulun kaupunki<br/>
+            Sivistyspalvelut<br/>
+            Varhaiskasvatus ja esiopetus<br/>
+            Asiakaspalvelu<br/>
+            <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
+            Puh. <a href="tel:+0855845300">08 558 45300</a>- valitse numero 1 (ma–pe klo 9–12)<br/>
+            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">https://www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
+            </p>
+            
+            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+            
         """.trimIndent()
     }
 
     override fun getPreschoolApplicationReceivedEmailText(withinApplicationPeriod: Boolean): String {
         return """
-            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+
+            Hyvä huoltaja,
+
+            lapsenne esikouluhakemus on vastaanotettu.
+            
+            Lisätietoa hakemuksen käsittelystä ja varhaiskasvatuspaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:
+
+            Oulun kaupunki
+            Sivistyspalvelut
+            Varhaiskasvatus ja esiopetus
+            Asiakaspalvelu
+            varhaiskasvatus@ouka.fi
+            Puh. 08 558 45300 - valitse numero 1 (ma–pe klo 9–12)
+            https://www.ouka.fi/oulu/paivahoito-ja-esiopetus
+                        
+            Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.
+                        
         """.trimIndent()
     }
 

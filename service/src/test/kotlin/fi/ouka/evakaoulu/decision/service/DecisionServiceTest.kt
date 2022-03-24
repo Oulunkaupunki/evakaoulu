@@ -31,6 +31,7 @@ import fi.ouka.evakaoulu.template.config.TemplateConfiguration
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 import java.io.FileOutputStream
@@ -95,6 +96,35 @@ class DecisionServiceTest {
 
         val filepath = "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-$decisionType.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
+    }
+
+    @Test
+    fun decisionPdfCreationShouldSucceedWhenServiceNeedOptionIsNull() {
+        // my kind of assertion
+        assertDoesNotThrow {
+            val bytes = createDecisionPdf(
+                messageProvider,
+                templateProvider,
+                pdfService,
+                settings,
+                validDecision(DecisionType.PREPARATORY_EDUCATION, validDecisionUnit(ProviderType.MUNICIPAL)),
+                guardian = validGuardian(),
+                child = validChild(),
+                isTransferApplication = false,
+                serviceNeed = ServiceNeed(
+                    startTime = "08:00",
+                    endTime = "16:00",
+                    shiftCare = false,
+                    partTime = false,
+                    serviceNeedOption = null // this is null!!!
+                ),
+                lang = "fi",
+                DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
+            )
+
+            val filepath = "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-PREPARATORY_EDUCATION-NO-OPTIONS.pdf"
+            FileOutputStream(filepath).use { it.write(bytes) }
+        }
     }
 
     @Test

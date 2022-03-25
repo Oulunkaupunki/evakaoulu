@@ -54,8 +54,8 @@ VALUES
     ('c288a706-9ef2-11ec-854e-8fec0360d917','Tilapäinen osa-aikainen varhaiskasvatus','Tilapäinen osa-aikainen varhaiskasvatus','tilapäinen osa-aikainen varhaiskasvatus','TEMPORARY_DAYCARE_PART_DAY',FALSE,1.0,1.0,1.0,20,TRUE,FALSE,'Tilapäinen osa-aikainen varhaiskasvatus','Tilapäinen osa-aikainen varhaiskasvatus','Tilapäinen osa-aikainen varhaiskasvatus','Tilapäinen osa-aikainen varhaiskasvatus', null),
 
     -- PREPARATORY_DAYCARE
-    ('de463d82-9f97-11ec-a232-a782189e7c84', 'Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','PREPARATORY_DAYCARE',TRUE,0,1.0,0.54,25,TRUE,FALSE,'Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus', null),
-    ('c288a74c-9ef2-11ec-854f-935955a88b27','Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','PREPARATORY_DAYCARE',FALSE,0,1.0,0.54,25,TRUE,FALSE,'Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus', null)
+    ('de463d82-9f97-11ec-a232-a782189e7c84', 'Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','PREPARATORY',TRUE,0,1.0,0.54,25,TRUE,FALSE,'Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus', null),
+    ('c288a74c-9ef2-11ec-854f-935955a88b27','Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','PREPARATORY',FALSE,0,1.0,0.54,25,TRUE,FALSE,'Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus','Valmistava esiopetus', null)
 
 ON CONFLICT (id) DO
 UPDATE SET

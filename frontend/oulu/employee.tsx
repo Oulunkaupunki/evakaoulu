@@ -122,11 +122,18 @@ const customizations: EmployeeCustomizations = {
   featureFlags,
   assistanceMeasures: [],
   placementTypes: [
+    'CLUB',
     'DAYCARE',
     'DAYCARE_PART_TIME',
+    'DAYCARE_FIVE_YEAR_OLDS',
+    'DAYCARE_PART_TIME_FIVE_YEAR_OLDS',
     'TEMPORARY_DAYCARE',
+    'TEMPORARY_DAYCARE_PART_DAY',
     'PRESCHOOL_DAYCARE',
-    'CLUB',
+    'PRESCHOOL',
+    'PRESCHOOL_DAYCARE',
+    'PREPARATORY',
+    'PREPARATORY_DAYCARE',
     'SCHOOL_SHIFT_CARE'
   ],
   absenceTypes: [

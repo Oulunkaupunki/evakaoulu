@@ -300,9 +300,6 @@ INSERT INTO daycare_group (daycare_id, name, start_date, end_date)
 SELECT id, 'Ryhmä ' || r, opening_date, COALESCE(closing_date, NULL)
 FROM daycare CROSS JOIN generate_series(1, 3) AS r;
 
-INSERT INTO message_account (daycare_group_id)
-SELECT id FROM daycare_group;
-
 INSERT INTO employee (id, first_name, last_name, email, external_id, roles) VALUES
     ('00000000-0000-0000-0000-000000000001', 'Päivi', 'Pääkäyttäjä', 'paivi.paakayttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0000-000000000001', '{ADMIN, SERVICE_WORKER, FINANCE_ADMIN}'::user_role[]),
     ('00000000-0000-0000-0001-000000000000', 'Paula', 'Palveluohjaaja', 'paula.palveluohjaaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0001-000000000000', '{SERVICE_WORKER}'::user_role[]),
@@ -329,15 +326,14 @@ INSERT INTO daycare_acl (daycare_id, employee_id, role) VALUES
     ('340ea27a-a1bc-11eb-b5d2-dfc0dc6d2fcb', '00000000-0000-0000-0006-000000000000', 'SPECIAL_EDUCATION_TEACHER'),
     ('3f667508-a1bc-11eb-b62e-9bdec02ff105', '00000000-0000-0000-0006-000000000000', 'SPECIAL_EDUCATION_TEACHER');
 
-INSERT INTO message_account (employee_id)
-SELECT id
-FROM employee e
-WHERE EXISTS(
-    SELECT 1
-    FROM daycare_acl acl
-    WHERE acl.employee_id = e.id
-    AND acl.role IN ('UNIT_SUPERVISOR', 'SPECIAL_EDUCATION_TEACHER'));
+-- INSERT INTO message_account (daycare_group_id, person_id, employee_id) VALUES
+-- (SELECT id FROM daycare_group, SELECT id FROM person, SELECT id FROM employee);
 
+-- INSERT INTO message_account (person_id)
+-- SELECT id FROM person;
+--
+-- INSERT INTO message_account (employee_id)
+-- SELECT id FROM employee;
 
 UPDATE fee_thresholds SET temporary_fee = 2900 WHERE temporary_fee IS NULL;
 UPDATE fee_thresholds SET temporary_fee_part_day = 1500 WHERE temporary_fee_part_day IS NULL;

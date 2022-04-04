@@ -19,24 +19,24 @@ class EVakaOuluInvoiceClient(
     private val properties: IntimeProperties
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
-//        TODO("Not yet implemented")
-        val channelSftp: ChannelSftp = setupJsch()
-        channelSftp.connect()
-        val localFile = "src/main/resources/sample.txt"
-        val remoteDir = properties.address
-        channelSftp.put(localFile, remoteDir + "jschFile.txt")
-        channelSftp.exit()
+        TODO("Not yet implemented")
+//        val channelSftp: ChannelSftp = setupJsch()
+//        channelSftp.connect()
+//        val localFile = "src/main/resources/sample.txt"
+//        val remoteDir = properties.address
+//        channelSftp.put(localFile, remoteDir + "jschFile.txt")
+//        channelSftp.exit()
     }
 
 //    @Throws(JSchException::class)
-    private fun setupJsch(): ChannelSftp? {
-        val jsch = JSch()
-        jsch.setKnownHosts("/Users/john/.ssh/known_hosts")
-        val jschSession: Session = jsch.getSession(properties.username, properties.address)
-        jschSession.setPassword(properties.password)
-        jschSession.connect()
-        return jschSession.openChannel("sftp") as ChannelSftp
-    }
+//    private fun setupJsch(): ChannelSftp? {
+//        val jsch = JSch()
+//        jsch.setKnownHosts("/Users/john/.ssh/known_hosts")
+//        val jschSession: Session = jsch.getSession(properties.username, properties.address)
+//        jschSession.setPassword(properties.password)
+//        jschSession.connect()
+//        return jschSession.openChannel("sftp") as ChannelSftp
+//    }
 
 
 }

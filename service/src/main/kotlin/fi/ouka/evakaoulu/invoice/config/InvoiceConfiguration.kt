@@ -81,7 +81,7 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
         val product = when (findProduct(productKey) to feeAlterationType) {
             Product.DAYCARE to FeeAlteration.Type.DISCOUNT, Product.DAYCARE to FeeAlteration.Type.RELIEF, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.DISCOUNT, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.RELIEF -> Product.DAYCARE_DISCOUNT
             Product.DAYCARE to FeeAlteration.Type.INCREASE -> Product.CORRECTION
-            Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.INCREASE -> Product.PRESCHOOL_DAYCARE_FULLTIME
+            Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
             else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
         }
         return product.key
@@ -103,7 +103,7 @@ enum class Product(val nameFi: String, val code: String) {
     CORRECTION("Oikaisu", ""),
     FREE_MONTH("Poissaolovähennys 100 %", ""),
     OVER_CONTRACT("Sovittujen päivien ylitys", ""),
-    PRESCHOOL_DAYCARE_FULLTIME("Kokoaikainen varhaiskasvatus / Tilapäinen maksun muutos", "");
+    PRESCHOOL_DAYCARE_CORRECTION("Kokoaikainen varhaiskasvatus", "");
 
     val key = ProductKey(this.name)
 }

@@ -72,8 +72,7 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
             PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
             PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
             PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
-            PlacementType.SCHOOL_SHIFT_CARE -> Product.SCHOOL_SHIFT_CARE
-            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.CLUB -> error("No product mapping found for placement type $placementType")
+            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.SCHOOL_SHIFT_CARE, PlacementType.CLUB -> error("No product mapping found for placement type $placementType")
         }
         return product.key
     }
@@ -81,7 +80,8 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
     override fun mapToFeeAlterationProduct(productKey: ProductKey, feeAlterationType: FeeAlteration.Type): ProductKey {
         val product = when (findProduct(productKey) to feeAlterationType) {
             Product.DAYCARE to FeeAlteration.Type.DISCOUNT, Product.DAYCARE to FeeAlteration.Type.RELIEF, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.DISCOUNT, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.RELIEF -> Product.DAYCARE_DISCOUNT
-            Product.DAYCARE to FeeAlteration.Type.INCREASE, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.INCREASE -> Product.CORRECTION
+            Product.DAYCARE to FeeAlteration.Type.INCREASE -> Product.CORRECTION
+            Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
             else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
         }
         return product.key
@@ -92,25 +92,18 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
 fun findProduct(key: ProductKey) = Product.values().find { it.key == key } ?: error("Product with key $key not found")
 
 enum class Product(val nameFi: String, val code: String) {
-    DAYCARE("Varhaiskasvatus", "500218"), DAYCARE_DISCOUNT(
-        "Alennus", "500687"
-    ),
-    PRESCHOOL_WITH_DAYCARE(
-        "Esiopetusta täydentävä varhaiskasvatus", "500220"
-    ),
-    TEMPORARY_CARE("Tilapäinen varhaiskasvatus", "500576"), SCHOOL_SHIFT_CARE(
-        "Koululaisen vuorohoito", "500949"
-    ),
-    SICK_LEAVE_50("Laskuun vaikuttava poissaolo 50%", "500283"), SICK_LEAVE_100(
-        "Laskuun vaikuttava poissaolo 100%", "500248"
-    ),
-    ABSENCE("Poissaolovähennys 50%", "500210"), FREE_OF_CHARGE("Maksuton päivä", "503696"), CORRECTION(
-        "Oikaisu", "500177"
-    ),
-    FREE_MONTH("Maksuton kuukausi", "500156"), OVER_CONTRACT(
-        "Sopimuksen ylitys", "500538"
-    ),
-    UNANNOUNCED_ABSENCE("Ilmoittamaton päivystysajan poissaolo", "507292");
+    DAYCARE("Varhaiskasvatus", ""),
+    DAYCARE_DISCOUNT("Alennus", ""),
+    PRESCHOOL_WITH_DAYCARE("Esiopetusta täydentävä varhaiskasvatus", ""),
+    TEMPORARY_CARE("Tilapäinen varhaiskasvatus", ""),
+    SICK_LEAVE_50("Sairaspoissaolovähennys 50 %", ""),
+    SICK_LEAVE_100("Sairaspoissaolovähennys 100 %", ""),
+    ABSENCE("Poissaolovähennys 50%", ""),
+    FREE_OF_CHARGE("Maksuton päivä", ""),
+    CORRECTION("Oikaisu", ""),
+    FREE_MONTH("Poissaolovähennys 100 %", ""),
+    OVER_CONTRACT("Sovittujen päivien ylitys", ""),
+    PRESCHOOL_DAYCARE_CORRECTION("Kokoaikainen varhaiskasvatus", "");
 
     val key = ProductKey(this.name)
 }

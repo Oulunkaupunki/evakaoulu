@@ -30,7 +30,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Hakemuksen tekijä voi hyväksyä tai hylätä varhaiskasvatus-/kerhopaikan kirjautumalla osoitteeseen <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai ottamalla yhteyttä päätöksellä mainittuun päiväkodin johtajaan.</p>
             
-            <p>Tähän viestiin ei voi vastata. Tarvittaessa ole yhteydessä Varhaiskasvatuksen asiakaspalveluun: <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>, puh. <a href="tel:+358855845300">08 558 45300 - valitse numero 1</a> (ma–pe klo 9–12).</p>
+            <p>Tähän viestiin ei voi vastata.</p>
         """.trimIndent()
     }
 
@@ -38,178 +38,176 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
         return """
             Olet saanut päätöksen/ilmoituksen Oulun varhaiskasvatukselta, joka odottaa toimenpiteitäsi. Myönnetty varhaiskasvatus-/kerhopaikka tulee hyväksyä tai hylätä kahden viikon sisällä päätöksen saapumisesta.
             
-            Hakemuksen tekijä voi hyväksyä tai hylätä varhaiskasvatus-/kerhopaikan kirjautumalla osoitteeseen https://varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksellä mainittuun päiväkodin johtajaan.
+            Hakemuksen tekijä voi hyväksyä tai hylätä varhaiskasvatus-/kerhopaikan kirjautumalla osoitteeseen varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksellä mainittuun päiväkodin johtajaan.            
             
-            Tähän viestiin ei voi vastata. Tarvittaessa ole yhteydessä Varhaiskasvatuksen asiakaspalveluun: varhaiskasvatus@ouka.fi, puh. 08 558 45300 - valitse numero 1 (ma–pe klo 9–12).
+            Tähän viestiin ei voi vastata.
         """.trimIndent()
     }
 
     override fun getClubApplicationReceivedEmailHtml(): String {
         return """
-            <p>Hyvä huoltaja,</p>
+            <p>Hei!</p>
             
-            <p>lapsenne kerhohakemus on vastaanotettu.</p>
+            <p>Olemme vastaanottaneet lapsenne hakemuksen avoimeen varhaiskasvatukseen. Pyydämme teitä olemaan yhteydessä suoraan toivomanne päiväkodin johtajaan ja tiedustelemaan vapaata avoimen varhaiskasvatuksen kerhopaikkaa.</p>
             
-            <p>Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> siihen saakka, kunnes se on otettu käsittelyyn asiakaspalvelussa.</p>
+            <p>Hakemuksia käsitellään pääsääntöisesti vastaanottopäivämäärän mukaan. Sisarukset valitaan myös hakujärjestyksessä, ellei ole erityisperustetta.</p>
             
-            <p>Kirjallinen ilmoitus myönnetystä kerhopaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, ilmoitus lähetetään hänelle postitse.</p> 
-            
-            <p>Myönnetyn kerhopaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>. Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kauden päättyessä hakemus poistetaan järjestelmästä.</p>
-            
-            <p>Lisätietoa hakemuksen käsittelystä ja kerhopaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:</p>
-            
+            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+
             <p>
-            Oulun kaupunki<br/>
-            Sivistyspalvelut<br/>
-            Varhaiskasvatus ja esiopetus<br/>
-            Asiakaspalvelu<br/>
+            Ystävällisesti <br/>
+            Varhaiskasvatuksen palveluohjaus <br/>
             <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
-            Puh. <a href="tel:+0855845300">08 558 45300</a>- valitse numero 1 (ma–pe klo 9–12)<br/>
-            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">https://www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
+            Puh. <a href="tel:+0855845300">08 558 45300</a>, puhelinpäivystys arkisin klo 9.00-12.00<br/>
             </p>
             
-            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+            <p>Tähän viestiin ei voi vastata.</p>
         """.trimIndent()
     }
 
     override fun getClubApplicationReceivedEmailText(): String {
         return """
-            Hyvä huoltaja, 
-
-            lapsenne kerhohakemus on vastaanotettu.
+            Hei! 
             
-            Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes se on otettu käsittelyyn asiakaspalvelussa.
-
-            Kirjallinen ilmoitus myönnetystä kerhopaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, ilmoitus lähetetään hänelle postitse.
+            Olemme vastaanottaneet lapsenne hakemuksen avoimeen varhaiskasvatukseen. Pyydämme teitä olemaan yhteydessä suoraan toivomanne päiväkodin johtajaan ja tiedustelemaan vapaata avoimen varhaiskasvatuksen kerhopaikkaa. 
             
-            Myönnetyn kerhopaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi. Kerhohakemus kohdistuu yhdelle kerhon toimintakaudelle. Kauden päättyessä hakemus poistetaan järjestelmästä.
+            Hakemuksia käsitellään pääsääntöisesti vastaanottopäivämäärän mukaan. Sisarukset valitaan myös hakujärjestyksessä, ellei ole erityisperustetta. 
+           
+            Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.  
             
-            Lisätietoa hakemuksen käsittelystä ja kerhopaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:
+            Ystävällisesti,  
+            Varhaiskasvatuksen palveluohjaus 
+            varhaiskasvatus@ouka.fi   
             
-            Oulun kaupunki
-            Sivistyspalvelut
-            Varhaiskasvatus ja esiopetus
-            Asiakaspalvelu
-            varhaiskasvatus@ouka.fi
-            Puh. 08 558 45300 - valitse numero 1 (ma–pe klo 9–12)
-            https://www.ouka.fi/oulu/paivahoito-ja-esiopetus
+            p. 08 558 45300, puhelinpäivystys arkisin klo 9.00-12.00 
             
-            Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.
+            Tähän viestiin ei voi vastata.
         """.trimIndent()
     }
 
     override fun getDaycareApplicationReceivedEmailHtml(): String {
         return """
-            <p>Hyvä huoltaja,</p>
+            <p>Hei!</p>
             
-            <p>lapsenne varhaiskasvatushakemus on vastaanotettu.</p>
+            <p>Lapsenne varhaiskasvatushakemus on vastaanotettu. Hakemuksen tehnyt huoltaja voi muokata hakemusta osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuspaikan järjestelyaika on neljä kuukautta. Mikäli kyseessä on vanhemman äkillinen työllistyminen tai opintojen alkaminen, järjestelyaika on kaksi viikkoa. Toimittakaa tällöin työ- tai opiskelutodistus hakemuksen liitteeksi. Kahden viikon järjestelyaika alkaa todistuksen saapumispäivämäärästä. Jatketun aukiolon ja vuorohoidon palveluita järjestetään vanhempien vuorotyön perusteella.</p>
             
-            <p>Varhaiskasvatushakemuksella on neljän (4) kuukauden hakuaika. Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> siihen saakka, kunnes se on otettu käsittelyyn.</p>
+            <p><b>Mikäli lapsellenne järjestyy varhaiskasvatuspaikka jostakin hakemuksessa toivomastanne kunnallisesta varhaiskasvatuspaikasta</b>, ilmoitamme teille paikan viimeistään kaksi viikkoa ennen varhaiskasvatuksen toivottua aloitusajankohtaa. Muussa tapauksessa olemme teihin yhteydessä puhelimitse.</p>
             
-            <p>Saatte tiedon lapsenne varhaiskasvatuspaikasta noin kuukautta ennen palvelutarpeen alkamista tai hakemuksen lakisääteisen järjestelyajan päättymistä. Hakemuksen lakisääteinen järjestelyaika on neljä (4) kuukautta hakemuksen saapumisesta.</p> 
+            <p><b>Mikäli valitsitte ensimmäiseksi hakutoiveeksi yksityisen päiväkodin tai perhepäivähoitajan</b>, olkaa suoraan yhteydessä kyseiseen palveluntuottajaan varmistaaksenne varhaiskasvatuspaikan saamisen. Mikäli toivomanne palveluntuottaja ei pysty tarjoamaan hoitopaikkaa, pyydämme teitä olemaan yhteydessä varhaiskasvatuksen palveluohjaukseen.</p>
             
-            <p>Mikäli hakemuksenne on kiireellinen, ottakaa yhteyttä viipymättä Varhaiskasvatuksen asiakaspalveluun: <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>, puh. <a href="tel:0855845300">08&nbsp;558&nbsp;45300</a> (ma–pe klo 9–12). Hakuaika kiireellisissä hakemuksissa on minimissään kaksi (2) viikkoa ja se alkaa siitä päivästä, kun olette olleet yhteydessä asiakaspalveluun.</p>
+            <p><b>Siirtohakemukset</b> (lapsella on jo varhaiskasvatuspaikka Oulun kaupungin varhaiskasvatusyksikössä) käsitellään pääsääntöisesti hakemuksen saapumispäivämäärän mukaan. Merkittäviä syitä siirtoon ovat: aikaisemman varhaiskasvatuspaikan lakkauttaminen, sisarukset ovat hoidossa eri yksiköissä, pitkä matka, huonot kulkuyhteydet, lapsen ikä, ryhmän ikärakenne, vuorohoidon tarpeen loppuminen sekä huomioon otettavat erityisperusteet.</p>
             
-            <p>Kirjallinen päätös varhaiskasvatuspaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, päätös lähetetään hänelle postitse.</p>
+            <p><b>Mikäli ilmoititte hakemuksessa lapsenne tuen tarpeesta</b>, varhaiskasvatuksen erityisopettaja on teihin yhteydessä, jotta lapsen tuen tarpeet voidaan ottaa huomioon paikkaa osoitettaessa.</p>
             
-            <p>Myönnetyn varhaiskasvatuspaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>. Mikäli haette paikkaa palvelusetelipäiväkodista, olkaa yhteydessä kyseiseen päiväkotiin viimeistään hakemuksen jättämisen jälkeen.</p>
+            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
             
-            <p>Ilta- ja vuorohoitoa haettaessa, hakemuksen liitteeksi tulee toimittaa molempien samassa taloudessa asuvien huoltajien todistukset työnantajalta vuorotyöstä tai oppilaitoksesta iltaisin tapahtuvasta opiskelusta. Hakemusta käsitellään vuorohoidon hakemuksena vasta sen jälkeen, kun edellä mainitut todistukset on toimitettu. Tarvittavat liitteet voi lisätä suoraan sähköiselle hakemukselle.</p> 
-            
-            <p>Hakiessanne lapsellenne siirtoa toiseen varhaiskasvatusyksikköön, hakemuksella ei ole hakuaikaa. Siirrot pystytään toteuttamaan pääsääntöisesti elokuusta alkaen. Mikäli lapsen nykyinen hoitopaikka irtisanotaan, myös siirtohakemus poistuu.</p> 
-            
-            <p>Lisätietoa hakemuksen käsittelystä ja varhaiskasvatuspaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:</p>
-            
+            <p>Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa sähköpostilla osoitteeseen <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.</p>
+
             <p>
-            Oulun kaupunki<br/>
-            Sivistyspalvelut<br/>
-            Varhaiskasvatus ja esiopetus<br/>
-            Asiakaspalvelu<br/>
+            Ystävällisesti <br/>
+            Varhaiskasvatuksen palveluohjaus <br/>
             <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
-            Puh. <a href="tel:+0855845300">08 558 45300</a>- valitse numero 1 (ma–pe klo 9–12)<br/>
-            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">https://www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
+            Puh. <a href="tel:+0855845300">08 558 45300</a>, puhelinpäivystys arkisin klo 9.00-12.00<br/>
             </p>
             
-            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+            <p>Tähän viestiin ei voi vastata.</p>
+            
         """.trimIndent()
     }
 
     override fun getDaycareApplicationReceivedEmailText(): String {
         return """
-            Hyvä huoltaja,
+            Hei! 
 
-            lapsenne varhaiskasvatushakemus on vastaanotettu.
+            Lapsenne varhaiskasvatushakemus on vastaanotettu. Hakemuksen tehnyt huoltaja voi muokata hakemusta osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuspaikan järjestelyaika on neljä kuukautta. Mikäli kyseessä on vanhemman äkillinen työllistyminen tai opintojen alkaminen, järjestelyaika on kaksi viikkoa. Toimittakaa tällöin työ- tai opiskelutodistus hakemuksen liitteeksi. Kahden viikon järjestelyaika alkaa todistuksen saapumispäivämäärästä. Jatketun aukiolon ja vuorohoidon palveluita järjestetään vanhempien vuorotyön perusteella. 
+
+            Mikäli lapsellenne järjestyy varhaiskasvatuspaikka jostakin hakemuksessa toivomastanne kunnallisesta varhaiskasvatuspaikasta, ilmoitamme teille paikan viimeistään kaksi viikkoa ennen varhaiskasvatuksen toivottua aloitusajankohtaa. Muussa tapauksessa olemme teihin yhteydessä puhelimitse.  
+
+            Mikäli valitsitte ensimmäiseksi hakutoiveeksi yksityisen päiväkodin tai perhepäivähoitajan, olkaa suoraan yhteydessä kyseiseen palveluntuottajaan varmistaaksenne varhaiskasvatuspaikan saamisen. Mikäli toivomanne palveluntuottaja ei pysty tarjoamaan hoitopaikkaa, pyydämme teitä olemaan yhteydessä varhaiskasvatuksen palveluohjaukseen. 
+
+            Siirtohakemukset (lapsella on jo varhaiskasvatuspaikka Oulun kaupungin varhaiskasvatusyksikössä) käsitellään pääsääntöisesti hakemuksen saapumispäivämäärän mukaan. Merkittäviä syitä siirtoon ovat: aikaisemman varhaiskasvatuspaikan lakkauttaminen, sisarukset ovat hoidossa eri yksiköissä, pitkä matka, huonot kulkuyhteydet, lapsen ikä, ryhmän ikärakenne, vuorohoidon tarpeen loppuminen sekä huomioon otettavat erityisperusteet. 
+
+            Mikäli ilmoititte hakemuksessa lapsenne tuen tarpeesta, varhaiskasvatuksen erityisopettaja on teihin yhteydessä, jotta lapsen tuen tarpeet voidaan ottaa huomioon paikkaa osoitettaessa.  
+
+            Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.  
+
+            Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa sähköpostilla osoitteeseen varhaiskasvatus@ouka.fi tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki. 
             
-            Varhaiskasvatushakemuksella on neljän (4) kuukauden hakuaika. Hakemuksen tehnyt huoltaja voi muokata hakemusta Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes se on otettu käsittelyyn.
-            
-            Saatte tiedon lapsenne varhaiskasvatuspaikasta noin kuukautta ennen palvelutarpeen alkamista tai hakemuksen lakisääteisen järjestelyajan päättymistä. Hakemuksen lakisääteinen järjestelyaika on neljä (4) kuukautta hakemuksen saapumisesta.
-            
-            Mikäli hakemuksenne on kiireellinen, ottakaa yhteyttä viipymättä Varhaiskasvatuksen asiakaspalveluun: varhaiskasvatus@ouka.fi, puh. 08 558 45300 (ma–pe klo 9–12). Hakuaika kiireellisissä hakemuksissa on minimissään kaksi (2) viikkoa ja se alkaa siitä päivästä, kun olette olleet yhteydessä asiakaspalveluun.
-            
-            Kirjallinen päätös varhaiskasvatuspaikasta lähetetään huoltajalle Suomi.fi-viestit -palveluun. Mikäli huoltaja ei ole ottanut Suomi.fi-viestit -palvelua käyttöön, päätös lähetetään hänelle postitse.
-            
-            Myönnetyn varhaiskasvatuspaikan voi hyväksyä / hylätä sähköisesti Oulun varhaiskasvatuksen verkkopalvelussa osoitteessa varhaiskasvatus.ouka.fi. Mikäli haette paikkaa palvelusetelipäiväkodista, olkaa yhteydessä kyseiseen päiväkotiin viimeistään hakemuksen jättämisen jälkeen.
-            
-            Ilta- ja vuorohoitoa haettaessa, hakemuksen liitteeksi tulee toimittaa molempien samassa taloudessa asuvien huoltajien todistukset työnantajalta vuorotyöstä tai oppilaitoksesta iltaisin tapahtuvasta opiskelusta. Hakemusta käsitellään vuorohoidon hakemuksena vasta sen jälkeen, kun edellä mainitut todistukset on toimitettu. Tarvittavat liitteet voi lisätä suoraan sähköiselle hakemukselle.
-            
-            Hakiessanne lapsellenne siirtoa toiseen varhaiskasvatusyksikköön, hakemuksella ei ole hakuaikaa. Siirrot pystytään toteuttamaan pääsääntöisesti elokuusta alkaen. Mikäli lapsen nykyinen hoitopaikka irtisanotaan, myös siirtohakemus poistuu.
-            
-            Lisätietoa hakemuksen käsittelystä ja varhaiskasvatuspaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:
-            
-            Oulun kaupunki
-            Sivistyspalvelut
-            Varhaiskasvatus ja esiopetus
-            Asiakaspalvelu
-            varhaiskasvatus@ouka.fi
-            Puh. 08 558 45300 - valitse numero 1 (ma–pe klo 9–12)
-            https://www.ouka.fi/oulu/paivahoito-ja-esiopetus
-                       
-            Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.
+            Ystävällisesti, 
+            Varhaiskasvatuksen palveluohjaus 
+            varhaiskasvatus@ouka.fi   
+            p. 08 558 45300, puhelinpäivystys arkisin klo 9.00-12.00 
+                        
+            Tähän viestiin ei voi vastata.
         """.trimIndent()
     }
 
     override fun getPreschoolApplicationReceivedEmailHtml(withinApplicationPeriod: Boolean): String {
         return """
-            <p>Hyvä huoltaja,</p>
+            <p>Hei!</p>
             
-            <p>lapsenne esikouluhakemus on vastaanotettu.</p>
+            <p>Olemme vastaanottaneet lapsenne ilmoittautumisen esiopetukseen. Hakemuksen tehnyt huoltaja voi muokata hakemusta osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuksen palveluohjaus sijoittaa kaikki esiopetukseen ilmoitetut lapset esiopetusyksiköihin maaliskuun aikana. Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
             
-            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+            <p>Mikäli hakemaanne yksikköön ei perusteta esiopetusryhmää, palveluohjaus on teihin yhteydessä ja tarjoaa paikkaa sellaisesta yksiköstä, johon esiopetusryhmä on muodostunut.</p>
+            
+            <p>Mikäli ilmoititte hakemuksessa lapsenne tuen tarpeesta, varhaiskasvatuksen erityisopettaja on teihin yhteydessä, jotta lapsen tuen tarpeet voidaan ottaa huomioon paikkaa osoitettaessa.</p>
+            
+            <p><b>ESIOPETUKSEEN LIITTYVÄ VARHAISKASVATUS</b></p>
+            
+            <p>Mikäli hait esiopetukseen liittyvää varhaiskasvatusta, otathan huomioon:</p>
+            <ul><li>Varhaiskasvatuspaikan järjestelyaika on neljä kuukautta. Jatketun aukiolon ja vuorohoidon palveluita järjestetään vanhempien vuorotyön tai iltaisin ja/tai viikonloppuisin tapahtuvan opiskelun perusteella.</li>
+            <li><b>Mikäli lapsellenne järjestyy varhaiskasvatuspaikka jostakin hakemuksessa toivomastanne kunnallisesta varhaiskasvatuspaikasta,</b> ilmoitamme teille paikan viimeistään kaksi viikkoa ennen varhaiskasvatuksen toivottua aloitusajankohtaa. Muussa tapauksessa olemme teihin yhteydessä puhelimitse.</li>
+            <li><b>Mikäli valitsitte ensimmäiseksi hakutoiveeksi yksityisen päiväkodin</b>, olkaa suoraan yhteydessä kyseiseen yksikköön varmistaaksenne varhaiskasvatuspaikan saamisen. Mikäli toivomanne palveluntuottaja ei pysty tarjoamaan hoitopaikkaa, pyydämme teitä olemaan yhteydessä varhaiskasvatuksen palveluohjaukseen.</li>
+            <li><b>Siirtohakemukset</b> (lapsella on jo varhaiskasvatuspaikka Oulun kaupungin varhaiskasvatusyksikössä) käsitellään pääsääntöisesti hakemuksen saapumispäivämäärän mukaan. Merkittäviä syitä siirtoon ovat: aikaisemman varhaiskasvatuspaikan lakkauttaminen, sisarukset ovat hoidossa eri yksiköissä, pitkä matka, huonot kulkuyhteydet, lapsen ikä, ryhmän ikärakenne, vuorohoidon tarpeen loppuminen sekä huomioon otettavat erityisperusteet.</li>
+            </ul>
+            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            
+            <p>Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa sähköpostilla osoitteeseen <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a> tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.</p>
             
             <p>
-            Oulun kaupunki<br/>
-            Sivistyspalvelut<br/>
-            Varhaiskasvatus ja esiopetus<br/>
-            Asiakaspalvelu<br/>
+            Ystävällisesti <br/>
+            Varhaiskasvatuksen palveluohjaus <br/>
             <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
-            Puh. <a href="tel:+0855845300">08 558 45300</a>- valitse numero 1 (ma–pe klo 9–12)<br/>
-            <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus">https://www.ouka.fi/oulu/paivahoito-ja-esiopetus</a>
+            Puh. <a href="tel:+0855845300">08 558 45300</a>, puhelinpäivystys arkisin klo 9.00-12.00<br/>
             </p>
             
-            <p>Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.</p>
+            <p>Tähän viestiin ei voi vastata.</p>
             
         """.trimIndent()
     }
 
     override fun getPreschoolApplicationReceivedEmailText(withinApplicationPeriod: Boolean): String {
         return """
+            Hei! 
 
-            Hyvä huoltaja,
+            Olemme vastaanottaneet lapsenne ilmoittautumisen esiopetukseen. Hakemuksen tehnyt huoltaja voi muokata hakemusta osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuksen palveluohjaus sijoittaa kaikki esiopetukseen ilmoitetut lapset esiopetusyksiköihin maaliskuun aikana. Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.  
 
-            lapsenne esikouluhakemus on vastaanotettu.
-            
-            Lisätietoa hakemuksen käsittelystä ja varhaiskasvatuspaikan myöntämisestä saa varhaiskasvatuksen ja esiopetuksen asiakaspalvelusta:
+            Mikäli hakemaanne yksikköön ei perusteta esiopetusryhmää, palveluohjaus on teihin yhteydessä ja tarjoaa paikkaa sellaisesta yksiköstä, johon esiopetusryhmä on muodostunut.          
 
-            Oulun kaupunki
-            Sivistyspalvelut
-            Varhaiskasvatus ja esiopetus
-            Asiakaspalvelu
-            varhaiskasvatus@ouka.fi
-            Puh. 08 558 45300 - valitse numero 1 (ma–pe klo 9–12)
-            https://www.ouka.fi/oulu/paivahoito-ja-esiopetus
+            Mikäli ilmoititte hakemuksessa lapsenne tuen tarpeesta, varhaiskasvatuksen erityisopettaja on teihin yhteydessä, jotta lapsen tuen tarpeet voidaan ottaa huomioon paikkaa osoitettaessa.  
+
+            ESIOPETUKSEEN LIITTYVÄ VARHAISKASVATUS 
+
+            Mikäli hait esiopetukseen liittyvää varhaiskasvatusta, otathan huomioon: 
+
+            - Varhaiskasvatuspaikan järjestelyaika on neljä kuukautta. Jatketun aukiolon ja vuorohoidon palveluita järjestetään vanhempien vuorotyön tai iltaisin ja/tai viikonloppuisin tapahtuvan opiskelun perusteella. 
+
+            - Mikäli lapsellenne järjestyy varhaiskasvatuspaikka jostakin hakemuksessa toivomastanne kunnallisesta varhaiskasvatuspaikasta, ilmoitamme teille paikan viimeistään kaksi viikkoa ennen varhaiskasvatuksen toivottua aloitusajankohtaa. Muussa tapauksessa olemme teihin yhteydessä puhelimitse.  
+
+            - Mikäli valitsitte ensimmäiseksi hakutoiveeksi yksityisen päiväkodin, olkaa suoraan yhteydessä kyseiseen yksikköön varmistaaksenne varhaiskasvatuspaikan saamisen. Mikäli toivomanne palveluntuottaja ei pysty tarjoamaan hoitopaikkaa, pyydämme teitä olemaan yhteydessä varhaiskasvatuksen palveluohjaukseen. 
+
+            - Siirtohakemukset (lapsella on jo varhaiskasvatuspaikka Oulun kaupungin varhaiskasvatusyksikössä) käsitellään pääsääntöisesti hakemuksen saapumispäivämäärän mukaan. Merkittäviä syitä siirtoon ovat: aikaisemman varhaiskasvatuspaikan lakkauttaminen, sisarukset ovat hoidossa eri yksiköissä, pitkä matka, huonot kulkuyhteydet, lapsen ikä, ryhmän ikärakenne, vuorohoidon tarpeen loppuminen sekä huomioon otettavat erityisperusteet. 
+
+            Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.  
+
+            Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa sähköpostilla osoitteeseen varhaiskasvatus@ouka.fi tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki. 
+
+            Ystävällisesti, 
+            Varhaiskasvatuksen palveluohjaus 
+            varhaiskasvatus@ouka.fi   
+            p. 08 558 45300, puhelinpäivystys arkisin klo 9.00-12.00 
                         
-            Tämä on automaattinen viesti, joka kertoo lomakkeen tallennuksesta. Viestiin ei voi vastata reply-/ vastaa-toiminnolla.
-                        
+            Tähän viestiin ei voi vastata.
         """.trimIndent()
     }
 

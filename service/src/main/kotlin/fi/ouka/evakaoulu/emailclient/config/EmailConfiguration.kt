@@ -162,7 +162,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             </ul>
             <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
             
-            <p>Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa sähköpostilla osoitteeseen <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a> tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.</p>
+            <p>Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle tai toimittaa sähköpostilla osoitteeseen <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.</p>
             
             <p>
             Ystävällisesti <br/>

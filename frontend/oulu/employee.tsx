@@ -141,7 +141,7 @@ const customizations: EmployeeCustomizations = {
     'FREE_ABSENCE'
   ],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
-  unitProviderTypes: ['MUNICIPAL', 'PRIVATE']
+  unitProviderTypes: ['MUNICIPAL', 'PRIVATE', 'PRIVATE_SERVICE_VOUCHER']
 }
 
 export default customizations

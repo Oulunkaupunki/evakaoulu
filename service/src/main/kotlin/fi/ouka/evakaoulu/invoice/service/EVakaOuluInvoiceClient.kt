@@ -14,7 +14,9 @@ class EVakaOuluInvoiceClient(
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
 
-        val proEInvoices = listOf("")
+        // fake generated invoices
+        val proEInvoices = invoices.map {""}
+
         invoiceSender.send(proEInvoices)
         return InvoiceIntegrationClient.SendResult(emptyList(), emptyList(), emptyList())
     }

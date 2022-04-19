@@ -15,8 +15,8 @@ internal class EVakaOuluInvoiceClientTest {
     fun `should send generated invoices`() {
         val properties = IntimeProperties("", "", "", "")
         val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, invoiceSender)
-        val invoiceList = listOf(invoiceDetailed)
-        val proEInvoices = listOf("")
+        val invoiceList = listOf(invoiceDetailed, invoiceDetailed, invoiceDetailed)
+        val proEInvoices = listOf("", "", "")
         
         eVakaOuluInvoiceClient.send(invoiceList)
 

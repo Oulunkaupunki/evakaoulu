@@ -32,7 +32,7 @@ module.exports = {
   }, {
     name: 'service',
     script: `${__dirname}/../evaka/compose/run-after-db.sh`,
-    args: './gradlew --no-daemon bootRun --debug-jvm',
+    args: './gradlew --no-daemon bootRun',
     cwd: path.resolve(__dirname, '../service'),
     ...defaults
   },

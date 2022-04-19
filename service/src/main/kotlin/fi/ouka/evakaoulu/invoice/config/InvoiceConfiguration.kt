@@ -11,6 +11,7 @@ import fi.espoo.evaka.invoicing.service.*
 import fi.espoo.evaka.placement.PlacementType
 import fi.ouka.evakaoulu.EvakaOuluProperties
 import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
+import fi.ouka.evakaoulu.invoice.service.InvoiceSender
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -22,8 +23,8 @@ class InvoiceConfiguration {
     @Primary
     @Bean(name = ["evakaOuluInvoiceIntegrationClient"])
     fun invoiceIntegrationClient(
-        properties: EvakaOuluProperties
-    ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(properties.intime)
+        properties: EvakaOuluProperties, invoiceSender: InvoiceSender
+    ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(properties.intime, invoiceSender)
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()

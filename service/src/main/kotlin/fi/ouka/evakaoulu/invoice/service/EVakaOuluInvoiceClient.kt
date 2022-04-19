@@ -16,16 +16,18 @@ import org.apache.tomcat.jni.User.username
 
 
 class EVakaOuluInvoiceClient(
-    private val properties: IntimeProperties
+    private val properties: IntimeProperties, private val invoiceSender: InvoiceSender
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
 //        val channelSftp: ChannelSftp = setupJsch()
 //        channelSftp.connect()
 //        val localFile = "src/main/resources/sample.txt"
 //        val remoteDir = properties.address
 //        channelSftp.put(localFile, remoteDir + "jschFile.txt")
 //        channelSftp.exit()
+        invoiceSender.send()
+        return InvoiceIntegrationClient.SendResult(emptyList(), emptyList(), emptyList())
     }
 
 //    @Throws(JSchException::class)

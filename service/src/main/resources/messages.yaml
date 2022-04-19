@@ -8,9 +8,9 @@ fi.ouka.evakaoulu:
       fi: Oulun varhaiskasvatukseen liittyvät päätökset
     DECISION_CONTENT:
       fi: |
-        Olette hakeneet lapsellenne varhaiskasvatus-, esiopetus- tai kerhopaikkaa tai palveluseteliä Oulun varhaiskasvatuksesta. Päätös on luettavissa oheisesta liitteestä.
+        Olette hakeneet lapsellenne varhaiskasvatus- esiopetus- tai kerhopaikkaa tai palveluseteliä Oulun varhaiskasvatuksesta. Päätös on luettavissa oheisesta liitteestä.
 
-        Huomioithan, että vastaus päätökseen tulee antaa kahden viikon kuluessa tämän päätöksen saamisesta joko sähköisesti osoitteessa varhaiskasvatus.ouka.fi (vaatii vahvan tunnistautumisen) tai lähettämällä sähköpostia varhaiskasvatuksen palveluohjaukseen varhaiskasvatus@ouka.fi.
+        Huomioithan, että vastaus päätökseen tulee antaa kahden viikon kuluessa tämän päätöksen saamisesta sähköisesti osoitteessa varhaiskasvatus.ouka.fi (vaatii vahvan tunnistautumisen).
     FEE_DECISION_HEADER:
       fi: Oulun varhaiskasvatukseen liittyvät päätökset
     FEE_DECISION_CONTENT:

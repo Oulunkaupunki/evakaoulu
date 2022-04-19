@@ -16,10 +16,10 @@ internal class EVakaOuluInvoiceClientTest {
         val properties = IntimeProperties("", "", "", "")
         val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, invoiceSender)
         val invoiceList = listOf(invoiceDetailed)
-        val proEInvoice = ""
+        val proEInvoices = listOf("")
         
         eVakaOuluInvoiceClient.send(invoiceList)
 
-        verify(invoiceSender).send(proEInvoice)
+        verify(invoiceSender).send(proEInvoices)
     }
 }

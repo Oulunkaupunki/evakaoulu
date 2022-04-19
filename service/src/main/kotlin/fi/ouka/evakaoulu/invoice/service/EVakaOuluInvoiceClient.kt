@@ -4,15 +4,9 @@
 
 package fi.ouka.evakaoulu.invoice.service
 
-import com.jcraft.jsch.ChannelSftp
-import com.jcraft.jsch.JSch
-import com.jcraft.jsch.Session
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.ouka.evakaoulu.IntimeProperties
-import org.apache.tomcat.jni.User.username
-
-
 
 
 class EVakaOuluInvoiceClient(
@@ -26,7 +20,8 @@ class EVakaOuluInvoiceClient(
 //        val remoteDir = properties.address
 //        channelSftp.put(localFile, remoteDir + "jschFile.txt")
 //        channelSftp.exit()
-        invoiceSender.send()
+        val proEInvoice = ""
+        invoiceSender.send(proEInvoice)
         return InvoiceIntegrationClient.SendResult(emptyList(), emptyList(), emptyList())
     }
 

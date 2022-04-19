@@ -2,7 +2,6 @@ package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.ouka.evakaoulu.IntimeProperties
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
@@ -17,10 +16,10 @@ internal class EVakaOuluInvoiceClientTest {
         val properties = IntimeProperties("", "", "", "")
         val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, invoiceSender)
         val invoiceList = listOf(invoiceDetailed)
-
+        val proEInvoice = ""
         
         eVakaOuluInvoiceClient.send(invoiceList)
 
-        verify(invoiceSender).send()
+        verify(invoiceSender).send(proEInvoice)
     }
 }

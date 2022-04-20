@@ -15,12 +15,15 @@ class EVakaOuluInvoiceClient(
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
 
         // fake generated invoices
-        val proEInvoices = invoices.map {""}
+        invoices.forEach{invoiceSender.send("")}
 
-        invoiceSender.send(proEInvoices)
+
         return InvoiceIntegrationClient.SendResult(emptyList(), emptyList(), emptyList())
     }
 
+}
 
+interface MockInvoiceGenerator{
+    fun generateInvoice(invoice : InvoiceDetailed): String
 
 }

@@ -3,15 +3,17 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.ChannelSftp
 import com.jcraft.jsch.JSch
 import com.jcraft.jsch.Session
+import org.springframework.stereotype.Component
 import java.io.ByteArrayInputStream
 
+@Component
 class SftpConnector(val jsch: JSch) {
 
     lateinit var channelSftp: ChannelSftp
     fun connect(address:String, username:String, password:String): Unit {
 
-        jsch.setKnownHosts("/Users/john/.ssh/known_hosts")
         val jschSession: Session = jsch.getSession(username, address)
+        jschSession.setConfig("StrictHostKeyChecking", "no")
         jschSession.setPassword(password)
         jschSession.connect()
 

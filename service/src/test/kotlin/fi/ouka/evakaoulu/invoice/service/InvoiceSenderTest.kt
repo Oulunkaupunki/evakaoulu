@@ -8,6 +8,7 @@ import fi.ouka.evakaoulu.IntimeProperties
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 import java.time.Instant
+import java.time.format.DateTimeFormatter
 
 internal class InvoiceSenderTest {
 
@@ -17,7 +18,7 @@ internal class InvoiceSenderTest {
         val sftpConnector = mock<SftpConnector>()
         val invoiceSender = InvoiceSender(intimeProperties, sftpConnector)
         val proEInvoice = "one"
-        val filepath = "${intimeProperties.path}-${Instant.now()}"
+        val filepath = "${intimeProperties.path}-${DateTimeFormatter.ofPattern("yyyy-MM-dd").format(Instant.now())}"
 
         invoiceSender.send(proEInvoice)
 

@@ -7,13 +7,11 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
-import fi.ouka.evakaoulu.IntimeProperties
 
 
 class EVakaOuluInvoiceClient(
-    private val properties: IntimeProperties,
     private val invoiceSender: InvoiceSender,
-    private val proEInvoiceGenerator: ProEInvoiceGenerator
+    private val invoiceGenerator: ProEInvoiceGenerator
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
         val successList = mutableListOf<InvoiceDetailed>()
@@ -21,7 +19,7 @@ class EVakaOuluInvoiceClient(
         var invoice = ""
 
         invoices.forEach {
-            invoice += proEInvoiceGenerator.generateInvoice(it)
+            invoice += invoiceGenerator.generateInvoice(it)
             successList.add(it)
         }
 
@@ -37,7 +35,7 @@ class EVakaOuluInvoiceClient(
 
 }
 
-interface ProEInvoiceGenerator {
+interface StringInvoiceGenerator {
     fun generateInvoice(invoice: InvoiceDetailed): String
 
 }

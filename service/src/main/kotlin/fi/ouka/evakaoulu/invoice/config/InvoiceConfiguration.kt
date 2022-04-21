@@ -10,10 +10,7 @@ import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.espoo.evaka.invoicing.service.*
 import fi.espoo.evaka.placement.PlacementType
 import fi.ouka.evakaoulu.EvakaOuluProperties
-import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
-import fi.ouka.evakaoulu.invoice.service.InvoiceSender
-import fi.ouka.evakaoulu.invoice.service.ProEInvoiceGenerator
-import fi.ouka.evakaoulu.invoice.service.SftpConnector
+import fi.ouka.evakaoulu.invoice.service.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -26,11 +23,11 @@ class InvoiceConfiguration {
     @Bean(name = ["evakaOuluInvoiceIntegrationClient"])
     fun invoiceIntegrationClient(
         properties: EvakaOuluProperties,
-        proEInvoiceGenerator: ProEInvoiceGenerator,
+        invoiceGenerator: ProEInvoiceGenerator,
         sftpConnector: SftpConnector
         ): InvoiceIntegrationClient {
         val invoiceSender = InvoiceSender(properties.intime, sftpConnector)
-        return EVakaOuluInvoiceClient(properties.intime, invoiceSender, proEInvoiceGenerator)
+        return EVakaOuluInvoiceClient(invoiceSender, invoiceGenerator)
     }
 
     @Bean

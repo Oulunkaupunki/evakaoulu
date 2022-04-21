@@ -4,6 +4,7 @@
 
 package fi.ouka.evakaoulu.invoice.config
 
+import com.jcraft.jsch.JSch
 import fi.espoo.evaka.invoicing.domain.FeeAlteration
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
@@ -24,11 +25,13 @@ class InvoiceConfiguration {
     fun invoiceIntegrationClient(
         properties: EvakaOuluProperties,
         invoiceGenerator: ProEInvoiceGenerator,
-        sftpConnector: SftpConnector
+        invoiceSender: InvoiceSender
         ): InvoiceIntegrationClient {
-        val invoiceSender = InvoiceSender(properties.intime, sftpConnector)
         return EVakaOuluInvoiceClient(invoiceSender, invoiceGenerator)
     }
+
+    @Bean
+    fun jsch() : JSch = JSch()
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()

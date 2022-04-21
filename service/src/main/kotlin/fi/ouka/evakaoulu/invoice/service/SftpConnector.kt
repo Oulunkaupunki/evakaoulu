@@ -10,6 +10,7 @@ import java.io.ByteArrayInputStream
 class SftpConnector(val jsch: JSch) {
 
     lateinit var channelSftp: ChannelSftp
+
     fun connect(address:String, username:String, password:String): Unit {
 
         val jschSession: Session = jsch.getSession(username, address)

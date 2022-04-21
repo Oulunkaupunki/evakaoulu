@@ -13,9 +13,9 @@ internal class EVakaOuluInvoiceClientTest {
 
     val invoiceDetailed = mock<InvoiceDetailed>()
     val proEInvoiceGenerator = mock<ProEInvoiceGenerator>()
-    val sftpConnector = mock<SftpConnector>()
+    val invoiceSender = mock<InvoiceSender>()
     val properties = IntimeProperties("", "", "", "")
-    val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, proEInvoiceGenerator, sftpConnector)
+    val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, invoiceSender, proEInvoiceGenerator)
 
     @Test
     fun `should send generated invoices`() {
@@ -38,18 +38,33 @@ internal class EVakaOuluInvoiceClientTest {
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
         assertThat(sendResult.succeeded).hasSize(1)
-
     }
 
     @Test
     fun `should return unsuccessfully sent invoices in failed list`() {
-        val invoiceList = listOf(invoiceDetailed)
+        val invoiceList = listOf(invoiceDetailed, invoiceDetailed)
         val proEInvoice1 = ""
         whenever(proEInvoiceGenerator.generateInvoice(invoiceDetailed)).thenReturn(proEInvoice1)
         whenever(invoiceSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
 
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
-        assertThat(sendResult.failed).hasSize(1)
+        assertThat(sendResult.failed).hasSize(2)
     }
+
+    @Test
+    fun `should send more invoices at once`() {
+        val invoiceList = listOf(invoiceDetailed, invoiceDetailed)
+        val proEInvoice1 = "xx"
+        whenever(proEInvoiceGenerator.generateInvoice(invoiceDetailed)).thenReturn(
+            "x"
+        )
+        val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
+
+        assertThat(sendResult.succeeded).hasSize(2)
+        verify(invoiceSender).send(proEInvoice1)
+    }
+
+
+
 }

@@ -8,24 +8,27 @@ import fi.ouka.evakaoulu.EvakaOuluProperties
 import fi.ouka.evakaoulu.IntimeProperties
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 internal class InvoiceSenderTest {
 
     @Test
     fun `should send invoice`() {
-        val intimeProperties = IntimeProperties("", "", "", "")
+        val path = "/some/path"
+        val intimeProperties = IntimeProperties("", path, "", "")
+        val proEInvoice = "one"
         val sftpConnector = mock<SftpConnector>()
         val invoiceSender = InvoiceSender(
             EvakaOuluProperties(intimeProperties), sftpConnector
         )
-        val proEInvoice = "one"
 
         invoiceSender.send(proEInvoice)
 
         verify(sftpConnector).connect(intimeProperties.address, intimeProperties.username, intimeProperties.password)
-        verify(sftpConnector).send(any(), eq("one"))
+        val fileNamePattern = """$path/proe-\d{8}-\d{6}.csv"""
+        verify(sftpConnector).send(
+            argThat { filePath -> filePath.matches(Regex(fileNamePattern)) },
+            eq("one")
+        )
         verify(sftpConnector).disconnect()
     }
 }

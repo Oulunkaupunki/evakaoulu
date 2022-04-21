@@ -13,6 +13,7 @@ import fi.ouka.evakaoulu.EvakaOuluProperties
 import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
 import fi.ouka.evakaoulu.invoice.service.InvoiceSender
 import fi.ouka.evakaoulu.invoice.service.ProEInvoiceGenerator
+import fi.ouka.evakaoulu.invoice.service.SftpConnector
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -25,9 +26,12 @@ class InvoiceConfiguration {
     @Bean(name = ["evakaOuluInvoiceIntegrationClient"])
     fun invoiceIntegrationClient(
         properties: EvakaOuluProperties,
-        invoiceSender: InvoiceSender,
-        proEInvoiceGenerator: ProEInvoiceGenerator
-    ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(properties.intime, invoiceSender, proEInvoiceGenerator)
+        proEInvoiceGenerator: ProEInvoiceGenerator,
+        sftpConnector: SftpConnector
+        ): InvoiceIntegrationClient {
+        val invoiceSender = InvoiceSender(properties.intime, sftpConnector)
+        return EVakaOuluInvoiceClient(properties.intime, invoiceSender, proEInvoiceGenerator)
+    }
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()
@@ -76,7 +80,9 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
             PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
             PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
             PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
-            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.SCHOOL_SHIFT_CARE, PlacementType.CLUB -> error("No product mapping found for placement type $placementType")
+            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.SCHOOL_SHIFT_CARE, PlacementType.CLUB -> error(
+                "No product mapping found for placement type $placementType"
+            )
         }
         return product.key
     }

@@ -12,10 +12,10 @@ import org.mockito.kotlin.whenever
 internal class EVakaOuluInvoiceClientTest {
 
     val invoiceDetailed = mock<InvoiceDetailed>()
-    val invoiceSender = mock<InvoiceSender>()
     val proEInvoiceGenerator = mock<ProEInvoiceGenerator>()
+    val sftpConnector = mock<SftpConnector>()
     val properties = IntimeProperties("", "", "", "")
-    val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, invoiceSender, proEInvoiceGenerator)
+    val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(properties, proEInvoiceGenerator, sftpConnector)
 
     @Test
     fun `should send generated invoices`() {

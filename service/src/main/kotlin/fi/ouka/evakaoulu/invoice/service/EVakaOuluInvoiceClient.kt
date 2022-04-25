@@ -16,21 +16,27 @@ class EVakaOuluInvoiceClient(
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
         val successList = mutableListOf<InvoiceDetailed>()
         val failedList = mutableListOf<InvoiceDetailed>()
-        var invoice = ""
+        val manuallySentList = mutableListOf<InvoiceDetailed>()
+        var proEinvoices = ""
 
-        invoices.forEach {
-            invoice += invoiceGenerator.generateInvoice(it)
+        val (withSSN, withoutSSN) = invoices.partition { invoice -> invoice.headOfFamily.ssn != null }
+
+        withSSN.forEach {
+            proEinvoices += invoiceGenerator.generateInvoice(it)
             successList.add(it)
         }
 
         try {
-            invoiceSender.send(invoice)
+            manuallySentList.addAll(withoutSSN)
+            invoiceSender.send(proEinvoices)
         } catch (e: SftpException){
             failedList.addAll(successList)
+            failedList.addAll(manuallySentList)
             successList.clear()
+            manuallySentList.clear()
         }
 
-        return InvoiceIntegrationClient.SendResult(successList, failedList, emptyList())
+        return InvoiceIntegrationClient.SendResult(successList, failedList, manuallySentList)
     }
 
 }

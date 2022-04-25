@@ -10,14 +10,19 @@ import fi.espoo.evaka.invoicing.domain.InvoiceStatus
 import fi.espoo.evaka.invoicing.domain.PersonDetailed
 import fi.espoo.evaka.invoicing.service.ProductKey
 import fi.espoo.evaka.shared.*
+import mu.KotlinLogging
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.springframework.boot.test.system.CapturedOutput
+import org.springframework.boot.test.system.OutputCaptureExtension
 import java.time.LocalDate
 import java.util.*
 
+@ExtendWith(OutputCaptureExtension::class)
 internal class EVakaOuluInvoiceClientTest {
 
 
@@ -94,6 +99,35 @@ internal class EVakaOuluInvoiceClientTest {
         verify(invoiceSender).send(proEInvoice1)
     }
 
+    @Test
+    fun `should log successful invoices`(output: CapturedOutput) {
+        val validInvoice = validInvoice()
+        val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
+        val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
+        whenever(invoiceGenerator.generateInvoice(validInvoice)).thenReturn(
+            "x"
+        )
+
+        eVakaOuluInvoiceClient.send(invoiceList)
+
+        assertThat(output).contains("Successfully sent 1 invoices and created 1 manual invoice")
+    }
+
+    @Test
+    fun `should log failed invoice sends`(output: CapturedOutput) {
+        val validInvoice = validInvoice()
+        val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
+        val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
+        whenever(invoiceGenerator.generateInvoice(validInvoice)).thenReturn(
+            "x"
+        )
+        val proEInvoice1 = ""
+        whenever(invoiceGenerator.generateInvoice(validInvoice)).thenReturn(proEInvoice1)
+        whenever(invoiceSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
+        eVakaOuluInvoiceClient.send(invoiceList)
+
+        assertThat(output).contains("Failed to send 2 invoices")
+    }
 
     fun validInvoice(): InvoiceDetailed {
         val headOfFamily = validPerson()

@@ -12,6 +12,7 @@ import fi.espoo.evaka.invoicing.service.*
 import fi.espoo.evaka.placement.PlacementType
 import fi.ouka.evakaoulu.EvakaOuluProperties
 import fi.ouka.evakaoulu.invoice.service.*
+import mu.KotlinLogging
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary

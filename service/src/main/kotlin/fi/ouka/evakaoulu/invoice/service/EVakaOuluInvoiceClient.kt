@@ -7,7 +7,9 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
+import mu.KotlinLogging
 
+private val logger = KotlinLogging.logger {}
 
 class EVakaOuluInvoiceClient(
     private val invoiceSender: InvoiceSender,
@@ -29,10 +31,12 @@ class EVakaOuluInvoiceClient(
         try {
             invoiceSender.send(proEinvoices)
             manuallySentList.addAll(withoutSSN)
+            logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
         } catch (e: SftpException){
             failedList.addAll(successList)
             failedList.addAll(withoutSSN)
             successList.clear()
+            logger.error { "Failed to send ${failedList.size} invoices" }
         }
 
         return InvoiceIntegrationClient.SendResult(successList, failedList, manuallySentList)

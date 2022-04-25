@@ -26,6 +26,7 @@ dependencies {
     implementation("org.apache.httpcomponents:httpclient")
     implementation("com.github.kittinunf.fuel:fuel")
     implementation("org.jdbi:jdbi3-core")
+    implementation("com.jcraft:jsch:0.1.55")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude( "com.vaadin.external.google", "android-json")

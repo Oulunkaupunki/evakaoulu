@@ -4,13 +4,15 @@
 
 package fi.ouka.evakaoulu.invoice.config
 
+import com.jcraft.jsch.JSch
 import fi.espoo.evaka.invoicing.domain.FeeAlteration
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.espoo.evaka.invoicing.service.*
 import fi.espoo.evaka.placement.PlacementType
 import fi.ouka.evakaoulu.EvakaOuluProperties
-import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
+import fi.ouka.evakaoulu.invoice.service.*
+import mu.KotlinLogging
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -22,8 +24,15 @@ class InvoiceConfiguration {
     @Primary
     @Bean(name = ["evakaOuluInvoiceIntegrationClient"])
     fun invoiceIntegrationClient(
-        properties: EvakaOuluProperties
-    ): InvoiceIntegrationClient = EVakaOuluInvoiceClient(properties.intime)
+        properties: EvakaOuluProperties,
+        invoiceGenerator: ProEInvoiceGenerator,
+        invoiceSender: InvoiceSender
+        ): InvoiceIntegrationClient {
+        return EVakaOuluInvoiceClient(invoiceSender, invoiceGenerator)
+    }
+
+    @Bean
+    fun jsch() : JSch = JSch()
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()
@@ -72,7 +81,9 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
             PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
             PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
             PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
-            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.SCHOOL_SHIFT_CARE, PlacementType.CLUB -> error("No product mapping found for placement type $placementType")
+            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.SCHOOL_SHIFT_CARE, PlacementType.CLUB -> error(
+                "No product mapping found for placement type $placementType"
+            )
         }
         return product.key
     }

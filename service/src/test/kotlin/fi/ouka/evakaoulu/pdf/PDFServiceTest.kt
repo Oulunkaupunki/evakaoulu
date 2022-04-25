@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-package fi.ouka.evakaoulu.invoice.service
+package fi.ouka.evakaoulu.pdf
 
 import fi.espoo.evaka.invoicing.domain.DecisionIncome
 import fi.espoo.evaka.invoicing.domain.EmployeeWithName

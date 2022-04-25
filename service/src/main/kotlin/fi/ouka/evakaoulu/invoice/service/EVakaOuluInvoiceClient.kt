@@ -27,13 +27,12 @@ class EVakaOuluInvoiceClient(
         }
 
         try {
-            manuallySentList.addAll(withoutSSN)
             invoiceSender.send(proEinvoices)
+            manuallySentList.addAll(withoutSSN)
         } catch (e: SftpException){
             failedList.addAll(successList)
-            failedList.addAll(manuallySentList)
+            failedList.addAll(withoutSSN)
             successList.clear()
-            manuallySentList.clear()
         }
 
         return InvoiceIntegrationClient.SendResult(successList, failedList, manuallySentList)

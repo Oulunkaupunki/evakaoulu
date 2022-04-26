@@ -115,11 +115,19 @@ class ProEInvoiceGenerator : StringInvoiceGenerator {
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
         var invoiceString = ""
 
-        invoices.forEach {
+        var successList = mutableListOf<InvoiceDetailed>()
+        var failedList = mutableListOf<InvoiceDetailed>()
+        var manuallySentList = mutableListOf<InvoiceDetailed>()
+
+        val (withSSN, withoutSSN) = invoices.partition { invoice -> invoice.headOfFamily.ssn != null }
+        manuallySentList.addAll(withoutSSN)
+
+        withSSN.forEach {
             var invoiceData = gatherInvoiceData(it)
             invoiceString += formatInvoice(invoiceData)
+            successList.add(it)
         }
 
-        return StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), invoiceString)
+        return StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(successList, failedList, manuallySentList), invoiceString)
     }
 }

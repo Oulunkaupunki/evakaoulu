@@ -50,7 +50,7 @@ internal class EVakaOuluInvoiceClientTest {
         val validInvoice = validInvoice()
         val invoiceList = listOf(validInvoice)
         val proEInvoice1 = ""
-        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
+        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), proEInvoice1)
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
 
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
@@ -63,10 +63,9 @@ internal class EVakaOuluInvoiceClientTest {
         val validInvoice = validInvoice()
         val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
         val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
-        val goodInvoiceList = listOf(validInvoice)
         val proEInvoice1 = ""
-        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
-        whenever(invoiceGenerator.generateInvoice(goodInvoiceList)).thenReturn(invoiceGeneratorResult)
+        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), proEInvoice1)
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
         whenever(invoiceSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
 
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
@@ -80,7 +79,7 @@ internal class EVakaOuluInvoiceClientTest {
         val invoiceList = listOf(validInvoice, validInvoice)
         val proEInvoice1 = "xx"
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(
-            StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), "xx")
+            StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), "xx")
         )
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
@@ -93,10 +92,9 @@ internal class EVakaOuluInvoiceClientTest {
         val validInvoice = validInvoice()
         val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
         val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
-        val goodInvoiceList = listOf(validInvoice)
         val proEInvoice1 = "x"
-        whenever(invoiceGenerator.generateInvoice(goodInvoiceList)).thenReturn(
-                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), "x")
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(
+                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(listOf(validInvoice), listOf(), listOf(invoiceWithoutSSN)), "x")
         )
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
@@ -110,9 +108,8 @@ internal class EVakaOuluInvoiceClientTest {
         val validInvoice = validInvoice()
         val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
         val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
-        val goodInvoiceList = listOf(validInvoice)
-        whenever(invoiceGenerator.generateInvoice(goodInvoiceList)).thenReturn(
-                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), "x")
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(
+                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(listOf(validInvoice), listOf(), listOf(invoiceWithoutSSN)), "x")
         )
 
         eVakaOuluInvoiceClient.send(invoiceList)
@@ -125,10 +122,9 @@ internal class EVakaOuluInvoiceClientTest {
         val validInvoice = validInvoice()
         val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
         val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
-        val goodInvoiceList = listOf(validInvoice)
         val proEInvoice1 = ""
-        whenever(invoiceGenerator.generateInvoice(goodInvoiceList)).thenReturn(
-                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(
+                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), proEInvoice1)
         )
 
         whenever(invoiceSender.send(proEInvoice1)).thenThrow(SftpException::class.java)

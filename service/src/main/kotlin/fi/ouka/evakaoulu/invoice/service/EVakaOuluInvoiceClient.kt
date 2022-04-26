@@ -121,33 +121,21 @@ class EVakaOuluInvoiceClient(
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
 
-	var iter = invoices.iterator()
-	while (iter.hasNext()) {
-	    var invoiceData = gatherInvoiceData(iter.next())
-	    var invoiceString = formatInvoice(invoiceData)
-	    println(invoiceString)
-	}
-
-        val successList = mutableListOf<InvoiceDetailed>()
         val failedList = mutableListOf<InvoiceDetailed>()
-        val manuallySentList = mutableListOf<InvoiceDetailed>()
 
-        val (withSSN, withoutSSN) = invoices.partition { invoice -> invoice.headOfFamily.ssn != null }
-
-        withSSN.forEach {
-//            proEinvoices += invoiceGenerator.generateInvoice(it).invoiceString
-            successList.add(it)
-        }
-        var proEinvoices = invoiceGenerator.generateInvoice(withSSN).invoiceString
+        val generatorResult = invoiceGenerator.generateInvoice(invoices)
+        var proEinvoices = generatorResult.invoiceString
+        var successList = generatorResult.sendResult.succeeded
+        var manuallySentList = generatorResult.sendResult.manuallySent
 
         try {
             invoiceSender.send(proEinvoices)
-            manuallySentList.addAll(withoutSSN)
             logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
         } catch (e: SftpException){
             failedList.addAll(successList)
-            failedList.addAll(withoutSSN)
-            successList.clear()
+            failedList.addAll(manuallySentList)
+            successList = listOf()
+            manuallySentList = listOf()
             logger.error { "Failed to send ${failedList.size} invoices" }
         }
 

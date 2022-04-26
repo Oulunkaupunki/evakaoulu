@@ -5,11 +5,12 @@
 package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
+import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import org.springframework.stereotype.Component
 
 @Component
 class ProEInvoiceGenerator : StringInvoiceGenerator {
-    override fun generateInvoice(invoice: InvoiceDetailed): String {
-        return ""
+    override fun generateInvoice(invoice: InvoiceDetailed): StringInvoiceGenerator.InvoiceGeneratorResult {
+        return StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), "")
     }
 }

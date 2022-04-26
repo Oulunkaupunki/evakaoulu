@@ -268,12 +268,12 @@ class EVakaOuluInvoiceClient(
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
 
-	var iter = invoices.iterator()
-	while (iter.hasNext()) {
-	    var invoiceData = gatherInvoiceData(iter.next())
-	    var invoiceString = formatInvoice(invoiceData)
-	    println(invoiceString)
-	}
+//	var iter = invoices.iterator()
+//	while (iter.hasNext()) {
+//	    var invoiceData = gatherInvoiceData(iter.next())
+//	    var invoiceString = formatInvoice(invoiceData)
+//	    println(invoiceString)
+//	}
 
         val successList = mutableListOf<InvoiceDetailed>()
         val failedList = mutableListOf<InvoiceDetailed>()
@@ -283,7 +283,7 @@ class EVakaOuluInvoiceClient(
         val (withSSN, withoutSSN) = invoices.partition { invoice -> invoice.headOfFamily.ssn != null }
 
         withSSN.forEach {
-            proEinvoices += invoiceGenerator.generateInvoice(it)
+            proEinvoices += invoiceGenerator.generateInvoice(it).invoiceString
             successList.add(it)
         }
 
@@ -304,6 +304,10 @@ class EVakaOuluInvoiceClient(
 }
 
 interface StringInvoiceGenerator {
-    fun generateInvoice(invoice: InvoiceDetailed): String
+    data class InvoiceGeneratorResult(
+        val sendResult: InvoiceIntegrationClient.SendResult = InvoiceIntegrationClient.SendResult(),
+        val invoiceString: String = ""
+    )
+    fun generateInvoice(invoice: InvoiceDetailed): StringInvoiceGenerator.InvoiceGeneratorResult
 
 }

@@ -131,14 +131,14 @@ class EVakaOuluInvoiceClient(
         val successList = mutableListOf<InvoiceDetailed>()
         val failedList = mutableListOf<InvoiceDetailed>()
         val manuallySentList = mutableListOf<InvoiceDetailed>()
-        var proEinvoices = ""
 
         val (withSSN, withoutSSN) = invoices.partition { invoice -> invoice.headOfFamily.ssn != null }
 
         withSSN.forEach {
-            proEinvoices += invoiceGenerator.generateInvoice(it).invoiceString
+//            proEinvoices += invoiceGenerator.generateInvoice(it).invoiceString
             successList.add(it)
         }
+        var proEinvoices = invoiceGenerator.generateInvoice(withSSN).invoiceString
 
         try {
             invoiceSender.send(proEinvoices)
@@ -161,6 +161,6 @@ interface StringInvoiceGenerator {
         val sendResult: InvoiceIntegrationClient.SendResult = InvoiceIntegrationClient.SendResult(),
         val invoiceString: String = ""
     )
-    fun generateInvoice(invoice: InvoiceDetailed): StringInvoiceGenerator.InvoiceGeneratorResult
+    fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult
 
 }

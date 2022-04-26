@@ -95,19 +95,17 @@ class ProEInvoiceGenerator : StringInvoiceGenerator {
 
         var result = ""
 
-        var iter = headerRowFields.iterator()
-        while (iter.hasNext()) {
-            val fieldInfo = iter.next()
-            if (fieldInfo.fieldType == FieldType.ALPHANUMERIC) {
-                var value = invoiceData.getAlphanumericValue(fieldInfo.field) ?: ""
-                result = result + value.padEnd(fieldInfo.length)
+        headerRowFields.forEach{
+            if (it.fieldType == FieldType.ALPHANUMERIC) {
+                var value = invoiceData.getAlphanumericValue(it.field) ?: ""
+                result = result + value.padEnd(it.length)
             }
-            else if (fieldInfo.fieldType == FieldType.NUMERIC) {
-                var value = invoiceData.getNumericValue(fieldInfo.field) ?: 0
-                var stringValue = value.toString().padStart(fieldInfo.length, '0')
+            else if (it.fieldType == FieldType.NUMERIC) {
+                var value = invoiceData.getNumericValue(it.field) ?: 0
+                var stringValue = value.toString().padStart(it.length, '0')
                 // all Evaka values seem to be Int so we can just pad
                 // the decimal part with the correct number of zeroes
-                result = result + stringValue.padEnd(fieldInfo.length + fieldInfo.decimals, '0')
+                result = result + stringValue.padEnd(it.length + it.decimals, '0')
             }
         }
 
@@ -117,9 +115,8 @@ class ProEInvoiceGenerator : StringInvoiceGenerator {
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
         var invoiceString = ""
 
-        var iter = invoices.iterator()
-        while (iter.hasNext()) {
-            var invoiceData = gatherInvoiceData(iter.next())
+        invoices.forEach {
+            var invoiceData = gatherInvoiceData(it)
             invoiceString += formatInvoice(invoiceData)
         }
 

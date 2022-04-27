@@ -145,8 +145,8 @@ internal class EVakaOuluInvoiceClientTest {
             LocalDate.of(2021, 1, 1),
             LocalDate.of(2021, 1, 31),
             ProductKey("DAYCARE"), DaycareId(UUID.randomUUID()), "131885", null, null, "kuvaus1",
-            // correctionId = null,
-            // note = null
+             correctionId = null,
+             note = null
         )
         val invoiceRow2 = InvoiceRowDetailed(
             InvoiceRowId(UUID.randomUUID()), PersonDetailed(
@@ -158,8 +158,8 @@ internal class EVakaOuluInvoiceClientTest {
             LocalDate.of(2021, 1, 1),
             LocalDate.of(2021, 1, 31),
             ProductKey("PRESCHOOL_WITH_DAYCARE"), DaycareId(UUID.randomUUID()), "284823", null, null, "kuvaus2",
-            // correctionId = null,
-            // note = null
+             correctionId = null,
+             note = null
         )
         return InvoiceDetailed(
             (InvoiceId(UUID.randomUUID())),

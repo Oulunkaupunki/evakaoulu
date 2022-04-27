@@ -57,8 +57,6 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             <p>
             Ystävällisesti <br/>
             Varhaiskasvatuksen palveluohjaus <br/>
-            <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a><br/>
-            Puh. <a href="tel:+0855845300">08 558 45300</a>, puhelinpäivystys arkisin klo 9.00-12.00<br/>
             </p>
             
             <p>Tähän viestiin ei voi vastata.</p>
@@ -76,10 +74,8 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.  
             
             Ystävällisesti,  
-            Varhaiskasvatuksen palveluohjaus 
-            varhaiskasvatus@ouka.fi   
             
-            p. 08 558 45300, puhelinpäivystys arkisin klo 9.00-12.00 
+            Varhaiskasvatuksen palveluohjaus 
             
             Tähän viestiin ei voi vastata.
         """.trimIndent()

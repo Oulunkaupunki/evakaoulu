@@ -88,6 +88,33 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
         invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_VAT_IDENTIFIER, "")
         invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_OVT_IDENTIFIER, "")
 
+        val sortedRows = invoiceDetailed.rows.sortedBy { row -> row.child.firstName }
+
+        val rowsPerChild: MutableMap<String, List<InvoiceData>> = mutableMapOf()
+        var currentChild = ""
+        var childRows: MutableList<InvoiceData> = mutableListOf()
+
+        sortedRows.forEach {
+            if (it.child.firstName != currentChild) {
+                currentChild = it.child.firstName
+                childRows = mutableListOf()
+                rowsPerChild.put(currentChild, childRows)
+            }
+
+            val invoiceRowData = InvoiceData()
+
+            invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
+            invoiceRowData.setAlphanumericValue(InvoiceField.TEXT_ROW_CODE, "3")
+            invoiceRowData.setAlphanumericValue(InvoiceField.CHILD_NAME, it.child.firstName + " " + it.child.lastName)
+            invoiceRowData.setAlphanumericValue(InvoiceField.TIME_PERIOD, "XX.XX.XXXX - YY.YY.YYYY")
+            invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_ROW_HEADER, "")
+            invoiceRowData.setAlphanumericValue(InvoiceField.CONSTANT_TEXT_IDENTIFIER, "")
+
+            childRows.add(invoiceRowData)
+        }
+
+        invoiceData.setChildRowMap(rowsPerChild)
+
         return invoiceData
     }
 
@@ -119,6 +146,14 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
         if (invoiceData.getAlphanumericValue(InvoiceField.CODEBTOR_IDENTIFIER) != "")
             result += generateRow(codebtorRowFields, invoiceData)
+
+        var rowsPerChild = invoiceData.getChildRowMap()
+        rowsPerChild.forEach {
+            result += generateRow(childHeaderRowFields, it.value.get(0))
+            it.value.forEach {
+                result += generateRow(rowHeaderRowFields, it)
+            }
+        }
 
         return result
     }

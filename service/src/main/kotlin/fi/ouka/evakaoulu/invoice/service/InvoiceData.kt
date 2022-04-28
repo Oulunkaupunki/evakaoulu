@@ -59,6 +59,11 @@ enum class InvoiceField {
     CODEBTOR_SSN,
     CODEBTOR_VAT_IDENTIFIER,
     CODEBTOR_OVT_IDENTIFIER,
+    TEXT_ROW_CODE,
+    CHILD_NAME,
+    TIME_PERIOD,
+    INVOICE_ROW_HEADER,
+    CONSTANT_TEXT_IDENTIFIER,
 }
 
 enum class FieldType {
@@ -137,12 +142,32 @@ var codebtorRowFields = listOf(
         Field(InvoiceField.CODEBTOR_OVT_IDENTIFIER, FieldType.ALPHANUMERIC, 408, 35),
 )
 
+var childHeaderRowFields = listOf(
+        Field(InvoiceField.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
+        Field(InvoiceField.TEXT_ROW_CODE, FieldType.ALPHANUMERIC, 12, 1),
+        Field(InvoiceField.CHILD_NAME, FieldType.ALPHANUMERIC, 13, 78),
+        Field(InvoiceField.INVOICE_ROW_HEADER, FieldType.ALPHANUMERIC, 30, 91),
+        Field(InvoiceField.CONSTANT_TEXT_IDENTIFIER, FieldType.ALPHANUMERIC, 121, 10),
+)
+
+var rowHeaderRowFields = listOf(
+        Field(InvoiceField.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
+        Field(InvoiceField.TEXT_ROW_CODE, FieldType.ALPHANUMERIC, 12, 1),
+        Field(InvoiceField.TIME_PERIOD, FieldType.ALPHANUMERIC, 13, 78),
+        Field(InvoiceField.INVOICE_ROW_HEADER, FieldType.ALPHANUMERIC, 30, 91),
+        Field(InvoiceField.CONSTANT_TEXT_IDENTIFIER, FieldType.ALPHANUMERIC, 121, 10),
+)
+
 class InvoiceData {
     val alphanumericValues: MutableMap<InvoiceField, String> = mutableMapOf()
     val numericValues: MutableMap<InvoiceField, Int> = mutableMapOf()
+    var rowMap: Map<String, List<InvoiceData>> = mapOf()
 
     fun setAlphanumericValue(field: InvoiceField, value: String) { alphanumericValues.put(field, value) }
     fun getAlphanumericValue(field: InvoiceField): String? { return alphanumericValues.get(field)}
     fun setNumericValue(field: InvoiceField, value: Int) { numericValues.put(field, value) }
     fun getNumericValue(field: InvoiceField): Int? { return numericValues.get(field)}
+
+    fun setChildRowMap(childMap: Map<String, List<InvoiceData>>) { rowMap = childMap }
+    fun getChildRowMap(): Map<String, List<InvoiceData>> { return rowMap }
 }

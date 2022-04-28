@@ -68,3 +68,10 @@ fun personWithoutSSN() = PersonDetailed(
         null, "Meikäläisenkuja 6 B 7", "90100", "OULU",
         "", null, "", null, restrictedDetailsEnabled = false
 )
+
+fun personWithRestrictedDetails() = PersonDetailed(
+        PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
+        "Mysteeri", "Meikäläinen",
+        "280691-943Z", "Todistajansuojeluohjelmankatu 9", "45600", "OULU",
+        "", null, "", null, restrictedDetailsEnabled = true
+)

@@ -64,6 +64,8 @@ enum class InvoiceField {
     TIME_PERIOD,
     INVOICE_ROW_HEADER,
     CONSTANT_TEXT_IDENTIFIER,
+    DETAIL_ROW_CODE,
+    // TODO Define here the identifiers for the rest of the detail row fields
 }
 
 enum class FieldType {
@@ -156,6 +158,12 @@ var rowHeaderRowFields = listOf(
         Field(InvoiceField.TIME_PERIOD, FieldType.ALPHANUMERIC, 13, 78),
         Field(InvoiceField.INVOICE_ROW_HEADER, FieldType.ALPHANUMERIC, 30, 91),
         Field(InvoiceField.CONSTANT_TEXT_IDENTIFIER, FieldType.ALPHANUMERIC, 121, 10),
+)
+
+var detailRowFields = listOf(
+        Field(InvoiceField.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
+        Field(InvoiceField.DETAIL_ROW_CODE, FieldType.ALPHANUMERIC, 12, 1),
+        // TODO define here the rest of the fields for the invoice row details
 )
 
 class InvoiceData {

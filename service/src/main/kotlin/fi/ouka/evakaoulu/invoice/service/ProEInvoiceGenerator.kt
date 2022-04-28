@@ -110,6 +110,9 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
             invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_ROW_HEADER, "")
             invoiceRowData.setAlphanumericValue(InvoiceField.CONSTANT_TEXT_IDENTIFIER, "")
 
+            invoiceRowData.setAlphanumericValue(InvoiceField.DETAIL_ROW_CODE, "1")
+            // TODO Gather here the rest of the data for the invoice row details
+
             childRows.add(invoiceRowData)
         }
 
@@ -152,6 +155,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
             result += generateRow(childHeaderRowFields, it.value.get(0))
             it.value.forEach {
                 result += generateRow(rowHeaderRowFields, it)
+                result += generateRow(detailRowFields, it)
             }
         }
 

@@ -11,7 +11,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
-class ProEInvoiceGenerator : StringInvoiceGenerator {
+class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringInvoiceGenerator {
 
     fun gatherInvoiceData(invoiceDetailed: InvoiceDetailed): InvoiceData {
         var invoiceData = InvoiceData()
@@ -91,11 +91,10 @@ class ProEInvoiceGenerator : StringInvoiceGenerator {
         return invoiceData
     }
 
-    fun formatInvoice(invoiceData: InvoiceData): String {
-
+    fun generateRow(fields: List<Field>, invoiceData: InvoiceData): String {
         var result = ""
 
-        headerRowFields.forEach{
+        fields.forEach{
             if (it.fieldType == FieldType.ALPHANUMERIC) {
                 var value = invoiceData.getAlphanumericValue(it.field) ?: ""
                 result = result + value.padEnd(it.length)
@@ -108,6 +107,13 @@ class ProEInvoiceGenerator : StringInvoiceGenerator {
                 result = result + stringValue.padEnd(it.length + it.decimals, '0')
             }
         }
+
+        return result
+    }
+
+    fun formatInvoice(invoiceData: InvoiceData): String {
+
+        var result = generateRow(headerRowFields, invoiceData)
 
         return result
     }

@@ -119,10 +119,10 @@ class ProEInvoiceGenerator : StringInvoiceGenerator {
         var failedList = mutableListOf<InvoiceDetailed>()
         var manuallySentList = mutableListOf<InvoiceDetailed>()
 
-        val (withSSN, withoutSSN) = invoices.partition { invoice -> invoice.headOfFamily.ssn != null }
-        manuallySentList.addAll(withoutSSN)
+        val (manuallySent, succeeded) = invoices.partition { invoice -> invoiceChecker.shouldSendManually(invoice) }
+        manuallySentList.addAll(manuallySent)
 
-        withSSN.forEach {
+        succeeded.forEach {
             var invoiceData = gatherInvoiceData(it)
             invoiceString += formatInvoice(invoiceData)
             successList.add(it)

@@ -108,6 +108,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
             }
         }
 
+        result = result + "\n"
+
         return result
     }
 

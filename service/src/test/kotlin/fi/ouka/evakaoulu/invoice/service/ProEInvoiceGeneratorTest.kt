@@ -46,6 +46,6 @@ internal class ProEInvoiceGeneratorTest {
 
         val result = proEInvoiceGenerator.generateRow(format, invoiceData)
 
-        assert(result == "121212A121AJaska Jokunen                 00004200")
+        assertEquals(result, "121212A121AJaska Jokunen                 00004200\n")
     }
 }

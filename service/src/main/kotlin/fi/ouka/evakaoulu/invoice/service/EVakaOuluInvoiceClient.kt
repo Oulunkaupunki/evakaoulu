@@ -7,7 +7,6 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
-import fi.ouka.evakaoulu.IntimeProperties
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import mu.KotlinLogging

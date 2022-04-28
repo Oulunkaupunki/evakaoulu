@@ -117,6 +117,9 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
         var result = generateRow(headerRowFields, invoiceData)
 
+        if (invoiceData.getAlphanumericValue(InvoiceField.CODEBTOR_IDENTIFIER) != "")
+            result += generateRow(codebtorRowFields, invoiceData)
+
         return result
     }
 

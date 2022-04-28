@@ -665,7 +665,7 @@ const fi: DeepPartial<Translations> = {
           text="verkkolomakkeella"
         />{' '}
         tai sähköpostitse{' '}
-        <a href="varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
+        <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
       </P>
       <H2>Valvontaviranomainen</H2>
       <P>

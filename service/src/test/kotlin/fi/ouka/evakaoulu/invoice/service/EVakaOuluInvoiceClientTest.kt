@@ -32,7 +32,7 @@ internal class EVakaOuluInvoiceClientTest {
     val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(invoiceSender, invoiceGenerator)
 
     @Test
-    fun `should send generated invoices`() {
+    fun `should pass invoices to the invoice generator`() {
         val validInvoice = validInvoice()
         val invoiceList = listOf(validInvoice)
         val proEInvoice1 = ""
@@ -42,6 +42,18 @@ internal class EVakaOuluInvoiceClientTest {
         eVakaOuluInvoiceClient.send(invoiceList)
 
         verify(invoiceGenerator).generateInvoice(invoiceList)
+    }
+
+    @Test
+    fun `should send generated invoices`() {
+        val validInvoice = validInvoice()
+        val invoiceList = listOf(validInvoice)
+        val proEInvoice1 = ""
+        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
+
+        eVakaOuluInvoiceClient.send(invoiceList)
+
         verify(invoiceSender).send(proEInvoice1)
     }
 
@@ -88,13 +100,13 @@ internal class EVakaOuluInvoiceClientTest {
     }
 
     @Test
-    fun `should send manually invoices when customer has no SSN`() {
+    fun `should send manually invoices which invoice generator determined to be manually sent`() {
         val validInvoice = validInvoice()
-        val invoiceWithoutSSN = validInvoice().copy(headOfFamily = personWithoutSSN())
-        val invoiceList = listOf(validInvoice, invoiceWithoutSSN)
+        val invoiceWithRestrictedDetails = validInvoice().copy(headOfFamily = personWithRestrictedDetails())
+        val invoiceList = listOf(validInvoice, invoiceWithRestrictedDetails)
         val proEInvoice1 = "x"
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(
-                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(listOf(validInvoice), listOf(), listOf(invoiceWithoutSSN)), "x")
+                StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(listOf(validInvoice), listOf(), listOf(invoiceWithRestrictedDetails)), "x")
         )
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 

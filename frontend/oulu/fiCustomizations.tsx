@@ -306,8 +306,8 @@ const fi: DeepPartial<Translations> = {
         },
         assistanceNeedInstructions: {
           DAYCARE:
-            'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
-          CLUB: 'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
+            'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
+          CLUB: 'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
           PRESCHOOL:
             'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukea toteutetaan lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon esiopetuspaikkaa osoitettaessa.'
         },
@@ -347,6 +347,9 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             PRESCHOOL:
               'Esiopetusta tarjotaan päiväkodeissa ja kouluissa neljä tuntia päivässä. Ilmoita lapsen tarvitsema varhaiskasvatusaika siten, että se sisältää myös esiopetusajan (esim. 7.00–17.00). Aika tarkennetaan varhaiskasvatuksen alkaessa. Päivittäisen varhaiskasvatusajan vaihdellessa päivittäin tai viikoittain (esim. vuorohoidossa), ilmoita tarve tarkemmin hakemuksen Muut lisätiedot -kohdassa.'
+          },
+          usualArrivalAndDeparture: {
+            DAYCARE: 'Päivittäinen varhaiskasvatusaika '
           }
         },
         preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
@@ -374,7 +377,7 @@ const fi: DeepPartial<Translations> = {
           </P>
         ),
         futureAddressInfo:
-          'Oulun varhaiskasvatuksessa virallisena osoitteena pidetään väestötiedoista saatavaa osoitetta. Osoite väestötiedoissa muuttuu hakijan tehdessä muuttoilmoituksen postiin tai maistraattiin.'
+          'Oulun varhaiskasvatuksessa virallisena osoitteena pidetään väestötiedoista saatavaa osoitetta. Osoite väestötiedoissa muuttuu hakijan tehdessä muuttoilmoituksen postiin tai Digi- ja väestötietovirastoon.'
       },
       fee: {
         info: {
@@ -418,19 +421,7 @@ const fi: DeepPartial<Translations> = {
         )
       },
       additionalDetails: {
-        dietInfo: (
-          <>
-            Erityisruokavaliosta huoltaja toimittaa varhaiskasvatuspaikkaan
-            lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman
-            lomakkeen{' '}
-            <ExternalLink
-              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus"
-              text="Oulun kaupungin sivuilta"
-              newTab
-            />
-            , joka on määräaikainen.
-          </>
-        )
+        dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>
       }
     }
   },

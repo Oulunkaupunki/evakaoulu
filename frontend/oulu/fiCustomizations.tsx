@@ -280,12 +280,8 @@ const fi: DeepPartial<Translations> = {
                 molemmilta samassa taloudessa asuvilta huoltajilta. Kahden
                 viikon käsittelyaika alkaa siitä, kun olemme vastaanottaneet
                 hakemuksen tarvittavine liitteineen. Jos et voi lisätä liitteitä
-                hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen{' '}
-                <a href="mailto:varhaiskasvatus@ouka.fi">
-                  varhaiskasvatus@ouka.fi
-                </a>{' '}
-                tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL
-                75, 90015 Oulun kaupunki.
+                hakemukselle sähköisesti, lähetä liitteet postilla osoitteeseen
+                Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.
               </P>
             ),
             subtitle:
@@ -296,10 +292,10 @@ const fi: DeepPartial<Translations> = {
           instructions:
             'Ilta- ja vuorohoidolla tarkoitetaan pääasiassa klo 6.00-18.00 ulkopuolella ja viikonloppuisin sekä ympärivuorokautisesti tapahtuvaa varhaiskasvatusta. Mikäli tarvitset ilta- tai vuorohoitoa, täsmennä tarvetta hakemuksen Muut lisätiedot -kohdassa.',
           message: {
-            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta. Jos et voi lisätä liitteitä hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen varhaiskasvatus@ouka.fi tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL75, 90015 Oulun kaupunki.'
+            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta. Jos et voi lisätä liitteitä hakemukselle sähköisesti, lähetä liitteet postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL75, 90015 Oulun kaupunki.'
           },
           attachmentsMessage: {
-            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta. Jos et voi lisätä liitteitä hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen varhaiskasvatus@ouka.fi tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL75, 90015 Oulun kaupunki.',
+            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta. Jos et voi lisätä liitteitä hakemukselle sähköisesti, lähetä liitteet postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL75, 90015 Oulun kaupunki.',
             subtitle:
               'Lisää tähän selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molempien huoltajien osalta.'
           }

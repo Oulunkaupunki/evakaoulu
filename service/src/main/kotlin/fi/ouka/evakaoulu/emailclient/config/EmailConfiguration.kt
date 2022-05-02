@@ -26,9 +26,9 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
 
     override fun getPendingDecisionEmailHtml(): String {
         return """
-            <p>Olet saanut päätöksen/ilmoituksen Oulun varhaiskasvatukselta, joka odottaa toimenpiteitäsi. Myönnetty varhaiskasvatus-/kerhopaikka tulee hyväksyä tai hylätä kahden viikon sisällä päätöksen saapumisesta.</p>
+            <p>Hei!</p>
             
-            <p>Hakemuksen tekijä voi hyväksyä tai hylätä varhaiskasvatus-/kerhopaikan kirjautumalla osoitteeseen <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai ottamalla yhteyttä päätöksellä mainittuun päiväkodin johtajaan.</p>
+            <p>Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan.</p>
             
             <p>Tähän viestiin ei voi vastata.</p>
         """.trimIndent()
@@ -36,11 +36,12 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
 
     override fun getPendingDecisionEmailText(): String {
         return """
-            Olet saanut päätöksen/ilmoituksen Oulun varhaiskasvatukselta, joka odottaa toimenpiteitäsi. Myönnetty varhaiskasvatus-/kerhopaikka tulee hyväksyä tai hylätä kahden viikon sisällä päätöksen saapumisesta.
+            Hei! 
+
+            Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan. 
+
+            Tähän viestiin ei voi vastata.  
             
-            Hakemuksen tekijä voi hyväksyä tai hylätä varhaiskasvatus-/kerhopaikan kirjautumalla osoitteeseen varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksellä mainittuun päiväkodin johtajaan.            
-            
-            Tähän viestiin ei voi vastata.
         """.trimIndent()
     }
 

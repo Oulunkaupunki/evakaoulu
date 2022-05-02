@@ -14,6 +14,11 @@ import java.time.format.DateTimeFormatter
 @Component
 class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringInvoiceGenerator {
 
+    fun generateInvoiceTitle(): String {
+        val previousMonth = LocalDate.now().minusMonths(1)
+        val titleFormatter = DateTimeFormatter.ofPattern("MM.yyyy")
+        return "Varhaiskasvatus " + previousMonth.format(titleFormatter)
+    }
     fun gatherInvoiceData(invoiceDetailed: InvoiceDetailed): InvoiceData {
         var invoiceData = InvoiceData()
 
@@ -58,7 +63,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
         invoiceData.setAlphanumericValue(InvoiceField.INVOICE_TYPE, "")
         invoiceData.setAlphanumericValue(InvoiceField.INVOICING_UNIT, "000")
         // what should we put here?
-        invoiceData.setAlphanumericValue(InvoiceField.DESCRIPTION, "Selite tähän!")
+        invoiceData.setAlphanumericValue(InvoiceField.DESCRIPTION, generateInvoiceTitle())
         invoiceData.setAlphanumericValue(InvoiceField.SECURITY_DENIAL, "")
         invoiceData.setAlphanumericValue(InvoiceField.CONTRACT_NUMBER, "")
         invoiceData.setAlphanumericValue(InvoiceField.ORDER_NUMBER, "")

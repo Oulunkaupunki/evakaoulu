@@ -163,6 +163,14 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
                 // the decimal part with the correct number of zeroes
                 result = result + stringValue.padEnd(it.length + it.decimals, '0')
             }
+            else if (it.fieldType == FieldType.MONETARY) {
+                var value = invoiceData.getNumericValue(it.field) ?: 0
+                // if the value if non-zero it has been multiplied by 100 to already contain two decimals
+                val decimals = if (value == 0) it.decimals else it.decimals - 2
+                val length = if (value == 0) it.length else it.length + 2
+                var stringValue = value.toString().padStart(length, '0')
+                result = result + stringValue.padEnd(length + decimals, '0')
+            }
         }
 
         result = result + "\n"

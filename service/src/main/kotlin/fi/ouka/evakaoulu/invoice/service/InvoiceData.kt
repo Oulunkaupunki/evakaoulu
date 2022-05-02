@@ -82,6 +82,8 @@ enum class InvoiceField {
 enum class FieldType {
     ALPHANUMERIC,
     NUMERIC,
+    // we need a specific monetary type because they are prescaled by 100, so they include two decimals
+    MONETARY,
 }
 
 class Field(val field: InvoiceField, val fieldType: FieldType, val start: Int, val length: Int, val decimals: Int = 0)
@@ -176,7 +178,7 @@ var detailRowFields = listOf(
         Field(InvoiceField.DETAIL_ROW_CODE, FieldType.ALPHANUMERIC, 12, 1),
         Field(InvoiceField.PRODUCT_NAME, FieldType.ALPHANUMERIC, 13, 40),
         Field(InvoiceField.PRICE_SIGN, FieldType.ALPHANUMERIC, 53, 1),
-        Field(InvoiceField.UNIT_PRICE, FieldType.NUMERIC, 54, 8, 4),
+        Field(InvoiceField.UNIT_PRICE, FieldType.MONETARY, 54, 8, 4),
         Field(InvoiceField.UNIT, FieldType.ALPHANUMERIC, 66, 3),
         Field(InvoiceField.AMOUNT_SIGN, FieldType.ALPHANUMERIC, 69, 1),
         Field(InvoiceField.AMOUNT, FieldType.ALPHANUMERIC, 70, 8, 4),

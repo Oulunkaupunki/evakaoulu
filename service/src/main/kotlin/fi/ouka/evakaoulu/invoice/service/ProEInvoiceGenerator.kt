@@ -114,7 +114,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
             invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
             invoiceRowData.setAlphanumericValue(InvoiceField.TEXT_ROW_CODE, "3")
             invoiceRowData.setAlphanumericValue(InvoiceField.CHILD_NAME, it.child.firstName + " " + it.child.lastName)
-            invoiceRowData.setAlphanumericValue(InvoiceField.TIME_PERIOD, "XX.XX.XXXX - YY.YY.YYYY")
+            val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            invoiceRowData.setAlphanumericValue(InvoiceField.TIME_PERIOD, it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter))
             invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_ROW_HEADER, "")
             invoiceRowData.setAlphanumericValue(InvoiceField.CONSTANT_TEXT_IDENTIFIER, "")
 

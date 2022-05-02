@@ -97,6 +97,12 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <p th:text="#{text.reference.p3}"></p>
     </div>
 
+
+
+</div>
+
+<div class="page last-page">
+
     <div class="decision-details-container">
         <p>
             <strong th:text="#{decision.sentDate}">Päätöspäivä</strong>
@@ -110,12 +116,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <div th:utext="#{decision.approver.additionalInfo}">(allekirjoitettu koneellisesti)</div>
         <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>
         <div th:utext="#{decision.approver.details}"></div>
-
     </div>
 
-</div>
-
-<div class="page last-page">
     <div th:utext="#{decision.legalInstructions}"></div>
     <div th:replace="~{oulu/shared/daycare-correction :: correction}"></div>
 </div>

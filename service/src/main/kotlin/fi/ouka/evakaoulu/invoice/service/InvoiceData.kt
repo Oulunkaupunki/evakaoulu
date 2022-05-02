@@ -65,7 +65,18 @@ enum class InvoiceField {
     INVOICE_ROW_HEADER,
     CONSTANT_TEXT_IDENTIFIER,
     DETAIL_ROW_CODE,
-    // TODO Define here the identifiers for the rest of the detail row fields
+    PRODUCT_NAME,
+    PRICE_SIGN,
+    UNIT_PRICE,
+    UNIT,
+    AMOUNT_SIGN,
+    AMOUNT,
+    VAT_CODE,
+    VAT_ACCOUNT,
+    BRUTTO_NETTO,
+    DEBIT_ACCOUNTING,
+    CREDIT_ACCOUNTING,
+    ROW_SUM,
 }
 
 enum class FieldType {
@@ -163,7 +174,20 @@ var rowHeaderRowFields = listOf(
 var detailRowFields = listOf(
         Field(InvoiceField.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
         Field(InvoiceField.DETAIL_ROW_CODE, FieldType.ALPHANUMERIC, 12, 1),
-        // TODO define here the rest of the fields for the invoice row details
+        Field(InvoiceField.PRODUCT_NAME, FieldType.ALPHANUMERIC, 13, 40),
+        Field(InvoiceField.PRICE_SIGN, FieldType.ALPHANUMERIC, 53, 1),
+        Field(InvoiceField.UNIT_PRICE, FieldType.NUMERIC, 54, 8, 4),
+        Field(InvoiceField.UNIT, FieldType.ALPHANUMERIC, 66, 3),
+        Field(InvoiceField.AMOUNT_SIGN, FieldType.ALPHANUMERIC, 69, 1),
+        Field(InvoiceField.AMOUNT, FieldType.ALPHANUMERIC, 70, 8, 4),
+        Field(InvoiceField.VAT_CODE, FieldType.ALPHANUMERIC, 82, 2),
+        Field(InvoiceField.VAT_ACCOUNT, FieldType.ALPHANUMERIC, 84, 60),
+        Field(InvoiceField.BRUTTO_NETTO, FieldType.ALPHANUMERIC, 144, 1),
+        Field(InvoiceField.DEBIT_ACCOUNTING, FieldType.ALPHANUMERIC, 145, 60),
+        Field(InvoiceField.CREDIT_ACCOUNTING, FieldType.ALPHANUMERIC, 205, 60),
+        // format says that ROW_SUM is a numeric field, but the example file has this
+        // empty which is not possible the way we implemented numeric fields
+        Field(InvoiceField.ROW_SUM, FieldType.ALPHANUMERIC, 265, 11),
 )
 
 class InvoiceData {

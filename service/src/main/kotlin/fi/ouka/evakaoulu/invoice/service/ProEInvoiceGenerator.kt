@@ -6,6 +6,7 @@ package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
+import fi.ouka.evakaoulu.invoice.config.Product
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -111,7 +112,20 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
             invoiceRowData.setAlphanumericValue(InvoiceField.CONSTANT_TEXT_IDENTIFIER, "")
 
             invoiceRowData.setAlphanumericValue(InvoiceField.DETAIL_ROW_CODE, "1")
-            // TODO Gather here the rest of the data for the invoice row details
+            invoiceRowData.setAlphanumericValue(InvoiceField.PRODUCT_NAME, Product.valueOf(it.product.value).nameFi)
+            // empty value is interpreted as a plus sign
+            invoiceRowData.setAlphanumericValue(InvoiceField.PRICE_SIGN, "")
+            invoiceRowData.setNumericValue(InvoiceField.UNIT_PRICE, it.unitPrice)
+            invoiceRowData.setAlphanumericValue(InvoiceField.UNIT, "kpl")
+            // empty value is interpreted as a plus sign
+            invoiceRowData.setAlphanumericValue(InvoiceField.AMOUNT_SIGN, "")
+            invoiceRowData.setNumericValue(InvoiceField.AMOUNT, it.amount)
+            invoiceRowData.setAlphanumericValue(InvoiceField.VAT_CODE, "00")
+            invoiceRowData.setAlphanumericValue(InvoiceField.VAT_ACCOUNT, "")
+            // format description says "value of this field has not been used", example file has "0" here
+            invoiceRowData.setAlphanumericValue(InvoiceField.BRUTTO_NETTO, "0")
+            invoiceRowData.setAlphanumericValue(InvoiceField.DEBIT_ACCOUNTING, "")
+            invoiceRowData.setAlphanumericValue(InvoiceField.CREDIT_ACCOUNTING, "3271 1101170      2627")
 
             childRows.add(invoiceRowData)
         }

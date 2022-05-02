@@ -82,6 +82,13 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
             invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_POSTAL_ADDRESS, codebtor.postalCode + " " + codebtor.postOffice)
             invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_PHONE_NUMBER, codebtor.phone)
         }
+        else {
+            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_IDENTIFIER, "")
+            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_NAME, "")
+            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_STREET_ADDRESS, "")
+            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_POSTAL_ADDRESS, "")
+            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_PHONE_NUMBER, "")
+        }
         invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_LANGUAGE_CODE, "1")
         invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_ADDRESS2, "")
         invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_COUNTRY, "")

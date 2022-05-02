@@ -22,10 +22,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <h1>
         <strong th:text="#{decision.title}"></strong>
     </h1>
-
     <div th:replace="~{ oulu/shared/common :: child-and-unit-details}"></div>
-
     <p th:utext="#{decision.instructions}"></p>
+</div>
+
+<div class="page last-page">
     <div th:replace="~{ oulu/shared/common :: decision-details}"></div>
     <div th:utext="#{decision.legalInstructions}"></div>
 </div>

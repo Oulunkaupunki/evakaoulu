@@ -279,13 +279,7 @@ const fi: DeepPartial<Translations> = {
                 liitteenä tulee olla selvitys työ- tai opiskelupaikasta
                 molemmilta samassa taloudessa asuvilta huoltajilta. Kahden
                 viikon käsittelyaika alkaa siitä, kun olemme vastaanottaneet
-                hakemuksen tarvittavine liitteineen. Jos et voi lisätä liitteitä
-                hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen{' '}
-                <a href="mailto:varhaiskasvatus@ouka.fi">
-                  varhaiskasvatus@ouka.fi
-                </a>{' '}
-                tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL
-                75, 90015 Oulun kaupunki.
+                hakemuksen tarvittavine liitteineen.
               </P>
             ),
             subtitle:
@@ -296,18 +290,18 @@ const fi: DeepPartial<Translations> = {
           instructions:
             'Ilta- ja vuorohoidolla tarkoitetaan pääasiassa klo 6.00-18.00 ulkopuolella ja viikonloppuisin sekä ympärivuorokautisesti tapahtuvaa varhaiskasvatusta. Mikäli tarvitset ilta- tai vuorohoitoa, täsmennä tarvetta hakemuksen Muut lisätiedot -kohdassa.',
           message: {
-            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta. Jos et voi lisätä liitteitä hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen varhaiskasvatus@ouka.fi tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL75, 90015 Oulun kaupunki.'
+            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta.'
           },
           attachmentsMessage: {
-            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta. Jos et voi lisätä liitteitä hakemukselle sähköisesti, lähetä ne sähköpostilla osoitteeseen varhaiskasvatus@ouka.fi tai postilla osoitteeseen Varhaiskasvatuksen palveluohjaus, PL75, 90015 Oulun kaupunki.',
+            text: 'Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta.',
             subtitle:
               'Lisää tähän selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molempien huoltajien osalta.'
           }
         },
         assistanceNeedInstructions: {
           DAYCARE:
-            'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
-          CLUB: 'Lapsen tuen tarpeella tarkoitetaan sellaisten tukitoimien tarvetta, jotka on osoitettu asiantuntijalausunnoin. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
+            'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
+          CLUB: 'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
           PRESCHOOL:
             'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukea toteutetaan lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon esiopetuspaikkaa osoitettaessa.'
         },
@@ -347,6 +341,9 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             PRESCHOOL:
               'Esiopetusta tarjotaan päiväkodeissa ja kouluissa neljä tuntia päivässä. Ilmoita lapsen tarvitsema varhaiskasvatusaika siten, että se sisältää myös esiopetusajan (esim. 7.00–17.00). Aika tarkennetaan varhaiskasvatuksen alkaessa. Päivittäisen varhaiskasvatusajan vaihdellessa päivittäin tai viikoittain (esim. vuorohoidossa), ilmoita tarve tarkemmin hakemuksen Muut lisätiedot -kohdassa.'
+          },
+          usualArrivalAndDeparture: {
+            DAYCARE: 'Päivittäinen varhaiskasvatusaika '
           }
         },
         preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
@@ -373,8 +370,18 @@ const fi: DeepPartial<Translations> = {
             osoitteessa asuvalle väestötiedoista löytyvälle huoltajalle.
           </P>
         ),
+        secondGuardianInfoPreschoolSeparated:
+          'Toisen huoltajan tiedot haetaan automaattisesti väestötietojärjestelmästä. Tietojemme mukaan lapsen toinen huoltaja asuu eri osoitteessa. Esiopetukseen ilmoittautumisesta tulee sopia yhdessä toisen huoltajan kanssa.',
+        secondGuardianAgreementStatus: {
+          label:
+            'Oletteko sopineet hakemuksen tekemisestä yhdessä toisen huoltajan kanssa?*',
+          AGREED: 'Olemme yhdessä sopineet hakemuksen tekemisestä.',
+          NOT_AGREED: 'Emme ole voineet sopia hakemuksen tekemisestä yhdessä.',
+          RIGHT_TO_GET_NOTIFIED:
+            'Toisella huoltajalla on vain tiedonsaantioikeus.'
+        },
         futureAddressInfo:
-          'Oulun varhaiskasvatuksessa virallisena osoitteena pidetään väestötiedoista saatavaa osoitetta. Osoite väestötiedoissa muuttuu hakijan tehdessä muuttoilmoituksen postiin tai maistraattiin.'
+          'Oulun varhaiskasvatuksessa virallisena osoitteena pidetään väestötiedoista saatavaa osoitetta. Osoite väestötiedoissa muuttuu hakijan tehdessä muuttoilmoituksen postiin tai Digi- ja väestötietovirastoon.'
       },
       fee: {
         info: {
@@ -418,19 +425,7 @@ const fi: DeepPartial<Translations> = {
         )
       },
       additionalDetails: {
-        dietInfo: (
-          <>
-            Erityisruokavaliosta huoltaja toimittaa varhaiskasvatuspaikkaan
-            lääkärin tai ravitsemusterapeutin täyttämän ja allekirjoittaman
-            lomakkeen{' '}
-            <ExternalLink
-              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus"
-              text="Oulun kaupungin sivuilta"
-              newTab
-            />
-            , joka on määräaikainen.
-          </>
-        )
+        dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>
       }
     }
   },

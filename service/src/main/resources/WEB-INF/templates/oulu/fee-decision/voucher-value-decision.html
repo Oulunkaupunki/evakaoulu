@@ -157,6 +157,10 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <span><a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrlText}"></a></span>
         <span th:text="#{text.reference.p2}"></span>
     </div>
+
+</div>
+
+<div class="page last-page">
     <div class="decision-details-container">
         <div>
             <strong th:text="#{decision.sentDate}">Päätöspäivä</strong>
@@ -172,10 +176,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <div th:utext="#{decision.approver.title}">Varhaiskasvatuksen palveluohjaaja</div>
         <div th:utext="#{decision.approver.details}"></div>
     </div>
-</div>
-
-<div class="page last-page">
-
     <div th:utext="#{decision.legalInstructions}"></div>
     <div th:replace="~{oulu/shared/voucher-value-correction :: correction}"></div>
 </div>

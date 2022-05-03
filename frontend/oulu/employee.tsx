@@ -17,6 +17,11 @@ const customizations: EmployeeCustomizations = {
   appConfig: {},
   translations: {
     fi: {
+      invoices: {
+        buttons: {
+          individualSendAlertText: ''
+        }
+      },
       // override translations here
       common: {
         careTypeLabels: {

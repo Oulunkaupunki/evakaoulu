@@ -15,6 +15,8 @@ import java.time.format.DateTimeFormatter
 @Component
 class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringInvoiceGenerator {
 
+    var nextInvoiceIdWithoutSsn: Long = 0
+
     fun generateInvoiceTitle(): String {
         val previousMonth = LocalDate.now().minusMonths(1)
         val titleFormatter = DateTimeFormatter.ofPattern("MM.yyyy")
@@ -27,8 +29,13 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
         invoiceData.setAlphanumericValue(InvoiceField.NOT_USED, "")
 
-        // what will be the invoice ID if the headOfFamily has no ssn?
-        invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
+        val headOfFamilySsn = invoiceDetailed.headOfFamily.ssn
+        if (headOfFamilySsn != null)
+            invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, headOfFamilySsn)
+        else {
+            invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, nextInvoiceIdWithoutSsn.toString())
+            nextInvoiceIdWithoutSsn += 1
+        }
         invoiceData.setAlphanumericValue(InvoiceField.HEADER_ROW_CODE, "L")
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_GROUP, "10")
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, invoiceDetailed.headOfFamily.firstName + " " + invoiceDetailed.headOfFamily.lastName)
@@ -200,7 +207,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
         var invoiceString = ""
-
+        var invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        nextInvoiceIdWithoutSsn = (LocalDate.now().format(invoiceIdFormatter) + "001").toLong()
         var successList = mutableListOf<InvoiceDetailed>()
         var failedList = mutableListOf<InvoiceDetailed>()
         var manuallySentList = mutableListOf<InvoiceDetailed>()

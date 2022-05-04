@@ -8,11 +8,14 @@ import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.ouka.evakaoulu.invoice.config.Product
 import org.springframework.stereotype.Component
+import java.lang.Math.abs
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
 class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringInvoiceGenerator {
+
+    var nextInvoiceIdWithoutSsn: Long = 0
 
     fun generateInvoiceTitle(): String {
         val previousMonth = LocalDate.now().minusMonths(1)
@@ -26,8 +29,13 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
         invoiceData.setAlphanumericValue(InvoiceField.NOT_USED, "")
 
-        // what will be the invoice ID if the headOfFamily has no ssn?
-        invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
+        val headOfFamilySsn = invoiceDetailed.headOfFamily.ssn
+        if (headOfFamilySsn != null)
+            invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, headOfFamilySsn)
+        else {
+            invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, nextInvoiceIdWithoutSsn.toString())
+            nextInvoiceIdWithoutSsn += 1
+        }
         invoiceData.setAlphanumericValue(InvoiceField.HEADER_ROW_CODE, "L")
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_GROUP, "10")
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, invoiceDetailed.headOfFamily.firstName + " " + invoiceDetailed.headOfFamily.lastName)
@@ -126,9 +134,9 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
             invoiceRowData.setAlphanumericValue(InvoiceField.DETAIL_ROW_CODE, "1")
             invoiceRowData.setAlphanumericValue(InvoiceField.PRODUCT_NAME, Product.valueOf(it.product.value).nameFi)
-            // empty value is interpreted as a plus sign
-            invoiceRowData.setAlphanumericValue(InvoiceField.PRICE_SIGN, "")
-            invoiceRowData.setNumericValue(InvoiceField.UNIT_PRICE, it.unitPrice)
+            // sign of unitPrice is moved to a separate field - empty value is interpreted as a plus sign
+            invoiceRowData.setAlphanumericValue(InvoiceField.PRICE_SIGN, if (it.unitPrice < 0) "-" else "")
+            invoiceRowData.setNumericValue(InvoiceField.UNIT_PRICE, abs(it.unitPrice))
             invoiceRowData.setAlphanumericValue(InvoiceField.UNIT, "kpl")
             // empty value is interpreted as a plus sign
             invoiceRowData.setAlphanumericValue(InvoiceField.AMOUNT_SIGN, "")
@@ -199,7 +207,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
         var invoiceString = ""
-
+        var invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        nextInvoiceIdWithoutSsn = (LocalDate.now().format(invoiceIdFormatter) + "001").toLong()
         var successList = mutableListOf<InvoiceDetailed>()
         var failedList = mutableListOf<InvoiceDetailed>()
         var manuallySentList = mutableListOf<InvoiceDetailed>()

@@ -19,7 +19,7 @@ class InvoiceSender(val properties: EvakaOuluProperties, val sftpConnector: Sftp
     fun send(proEInvoice: String) {
         val intimeProperties = properties.intime
         val path = intimeProperties.path
-        val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.csv'").format(Date())
+        val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
         val filepath = "$path/$fileName"
 
         sftpConnector.connect(intimeProperties.address, intimeProperties.username, intimeProperties.password)

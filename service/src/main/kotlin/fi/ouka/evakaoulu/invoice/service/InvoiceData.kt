@@ -181,7 +181,7 @@ var detailRowFields = listOf(
         Field(InvoiceField.UNIT_PRICE, FieldType.MONETARY, 54, 8, 4),
         Field(InvoiceField.UNIT, FieldType.ALPHANUMERIC, 66, 3),
         Field(InvoiceField.AMOUNT_SIGN, FieldType.ALPHANUMERIC, 69, 1),
-        Field(InvoiceField.AMOUNT, FieldType.ALPHANUMERIC, 70, 8, 4),
+        Field(InvoiceField.AMOUNT, FieldType.NUMERIC, 70, 8, 4),
         Field(InvoiceField.VAT_CODE, FieldType.ALPHANUMERIC, 82, 2),
         Field(InvoiceField.VAT_ACCOUNT, FieldType.ALPHANUMERIC, 84, 60),
         Field(InvoiceField.BRUTTO_NETTO, FieldType.ALPHANUMERIC, 144, 1),

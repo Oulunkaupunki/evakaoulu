@@ -1,8 +1,9 @@
 package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+
 
 internal class ProEInvoiceGeneratorTest {
 
@@ -47,5 +48,18 @@ internal class ProEInvoiceGeneratorTest {
         val result = proEInvoiceGenerator.generateRow(format, invoiceData)
 
         assertEquals(result, "121212A121AJaska Jokunen                 00004200\n")
+    }
+
+    @Test
+    fun `should format invoice identifier for clients that has no SSN`() {
+        val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker())
+        val invoice = validInvoice().copy(headOfFamily = personWithoutSSN())
+        val invoiceList = listOf(invoice, invoice)
+
+        val generationResult = proEInvoiceGenerator.generateInvoice(invoiceList)
+
+        var correctInvoice = object {}.javaClass.getResource("/invoice-client/CorrectProEInvoice.txt")?.readText()
+
+        assertEquals(generationResult.invoiceString, correctInvoice)
     }
 }

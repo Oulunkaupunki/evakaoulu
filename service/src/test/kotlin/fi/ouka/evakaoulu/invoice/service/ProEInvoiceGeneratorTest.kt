@@ -60,6 +60,6 @@ internal class ProEInvoiceGeneratorTest {
 
         var correctInvoice = object {}.javaClass.getResource("/invoice-client/CorrectProEInvoice.txt")?.readText()
 
-        assertEquals(generationResult.invoiceString, correctInvoice)
+        assertEquals(correctInvoice, generationResult.invoiceString)
     }
 }

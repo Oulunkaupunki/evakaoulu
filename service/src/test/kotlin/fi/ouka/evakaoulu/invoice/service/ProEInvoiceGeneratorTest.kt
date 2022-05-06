@@ -2,14 +2,25 @@ package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 
 internal class ProEInvoiceGeneratorTest {
 
+    val invoiceDateProvider = mock<InvoiceDateProvider>()
+    val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), invoiceDateProvider)
+
+    @BeforeEach
+    fun setup() {
+        whenever(invoiceDateProvider.currentDate()).thenReturn("20220505")
+    }
+
     @Test
     fun `should return successfully created invoices in success list`() {
-        val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker())
+
         val invoice = validInvoice()
         val invoiceList = listOf(invoice, invoice)
 
@@ -21,7 +32,7 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should return manually sent invoices in manually list`() {
-        val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker())
+
         val invoice = validInvoice().copy(headOfFamily = personWithRestrictedDetails())
         val invoiceList = listOf(invoice, invoice)
 
@@ -33,7 +44,7 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should format invoice rows according to data and formatting`() {
-        val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker())
+
         val format = listOf(
                 Field(InvoiceField.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
                 Field(InvoiceField.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
@@ -52,7 +63,7 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should format invoice identifier for clients that has no SSN`() {
-        val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker())
+
         val invoice = validInvoice().copy(headOfFamily = personWithoutSSN())
         val invoiceList = listOf(invoice, invoice)
 

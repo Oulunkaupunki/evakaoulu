@@ -6,7 +6,9 @@ import fi.espoo.evaka.invoicing.domain.InvoiceStatus
 import fi.espoo.evaka.invoicing.domain.PersonDetailed
 import fi.espoo.evaka.invoicing.service.ProductKey
 import fi.espoo.evaka.shared.*
+import fi.espoo.evaka.shared.domain.HelsinkiDateTime
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 fun validInvoice(): InvoiceDetailed {
@@ -40,8 +42,8 @@ fun validInvoice(): InvoiceDetailed {
     return InvoiceDetailed(
             (InvoiceId(UUID.randomUUID())),
             InvoiceStatus.WAITING_FOR_SENDING,
-            LocalDate.now(),
-            LocalDate.now(),
+            LocalDate.of(2022, 5, 5),
+            LocalDate.of(2022, 5, 5),
             LocalDate.of(2021, 3, 6),
             LocalDate.of(2021, 2, 4),
             null,
@@ -51,7 +53,8 @@ fun validInvoice(): InvoiceDetailed {
             listOf(invoiceRow1, invoiceRow2),
             null,
             null,
-            null
+            HelsinkiDateTime.Companion.of(
+                    LocalDateTime.of(2022, 5, 5, 1, 1))
     )
 }
 

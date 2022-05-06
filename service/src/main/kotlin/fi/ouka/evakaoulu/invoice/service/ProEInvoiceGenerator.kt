@@ -13,7 +13,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
-class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringInvoiceGenerator {
+class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoiceDateProvider: InvoiceDateProvider) : StringInvoiceGenerator {
 
     var invoiceIdWithoutSsn: Long = 0
 
@@ -212,8 +212,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker) : StringI
 
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
         var invoiceString = ""
-        var invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        invoiceIdWithoutSsn = (LocalDate.now().format(invoiceIdFormatter) + "001").toLong()
+        invoiceIdWithoutSsn = (invoiceDateProvider.currentDate() + "001").toLong()
         var successList = mutableListOf<InvoiceDetailed>()
         var failedList = mutableListOf<InvoiceDetailed>()
         var manuallySentList = mutableListOf<InvoiceDetailed>()

@@ -149,7 +149,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
             // format description says "value of this field has not been used", example file has "0" here
             invoiceRowData.setAlphanumericValue(InvoiceField.BRUTTO_NETTO, "0")
             invoiceRowData.setAlphanumericValue(InvoiceField.DEBIT_ACCOUNTING, "")
-            invoiceRowData.setAlphanumericValue(InvoiceField.CREDIT_ACCOUNTING, "3271 1101170      2627")
+            invoiceRowData.setAlphanumericValue(InvoiceField.CREDIT_ACCOUNTING, "3271 1101170      " + it.costCenter)
 
             childRows.add(invoiceRowData)
         }

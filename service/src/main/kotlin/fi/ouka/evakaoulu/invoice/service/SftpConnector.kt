@@ -23,7 +23,7 @@ class SftpConnector(val jsch: JSch) {
     }
 
     fun send(filePath:String, proEInvoice:String) : Unit {
-        channelSftp.put(ByteArrayInputStream(proEInvoice.toByteArray()), filePath)
+        channelSftp.put(ByteArrayInputStream(proEInvoice.toByteArray(Charsets.ISO_8859_1)), filePath)
     }
 
     fun disconnect(){

@@ -490,6 +490,7 @@ const fi: DeepPartial<Translations> = {
       </P>
     )
   },
+
   income: {
     description: (
       <>
@@ -518,13 +519,176 @@ const fi: DeepPartial<Translations> = {
         </p>
       </>
     ),
+    incomeType: {
+      description: (
+        <>
+          Jos olet yrittäjä, mutta sinulla on myös muita tuloja, valitse sekä{' '}
+          <strong>Yrittäjän tulotiedot</strong>, että{' '}
+          <strong>Asiakasmaksun määritteleminen bruttotulojen mukaan</strong>.
+        </>
+      ),
+      startDate: 'Voimassa alkaen',
+      endDate: 'Voimassaolo päättyy',
+      title: 'Asiakasmaksun perusteet',
+      agreeToHighestFee: 'Suostun korkeimpaan varhaiskasvatusmaksuun',
+      highestFeeInfo:
+        'Palveluntarpeen mukainen korkein maksu on voimassa toistaiseksi siihen saakka, kunnes toisin ilmoitan tai kunnes lapseni varhaiskasvatus päättyy. (Tulotietoja ei tarvitse toimittaa)',
+      grossIncome: 'Maksun määritteleminen bruttotulojen mukaan',
+      entrepreneurIncome: 'Yrittäjän tulotiedot'
+    },
+    grossIncome: {
+      title: 'Bruttotulotietojen täyttäminen',
+      description: (
+        <>
+          <P></P>
+        </>
+      ),
+      incomeSource: 'Tulotietojen toimitus',
+      provideAttachments: 'Toimitan tulotietoni liitteenä',
+      estimate: 'Arvio bruttotuloistani',
+      estimatedMonthlyIncome: 'Keskimääräiset tulot sisältäen lomarahat, €/kk',
+      otherIncome: 'Muut tulot',
+      otherIncomeDescription:
+        'Jos sinulla on muita tuloja, on niistä toimitettavana tositteet liitteinä. Listan tarvittavista liitteistä löydät lomakkeen alaosasta kohdasta: Tuloihin ja varhaiskasvatusmaksuihin liittyvät liitteet.',
+      choosePlaceholder: 'Valitse',
+      otherIncomeTypes: {
+        PENSION: 'Eläke',
+        ADULT_EDUCATION_ALLOWANCE: 'Aikuiskoulutustuki',
+        SICKNESS_ALLOWANCE: 'Sairauspäiväraha',
+        PARENTAL_ALLOWANCE: 'Äitiys- ja vanhempainraha',
+        HOME_CARE_ALLOWANCE: 'Lasten kotihoidontuki',
+        FLEXIBLE_AND_PARTIAL_HOME_CARE_ALLOWANCE:
+          'Joustava tai osittainen hoitoraha',
+        ALIMONY: 'Elatusapu tai -tuki',
+        INTEREST_AND_INVESTMENT_INCOME: 'Korko- ja osinkotulot',
+        RENTAL_INCOME: 'Vuokratulot',
+        UNEMPLOYMENT_ALLOWANCE: 'Työttömyyspäiväraha',
+        LABOUR_MARKET_SUBSIDY: 'Työmarkkinatuki',
+        ADJUSTED_DAILY_ALLOWANCE: 'Soviteltu päiväraha',
+        JOB_ALTERNATION_COMPENSATION: 'Vuorotteluvapaakorvaus',
+        REWARD_OR_BONUS: 'Palkkio tai bonus',
+        RELATIVE_CARE_SUPPORT: 'Omaishoidontuki',
+        BASIC_INCOME: 'Perustulo',
+        FOREST_INCOME: 'Metsätulo',
+        FAMILY_CARE_COMPENSATION: 'Perhehoidon palkkiot',
+        REHABILITATION: 'Kuntoutustuki tai kuntoutusraha',
+        EDUCATION_ALLOWANCE: 'Koulutuspäiväraha',
+        GRANT: 'Apuraha',
+        APPRENTICESHIP_SALARY: 'Palkkatulo oppisopimuskoulutuksesta',
+        ACCIDENT_INSURANCE_COMPENSATION: 'Korvaus tapaturmavakuutuksesta',
+        OTHER_INCOME: 'Muut tulot'
+      },
+      otherIncomeInfoLabel: 'Arviot muista tuloista',
+      otherIncomeInfoDescription:
+        'Kirjoita tähän arviot muiden tulojen määristä €/kk, esim. "Vuokratulot 150, lasten kotihoidontuki 300"'
+    },
+    entrepreneurIncome: {
+      title: 'Yrittäjän tulotietojen täyttäminen',
+      description: (
+        <>
+          Tällä lomakkeella voit tarvittaessa täyttää tiedot myös useammalle
+          yritykselle valitsemalla kaikkia yrityksiäsi koskevat kohdat. Toimita
+          tarkemmat yrityskohtaiset tiedot liitteinä.
+          <br />
+          Listan tarvittavista liitteistä löydät lomakkeen alaosasta kohdasta
+          “Tuloihin ja varhaiskasvatusmaksuihin liittyvät liitteet”.
+        </>
+      ),
+      fullTimeLabel: 'Onko yritystoiminta päätoimista vai sivutoimista?',
+      fullTime: 'Päätoimista',
+      partTime: 'Sivutoimista',
+      startOfEntrepreneurship: 'Yrittäjyys alkanut',
+      spouseWorksInCompany: 'Työskenteleekö puoliso yrityksessä?',
+      yes: 'Kyllä',
+      no: 'Ei',
+      startupGrantLabel: 'Saako yrityksesi starttirahaa?',
+      startupGrant:
+        'Yritykseni saa starttirahaa. Toimitan starttirahapäätöksen liitteenä.',
+      checkupLabel: 'Tietojen tarkastus',
+      checkupConsent:
+        'Hyväksyn, että tuloihini liittyviä tietoja tarkastellaan tarvittaessa tulorekisteristä sekä Kelasta.',
+      companyInfo: 'Yrityksen tiedot',
+      companyForm: 'Yrityksen toimintamuoto',
+      selfEmployed: 'Toiminimi',
+      limitedCompany: 'Osakeyhtiö',
+      partnership: 'Avoin yhtiö tai kommandiittiyhtiö',
+      lightEntrepreneur: 'Kevytyrittäjyys',
+      lightEntrepreneurInfo:
+        'Maksutositteet palkoista ja työkorvauksista tulee toimittaa liitteinä.',
+      partnershipInfo: ''
+    },
+    moreInfo: {
+      title: 'Muita maksuun liittyviä tietoja',
+      studentLabel: 'Oletko opiskelija?',
+      student: 'Olen opiskelija.',
+      studentInfo:
+        'Opiskelijat toimittavat oppilaitoksesta opiskelutodistuksen ja päätöksen opintoetuudesta.',
+      deductions: 'Vähennykset',
+      alimony:
+        'Maksan elatusmaksuja. Toimitan kopion maksutositteesta liitteenä.',
+      otherInfoLabel: 'Lisätietoja tulotietoihin liittyen'
+    },
+    attachments: {
+      title: 'Tuloihin ja varhaiskasvatusmaksuihin liittyvät liitteet',
+      description:
+        'Toimita tässä tuloihin tai varhaiskasvatusmaksuihin liittyvät liitteet. Liitteitä ei tarvita, jos perheenne on suostunut korkeimpaan maksuun.',
+      required: {
+        title: 'Tarvittavat liitteet'
+      },
+      attachmentNames: {
+        PENSION: 'Päätös eläkkeestä',
+        ADULT_EDUCATION_ALLOWANCE: 'Päätös aikuiskoulutustuesta',
+        SICKNESS_ALLOWANCE: 'Päätös sairauspäivärahasta',
+        PARENTAL_ALLOWANCE: 'Päätös äitiys- tai vanhempainrahasta',
+        HOME_CARE_ALLOWANCE: 'Päätös kotihoidontuesta',
+        FLEXIBLE_AND_PARTIAL_HOME_CARE_ALLOWANCE: 'Päätös hoitorahasta',
+        ALIMONY: 'Elatussopimus tai päätös elatustuesta',
+        UNEMPLOYMENT_ALLOWANCE: 'Päätös työttömyyspäivärahasta',
+        LABOUR_MARKET_SUBSIDY: 'Päätös työmarkkinatuesta',
+        ADJUSTED_DAILY_ALLOWANCE: 'Päätös päivärahasta',
+        JOB_ALTERNATION_COMPENSATION: 'Tosite vuorotteluvapaakorvaus',
+        REWARD_OR_BONUS: 'Palkkatosite bonuksesta tai/ja palkkiosta',
+        RELATIVE_CARE_SUPPORT: 'Päätös omaishoidontuesta',
+        BASIC_INCOME: 'Päätös perustulosta',
+        FOREST_INCOME: 'Tosite metsätulosta',
+        FAMILY_CARE_COMPENSATION: 'Tositteet perhehoidon palkkioista',
+        REHABILITATION: 'Päätös kuntoutustuesta tai kuntoutusrahasta',
+        EDUCATION_ALLOWANCE: 'Päätös koulutuspäivärahasta',
+        GRANT: 'Tosite apurahasta',
+        APPRENTICESHIP_SALARY: 'Tosite oppisopimuskoulutuksen palkkatuloista',
+        ACCIDENT_INSURANCE_COMPENSATION:
+          'Tosite tapaturmavakuutuksen korvauksesta',
+        OTHER_INCOME: 'Liitteet muista tuloista',
+        ALIMONY_PAYOUT: 'Maksutosite elatusmaksuista',
+        INTEREST_AND_INVESTMENT_INCOME: 'Tositteet korko- ja osinkotuloista',
+        RENTAL_INCOME: 'Tositteet vuokratuloista ja vastikkeesta',
+        PAYSLIP: 'Viimeisin palkkalaskelma',
+        STARTUP_GRANT: 'Starttirahapäätös',
+        ACCOUNTANT_REPORT: 'Kirjanpitäjän selvitys palkasta ja luontoiseduista',
+        ACCOUNTANT_REPORT_LLC:
+          'Kirjanpitäjän selvitys luontoiseduista ja osingoista',
+        PROFIT_AND_LOSS_STATEMENT: 'Tuloslaskelma ja tase',
+        SALARY: 'Maksutositteet palkoista ja työkorvauksista',
+        PROOF_OF_STUDIES:
+          'Opiskelutodistus tai päätös työttömyyskassan opintoetuudesta / työllisyysrahaston koulutustuesta',
+        CHILD_INCOME: 'Tositteet lapsen tuloista'
+      }
+    },
+    selfEmployed: {
+      info: '',
+      attachments:
+        'Toimitan liitteinä yrityksen viimeisimmän tulos- ja taselaskelman tai veropäätöksen.',
+      estimatedIncome:
+        'Olen uusi yrittäjä. Täytän arvion keskimääräisistä kuukausituloistani. Toimitan tuloslaskelman ja taseen mahdollisimman pian.',
+      estimatedMonthlyIncome: 'Keskimääräiset tulot €/kk',
+      timeRange: 'Aikavälillä'
+    },
     formDescription: (
       <>
         <P data-qa="income-formDescription-p1">
-          Tuloselvitys liitteineen palautetaan kuukauden kuluessa
-          varhaiskasvatuksen aloittamisesta. Maksu voidaan määrätä
-          puutteellisilla tulotiedoilla korkeimpaan maksuun. Puutteellisia
-          tulotietoja ei korjata takautuvasti oikaisuvaatimusajan jälkeen.
+          Tuloselvitys liitteineen palautetaan mahdollisimman pian
+          varhaiskasvatuksen aloittamisesta. Jos tulotietoja ei toimiteta tai ne
+          ovat puutteelliset, maksu määräytyy korkeimman mukaan.
         </P>
         <P>
           Asiakasmaksu peritään päätöksen mukaisesta varhaiskasvatuksen
@@ -532,8 +696,8 @@ const fi: DeepPartial<Translations> = {
         </P>
         <P>
           Asiakkaan on viipymättä ilmoitettava tulojen ja perhekoon muutoksista
-          varhaiskasvutuksen asiakasmaksuihin. Viranomainen on tarvittaessa
-          oikeutettu perimään varhaiskasvatusmaksuja myös takautuvasti.
+          varhaiskasvatuksen asiakasmaksutiimiin. Viranomainen on tarvittaessa
+          oikeutettu oikaisemaan varhaiskasvatusmaksuja myös takautuvasti.
         </P>
         <P>
           <strong>Huomioitavaa:</strong>

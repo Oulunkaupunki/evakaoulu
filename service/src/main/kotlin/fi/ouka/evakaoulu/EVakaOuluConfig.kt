@@ -15,7 +15,8 @@ class EVakaOuluConfig {
         daycareApplicationServiceNeedOptionsEnabled = false,
         citizenReservationThresholdHours = 6 * 24, // Tue 00:00
         dailyFeeDivisorOperationalDaysOverride = null,
-        freeSickLeaveOnContractDays = true
+        freeSickLeaveOnContractDays = true,
+        alwaysUseDaycareFinanceDecisionHandler = true
     )
 
     @Bean

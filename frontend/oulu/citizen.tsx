@@ -6,6 +6,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 */
 }
 
+import React from 'react'
+
 import { CitizenCustomizations } from 'lib-customizations/types'
 
 import OuluLogo from './city-logo-citizen.svg'
@@ -27,10 +29,7 @@ const customizations: CitizenCustomizations = {
     src: OuluLogo,
     alt: 'Oulu logo'
   },
-  footerLogo: {
-    src: FooterLogo,
-    alt: 'Oulu logo'
-  },
+  footerLogo: <img src={FooterLogo} alt="Oulu Logo" />,
   routeLinkRootUrl: 'https://oulu.digitransit.fi/',
   mapConfig,
   featureFlags,

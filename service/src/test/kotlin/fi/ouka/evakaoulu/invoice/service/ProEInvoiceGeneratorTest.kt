@@ -33,8 +33,9 @@ internal class ProEInvoiceGeneratorTest {
     @Test
     fun `should return manually sent invoices in manually list`() {
 
-        val invoice = validInvoice().copy(headOfFamily = personWithRestrictedDetails())
-        val invoiceList = listOf(invoice, invoice)
+        val restrictedInvoice = validInvoice().copy(headOfFamily = personWithRestrictedDetails())
+        val invoiceWithoutSsn = validInvoice().copy(headOfFamily = personWithoutSSN())
+        val invoiceList = listOf(restrictedInvoice, invoiceWithoutSsn)
 
         val generationResult = proEInvoiceGenerator.generateInvoice(invoiceList)
         assertEquals(generationResult.sendResult.succeeded, listOf<InvoiceDetailed>())
@@ -59,18 +60,5 @@ internal class ProEInvoiceGeneratorTest {
         val result = proEInvoiceGenerator.generateRow(format, invoiceData)
 
         assertEquals(result, "121212A121AJaska Jokunen                 00004200\n")
-    }
-
-    @Test
-    fun `should format invoice identifier for clients that has no SSN`() {
-
-        val invoice = validInvoice().copy(headOfFamily = personWithoutSSN())
-        val invoiceList = listOf(invoice, invoice)
-
-        val generationResult = proEInvoiceGenerator.generateInvoice(invoiceList)
-
-        var correctInvoice = object {}.javaClass.getResource("/invoice-client/CorrectProEInvoice.txt")?.readText()
-
-        assertEquals(correctInvoice, generationResult.invoiceString)
     }
 }

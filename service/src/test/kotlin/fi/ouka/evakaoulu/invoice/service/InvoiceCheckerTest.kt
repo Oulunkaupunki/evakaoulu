@@ -12,7 +12,15 @@ internal class InvoiceCheckerTest {
     }
 
     @Test
-    fun `should return false for Invoices without restricted head of family details`() {
+    fun `should return true for Invoices without head of family SSN`() {
+        val invoice = validInvoice().copy(headOfFamily = personWithoutSSN())
+        val invoiceChecker = InvoiceChecker()
+
+        assert(invoiceChecker.shouldSendManually(invoice) == true)
+    }
+
+    @Test
+    fun `should return false for Invoices without restricted head of family details and with head of family SSN`() {
         val invoice = validInvoice()
         val invoiceChecker = InvoiceChecker()
 

@@ -113,6 +113,45 @@ const customizations: EmployeeCustomizations = {
       },
       welcomePage: {
         text: 'Olet kirjautunut sisään eVaka Oulu -palveluun. Käyttäjätunnuksellesi ei ole vielä annettu oikeuksia, jotka mahdollistavat palvelun käytön. Tarvittavat käyttöoikeudet saat omalta esimieheltäsi.'
+      },
+      absences: {
+      title: 'Poissaolot',
+        absenceTypes: {
+          OTHER_ABSENCE: 'Poissaolo',
+          SICKLEAVE: 'Sairaus',
+          PLANNED_ABSENCE: 'Sopimuspoissaolo',
+          TEMPORARY_RELOCATION: 'Lapsi varasijoitettuna muualla',
+          PARENTLEAVE: 'Isyysvapaa',
+          FORCE_MAJEURE: 'Hyvityspäivä',
+          FREE_ABSENCE: 'Maksuton poissaolo',
+          NO_ABSENCE: 'Ei poissaoloa'
+        },
+        absenceTypesShort: {
+          OTHER_ABSENCE: 'Poissaolo',
+          SICKLEAVE: 'Sairaus',
+          PLANNED_ABSENCE: 'Sopimus',
+          TEMPORARY_RELOCATION: 'Varasijoitus',
+          PARENTLEAVE: 'Isyysvapaa',
+          FORCE_MAJEURE: 'Hyvitys',
+          FREE_ABSENCE: 'Maksuton',
+          NO_ABSENCE: 'Ei poissa'
+        },
+        absenceTypeInfo: {
+          OTHER_ABSENCE:
+            'Käytetään aina, kun huoltaja on ilmoittanut poissaolosta mukaan lukien säännölliset vapaat ja loma-ajat. Käytetään myös vuoroyksiköissä lasten lomamerkinnöissä tai muissa poissaoloissa, jotka ovat suunniteltujen läsnäolovarausten ulkopuolella.',
+          SICKLEAVE:
+            'Merkitään, kun lapsi on sairaana tai kuntoutus- / tutkimusjaksolla.',
+          PLANNED_ABSENCE:
+            'Palveluntarvesopimuksen (10 tai 13 pv/kk) mukaiset etukäteen ilmoitetut poissaolot.',
+          TEMPORARY_RELOCATION:
+            'Lapselle on tehty varasijoitus toiseen yksikköön. Poissa omasta, läsnä muualla.​',
+          PARENTLEAVE:
+            'Poissaolo merkitään sille lapselle, josta maksetaan isyysrahaa.',
+          FORCE_MAJEURE:
+            'Käytetään vain erikoistilanteissa hallinnon ohjeiden mukaan. Yksittäisiä päiviä, joista luvattu maksuhyvitys.',
+          FREE_ABSENCE: 'Kesäajan maksuton poissaolo',
+          NO_ABSENCE: 'Jos lapsi on paikalla, älä merkitse mitään.'
+        }
       }
     }
   },
@@ -143,7 +182,8 @@ const customizations: EmployeeCustomizations = {
     'SICKLEAVE',
     'PLANNED_ABSENCE',
     'FORCE_MAJEURE',
-    'FREE_ABSENCE'
+    'FREE_ABSENCE',
+    'PARENTLEAVE'
   ],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
   unitProviderTypes: ['MUNICIPAL', 'PRIVATE', 'PRIVATE_SERVICE_VOUCHER']

@@ -115,7 +115,7 @@ const customizations: EmployeeCustomizations = {
         text: 'Olet kirjautunut sisään eVaka Oulu -palveluun. Käyttäjätunnuksellesi ei ole vielä annettu oikeuksia, jotka mahdollistavat palvelun käytön. Tarvittavat käyttöoikeudet saat omalta esimieheltäsi.'
       },
       absences: {
-      title: 'Poissaolot',
+        title: 'Poissaolot',
         absenceTypes: {
           OTHER_ABSENCE: 'Poissaolo',
           SICKLEAVE: 'Sairaus',

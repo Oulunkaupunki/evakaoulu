@@ -26,15 +26,17 @@ class EVakaOuluInvoiceClient(
         var successList = generatorResult.sendResult.succeeded
         var manuallySentList = generatorResult.sendResult.manuallySent
 
-        try {
-            invoiceSender.send(proEinvoices)
-            logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
-        } catch (e: SftpException){
-            failedList.addAll(successList)
-            failedList.addAll(manuallySentList)
-            successList = listOf()
-            manuallySentList = listOf()
-            logger.error { "Failed to send ${failedList.size} invoices" }
+        if (!successList.isEmpty()) {
+            try {
+                invoiceSender.send(proEinvoices)
+                logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
+            } catch (e: SftpException){
+                failedList.addAll(successList)
+                failedList.addAll(manuallySentList)
+                successList = listOf()
+                manuallySentList = listOf()
+                logger.error { "Failed to send ${failedList.size} invoices" }
+            }
         }
 
         return InvoiceIntegrationClient.SendResult(successList, failedList, manuallySentList)

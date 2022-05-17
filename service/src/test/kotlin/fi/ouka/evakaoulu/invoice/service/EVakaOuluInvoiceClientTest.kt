@@ -4,11 +4,13 @@
 package fi.ouka.evakaoulu.invoice.service
 
 import com.jcraft.jsch.SftpException
+import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.boot.test.system.CapturedOutput
@@ -40,7 +42,7 @@ internal class EVakaOuluInvoiceClientTest {
         val validInvoice = validInvoice()
         val invoiceList = listOf(validInvoice)
         val proEInvoice1 = ""
-        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
+        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), proEInvoice1)
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
 
         eVakaOuluInvoiceClient.send(invoiceList)
@@ -48,6 +50,17 @@ internal class EVakaOuluInvoiceClientTest {
         verify(invoiceSender).send(proEInvoice1)
     }
 
+
+    @Test
+    fun `should not send anything if there are no sendable invoices`() {
+        val invoiceList = listOf<InvoiceDetailed>()
+        val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), "")
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
+
+        eVakaOuluInvoiceClient.send(invoiceList)
+
+        verify(invoiceSender, never()).send("")
+    }
     @Test
     fun `should return successfully sent invoices in success list`() {
         val validInvoice = validInvoice()

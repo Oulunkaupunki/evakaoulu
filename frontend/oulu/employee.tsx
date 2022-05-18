@@ -35,34 +35,19 @@ const customizations: EmployeeCustomizations = {
       },
       childInformation: {
         assistanceNeed: {
+          title: 'Lapsen tuki',
           fields: {
-            // @ts-expect-error: Type 'Element' is not assignable to type 'string'
-            capacityFactorInfo: (
-              <ol style={{ margin: '0', padding: '0 1em' }}>
-                <li>
-                  Kaupungin päiväkodeissa kerroin merkitään integroidussa
-                  varhaiskasvatusryhmässä oleville tehostettua tai erityistä
-                  tukea tarvitseville lapsille ja missä tahansa ryhmässä
-                  kotoutumisen tukea saaville lapsille. Kertoimen tallentaa
-                  varhaiskasvatuksen erityisopettaja.
-                </li>
-                <li>
-                  Mikäli ostopalvelu- tai palvelusetelipäiväkodissa olevalla
-                  lapsella on tehostetun tai erityisen tuen tarve, voidaan
-                  hänelle määritellä tuen kerroin. Päätöksen kertoimesta tekee
-                  varhaiskasvatusjohtaja, varhaiskasvatuksen erityisopettajan
-                  esityksen perusteella. Kertoimen tallentaa varhaiskasvatuksen
-                  asiakaspalvelu.
-                </li>
-              </ol>
-            ),
-            bases: 'Tuen tarve'
+            dateRange: 'Tuen tarve ajalle',
+            capacityFactor: 'Lapsen paikkaluku',
+            capacityFactorInfo:
+              'Lapsen paikkaluku yleensä lapsen iän ja palvelun tarpeen mukaan. Mikäli lapsella on sellainen tuen tarve, joka lisää kapasiteettia, lisätään tuen tarpeen kerroin tähän. Tuen tarpeen ja kertoimen lisää varhaiserityiskasvatuksen koordinaattori.',
+            bases: 'Perusteet'
           }
         },
         assistanceAction: {
-          title: 'Tukitoimet ja tukipalvelut',
+          title: 'Tukitoimet',
           fields: {
-            actions: 'Tukitoimet ja tukipalvelut'
+            actions: 'Tukitoimet'
           }
         },
         dailyServiceTimes: {
@@ -151,6 +136,19 @@ const customizations: EmployeeCustomizations = {
             'Käytetään vain erikoistilanteissa hallinnon ohjeiden mukaan. Yksittäisiä päiviä, joista luvattu maksuhyvitys.',
           FREE_ABSENCE: 'Kesäajan maksuton poissaolo',
           NO_ABSENCE: 'Jos lapsi on paikalla, älä merkitse mitään.'
+        }
+      },
+      reports: {
+        invoices: {
+          title: 'Laskujen täsmäytys',
+          description:
+            'Laskujen täsmäytysraportti Monetra-järjestelmän vertailua varten',
+          areaCode: 'Alue',
+          amountOfInvoices: 'Laskuja',
+          totalSumCents: 'Summa',
+          amountWithoutSSN: 'Hetuttomia',
+          amountWithoutAddress: 'Osoitteettomia',
+          amountWithZeroPrice: 'Nollalaskuja'
         }
       }
     }

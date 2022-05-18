@@ -5,15 +5,23 @@
 INSERT INTO assistance_action_option
     (value, name_fi, description_fi, display_order)
 VALUES
-    ('10', 'Avustajapalvelut', 'Lapsen ryhmässä työskentelee ryhmäavustaja tai lapsella on henkilökohtainen avustaja. Mikäli lapsi on integroidussa varhaiskasvatusryhmässä tai erityisryhmässä, tätä vaihtoehtoa ei valita.', 10),
-    ('20', 'Erho', NULL, 20),
-    ('30', 'Erityisryhmä', 'Lapsi on erityisryhmässä.', 30),
-    ('40', 'Henkilökuntalisäys', 'Lapsen ryhmässä työskentelee lain vaatimaa resurssia enemmän varhaiskasvatuksen lastenhoitajia/opettajia. Mikäli lapsi on integroidussa varhaiskasvatusryhmässä tai erityisryhmässä, tätä vaihtoehtoa ei valita.', 40),
-    ('50', 'Integroitu varhaiskasvatusryhmä ', 'Lapsi on integroidussa varhaiskasvatusryhmässä.', 50),
-    ('60', 'Osa-aikainen erityisopetus', 'Lapsi saa osa-aikaista erityisopetusta. Mikäli lapsi on integroidussa varhaiskasvatusryhmässä tai erityisryhmässä, tätä vaihtoehtoa ei valita.', 60),
-    ('70', 'Veon tuki', 'Lapsen ryhmän henkilökunta saa veon tukea ja konsultaatiota ja/tai veo on samanaikaisopettajana lapsen ryhmässä. Mikäli lapsi on integroidussa varhaiskasvatusryhmässä tai erityisryhmässä, tätä vaihtoehtoa ei valita.', 70),
-    ('80', 'Tulkitsemispalvelut', 'Lapsi saa tulkitsemispalveluita. Huoltajien kanssa käytettävät tulkkipalvelut eivät sisälly tähän.', 80),
-    ('90', 'Kuljetusetu', 'Lapsi on saanut päätöksen kuljetusedusta.', 90)
+    ('10', 'Avustamispalvelut: ryhmäkohtainen', 'Merkitään alueellisen tuen vastaavan päätöksen jälkeen.', 10),
+    ('20', 'Avustamispalvelut: lapsikohtainen', 'Merkitään alueellisen tuen vastaavan päätöksen jälkeen.', 20),
+    ('30', 'Tuki huomioidaan lapsiryhmän koossa', 'Merkitään alueellisen tuen vastaavan päätöksen jälkeen', 30),
+    ('40', 'Varhaiskasvatuksen erityisopettajan konsultaatio', 'Merkitään, kun lapsikohtainen konsultaatio on säännöllistä.', 40),
+    ('50', 'Osa-aikainen erityisopetus', 'Lapsi saa osa-aikaisesti varhaiskasvatuksen erityisopettajan antamaa opetusta.', 50),
+    ('60', 'Kokoaikainen erityisopetus', 'Lapsi saa kokoaikaisesti varhaiskasvatuksen erityisopettajan antamaa opetusta.', 60),
+    ('70', 'Ryhmän henkilöstömäärän lisäys', 'Esim. neljäs kasvattaja ryhmässä, resurssiveo ryhmässä.', 70),
+    ('80', 'Integroitu varhaiskasvatusryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 80),
+    ('90', 'Alueellinen pienryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 90),
+    ('100', 'Pienryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 100),
+    ('110', 'Alueellinen erityisryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 110),
+    ('120', 'Erityisryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 120),
+    ('130', 'Apuvälineet', 'Merkitään hallintopäätöksen jälkeen.', 130),
+    ('140', 'Tulkitsemispalvelut', 'Lapselle järjestetään kommunikaation tueksi erillisiä tulkitsemispalveluita. Viittomakieltä käyttävien lasten kommunikaation tukena voidaan tarvittaessa käyttää viittomakielen tulkkia tai viittomakielentaitoista avustajaa. Tulkitsemispalvelut on mahdollista järjestää avustamispalvelun yhteydessä.', 140),
+    ('150', 'Kuljetusetu varhaiskasvatus', 'Merkitään päätöksen jälkeen. Lapselle on myönnetty taksikuljetus varhaiskasvatukseen.', 150),
+    ('160', 'Kuljetusetu esiopetus', 'Merkitään päätöksen jälkeen. Lapselle on myönnetty taksikuljetus esiopetukseen.', 160),
+    ('170', 'Erityishuolto-ohjelma', 'Kehitysvammalain nojalla myönnettyjä palveluja saaville lapsille laaditaan erityishuolto-ohjelma. Erityishuolto-ohjelma sisältää asiakkaalle kehitysvammalain nojalla myönnetyt palvelut.', 170)
 ON CONFLICT (value) DO
 UPDATE SET
     name_fi = EXCLUDED.name_fi,

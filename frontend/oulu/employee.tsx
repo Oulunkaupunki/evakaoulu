@@ -6,8 +6,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 */
 }
 
-import React from 'react'
-
 import { EmployeeCustomizations } from 'lib-customizations/types'
 
 import OuluLogo from './city-logo.svg'
@@ -182,6 +180,12 @@ const customizations: EmployeeCustomizations = {
     'FORCE_MAJEURE',
     'FREE_ABSENCE',
     'PARENTLEAVE'
+  ],
+  voucherValueDecisionTypes: [
+    'NORMAL',
+    'RELIEF_ACCEPTED',
+    'RELIEF_PARTLY_ACCEPTED',
+    'RELIEF_REJECTED'
   ],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
   unitProviderTypes: ['MUNICIPAL', 'PRIVATE', 'PRIVATE_SERVICE_VOUCHER']

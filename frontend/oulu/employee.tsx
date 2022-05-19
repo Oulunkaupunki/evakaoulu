@@ -38,7 +38,7 @@ const customizations: EmployeeCustomizations = {
             dateRange: 'Tuen tarve ajalle',
             capacityFactor: 'Lapsen paikkaluku',
             capacityFactorInfo:
-              'Lapsen paikkaluku yleensä lapsen iän ja palvelun tarpeen mukaan. Mikäli lapsella on sellainen tuen tarve, joka lisää kapasiteettia, lisätään tuen tarpeen kerroin tähän. Tuen tarpeen ja kertoimen lisää varhaiserityiskasvatuksen koordinaattori.',
+              'Täytetään, kun lapsen paikkaluku/tuen kerroin on muu kuin 1. Yksityisen palvelusetelin korotus määräytyy tuen kertoimen mukaan. Täytetään, kun päätös tehty.',
             bases: 'Perusteet'
           }
         },

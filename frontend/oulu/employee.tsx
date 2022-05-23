@@ -197,7 +197,6 @@ const customizations: EmployeeCustomizations = {
     'OTHER_ABSENCE',
     'PLANNED_ABSENCE',
     'SICKLEAVE',
-    'TEMPORARY_RELOCATION',
     'PARENTLEAVE',
     'FORCE_MAJEURE',
     'FREE_ABSENCE'

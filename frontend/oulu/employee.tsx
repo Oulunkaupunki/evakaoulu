@@ -127,13 +127,33 @@ const customizations: EmployeeCustomizations = {
           PLANNED_ABSENCE:
             'Palveluntarvesopimuksen (10 tai 13 pv/kk) mukaiset etukäteen ilmoitetut poissaolot.',
           TEMPORARY_RELOCATION:
-            'Lapselle on tehty varasijoitus toiseen yksikköön. Poissa omasta, läsnä muualla.​',
+            'Lapselle on tehty varasijoitus toiseen yksikköön. Poissa omasta, läsnä muualla.',
           PARENTLEAVE:
             'Poissaolo merkitään sille lapselle, josta maksetaan isyysrahaa.',
           FORCE_MAJEURE:
             'Käytetään vain erikoistilanteissa hallinnon ohjeiden mukaan. Yksittäisiä päiviä, joista luvattu maksuhyvitys.',
           FREE_ABSENCE: 'Kesäajan maksuton poissaolo',
           NO_ABSENCE: 'Jos lapsi on paikalla, älä merkitse mitään.'
+        },
+        modal: {
+          absenceSectionLabel: 'Poissaolon syy',
+          placementSectionLabel: 'Toimintamuoto, jota poissaolo koskee',
+          saveButton: 'Tallenna',
+          cancelButton: 'Peruuta',
+          absenceTypes: {
+            OTHER_ABSENCE: 'Poissaolo',
+            SICKLEAVE: 'Sairaus',
+            UNKNOWN_ABSENCE: 'Ilmoittamaton poissaolo',
+            PLANNED_ABSENCE: 'Sopimuspoissaolo',
+            TEMPORARY_RELOCATION: 'Lapsi varasijoitettuna muualla',
+            PARENTLEAVE: 'Isyysvapaa',
+            FORCE_MAJEURE: 'Hyvityspäivä',
+            FREE_ABSENCE: 'Maksuton poissaolo',
+            NO_ABSENCE: 'Ei poissaoloa'
+          },
+          free: 'Maksuton',
+          paid: 'Maksullinen',
+          absenceSummaryTitle: 'Lapsen poissaolokooste'
         }
       },
       reports: {
@@ -175,11 +195,12 @@ const customizations: EmployeeCustomizations = {
   ],
   absenceTypes: [
     'OTHER_ABSENCE',
-    'SICKLEAVE',
     'PLANNED_ABSENCE',
+    'SICKLEAVE',
+    'TEMPORARY_RELOCATION',
+    'PARENTLEAVE',
     'FORCE_MAJEURE',
-    'FREE_ABSENCE',
-    'PARENTLEAVE'
+    'FREE_ABSENCE'
   ],
   voucherValueDecisionTypes: [
     'NORMAL',

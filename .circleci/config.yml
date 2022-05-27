@@ -213,10 +213,14 @@ commands:
     steps:
       - restore:
           path: evaka-base.tar
+      - restore:
+          path: evaka-yarn.tar
       - run:
           name: Load base image
           working_directory: *workspace_root
-          command: docker load -i evaka-base.tar
+          command: |
+            docker load -i evaka-base.tar
+            docker load -i evaka-yarn.tar
 
   build_docker_image:
     parameters:
@@ -464,11 +468,21 @@ jobs:
           working_directory: *workspace_evaka_base
           command: docker build -t evaka-base .
       - run:
+          name: Build base image
+          working_directory: *workspace_evaka_base
+          command: docker build -t evaka-yarn -f yarn.Dockerfile .
+      - run:
           name: Save base image
           working_directory: *workspace_root
           command: docker save evaka-base > evaka-base.tar
+      - run:
+          name: Save base image
+          working_directory: *workspace_root
+          command: docker save evaka-yarn > evaka-yarn.tar
       - save:
           path: evaka-base.tar
+      - save:
+          path: evaka-yarn.tar
 
   apigw_build:
     executor: nodejs_executor

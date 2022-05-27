@@ -206,24 +206,6 @@ internal class PDFServiceTest {
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 
-//    @Test
-//    fun generateVoucherValueDecisionPdfEmptyAddress() {
-//        val decision = validVoucherValueDecision().copy(
-//            headOfFamily = PersonDetailed(
-//                PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
-//                "Maija", "Meikäläinen",
-//                "310382-956D", "", "", "",
-//                "", null, "", null, restrictedDetailsEnabled = false
-//            )
-//        )
-//        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
-//
-//        val bytes = pdfService.generateVoucherValueDecisionPdf(data)
-//
-//        val filepath = "${reportsPath}/PDFServiceTest-voucher-value-decision-empty-address.pdf"
-//        FileOutputStream(filepath).use { it.write(bytes) }
-//    }
-
     @Test
     fun generateReliefAcceptedVoucherValueDecisionPdfValidTo() {
         val decision = validVoucherValueDecision().copy(

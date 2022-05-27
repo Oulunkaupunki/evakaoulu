@@ -280,8 +280,7 @@ private val testDecisionIncome = DecisionIncome(
     totalIncome = 314100,
     totalExpenses = 0,
     total = 314100,
-    validFrom = LocalDate.of(2000, 1, 1),
-    validTo = null
+    worksAtECHA = false,
 )
 
 private fun validFeeDecision() = FeeDecisionDetailed(

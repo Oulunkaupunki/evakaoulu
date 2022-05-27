@@ -1,5 +1,6 @@
 package fi.ouka.evakaoulu
 
+import fi.espoo.evaka.invoicing.service.DefaultInvoiceGenerationLogic
 import fi.espoo.evaka.shared.FeatureConfig
 import fi.espoo.evaka.shared.security.actionrule.ActionRuleMapping
 import fi.ouka.evakaoulu.security.EvakaOuluActionRuleMapping
@@ -21,5 +22,8 @@ class EVakaOuluConfig {
 
     @Bean
     fun actionRuleMapping(): ActionRuleMapping = EvakaOuluActionRuleMapping()
+
+    @Bean
+    fun invoiceGenerationLogicChooser() = DefaultInvoiceGenerationLogic // TODO: implement
 
 }

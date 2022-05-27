@@ -5,11 +5,15 @@
 INSERT INTO assistance_basis_option
     (value, name_fi, description_fi, display_order)
 VALUES
-    ('CHILD_ACCULTURATION_SUPPORT', 'Lapsen ja perheen kotoutumisen tuki', 'Lapsen ja perheen kotoutumisen tuki voidaan myöntää, kun perheen lapsi tulee ensimmäistä kertaa suomalaiseen päiväkotiin. Jos perheen muita lapsia on tällä hetkellä tai on ollut aiemmin suomalaisessa päiväkodissa, kotoutumisen tukea ei enää myönnetä. Pakolaistaustaisen perheen ollessa kyseessä aika on 6 kk, muiden osalta 3kk.', 100),
-    ('INTENSIFIED_ASSISTANCE', 'Tehostettu tuki', NULL, 200),
-    ('SPECIAL_ASSISTANCE_DECISION', 'Erityinen tuki', NULL, 300),
-    ('DEVELOPMENTAL_DISABILITY', 'Kehitysvamma', NULL, 310),
-    ('EXTENDED_COMPULSORY_EDUCATION', 'Pidennetty oppivelvollisuus', 'Lapsella erityisen tuen päätös', 320)
+    ('CHILD_ACCULTURATION_SUPPORT', 'Lapsen ja perheen kotoutumissuunnitelma', 'Lapsen ja perheen kotoutumisen tuki voidaan myöntää, kun perheen lapsi tulee ensimmäistä kertaa suomalaiseen päiväkotiin. Jos perheen muita lapsia on tällä hetkellä tai on ollut aiemmin suomalaisessa päiväkodissa, kotoutumisen tukea ei enää myönnetä. Pakolaistaustaisen perheen ollessa kyseessä aika on 6 kk, muiden osalta 3kk.', 100),
+    ('COMMON_SUPPORT', 'Yleinen tuki', 'Ei hallintopäätöstä.', 150),
+    ('INTENSIFIED_ASSISTANCE', 'Tehostettu tuki', 'Merkitään hallintopäätöksen jälkeen.', 200),
+    ('SPECIAL_ASSISTANCE_DECISION', 'Erityinen tuki', 'Merkitään hallintopäätöksen jälkeen.', 300),
+    ('EXTENDED_COMPULSORY_EDUCATION', 'Pidennetty oppivelvollisuus', 'Merkitään hallintopäätöksen jälkeen.', 310),
+    ('DIFFERENT_EDUCTATION_START_DATE', 'Opetuksen poikkeava aloittamisajankohta', 'Merkitään päätöksen jälkeen.', 320),
+    ('DEVELOPMENTAL_DISABILITY', 'Kehitysvamma', 'Lapsella on todettu kehitysvamma, tieto tarvitaan tilastointia varten.', 330),
+    ('FINNISH_AS_SECOND_LANGUAGE', 'Suomi toisena kielenä opetus', 'Mikäli lapsi on alkeiskielitasolla ja saa suomi toisena kielenä opettajan antamaa opetusta', 340),
+    ('PREPARATORY_EDUCATION_ASSISTANCE', 'Valmistava opetus ', 'Valmistavaa opetusta annetaan esiopetusikäisille maahanmuuttajataustaisille, joilla ei ole vielä tarvittavia kielellisiä valmiuksia esiopetuksessa opiskeluun (alkeiskielitaso). Merkitään palveluohjauksen päätöksen jälkeen', 350)
 ON CONFLICT (value) DO
 UPDATE SET
     name_fi = EXCLUDED.name_fi,

@@ -1,5 +1,6 @@
 package fi.ouka.evakaoulu.invoice.service
 
+import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -61,4 +62,18 @@ internal class ProEInvoiceGeneratorTest {
 
         assertEquals(result, "121212A121AJaska Jokunen                 00004200\n")
     }
+
+    @Test
+    fun `should check that invoice format is a proper one also with invoice function number`() {
+
+        val invoice = validInvoice()
+        val invoiceList = listOf(invoice, invoice)
+
+        val generationResult = proEInvoiceGenerator.generateInvoice(invoiceList)
+
+        var correctInvoice = object {}.javaClass.getResource("/invoice-client/CorrectProEInvoice.txt")?.readText()
+
+        assertEquals(correctInvoice, generationResult.invoiceString)
+    }
+
 }

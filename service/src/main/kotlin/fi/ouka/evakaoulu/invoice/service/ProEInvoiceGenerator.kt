@@ -4,6 +4,7 @@
 
 package fi.ouka.evakaoulu.invoice.service
 
+import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.ouka.evakaoulu.invoice.config.Product
@@ -140,7 +141,12 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
             // format description says "value of this field has not been used", example file has "0" here
             invoiceRowData.setAlphanumericValue(InvoiceField.BRUTTO_NETTO, "0")
             invoiceRowData.setAlphanumericValue(InvoiceField.DEBIT_ACCOUNTING, "")
-            invoiceRowData.setAlphanumericValue(InvoiceField.CREDIT_ACCOUNTING, "3271 1101170      " + it.costCenter)
+            if (it.daycareType.contains(CareType.FAMILY) or it.daycareType.contains(CareType.GROUP_FAMILY)) {
+                invoiceRowData.setAlphanumericValue(InvoiceField.CREDIT_ACCOUNTING, "3271 1101171      " + it.costCenter)
+            }
+            else {
+                invoiceRowData.setAlphanumericValue(InvoiceField.CREDIT_ACCOUNTING, "3271 1101170      " + it.costCenter)
+            }
 
             childRows.add(invoiceRowData)
         }

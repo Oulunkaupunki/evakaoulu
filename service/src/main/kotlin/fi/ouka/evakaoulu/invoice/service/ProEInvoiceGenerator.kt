@@ -56,7 +56,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
         invoiceData.setAlphanumericValue(InvoiceField.ACCOUNTING_DATE, invoiceDetailed.sentAt?.toLocalDateTime()?.format(invoiceDateFormatter) ?: LocalDate.now().format(invoiceDateFormatter))
         invoiceData.setNumericValue(InvoiceField.INCLUDED_LATE_PAYMENT_INTEREST, 0)
         invoiceData.setAlphanumericValue(InvoiceField.CREDIT_NOTE_INVOICE_NUMBER, "")
-        invoiceData.setAlphanumericValue(InvoiceField.INVOICE_NUMBER, invoiceDetailed.number.toString())
+        invoiceData.setAlphanumericValue(InvoiceField.INVOICE_NUMBER, if (invoiceDetailed.number != null) invoiceDetailed.number.toString() else "")
         invoiceData.setAlphanumericValue(InvoiceField.REFERENCE_NUMBER, "")
         // N = normal
         invoiceData.setAlphanumericValue(InvoiceField.PAYMENT_TYPE, "N")

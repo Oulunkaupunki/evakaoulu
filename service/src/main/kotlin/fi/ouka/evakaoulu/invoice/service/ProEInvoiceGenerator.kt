@@ -17,9 +17,8 @@ import java.time.format.DateTimeFormatter
 class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoiceDateProvider: InvoiceDateProvider) : StringInvoiceGenerator {
 
     fun generateInvoiceTitle(): String {
-        val previousMonth = LocalDate.now().minusMonths(1)
-        val titleFormatter = DateTimeFormatter.ofPattern("MM.yyyy")
-        return "Varhaiskasvatus " + previousMonth.format(titleFormatter)
+        val previousMonth = invoiceDateProvider.previousMonth()
+        return "Varhaiskasvatus " + previousMonth
     }
     fun gatherInvoiceData(invoiceDetailed: InvoiceDetailed): InvoiceData {
         var invoiceData = InvoiceData()

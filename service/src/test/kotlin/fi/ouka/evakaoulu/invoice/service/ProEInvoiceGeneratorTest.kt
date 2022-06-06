@@ -17,6 +17,7 @@ internal class ProEInvoiceGeneratorTest {
     @BeforeEach
     fun setup() {
         whenever(invoiceDateProvider.currentDate()).thenReturn("20220505")
+        whenever(invoiceDateProvider.previousMonth()).thenReturn("04.2022")
     }
 
     @Test

@@ -96,4 +96,4 @@ WHERE
     service_need_option.voucher_value_description_fi <> EXCLUDED.voucher_value_description_fi OR
     service_need_option.voucher_value_description_sv <> EXCLUDED.voucher_value_description_sv OR
     service_need_option.display_order <> EXCLUDED.display_order OR
-    service_need_option.occupancy_coefficient_under_3y = EXCLUDED.occupancy_coefficient_under_3y;
+    service_need_option.occupancy_coefficient_under_3y <> EXCLUDED.occupancy_coefficient_under_3y;

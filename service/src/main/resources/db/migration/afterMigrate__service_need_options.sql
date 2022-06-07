@@ -77,7 +77,8 @@ UPDATE SET
     voucher_value_description_fi = EXCLUDED.voucher_value_description_fi,
     voucher_value_description_sv = EXCLUDED.voucher_value_description_sv,
     display_order = EXCLUDED.display_order,
-    occupancy_coefficient_under_3y = EXCLUDED.occupancy_coefficient_under_3y
+    occupancy_coefficient_under_3y = EXCLUDED.occupancy_coefficient_under_3y,
+    show_for_citizen = EXCLUDED.show_for_citizen
 WHERE
     service_need_option.name_fi <> EXCLUDED.name_fi OR
     service_need_option.name_sv <> EXCLUDED.name_sv OR

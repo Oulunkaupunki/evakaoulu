@@ -361,7 +361,7 @@ const en: DeepPartial<Translations> = {
     <>
       <H1>Accessibility statement</H1>
       <P>
-        This accessibility statement applies to the City of Oulu's early
+        This accessibility statement applies to the City of Oulus early
         childhood education online service eVaka at{' '}
         <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>.
         The City of Oulu endeavours to ensure the accessibility of the online

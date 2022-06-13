@@ -10,7 +10,7 @@ import React from 'react'
 
 import ExternalLink from 'lib-components/atoms/ExternalLink'
 import UnorderedList from 'lib-components/atoms/UnorderedList'
-import { P } from 'lib-components/typography'
+import { H1, H2, P } from 'lib-components/typography'
 import { Gap } from 'lib-components/white-space'
 import { Translations } from 'lib-customizations/citizen'
 import { DeepPartial } from 'lib-customizations/types'
@@ -356,7 +356,135 @@ const en: DeepPartial<Translations> = {
   vasu: {
     givePermissionToShareInfoVasu:
       "If you want to change the recipients mentioned in the plan, contact the staff of your child's early childhood education unit. When a child changes to another early childhood education unit in the City of Oulu, the early childhood education plan and other early childhood education documents are transferred to the new unit (also applies to early childhood education organized by Oulu as a purchasing service). The guardian will be informed about the transfer in advance. We ask the guardian for permission to hand over the early childhood education plan to an outsider. However, if a child enters private or other municipality's early childhood education, the early childhood education plan must be submitted to the new early childhood education provider even without permission, if the information is necessary for arranging the child's early childhood education (section 41 (3) of the Early Childhood Education Act). In addition, the early childhood education plan must be submitted to the organizer of pre-primary or primary education if it is necessary for the organization of the child's education (section 41 (4) of the Basic Education Act). The guardian will be informed of the transfer in advance."
-  }
+  },
+  accessibilityStatement: (
+    <>
+      <H1>Accessibility statement</H1>
+      <P>
+        This accessibility statement applies to the City of Oulu's early
+        childhood education online service eVaka at{' '}
+        <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>.
+        The City of Oulu endeavours to ensure the accessibility of the online
+        service, continuously improve the user experience and apply appropriate
+        accessibility standards.
+      </P>
+      <P>
+        The accessibility of the service was assessed by the development team of
+        the service, and this statement was drawn up on 12 April 2022.
+      </P>
+      <H2>Compliance of the service</H2>
+      <P>
+        The online service complies with the statutory critical accessibility
+        requirements in accordance with Level AA of the Accessibility Guidelines
+        for the WCAG v2.1. The service is not yet fully compliant with the
+        requirements.
+      </P>
+      <H2>Measures to support accessibility</H2>
+      <P>
+        The accessibility of the online service is ensured, among other things,
+        by the following measures:
+      </P>
+      <ul>
+        <li>
+          Accessibility has been taken into account from the beginning of the
+          design phase, for example, when choosing the colours and font sizes of
+          the service.
+        </li>
+        <li>
+          The service elements have been defined in consistently in terms of
+          semantics.
+        </li>
+        <li>The service is continuously tested with a screen reader.</li>
+        <li>
+          Various users test the service and give feedback on its accessibility.
+        </li>
+        <li>
+          When website technology or content changes, its accessibility is
+          ensured through constant monitoring.
+        </li>
+      </ul>
+      <P>
+        This statement will be updated in conjunction with website changes and
+        accessibility evaluations.
+      </P>
+      <H2>Known accessibility issues</H2>
+      <P>
+        Users may still encounter some issues on the website. The following
+        contains a description of known accessibility issues. If you notice an
+        issue on the site that is not listed, please contact us.
+      </P>
+      <ul>
+        <li>
+          Navigating on the Messages page using the keyboard or screen reader
+          still requires revision for part of moving and targeted elements.
+        </li>
+        <li>
+          The service’s unit map cannot be navigated using the keyboard/screen
+          reader, but the units can be browsed on the list available in the same
+          view. The map used in the service is produced by a third party.
+        </li>
+      </ul>
+      <H2>Third parties</H2>
+      <P>
+        The online service uses the following third party services, the
+        accessibility of which we cannot be responsible for.
+      </P>
+      <ul>
+        <li>Keycloak user identification service</li>
+        <li>Suomi.fi identification</li>
+        <li>Leaflet map service</li>
+      </ul>
+      <H2>Alternative ways of accessing the service</H2>
+      <P>
+        <ExternalLink
+          href="https://www.ouka.fi/oulu/asiointi-ja-neuvonta"
+          text="The City of Oulu’s Service Points"
+        />{' '}
+        provide assistance with using electronic services. Service advisors at
+        the Service Points help users who cannot access digital services.
+      </P>
+      <H2>Give feedback</H2>
+      <P>
+        If you notice an accessibility gap in our online service, please let us
+        know! You can give us feedback using the{' '}
+        <ExternalLink
+          href="https://e-kartta.ouka.fi/efeedback"
+          text="online form"
+        />{' '}
+        or by emailing{' '}
+        <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
+      </P>
+      <H2>Supervisory authority</H2>
+      <P>
+        If you notice any accessibility issues on the website, please send us,
+        the site administrator, feedback first. It may take us up to 14 days to
+        reply. If you are not satisfied with the reply or you do not receive a
+        reply within two weeks, you can give feedback to the Regional State
+        Administrative Agency for Southern Finland. The website of the Regional
+        State Administrative Agency for Southern Finland explains in detail how
+        a complaint can be submitted, and how the matter will be processed.
+      </P>
+
+      <P>
+        <strong>Contact information of the supervisory authority</strong>
+        <br />
+        Regional State Administrative Agency of Southern Finland
+        <br />
+        Accessibility Supervision Unit
+        <br />
+        <ExternalLink
+          href="https://www.saavutettavuusvaatimukset.fi"
+          text="www.saavutettavuusvaatimukset.fi"
+        />
+        <br />
+        <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>
+        <br />
+        tel. (exchange) 0295 016 000
+        <br />
+        Open: Mon-Fri 8.00–16.15
+      </P>
+    </>
+  )
 }
 
 export default en

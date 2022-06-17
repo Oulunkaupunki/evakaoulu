@@ -56,12 +56,12 @@ internal class ProEInvoiceGeneratorTest {
         val invoiceData = InvoiceData()
 
         invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, "121212A121A")
-        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, "Jaska Jokunen")
+        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, "Jokunen Jaska")
         invoiceData.setNumericValue(InvoiceField.INCLUDED_LATE_PAYMENT_INTEREST, 42)
 
         val result = proEInvoiceGenerator.generateRow(format, invoiceData)
 
-        assertEquals(result, "121212A121AJaska Jokunen                 00004200\n")
+        assertEquals(result, "121212A121AJokunen Jaska                 00004200\n")
     }
 
     @Test

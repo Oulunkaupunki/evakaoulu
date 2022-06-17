@@ -31,7 +31,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
         invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
         invoiceData.setAlphanumericValue(InvoiceField.HEADER_ROW_CODE, "L")
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_GROUP, "10")
-        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, invoiceDetailed.headOfFamily.firstName + " " + invoiceDetailed.headOfFamily.lastName)
+        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, invoiceDetailed.headOfFamily.lastName + " " + invoiceDetailed.headOfFamily.firstName)
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME2, "")
         invoiceData.setAlphanumericValue(InvoiceField.STREET_ADDRESS, invoiceDetailed.headOfFamily.streetAddress)
         invoiceData.setAlphanumericValue(InvoiceField.POSTAL_ADDRESS, invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice)
@@ -83,7 +83,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
         val codebtor = invoiceDetailed.codebtor
         if (codebtor != null) {
             invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_IDENTIFIER, codebtor.ssn ?: "")
-            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_NAME, codebtor.firstName + " " + codebtor.lastName)
+            invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_NAME, codebtor.lastName + " " + codebtor.firstName)
             invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_STREET_ADDRESS, codebtor.streetAddress)
             invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_POSTAL_ADDRESS, codebtor.postalCode + " " + codebtor.postOffice)
             invoiceData.setAlphanumericValue(InvoiceField.CODEBTOR_PHONE_NUMBER, codebtor.phone)
@@ -120,7 +120,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
             // we have previously made sure the head of family has an SSN but the compiler doesn't realize it
             invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
             invoiceRowData.setAlphanumericValue(InvoiceField.TEXT_ROW_CODE, "3")
-            invoiceRowData.setAlphanumericValue(InvoiceField.CHILD_NAME, it.child.firstName + " " + it.child.lastName)
+            invoiceRowData.setAlphanumericValue(InvoiceField.CHILD_NAME, it.child.lastName + " " + it.child.firstName)
             val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
             invoiceRowData.setAlphanumericValue(InvoiceField.TIME_PERIOD, it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter))
             invoiceRowData.setAlphanumericValue(InvoiceField.INVOICE_ROW_HEADER, "")

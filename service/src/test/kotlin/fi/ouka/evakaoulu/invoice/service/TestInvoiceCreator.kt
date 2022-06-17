@@ -92,3 +92,10 @@ fun personWithRestrictedDetails() = PersonDetailed(
         "280691-943Z", "Todistajansuojeluohjelmankatu 9", "45600", "OULU",
         "", null, "", null, restrictedDetailsEnabled = true
 )
+
+fun personWithLongName() = PersonDetailed(
+        PersonId(UUID.randomUUID()), LocalDate.of(1982, 3, 31), null,
+        "Eskoensio Velipekka-Simopetteri", "von und zu Aaltonen-Räyhäkäinen",
+        "310382-956D", "Aateliskulma 3", "90200", "OULU",
+        "", null, "", null, restrictedDetailsEnabled = false
+)

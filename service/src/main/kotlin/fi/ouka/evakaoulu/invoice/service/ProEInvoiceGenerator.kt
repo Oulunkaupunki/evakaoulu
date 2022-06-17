@@ -31,8 +31,10 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoi
         invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
         invoiceData.setAlphanumericValue(InvoiceField.HEADER_ROW_CODE, "L")
         invoiceData.setAlphanumericValue(InvoiceField.CLIENT_GROUP, "10")
-        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, invoiceDetailed.headOfFamily.lastName + " " + invoiceDetailed.headOfFamily.firstName)
-        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME2, "")
+        val clientName = invoiceDetailed.headOfFamily.lastName + " " + invoiceDetailed.headOfFamily.firstName
+        // CLIENT_NAME1 and CLIENT_NAME2 are 50 characters wide, but Intime only reads the first 30(!)
+        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, clientName.substring(0, Math.min(30, clientName.length)))
+        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME2, if (clientName.length > 30) clientName.substring(30, Math.min(60,clientName.length)) else "")
         invoiceData.setAlphanumericValue(InvoiceField.STREET_ADDRESS, invoiceDetailed.headOfFamily.streetAddress)
         invoiceData.setAlphanumericValue(InvoiceField.POSTAL_ADDRESS, invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice)
         invoiceData.setAlphanumericValue(InvoiceField.PHONE_NUMBER, invoiceDetailed.headOfFamily.phone)

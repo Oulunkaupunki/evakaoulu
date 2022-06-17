@@ -68,7 +68,8 @@ internal class ProEInvoiceGeneratorTest {
     fun `should check that invoice format is a proper one also with invoice function number`() {
 
         val invoice = validInvoice()
-        val invoiceList = listOf(invoice, invoice)
+        val longNamedInvoice = validInvoice().copy(headOfFamily = personWithLongName())
+        val invoiceList = listOf(invoice, longNamedInvoice)
 
         val generationResult = proEInvoiceGenerator.generateInvoice(invoiceList)
 

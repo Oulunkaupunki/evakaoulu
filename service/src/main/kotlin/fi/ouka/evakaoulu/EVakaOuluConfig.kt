@@ -19,7 +19,7 @@ class EVakaOuluConfig {
         valueDecisionCapacityFactorEnabled = true,
         daycareApplicationServiceNeedOptionsEnabled = true,
         citizenReservationThresholdHours = 6 * 24, // Tue 00:00
-        dailyFeeDivisorOperationalDaysOverride = null,
+        dailyFeeDivisorOperationalDaysOverride = 20,
         freeSickLeaveOnContractDays = true,
         alwaysUseDaycareFinanceDecisionHandler = true
     )

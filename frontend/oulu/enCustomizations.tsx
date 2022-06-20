@@ -19,94 +19,248 @@ const customerContactText = function () {
   return (
     <>
       {' '}
-      customer service of the Early childhood education at:{' '}
-      <a href="mailto:varhaiskasvatus@ouka.fi">
-        varhaiskasvatus@ouka.fi
-      </a> / <a href="tel:+358855845300">08 558 45300 - select 1</a> (Mon-Fri
-      between 9am and 12noon).
+      p. <a href="tel:+358855845300">08 558 45300 </a> OR{' '}
+      <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
     </>
   )
 }
 
-const en: DeepPartial<Translations> = {
+const fi: DeepPartial<Translations> = {
   applications: {
     creation: {
       daycareInfo:
-        'An applicant for early childhood education applies for a place in a municipal day care centre or family day care, an outsourced service day care centre or a day care centre supported by a service voucher.',
+        'You can apply for a place in a municipal daycare center or in family day care using the application for early childhood education. The same application can be used to apply for an early childhood education service voucher for private childcare. In order to do this, simply choose the private unit for which you wish to acquire a voucher for as your preferred option.',
+      preschoolLabel:
+        'Enrolment for pre-primary school and/or instruction preparing for basic education',
+      preschoolInfo:
+        'Free pre-school education is provided for four (4) hours a day. The school year mainly follows the annual holiday schedule used in basic education. In addition to this, you may apply for early childhood education and care (ECEC) in connection with pre-school education. In connection with pre-school education, ECEC is provided in the same place as the pre-school education before and after the pre-school education.',
+      preschoolDaycareInfo: '',
+      clubLabel: 'Application for open early childhood education and care',
       clubInfo:
-        'With a club application one may apply for a place at municipal clubs or clubs supported by a service voucher.',
+        'With the application for open early childhood education and care, you can apply to groups that meet two to three times a week, as well as family groups.',
       applicationInfo: (
         <P>
-          The custodian can make amendments to the application on the web up
-          until the moment that the application is accepted for processing by
-          the customer service. After this, amendments or cancellation of the
-          application are possible by getting in contact with the
+          You can make changes to the application until the service coordination
+          unit has begun to process it. After this, you can only cancel the
+          application or make changes to it by contacting the early childhood
+          education service coordination unit.
           {customerContactText()}
         </P>
       ),
       duplicateWarning:
-        'The child already has a similar unfinished application. Please return to the Applications view and complete the existing application or contact the customer service of the Early childhood education.',
+        'You have already saved a similar, unfinished application for your child. In order to edit the existing application, return to the Applications view or contact the early childhood service coordination unit.',
       transferApplicationInfo: {
         DAYCARE:
-          'The child already has a place in early childhood education in Oulu. With this application you can apply for a transfer to another unit offering early childhood education in Oulu.'
+          'The child has already been granted a place in early childhood education in Oulu. With this application, you can request a transfer to another early childhood education unit within Oulu.'
       }
     },
     editor: {
+      sentInfo: {
+        title: 'Your application has been submitted.',
+        text: 'You can make changes to your application until it has entered processing at the service coordination unit.',
+        ok: 'Okay!'
+      },
+      unitPreference: {
+        siblingBasis: {
+          title: 'Application on the basis of a sibling relationship',
+          info: {
+            DAYCARE: (
+              <>
+                <P>
+                  If your child has a sibling who has already received a place
+                  in an early childhood education and care unit, they can apply
+                  to be placed in the same unit on the basis of the sibling
+                  relationship. The city strives to place all siblings in the
+                  same unit, if this is what the parents wish. If you are
+                  filling out applications for siblings of who are not yet
+                  included within the scope of early childhood education and
+                  care, enter the information about the sibling relationship in
+                  the Additional information field of the application.
+                </P>
+                <P>
+                  Fill out this section only if you are applying for a place at
+                  an early childhood education and care unit on the basis of a
+                  sibling relationship. Make sure that you choose the sibling’s
+                  current early childhood education and care unit as the
+                  preferred option.
+                </P>
+              </>
+            ),
+            CLUB: (
+              <>
+                <P>
+                  The city always strives to place siblings in the same group if
+                  the family so wishes.
+                </P>
+                <P>
+                  Fill out this section only if you are applying for a place at
+                  an early childhood education and care unit on the basis of a
+                  sibling relationship. Make sure that you choose the sibling’s
+                  current open early childhood education and care unit as the
+                  preferred option.
+                </P>
+              </>
+            )
+          }
+        },
+        units: {
+          info: {
+            DAYCARE: (
+              <>
+                <P>
+                  You can apply to 1–3 units in the order of preference of your
+                  choosing. The order of preference does not guarantee a place
+                  in the unit of your choice, but the more options you name, the
+                  greater chances you have to receive a place at one of the
+                  desired units.
+                </P>
+                <P>
+                  You can view the locations of the early childhood education
+                  and care units by choosing the option ‘Unit map view’.
+                </P>
+                <P>
+                  You can apply for a service voucher by selecting the private
+                  early childhood education and care unit you wish to apply for
+                  as the preferred option. If you apply for a service voucher
+                  for a private early childhood education and care unit, the
+                  head of the unit will also be informed of this.
+                </P>
+              </>
+            ),
+            PRESCHOOL: (
+              <>
+                <P>
+                  You can apply to 1–3 units in the order of your choosing. The
+                  order of preference does not guarantee a place in the unit of
+                  your choice, but the more options you name, the greater
+                  chances you have to receive a place at one of the desired
+                  units.
+                </P>
+                <P>
+                  You can view the unit locations by selecting the option ‘Unit
+                  map view’.
+                </P>
+                <P>
+                  If you wish to apply for a service voucher, please select the
+                  service voucher unit you want to apply to as your preferred
+                  option. If you apply for a service voucher for a private early
+                  childhood education and care unit, the head of the unit will
+                  also be informed of this.
+                </P>
+              </>
+            ),
+            CLUB: (
+              <>
+                <P>
+                  You can apply to 1–3 units in the order of preference of your
+                  choosing. The order of preference does not guarantee a place
+                  in the group or club of your choice, but the more options you
+                  name, the greater chances you have to receive a place at one
+                  of the desired units.
+                </P>
+                <P>
+                  You can view the locations of the open early childhood
+                  education and care units by selecting the option ‘Unit map
+                  view’.
+                </P>
+              </>
+            )
+          },
+          serviceVoucherLink:
+            'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli'
+        }
+      },
       heading: {
+        title: {
+          CLUB: 'Apply for open early childhood education and care'
+        },
         info: {
           DAYCARE: (
             <>
               <P>
-                An early child education place may be applied for all year
-                round. The application for early childhood education must be
-                submitted no later than four months prior to the desired start
-                date. If the need for early childhood education is due to
-                employment, studies or training, and it has not been possible to
-                anticipate the need for care, an early childhood education place
-                must be sought as soon as possible – however, no later than two
-                weeks before the child needs the place.
+                Please apply for open early childhood education and care at
+                least four months before you require a place for your child. If
+                you require open early childhood education and care urgently due
+                to a change in your employment or student status, the processing
+                time for the application is two weeks upon receipt.
               </P>
               <P>
-                A written decision on the early childhood education place will
-                be sent to the Suomi.fi Messages service. If you wish to be
-                notified of the decision electronically, you will need to
-                activate the Suomi.fi Messages service. Further information on
-                the service and its activation is available at{' '}
+                You will receive a written decision regarding your child’s early
+                childhood education and care unit in the Suomi.fi messages
+                service, or, if you have not yet started using the Suomi.fi
+                service, by mail. The decision can also be found in the
+                Applications – Decisions (Hakeminen – Päätökset) section of the
+                eVaka service. You can find more information about the Suomi.fi
+                service and how to start using the service
                 <ExternalLink
-                  text="https://www.suomi.fi/messages"
-                  href="https://www.suomi.fi/messages"
+                  text="https://www.suomi.fi/viestit"
+                  href="https://www.suomi.fi/viestit"
                   newTab
                 />
-                . If you do not activate the Suomi.fi Messages service, the
-                decision will be sent to you by post.
+                .
               </P>
               <P fitted={true}>
-                * The information denoted with an asterisk is mandatory.
+                *Fields marked with an asterisk are mandatory.
+              </P>
+            </>
+          ),
+          PRESCHOOL: (
+            <>
+              <P>
+                Pre-school education starts a year before the beginning of
+                compulsory education. Pre-school education is free of charge.
+                The application period for pre-school education for the school
+                year 2022–2023 is January 10 to January 23, 2022. Pre-school
+                education begins on August 15, 2022.
+              </P>
+              <P>
+                You will receive the decisions either on the{' '}
+                <ExternalLink
+                  text="Suomi.fi messages"
+                  href="https://www.suomi.fi/viestit"
+                  newTab
+                />{' '}
+                service, or, if you have not yet started using Suomi.fi, by
+                mail.
+              </P>
+              <P fitted={true}>
+                *Fields marked with an asterisk are mandatory.
               </P>
             </>
           ),
           CLUB: (
             <>
               <P>
-                A place at a club can be applied for all year round. A municipal
-                place in a club or one supported with a service voucher can be
-                applied for with a club application. A written confirmation of a
-                place in a club will be sent to the Suomi.fi Messages service.
-                If you wish to have the notice in electronic form, you must
-                activate the Suomi.fi Messages service. Further information on
-                the service and its activation is available at{' '}
-                <ExternalLink
-                  text="https://www.suomi.fi/messages"
-                  href="https://www.suomi.fi/messages"
-                  newTab
-                />
-                . If you do not activate the suomi.fi/messages service, the
-                notice of the place at the club will be sent to you by post. A
-                place is granted for one administrative period at a time.
+                The right to attend a club or group organized as a part of open
+                early childhood education and care (ECEC) is granted until the
+                applicant decides that it is no longer required or until the
+                child moves from open ECEC to ECEC or pre-school education.
+                Applicants to open ECEC are considered in the following order:
+                children leaving early childhood education, children applying on
+                the basis of a sibling relationship, new applicants in order of
+                application. Individual support needs are also taken into
+                consideration. The decision regarding a place in a club or group
+                will be provided to you via the Suomi.fi service, or, if you
+                have not yet started using the service, by mail. The decision
+                can also be found in the Applications – Decisions (Hakeminen –
+                Päätökset) section of the eVaka service.
               </P>
               <P>
-                The club application is for one such period. Once the period in
-                question ends, the application is removed from the system.
+                Open early childhood education activities are provided free of
+                charge, and participating in them does not affect the home care
+                allowance granted by Kela.
+              </P>
+              <P>
+                You can find more information about open early childhood
+                education on the website of the City of Oulu:{' '}
+                <ExternalLink
+                  text="Open early childhood education – Clubs, groups and play schools"
+                  href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/avoin-varhaiskasvatus"
+                  newTab
+                />
+              </P>
+              <P fitted={true}>
+                *Fields marked with an asterisk are mandatory.
               </P>
             </>
           )
@@ -114,135 +268,235 @@ const en: DeepPartial<Translations> = {
       },
       serviceNeed: {
         startDate: {
+          header: {
+            CLUB: 'When does open early childhood education begin?'
+          },
+          info: {
+            PRESCHOOL: [
+              'Pre-school education begins on August 15, 2022. If you require early childhood education and care in connection with pre-school education, you can apply for it by going to the section for early childhood education in connection with pre-school education (Esiopetukseen liittyvä varhaiskasvatus). If your child already has a place in an early childhood education and care unit in Oulu and will continue at the same unit, there is no need to fill out a new application.'
+            ],
+            CLUB: [
+              'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in pre-school education. The child may attend one group that meets two or three times a week and a family group at the same time.'
+            ]
+          },
           instructions: (
             <>
-              It is possible to postpone the preferred starting day as long as
-              the application has not been processed by the customer service.
-              After this, any desired amendments can be made by contacting the
+              You can postpone the desired start date until the service
+              coordination team has begun to process the application. After
+              this, the date can only be postponed by contacting the early
+              childhood education and care service coordination team.
               {customerContactText()}
             </>
           )
         },
         clubDetails: {
+          wasOnDaycare:
+            'The child already has a place at an early childhood education and care unit, which they will give up upon receiving the right to attend a club or group.',
           wasOnDaycareInfo:
-            'If a child has been in municipal day care or family care or they give up their place when the club starts, they have a greater chance to obtain the place in the club.',
+            'If a child has been attending a municipal day care center or family day care center and will give up their place once they start attending the club or group, the child is more likely to receive a place in a club or group.',
           wasOnClubCareInfo:
-            'If the child has been in the club already during the previous period, they have a greater chance also to obtain a place from the club during the forthcoming period.'
+            'If a child has already been attending the club or group during the previous term, they will have a better chance of being granted a place in the club or group in the coming term as well.'
         },
         urgent: {
           attachmentsMessage: {
             text: (
               <P fitted={true}>
-                If the need for an early child education place is due to sudden
-                employment or obtaining a study place, the early childhood
-                education place must be sought no later than two weeks before
-                the need for care starts. Furthermore, the custodian must make
-                contact, without delay, with the {customerContactText()}
+                If your child requires early childhood education and care due to
+                a recent change in your student or employment status, you must
+                send the application no later than two weeks before your child
+                should start at the ECEC unit. A statement on the employment or
+                student status of both guardians living in the same household
+                must be attached to the application. The processing time of two
+                weeks starts upon receipt of the application and the mandatory
+                attachments.
               </P>
-            )
+            ),
+            subtitle:
+              'Add a certificate of employment or a student certificate from both guardians.'
           }
         },
         shiftCare: {
           instructions:
-            'The day care centres are normally open on weekdays from 6.00am to 6pm. Evening care is intended for the children who, due to the parents’ work or studies that lead to a qualification, regularly require care after 6pm. Day care centres that offer evening care open, if necessary, at 5.30am and close at 10.30pm at the latest. Some day care centres that offer evening care are also open during the weekends. Shift care is intended for children whose parents work in shifts, when the child’s care also includes nights.',
+            'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you require evening or shift care, please specify your care needs in the Additional information field of the application.',
           message: {
-            text: 'Evening and shift care is intended for those children who, due to the parents work or studies that lead to a qualification, require evening and shift care. In the case of the parents, an employer’s certificate of a need for evening or shift care due to shift work or study must be attached to the application.'
+            text: 'Evening and shift care is intended for children whose parents are both employed in shift work or receive education mainly in the evenings and/or at weekends. A statement on the nature of the employment relationship and/or educational activities taking place during the evenings or weekends for both guardians living in the same household must be attached to the application.'
           },
           attachmentsMessage: {
-            text: 'Evening and shift care is intended for those children who, due to the parents’ work or studies that lead to a qualification, require evening and shift care. In the case of the parents, an employer’s certificate of a need for evening or shift care due to shift work or study must be attached to the application.'
+            text: 'Evening and shift care is intended for children whose parents are both employed in shift work or receive education mainly in the evenings and/or at weekends. A statement on the nature of the employment relationship or educational activities taking place during the evenings and/or weekends for both guardians living in the same household must be attached to the application.',
+            subtitle:
+              'Add a statement regarding the nature of the employment relationship and/or educational activities taking place during the evenings and/or weekends for both guardians here.'
           }
         },
         assistanceNeedInstructions: {
           DAYCARE:
-            'Intensified or special care is given to a child as soon as the need arises. If a child has received an expert opinion backing the need for support, this must be notified in the early childhood education application. The support measures are carried out in the child’s daily life as part of the early childhood educational activities. Oulu’s early childhood education will separately be in contact after the application has been submitted, if the child has a need for support.',
-          CLUB: 'If the child has a need for support, the staff of Oulu’s early childhood education will get in contact the application has been submitted.'
+            "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
+          CLUB: "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
+          PRESCHOOL:
+            "Select this section of the application if your child needs support for their development and/or learning during their year in pre-school education. Support is implemented in the child's daily life as part of other pre-school education and early childhood education and care activities. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at a pre-school education unit."
         },
         partTime: {
-          true: 'Part-time'
+          true: 'Part-time',
+          false: 'Full-time'
         },
         dailyTime: {
           label: {
-            DAYCARE: 'Service options'
+            DAYCARE: 'Service need options'
+          },
+          connectedDaycareInfo: (
+            <>
+              <P>
+                If necessary, you can apply for charged early childhood
+                education in connection with pre-school education for your
+                child. If you want your child to start at the early childhood
+                education and care unit at a later date than the pre-school
+                education starts, please indicate the desired date in the
+                Additional information field of the application. If you wish to
+                apply for a service voucher for a private daycare unit, please
+                select the service voucher unit you want to apply to as your
+                preferred option.
+              </P>
+              <P>
+                You will receive a written decision regarding your child’s
+                access to early childhood education and care{' '}
+                <a
+                  href="https://www.suomi.fi/viestit"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  either as a message in the Suomi.fi
+                </a>{' '}
+                service, or, if you have not yet started using the service, by
+                mail. The decision can also be found in the Applications –
+                Decisions (Hakeminen – Päätökset) section of the eVaka service.
+              </P>
+            </>
+          ),
+          instructions: {
+            PRESCHOOL:
+              'Daycare centers and schools provide pre-school education for four hours a day. Please indicate the hours during which your child requires early childhood education and care, including the time spent in pre-school education (e.g. 7 a.m. to 5 p.m.). You will be asked to specify the times in greater detail once your child enters early childhood education and care. If the care needs vary by day or week (e.g. in cases where shift care is required), please indicate the hours in greater detail in the Additional information field of this application.'
+          },
+          usualArrivalAndDeparture: {
+            DAYCARE: 'Daily time in early childhood education and care'
           }
-        }
+        },
+        preparatory: 'The child requires support to learn Finnish.',
+        preparatoryInfo:
+          'A language assessment (Pienten kielireppu) will be conducted for each child with a mother tongue other than Finnish, Swedish or Sámi. This assessment will serve as a basis for constructing a Finnish as a second language (S2) curriculum or a decision regarding instruction preparing for basic education. S2 education is integrated into the daily early childhood education and care or pre-school activities in accordance with the child’s individual needs. Children at the age of six will receive instruction preparing for basic education, which consists of four pre-school education lessons and one Finnish language lesson every day. This instruction is free of charge.'
       },
       contactInfo: {
+        familyInfo: undefined,
         info: (
           <P data-qa="contact-info-text">
-            The personal information has been retrieved from the population data
-            services and cannot be changed with this application. If the
-            personal information is incorrect, please update the information on{' '}
+            The personal information has been retrieved from the population
+            information system and therefore cannot be changed using this form.
+            If there are errors in your personal information, please update your
+            information{' '}
             <ExternalLink
-              text="dvv.fi"
-              href="https://dvv.fi/en/certificates-from-the-population-information-system."
+              text="on the website of the Digital and Population Data Services Agency"
+              href="https://dvv.fi/henkiloasiakkaat"
               newTab
             />
-            . If your address is about to change, you can add the new address in
-            a separate field in the application. Add a future address for both
-            the child and guardian. The address information will be official
-            only when it has been updated to the database of the Digital and
-            Population Data Services Agency. The decision on both early
-            childhood education and service vouchers as well as the information
-            about a club place for open early childhood education is
-            automatically submitted to a custodian living at another address
-            based on the information in the population data register.
+            . If your address is going to change in the near future, you can add
+            your future address in a separate field of this application. Enter
+            the future address for both the child and the guardian. The address
+            is only considered official once it has been updated in the
+            population information system. The guardian’s information can be
+            found in the population information system; decisions regarding
+            pre-school education and early childhood education and care will be
+            automatically submitted to any guardians living at a different
+            address, as well.
           </P>
         ),
+        secondGuardianInfoPreschoolSeparated:
+          'The address information for the other guardian is retrieved from the population information system automatically. According to our information, the child has another guardian living at a different address. Registration for pre-school education must be agreed upon jointly with the other guardian.',
+        secondGuardianAgreementStatus: {
+          label:
+            'Have you and the other guardian agreed to make this application?*',
+          AGREED:
+            'We have discussed making this application and agreed on it jointly.',
+          NOT_AGREED:
+            'We have not been able to agree on making the application.',
+          RIGHT_TO_GET_NOTIFIED:
+            'The other guardian only has the right of information.'
+        },
         futureAddressInfo:
-          'In Oulu’s early childhood education, the official address is considered the one obtainable from the population data register. The address in the population data register changes when an applicant gives notice of a move to the post office or to the registry office.'
+          'Oulu’s early childhood education and care services consider the address obtained from the population information system to be the official address. The address entered in the population information system changes when you submit a notification of change of address to the Digital and Population Data Services Agency.'
       },
       fee: {
         info: {
           DAYCARE: (
             <P>
-              The client fees for municipal early childhood education and the
-              own deductible part of the service voucher are based on the Act on
-              Client Fees in Early Childhood Education and Care (1503/2016). The
-              client fee is determined by the size of the family, the need for
-              service as well the gross income. New clients must fill in the
-              client fee form and submit the required appendices to the Client
-              fees of Early childhood education within a month from when the
-              care started at the latest.
+              The client fees and the share of the service voucher to be paid by
+              the family are determined as a percentage of the family’s combined
+              gross income. Family size and income and the duration of early
+              childhood education all affect the amount to be paid. If the cost
+              of early childhood education and care at a private unit is higher
+              than the value of the service voucher, the family is responsible
+              for paying the difference. The family must submit an income
+              declaration detailing their gross income using the income
+              declaration form as soon as possible after the child has started
+              attending early childhood education and care.
+            </P>
+          ),
+          PRESCHOOL: (
+            <P>
+              Pre-school education is provided free of charge, but early
+              childhood education and care organized in connection with it is
+              subject to a fee. If the child attends early childhood education
+              and care in connection with pre-school education, the family must
+              submit an income declaration detailing their gross income using
+              the income declaration form as soon as possible after the child
+              has started attending early childhood education and care.
             </P>
           )
         },
         links: (
-          <P>
-            You will find further information on client fees for early childhood
-            education on{' '}
-            <ExternalLink
-              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut"
-              text="the website of the City of Oulu"
-              newTab
-            />
-          </P>
+          <>
+            <P>
+              You can find the income declaration form in the Income information
+              (Tulotiedot) section of the User (Käyttäjä) menu in the eVaka
+              service.
+            </P>
+            <P>
+              For more information on client fees, visit the website of the City
+              of Oulu:
+              <ExternalLink
+                href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut"
+                text="Client fees in early childhood education"
+                newTab
+              />
+            </P>
+          </>
         )
       },
       additionalDetails: {
         dietInfo: (
-          <>
-            For special diets, a custodian shall submit to the early childhood
-            education location{' '}
-            <ExternalLink
-              href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus"
-              text="the website of the City of Oulu"
-              newTab
-            />
-            , filled in and signed by a doctor or a nutritional therapist, which
-            is for a fixed time period.
-          </>
+          <> If your child follows a special diet, please indicate it here. </>
         )
       }
     }
   },
   applicationsList: {
-    title: 'Applying for early childhood education',
+    title:
+      'Applying for early childhood education and enrolling in pre-school education',
     summary: (
-      <P width="800px">
-        The child&apos;s custodian can apply for early childhood education and a
-        club for the child. Information about the custodian&apos;s children is
-        automatically retrieved from the Population data register for this view.
-      </P>
+      <>
+        <P width="800px">
+          The child&apos;s guardian can make an application for the child to be
+          granted a place in early childhood education and care and in clubs and
+          groups organized as a part of open early childhood education, or
+          enroll the child in pre-school education. The same application can be
+          used for applying for a service voucher for early childhood education
+          and care, by applying for a place a private early childhood education
+          and care unit. The guardian’s and the children’s address information
+          is retrieved from the population information system automatically.
+        </P>
+        <P width="800px">
+          If the child has already been granted a place in an early childhood
+          education and care unit in Oulu, and the family wishes to apply for a
+          transfer to another unit, they must submit a new application.
+        </P>
+      </>
     )
   },
   footer: {
@@ -250,7 +504,7 @@ const en: DeepPartial<Translations> = {
     privacyPolicyLink: (
       <ExternalLink
         href="https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus"
-        text="Privacy Notices"
+        text="Privacy statements"
         newTab={true}
         data-qa="footer-policy-link"
       ></ExternalLink>
@@ -260,22 +514,30 @@ const en: DeepPartial<Translations> = {
         href="https://e-kartta.ouka.fi/efeedback"
         text="Give feedback"
         newTab={true}
-        data-qa="footer-feedback-link"
+        data-qa="footer-policy-link"
       ></ExternalLink>
     )
   },
+  loginPage: {
+    title: 'Early childhood education and care in the City of Oulu'
+  },
   map: {
-    mainInfo: `In this view you can locate on the map all of Oulu’s early childhood education units and clubs. Regional service voucher units and clubs can also be found on the map.`,
+    mainInfo: `You can use this view to search Oulu’s early childhood education care units, pre-school education units, and open early childhood education and care units by their geographic location. You can find information about private kindergartens on the website of the City of Oulu.`,
     privateUnitInfo: <></>,
     serviceVoucherLink:
       'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli',
-    searchPlaceholder: 'E.g. Ainola daycare'
+    searchPlaceholder: 'E.g. Ainolan päiväkoti',
+    careTypes: {
+      CLUB: 'Open early childhood education and care',
+      DAYCARE: 'Early childhood education and care',
+      PRESCHOOL: 'Pre-school education'
+    }
   },
   decisions: {
     summary: (
       <P width="800px">
-        This page displays the received decisions regarding child&apos;s early
-        childhood education and club applications.
+        Any decisions or notifications regarding your child’s access to
+        pre-school education and groups or clubs will be displayed on this page.
       </P>
     )
   },
@@ -283,208 +545,386 @@ const en: DeepPartial<Translations> = {
     description: (
       <>
         <p data-qa="income-description-p1">
-          On this page, you can submit statements on your earnings that affect
-          the early childhood education fee. You can also view, edit, or delete
-          income statements that you have submitted until the authority has
-          processed the information. After the form has been processed, you can
-          update your income information by submitting a new form.
-        </p>
-        <p>
-          <strong>
-            Both adults living in the same household must submit their own
-            separate income statements.
-          </strong>
+          On this page, you can submit declarations regarding the part of your
+          income affecting your early childhood education fees. You can also
+          view the income declarations you have submitted and edit or delete
+          them until they have been processed by the assigned authority. After
+          your form has been processed, you can only update your income
+          information by submitting a new form.
         </p>
         <p data-qa="income-description-p2">
-          The client fees for municipal early childhood education are determined
-          as a percentage of the family’s gross income. The fees vary according
-          to family size, income and time in early childhood education.
+          <strong>
+            Both adults living in the same household must submit separate income
+            declarations.
+          </strong>
         </p>
-        <p>
+        <p data-qa="income-description-p3">
+          The client fees for municipal early childhood education and care are
+          determined as a percentage of the family’s combined gross income.
+          Family size and income and the duration of early childhood education
+          all affect the amount to be paid.
+        </p>
+        <p data-qa="income-description-p4">
           <a href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut">
-            Further information on client fees.
+            Additional information about the client fees
           </a>
         </p>
       </>
     ),
+    incomeType: {
+      description: (
+        <>
+          If you&apos;re an entrepreneur, but also have other sources of income,
+          choose both of the following options:
+          <strong> Entrepreneur’s income information </strong> and
+          <strong>Determining the client fee based on gross income.</strong>.
+        </>
+      ),
+      startDate: 'Valid from',
+      endDate: 'Expires on',
+      title: 'Grounds for determining the client fee',
+      agreeToHighestFee:
+        'I acknowledge and accept that I will be charged the highest possible client fee for early childhood education and care',
+      highestFeeInfo:
+        'The highest possible client fee according to my family’s service needs is valid until further notice or until my child’s early childhood education and care ends. (Income information not required)',
+      grossIncome: 'Determining the client fee based on gross income.',
+      entrepreneurIncome: 'Entrepreneur’s income information'
+    },
+    grossIncome: {
+      title: 'Filling out the information on your gross income',
+      description: (
+        <>
+          <P></P>
+        </>
+      ),
+      incomeSource: 'Submitting the income information',
+      provideAttachments: 'I submit my income information attached',
+      estimate: 'My estimated gross income',
+      estimatedMonthlyIncome:
+        'Average income including holiday compensation, €/month',
+      otherIncome: 'Other income',
+      otherIncomeDescription:
+        'If you have any other sources of income, you must provide proof or receipts as attachments. You can find a list of all required attachments at the bottom of the form under the section Attachments relating to income and early childhood education fees.',
+      choosePlaceholder: 'Select',
+      otherIncomeTypes: {
+        PENSION: 'Pension',
+        ADULT_EDUCATION_ALLOWANCE: 'Adult education allowance',
+        SICKNESS_ALLOWANCE: 'Sickness allowance',
+        PARENTAL_ALLOWANCE: 'Maternity and parental allowance',
+        HOME_CARE_ALLOWANCE: 'Child home care allowance',
+        FLEXIBLE_AND_PARTIAL_HOME_CARE_ALLOWANCE:
+          'Flexible or partial child home care allowance',
+        ALIMONY: 'Maintenance allowance or support',
+        INTEREST_AND_INVESTMENT_INCOME: 'Interest and dividend income',
+        RENTAL_INCOME: 'Rental income',
+        UNEMPLOYMENT_ALLOWANCE: 'Unemployment allowance',
+        LABOUR_MARKET_SUBSIDY: 'Labor market subsidy',
+        ADJUSTED_DAILY_ALLOWANCE: 'Adjusted unemployment allowance',
+        JOB_ALTERNATION_COMPENSATION: 'Job alternation compensation',
+        REWARD_OR_BONUS: 'Compensation or bonus',
+        RELATIVE_CARE_SUPPORT: 'Informal care allowance',
+        BASIC_INCOME: 'Basic income',
+        FOREST_INCOME: 'Forest income',
+        FAMILY_CARE_COMPENSATION: 'Family care compensation',
+        REHABILITATION:
+          'Rehabilitation allowance or partial rehabilitation allowance',
+        EDUCATION_ALLOWANCE: 'Education allowance',
+        GRANT: 'Grant or scholarship',
+        APPRENTICESHIP_SALARY: 'Income from apprenticeship training',
+        ACCIDENT_INSURANCE_COMPENSATION: 'Accident insurance payment',
+        OTHER_INCOME: 'Other sources of income'
+      },
+      otherIncomeInfoLabel: 'Estimate of other income',
+      otherIncomeInfoDescription:
+        'Enter an estimate of your income received from other sources income (EUR/month) here, e.g. "Rental income 150, child home care allowance 300"'
+    },
+    entrepreneurIncome: {
+      title: 'Filling out the income information for entrepreneurs',
+      description: (
+        <>
+          If necessary, you can also use this form to enter the information for
+          several companies at once by selecting all options that apply to your
+          companies. Please provide more detailed information on each company in
+          the attachments.
+          <br />
+          You can find a list of all required attachments at the bottom of the
+          form under the section Attachments relating to income and early
+          childhood education fees.
+        </>
+      ),
+      fullTimeLabel: 'Is the business activity full-time or part-time?',
+      fullTime: 'Full-time',
+      partTime: 'Part-time',
+      startOfEntrepreneurship: 'Entrepreneurship started on',
+      spouseWorksInCompany: 'Does your spouse work for the company?',
+      yes: 'Yes',
+      no: 'No',
+      startupGrantLabel: 'Has your business been granted a start-up grant?',
+      startupGrant:
+        'My business has been granted a start-up grant. I will include the decision regarding the start-up grant in the attachments.',
+      checkupLabel: 'Review your information',
+      checkupConsent:
+        'I accept that information related to my income may be retrieved from the income register and Kela if need be.',
+      companyInfo: 'Company information',
+      companyForm: 'Type of business',
+      selfEmployed: 'Trade name',
+      limitedCompany: 'Limited liability company',
+      partnership: 'Partnership or limited partnership company',
+      lightEntrepreneur: 'Light entrepreneurship',
+      lightEntrepreneurInfo:
+        'Provide receipts for paid salaries and wages in the attachments.',
+      partnershipInfo: ''
+    },
+    moreInfo: {
+      title: 'Additional information related to the payment',
+      studentLabel: 'Are you currently a student?',
+      student: 'I am a student.',
+      studentInfo:
+        'If you are a student, you must submit a study certificate and a decision regarding social benefits for students.',
+      deductions: 'Deductions',
+      alimony:
+        'I pay child support. I will provide a copy of a receipt for payment in the attachments.',
+      otherInfoLabel: 'Additional information about the income information'
+    },
+    attachments: {
+      title:
+        'Attachments relating to income and early childhood education fees',
+      description:
+        'You can submit attachments relating to income and early childhood education fees here. If your family has already agreed to pay the highest possible client fee, the attachments are not required.',
+      required: {
+        title: 'Required attachments'
+      },
+      attachmentNames: {
+        PENSION: 'Decision on pension',
+        ADULT_EDUCATION_ALLOWANCE: 'Decision on adult education allowance',
+        SICKNESS_ALLOWANCE: 'Decision on sickness allowance',
+        PARENTAL_ALLOWANCE: 'Decision on maternity or parental allowance',
+        HOME_CARE_ALLOWANCE: 'Decision on home care allowance',
+        FLEXIBLE_AND_PARTIAL_HOME_CARE_ALLOWANCE:
+          'Decision on flexible or partial home care allowance',
+        ALIMONY: 'Maintenance agreement or decision on maintenance',
+        UNEMPLOYMENT_ALLOWANCE: 'Decision on unemployment allowance',
+        LABOUR_MARKET_SUBSIDY: 'Decision on labor market subsidy',
+        ADJUSTED_DAILY_ALLOWANCE: 'Decision on adjusted unemployment allowance',
+        JOB_ALTERNATION_COMPENSATION:
+          'Receipt of job alternation compensation ',
+        REWARD_OR_BONUS: 'Receipt of paid bonus and/or compensation',
+        RELATIVE_CARE_SUPPORT: 'Decision on informal care allowance',
+        BASIC_INCOME: 'Decision on basic income',
+        FOREST_INCOME: 'Receipt for received forest income',
+        FAMILY_CARE_COMPENSATION: 'Receipt for paid family care compensation',
+        REHABILITATION:
+          'Decision on rehabilitation allowance or partial rehabilitation allowance',
+        EDUCATION_ALLOWANCE: 'Decision on education allowance',
+        GRANT: 'Receipt for received grant or scholarship',
+        APPRENTICESHIP_SALARY:
+          'Receipt for salary paid for apprenticeship training',
+        ACCIDENT_INSURANCE_COMPENSATION:
+          'Receipt for accident insurance payment',
+        OTHER_INCOME: 'Attachments detailing other income',
+        ALIMONY_PAYOUT: 'Proof of payment of maintenance payment',
+        INTEREST_AND_INVESTMENT_INCOME:
+          'Receipts for received interest and dividend income',
+        RENTAL_INCOME: 'Receipts for rental income and condominium payment',
+        PAYSLIP: 'Latest payslip',
+        STARTUP_GRANT: 'Start-up grant',
+        ACCOUNTANT_REPORT: "Accountant's statement of salary and benefits",
+        ACCOUNTANT_REPORT_LLC:
+          "Accountant's statement of benefits in kind and dividends",
+        PROFIT_AND_LOSS_STATEMENT: 'Income statement and balance sheet',
+        SALARY: 'Receipts for paid salaries and wages',
+        PROOF_OF_STUDIES:
+          'Study certificate or decision on adult education allowance from an unemployment fund / education allowance from an employment fund',
+        CHILD_INCOME: "Receipts for the child's income"
+      }
+    },
+    selfEmployed: {
+      info: '',
+      attachments:
+        'I will include the company’s latest income statement and balance sheet or tax decision in the attachments.',
+      estimatedIncome:
+        'I am a new entrepreneur. I will provide an estimate of my average monthly income. I will make the income statement and balance sheet available as soon as possible.',
+      estimatedMonthlyIncome: 'Average income EUR/month',
+      timeRange: 'During the following period of time'
+    },
     formDescription: (
       <>
         <P data-qa="income-formDescription-p1">
-          The income statement and its attachments must be submitted within a
-          month from the beginning of early childhood education. In case of
-          incomplete income information, the fee may be set at the highest fee.
+          You must provide the income declaration as soon as possible after the
+          early childhood education begins. If the income information is not
+          provided or the provided information is incomplete, the client fee
+          will be determined as the highest possible fee.
         </P>
         <P>
-          The client fee is charged from the first day of early education in
-          accordance with the decision.
+          The client fee is charged from the early childhood education and care
+          start date determined in the corresponding decision.
         </P>
         <P>
-          The client must immediately inform the client fees for Early childhood
-          education of changes in income and family size.{' '}
+          The client must notify the early childhood education and care client
+          fee team of any changes in income or family size. If necessary, the
+          authorities also have the right to adjust early childhood education
+          and care fees retroactively.
         </P>
         <P>
-          <strong>To be noted:</strong>
+          <strong>Please note:</strong>
         </P>
         <Gap size="xs" />
-        <UnorderedList>
+        <UnorderedList data-qa="income-formDescription-ul">
           <li>
-            If your income exceeds the income threshold according to family
-            size, accept the highest early childhood education fee. In this
-            case, you do not need to submit an income statement.
+            If your income exceeds the income limit determined for your family
+            size, accept the highest possible early childhood education and care
+            client fee. If you do this, you will not have to provide any
+            declarations, receipts or other proof of income.
           </li>
           <li>
-            If there&apos;s another adult in your family, they must also submit
-            an income statement by personally logging into eVaka and filling out
-            this form.
+            If your family includes another adult, they also have to submit an
+            income declaration by logging onto eVaka with their own personal
+            information and filling out this form.
           </li>
           <li>
-            See current income thresholds{' '}
+            View current income limits
             <a
               target="_blank"
               rel="noreferrer"
               href="https://www.ouka.fi/oulu/paivahoito-ja-esiopetus/paivahoitomaksut"
             >
-              hare
+              here
             </a>
             .
           </li>
         </UnorderedList>
-        <P>* The information denoted with an asterisk is mandatory.</P>
+        <P>*Fields marked with an asterisk are mandatory.</P>
       </>
     )
-  },
-  vasu: {
-    givePermissionToShareInfoVasu:
-      "If you want to change the recipients mentioned in the plan, contact the staff of your child's early childhood education unit. When a child changes to another early childhood education unit in the City of Oulu, the early childhood education plan and other early childhood education documents are transferred to the new unit (also applies to early childhood education organized by Oulu as a purchasing service). The guardian will be informed about the transfer in advance. We ask the guardian for permission to hand over the early childhood education plan to an outsider. However, if a child enters private or other municipality's early childhood education, the early childhood education plan must be submitted to the new early childhood education provider even without permission, if the information is necessary for arranging the child's early childhood education (section 41 (3) of the Early Childhood Education Act). In addition, the early childhood education plan must be submitted to the organizer of pre-primary or primary education if it is necessary for the organization of the child's education (section 41 (4) of the Basic Education Act). The guardian will be informed of the transfer in advance."
   },
   accessibilityStatement: (
     <>
       <H1>Accessibility statement</H1>
       <P>
-        This accessibility statement applies to the City of Oulus early
-        childhood education online service eVaka at{' '}
+        This accessibility statement is given on the eVaka web service provided
+        by the early childhood education and care services of the City of Oulu.
         <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a>.
-        The City of Oulu endeavours to ensure the accessibility of the online
-        service, continuously improve the user experience and apply appropriate
-        accessibility standards.
+        The City of Oulu seeks to guarantee the accessibility of this website,
+        to continuously improve the user experience it offers, and to comply
+        with the appropriate accessibility standards.
       </P>
       <P>
-        The accessibility of the service was assessed by the development team of
-        the service, and this statement was drawn up on 12 April 2022.
+        The accessibility of this service was assessed by the service
+        development team. The accessibility statement was published on April 12,
+        2022.
       </P>
-      <H2>Compliance of the service</H2>
+      <H2>Service compliance</H2>
       <P>
-        The online service complies with the statutory critical accessibility
-        requirements in accordance with Level AA of the Accessibility Guidelines
-        for the WCAG v2.1. The service is not yet fully compliant with the
-        requirements.
+        This web service meets the critical accessibility requirements set forth
+        in the relevant legislation in accordance with level AA of WCAG 2.1. The
+        service does not yet completely comply with the requirements.
       </P>
-      <H2>Measures to support accessibility</H2>
+      <H2>Accessibility support measures</H2>
       <P>
-        The accessibility of the online service is ensured, among other things,
-        by the following measures:
+        We utilize the following measures to ensure the accessibility of this
+        service:
       </P>
       <ul>
         <li>
-          Accessibility has been taken into account from the beginning of the
-          design phase, for example, when choosing the colours and font sizes of
-          the service.
+          Accessibility is taken into account from the start of the process when
+          selecting colors and font sizes in the design phase, for example.
         </li>
         <li>
-          The service elements have been defined in consistently in terms of
-          semantics.
-        </li>
-        <li>The service is continuously tested with a screen reader.</li>
-        <li>
-          Various users test the service and give feedback on its accessibility.
+          The elements of the service are defined in a semantically consistent
+          manner.
         </li>
         <li>
-          When website technology or content changes, its accessibility is
-          ensured through constant monitoring.
+          The service is tested with a screen reader at regular intervals.
+        </li>
+        <li>
+          The service is tested by different users who provide feedback on
+          accessibility.
+        </li>
+        <li>
+          The accessibility of the site is reviewed every time the technology
+          used on the site or its contents change.
         </li>
       </ul>
       <P>
-        This statement will be updated in conjunction with website changes and
-        accessibility evaluations.
+        This brochure is updated with site changes and accessibility reviews.
       </P>
       <H2>Known accessibility issues</H2>
       <P>
-        Users may still encounter some issues on the website. The following
-        contains a description of known accessibility issues. If you notice an
-        issue on the site that is not listed, please contact us.
+        Users may still experience some issues when using the site. The
+        following is a description of known accessibility issues. If you notice
+        an issue that is not on this list, please contact us.
       </P>
       <ul>
         <li>
-          Navigating on the Messages page using the keyboard or screen reader
-          still requires revision for part of moving and targeted elements.
+          Navigating the Messages page with a keyboard or a screen reader
+          requires corrections with regard to transitions and aligned elements.
         </li>
         <li>
-          The service’s unit map cannot be navigated using the keyboard/screen
-          reader, but the units can be browsed on the list available in the same
-          view. The map used in the service is produced by a third party.
+          The unit map provided in the service cannot be navigated with only a
+          keyboard or a screen reader, but the units can be browsed using the
+          list feature on the same page. The service utilizes a third-party map.
         </li>
       </ul>
       <H2>Third parties</H2>
       <P>
-        The online service uses the following third party services, the
-        accessibility of which we cannot be responsible for.
+        We cannot guarantee the accessibility of third-party services. This web
+        service utilizes the following third-party services:
       </P>
       <ul>
-        <li>Keycloak user identification service</li>
-        <li>Suomi.fi identification</li>
-        <li>Leaflet map service</li>
+        <li>The user authentication service Keycloak</li>
+        <li>Suomi.fi e-identification</li>
+        <li>The map service Leaflet</li>
       </ul>
-      <H2>Alternative ways of accessing the service</H2>
+      <H2>Alternative ways of using the service</H2>
       <P>
         <ExternalLink
           href="https://www.ouka.fi/oulu/asiointi-ja-neuvonta"
-          text="The City of Oulu’s Service Points"
+          text="The service points of the City of Oulu"
         />{' '}
-        provide assistance with using electronic services. Service advisors at
-        the Service Points help users who cannot access digital services.
+        offer guidance to using electronic services. The service point staff
+        also provide help to users for whom digital services are not accessible.
       </P>
       <H2>Give feedback</H2>
       <P>
-        If you notice an accessibility gap in our online service, please let us
-        know! You can give us feedback using the{' '}
+        If you notice an accessibility-related issue on the service, please let
+        us know! You can send us feedback using this{' '}
         <ExternalLink
           href="https://e-kartta.ouka.fi/efeedback"
           text="online form"
         />{' '}
-        or by emailing{' '}
+        or by mail{' '}
         <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
       </P>
-      <H2>Supervisory authority</H2>
+      <H2>Control authority</H2>
       <P>
-        If you notice any accessibility issues on the website, please send us,
-        the site administrator, feedback first. It may take us up to 14 days to
-        reply. If you are not satisfied with the reply or you do not receive a
-        reply within two weeks, you can give feedback to the Regional State
-        Administrative Agency for Southern Finland. The website of the Regional
-        State Administrative Agency for Southern Finland explains in detail how
-        a complaint can be submitted, and how the matter will be processed.
+        If you notice issues with the accessibility of this website, please
+        contact the site administrators first. It may take up to 14 days until
+        you receive a response. If you are not satisfied with the reply you
+        received or do not receive a reply within two weeks, you can send your
+        feedback to the Regional State Administrative Agency for Southern
+        Finland. The website of the Regional State Administrative Agency for
+        Southern Finland provides more in-depth information on submitting a
+        complaint and how the complaints are processed.
       </P>
-
       <P>
-        <strong>Contact information of the supervisory authority</strong>
+        <strong>Control authority contact details</strong>
         <br />
-        Regional State Administrative Agency of Southern Finland
-        <br />
-        Accessibility Supervision Unit
+        Regional State Administrative Agency for Southern Finland <br />
+        Accessibility Control Unit
         <br />
         <ExternalLink
-          href="https://www.saavutettavuusvaatimukset.fi"
+          href="www.saavutettavuusvaatimukset.fi"
           text="www.saavutettavuusvaatimukset.fi"
         />
         <br />
         <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>
         <br />
-        tel. (exchange) 0295 016 000
+        phone number switchboard 0295 016 000
         <br />
-        Open: Mon-Fri 8.00–16.15
+        Open: Mon–Fri 8 a.m. to 4.15 p.m.
       </P>
     </>
   )
 }
 
-export default en
+export default fi

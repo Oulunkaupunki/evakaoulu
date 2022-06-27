@@ -30,8 +30,7 @@ const fi: DeepPartial<Translations> = {
     creation: {
       daycareInfo:
         'Varhaiskasvatushakemuksella haetaan paikkaa kunnalliseen päiväkotiin tai perhepäivähoitoon. Samalla hakemuksella voi hakea myös varhaiskasvatuksen palveluseteliä yksityiseen varhaiskasvatukseen valitsemalla Hakutoiveet-kohtaan se yksityinen yksikkö, johon palveluseteliä halutaan hakea.',
-      preschoolLabel:
-        'Ilmoittautuminen esiopetukseen ja / tai valmistavaan opetukseen',
+      preschoolLabel: 'Ilmoittautuminen esiopetukseen',
       preschoolInfo:
         'Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen työ- ja loma-aikoja. Tämän lisäksi lapselle voidaan hakea esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
       preschoolDaycareInfo: '',

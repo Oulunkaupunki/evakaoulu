@@ -30,8 +30,7 @@ const fi: DeepPartial<Translations> = {
     creation: {
       daycareInfo:
         'You can apply for a place in a municipal daycare center or in family day care using the application for early childhood education. The same application can be used to apply for an early childhood education service voucher for private childcare. In order to do this, simply choose the private unit for which you wish to acquire a voucher for as your preferred option.',
-      preschoolLabel:
-        'Enrolment for pre-primary school and/or instruction preparing for basic education',
+      preschoolLabel: 'Enrolment for pre-primary school',
       preschoolInfo:
         'Free pre-school education is provided for four (4) hours a day. The school year mainly follows the annual holiday schedule used in basic education. In addition to this, you may apply for early childhood education and care (ECEC) in connection with pre-school education. In connection with pre-school education, ECEC is provided in the same place as the pre-school education before and after the pre-school education.',
       preschoolDaycareInfo: '',

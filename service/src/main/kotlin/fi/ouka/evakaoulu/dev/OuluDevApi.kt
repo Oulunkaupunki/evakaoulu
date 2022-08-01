@@ -8,6 +8,7 @@ import fi.espoo.evaka.ExcludeCodeGen
 import fi.espoo.evaka.shared.async.AsyncJob
 import fi.espoo.evaka.shared.async.AsyncJobRunner
 import fi.espoo.evaka.shared.db.Database
+import fi.espoo.evaka.shared.domain.EvakaClock
 import fi.ouka.evakaoulu.database.resetOuluDatabaseForE2ETests
 import org.springframework.context.annotation.Profile
 import org.springframework.http.ResponseEntity
@@ -30,9 +31,9 @@ class OuluDevApi(
     }
 
     @PostMapping("/reset-oulu-db-for-e2e-tests")
-    fun resetOuluDatabaseForE2ETests(db: Database): ResponseEntity<Unit> {
+    fun resetOuluDatabaseForE2ETests(db: Database, clock: EvakaClock): ResponseEntity<Unit> {
         // Run async jobs before database reset to avoid database locks/deadlocks
-        asyncJobRunner.runPendingJobsSync()
+        asyncJobRunner.runPendingJobsSync(clock)
         asyncJobRunner.waitUntilNoRunningJobs(timeout = Duration.ofSeconds(20))
 
         db.connect { c -> c.transaction { tx -> tx.resetOuluDatabaseForE2ETests() } }

@@ -102,6 +102,7 @@ INSERT INTO service_need_option_voucher_value (
     id,service_need_option_id,validity,base_value,coefficient,value,base_value_under_3y,coefficient_under_3y,value_under_3y
 )
 VALUES
+    ('546fdfbe-123d-11ed-b5b1-9fd256edadac','de463972-9f97-11ec-a22c-931f5a294cea',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200)
     ('a068c5d8-1185-11ed-80ed-5bf569d0e21f','86ef70a0-bf85-11eb-91e6-1fb57a101161',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a06993e6-1185-11ed-80ed-4bc089b67986','503590f0-b961-11eb-b520-53740af3f7ee',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a0699788-1185-11ed-80ed-77eb3184d140','503591ae-b961-11eb-b521-1fca99358eef',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),

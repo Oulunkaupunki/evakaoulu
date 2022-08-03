@@ -12,6 +12,8 @@ VALUES
     ('503591ae-b961-11eb-b521-1fca99358eef','Kokoaikainen varhaiskasvatus 13 pv/kk','Kokoaikainen varhaiskasvatus 13 pv/kk','Full-time early childhood education 13 d/M',13,'DAYCARE',FALSE,0.75,0.77,26.3,FALSE,FALSE,'Kokoaikainen varhaiskasvatus 13 pv/kk','Kokoaikainen varhaiskasvatus 13 pv/kk','Kokoaikainen varhaiskasvatus 13 pv/kk','Kokoaikainen varhaiskasvatus 13 pv/kk', 3, 1.75, true),
     ('c288a058-9ef2-11ec-853e-9bcaa26ea729','Yksityinen varhaiskasvatus','Yksityinen varhaiskasvatus','Private early childhood education',NULL,'DAYCARE',FALSE,1.0,1.0,40,FALSE,FALSE,'Yksityinen varhaiskasvatus','Yksityinen varhaiskasvatus','Yksityinen varhaiskasvatus','Yksityinen varhaiskasvatus', 4, 1.75, true),
     ('c288a0c6-9ef2-11ec-853f-47b02ebd51bb','Yksityinen varhaiskasvatus palse','Yksityinen varhaiskasvatus palse','Private early childhood education service voucher',NULL,'DAYCARE',FALSE,1.0,1.0,40,FALSE,FALSE,'Yksityinen varhaiskasvatus palse','Yksityinen varhaiskasvatus palse','Yksityinen varhaiskasvatus palse','Yksityinen varhaiskasvatus palse', 5,1.75, false),
+    ('19094188-130d-11ed-a572-473907d23b65','Yksityinen perhepäivähoito palse','Yksityinen perhepäivähoito palse','Private family daycare service voucher',NULL,'DAYCARE',FALSE,1.0,1.0,40,FALSE,FALSE,'Yksityinen perhepäivähoito palse','Yksityinen perhepäivähoito palse','Yksityinen perhepäivähoito palse','Yksityinen perhepäivähoito palse', 6,1, false),
+
 
     -- DAYCARE_PART_TIME
     ('de463bd4-9f97-11ec-a22d-4791bc036bd9', 'Varhaiskasvatus alle 5-h päivä','Varhaiskasvatus alle 5-h päivä','Early childhood education under 5-h day',NULL,'DAYCARE_PART_TIME',TRUE,0.6,0.54,25,FALSE,FALSE,'Varhaiskasvatus alle 5-h päivä','Varhaiskasvatus alle 5-h päivä','Varhaiskasvatus alle 5-h päivä','Varhaiskasvatus alle 5-h päivä', null,1.75, true),
@@ -22,6 +24,9 @@ VALUES
     ('c2889ef0-9ef2-11ec-853b-2f545a699ef0','Yksityinen osapäivä','Yksityinen osapäivä','Private part time',NULL,'DAYCARE_PART_TIME',FALSE,1.0,0.54,20,TRUE,FALSE,'Yksityinen osapäivä','Yksityinen osapäivä','Yksityinen osapäivä','Yksityinen osapäivä', null,1.75, true),
     ('c2889f72-9ef2-11ec-853c-3bc6a35d44a3','Yksityinen osapäivä 4h palse','Yksityinen osapäivä 4h palse','Private part time 4h service voucher',NULL,'DAYCARE_PART_TIME',FALSE,0.5,0.54,20,TRUE,FALSE,'Yksityinen osapäivä 4h palse','Yksityinen osapäivä 4h palse','Yksityinen osapäivä 4h palse','Yksityinen osapäivä 4h palse', null,1.75, false),
     ('50359334-b961-11eb-b525-f3febdfea5d3','Yksityinen osaviikko 20h palse','Yksityinen osaviikko 20h palse','Private part time 20h service voucher',NULL,'DAYCARE_PART_TIME',FALSE,1.0,0.54,20,FALSE,TRUE,'Yksityinen osaviikko 20h palse','Yksityinen osaviikko 20h palse','Yksityinen osaviikko 20h palse','Yksityinen osaviikko 20h palse', null,1.75, false),
+    ('86495b70-130d-11ed-a573-bfda992853b8','Yksityinen perhepäivähoito osaviikko 20h palse','Yksityinen perhepäivähoito osaviikko 20h palse','Private family daycare part time 20h service voucher',NULL,'DAYCARE_PART_TIME',FALSE,1.0,0.54,20,FALSE,TRUE,'Yksityinen perhepäivähoito osaviikko 20h palse','Yksityinen perhepäivähoito osaviikko 20h palse','Yksityinen perhepäivähoito osaviikko 20h palse','Yksityinen perhepäivähoito osaviikko 20h palse', null,1, false),
+    ('d146f678-130d-11ed-a574-c39e98171347','Yksityinen perhepäivähoito osa-aikainen 12-13pv/kk palse','Yksityinen perhepäivähoito osa-aikainen 12-13pv/kk palse','Private family daycare part time 12-13d/m service voucher',NULL,'DAYCARE_PART_TIME',FALSE,1.0,1.0,26.3,FALSE,FALSE,'Yksityinen perhepäivähoito osa-aikainen 12-13pv/kk palse','Yksityinen perhepäivähoito osa-aikainen 12-13pv/kk palse','Yksityinen perhepäivähoito osa-aikainen 12-13pv/kk palse','Yksityinen perhepäivähoito osa-aikainen 12-13pv/kk palse', null,1, false),
+    ('07a1bde8-130e-11ed-a575-bbe09459e8d0','Yksityinen perhepäivähoito osa-aikainen 29h/viikko palse','Yksityinen perhepäivähoito osa-aikainen 29h/viikko palse','Private family daycare part time 29h/week service voucher',NULL,'DAYCARE_PART_TIME',FALSE,1.0,1.0,29,FALSE,FALSE,'Yksityinen perhepäivähoito osa-aikainen 29h/viikko palse','Yksityinen perhepäivähoito osa-aikainen 29h/viikko palse','Yksityinen perhepäivähoito osa-aikainen 29h/viikko palse','Yksityinen perhepäivähoito osa-aikainen 29h/viikko palse', null,1, false),
 
     -- PRESCHOOL
     ('de463c38-9f97-11ec-a22e-97907801ecdc', 'Esiopetus 4h ','Esiopetus 4h ','Pre-school education 4h ',NULL,'PRESCHOOL',TRUE,0,0.54,20,TRUE,FALSE,'Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h', null,1.75, true),
@@ -107,6 +112,7 @@ VALUES
     ('a0699788-1185-11ed-80ed-77eb3184d140','503591ae-b961-11eb-b521-1fca99358eef',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a0699990-1185-11ed-80ed-fb1b3ae80278','c288a058-9ef2-11ec-853e-9bcaa26ea729',daterange('2000-01-01', NULL, '[]'),86800,0.0,0,133200,0.0,0),
     ('a0699b70-1185-11ed-80ed-f73cd8514a0b','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
+    ('70051c0e-130e-11ed-b908-0f4908e167de','19094188-130d-11ed-a572-473907d23b65',daterange('2000-01-01', NULL, '[]'),82000,1.0,82000,82000,1.0,82000),
     ('a0699d64-1185-11ed-80ed-334f889d313a','de463bd4-9f97-11ec-a22d-4791bc036bd9',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a0699f44-1185-11ed-80ed-6b21f4cc6fcd','86ef7370-bf85-11eb-91e7-6fcd728c518d',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a069a1ec-1185-11ed-80ed-4bda5bf9eb9f','c2886f84-9ef2-11ec-8538-734ab2ac6c71',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
@@ -115,6 +121,9 @@ VALUES
     ('a069a7c8-1185-11ed-80ed-6b8aafd8acb1','c2889ef0-9ef2-11ec-853b-2f545a699ef0',daterange('2000-01-01', NULL, '[]'),86800,0.0,0,133200,0.0,0),
     ('a069aa98-1185-11ed-80ed-0f06e4c634d7','c2889f72-9ef2-11ec-853c-3bc6a35d44a3',daterange('2000-01-01', NULL, '[]'),86800,0.55,47740,133200,0.55,73260),
     ('a069afc0-1185-11ed-80ed-53c4aa412615','50359334-b961-11eb-b525-f3febdfea5d3',daterange('2000-01-01', NULL, '[]'),86800,0.55,47740,133200,0.55,73260),
+    ('a2e8de44-130e-11ed-b909-4b7d84273804','86495b70-130d-11ed-a573-bfda992853b8',daterange('2000-01-01', NULL, '[]'),82000,0.55,82000,82000,0.55,82000),
+    ('c0f5cf0a-130e-11ed-b90a-7f619c57012f','d146f678-130d-11ed-a574-c39e98171347',daterange('2000-01-01', NULL, '[]'),82000,0.7,82000,82000,0.7,82000),
+    ('e0e7e924-130e-11ed-b90b-6be35ba0f06a','07a1bde8-130e-11ed-a575-bbe09459e8d0',daterange('2000-01-01', NULL, '[]'),82000,0.7,82000,82000,0.7,82000),
     ('a069b2ea-1185-11ed-80ed-ff1829825b94','de463c38-9f97-11ec-a22e-97907801ecdc',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a069b556-1185-11ed-80ed-2f58ed6d6505','c288a152-9ef2-11ec-8540-2fc7b01eb49e',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a069b7e0-1185-11ed-80ed-431a58630a1f','c288a26a-9ef2-11ec-8541-57b8edf0098f',daterange('2000-01-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),

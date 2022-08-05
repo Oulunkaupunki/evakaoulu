@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Component
-class IntimeSender(val properties: EvakaOuluProperties, val sftpConnector: SftpConnector) {
+class SftpSender(val properties: EvakaOuluProperties, val sftpConnector: SftpConnector) {
     @Throws(SftpException::class)
     fun send(proEInvoice: String) {
         val intimeProperties = properties.intime

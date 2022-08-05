@@ -12,7 +12,7 @@ import mu.KotlinLogging
 private val logger = KotlinLogging.logger {}
 
 class EVakaOuluInvoiceClient(
-    private val intimeSender: IntimeSender,
+    private val sftpSender: SftpSender,
     private val invoiceGenerator: ProEInvoiceGenerator
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
@@ -26,7 +26,7 @@ class EVakaOuluInvoiceClient(
 
         if (!successList.isEmpty()) {
             try {
-                intimeSender.send(proEinvoices)
+                sftpSender.send(proEinvoices)
                 logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
             } catch (e: SftpException){
                 failedList.addAll(successList)

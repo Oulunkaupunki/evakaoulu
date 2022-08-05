@@ -25,9 +25,9 @@ class InvoiceConfiguration {
     fun invoiceIntegrationClient(
         properties: EvakaOuluProperties,
         invoiceGenerator: ProEInvoiceGenerator,
-        intimeSender: IntimeSender
+        sftpSender: SftpSender
         ): InvoiceIntegrationClient {
-        return EVakaOuluInvoiceClient(intimeSender, invoiceGenerator)
+        return EVakaOuluInvoiceClient(sftpSender, invoiceGenerator)
     }
 
     @Bean

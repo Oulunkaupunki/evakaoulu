@@ -7,14 +7,12 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
 
 class EVakaOuluInvoiceClient(
-    private val invoiceSender: InvoiceSender,
+    private val intimeSender: IntimeSender,
     private val invoiceGenerator: ProEInvoiceGenerator
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
@@ -28,7 +26,7 @@ class EVakaOuluInvoiceClient(
 
         if (!successList.isEmpty()) {
             try {
-                invoiceSender.send(proEinvoices)
+                intimeSender.send(proEinvoices)
                 logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
             } catch (e: SftpException){
                 failedList.addAll(successList)

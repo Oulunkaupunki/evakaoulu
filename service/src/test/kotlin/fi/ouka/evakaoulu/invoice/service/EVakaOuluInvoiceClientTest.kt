@@ -21,8 +21,8 @@ internal class EVakaOuluInvoiceClientTest {
 
 
     val invoiceGenerator = mock<ProEInvoiceGenerator>()
-    val invoiceSender = mock<InvoiceSender>()
-    val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(invoiceSender, invoiceGenerator)
+    val intimeSender = mock<IntimeSender>()
+    val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(intimeSender, invoiceGenerator)
 
     @Test
     fun `should pass invoices to the invoice generator`() {
@@ -47,7 +47,7 @@ internal class EVakaOuluInvoiceClientTest {
 
         eVakaOuluInvoiceClient.send(invoiceList)
 
-        verify(invoiceSender).send(proEInvoice1)
+        verify(intimeSender).send(proEInvoice1)
     }
 
 
@@ -59,7 +59,7 @@ internal class EVakaOuluInvoiceClientTest {
 
         eVakaOuluInvoiceClient.send(invoiceList)
 
-        verify(invoiceSender, never()).send("")
+        verify(intimeSender, never()).send("")
     }
     @Test
     fun `should return successfully sent invoices in success list`() {
@@ -82,7 +82,7 @@ internal class EVakaOuluInvoiceClientTest {
         val proEInvoice1 = ""
         val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), proEInvoice1)
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
-        whenever(invoiceSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
+        whenever(intimeSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
 
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
@@ -100,7 +100,7 @@ internal class EVakaOuluInvoiceClientTest {
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
         assertThat(sendResult.succeeded).hasSize(2)
-        verify(invoiceSender).send(proEInvoice1)
+        verify(intimeSender).send(proEInvoice1)
     }
 
     @Test
@@ -116,7 +116,7 @@ internal class EVakaOuluInvoiceClientTest {
 
         assertThat(sendResult.succeeded).hasSize(1)
         assertThat(sendResult.manuallySent).hasSize(1)
-        verify(invoiceSender).send(proEInvoice1)
+        verify(intimeSender).send(proEInvoice1)
     }
 
     @Test
@@ -143,7 +143,7 @@ internal class EVakaOuluInvoiceClientTest {
                 StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(invoiceList, listOf(), listOf()), proEInvoice1)
         )
 
-        whenever(invoiceSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
+        whenever(intimeSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
         eVakaOuluInvoiceClient.send(invoiceList)
 
         assertThat(output).contains("Failed to send 2 invoices")

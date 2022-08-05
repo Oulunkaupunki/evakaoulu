@@ -17,11 +17,11 @@ internal class InvoiceSenderTest {
         val intimeProperties = IntimeProperties("", path, "", "")
         val proEInvoice = "one"
         val sftpConnector = mock<SftpConnector>()
-        val invoiceSender = InvoiceSender(
+        val intimeSender = IntimeSender(
             EvakaOuluProperties(intimeProperties), sftpConnector
         )
 
-        invoiceSender.send(proEInvoice)
+        intimeSender.send(proEInvoice)
 
         verify(sftpConnector).connect(intimeProperties.address, intimeProperties.username, intimeProperties.password)
         val fileNamePattern = """$path/proe-\d{8}-\d{6}.txt"""

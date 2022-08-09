@@ -1,0 +1,30 @@
+package fi.ouka.evakaoulu.payment.service
+
+import fi.espoo.evaka.invoicing.domain.Payment
+import fi.ouka.evakaoulu.invoice.service.*
+import org.junit.jupiter.api.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
+
+val paymentGenerator = mock<ProEPaymentGenerator>()
+val sftpSender = mock<SftpSender>()
+val paymentClient = OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
+
+internal class OuluPaymentIntegrationClientTest {
+
+    @Test
+    fun `should pass payments to the payment generator`() {
+        // val validInvoice = validInvoice()
+        val paymentList = listOf<Payment>()
+        val proEPayment1 = ""
+        // val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
+        val paymentGeneratorResult = proEPayment1
+        whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
+
+        paymentClient.send(paymentList)
+
+        verify(paymentGenerator).generatePayments(paymentList)
+    }
+
+}

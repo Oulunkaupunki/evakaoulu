@@ -21,13 +21,15 @@ class OuluPaymentIntegrationClient(
         var successList = generatorResult.sendResult.succeeded
         failedList.addAll(generatorResult.sendResult.failed)
 
-        try {
-            sftpSender.send(generatorResult.paymentString)
-        }
-        catch (e: SftpException) {
-            logger.error { "Failed to send ${successList.size} invoices" }
-            failedList.addAll(successList)
-            successList = listOf()
+        if (!successList.isEmpty()) {
+            try {
+                sftpSender.send(generatorResult.paymentString)
+                logger.info { "Successfully sent ${successList.size} payments" }
+            } catch (e: SftpException) {
+                logger.error { "Failed to send ${successList.size} payments" }
+                failedList.addAll(successList)
+                successList = listOf()
+            }
         }
 
         return PaymentIntegrationClient.SendResult(successList, failedList)

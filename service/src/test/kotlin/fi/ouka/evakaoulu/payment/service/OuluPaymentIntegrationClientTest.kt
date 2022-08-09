@@ -1,18 +1,28 @@
 package fi.ouka.evakaoulu.payment.service
 
 import com.jcraft.jsch.SftpException
+import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.espoo.evaka.invoicing.domain.PaymentUnit
+import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.espoo.evaka.shared.DaycareId
 import fi.ouka.evakaoulu.invoice.service.SftpSender
+import fi.ouka.evakaoulu.invoice.service.StringInvoiceGenerator
+import fi.ouka.evakaoulu.invoice.service.personWithoutSSN
+import fi.ouka.evakaoulu.invoice.service.validInvoice
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.springframework.boot.test.system.CapturedOutput
+import org.springframework.boot.test.system.OutputCaptureExtension
 import java.util.*
 
+@ExtendWith(OutputCaptureExtension::class)
 internal class OuluPaymentIntegrationClientTest {
 
     val paymentGenerator = mock<ProEPaymentGenerator>()
@@ -37,12 +47,23 @@ internal class OuluPaymentIntegrationClientTest {
         val validPayment = validPayment()
         val paymentList = listOf(validPayment)
         val proEPayment1 = ""
-        val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(), proEPayment1)
+        val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
         paymentClient.send(paymentList)
 
         verify(sftpSender).send(proEPayment1)
+    }
+
+    @Test
+    fun `should not send anything if there are no sendable payments`() {
+        val paymentList = listOf<Payment>()
+        val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(), "")
+        whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
+
+        paymentClient.send(paymentList)
+
+        verify(sftpSender, never()).send("")
     }
 
     @Test
@@ -87,4 +108,47 @@ internal class OuluPaymentIntegrationClientTest {
 
         Assertions.assertThat(sendResult.failed).hasSize(2)
     }
+
+    @Test
+    fun `should send multiple payments at once`() {
+        val validPayment = validPayment()
+        val paymentList = listOf(validPayment, validPayment)
+        val proEPayment1 = "xx"
+        whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), "xx")
+        )
+        val sendResult = paymentClient.send(paymentList)
+
+        Assertions.assertThat(sendResult.succeeded).hasSize(2)
+        verify(sftpSender).send(proEPayment1)
+    }
+
+    @Test
+    fun `should log successful payments`(output: CapturedOutput) {
+        val validPayment = validPayment()
+        val paymentList = listOf(validPayment, validPayment)
+        whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()), "x")
+        )
+
+        paymentClient.send(paymentList)
+
+        Assertions.assertThat(output).contains("Successfully sent 1 payments")
+    }
+    @Test
+
+    fun `should log failed payment sends`(output: CapturedOutput) {
+        val validPayment = validPayment()
+        val paymentList = listOf(validPayment, validPayment)
+        val proEPayment1 = ""
+        whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
+        )
+
+        whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
+        paymentClient.send(paymentList)
+
+        Assertions.assertThat(output).contains("Failed to send 2 payments")
+    }
+
 }

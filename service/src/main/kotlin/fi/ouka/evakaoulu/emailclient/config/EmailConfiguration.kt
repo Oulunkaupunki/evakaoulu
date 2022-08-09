@@ -18,19 +18,29 @@ class EmailConfiguration {
 }
 
 internal class EmailMessageProvider(): IEmailMessageProvider {
-    override val subjectForPendingDecisionEmail: String = "Toimenpiteitäsi odotetaan"
-    override val subjectForClubApplicationReceivedEmail: String = "Hakemus vastaanotettu"
-    override val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu"
-    override val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu"
+    override val subjectForPendingDecisionEmail: String = "Toimenpiteitäsi odotetaan / Waiting for your action"
+    override val subjectForClubApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
+    override val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
+    override val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
 
 
     override fun getPendingDecisionEmailHtml(): String {
         return """
             <p>Hei!</p>
             
-            <p>Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan.</p>
+            <p>Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan.</p>
             
             <p>Tähän viestiin ei voi vastata.</p>
+            
+            <hr>
+            
+            <p>Hello!</p>
+
+            <p>A decision has been made for you by the Oulu early childhood education and care services and remains unanswered. The decision must be accepted or rejected within two weeks of its arrival online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> or by contacting the daycare centre manager listed in the decision.</p> 
+
+            <p>You may not reply to this message.</p>
+            
+            
         """.trimIndent()
     }
 
@@ -41,6 +51,14 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan. 
 
             Tähän viestiin ei voi vastata.  
+            
+            ------------------------------------------------------------------------------
+            
+            Hello! 
+
+            A decision has been made for you by the Oulu early childhood education and care services and remains unanswered. The decision must be accepted or rejected within two weeks of its arrival online at varhaiskasvatus.ouka.fi or by contacting the daycare centre manager listed in the decision. 
+
+            You may not reply to this message.  
             
         """.trimIndent()
     }
@@ -61,6 +79,23 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             </p>
             
             <p>Tähän viestiin ei voi vastata.</p>
+            
+            <hr>
+            
+            <p>Hello!</p>
+            
+            <p>We have received your child’s application for open early childhood education and care. We request you to directly contact the manager of the daycare centre you wish to enrol in and inquire for free places in open early childhood education and care.</p>
+            
+            <p>The applications are usually processed in the order they are received. Siblings will also be enrolled in the order of application unless special ground exist.</p>
+            
+            <p>The decision may be viewed and accepted or rejected online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            
+            <p>Yours, <br/>
+            Early childhood education services coordination team <br/>
+            </p>
+
+            <p>You may not reply to this message.</p>
+            
         """.trimIndent()
     }
 
@@ -79,6 +114,23 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             Varhaiskasvatuksen palveluohjaus 
             
             Tähän viestiin ei voi vastata.
+            
+            ------------------------------------------------------------------------------
+            
+            Hello! 
+
+            We have received your child’s application for open early childhood education and care. We request you to directly contact the manager of the daycare centre you wish to enrol in and inquire for free places in open early childhood education and care. 
+
+            The applications are usually processed in the order they are received. Siblings will also be enrolled in the order of application unless special ground exist. 
+
+            The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.  
+            
+            Yours, 
+
+            Early childhood education services coordination team 
+            
+            You may not reply to this message. 
+            
         """.trimIndent()
     }
 
@@ -98,14 +150,35 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
             
-            <p>Hakemuksen liitteet voi lisätä suoraan sähköiselle hakemukselle <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai postitse osoitteeseen Varhaiskasvatuksen palveluohjaus, PL 75, 90015 Oulun kaupunki.</p>
-
             <p>
             Ystävällisesti <br/>
             Varhaiskasvatuksen palveluohjaus <br/>
             </p>
             
             <p>Tähän viestiin ei voi vastata.</p>
+            
+                        
+            <hr>
+            
+            <p>Hello!</p>
+            
+            <p>The early childhood education and care application for your child has been received. The guardian who filed the application may edit it online at varhaiskasvatus.ouka.fi until such time as the service coordination team takes it up for processing. The time necessary to organize a berth in early childhood education and care is four months. If care must begin earlier due to a parent’s sudden employment or beginning of their studies, the minimum time of notice is two weeks. In such a case, a certificate of employment or student status must be presented as an appendix to the application. The two weeks’ notice begins at the date this certificate is submitted. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours.</p>
+            
+            <p>If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application, we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.</p>
+            
+            <p>If the first care location you picked is a private daycare centre or child minder, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre.</p>
+            
+            <p>Transfer applications (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually.</p>
+            
+            <p>If you have specified a need for special support for your child in the application, a special needs early childhood education teacher will contact you in order to best consider your child’s need for support in making the enrolment decision.</p>
+            
+            <p>The decision may be viewed and accepted or rejected online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a></p>
+            
+            <p>Yours, <br/>
+            Early childhood education services coordination team <br/>
+            </p>
+            
+            <p>You may not reply to this message.</p>
             
         """.trimIndent()
     }
@@ -132,6 +205,28 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             Varhaiskasvatuksen palveluohjaus 
                         
             Tähän viestiin ei voi vastata.
+            
+            ------------------------------------------------------------------------------
+            
+            Hello! 
+            
+            The early childhood education and care application for your child has been received. The guardian who filed the application may edit it online at varhaiskasvatus.ouka.fi until such time as the service coordination team takes it up for processing. The time necessary to organize a berth in early childhood education and care is four months. If care must begin earlier due to a parent’s sudden employment or beginning of their studies, the minimum time of notice is two weeks. In such a case, a certificate of employment or student status must be presented as an appendix to the application. The two weeks’ notice begins at the date this certificate is submitted. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours. 
+
+            If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application, we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.  
+
+            If the first care location you picked is a private daycare centre or child minder, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre. 
+
+            Transfer applications (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually. 
+
+            If you have specified a need for special support for your child in the application, a special needs early childhood education teacher will contact you in order to best consider your child’s need for support in making the enrolment decision.  
+
+            The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.  
+
+            Yours, 
+            Early childhood education services coordination team 
+
+            You may not reply to this message. 
+ 
         """.trimIndent()
     }
 
@@ -164,6 +259,35 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Tähän viestiin ei voi vastata.</p>
             
+            <hr>
+            
+            <p>Hello!</p>
+            
+            <p>We have received your child’s registration for preschool education. The guardian who filed the application may edit it online until such time as the service coordination team takes it up for processing. The early childhood education services coordination team will enrol every child registered for preschool education with a preschool education unit during March. The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.</p>
+            
+            <p>If no preschool education group will be set up in the unit you have applied for, the coordination team will contact you and offer a spot in a unit where such a group will be set up.</p>
+      
+            <p>If you have specified a need for special support for your child in the application, a special needs early childhood education teacher will contact you in order to best consider your child’s need for support in making the enrolment decision.</p>
+       
+            <p>EARLY CHILDHOOD EDUCATION AND CARE IN CONJUNCTION WITH PRESCHOOL EDUCATION</p>
+   
+            <p>If you have applied for early childhood education and care services in conjunction with preschool education, please consider the following:</p>
+    
+            <ul><li>The time necessary to organize a berth in early childhood education and care is four months. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours or evening and/or weekend studies.</li>
+            <li><b>If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application,</b> we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.</li>
+            <li><b>If the first care location you picked is a private daycare centre,</b> you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre.</li>
+            <li><b>Transfer applications</b>  (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually.</li>
+            </ul>
+    
+            <p>The decision may be viewed and accepted or rejected online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            
+            <p>The appendices to the application may be directly submitted with the online application through the eVaka service.</p>
+            
+            <p>Yours, <br/>
+            Early childhood education services coordination team <br/>
+            </p>
+            
+            <p>You may not reply to this message.</p>
         """.trimIndent()
     }
 
@@ -197,6 +321,38 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             Varhaiskasvatuksen palveluohjaus 
                         
             Tähän viestiin ei voi vastata.
+            
+            ------------------------------------------------------------------------------
+            
+            Hello! 
+
+            We have received your child’s registration for preschool education. The guardian who filed the application may edit it online until such time as the service coordination team takes it up for processing. The early childhood education services coordination team will enrol every child registered for preschool education with a preschool education unit during March. The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.  
+
+            If no preschool education group will be set up in the unit you have applied for, the coordination team will contact you and offer a spot in a unit where such a group will be set up. 
+
+            If you have specified a need for special support for your child in the application, a special needs early childhood education teacher will contact you in order to best consider your child’s need for support in making the enrolment decision.  
+
+            EARLY CHILDHOOD EDUCATION AND CARE IN CONJUNCTION WITH PRESCHOOL EDUCATION             
+             
+            If you have applied for early childhood education and care services in conjunction with preschool education, please consider the following: 
+
+            - The time necessary to organize a berth in early childhood education and care is four months. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours or evening and/or weekend studies. 
+
+            - If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application, we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.  
+
+            - If the first care location you picked is a private daycare centre, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre. 
+
+            - Transfer applications (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually. 
+
+            The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.         
+
+            The appendices to the application may be directly submitted with the online application through the eVaka service.  
+
+            Yours, 
+            Early childhood education services coordination team 
+            
+            You may not reply to this message. 
+            
         """.trimIndent()
     }
 

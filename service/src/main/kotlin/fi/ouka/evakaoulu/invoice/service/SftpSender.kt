@@ -5,20 +5,18 @@
 package fi.ouka.evakaoulu.invoice.service
 
 import com.jcraft.jsch.SftpException
-import fi.ouka.evakaoulu.EvakaOuluProperties
-import fi.ouka.evakaoulu.IntimeProperties
-import org.springframework.stereotype.Component
+import fi.ouka.evakaoulu.SftpProperties
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SftpSender(val intimeProperties: IntimeProperties, val sftpConnector: SftpConnector) {
+class SftpSender(val sftpProperties: SftpProperties, val sftpConnector: SftpConnector) {
     @Throws(SftpException::class)
     fun send(proEInvoice: String) {
-        val path = intimeProperties.path
+        val path = sftpProperties.path
         val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
         val filepath = "$path/$fileName"
 
-        sftpConnector.connect(intimeProperties.address, intimeProperties.username, intimeProperties.password)
+        sftpConnector.connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
 
         sftpConnector.send(filepath, proEInvoice)
 

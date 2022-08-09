@@ -4,8 +4,7 @@
 
 package fi.ouka.evakaoulu.invoice.service
 
-import fi.ouka.evakaoulu.EvakaOuluProperties
-import fi.ouka.evakaoulu.IntimeProperties
+import fi.ouka.evakaoulu.SftpProperties
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 
@@ -14,16 +13,16 @@ internal class InvoiceSenderTest {
     @Test
     fun `should send invoice`() {
         val path = "/some/path"
-        val intimeProperties = IntimeProperties("", path, "", "")
+        val sftpProperties = SftpProperties("", path, "", "")
         val proEInvoice = "one"
         val sftpConnector = mock<SftpConnector>()
         val sftpSender = SftpSender(
-            intimeProperties, sftpConnector
+            sftpProperties, sftpConnector
         )
 
         sftpSender.send(proEInvoice)
 
-        verify(sftpConnector).connect(intimeProperties.address, intimeProperties.username, intimeProperties.password)
+        verify(sftpConnector).connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
         val fileNamePattern = """$path/proe-\d{8}-\d{6}.txt"""
         verify(sftpConnector).send(
             argThat { filePath -> filePath.matches(Regex(fileNamePattern)) },

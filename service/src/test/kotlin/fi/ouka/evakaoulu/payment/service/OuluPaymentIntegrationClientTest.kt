@@ -15,8 +15,8 @@ internal class OuluPaymentIntegrationClientTest {
 
     @Test
     fun `should pass payments to the payment generator`() {
-        // val validInvoice = validInvoice()
-        val paymentList = listOf<Payment>()
+        val validPayment = validPayment()
+        val paymentList = listOf(validPayment)
         val proEPayment1 = ""
         // val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), proEInvoice1)
         val paymentGeneratorResult = proEPayment1

@@ -13,6 +13,8 @@ class OuluPaymentIntegrationClient(
 
         val generatorResult = paymentGenerator.generatePayments(payments)
 
+        sftpSender.send(generatorResult)
+
         return PaymentIntegrationClient.SendResult()
     }
 }

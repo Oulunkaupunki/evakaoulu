@@ -42,7 +42,12 @@ evaka:
       xroad:
         address: address
 evakaoulu:
-  intime:
+  intimeInvoices:
+    username: user
+    password: pass
+    address: address
+    path: path
+  intimePayments:
     username: user
     password: pass
     address: address

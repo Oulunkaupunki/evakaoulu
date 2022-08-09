@@ -14,7 +14,7 @@ import java.util.*
 class SftpSender(val properties: EvakaOuluProperties, val sftpConnector: SftpConnector) {
     @Throws(SftpException::class)
     fun send(proEInvoice: String) {
-        val intimeProperties = properties.intime
+        val intimeProperties = properties.intimeInvoices
         val path = intimeProperties.path
         val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
         val filepath = "$path/$fileName"

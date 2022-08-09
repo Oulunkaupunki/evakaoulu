@@ -13,7 +13,8 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConstructorBinding
 @ConfigurationProperties(prefix = "evakaoulu", ignoreUnknownFields = false)
 data class EvakaOuluProperties(
-    val intime: IntimeProperties,
+    val intimeInvoices: IntimeProperties,
+    val intimePayments: IntimeProperties,
 )
 
 data class IntimeProperties(

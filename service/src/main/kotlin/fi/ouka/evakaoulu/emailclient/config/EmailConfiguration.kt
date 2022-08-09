@@ -32,7 +32,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Tähän viestiin ei voi vastata.</p>
             
-            <p>------------------------------------------------------------------------------</p>
+            <hr>
             
             <p>Hello!</p>
 
@@ -80,7 +80,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Tähän viestiin ei voi vastata.</p>
             
-            <p>------------------------------------------------------------------------------</p>
+            <hr>
             
             <p>Hello!</p>
             
@@ -158,7 +158,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             <p>Tähän viestiin ei voi vastata.</p>
             
                         
-            <p>------------------------------------------------------------------------------</p>
+            <hr>
             
             <p>Hello!</p>
             
@@ -259,7 +259,7 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             
             <p>Tähän viestiin ei voi vastata.</p>
             
-            <p>------------------------------------------------------------------------------</p>
+            <hr>
             
             <p>Hello!</p>
             

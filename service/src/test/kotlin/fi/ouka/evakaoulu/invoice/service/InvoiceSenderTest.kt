@@ -18,7 +18,7 @@ internal class InvoiceSenderTest {
         val proEInvoice = "one"
         val sftpConnector = mock<SftpConnector>()
         val sftpSender = SftpSender(
-            EvakaOuluProperties(intimeProperties, intimeProperties), sftpConnector
+            intimeProperties, sftpConnector
         )
 
         sftpSender.send(proEInvoice)

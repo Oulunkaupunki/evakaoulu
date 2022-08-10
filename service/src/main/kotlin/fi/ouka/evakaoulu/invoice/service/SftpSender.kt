@@ -11,14 +11,14 @@ import java.util.*
 
 class SftpSender(val sftpProperties: SftpProperties, val sftpConnector: SftpConnector) {
     @Throws(SftpException::class)
-    fun send(proEInvoice: String) {
+    fun send(content: String) {
         val path = sftpProperties.path
         val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
         val filepath = "$path/$fileName"
 
         sftpConnector.connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
 
-        sftpConnector.send(filepath, proEInvoice)
+        sftpConnector.send(filepath, content)
 
         sftpConnector.disconnect()
     }

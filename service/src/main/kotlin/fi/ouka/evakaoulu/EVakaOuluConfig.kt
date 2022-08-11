@@ -44,7 +44,7 @@ class EVakaOuluConfig {
 
     @Bean
     fun paymentIntegrationClient(evakaProperties: EvakaOuluProperties, paymentGenerator: ProEPaymentGenerator, sftpConnector: SftpConnector): PaymentIntegrationClient {
-        val sftpSender = SftpSender(evakaProperties.intimePayments, sftpConnector)
+        val sftpSender = SftpSender(evakaProperties.intimepayments, sftpConnector)
         return OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
     }
 }

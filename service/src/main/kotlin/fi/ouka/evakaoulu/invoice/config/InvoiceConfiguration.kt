@@ -25,8 +25,9 @@ class InvoiceConfiguration {
     fun invoiceIntegrationClient(
         properties: EvakaOuluProperties,
         invoiceGenerator: ProEInvoiceGenerator,
-        sftpSender: SftpSender
+        sftpConnector: SftpConnector
         ): InvoiceIntegrationClient {
+        val sftpSender = SftpSender(properties.intimeInvoices, sftpConnector)
         return EVakaOuluInvoiceClient(sftpSender, invoiceGenerator)
     }
 

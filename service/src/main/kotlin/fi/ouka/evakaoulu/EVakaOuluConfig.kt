@@ -11,6 +11,10 @@ import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.presigner.S3Presigner
 import fi.espoo.evaka.BucketEnv
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
+import fi.ouka.evakaoulu.invoice.service.SftpConnector
+import fi.ouka.evakaoulu.invoice.service.SftpSender
+import fi.ouka.evakaoulu.payment.service.ProEPaymentGenerator
+import fi.ouka.evakaoulu.payment.service.OuluPaymentIntegrationClient
 
 @Configuration
 class EVakaOuluConfig {
@@ -39,5 +43,8 @@ class EVakaOuluConfig {
         DocumentService(s3Client, s3Presigner, env.proxyThroughNginx)
 
     @Bean
-    fun paymentIntegrationClient(): PaymentIntegrationClient = PaymentIntegrationClient.FailingClient()
+    fun paymentIntegrationClient(evakaProperties: EvakaOuluProperties, paymentGenerator: ProEPaymentGenerator, sftpConnector: SftpConnector): PaymentIntegrationClient {
+        val sftpSender = SftpSender(evakaProperties.intimePayments, sftpConnector)
+        return OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
+    }
 }

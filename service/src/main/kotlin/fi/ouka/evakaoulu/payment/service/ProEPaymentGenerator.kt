@@ -13,6 +13,13 @@ class ProEPaymentGenerator {
     )
 
     fun generatePayments(payments: List<Payment> ): Result {
+        var successList = mutableListOf<Payment>()
+        var result = ""
+        payments.forEach {
+            successList.add(it)
+            result += "${it.unit.name} ${it.amount} ${it.unit.iban} ${it.unit.businessId} ${it.unit.providerId}\n"
+        }
+
         return Result(PaymentIntegrationClient.SendResult(), "")
     }
 }

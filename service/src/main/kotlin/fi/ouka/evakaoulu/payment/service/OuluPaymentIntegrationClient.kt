@@ -17,6 +17,7 @@ class OuluPaymentIntegrationClient(
 
         var failedList: MutableList<Payment> = mutableListOf()
 
+        logger.info { "OuluPaymentIntegrationClient.send() called" }
         val generatorResult = paymentGenerator.generatePayments(payments)
         var successList = generatorResult.sendResult.succeeded
         failedList.addAll(generatorResult.sendResult.failed)
@@ -32,6 +33,7 @@ class OuluPaymentIntegrationClient(
             }
         }
 
+        logger.info { "OuluPaymentIntegrationClient.send() returning" }
         return PaymentIntegrationClient.SendResult(successList, failedList)
     }
 }

@@ -20,6 +20,6 @@ class ProEPaymentGenerator {
             result += "${it.unit.name} ${it.amount} ${it.unit.iban} ${it.unit.businessId} ${it.unit.providerId}\n"
         }
 
-        return Result(PaymentIntegrationClient.SendResult(), "")
+        return Result(PaymentIntegrationClient.SendResult(successList, listOf()), result)
     }
 }

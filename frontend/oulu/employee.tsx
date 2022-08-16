@@ -104,7 +104,7 @@ const customizations: EmployeeCustomizations = {
           SICKLEAVE: 'Sairaus',
           PLANNED_ABSENCE: 'Sopimuspoissaolo',
           TEMPORARY_RELOCATION: 'Lapsi varasijoitettuna muualla',
-          PARENTLEAVE: 'Isyysvapaa',
+          PARENTLEAVE: 'Vanhempainvapaa',
           FORCE_MAJEURE: 'Hyvityspäivä',
           FREE_ABSENCE: 'Maksuton poissaolo',
           NO_ABSENCE: 'Ei poissaoloa'
@@ -114,7 +114,7 @@ const customizations: EmployeeCustomizations = {
           SICKLEAVE: 'Sairaus',
           PLANNED_ABSENCE: 'Sopimus',
           TEMPORARY_RELOCATION: 'Varasijoitus',
-          PARENTLEAVE: 'Isyysvapaa',
+          PARENTLEAVE: 'Vanhempainvapaa',
           FORCE_MAJEURE: 'Hyvitys',
           FREE_ABSENCE: 'Maksuton',
           NO_ABSENCE: 'Ei poissa'
@@ -129,7 +129,7 @@ const customizations: EmployeeCustomizations = {
           TEMPORARY_RELOCATION:
             'Lapselle on tehty varasijoitus toiseen yksikköön. Poissa omasta, läsnä muualla.',
           PARENTLEAVE:
-            'Poissaolo merkitään sille lapselle, josta maksetaan isyysrahaa.',
+            'Poissaolo merkitään sille lapselle, josta maksetaan vanhempainrahaa.',
           FORCE_MAJEURE:
             'Käytetään vain erikoistilanteissa hallinnon ohjeiden mukaan. Yksittäisiä päiviä, joista luvattu maksuhyvitys.',
           FREE_ABSENCE: 'Kesäajan maksuton poissaolo',
@@ -146,7 +146,7 @@ const customizations: EmployeeCustomizations = {
             UNKNOWN_ABSENCE: 'Ilmoittamaton poissaolo',
             PLANNED_ABSENCE: 'Sopimuspoissaolo',
             TEMPORARY_RELOCATION: 'Lapsi varasijoitettuna muualla',
-            PARENTLEAVE: 'Isyysvapaa',
+            PARENTLEAVE: 'Vanhempainvapaa',
             FORCE_MAJEURE: 'Hyvityspäivä',
             FREE_ABSENCE: 'Maksuton poissaolo',
             NO_ABSENCE: 'Ei poissaoloa'

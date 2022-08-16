@@ -25,7 +25,7 @@ const customizations: EmployeeMobileCustomizations = {
           UNKNOWN_ABSENCE: 'Ilmoittamaton poissaolo',
           PLANNED_ABSENCE: 'Sopimuspoissaolo',
           TEMPORARY_RELOCATION: 'Lapsi varasijoitettuna muualla',
-          PARENTLEAVE: 'Isyysvapaa',
+          PARENTLEAVE: 'Vanhempainvapaa',
           FORCE_MAJEURE: 'Hyvityspäivä',
           FREE_ABSENCE: 'Maksuton poissaolo',
           NO_ABSENCE: 'Ei poissaoloa'

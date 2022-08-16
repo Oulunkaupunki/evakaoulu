@@ -13,18 +13,11 @@ import java.time.LocalTime
 import java.util.*
 
 fun validPayment(): Payment {
-    val paymentUnit = PaymentUnit(
-        DaycareId(UUID.randomUUID()),
-        "Private test care provider",
-        "1234567-8",
-        "FI01 2345 6789 0123 4567 89",
-        "PROVIDERID"
-    )
     return Payment(
         PaymentId(UUID.randomUUID()),
         HelsinkiDateTime.Companion.of(LocalDate.of(2022, 8, 8), LocalTime.of(12, 0, 0)),
         HelsinkiDateTime.Companion.of(LocalDate.of(2022, 8, 8), LocalTime.of(12, 0, 0)),
-        paymentUnit,
+        validPaymentUnit(),
         1234,
         DateRange(LocalDate.of(2022, 7, 1), LocalDate.of(2022, 7, 30)),
         657285,
@@ -33,5 +26,15 @@ fun validPayment(): Payment {
         LocalDate.of(2022, 8, 15),
         HelsinkiDateTime.Companion.of(LocalDate.of(2022, 7, 31), LocalTime.of(12, 0, 0)),
         EvakaUserId(UUID.randomUUID())
+    )
+}
+
+fun validPaymentUnit(): PaymentUnit {
+    return PaymentUnit(
+        DaycareId(UUID.randomUUID()),
+        "Private test care provider",
+        "1234567-8",
+        "FI01 2345 6789 0123 4567 89",
+        "PROVIDERID"
     )
 }

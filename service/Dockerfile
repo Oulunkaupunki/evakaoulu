@@ -5,11 +5,19 @@
 FROM evaka-base:latest
 
 USER root
-RUN set -eux \
-    && apt-get update && apt-get -y --no-install-recommends install \
-       wget \
+RUN apt-get update \
+ && apt-get -y --no-install-recommends install \
+       curl \
        openjdk-17-jre-headless \
-    && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
+
+ARG DD_JAVA_AGENT_VERSION="0.91.0"
+ARG DD_JAVA_AGENT_SHA256="52c30ef421366a2a5c3d9725bb53e80b5ae9feb272cd69760ecb31bf8b019ef8"
+
+RUN curl -sSfo /opt/dd-java-agent.jar "https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/${DD_JAVA_AGENT_VERSION}/dd-java-agent-${DD_JAVA_AGENT_VERSION}.jar" \
+ && echo "${DD_JAVA_AGENT_SHA256}  /opt/dd-java-agent.jar" | sha256sum -c -
+
+ADD ./dd-jmxfetch/ /etc/jmxfetch/
 
 USER evaka
 WORKDIR /home/evaka

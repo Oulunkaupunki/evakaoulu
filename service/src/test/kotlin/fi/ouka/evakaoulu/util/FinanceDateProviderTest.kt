@@ -19,4 +19,16 @@ class FinanceDateProviderTest {
         assertThat(actualDate).isEqualTo(expectedDate)
 
     }
+
+    @Test
+    fun `should return date with correct abbreviated format`() {
+        val financeDateProvider = FinanceDateProvider()
+        val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
+        val expectedDate = LocalDate.now().format(invoiceIdFormatter)
+
+        val actualDate = financeDateProvider.currentDateWithAbbreviatedYear()
+
+        assertThat(actualDate).isEqualTo(expectedDate)
+
+    }
 }

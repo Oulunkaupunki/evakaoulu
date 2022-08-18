@@ -16,4 +16,9 @@ class FinanceDateProvider {
         val titleFormatter = DateTimeFormatter.ofPattern("MM.yyyy")
         return previousMonth.format(titleFormatter)
     }
+
+    fun currentDateWithAbbreviatedYear(): String {
+        val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
+        return LocalDate.now().format(invoiceIdFormatter)
+    }
 }

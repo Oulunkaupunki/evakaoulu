@@ -3,10 +3,11 @@ package fi.ouka.evakaoulu.payment.service
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.ouka.evakaoulu.util.FieldType
+import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.springframework.stereotype.Component
 
 @Component
-class ProEPaymentGenerator(private val paymentChecker: PaymentChecker) {
+class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val financeDateProvider: FinanceDateProvider) {
 
     data class Result(
         val sendResult: PaymentIntegrationClient.SendResult = PaymentIntegrationClient.SendResult(),
@@ -15,6 +16,19 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker) {
 
     fun gatherPaymentData(payment: Payment): PaymentData {
         var paymentData = PaymentData()
+
+        paymentData.setAlphanumericValue(PaymentFieldName.INTIME_COMPANY_ID, "20")
+        paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ID, payment.unit.providerId ?: "")
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID, payment.number.toString())
+        paymentData.setNumericValue(PaymentFieldName.INVOICE_ACCEPTANCE, 1)
+        paymentData.setNumericValue(PaymentFieldName.VOUCHER_TYPE, 42)
+        paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_NUMBER, payment.number.toString())
+        paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_DATE, financeDateProvider.currentDateWithAbbreviatedYear())
+        paymentData.setNumericValue(PaymentFieldName.INVOICE_TYPE, 1)
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION, "")
+        // TODO how to compute this
+        paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, "2208")
+
 
         return paymentData
     }

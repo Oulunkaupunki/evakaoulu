@@ -1,11 +1,11 @@
-package fi.ouka.evakaoulu.invoice.service
+package fi.ouka.evakaoulu.util
 
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
-class InvoiceDateProvider {
+class FinanceDateProvider {
     fun currentDate() : String {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         return LocalDate.now().format(invoiceIdFormatter)

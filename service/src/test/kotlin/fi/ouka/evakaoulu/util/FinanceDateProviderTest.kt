@@ -1,19 +1,20 @@
 package fi.ouka.evakaoulu.invoice.service
 
+import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class InvoiceDateProviderTest {
+class FinanceDateProviderTest {
 
     @Test
     fun `should return date with correct format`() {
-        val invoiceDateProvider = InvoiceDateProvider()
+        val financeDateProvider = FinanceDateProvider()
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         val expectedDate = LocalDate.now().format(invoiceIdFormatter)
 
-        val actualDate = invoiceDateProvider.currentDate()
+        val actualDate = financeDateProvider.currentDate()
 
         assertThat(actualDate).isEqualTo(expectedDate)
 

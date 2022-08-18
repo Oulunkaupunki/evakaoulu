@@ -9,16 +9,17 @@ import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.ouka.evakaoulu.invoice.config.Product
 import fi.ouka.evakaoulu.util.FieldType
+import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.springframework.stereotype.Component
 import java.lang.Math.abs
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
-class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val invoiceDateProvider: InvoiceDateProvider) : StringInvoiceGenerator {
+class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val financeDateProvider: FinanceDateProvider) : StringInvoiceGenerator {
 
     fun generateInvoiceTitle(): String {
-        val previousMonth = invoiceDateProvider.previousMonth()
+        val previousMonth = financeDateProvider.previousMonth()
         return "Varhaiskasvatus " + previousMonth
     }
     fun gatherInvoiceData(invoiceDetailed: InvoiceDetailed): InvoiceData {

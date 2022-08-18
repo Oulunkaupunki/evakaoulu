@@ -2,6 +2,7 @@ package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.ouka.evakaoulu.util.FieldType
+import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -11,13 +12,13 @@ import org.mockito.kotlin.whenever
 
 internal class ProEInvoiceGeneratorTest {
 
-    val invoiceDateProvider = mock<InvoiceDateProvider>()
-    val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), invoiceDateProvider)
+    val financeDateProvider = mock<FinanceDateProvider>()
+    val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), financeDateProvider)
 
     @BeforeEach
     fun setup() {
-        whenever(invoiceDateProvider.currentDate()).thenReturn("20220505")
-        whenever(invoiceDateProvider.previousMonth()).thenReturn("04.2022")
+        whenever(financeDateProvider.currentDate()).thenReturn("20220505")
+        whenever(financeDateProvider.previousMonth()).thenReturn("04.2022")
     }
 
     @Test

@@ -190,6 +190,7 @@ const customizations: EmployeeCustomizations = {
     'PRESCHOOL',
     'PRESCHOOL_DAYCARE',
     'PREPARATORY',
+    'PREPARATORY_DAYCARE',
     'SCHOOL_SHIFT_CARE'
   ],
   absenceTypes: [

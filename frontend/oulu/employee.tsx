@@ -187,7 +187,6 @@ const customizations: EmployeeCustomizations = {
     'DAYCARE_PART_TIME',
     'TEMPORARY_DAYCARE',
     'TEMPORARY_DAYCARE_PART_DAY',
-    'PRESCHOOL_DAYCARE',
     'PRESCHOOL',
     'PRESCHOOL_DAYCARE',
     'PREPARATORY',

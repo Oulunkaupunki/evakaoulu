@@ -32,6 +32,16 @@ enum class PaymentFieldName {
     SI_CASHBOX_ACCOUNT,
     KP_OTHER_ACCOUNT,
     SI_OTHER_ACCOUNT,
+    SI_KERO_ACCOUNT,
+    KP_KERO_ACCOUNT,
+    STATS,
+    CALC_IDENTIFIER,
+    RESP_PERSON,
+    FACTORING_NUMBER,
+    MACHINE_REFERENCE_NUMBER,
+
+
+
 
 
 }
@@ -59,12 +69,22 @@ val headerRowFields = listOf(
     PaymentField(PaymentFieldName.CASHBOX_MINUS, FieldType.ALPHANUMERIC, 121, 24),
     PaymentField(PaymentFieldName.DEBT_ACCOUNT, FieldType.ALPHANUMERIC, 145, 8),
     PaymentField(PaymentFieldName.SI_DEBT_ACCOUNT, FieldType.ALPHANUMERIC, 153, 8),
-    PaymentField(PaymentFieldName.KP_PURCHASE_ACCOUNT, FieldType.ALPHANUMERIC, 161, 8),
-    PaymentField(PaymentFieldName.SI_PURCHASE_ACCOUNT, FieldType.ALPHANUMERIC, 169, 8),
-    PaymentField(PaymentFieldName.KP_CASHBOX_ACCOUNT, FieldType.ALPHANUMERIC, 177, 8),
-    PaymentField(PaymentFieldName.SI_CASHBOX_ACCOUNT, FieldType.ALPHANUMERIC, 185, 8),
-    PaymentField(PaymentFieldName.KP_OTHER_ACCOUNT, FieldType.ALPHANUMERIC, 193, 8),
-    PaymentField(PaymentFieldName.SI_OTHER_ACCOUNT, FieldType.ALPHANUMERIC, 217, 8),
+    PaymentField(PaymentFieldName.KP_PURCHASE_ACCOUNT, FieldType.NUMERIC, 161, 8),
+    PaymentField(PaymentFieldName.SI_PURCHASE_ACCOUNT, FieldType.NUMERIC, 169, 8),
+    PaymentField(PaymentFieldName.KP_CASHBOX_ACCOUNT, FieldType.NUMERIC, 177, 8),
+    PaymentField(PaymentFieldName.SI_CASHBOX_ACCOUNT, FieldType.NUMERIC, 185, 8),
+    PaymentField(PaymentFieldName.KP_OTHER_ACCOUNT, FieldType.NUMERIC, 193, 8),
+    PaymentField(PaymentFieldName.SI_OTHER_ACCOUNT, FieldType.NUMERIC, 201, 8),
+    PaymentField(PaymentFieldName.SI_KERO_ACCOUNT, FieldType.NUMERIC, 209, 8),
+    PaymentField(PaymentFieldName.KP_KERO_ACCOUNT, FieldType.NUMERIC, 217, 8),
+    PaymentField(PaymentFieldName.STATS, FieldType.ALPHANUMERIC, 225, 12),
+    PaymentField(PaymentFieldName.CALC_IDENTIFIER, FieldType.ALPHANUMERIC, 237, 30),
+    PaymentField(PaymentFieldName.RESP_PERSON, FieldType.ALPHANUMERIC, 267, 8),
+    PaymentField(PaymentFieldName.FACTORING_NUMBER, FieldType.NUMERIC, 275, 8),
+    PaymentField(PaymentFieldName.MACHINE_REFERENCE_NUMBER, FieldType.ALPHANUMERIC, 283, 20),
+
+
+
 
 
 

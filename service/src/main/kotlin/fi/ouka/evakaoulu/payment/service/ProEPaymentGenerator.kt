@@ -45,6 +45,14 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.SI_CASHBOX_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.KP_OTHER_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_OTHER_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KP_KERO_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "00000000000010002315")
+
 
 
 

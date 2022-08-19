@@ -2,6 +2,7 @@ package fi.ouka.evakaoulu.payment.service
 
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
+import fi.ouka.evakaoulu.invoice.service.InvoiceFieldName
 import fi.ouka.evakaoulu.util.FieldType
 import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.springframework.stereotype.Component
@@ -28,6 +29,24 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION, "")
         // TODO how to compute this
         paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, "2208")
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_DATE, payment.paymentDate.toString()) // TODO needs converting to "YYMMDD"
+        paymentData.setAlphanumericValue(PaymentFieldName.DUE_DATE, payment.dueDate.toString()) // TODO needs converting to "YYMMDD"
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_SUM, payment.amount.toString()) //TODO check if this is correct type
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_1, "") //TODO check if this is correct type
+        paymentData.setAlphanumericValue(PaymentFieldName.CURRENCY, "EUR") //TODO make sure this value is correct one
+        paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_DATE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_SUM, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_MINUS, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.DEBT_ACCOUNT, "00002545")
+        paymentData.setAlphanumericValue(PaymentFieldName.SI_DEBT_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KP_PURCHASE_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SI_PURCHASE_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KP_CASHBOX_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SI_CASHBOX_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KP_OTHER_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SI_OTHER_ACCOUNT, "")
+
+
 
 
         return paymentData

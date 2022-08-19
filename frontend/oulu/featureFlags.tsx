@@ -9,7 +9,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 import { FeatureFlags } from 'lib-customizations/types'
 
 const featureFlags: FeatureFlags = {
-  citizenShiftCareAbsenceEnabled: true,
+  citizenShiftCareAbsenceEnabled: false,
   daycareApplication: {
     dailyTimesEnabled: true
   },

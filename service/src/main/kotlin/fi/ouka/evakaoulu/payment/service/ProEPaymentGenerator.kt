@@ -64,7 +64,17 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.BANK, "")
         paymentData.setAlphanumericValue(PaymentFieldName.BANK_ACCOUNT,payment.unit.iban.toString())
         paymentData.setAlphanumericValue(PaymentFieldName.NOTE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.NOTE, "1904")
+        paymentData.setAlphanumericValue(PaymentFieldName.VAT_PERIOD, "1904") //TODO add value from mappings
+        paymentData.setAlphanumericValue(PaymentFieldName.VAT_VAL, "0")
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_2, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.RECLAMATION_DATE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_TERM, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_MESSAGE, "1")
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_BANK_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TRANSFER_BAN, "0")
+
+
+
 
 
 

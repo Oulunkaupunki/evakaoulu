@@ -54,6 +54,13 @@ enum class PaymentFieldName {
     BANK_ACCOUNT,
     NOTE,
     VAT_PERIOD,
+    VAT_VAL,
+    INVOICE_2,
+    RECLAMATION_DATE,
+    PAYMENT_TERM,
+    PAYMENT_MESSAGE,
+    INVOICE_BANK_ACCOUNT,
+    KOM_TRANSFER_BAN,
 
 
 }
@@ -108,6 +115,17 @@ val headerRowFields = listOf(
     PaymentField(PaymentFieldName.BANK_ACCOUNT, FieldType.ALPHANUMERIC, 509, 30),
     PaymentField(PaymentFieldName.NOTE, FieldType.ALPHANUMERIC, 539, 60),
     PaymentField(PaymentFieldName.VAT_PERIOD, FieldType.ALPHANUMERIC, 599, 4),
+    PaymentField(PaymentFieldName.VAT_VAL, FieldType.ALPHANUMERIC, 603, 1),
+    PaymentField(PaymentFieldName.INVOICE_2, FieldType.ALPHANUMERIC, 604, 15),
+    PaymentField(PaymentFieldName.RECLAMATION_DATE, FieldType.ALPHANUMERIC, 619, 6),
+    PaymentField(PaymentFieldName.PAYMENT_TERM, FieldType.ALPHANUMERIC, 625, 1),
+    PaymentField(PaymentFieldName.PAYMENT_MESSAGE, FieldType.ALPHANUMERIC, 626, 1),
+    PaymentField(PaymentFieldName.INVOICE_BANK_ACCOUNT, FieldType.ALPHANUMERIC, 627, 1),
+    PaymentField(PaymentFieldName.KOM_TRANSFER_BAN, FieldType.ALPHANUMERIC, 628, 1),
+
+
+
+
 
 
 

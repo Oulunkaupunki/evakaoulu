@@ -3,6 +3,7 @@ package fi.ouka.evakaoulu.payment.service
 import fi.ouka.evakaoulu.invoice.service.InvoiceFieldName
 import fi.ouka.evakaoulu.util.DataMapper
 import fi.ouka.evakaoulu.util.FieldType
+import java.awt.PageAttributes.MediaType.NOTE
 
 // NB, I have no idea what many of these things would properly be in English...
 enum class PaymentFieldName {
@@ -39,9 +40,20 @@ enum class PaymentFieldName {
     RESP_PERSON,
     FACTORING_NUMBER,
     MACHINE_REFERENCE_NUMBER,
-
-
-
+    APPR_TARGET,
+    ALPHABETICAL_NAME,
+    NAME,
+    ADDRESS1,
+    ADDRESS2,
+    POSTAL_NUMBER,
+    POSTAL_ADDR,
+    COUNTRY,
+    LANGUAGE,
+    COUNTRY_CODE,
+    BANK,
+    BANK_ACCOUNT,
+    NOTE,
+    VAT_PERIOD,
 
 
 }
@@ -82,6 +94,20 @@ val headerRowFields = listOf(
     PaymentField(PaymentFieldName.RESP_PERSON, FieldType.ALPHANUMERIC, 267, 8),
     PaymentField(PaymentFieldName.FACTORING_NUMBER, FieldType.NUMERIC, 275, 8),
     PaymentField(PaymentFieldName.MACHINE_REFERENCE_NUMBER, FieldType.ALPHANUMERIC, 283, 20),
+    PaymentField(PaymentFieldName.APPR_TARGET, FieldType.ALPHANUMERIC, 303, 12),
+    PaymentField(PaymentFieldName.ALPHABETICAL_NAME, FieldType.ALPHANUMERIC, 315, 8),
+    PaymentField(PaymentFieldName.NAME, FieldType.ALPHANUMERIC, 323, 30),
+    PaymentField(PaymentFieldName.ADDRESS1, FieldType.ALPHANUMERIC, 353, 30),
+    PaymentField(PaymentFieldName.ADDRESS2, FieldType.ALPHANUMERIC, 383, 30),
+    PaymentField(PaymentFieldName.POSTAL_NUMBER, FieldType.ALPHANUMERIC, 413, 10),
+    PaymentField(PaymentFieldName.POSTAL_ADDR, FieldType.ALPHANUMERIC, 423, 20),
+    PaymentField(PaymentFieldName.COUNTRY, FieldType.ALPHANUMERIC, 443, 30),
+    PaymentField(PaymentFieldName.LANGUAGE, FieldType.ALPHANUMERIC, 473, 2),
+    PaymentField(PaymentFieldName.COUNTRY_CODE, FieldType.ALPHANUMERIC, 475, 4),
+    PaymentField(PaymentFieldName.BANK, FieldType.ALPHANUMERIC, 479, 30),
+    PaymentField(PaymentFieldName.BANK_ACCOUNT, FieldType.ALPHANUMERIC, 509, 30),
+    PaymentField(PaymentFieldName.NOTE, FieldType.ALPHANUMERIC, 539, 60),
+    PaymentField(PaymentFieldName.VAT_PERIOD, FieldType.ALPHANUMERIC, 599, 4),
 
 
 

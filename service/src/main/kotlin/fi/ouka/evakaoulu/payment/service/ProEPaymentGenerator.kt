@@ -52,6 +52,19 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "00000000000010002315")
+        paymentData.setAlphanumericValue(PaymentFieldName.APPR_TARGET, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ALPHABETICAL_NAME, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.NAME, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ADDRESS1, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ADDRESS2, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.POSTAL_NUMBER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.COUNTRY, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.LANGUAGE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.COUNTRY_CODE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.BANK, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.BANK_ACCOUNT,payment.unit.iban.toString())
+        paymentData.setAlphanumericValue(PaymentFieldName.NOTE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.NOTE, "1904")
 
 
 

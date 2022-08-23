@@ -170,4 +170,9 @@ val headerRowFields = listOf(
 
     )
 
+val paymentRowFields = listOf(
+    PaymentField(PaymentFieldName.INTIME_COMPANY_ID, FieldType.ALPHANUMERIC, 1, 2),
+
+)
+
 typealias PaymentData = DataMapper<PaymentFieldName>

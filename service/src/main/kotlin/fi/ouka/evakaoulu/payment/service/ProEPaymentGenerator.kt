@@ -17,7 +17,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
 
     fun gatherPaymentData(payment: Payment): PaymentData {
         var paymentData = PaymentData()
-
+        
         paymentData.setAlphanumericValue(PaymentFieldName.INTIME_COMPANY_ID, "20")
         paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ID, payment.unit.providerId ?: "")
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID, payment.number.toString())
@@ -95,6 +95,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.CONTRACT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CREDIT_TARGET_2, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE_FIELD, "")
+
 
         return paymentData
     }

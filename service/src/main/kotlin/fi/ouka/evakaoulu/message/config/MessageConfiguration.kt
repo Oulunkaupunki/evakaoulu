@@ -73,6 +73,10 @@ internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMes
     override fun getDefaultFeeDecisionAddress(lang: MessageLanguage): DecisionSendAddress =
         getDefaultDecisionAddress(lang)
 
+    override fun getAssistanceNeedDecisionHeader(lang: MessageLanguage): String = "X"
+
+    override fun getAssistanceNeedDecisionContent(lang: MessageLanguage): String = "X"
+
     private fun resolveLocale(lang: MessageLanguage): Locale {
         if (MessageLanguage.SV.equals(lang)) return resolveLocale(MessageLanguage.FI)
         return Locale(lang.name.lowercase())

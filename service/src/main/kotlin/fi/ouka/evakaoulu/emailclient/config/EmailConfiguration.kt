@@ -5,6 +5,8 @@
 package fi.ouka.evakaoulu.emailclient.config
 
 import fi.espoo.evaka.emailclient.IEmailMessageProvider
+import fi.espoo.evaka.shared.AssistanceNeedDecisionId
+import fi.espoo.evaka.shared.ChildId
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
@@ -22,6 +24,8 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
     override val subjectForClubApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     override val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     override val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
+    override val subjectForDecisionEmail: String = "Sama suomeksi / This space intentionally left blank"
+
 
 
     override fun getPendingDecisionEmailHtml(): String {
@@ -356,4 +360,11 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
         """.trimIndent()
     }
 
+    override fun getDecisionEmailHtml(childId: ChildId, decisionId: AssistanceNeedDecisionId): String {
+        return "X"
+    }
+
+    override fun getDecisionEmailText(childId: ChildId, decisionId: AssistanceNeedDecisionId): String {
+        return "X"
+    }
 }

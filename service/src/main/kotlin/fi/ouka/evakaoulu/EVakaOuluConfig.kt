@@ -10,6 +10,7 @@ import fi.espoo.evaka.s3.DocumentService
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.presigner.S3Presigner
 import fi.espoo.evaka.BucketEnv
+import fi.espoo.evaka.children.consent.ChildConsentType
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.ouka.evakaoulu.invoice.service.SftpConnector
 import fi.ouka.evakaoulu.invoice.service.SftpSender
@@ -29,7 +30,11 @@ class EVakaOuluConfig {
         alwaysUseDaycareFinanceDecisionHandler = true,
         freeAbsenceGivesADailyRefund = true,
         invoiceNumberSeriesStart = 1,
-        paymentNumberSeriesStart = 1
+        paymentNumberSeriesStart = 1,
+        unplannedAbsencesAreContractSurplusDays = false,
+        maxContractDaySurplusThreshold = null,
+        useContractDaysAsDailyFeeDivisor = true,
+        enabledChildConsentTypes = setOf(ChildConsentType.EVAKA_PROFILE_PICTURE)
     )
 
     @Bean

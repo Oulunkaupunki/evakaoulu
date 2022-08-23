@@ -72,6 +72,8 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_MESSAGE, "1")
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_BANK_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.KOM_TRANSFER_BAN, "0")
+        paymentData.setAlphanumericValue(PaymentFieldName.VALUATION_BAN, "0")
+        paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_TERM_CODE, "00")
 
 
 

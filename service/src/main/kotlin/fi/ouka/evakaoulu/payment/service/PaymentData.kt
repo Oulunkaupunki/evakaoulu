@@ -61,6 +61,8 @@ enum class PaymentFieldName {
     PAYMENT_MESSAGE,
     INVOICE_BANK_ACCOUNT,
     KOM_TRANSFER_BAN,
+    VALUATION_BAN,
+    PAYMENT_TERM_CODE,
 
 
 }
@@ -122,9 +124,8 @@ val headerRowFields = listOf(
     PaymentField(PaymentFieldName.PAYMENT_MESSAGE, FieldType.ALPHANUMERIC, 626, 1),
     PaymentField(PaymentFieldName.INVOICE_BANK_ACCOUNT, FieldType.ALPHANUMERIC, 627, 1),
     PaymentField(PaymentFieldName.KOM_TRANSFER_BAN, FieldType.ALPHANUMERIC, 628, 1),
-
-
-
+    PaymentField(PaymentFieldName.VALUATION_BAN, FieldType.ALPHANUMERIC, 629, 1),
+    PaymentField(PaymentFieldName.PAYMENT_TERM_CODE, FieldType.ALPHANUMERIC, 630, 2),
 
 
 

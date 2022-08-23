@@ -63,7 +63,27 @@ enum class PaymentFieldName {
     KOM_TRANSFER_BAN,
     VALUATION_BAN,
     PAYMENT_TERM_CODE,
-
+    EURO_CODE,
+    PROVIDER_ADDITIONAL_KEY,
+    APP_KEY,
+    SUBSTITUTE,
+    ADDITIONAL_INFO,
+    BANKS_2_3,
+    FACT_PROVIDER_ADD_KEY,
+    INVOICE_ID_ARCHIVE,
+    XML_ATTACHMENT_ID,
+    INVOICE_ID_2,
+    PICTURE_FILE,
+    INT_REF_NRO,
+    BANK_BIC_CODE,
+    SUBLEDGER,
+    DOC_ID,
+    SUBST_DOC_ID,
+    CONSTRUCTION_KEY,
+    CONSTRUCTION_NUMBER,
+    CONTRACT,
+    CREDIT_TARGET_2,
+    SUBSTITUTE_FIELD,
 
 }
 
@@ -126,12 +146,27 @@ val headerRowFields = listOf(
     PaymentField(PaymentFieldName.KOM_TRANSFER_BAN, FieldType.ALPHANUMERIC, 628, 1),
     PaymentField(PaymentFieldName.VALUATION_BAN, FieldType.ALPHANUMERIC, 629, 1),
     PaymentField(PaymentFieldName.PAYMENT_TERM_CODE, FieldType.ALPHANUMERIC, 630, 2),
-
-
-
-
-
-
+    PaymentField(PaymentFieldName.EURO_CODE, FieldType.ALPHANUMERIC, 632, 1),
+    PaymentField(PaymentFieldName.PROVIDER_ADDITIONAL_KEY, FieldType.ALPHANUMERIC, 633, 20),
+    PaymentField(PaymentFieldName.APP_KEY, FieldType.ALPHANUMERIC, 653, 2),
+    PaymentField(PaymentFieldName.SUBSTITUTE, FieldType.ALPHANUMERIC, 655, 4),
+    PaymentField(PaymentFieldName.ADDITIONAL_INFO, FieldType.ALPHANUMERIC, 659, 30),
+    PaymentField(PaymentFieldName.BANKS_2_3, FieldType.ALPHANUMERIC, 689, 60),
+    PaymentField(PaymentFieldName.FACT_PROVIDER_ADD_KEY, FieldType.ALPHANUMERIC, 749, 20),
+    PaymentField(PaymentFieldName.INVOICE_ID_ARCHIVE, FieldType.ALPHANUMERIC, 769, 10),
+    PaymentField(PaymentFieldName.XML_ATTACHMENT_ID, FieldType.ALPHANUMERIC, 779, 10),
+    PaymentField(PaymentFieldName.INVOICE_ID_2, FieldType.ALPHANUMERIC, 789, 20),
+    PaymentField(PaymentFieldName.PICTURE_FILE, FieldType.ALPHANUMERIC, 809, 30),
+    PaymentField(PaymentFieldName.INT_REF_NRO, FieldType.ALPHANUMERIC, 839, 25),
+    PaymentField(PaymentFieldName.BANK_BIC_CODE, FieldType.ALPHANUMERIC, 864, 33),
+    PaymentField(PaymentFieldName.SUBLEDGER, FieldType.ALPHANUMERIC, 897, 4),
+    PaymentField(PaymentFieldName.DOC_ID, FieldType.ALPHANUMERIC, 901, 50),
+    PaymentField(PaymentFieldName.SUBST_DOC_ID, FieldType.ALPHANUMERIC, 951, 14),
+    PaymentField(PaymentFieldName.CONSTRUCTION_KEY, FieldType.ALPHANUMERIC, 965, 35),
+    PaymentField(PaymentFieldName.CONSTRUCTION_NUMBER, FieldType.ALPHANUMERIC, 1000, 50),
+    PaymentField(PaymentFieldName.CONTRACT, FieldType.ALPHANUMERIC, 1050, 20),
+    PaymentField(PaymentFieldName.CREDIT_TARGET_2, FieldType.ALPHANUMERIC, 1070, 20),
+    PaymentField(PaymentFieldName.SUBSTITUTE_FIELD, FieldType.ALPHANUMERIC, 1090, 111)
 
     )
 

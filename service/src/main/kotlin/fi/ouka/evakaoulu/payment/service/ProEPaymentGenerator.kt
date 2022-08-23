@@ -51,7 +51,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "00000000000010002315")
+        paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.APPR_TARGET, "")
         paymentData.setAlphanumericValue(PaymentFieldName.ALPHABETICAL_NAME, "")
         paymentData.setAlphanumericValue(PaymentFieldName.NAME, "")
@@ -74,13 +74,27 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.KOM_TRANSFER_BAN, "0")
         paymentData.setAlphanumericValue(PaymentFieldName.VALUATION_BAN, "0")
         paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_TERM_CODE, "00")
-
-
-
-
-
-
-
+        paymentData.setAlphanumericValue(PaymentFieldName.EURO_CODE, "1")
+        paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ADDITIONAL_KEY, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.APP_KEY, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ADDITIONAL_INFO, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.BANKS_2_3, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.FACT_PROVIDER_ADD_KEY, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID_ARCHIVE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.XML_ATTACHMENT_ID, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID_2, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.PICTURE_FILE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.INT_REF_NRO, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.BANK_BIC_CODE, "NDEAFIHH") //TODO: add BIC adapter here!
+        paymentData.setAlphanumericValue(PaymentFieldName.SUBLEDGER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.DOC_ID, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SUBST_DOC_ID, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CONSTRUCTION_KEY, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CONSTRUCTION_NUMBER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CONTRACT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CREDIT_TARGET_2, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE_FIELD, "")
 
         return paymentData
     }

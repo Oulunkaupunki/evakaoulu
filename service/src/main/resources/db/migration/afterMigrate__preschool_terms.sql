@@ -9,8 +9,12 @@ VALUES
     ('de297918-2205-11ed-850c-4bf450c37db6', '[2022-08-10,2023-05-31]', '[2022-08-10,2023-05-31]', '[2022-08-10,2023-05-31]', '[2022-08-10,2023-05-31]')
 ON CONFLICT (id) DO
 UPDATE SET
+    finnish_preschool = EXCLUDED.finnish_preschool,
+    swedish_preschool = EXCLUDED.swedish_preschool,
     extended_term = EXCLUDED.extended_term,
     application_period = EXCLUDED.application_period
 WHERE
+    preschool_term.finnish_preschool <> EXCLUDED.finnish_preschool OR
+    preschool_term.swedish_preschool <> EXCLUDED.swedish_preschool OR
     preschool_term.extended_term <> EXCLUDED.extended_term OR
     preschool_term.application_period <> EXCLUDED.application_period;

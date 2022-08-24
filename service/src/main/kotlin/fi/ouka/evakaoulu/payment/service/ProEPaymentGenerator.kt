@@ -17,7 +17,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
 
     fun gatherPaymentData(payment: Payment): PaymentData {
         var paymentData = PaymentData()
-        
+
         paymentData.setAlphanumericValue(PaymentFieldName.INTIME_COMPANY_ID, "20")
         paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ID, payment.unit.providerId ?: "")
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID, payment.number.toString())
@@ -27,19 +27,18 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_DATE, financeDateProvider.currentDateWithAbbreviatedYear())
         paymentData.setNumericValue(PaymentFieldName.INVOICE_TYPE, 1)
         paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION, "")
-        // TODO how to compute this
-        paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, "2208")
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_DATE, payment.paymentDate.toString()) // TODO needs converting to "YYMMDD"
-        paymentData.setAlphanumericValue(PaymentFieldName.DUE_DATE, payment.dueDate.toString()) // TODO needs converting to "YYMMDD"
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_SUM, payment.amount.toString()) //TODO check if this is correct type
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_1, "") //TODO check if this is correct type
-        paymentData.setAlphanumericValue(PaymentFieldName.CURRENCY, "EUR") //TODO make sure this value is correct one
+        paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, "2208")  //TODO how to compute this
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_DATE, payment.paymentDate.toString()) //TODO needs converting to "YYMMDD"
+        paymentData.setAlphanumericValue(PaymentFieldName.DUE_DATE, payment.dueDate.toString()) //TODO needs converting to "YYMMDD"
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_SUM, payment.amount.toString())
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_1, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CURRENCY, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_DATE, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_SUM, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_MINUS, "")
         paymentData.setAlphanumericValue(PaymentFieldName.DEBT_ACCOUNT, "00002545")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_DEBT_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KP_PURCHASE_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KP_PURCHASE_ACCOUNT, "4335")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_PURCHASE_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.KP_CASHBOX_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_CASHBOX_ACCOUNT, "")
@@ -48,7 +47,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.KP_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "") // TODO 1104   1501253236
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "")
@@ -95,6 +94,30 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.CONTRACT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CREDIT_TARGET_2, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE_FIELD, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.BREAKDOWN_TYPE, "9")
+        paymentData.setAlphanumericValue(PaymentFieldName.DESCRIPTION, payment.unit.providerId.toString() + payment.unit.name.toString())
+        paymentData.setAlphanumericValue(PaymentFieldName.SUB_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.VAT_CODE, "105")
+        paymentData.setAlphanumericValue(PaymentFieldName.AMOUNT1, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.AMOUNT2, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.DELIVERY_PERIOD, "1904") //Todo: YYMM
+        paymentData.setAlphanumericValue(PaymentFieldName.VAT_BALANCE_SUM, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_ACCOUNT, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_PERIODS, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_START, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.FIXED_ASSET_ITEM, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_NAME, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_RESP_PERSON, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_GROUP, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_REM_GROUP, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_START_DATE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.APPROVER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.APPROVE_DATE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.INSPECTOR, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.INSPECTOR_DATE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_REFERENCE, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.ROW_NUMBER, "")
+        paymentData.setAlphanumericValue(PaymentFieldName.EMPTY_FIELD, "")
 
 
         return paymentData

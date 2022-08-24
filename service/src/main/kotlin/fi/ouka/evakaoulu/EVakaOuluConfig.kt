@@ -32,8 +32,8 @@ class EVakaOuluConfig {
         invoiceNumberSeriesStart = 1,
         paymentNumberSeriesStart = 1,
         unplannedAbsencesAreContractSurplusDays = false,
-        maxContractDaySurplusThreshold = null,
-        useContractDaysAsDailyFeeDivisor = true,
+        maxContractDaySurplusThreshold = 13,
+        useContractDaysAsDailyFeeDivisor = false,
         enabledChildConsentTypes = setOf(ChildConsentType.EVAKA_PROFILE_PICTURE)
     )
 

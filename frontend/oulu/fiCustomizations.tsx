@@ -539,7 +539,7 @@ const fi: DeepPartial<Translations> = {
       title: 'Bruttotulotietojen täyttäminen',
       description: (
         <>
-          <P/>
+          <P />
         </>
       ),
       incomeSource: 'Tulotietojen toimitus',

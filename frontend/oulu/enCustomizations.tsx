@@ -593,7 +593,7 @@ const fi: DeepPartial<Translations> = {
       title: 'Filling out the information on your gross income',
       description: (
         <>
-          <P/>
+          <P />
         </>
       ),
       incomeSource: 'Submitting the income information',

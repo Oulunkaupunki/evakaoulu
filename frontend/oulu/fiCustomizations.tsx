@@ -729,6 +729,10 @@ const fi: DeepPartial<Translations> = {
       </>
     )
   },
+  vasu: {
+    sharingVasuDisclaimer:
+      'Lapsen vaihtaessa toiseen Oulun kaupungin varhaiskasvatusyksikköön, lapsen varhaiskasvatussuunnitelma ja muut varhaiskasvatuksen asiakirjat siirtyvät automaattisesti (koskee myös Oulun ostopalveluna järjestettävää varhaiskasvatusta). Varhaiskasvatussuunnitelman luovuttamiseen ulkopuoliselle taholle pyydämme huoltajilta luvan. Lapsen siirtyessä yksityiseen tai toisen kunnan varhaiskasvatukseen, on varhaiskasvatussuunnitelma kuitenkin toimitettava uudelle varhaiskasvatuksen järjestäjälle myös ilman huoltajan lupaa, mikäli tiedot ovat välttämättömiä lapsen varhaiskasvatuksen järjestämiseksi (Varhaiskasvatuslaki 40§ ja 41§). Lisäksi varhaiskasvatussuunnitelma on toimitettava esi- tai perusopetuksen järjestäjälle, jos se on välttämätöntä lapsen opetuksen järjestämiseksi (Perusopetuslaki 41§). Luovuttamisesta informoidaan huoltajaa etukäteen.'
+  },
   accessibilityStatement: (
     <>
       <H1>Saavutettavuusseloste</H1>

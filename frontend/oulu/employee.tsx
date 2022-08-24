@@ -169,7 +169,8 @@ const customizations: EmployeeCustomizations = {
           amountWithZeroPrice: 'Nollalaskuja'
         }
       }
-    }
+    },
+    sv: {}
   },
   vasuTranslations: {
     FI: {},

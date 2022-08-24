@@ -455,7 +455,7 @@ const fi: DeepPartial<Translations> = {
         text="Tietosuojaselosteet"
         newTab={true}
         data-qa="footer-policy-link"
-      ></ExternalLink>
+      />
     ),
     sendFeedbackLink: (
       <ExternalLink
@@ -463,7 +463,7 @@ const fi: DeepPartial<Translations> = {
         text="Lähetä palautetta"
         newTab={true}
         data-qa="footer-policy-link"
-      ></ExternalLink>
+      />
     )
   },
   loginPage: {
@@ -539,7 +539,7 @@ const fi: DeepPartial<Translations> = {
       title: 'Bruttotulotietojen täyttäminen',
       description: (
         <>
-          <P></P>
+          <P/>
         </>
       ),
       incomeSource: 'Tulotietojen toimitus',

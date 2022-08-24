@@ -506,7 +506,7 @@ const fi: DeepPartial<Translations> = {
         text="Privacy statements"
         newTab={true}
         data-qa="footer-policy-link"
-      ></ExternalLink>
+      />
     ),
     sendFeedbackLink: (
       <ExternalLink
@@ -514,7 +514,7 @@ const fi: DeepPartial<Translations> = {
         text="Give feedback"
         newTab={true}
         data-qa="footer-policy-link"
-      ></ExternalLink>
+      />
     )
   },
   loginPage: {
@@ -593,7 +593,7 @@ const fi: DeepPartial<Translations> = {
       title: 'Filling out the information on your gross income',
       description: (
         <>
-          <P></P>
+          <P/>
         </>
       ),
       incomeSource: 'Submitting the income information',

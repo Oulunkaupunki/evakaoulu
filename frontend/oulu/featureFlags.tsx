@@ -18,7 +18,7 @@ const featureFlags: FeatureFlags = {
   financeBasicsPage: true,
   urgencyAttachmentsEnabled: true,
   preschoolEnabled: true,
-  assistanceActionOtherEnabled: false,
+  assistanceActionOtherEnabled: true,
   experimental: {
     messageAttachments: true,
     personalDetailsPage: true,

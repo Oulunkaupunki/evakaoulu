@@ -25,5 +25,5 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
     override fun getDaycareDecisionPath(): String = "oulu/daycare/decision"
     override fun getPreschoolDecisionPath(): String = "oulu/preschool/decision"
     override fun getPreparatoryDecisionPath(): String = "oulu/preschool/decision"
-    override fun getAssistanceNeedDecisionPath(): String = ""
+    override fun getAssistanceNeedDecisionPath(): String = "oulu/assistance-need/decision"
 }

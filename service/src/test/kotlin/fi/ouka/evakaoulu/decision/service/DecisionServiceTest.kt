@@ -6,6 +6,7 @@ package fi.ouka.evakaoulu.decision.service
 
 import fi.espoo.evaka.application.ServiceNeed
 import fi.espoo.evaka.application.ServiceNeedOption
+import fi.espoo.evaka.assistanceneed.decision.*
 import fi.espoo.evaka.daycare.domain.ProviderType
 import fi.espoo.evaka.daycare.service.DaycareManager
 import fi.espoo.evaka.decision.Decision
@@ -16,13 +17,9 @@ import fi.espoo.evaka.decision.createDecisionPdf
 import fi.espoo.evaka.identity.ExternalIdentifier
 import fi.espoo.evaka.pis.service.PersonDTO
 import fi.espoo.evaka.setting.SettingType
-import fi.espoo.evaka.shared.ApplicationId
-import fi.espoo.evaka.shared.ChildId
-import fi.espoo.evaka.shared.DaycareId
-import fi.espoo.evaka.shared.DecisionId
-import fi.espoo.evaka.shared.PersonId
-import fi.espoo.evaka.shared.ServiceNeedOptionId
+import fi.espoo.evaka.shared.*
 import fi.espoo.evaka.shared.config.PDFConfig
+import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import fi.espoo.voltti.pdfgen.PDFService
@@ -49,6 +46,7 @@ class DecisionServiceTest {
     private lateinit var messageProvider: IMessageProvider
     private lateinit var templateProvider: ITemplateProvider
     private lateinit var pdfService: PDFService
+    private lateinit var assistanceNeedDecisionService: AssistanceNeedDecisionService
 
     @BeforeEach
     fun setup() {
@@ -249,6 +247,16 @@ class DecisionServiceTest {
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 
+    @Test
+    fun generateAssistanceNeedPdf() {
+        val decision = validAssistanceNeedDecision
+
+        val bytes = assistanceNeedDecisionService.generatePdf(decision)
+
+        val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
+        FileOutputStream(filepath).use { it.write(bytes) }
+    }
+
 }
 
 private fun validDecision(type: DecisionType, decisionUnit: DecisionUnit) = Decision(
@@ -321,4 +329,62 @@ private fun validChild(restrictedDetailsEnabled: Boolean = false) = PersonDTO(
     postOffice = "Tampere",
     residenceCode = "",
     restrictedDetailsEnabled = restrictedDetailsEnabled
+)
+
+
+private val validAssistanceNeedDecision = AssistanceNeedDecision(
+    id = AssistanceNeedDecisionId(UUID.randomUUID()),
+    decisionNumber = 125632424,
+    child = AssistanceNeedDecisionChild(
+        id = ChildId(UUID.randomUUID()),
+        name = "Matti Meikäläinen",
+        dateOfBirth = LocalDate.of(2020, 1, 5)
+    ),
+    validityPeriod = DateRange(LocalDate.of(2022, 8, 2), LocalDate.of(2022, 12, 31)),
+    status = AssistanceNeedDecisionStatus.ACCEPTED,
+    language = AssistanceNeedDecisionLanguage.FI,
+    decisionMade = LocalDate.of(2022, 7, 1),
+    sentForDecision = LocalDate.of(2022, 5, 12),
+    selectedUnit = UnitInfo(
+        id = DaycareId(UUID.randomUUID()),
+        name = "Amurin päiväkoti",
+        streetAddress = "Amurinpolku 1",
+        postalCode = "33100",
+        postOffice = "Tampere"
+    ),
+    preparedBy1 = null,
+    preparedBy2 = null,
+    decisionMaker = AssistanceNeedDecisionMaker(
+        employeeId = EmployeeId(UUID.randomUUID()),
+        title = "Asiakaspalvelupäällikkö",
+        name = "Paula Palvelupäällikkö"
+    ),
+    pedagogicalMotivation = null,
+    structuralMotivationOptions = StructuralMotivationOptions(
+        smallerGroup = false,
+        specialGroup = false,
+        smallGroup = false,
+        groupAssistant = false,
+        childAssistant = false,
+        additionalStaff = false
+    ),
+    structuralMotivationDescription = null,
+    careMotivation = null,
+    serviceOptions = ServiceOptions(
+        consultationSpecialEd = false,
+        partTimeSpecialEd = false,
+        fullTimeSpecialEd = false,
+        interpretationAndAssistanceServices = false,
+        specialAides = false
+    ),
+    servicesMotivation = null,
+    expertResponsibilities = null,
+    guardiansHeardOn = null,
+    guardianInfo = emptySet(),
+    viewOfGuardians = null,
+    otherRepresentativeHeard = false,
+    otherRepresentativeDetails = null,
+    assistanceLevels = setOf(AssistanceLevel.ENHANCED_ASSISTANCE),
+    motivationForDecision = null,
+    hasDocument = false
 )

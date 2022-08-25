@@ -29,3 +29,9 @@ fi.ouka.evakaoulu:
         Päätös omavastuuosuudesta on voimassa toistaiseksi.  Päiväkodin / perhepäivähoitajan perimä omavastuu voi olla suurempi, kuin mitä päätöksessä ilmoitettu, jos päiväkodin hinta on suurempi kuin palvelusetelin enimmäisarvo. Jos perheen bruttotuloissa tapahtuu olennaisia (+/-10 %) muutoksia, on uusi tuloselvitys tehtävä välittömästi.
 
         Lisätietoja maksun määräytymisestä löytyy Oulun kaupungin verkkosivuilta: Varhaiskasvatuksen asiakasmaksut.
+    ASSISTANCE_NEED_DECISION_HEADER:
+      fi: Oulun varhaiskasvatukseen liittyvät päätökset
+    ASSISTANCE_NEED_DECISION_CONTENT:
+      fi: |
+        Lapsellenne on tehty päätös tuen tarpeesta. Voit katsella päätöstä eVakassa.
+        Koska olette ottanut Suomi.fi -palvelun käyttöönne, on päätös myös luettavissa alla olevista liitteistä.

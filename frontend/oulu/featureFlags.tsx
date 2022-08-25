@@ -24,7 +24,7 @@ const featureFlags: FeatureFlags = {
     personalDetailsPage: true,
     mobileMessages: true,
     voucherUnitPayments: true,
-    assistanceNeedDecisions: true
+    assistanceNeedDecisions: true,
     assistanceNeedDecisionsLanguageSelect: false
   },
   adminSettingsEnabled: true

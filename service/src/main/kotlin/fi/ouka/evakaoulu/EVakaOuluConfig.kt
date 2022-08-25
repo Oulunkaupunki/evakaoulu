@@ -34,7 +34,7 @@ class EVakaOuluConfig {
         unplannedAbsencesAreContractSurplusDays = false,
         maxContractDaySurplusThreshold = 13,
         useContractDaysAsDailyFeeDivisor = false,
-        enabledChildConsentTypes = setOf(ChildConsentType.EVAKA_PROFILE_PICTURE)
+        enabledChildConsentTypes = setOf()
     )
 
     @Bean

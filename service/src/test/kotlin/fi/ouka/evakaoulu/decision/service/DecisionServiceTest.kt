@@ -247,15 +247,15 @@ class DecisionServiceTest {
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 
-    @Test
-    fun generateAssistanceNeedPdf() {
-        val decision = validAssistanceNeedDecision
-
-        val bytes = assistanceNeedDecisionService.generatePdf(decision)
-
-        val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
-        FileOutputStream(filepath).use { it.write(bytes) }
-    }
+//    @Test
+//    fun generateAssistanceNeedPdf() {
+//        val decision = validAssistanceNeedDecision
+//
+//        val bytes = assistanceNeedDecisionService.generatePdf(decision)
+//
+//        val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
+//        FileOutputStream(filepath).use { it.write(bytes) }
+//    }
 
 }
 

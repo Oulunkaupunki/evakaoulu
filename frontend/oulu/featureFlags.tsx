@@ -23,7 +23,9 @@ const featureFlags: FeatureFlags = {
     messageAttachments: true,
     personalDetailsPage: true,
     mobileMessages: true,
-    voucherUnitPayments: true
+    voucherUnitPayments: true,
+    assistanceNeedDecisions: true
+    assistanceNeedDecisionsLanguageSelect: false
   },
   adminSettingsEnabled: true
 }

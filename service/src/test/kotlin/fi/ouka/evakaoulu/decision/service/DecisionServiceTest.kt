@@ -31,6 +31,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
+import org.springframework.beans.factory.annotation.Autowired
 import java.io.FileOutputStream
 import java.nio.file.Paths
 import java.time.LocalDate
@@ -46,6 +47,8 @@ class DecisionServiceTest {
     private lateinit var messageProvider: IMessageProvider
     private lateinit var templateProvider: ITemplateProvider
     private lateinit var pdfService: PDFService
+
+    @Autowired
     private lateinit var assistanceNeedDecisionService: AssistanceNeedDecisionService
 
     @BeforeEach
@@ -247,15 +250,15 @@ class DecisionServiceTest {
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 
-//    @Test
-//    fun generateAssistanceNeedPdf() {
-//        val decision = validAssistanceNeedDecision
-//
-//        val bytes = assistanceNeedDecisionService.generatePdf(decision)
-//
-//        val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
-//        FileOutputStream(filepath).use { it.write(bytes) }
-//    }
+    @Test
+    fun generateAssistanceNeedPdf() {
+        val decision = validAssistanceNeedDecision
+
+        val bytes = assistanceNeedDecisionService.generatePdf(decision)
+
+        val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
+        FileOutputStream(filepath).use { it.write(bytes) }
+    }
 
 }
 

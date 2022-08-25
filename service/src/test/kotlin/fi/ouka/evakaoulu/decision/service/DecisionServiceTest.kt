@@ -9,11 +9,7 @@ import fi.espoo.evaka.application.ServiceNeedOption
 import fi.espoo.evaka.assistanceneed.decision.*
 import fi.espoo.evaka.daycare.domain.ProviderType
 import fi.espoo.evaka.daycare.service.DaycareManager
-import fi.espoo.evaka.decision.Decision
-import fi.espoo.evaka.decision.DecisionStatus
-import fi.espoo.evaka.decision.DecisionType
-import fi.espoo.evaka.decision.DecisionUnit
-import fi.espoo.evaka.decision.createDecisionPdf
+import fi.espoo.evaka.decision.*
 import fi.espoo.evaka.identity.ExternalIdentifier
 import fi.espoo.evaka.pis.service.PersonDTO
 import fi.espoo.evaka.setting.SettingType
@@ -23,6 +19,8 @@ import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import fi.espoo.voltti.pdfgen.PDFService
+import fi.espoo.voltti.pdfgen.Page
+import fi.espoo.voltti.pdfgen.Template
 import fi.ouka.evakaoulu.message.config.MessageConfiguration
 import fi.ouka.evakaoulu.template.config.TemplateConfiguration
 import org.junit.jupiter.api.BeforeEach
@@ -31,11 +29,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
-import org.springframework.beans.factory.annotation.Autowired
+import org.thymeleaf.context.Context
 import java.io.FileOutputStream
 import java.nio.file.Paths
 import java.time.LocalDate
-import java.util.UUID
+import java.util.*
 
 private val settings = mapOf(
     SettingType.DECISION_MAKER_NAME to "Paula Palvelupäällikkö",
@@ -48,14 +46,12 @@ class DecisionServiceTest {
     private lateinit var templateProvider: ITemplateProvider
     private lateinit var pdfService: PDFService
 
-    @Autowired
-    private lateinit var assistanceNeedDecisionService: AssistanceNeedDecisionService
-
     @BeforeEach
     fun setup() {
         messageProvider = MessageConfiguration().messageProvider()
         templateProvider = TemplateConfiguration().templateProvider()
         pdfService = PDFService(PDFConfig.templateEngine())
+
     }
 
     @ParameterizedTest
@@ -254,7 +250,7 @@ class DecisionServiceTest {
     fun generateAssistanceNeedPdf() {
         val decision = validAssistanceNeedDecision
 
-        val bytes = assistanceNeedDecisionService.generatePdf(decision)
+        val bytes = generateAssistanceNeedPdf(decision, validAddress(), validGuardian(false), pdfService, templateProvider)
 
         val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -391,3 +387,27 @@ private val validAssistanceNeedDecision = AssistanceNeedDecision(
     motivationForDecision = null,
     hasDocument = false
 )
+
+private fun validAddress() = DecisionSendAddress("Kotikatu", "90100", "Oulu", "","","")
+
+
+fun generateAssistanceNeedPdf(
+    decision: AssistanceNeedDecision,
+    sendAddress: DecisionSendAddress? = null,
+    guardian: PersonDTO? = null,
+    pdfService: PDFService,
+    templateProvider: ITemplateProvider
+): ByteArray {
+    return pdfService.render(
+        Page(
+            Template(templateProvider.getAssistanceNeedDecisionPath()),
+            Context().apply {
+                locale = Locale.Builder().setLanguage(decision.language.name.lowercase()).build()
+                setVariable("decision", decision)
+                setVariable("sentDate", LocalDate.now())
+                setVariable("sendAddress", sendAddress)
+                setVariable("guardian", guardian)
+            }
+        )
+    )
+}

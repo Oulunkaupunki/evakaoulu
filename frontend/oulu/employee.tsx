@@ -6,6 +6,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 */
 }
 
+import React from 'react'
+
+import { H3, P } from 'lib-components/typography'
 import { EmployeeCustomizations } from 'lib-customizations/types'
 
 import OuluLogo from './city-logo.svg'
@@ -30,6 +33,104 @@ const customizations: EmployeeCustomizations = {
         cityLabel: 'Oulun kaupunki',
         linkLabel: 'Oulun varhaiskasvatus',
         linkHref: 'https://www.ouka.fi/oulu/paivahoito-ja-esiopetus'
+      },
+      children: {
+        assistanceNeed: {
+          decisions: {
+            decision: {
+              appealInstructions: (
+                <>
+                  <P>
+                    Tähän päätökseen tyytymätön voi tehdä kirjallisen
+                    oikaisuvaatimuksen.
+                  </P>
+                  <H3>Oikaisuvaatimusoikeus</H3>
+                  <P>
+                    Oikaisuvaatimuksen saa tehdä se, johon päätös on kohdistettu
+                    tai jonka oikeuteen, velvollisuuteen tai etuun päätös
+                    välittömästi vaikuttaa (asianosainen).
+                  </P>
+                  <H3>Oikaisuviranomainen</H3>
+                  <P>Oikaisu tehdään Pohjois-Suomen aluehallintovirastolle.</P>
+                  <P>
+                    Pohjois-Suomen aluehallintovirasto
+                    <br />
+                    Käyntiosoite: Linnankatu 3, 90100 Oulu
+                    <br />
+                    Postiosoite: PL 6, 13035 AVI
+                    <br />
+                    Sähköpostiosoite: kirjaamo.pohjois@avi.fi
+                    <br />
+                    Puhelinvaihde: 0295 017 500
+                  </P>
+                  <H3>Oikaisuvaatimusaika</H3>
+                  <P>
+                    Oikaisuvaatimus on tehtävä 30 päivän kuluessa päätöksen
+                    tiedoksisaannista.
+                  </P>
+                  <H3>Tiedoksisaanti</H3>
+                  <P>
+                    Asianosaisen katsotaan saaneen päätöksestä tiedon, jollei
+                    muuta näytetä, 7 päivän kuluttua kirjeen lähettämisestä, 3
+                    päivän kuluttua sähköpostin lähettämisestä,
+                    saantitodistuksen osoittamana aikana tai erilliseen
+                    tiedoksisaantitodistukseen merkittynä aikana.
+                    Tiedoksisaantipäivää ei lueta määräaikaan. Jos määräajan
+                    viimeinen päivä on pyhäpäivä, itsenäisyyspäivä, vapunpäivä,
+                    joulu- tai juhannusaatto tai arkilauantai, saa tehtävän
+                    toimittaa ensimmäisenä arkipäivänä sen jälkeen.
+                  </P>
+                  <H3>Oikaisuvaatimus</H3>
+                  <P noMargin>Oikaisuvaatimuksessa on ilmoitettava</P>
+                  <ul>
+                    <li>
+                      Oikaisuvaatimuksen tekijän nimi, kotikunta, postiosoite ja
+                      puhelinnumero
+                    </li>
+                    <li>päätös, johon haetaan oikaisua</li>
+                    <li>
+                      miltä osin päätökseen haetaan oikaisua ja mitä oikaisua
+                      siihen vaaditaan tehtäväksi
+                    </li>
+                    <li>vaatimuksen perusteet</li>
+                  </ul>
+                  <P noMargin>Oikaisuvaatimukseen on liitettävä</P>
+                  <ul>
+                    <li>
+                      päätös, johon haetaan oikaisua, alkuperäisenä tai
+                      jäljennöksenä
+                    </li>
+                    <li>
+                      todistus siitä, minä päivänä päätös on annettu tiedoksi,
+                      tai muu selvitys oikaisuvaatimusajan alkamisen
+                      ajankohdasta
+                    </li>
+                    <li>
+                      asiakirjat, joihin oikaisuvaatimuksen tekijä vetoaa
+                      oikaisuvaatimuksensa tueksi, jollei niitä ole jo
+                      aikaisemmin toimitettu viranomaiselle.
+                    </li>
+                  </ul>
+                  <P>
+                    Asiamiehen on liitettävä valituskirjelmään valtakirja, kuten
+                    oikeudenkäynnistä hallintoasioissa annetun lain (808/2019)
+                    32 §:ssä säädetään.
+                  </P>
+                  <H3>Oikaisuvaatimuksen toimittaminen</H3>
+                  <P>
+                    Oikaisuvaatimuskirjelmä on toimitettava oikaisuvaatimusajan
+                    kuluessa oikaisuvaatimusviranomaiselle.
+                    Oikaisuvaatimuskirjelmän tulee olla perillä
+                    oikaisuvaatimusajan viimeisenä päivänä ennen viraston
+                    aukiolon päättymistä. Oikaisuvaatimuksen lähettäminen
+                    postitse tai sähköisesti tapahtuu lähettäjän omalla
+                    vastuulla.
+                  </P>
+                </>
+              )
+            }
+          }
+        }
       },
       childInformation: {
         assistanceNeed: {

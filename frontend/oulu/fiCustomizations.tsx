@@ -545,7 +545,7 @@ const fi: DeepPartial<Translations> = {
     cityLabel: '© Oulun kaupunki',
     privacyPolicyLink: (
       <ExternalLink
-        href="https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus"
+        href="https://www.ouka.fi/oulu/verkkoasiointi/tietosuojaselosteet?registerId=1939220"
         text="Tietosuojaselosteet"
         newTab={true}
         data-qa="footer-policy-link"

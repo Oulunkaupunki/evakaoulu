@@ -25,7 +25,8 @@ const featureFlags: FeatureFlags = {
     mobileMessages: true,
     voucherUnitPayments: true,
     assistanceNeedDecisions: true,
-    assistanceNeedDecisionsLanguageSelect: false
+    assistanceNeedDecisionsLanguageSelect: false,
+    citizenVasu: true
   },
   adminSettingsEnabled: true
 }

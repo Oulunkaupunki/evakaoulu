@@ -22,7 +22,7 @@ class EVakaOuluConfig {
 
     @Bean
     fun featureConfig(): FeatureConfig = FeatureConfig(
-        valueDecisionCapacityFactorEnabled = true,
+        valueDecisionCapacityFactorEnabled = false,
         daycareApplicationServiceNeedOptionsEnabled = true,
         citizenReservationThresholdHours = 6 * 24, // Tue 00:00
         dailyFeeDivisorOperationalDaysOverride = 20,

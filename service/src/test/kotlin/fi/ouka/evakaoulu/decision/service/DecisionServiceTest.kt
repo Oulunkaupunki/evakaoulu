@@ -6,26 +6,21 @@ package fi.ouka.evakaoulu.decision.service
 
 import fi.espoo.evaka.application.ServiceNeed
 import fi.espoo.evaka.application.ServiceNeedOption
+import fi.espoo.evaka.assistanceneed.decision.*
 import fi.espoo.evaka.daycare.domain.ProviderType
 import fi.espoo.evaka.daycare.service.DaycareManager
-import fi.espoo.evaka.decision.Decision
-import fi.espoo.evaka.decision.DecisionStatus
-import fi.espoo.evaka.decision.DecisionType
-import fi.espoo.evaka.decision.DecisionUnit
-import fi.espoo.evaka.decision.createDecisionPdf
+import fi.espoo.evaka.decision.*
 import fi.espoo.evaka.identity.ExternalIdentifier
 import fi.espoo.evaka.pis.service.PersonDTO
 import fi.espoo.evaka.setting.SettingType
-import fi.espoo.evaka.shared.ApplicationId
-import fi.espoo.evaka.shared.ChildId
-import fi.espoo.evaka.shared.DaycareId
-import fi.espoo.evaka.shared.DecisionId
-import fi.espoo.evaka.shared.PersonId
-import fi.espoo.evaka.shared.ServiceNeedOptionId
+import fi.espoo.evaka.shared.*
 import fi.espoo.evaka.shared.config.PDFConfig
+import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import fi.espoo.voltti.pdfgen.PDFService
+import fi.espoo.voltti.pdfgen.Page
+import fi.espoo.voltti.pdfgen.Template
 import fi.ouka.evakaoulu.message.config.MessageConfiguration
 import fi.ouka.evakaoulu.template.config.TemplateConfiguration
 import org.junit.jupiter.api.BeforeEach
@@ -34,10 +29,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
+import org.thymeleaf.context.Context
 import java.io.FileOutputStream
 import java.nio.file.Paths
 import java.time.LocalDate
-import java.util.UUID
+import java.util.*
 
 private val settings = mapOf(
     SettingType.DECISION_MAKER_NAME to "Paula Palvelupäällikkö",
@@ -55,6 +51,7 @@ class DecisionServiceTest {
         messageProvider = MessageConfiguration().messageProvider()
         templateProvider = TemplateConfiguration().templateProvider()
         pdfService = PDFService(PDFConfig.templateEngine())
+
     }
 
     @ParameterizedTest
@@ -249,6 +246,16 @@ class DecisionServiceTest {
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 
+    @Test
+    fun generateAssistanceNeedPdf() {
+        val decision = validAssistanceNeedDecision
+
+        val bytes = generateAssistanceNeedPdf(decision, validAddress(), validGuardian(false), pdfService, templateProvider)
+
+        val filepath = "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-assistance-need-decision.pdf"
+        FileOutputStream(filepath).use { it.write(bytes) }
+    }
+
 }
 
 private fun validDecision(type: DecisionType, decisionUnit: DecisionUnit) = Decision(
@@ -322,3 +329,85 @@ private fun validChild(restrictedDetailsEnabled: Boolean = false) = PersonDTO(
     residenceCode = "",
     restrictedDetailsEnabled = restrictedDetailsEnabled
 )
+
+
+private val validAssistanceNeedDecision = AssistanceNeedDecision(
+    id = AssistanceNeedDecisionId(UUID.randomUUID()),
+    decisionNumber = 125632424,
+    child = AssistanceNeedDecisionChild(
+        id = ChildId(UUID.randomUUID()),
+        name = "Matti Meikäläinen",
+        dateOfBirth = LocalDate.of(2020, 1, 5)
+    ),
+    validityPeriod = DateRange(LocalDate.of(2022, 8, 2), LocalDate.of(2022, 12, 31)),
+    status = AssistanceNeedDecisionStatus.ACCEPTED,
+    language = AssistanceNeedDecisionLanguage.FI,
+    decisionMade = LocalDate.of(2022, 7, 1),
+    sentForDecision = LocalDate.of(2022, 5, 12),
+    selectedUnit = UnitInfo(
+        id = DaycareId(UUID.randomUUID()),
+        name = "Amurin päiväkoti",
+        streetAddress = "Amurinpolku 1",
+        postalCode = "33100",
+        postOffice = "Tampere"
+    ),
+    preparedBy1 = null,
+    preparedBy2 = null,
+    decisionMaker = AssistanceNeedDecisionMaker(
+        employeeId = EmployeeId(UUID.randomUUID()),
+        title = "Asiakaspalvelupäällikkö",
+        name = "Paula Palvelupäällikkö"
+    ),
+    pedagogicalMotivation = null,
+    structuralMotivationOptions = StructuralMotivationOptions(
+        smallerGroup = false,
+        specialGroup = false,
+        smallGroup = false,
+        groupAssistant = false,
+        childAssistant = false,
+        additionalStaff = false
+    ),
+    structuralMotivationDescription = null,
+    careMotivation = null,
+    serviceOptions = ServiceOptions(
+        consultationSpecialEd = false,
+        partTimeSpecialEd = false,
+        fullTimeSpecialEd = false,
+        interpretationAndAssistanceServices = false,
+        specialAides = false
+    ),
+    servicesMotivation = null,
+    expertResponsibilities = null,
+    guardiansHeardOn = null,
+    guardianInfo = emptySet(),
+    viewOfGuardians = null,
+    otherRepresentativeHeard = false,
+    otherRepresentativeDetails = null,
+    assistanceLevels = setOf(AssistanceLevel.ENHANCED_ASSISTANCE),
+    motivationForDecision = null,
+    hasDocument = false
+)
+
+private fun validAddress() = DecisionSendAddress("Kotikatu", "90100", "Oulu", "","","")
+
+
+fun generateAssistanceNeedPdf(
+    decision: AssistanceNeedDecision,
+    sendAddress: DecisionSendAddress? = null,
+    guardian: PersonDTO? = null,
+    pdfService: PDFService,
+    templateProvider: ITemplateProvider
+): ByteArray {
+    return pdfService.render(
+        Page(
+            Template(templateProvider.getAssistanceNeedDecisionPath()),
+            Context().apply {
+                locale = Locale.Builder().setLanguage(decision.language.name.lowercase()).build()
+                setVariable("decision", decision)
+                setVariable("sentDate", LocalDate.now())
+                setVariable("sendAddress", sendAddress)
+                setVariable("guardian", guardian)
+            }
+        )
+    )
+}

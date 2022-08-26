@@ -24,9 +24,50 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
     override val subjectForClubApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     override val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     override val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
-    override val subjectForDecisionEmail: String = "Sama suomeksi / This space intentionally left blank"
+    override val subjectForDecisionEmail: String = "Päätös eVakassa / Decision in eVaka"
 
 
+    override fun getDecisionEmailHtml(childId: ChildId, decisionId: AssistanceNeedDecisionId): String = """
+        <p>Hei!</p>
+       
+        <p>Lapsellenne on tehty päätös.</p>
+       
+        <p>Päätös on nähtävissä eVakassa osoitteessa <a href="https://varhaiskasvatus.ouka.fi/">https://varhaiskasvatus.ouka.fi/</a>.</p>
+        
+        <p>Tähän viestiin ei voi vastata.</p>
+        
+        <hr>
+        
+        <p>Hello!</p>
+       
+        <p>A decision has been made for you by the Oulu early childhood education and care services.</p>
+       
+        <p>The decision can be seen online at <a href="https://varhaiskasvatus.ouka.fi/">https://varhaiskasvatus.ouka.fi/</a>.</p>
+        
+        <p>You may not reply to this message.</p>
+        
+    """.trimIndent()
+
+    override fun getDecisionEmailText(childId: ChildId, decisionId: AssistanceNeedDecisionId): String = """
+        Hei!
+        
+        Lapsellenne on tehty päätös.
+        
+        Päätös on nähtävissä eVakassa osoitteessa https://varhaiskasvatus.ouka.fi/.
+        
+        Tähän viestiin ei voi vastata.
+        
+        ------------------------------------------------------------------------------
+        
+        Hello!
+        
+        A decision has been made for you by the Oulu early childhood education and care services. 
+        
+        The decision can be seen online at varhaiskasvatus.ouka.fi.
+        
+        You may not reply to this message.
+        
+    """.trimIndent()
 
     override fun getPendingDecisionEmailHtml(): String {
         return """
@@ -360,11 +401,5 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
         """.trimIndent()
     }
 
-    override fun getDecisionEmailHtml(childId: ChildId, decisionId: AssistanceNeedDecisionId): String {
-        return "X"
-    }
 
-    override fun getDecisionEmailText(childId: ChildId, decisionId: AssistanceNeedDecisionId): String {
-        return "X"
-    }
 }

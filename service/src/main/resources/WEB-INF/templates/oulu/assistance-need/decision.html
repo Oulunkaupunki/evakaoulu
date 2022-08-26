@@ -14,7 +14,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 <body>
 
-<header th:replace="~{ oulu/shared/common :: header}"></header>
+<header th:replace="~{ oulu/shared/common :: assistanceNeedHeader}"></header>
 <footer th:replace="~{ oulu/shared/common :: footer}"></footer>
 
 <div class="page first-page">
@@ -30,9 +30,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             >
             <br />
             <span th:utext="#{decision.details.date}"></span>
-            <span
-                    th:replace="~{shared/common :: date-range(${decision.startDate}, ${decision.endDate})}"
-            ></span>
+            <span th:replace="~{shared/common :: date-range(${decision.validityPeriod.start}, ${decision.validityPeriod.end})}"></span>
         </p>
         <p>
             <span th:text="#{decisionStatus}"></span>
@@ -42,17 +40,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
     <div class="decision-details-container">
         <h2 th:text="#{neededTypesOfAssistance}"></h2>
-        <div
-                class="decision-details"
-                th:if="${decision.pedagogicalMotivation} != null"
-        >
+        <div class="decision-details" th:if="${decision.pedagogicalMotivation} != null">
             <h3 th:text="#{pedagogicalMotivation}"></h3>
             <div th:text="${decision.pedagogicalMotivation}"></div>
         </div>
-        <div
-                class="decision-details"
-                th:if="${decision.structuralMotivationDescription} != null or ${decision.structuralMotivationOptions} != null"
-        >
+        <div class="decision-details" th:if="${decision.structuralMotivationDescription} != null or ${decision.structuralMotivationOptions} != null">
             <h3 th:text="#{structuralMotivation}"></h3>
             <ul th:if="${decision.structuralMotivationOptions} != null">
                 <li
@@ -85,17 +77,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                     th:text="${decision.structuralMotivationDescription}"
             ></div>
         </div>
-        <div
-                class="decision-details"
-                th:if="${decision.careMotivation} != null"
-        >
+        <div class="decision-details" th:if="${decision.careMotivation} != null">
             <h3 th:text="#{careMotivation}"></h3>
             <div th:text="${decision.careMotivation}"></div>
         </div>
-        <div
-                class="decision-details"
-                th:if="${decision.servicesMotivation} != null or ${decision.serviceOptions} != null"
-        >
+        <div class="decision-details" th:if="${decision.servicesMotivation} != null or ${decision.serviceOptions} != null">
             <h3 th:text="#{services}"></h3>
             <ul th:if="${decision.serviceOptions} != null">
                 <li
@@ -114,15 +100,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                         th:text="#{serviceOptions.interpretationAndAssistanceServices}"
                         th:if="${decision.serviceOptions.interpretationAndAssistanceServices}"
                 ></li>
-                <li
-                        th:text="#{serviceOptions.specialAides}"
-                        th:if="${decision.serviceOptions.specialAides}"
-                ></li>
+                <li th:text="#{serviceOptions.specialAides}" th:if="${decision.serviceOptions.specialAides}"></li>
             </ul>
-            <div
-                    th:text="${decision.servicesMotivation}"
-                    th:if="${decision.servicesMotivation} != null"
-            ></div>
+            <div th:text="${decision.servicesMotivation}" th:if="${decision.servicesMotivation} != null"></div>
         </div>
     </div>
 
@@ -170,34 +150,19 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
     <div class="decision-details-container">
         <h2 th:text="#{decisionAndValidity}"></h2>
-        <div
-                class="decision-details"
-                th:if="${decision.assistanceLevel} != null"
-        >
+        <div class="decision-details" th:unless="${decision.assistanceLevels.empty}">
             <h3 th:text="#{futureLevelOfAssistance}"></h3>
-            <div>
-          <span
-                  th:text="#{${'assistanceLevel.' + decision.assistanceLevel}}"
-          ></span>
-                <th:block
-                        th:if="${decision.assistanceServicesTime} != null and ${decision.assistanceLevel.toString()} == 'ASSISTANCE_SERVICES_FOR_TIME'"
-                >
-            <span
-                    th:replace="~{shared/common :: date-range(${decision.assistanceServicesTime.start}, ${decision.assistanceServicesTime.end})}"
-            ></span>
-                </th:block>
-            </div>
+            <span th:each="assistanceLevel, i : ${decision.assistanceLevels}">
+            <span th:text="#{${'assistanceLevel.' + assistanceLevel}}"></span
+            ><span th:unless="${i.last}">,</span>
+          </span>
         </div>
-        <div class="decision-details" th:if="${decision.startDate} != null">
+
+        <div class="decision-details" th:if="${decision.validityPeriod.start} != null">
             <h3 th:text="#{startDate}"></h3>
-            <div
-                    th:replace="~{shared/common :: format-date(${decision.startDate})}"
-            ></div>
+            <div th:replace="~{shared/common :: format-date(${decision.validityPeriod.start})}"></div>
         </div>
-        <div
-                class="decision-details"
-                th:if="${decision.selectedUnit} != null"
-        >
+        <div class="decision-details" th:if="${decision.selectedUnit} != null">
             <h3 th:text="#{selectedUnit}"></h3>
             <div>
                 <div th:text="${decision.selectedUnit.name}"></div>
@@ -207,10 +172,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             </div>
         </div>
         <div class="decision-details" th:text="#{unitMayChange}"></div>
-        <div
-                class="decision-details"
-                th:if="${decision.motivationForDecision} != null"
-        >
+        <div class="decision-details" th:if="${decision.motivationForDecision} != null">
             <h3 th:text="#{motivationForDecision}"></h3>
             <div th:text="${decision.motivationForDecision}"></div>
         </div>
@@ -240,10 +202,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                 <div th:text="${decision.preparedBy2.phoneNumber}"></div>
             </div>
         </div>
-        <div
-                class="decision-details"
-                th:if="${decision.decisionMaker} != null"
-        >
+        <div class="decision-details" th:if="${decision.decisionMaker} != null">
             <h3 th:text="#{decisionMaker}"></h3>
             <div>
                 <span th:text="${decision.decisionMaker.name}"></span>,
@@ -260,7 +219,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <p th:utext="#{disclaimer}"></p>
 </div>
 
-<div class="page">
+<div class="page last-page">
     <h2 th:text="#{appealInstructionTitle}"></h2>
     <div th:utext="#{appealInstructions}"></div>
 </div>

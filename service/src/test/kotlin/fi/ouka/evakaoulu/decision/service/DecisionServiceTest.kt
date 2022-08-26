@@ -252,7 +252,7 @@ class DecisionServiceTest {
 
         val bytes = generateAssistanceNeedPdf(decision, validAddress(), validGuardian(false), pdfService, templateProvider)
 
-        val filepath = "${Paths.get("build").toAbsolutePath()}/DecisionServiceTest-assistance-need-decision.pdf"
+        val filepath = "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-assistance-need-decision.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
     }
 

@@ -1,11 +1,16 @@
 package fi.ouka.evakaoulu.payment.service
 
+import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
+import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.ouka.evakaoulu.invoice.service.InvoiceFieldName
+import fi.ouka.evakaoulu.invoice.service.StringInvoiceGenerator
 import fi.ouka.evakaoulu.util.FieldType
 import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.springframework.stereotype.Component
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Component
 class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val financeDateProvider: FinanceDateProvider) {
@@ -18,19 +23,21 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
     fun gatherPaymentData(payment: Payment): PaymentData {
         var paymentData = PaymentData()
 
+        var paymentDateFormatterYYMMDD = DateTimeFormatter.ofPattern("yyMMdd")
+
         paymentData.setAlphanumericValue(PaymentFieldName.INTIME_COMPANY_ID, "20")
         paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ID, payment.unit.providerId ?: "")
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID, payment.number.toString())
         paymentData.setNumericValue(PaymentFieldName.INVOICE_ACCEPTANCE, 1)
         paymentData.setNumericValue(PaymentFieldName.VOUCHER_TYPE, 42)
-        paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_NUMBER, payment.number.toString())
+        paymentData.setNumericValue(PaymentFieldName.VOUCHER_NUMBER, payment.number)
         paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_DATE, financeDateProvider.currentDateWithAbbreviatedYear())
         paymentData.setNumericValue(PaymentFieldName.INVOICE_TYPE, 1)
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, "2208")  //TODO how to compute this
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_DATE, payment.paymentDate.toString()) //TODO needs converting to "YYMMDD"
-        paymentData.setAlphanumericValue(PaymentFieldName.DUE_DATE, payment.dueDate.toString()) //TODO needs converting to "YYMMDD"
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_SUM, payment.amount.toString())
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION,"")
+        paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, financeDateProvider.previousMonthYYMM())
+        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_DATE, payment.paymentDate?.format(paymentDateFormatterYYMMDD)?: LocalDate.now().format(paymentDateFormatterYYMMDD))
+        paymentData.setAlphanumericValue(PaymentFieldName.DUE_DATE, payment.dueDate?.format(paymentDateFormatterYYMMDD)?: LocalDate.now().format(paymentDateFormatterYYMMDD))
+        paymentData.setNumericValue(PaymentFieldName.INVOICE_SUM, payment.amount)
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_1, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CURRENCY, "")
         paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_DATE, "")
@@ -38,7 +45,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_MINUS, "")
         paymentData.setAlphanumericValue(PaymentFieldName.DEBT_ACCOUNT, "00002545")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_DEBT_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KP_PURCHASE_ACCOUNT, "4335")
+        paymentData.setNumericValue(PaymentFieldName.KP_PURCHASE_ACCOUNT, 4335)
         paymentData.setAlphanumericValue(PaymentFieldName.SI_PURCHASE_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.KP_CASHBOX_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_CASHBOX_ACCOUNT, "")
@@ -63,7 +70,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.BANK, "")
         paymentData.setAlphanumericValue(PaymentFieldName.BANK_ACCOUNT,payment.unit.iban.toString())
         paymentData.setAlphanumericValue(PaymentFieldName.NOTE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.VAT_PERIOD, "1904") //TODO add value from mappings
+        paymentData.setAlphanumericValue(PaymentFieldName.VAT_PERIOD, financeDateProvider.previousMonthYYMM())
         paymentData.setAlphanumericValue(PaymentFieldName.VAT_VAL, "0")
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_2, "")
         paymentData.setAlphanumericValue(PaymentFieldName.RECLAMATION_DATE, "")
@@ -95,12 +102,12 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.CREDIT_TARGET_2, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE_FIELD, "")
         paymentData.setAlphanumericValue(PaymentFieldName.BREAKDOWN_TYPE, "9")
-        paymentData.setAlphanumericValue(PaymentFieldName.DESCRIPTION, payment.unit.providerId.toString() + payment.unit.name.toString())
+        paymentData.setAlphanumericValue(PaymentFieldName.DESCRIPTION, payment.unit.providerId.toString() + " " + payment.unit.name.toString())
         paymentData.setAlphanumericValue(PaymentFieldName.SUB_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.VAT_CODE, "105")
         paymentData.setAlphanumericValue(PaymentFieldName.AMOUNT1, "")
         paymentData.setAlphanumericValue(PaymentFieldName.AMOUNT2, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.DELIVERY_PERIOD, "1904") //Todo: YYMM
+        paymentData.setAlphanumericValue(PaymentFieldName.DELIVERY_PERIOD, financeDateProvider.previousMonthYYMM())
         paymentData.setAlphanumericValue(PaymentFieldName.VAT_BALANCE_SUM, "")
         paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_PERIODS, "")
@@ -157,6 +164,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
     fun formatPayment(paymentData: PaymentData): String {
 
         var result = generateRow(headerRowFields, paymentData)
+        result += generateRow(paymentRowFields, paymentData)
         return result
     }
 
@@ -169,11 +177,15 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
 
         var paymentString = ""
         succeeded.forEach {
-            // val paymentData = gatherPaymentData(it)
-            // paymentString += formatPayment(paymentData)
+            val paymentData = gatherPaymentData(it)
+            paymentString += formatPayment(paymentData)
             successList.add(it)
         }
 
         return Result(PaymentIntegrationClient.SendResult(successList, failedList), paymentString)
     }
+
+
+
+
 }

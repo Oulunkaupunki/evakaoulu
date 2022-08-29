@@ -21,4 +21,11 @@ class FinanceDateProvider {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
         return LocalDate.now().format(invoiceIdFormatter)
     }
+
+    fun previousMonthYYMM() : String {
+        val previousMonth = LocalDate.now().minusMonths(1)
+        val titleFormatter = DateTimeFormatter.ofPattern("yyMM")
+        return previousMonth.format(titleFormatter)
+    }
+
 }

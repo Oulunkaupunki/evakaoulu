@@ -13,7 +13,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @Component
-class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val financeDateProvider: FinanceDateProvider) {
+class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val financeDateProvider: FinanceDateProvider, val bicMapper: BicMapper) {
 
     data class Result(
         val sendResult: PaymentIntegrationClient.SendResult = PaymentIntegrationClient.SendResult(),
@@ -92,7 +92,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID_2, "")
         paymentData.setAlphanumericValue(PaymentFieldName.PICTURE_FILE, "")
         paymentData.setAlphanumericValue(PaymentFieldName.INT_REF_NRO, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.BANK_BIC_CODE, "NDEAFIHH") //TODO: add BIC adapter here!
+        paymentData.setAlphanumericValue(PaymentFieldName.BANK_BIC_CODE, bicMapper.mapIban(payment.unit.iban ?: ""))
         paymentData.setAlphanumericValue(PaymentFieldName.SUBLEDGER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.DOC_ID, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SUBST_DOC_ID, "")

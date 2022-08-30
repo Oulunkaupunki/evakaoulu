@@ -54,7 +54,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.KP_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "") // TODO 1104   1501253236
+        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "1104371") // TODO: select 371 or 372 depending on daycare type
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "")

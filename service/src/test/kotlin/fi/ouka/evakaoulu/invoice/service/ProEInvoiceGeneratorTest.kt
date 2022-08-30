@@ -1,7 +1,8 @@
 package fi.ouka.evakaoulu.invoice.service
 
-import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
+import fi.ouka.evakaoulu.util.FieldType
+import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -11,13 +12,13 @@ import org.mockito.kotlin.whenever
 
 internal class ProEInvoiceGeneratorTest {
 
-    val invoiceDateProvider = mock<InvoiceDateProvider>()
-    val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), invoiceDateProvider)
+    val financeDateProvider = mock<FinanceDateProvider>()
+    val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), financeDateProvider)
 
     @BeforeEach
     fun setup() {
-        whenever(invoiceDateProvider.currentDate()).thenReturn("20220505")
-        whenever(invoiceDateProvider.previousMonth()).thenReturn("04.2022")
+        whenever(financeDateProvider.currentDate()).thenReturn("20220505")
+        whenever(financeDateProvider.previousMonth()).thenReturn("04.2022")
     }
 
     @Test
@@ -49,15 +50,15 @@ internal class ProEInvoiceGeneratorTest {
     fun `should format invoice rows according to data and formatting`() {
 
         val format = listOf(
-                Field(InvoiceField.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
-                Field(InvoiceField.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
-                Field(InvoiceField.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2)
+                InvoiceField(InvoiceFieldName.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
+                InvoiceField(InvoiceFieldName.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
+                InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2)
         )
         val invoiceData = InvoiceData()
 
-        invoiceData.setAlphanumericValue(InvoiceField.INVOICE_IDENTIFIER, "121212A121A")
-        invoiceData.setAlphanumericValue(InvoiceField.CLIENT_NAME1, "Jokunen Jaska")
-        invoiceData.setNumericValue(InvoiceField.INCLUDED_LATE_PAYMENT_INTEREST, 42)
+        invoiceData.setAlphanumericValue(InvoiceFieldName.INVOICE_IDENTIFIER, "121212A121A")
+        invoiceData.setAlphanumericValue(InvoiceFieldName.CLIENT_NAME1, "Jokunen Jaska")
+        invoiceData.setNumericValue(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, 42)
 
         val result = proEInvoiceGenerator.generateRow(format, invoiceData)
 

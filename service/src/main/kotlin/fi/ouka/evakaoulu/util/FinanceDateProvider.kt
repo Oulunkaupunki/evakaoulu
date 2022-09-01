@@ -2,6 +2,7 @@ package fi.ouka.evakaoulu.util
 
 import org.springframework.stereotype.Component
 import java.time.LocalDate
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 @Component
@@ -20,6 +21,12 @@ class FinanceDateProvider {
     fun currentDateWithAbbreviatedYear(): String {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
         return LocalDate.now().format(invoiceIdFormatter)
+    }
+
+    fun previousMonthLastDate(): String {
+        val previousMonthlastDate = YearMonth.now().minusMonths(1).atEndOfMonth()
+        val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
+        return previousMonthlastDate.format(invoiceIdFormatter)
     }
 
     fun previousMonthYYMM() : String {

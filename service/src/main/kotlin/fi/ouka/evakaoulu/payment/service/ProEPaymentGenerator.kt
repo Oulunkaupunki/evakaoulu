@@ -33,7 +33,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setNumericValue(PaymentFieldName.VOUCHER_NUMBER, payment.number?.toInt() ?: 0)
         paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_DATE, financeDateProvider.previousMonthLastDate())
         paymentData.setNumericValue(PaymentFieldName.INVOICE_TYPE, 1)
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION,"")
+        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION,"1")
         paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, financeDateProvider.previousMonthYYMM())
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_DATE, payment.paymentDate?.format(paymentDateFormatterYYMMDD)?: LocalDate.now().format(paymentDateFormatterYYMMDD))
         paymentData.setAlphanumericValue(PaymentFieldName.DUE_DATE, payment.dueDate?.format(paymentDateFormatterYYMMDD)?: LocalDate.now().format(paymentDateFormatterYYMMDD))

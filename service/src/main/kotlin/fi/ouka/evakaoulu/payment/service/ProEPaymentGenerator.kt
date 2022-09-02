@@ -136,7 +136,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         fields.forEach{
             if (it.fieldType == FieldType.ALPHANUMERIC) {
                 var value = paymentData.getAlphanumericValue(it.field) ?: ""
-                result = result + value.padEnd(it.length)
+                result = result + value.take(it.length).padEnd(it.length)
             }
             else if (it.fieldType == FieldType.NUMERIC) {
                 var value = paymentData.getNumericValue(it.field) ?: 0

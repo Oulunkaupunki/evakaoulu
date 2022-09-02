@@ -165,7 +165,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
         fields.forEach{
             if (it.fieldType == FieldType.ALPHANUMERIC) {
                 var value = invoiceData.getAlphanumericValue(it.field) ?: ""
-                result = result + value.padEnd(it.length)
+                result = result + value.take(it.length).padEnd(it.length)
             }
             else if (it.fieldType == FieldType.NUMERIC) {
                 var value = invoiceData.getNumericValue(it.field) ?: 0

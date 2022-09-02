@@ -205,7 +205,7 @@ val paymentRowFields = listOf(
     PaymentField(PaymentFieldName.VOUCHER_DATE, FieldType.ALPHANUMERIC, 34, 6),
     PaymentField(PaymentFieldName.INVOICE_TYPE, FieldType.NUMERIC, 40, 1),
     PaymentField(PaymentFieldName.BREAKDOWN_TYPE, FieldType.ALPHANUMERIC, 41, 1),
-    PaymentField(PaymentFieldName.CALC_IDENTIFIER, FieldType.ALPHANUMERIC, 42, 30), //TODO needs to check that same in row and in header. If different make new value for CALC_IDENTIFIER
+    PaymentField(PaymentFieldName.CALC_IDENTIFIER, FieldType.ALPHANUMERIC, 42, 30),
     PaymentField(PaymentFieldName.KP_PURCHASE_ACCOUNT, FieldType.NUMERIC, 72, 8),
     PaymentField(PaymentFieldName.SI_PURCHASE_ACCOUNT, FieldType.NUMERIC, 80, 8),
     PaymentField(PaymentFieldName.KP_CASHBOX_ACCOUNT, FieldType.NUMERIC, 88, 8),

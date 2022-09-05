@@ -1,5 +1,6 @@
 package fi.ouka.evakaoulu.payment.service
 
+import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
@@ -54,7 +55,8 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.KP_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, "1104371") // TODO: select 371 or 372 depending on daycare type
+        val calcIdentifier = "1104" + if (payment.unit.careType.contains(CareType.FAMILY)) "372" else "371"
+        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, calcIdentifier)
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
         paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "")

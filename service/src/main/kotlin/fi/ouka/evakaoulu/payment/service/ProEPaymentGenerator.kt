@@ -55,7 +55,7 @@ class ProEPaymentGenerator(private val paymentChecker: PaymentChecker, val finan
         paymentData.setAlphanumericValue(PaymentFieldName.KP_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
-        val calcIdentifier = "1104" + if (payment.unit.careType.contains(CareType.FAMILY)) "372" else "371"
+        val calcIdentifier = "1104" + if (payment.unit.careType.contains(CareType.FAMILY) or payment.unit.careType.contains(CareType.GROUP_FAMILY)) "372" else "371"
         paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, calcIdentifier)
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")

@@ -1,5 +1,6 @@
 package fi.ouka.evakaoulu.payment.service
 
+import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentStatus
 import fi.espoo.evaka.invoicing.domain.PaymentUnit
@@ -35,6 +36,7 @@ fun validPaymentUnit(): PaymentUnit {
         "Private test care provider",
         "1234567-8",
         "FI01 2345 6789 0123 4567 89",
-        "PROVIDERID"
+        "PROVIDERID",
+        setOf(CareType.CENTRE)
     )
 }

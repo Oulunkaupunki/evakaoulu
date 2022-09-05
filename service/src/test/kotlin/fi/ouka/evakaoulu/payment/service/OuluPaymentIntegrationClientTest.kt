@@ -1,6 +1,7 @@
 package fi.ouka.evakaoulu.payment.service
 
 import com.jcraft.jsch.SftpException
+import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
@@ -82,7 +83,7 @@ internal class OuluPaymentIntegrationClientTest {
     @Test
     fun `should return unsuccessfully generated payments in failed list`() {
         val validPayment = validPayment()
-        val unitWithoutIban = PaymentUnit(DaycareId(UUID.randomUUID()), "No IBAN", "1234567-8", null, "PROVIDERID")
+        val unitWithoutIban = PaymentUnit(DaycareId(UUID.randomUUID()), "No IBAN", "1234567-8", null, "PROVIDERID", setOf(CareType.CENTRE))
         val paymentWithoutIban = validPayment().copy(unit = unitWithoutIban)
         val paymentList = listOf(validPayment, paymentWithoutIban)
         val proEPayment1 = ""

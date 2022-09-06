@@ -116,7 +116,7 @@ internal class PDFServiceTest {
                 "140680-9239", "", "", "",
                 "", null, "", null, restrictedDetailsEnabled = false
             ),
-            isElementaryFamily = true
+            partnerIsCodebtor = true
         )
 
         val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
@@ -185,7 +185,7 @@ internal class PDFServiceTest {
                 "140680-9239", "", "", "",
                 "", null, "", null, restrictedDetailsEnabled = false
             ),
-            isElementaryFamily = true
+            partnerIsCodebtor = true
         )
         val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
 

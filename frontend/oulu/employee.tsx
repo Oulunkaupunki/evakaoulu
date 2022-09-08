@@ -139,6 +139,34 @@ const customizations: EmployeeCustomizations = {
             </>
           )
         },
+        assistanceNeedVoucherCoefficient: {
+          sectionTitle: 'Palvelusetelikerroin',
+          voucherCoefficient: 'Palvelusetelikerroin',
+          create: 'Aseta uusi palvelusetelikerroin',
+          form: {
+            title: 'Aseta uusi palvelusetelikerroin',
+            editTitle: 'Muokkaa palvelusetelikerrointa',
+            titleInfo:
+              'Valitse palvelusetelikertoimen voimassaolopäivämäärät korotetun palvelusetelipäätöksen mukaisesti.',
+            coefficient: 'Palvelusetelikerroin (luku)',
+            validityPeriod: 'Palvelusetelikerroin voimassa',
+            errors: {
+              previousOverlap:
+                'Aiempi päällekkäinen palvelusetelikerroin katkaistaan automaattisesti.',
+              upcomingOverlap:
+                'Tuleva päällekkäinen palvelusetelikerroin siirretään alkamaan myöhemmin automaattisesti.',
+              fullOverlap:
+                'Edellinen päällekkäinen palvelusetelikerroin poistetaan automaattisesti.',
+              coefficientRange: 'Kerroin tulee olla välillä 1-10'
+            }
+          },
+          deleteModal: {
+            title: 'Poistetaanko palvelusetelikerroin?',
+            description:
+              'Haluatko varmasti poistaa palvelusetelikertoimen? Asiakkaalle ei luoda uutta arvopäätöstä, vaikka kertoimen poistaisi, vaan sinun tulee tehdä uusi takautuva arvopäätös.',
+            delete: 'Poista kerroin'
+          }
+        },
         dailyServiceTimes: {
           info: 'Tallenna tähän varhaiskasvatussopimuksella sovittu päivittäinen läsnäoloaika.',
           info2: ''

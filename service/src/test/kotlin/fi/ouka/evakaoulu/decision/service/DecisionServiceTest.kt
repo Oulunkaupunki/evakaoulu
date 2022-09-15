@@ -351,7 +351,7 @@ private val validAssistanceNeedDecision = AssistanceNeedDecision(
         postalCode = "33100",
         postOffice = "Tampere"
     ),
-    preparedBy1 = null,
+    preparedBy1 = AssistanceNeedDecisionEmployee(EmployeeId(UUID.randomUUID()), "JOHTAJA", "JORMA PERTTILÄ", "0401234567"),
     preparedBy2 = null,
     decisionMaker = AssistanceNeedDecisionMaker(
         employeeId = EmployeeId(UUID.randomUUID()),

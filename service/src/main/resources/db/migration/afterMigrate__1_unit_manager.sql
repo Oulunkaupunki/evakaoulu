@@ -121,5 +121,5 @@ VALUES  ('5b1b23be-1e27-11ed-86d2-73721ee6d518', 'Helena Lehtola', 'p. 044 70353
         ('9fac9018-1e26-11ed-86d2-ff707fa1e75f', 'Vesa Rinta-Säntti', 'p. 0400 769106', 'vesa.rinta-santti@ouka.fi'),
         ('9ea7da22-1e28-11ed-86d2-170f45368080', 'Anne Schönberg', '', ''),
         ('d34c6134-35c1-11ed-a1b9-bb2d4ae54b81', 'Kirsi Ranki', '+358447036989','kirsi.ranki@ouka.fi'),
-        ('33faa4f0-35c2-11ed-9e9e-f7133d2283f3', 'Kirsi Ranki',	'+358447036989', 'kirsi.ranki@ouka.fi'),
+        ('33faa4f0-35c2-11ed-9e9e-f7133d2283f3', 'Kirsi Ranki',	'+358447036989', 'kirsi.ranki@ouka.fi')
 ON CONFLICT (id) DO NOTHING;

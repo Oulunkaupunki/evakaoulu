@@ -43,6 +43,7 @@ VALUES
     ('c288a440-9ef2-11ec-8546-8f405f297780','Esiopetus + varhaiskasvatus 13 pv/kk','Esiopetus + varhaiskasvatus 13 pv/kk','Pre-school education + early childhood education 13 d/m',13,'PRESCHOOL_DAYCARE',FALSE,0.45,1.0,12.4,FALSE,FALSE,'Esiopetus + varhaiskasvatus 13 pv/kk','Esiopetus + varhaiskasvatus 13 pv/kk','Esiopetus + varhaiskasvatus 13 pv/kk','Esiopetus + varhaiskasvatus 13 pv/kk', null,1.75, true),
     ('91a50d60-3f28-11ed-8217-b35ad6248e8d','Esiopetus + varhaiskasvatus 10 pv/kk 2v','Esiopetus + varhaiskasvatus 10 pv/kk 2v','Pre-school education + early childhood education 10 d/m 2y',10,'PRESCHOOL_DAYCARE',FALSE,0.3,1.0,9.5,FALSE,FALSE,'Esiopetus + varhaiskasvatus 10 pv/kk 2v','Esiopetus + varhaiskasvatus 10 pv/kk 2v','Esiopetus + varhaiskasvatus 10 pv/kk 2v','Esiopetus + varhaiskasvatus 10 pv/kk 2v', null,1.75, false),
     ('bf4b4946-3f28-11ed-8218-0392ee6d4528','Esiopetus + varhaiskasvatus 13 pv/kk 2v','Esiopetus + varhaiskasvatus 13 pv/kk 2v','Pre-school education + early childhood education 13 d/m 2y',13,'PRESCHOOL_DAYCARE',FALSE,0.45,1.0,12.4,FALSE,FALSE,'Esiopetus + varhaiskasvatus 13 pv/kk 2v','Esiopetus + varhaiskasvatus 13 pv/kk 2v','Esiopetus + varhaiskasvatus 13 pv/kk 2v','Esiopetus + varhaiskasvatus 13 pv/kk 2v', null,1.75, false),
+    ('99ab7baa-4083-11ed-8078-87d60cea9aea','Esiopetus + varhaiskasvatus alle 3h 2v','Esiopetus + varhaiskasvatus alle 3h 2v','Pre-school education + early childhood education less than 3h 2y',NULL,'PRESCHOOL_DAYCARE',FALSE,0.45,1.0,20,FALSE,FALSE,'Esiopetus + varhaiskasvatus alle 3h 2v','Esiopetus + varhaiskasvatus alle 3h 2v','Esiopetus + varhaiskasvatus alle 3h 2v','Esiopetus + varhaiskasvatus alle 3h 2v', null,1.75, false),
     ('c288a490-9ef2-11ec-8547-ab2d0b032c1c','Yksityinen esiopetus + varhaiskasvatus palse','Yksityinen esiopetus + varhaiskasvatus palse','Private pre-school education + early childhood education service voucher',NULL,'PRESCHOOL_DAYCARE',FALSE,0.6,1.0,25,FALSE,FALSE,'Yksityinen esiopetus + varhaiskasvatus palse','Yksityinen esiopetus + varhaiskasvatus palse','Yksityinen esiopetus + varhaiskasvatus palse','Yksityinen esiopetus + varhaiskasvatus palse', null,1.75, false),
 
     -- CLUB
@@ -146,6 +147,7 @@ VALUES
     ('a069cb72-1185-11ed-80ed-bf1fe485f058','c288a440-9ef2-11ec-8546-8f405f297780',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('0b4398d2-3f2c-11ed-aec6-2374da60e610','91a50d60-3f28-11ed-8217-b35ad6248e8d',daterange('2022-08-01', NULL, '[]'),86800,0.55,47740,133200,0.55,73260),
     ('a2ca6410-3f2c-11ed-aeca-6fcd7c353cce','bf4b4946-3f28-11ed-8218-0392ee6d4528',daterange('2022-08-01', NULL, '[]'),86800,0.7,60760,133200,0.7,93240),
+    ('c9abd74a-4084-11ed-b945-d3c3ccafac87','99ab7baa-4083-11ed-8078-87d60cea9aea',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a069ce10-1185-11ed-80ed-4366a9322b9a','c288a490-9ef2-11ec-8547-ab2d0b032c1c',daterange('2022-08-01', NULL, '[]'),86800,0.5,41250,133200,0.5,63300),
     ('a069d266-1185-11ed-80ed-7b2f4ae3b150','de463cec-9f97-11ec-a230-bb19e6bd6663',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a069d536-1185-11ed-80ed-e7faea8ca17f','c288a4d6-9ef2-11ec-8548-53f49e3cb87b',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
@@ -191,6 +193,7 @@ VALUES
     ('a81c1b38-3d70-11ed-afcc-87e8057ec4db','c288a440-9ef2-11ec-8546-8f405f297780',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('681a0456-3f2c-11ed-aec8-df57cb369c7b','91a50d60-3f28-11ed-8217-b35ad6248e8d',daterange('2020-08-01', '2022-07-31', '[]'),82500,0.55,45400,126600,0.55,69600),
     ('bfcab9ca-3f2c-11ed-aecb-6f46722c47f3','bf4b4946-3f28-11ed-8218-0392ee6d4528',daterange('2020-08-01', '2022-07-31', '[]'),82500,0.7,54530,126600,0.7,88600),
+    ('f16de7be-4084-11ed-b946-5f350f214358','99ab7baa-4083-11ed-8078-87d60cea9aea',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('ba910620-3d70-11ed-afcd-d7219776a7a0','c288a490-9ef2-11ec-8547-ab2d0b032c1c',daterange('2020-08-01', '2022-07-31', '[]'),82500,0.5,41250,126600,0.5,63300),
     ('cf734fee-3d70-11ed-afce-4f697dd18b65','de463cec-9f97-11ec-a230-bb19e6bd6663',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('e70d55be-3d70-11ed-afcf-4fc110f7308c','c288a4d6-9ef2-11ec-8548-53f49e3cb87b',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
@@ -236,6 +239,7 @@ VALUES
     ('2ae0b398-3d81-11ed-af3c-2b0905961944','c288a440-9ef2-11ec-8546-8f405f297780',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('835dc9e6-3f2c-11ed-aec9-03e2870650b1','91a50d60-3f28-11ed-8217-b35ad6248e8d',daterange('2018-08-01', '2020-07-31', '[]'),72500,0.55,39900,122300,0.55,67300),
     ('d5b19984-3f2c-11ed-aecc-7b0ae92655df','bf4b4946-3f28-11ed-8218-0392ee6d4528',daterange('2018-08-01', '2020-07-31', '[]'),72500,0.7,50800,122300,0.7,85600),
+    ('09976d2e-4085-11ed-b947-af0854950407','99ab7baa-4083-11ed-8078-87d60cea9aea',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('3fb77d9c-3d81-11ed-af3d-bf3864a97042','c288a490-9ef2-11ec-8547-ab2d0b032c1c',daterange('2018-08-01', '2020-07-31', '[]'),72500,0.5,41250,122300,0.5,63300),
     ('586b7d02-3d81-11ed-af3e-e32f81c28df5','de463cec-9f97-11ec-a230-bb19e6bd6663',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('6af55d12-3d81-11ed-af3f-378378102e94','c288a4d6-9ef2-11ec-8548-53f49e3cb87b',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),

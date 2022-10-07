@@ -190,11 +190,10 @@ const customizations: EmployeeCustomizations = {
       placement: {
         type: {
           DAYCARE: 'Varhaiskasvatus',
-          DAYCARE_PART_TIME: 'Osapäiväinen varhaiskasvatus​',
+          DAYCARE_PART_TIME: 'Osapäiväinen varhaiskasvatus',
           TEMPORARY_DAYCARE: 'Tilapäinen kokopäiväinen varhaiskasvatus',
           PRESCHOOL_DAYCARE: 'Esiopetusta täydentävä varhaiskasvatus',
-          CLUB: 'Kerho',
-          SCHOOL_SHIFT_CARE: 'Koululaisten vuorohoito'
+          CLUB: 'Kerho'
         }
       },
       unitEditor: {
@@ -310,8 +309,7 @@ const customizations: EmployeeCustomizations = {
     'PRESCHOOL',
     'PRESCHOOL_DAYCARE',
     'PREPARATORY',
-    'PREPARATORY_DAYCARE',
-    'SCHOOL_SHIFT_CARE'
+    'PREPARATORY_DAYCARE'
   ],
   absenceTypes: [
     'OTHER_ABSENCE',

@@ -299,7 +299,12 @@ const customizations: EmployeeCustomizations = {
     alt: 'Oulu logo'
   },
   featureFlags,
-  assistanceMeasures: [],
+  assistanceMeasures: [
+    'SPECIAL_ASSISTANCE_DECISION',
+    'INTENSIFIED_ASSISTANCE',
+    'EXTENDED_COMPULSORY_EDUCATION',
+    'CHILD_ACCULTURATION_SUPPORT',
+    'TRANSPORT_BENEFIT'],
   placementTypes: [
     'CLUB',
     'DAYCARE',

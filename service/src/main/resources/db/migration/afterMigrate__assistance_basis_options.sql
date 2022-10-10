@@ -9,9 +9,9 @@ VALUES
     ('COMMON_SUPPORT', 'Yleinen tuki', 'Ei hallintopäätöstä.', 150),
     ('INTENSIFIED_ASSISTANCE', 'Tehostettu tuki', 'Merkitään hallintopäätöksen jälkeen.', 200),
     ('SPECIAL_ASSISTANCE_DECISION', 'Erityinen tuki', 'Merkitään hallintopäätöksen jälkeen.', 300),
-    ('EXTENDED_COMPULSORY_EDUCATION', 'Pidennetty oppivelvollisuus', 'Merkitään hallintopäätöksen jälkeen.', 310),
+    ('DEVELOPMENTAL_DISABILITY_1', 'Pidennetty oppivelvollisuus', 'Merkitään hallintopäätöksen jälkeen.', 310),
     ('DIFFERENT_EDUCTATION_START_DATE', 'Opetuksen poikkeava aloittamisajankohta', 'Merkitään päätöksen jälkeen.', 320),
-    ('DEVELOPMENTAL_DISABILITY', 'Kehitysvamma', 'Lapsella on todettu kehitysvamma, tieto tarvitaan tilastointia varten.', 330),
+    ('DEVELOPMENTAL_DISABILITY_2', 'Kehitysvamma', 'Lapsella on todettu kehitysvamma, tieto tarvitaan tilastointia varten.', 330),
     ('FINNISH_AS_SECOND_LANGUAGE', 'Suomi toisena kielenä opetus', 'Mikäli lapsi on alkeiskielitasolla ja saa suomi toisena kielenä opettajan antamaa opetusta', 340),
     ('PREPARATORY_EDUCATION_ASSISTANCE', 'Valmistava opetus ', 'Valmistavaa opetusta annetaan esiopetusikäisille maahanmuuttajataustaisille, joilla ei ole vielä tarvittavia kielellisiä valmiuksia esiopetuksessa opiskeluun (alkeiskielitaso). Merkitään palveluohjauksen päätöksen jälkeen', 350)
 ON CONFLICT (value) DO

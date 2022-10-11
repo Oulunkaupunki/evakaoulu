@@ -13,7 +13,6 @@ VALUES
     ('60', 'Kokoaikainen erityisopetus', 'Lapsi saa kokoaikaisesti varhaiskasvatuksen erityisopettajan antamaa opetusta.', 60),
     ('70', 'Ryhmän henkilöstömäärän lisäys', 'Esim. neljäs kasvattaja ryhmässä, resurssiveo ryhmässä.', 70),
     ('90', 'Alueellinen pienryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 90),
-    ('110', 'Alueellinen erityisryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 110),
     ('130', 'Apuvälineet', 'Merkitään hallintopäätöksen jälkeen.', 130),
     ('140', 'Tulkitsemispalvelut', 'Lapselle järjestetään kommunikaation tueksi erillisiä tulkitsemispalveluita. Viittomakieltä käyttävien lasten kommunikaation tukena voidaan tarvittaessa käyttää viittomakielen tulkkia tai viittomakielentaitoista avustajaa. Tulkitsemispalvelut on mahdollista järjestää avustamispalvelun yhteydessä.', 140),
     ('150', 'Kuljetusetu varhaiskasvatus', 'Merkitään päätöksen jälkeen. Lapselle on myönnetty taksikuljetus varhaiskasvatukseen.', 150),

@@ -304,7 +304,8 @@ const customizations: EmployeeCustomizations = {
     'INTENSIFIED_ASSISTANCE',
     'EXTENDED_COMPULSORY_EDUCATION',
     'CHILD_ACCULTURATION_SUPPORT',
-    'TRANSPORT_BENEFIT'],
+    'TRANSPORT_BENEFIT'
+  ],
   placementTypes: [
     'CLUB',
     'DAYCARE',

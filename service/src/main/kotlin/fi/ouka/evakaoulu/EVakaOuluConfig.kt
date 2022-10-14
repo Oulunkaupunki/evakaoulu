@@ -27,7 +27,7 @@ class EVakaOuluConfig {
         citizenReservationThresholdHours = 6 * 24, // Tue 00:00
         dailyFeeDivisorOperationalDaysOverride = 20,
         freeSickLeaveOnContractDays = true,
-        alwaysUseDaycareFinanceDecisionHandler = true,
+        alwaysUseDaycareFinanceDecisionHandler = false,
         freeAbsenceGivesADailyRefund = true,
         invoiceNumberSeriesStart = 1,
         paymentNumberSeriesStart = 1,

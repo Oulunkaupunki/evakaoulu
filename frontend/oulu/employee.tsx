@@ -25,9 +25,6 @@ const customizations: EmployeeCustomizations = {
       },
       // override translations here
       common: {
-        careTypeLabels: {
-          preschool: 'Esiopetusta täydentävä toiminta'
-        }
       },
       footer: {
         cityLabel: 'Oulun kaupunki',

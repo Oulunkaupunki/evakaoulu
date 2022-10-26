@@ -24,8 +24,6 @@ const customizations: EmployeeCustomizations = {
         }
       },
       // override translations here
-      common: {
-      },
       footer: {
         cityLabel: 'Oulun kaupunki',
         linkLabel: 'Oulun varhaiskasvatus',

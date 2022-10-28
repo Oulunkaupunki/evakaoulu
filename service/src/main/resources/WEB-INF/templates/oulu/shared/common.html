@@ -426,7 +426,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <p>
             <strong th:if="${type == 'notice'}" th:text="#{notice.approver.prefix}">Ilmoituksentekijä</strong>
             <strong th:unless="${type == 'notice'}" th:text="#{decision.approver.prefix}">Päätöksentekijä</strong>
-            <div th:text="${manager.name}"></div>
+            <div>
+                <span th:text="${decision.createdBy}"></span>
+            </div>
             <div th:text="#{decision.approver.additionalInfo}"></div>
             <div th:text="#{decision.unitmanagertitle}"></div>
             <div>

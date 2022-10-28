@@ -260,7 +260,7 @@ class DecisionServiceTest {
 
 private fun validDecision(type: DecisionType, decisionUnit: DecisionUnit) = Decision(
     DecisionId(UUID.randomUUID()),
-    createdBy = "Päivi Päiväkodinjohtaja",
+    createdBy = "Matti Käsittelijä",
     type,
     startDate = LocalDate.now(),
     endDate = LocalDate.now().plusMonths(3),

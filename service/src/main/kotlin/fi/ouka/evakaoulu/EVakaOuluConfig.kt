@@ -24,7 +24,7 @@ class EVakaOuluConfig {
     fun featureConfig(): FeatureConfig = FeatureConfig(
         valueDecisionCapacityFactorEnabled = false,
         daycareApplicationServiceNeedOptionsEnabled = true,
-        citizenReservationThresholdHours = 6 * 24, // Tue 00:00
+        citizenReservationThresholdHours = 7 * 24,
         dailyFeeDivisorOperationalDaysOverride = 20,
         freeSickLeaveOnContractDays = true,
         alwaysUseDaycareFinanceDecisionHandler = false,

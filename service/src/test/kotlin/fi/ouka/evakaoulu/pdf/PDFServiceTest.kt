@@ -80,7 +80,7 @@ internal class PDFServiceTest {
     fun generateFeeDecisionPdf() {
         val decision = validFeeDecision()
 
-        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
+        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, DocumentLang.FI))
 
         val filepath = "${reportsPath}/PDFServiceTest-fee-decision.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -90,7 +90,7 @@ internal class PDFServiceTest {
     fun generateFeeDecisionPdfWithIncome() {
         val decision = validFeeDecision().copy(headOfFamilyIncome = testDecisionIncome)
 
-        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
+        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, DocumentLang.FI))
 
         val filepath = "${reportsPath}/PDFServiceTest-fee-decision-head-of-family-income.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -101,7 +101,7 @@ internal class PDFServiceTest {
     fun generateFeeDecisionPdfType(decisionType: FeeDecisionType) {
         val decision = validFeeDecision().copy(decisionType = decisionType)
 
-        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
+        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, DocumentLang.FI))
 
         val filepath = "${reportsPath}/PDFServiceTest-fee-decision-type-$decisionType.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -119,7 +119,7 @@ internal class PDFServiceTest {
             partnerIsCodebtor = true
         )
 
-        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
+        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, DocumentLang.FI))
 
         val filepath = "${reportsPath}/PDFServiceTest-fee-decision-partner.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -131,7 +131,7 @@ internal class PDFServiceTest {
         val validTo = validFrom.plusYears(1)
         val decision = validFeeDecision().copy(validDuring = DateRange(validFrom, validTo))
 
-        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
+        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, DocumentLang.FI))
 
         val filepath = "${reportsPath}/PDFServiceTest-fee-decision-valid-to.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -148,7 +148,7 @@ internal class PDFServiceTest {
             )
         )
 
-        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, "fi"))
+        val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, DocumentLang.FI))
 
         val filepath = "${reportsPath}/PDFServiceTest-fee-decision-empty-address.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -157,7 +157,7 @@ internal class PDFServiceTest {
     @Test
     fun generateVoucherValueDecisionPdf() {
         val decision = validVoucherValueDecision()
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -168,7 +168,7 @@ internal class PDFServiceTest {
     @Test
     fun generateVoucherValueDecisionPdfWithIncome() {
         val decision = validVoucherValueDecision().copy(headOfFamilyIncome = testDecisionIncome)
-        val data = VoucherValueDecisionPdfData(decision = decision, settings = settings, lang = DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision = decision, settings = settings, lang = DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -187,7 +187,7 @@ internal class PDFServiceTest {
             ),
             partnerIsCodebtor = true
         )
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -198,7 +198,7 @@ internal class PDFServiceTest {
     @Test
     fun generateVoucherValueDecisionPdfValidTo() {
         val decision = validVoucherValueDecision().copy(validTo = LocalDate.now().plusYears(1))
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -215,7 +215,7 @@ internal class PDFServiceTest {
                 FeeAlterationWithEffect(FeeAlteration.Type.RELIEF, 50, false, -10800)
             )
         )
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -232,7 +232,7 @@ internal class PDFServiceTest {
                 FeeAlterationWithEffect(FeeAlteration.Type.RELIEF, 50, false, -100)
             )
         )
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -246,7 +246,7 @@ internal class PDFServiceTest {
             validTo = LocalDate.now().plusYears(1),
             decisionType = VoucherValueDecisionType.RELIEF_REJECTED
         )
-        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.fi)
+        val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
 
         val bytes = pdfService.generateVoucherValueDecisionPdf(data)
 
@@ -373,7 +373,8 @@ private fun validVoucherValueDecision() = VoucherValueDecisionDetailed(
         feeDescriptionFi = "eka",
         feeDescriptionSv = "toka",
         voucherValueDescriptionFi = "VarhaiskasvatusXXX",
-        voucherValueDescriptionSv = "neljäs"
+        voucherValueDescriptionSv = "neljäs",
+        missing = false
     ),
     baseCoPayment = 1,
     siblingDiscount = 1,

@@ -4,9 +4,12 @@
 
 package fi.ouka.evakaoulu.emailclient.config
 
+import fi.espoo.evaka.daycare.domain.Language
+import fi.espoo.evaka.emailclient.EmailContent
 import fi.espoo.evaka.emailclient.IEmailMessageProvider
 import fi.espoo.evaka.shared.AssistanceNeedDecisionId
 import fi.espoo.evaka.shared.ChildId
+import fi.espoo.evaka.shared.domain.FiniteDateRange
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
@@ -68,6 +71,10 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
         You may not reply to this message.
         
     """.trimIndent()
+
+    override fun missingReservationsNotification(language: Language, checkedRange: FiniteDateRange): EmailContent {
+        return EmailContent("", "", "")
+    }
 
     override fun getPendingDecisionEmailHtml(): String {
         return """

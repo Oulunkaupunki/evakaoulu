@@ -7,9 +7,11 @@ import React from 'react'
 import { isArray, toArray, isObject } from 'lodash'
 
 const checkOuluTranslation = (value: string, errors: string[]) => {
-    if (value.toLowerCase().includes('espoo')) {
-        console.error(value)
-        errors.push(value);
+    if (value !== null){
+        if (value.toLowerCase().includes('espoo') || value.toLowerCase().includes('tampere')) {
+            console.error(value)
+            errors.push(value);
+        }
     }
 }
 
@@ -39,8 +41,14 @@ const checkOuluTranslations = (translationsFi: { [key: string]: any }): string[]
 }
 
 describe('Citizen translations', () => {
-  test('fi', async () => {
-    const errors = checkOuluTranslations(translations.fi)
-    expect(errors).toEqual([])
-  })
+    test('fi', async () => {
+        const errors = checkOuluTranslations(translations.fi)
+        expect(errors).toEqual([])
+    })
+    test('en', async () => {
+        const errors = checkOuluTranslations(translations.en)
+        expect(errors).toEqual([])
+    })
 })
+
+

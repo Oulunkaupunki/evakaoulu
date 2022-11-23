@@ -279,15 +279,31 @@ const fi: DeepPartial<Translations> = {
               'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in pre-school education. The child may attend one group that meets two or three times a week and a family group at the same time.'
             ]
           },
-          instructions: (
-            <>
-              You can postpone the desired start date until the service
-              coordination team has begun to process the application. After
-              this, the date can only be postponed by contacting the early
-              childhood education and care service coordination team.
-              {customerContactText()}
-            </>
-          )
+          instructions: {
+            DAYCARE: (
+              <>
+                You can postpone the desired start date until the service
+                coordination team has begun to process the application. After
+                this, the date can only be postponed by contacting the early
+                childhood education and care service coordination team.
+                {customerContactText()}
+              </>
+            ),
+            PRESCHOOL: (
+              <>
+                You can postpone the desired start date until the service
+                coordination team has begun to process the application. After
+                this, the date can only be postponed by contacting the early
+                childhood education and care service coordination team.
+                {customerContactText()}
+              </>
+            ),
+            CLUB: null
+          } as {
+            DAYCARE: JSX.Element | null
+            PRESCHOOL: JSX.Element | null
+            CLUB: JSX.Element | null
+          },
         },
         clubDetails: {
           wasOnDaycare:
@@ -498,6 +514,12 @@ const fi: DeepPartial<Translations> = {
         </P>
       </>
     )
+  },
+  children: {
+    vasu: {
+      sharingLeopsDisclaimer:
+        "When a child changes to another early childhood education unit in the City of Oulu, the early childhood education plan and other early childhood education documents are transferred to the new unit (also applies to early childhood education organized by Oulu as a purchasing service). The guardian will be informed about the transfer in advance. We ask the guardian for permission to hand over the early childhood education plan to an outsider. However, if a child enters private or other municipality's early childhood education, the early childhood education plan must be submitted to the new early childhood education provider even without permission, if the information is necessary for arranging the child's early childhood education (section 41 (3) of the Early Childhood Education Act). In addition, the early childhood education plan must be submitted to the organizer of pre-primary or primary education if it is necessary for the organization of the child's education (section 41 (4) of the Basic Education Act). The guardian will be informed of the transfer in advance.",
+    }
   },
   footer: {
     cityLabel: '© City of Oulu',

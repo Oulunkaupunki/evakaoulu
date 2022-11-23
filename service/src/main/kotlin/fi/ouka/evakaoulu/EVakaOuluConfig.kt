@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner
 import fi.espoo.evaka.BucketEnv
 import fi.espoo.evaka.children.consent.ChildConsentType
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
+import fi.espoo.evaka.shared.auth.UserRole
 import fi.ouka.evakaoulu.invoice.service.SftpConnector
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import fi.ouka.evakaoulu.payment.service.ProEPaymentGenerator
@@ -34,7 +35,13 @@ class EVakaOuluConfig {
         unplannedAbsencesAreContractSurplusDays = false,
         maxContractDaySurplusThreshold = 13,
         useContractDaysAsDailyFeeDivisor = false,
-        enabledChildConsentTypes = setOf()
+        enabledChildConsentTypes = setOf(),
+        curriculumDocumentPermissionToShareRequired = true,
+        assistanceDecisionMakerRoles = setOf(UserRole.SPECIAL_EDUCATION_TEACHER),
+        requestedStartUpperLimit = 7,
+        partialAbsenceThresholdsEnabled = false,
+        postOffice = "OULU",
+        municipalMessageAccountName = "Oulun kaupunki"
     )
 
     @Bean

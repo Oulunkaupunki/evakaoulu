@@ -29,11 +29,14 @@ const customizations: CitizenCustomizations = {
     src: OuluLogo,
     alt: 'Oulu logo'
   },
-  footerLogo: <img src={FooterLogo} alt="Oulu Logo" />,
+  footerLogo: <img src={FooterLogo} alt="Oulu Logo"/>,
   routeLinkRootUrl: 'https://oulu.digitransit.fi/',
   mapConfig,
   featureFlags,
-  unitProviderTypes: ['MUNICIPAL', 'PRIVATE', 'PRIVATE_SERVICE_VOUCHER']
+  unitProviderTypes: ['MUNICIPAL', 'PRIVATE', 'PRIVATE_SERVICE_VOUCHER'],
+  getMaxPreferredUnits() {
+    return 3
+  }
 }
 
 export default customizations

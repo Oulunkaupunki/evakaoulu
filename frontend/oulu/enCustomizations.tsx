@@ -279,15 +279,31 @@ const fi: DeepPartial<Translations> = {
               'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in pre-school education. The child may attend one group that meets two or three times a week and a family group at the same time.'
             ]
           },
-          instructions: (
-            <>
-              You can postpone the desired start date until the service
-              coordination team has begun to process the application. After
-              this, the date can only be postponed by contacting the early
-              childhood education and care service coordination team.
-              {customerContactText()}
-            </>
-          )
+          instructions: {
+            DAYCARE: (
+              <>
+                You can postpone the desired start date until the service
+                coordination team has begun to process the application. After
+                this, the date can only be postponed by contacting the early
+                childhood education and care service coordination team.
+                {customerContactText()}
+              </>
+            ),
+            PRESCHOOL: (
+              <>
+                You can postpone the desired start date until the service
+                coordination team has begun to process the application. After
+                this, the date can only be postponed by contacting the early
+                childhood education and care service coordination team.
+                {customerContactText()}
+              </>
+            ),
+            CLUB: null
+          } as {
+            DAYCARE: JSX.Element | null
+            PRESCHOOL: JSX.Element | null
+            CLUB: JSX.Element | null
+          },
         },
         clubDetails: {
           wasOnDaycare:

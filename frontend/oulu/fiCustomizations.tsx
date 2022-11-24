@@ -260,18 +260,18 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             DAYCARE: (
               <>
-                Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi siihen
-                saakka, kunnes palveluohjaus on ottanut sen käsittelyyn. Tämän
-                jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
+                Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi
+                siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn.
+                Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
                 yhteyttä varhaiskasvatuksen palveluohjaukseen
                 {customerContactText()}
               </>
             ),
             PRESCHOOL: (
               <>
-                Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi siihen
-                saakka, kunnes palveluohjaus on ottanut sen käsittelyyn. Tämän
-                jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
+                Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi
+                siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn.
+                Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
                 yhteyttä varhaiskasvatuksen palveluohjaukseen
                 {customerContactText()}
               </>
@@ -281,7 +281,7 @@ const fi: DeepPartial<Translations> = {
             DAYCARE: JSX.Element | null
             PRESCHOOL: JSX.Element | null
             CLUB: JSX.Element | null
-          },
+          }
         },
         clubDetails: {
           wasOnDaycare:
@@ -547,12 +547,12 @@ const fi: DeepPartial<Translations> = {
             <P>
               Asianosaisen katsotaan saaneen päätöksestä tiedon, jollei muuta
               näytetä, 7 päivän kuluttua kirjeen lähettämisestä, 3 päivän
-              kuluttua sähköpostin lähettämisestä, saantitodistuksen
-              osoittamana aikana tai erilliseen tiedoksisaantitodistukseen
-              merkittynä aikana. Tiedoksisaantipäivää ei lueta määräaikaan.
-              Jos määräajan viimeinen päivä on pyhäpäivä, itsenäisyyspäivä,
-              vapunpäivä, joulu- tai juhannusaatto tai arkilauantai, saa
-              tehtävän toimittaa ensimmäisenä arkipäivänä sen jälkeen.
+              kuluttua sähköpostin lähettämisestä, saantitodistuksen osoittamana
+              aikana tai erilliseen tiedoksisaantitodistukseen merkittynä
+              aikana. Tiedoksisaantipäivää ei lueta määräaikaan. Jos määräajan
+              viimeinen päivä on pyhäpäivä, itsenäisyyspäivä, vapunpäivä, joulu-
+              tai juhannusaatto tai arkilauantai, saa tehtävän toimittaa
+              ensimmäisenä arkipäivänä sen jälkeen.
             </P>
             <H3>Oikaisuvaatimus</H3>
             <P noMargin>Oikaisuvaatimuksessa on ilmoitettava</P>
@@ -571,12 +571,11 @@ const fi: DeepPartial<Translations> = {
             <P noMargin>Oikaisuvaatimukseen on liitettävä</P>
             <ul>
               <li>
-                päätös, johon haetaan oikaisua, alkuperäisenä tai
-                jäljennöksenä
+                päätös, johon haetaan oikaisua, alkuperäisenä tai jäljennöksenä
               </li>
               <li>
-                todistus siitä, minä päivänä päätös on annettu tiedoksi, tai
-                muu selvitys oikaisuvaatimusajan alkamisen ajankohdasta
+                todistus siitä, minä päivänä päätös on annettu tiedoksi, tai muu
+                selvitys oikaisuvaatimusajan alkamisen ajankohdasta
               </li>
               <li>
                 asiakirjat, joihin oikaisuvaatimuksen tekijä vetoaa

@@ -7,6 +7,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 }
 
 import { FeatureFlags } from 'lib-customizations/types'
+
 import { env, Env } from './env'
 
 type Features = {
@@ -14,7 +15,6 @@ type Features = {
 } & {
   [k in Env]: FeatureFlags
 }
-
 
 const features: Features = {
   default: {
@@ -77,9 +77,7 @@ const features: Features = {
       fosterParents: true
     }
   }
-
 }
-
 
 const featureFlags = features[env()]
 

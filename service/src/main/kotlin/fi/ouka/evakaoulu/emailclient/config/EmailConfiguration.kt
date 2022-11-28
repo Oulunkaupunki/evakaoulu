@@ -13,6 +13,9 @@ import fi.espoo.evaka.shared.domain.FiniteDateRange
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.*
 
 @Profile("evakaoulu")
 @Configuration
@@ -72,8 +75,36 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
         
     """.trimIndent()
 
-    override fun missingReservationsNotification(language: Language, checkedRange: FiniteDateRange): EmailContent {
-        return EmailContent("", "", "")
+    override fun missingReservationsNotification(
+        language: Language,
+        checkedRange: FiniteDateRange
+    ): EmailContent {
+        val start =
+            checkedRange.start.format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale("fi", "FI"))
+            )
+        return EmailContent(
+            subject =
+            "Läsnäolovarauksia puuttuu / Det finns några närvarobokningar som saknas / There are missing attendance reservations",
+            text =
+            """
+            Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.
+            -----
+            Det finns några närvarobokningar som saknas för följande vecka: $start. Vänligen markera dem så snart som möjligt.
+            ----
+            There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.
+                """
+                .trimIndent(),
+            html =
+            """
+            <p>Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.</p>
+            <hr>
+            <p>Det finns några närvarobokningar som saknas för följande vecka: $start. Vänligen markera dem så snart som möjligt.</p>
+            <hr>
+            <p>There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.</p>
+            """
+                .trimIndent()
+        )
     }
 
     override fun getPendingDecisionEmailHtml(): String {

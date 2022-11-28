@@ -18,7 +18,12 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <footer th:replace="~{ oulu/shared/common :: footer}"></footer>
 
 <div class="page first-page">
-    <strong th:text="#{decision.title}"></strong>
+    <address th:replace="~{ oulu/shared/common :: address}"></address>
+
+    <h1>
+        <strong th:text="#{decision.title}"></strong>
+    </h1>
+
     <div class="child-details">
         <p>
             <strong th:text="#{decision.details.child.prefix}"

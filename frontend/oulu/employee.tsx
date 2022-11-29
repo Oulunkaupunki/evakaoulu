@@ -18,6 +18,14 @@ const customizations: EmployeeCustomizations = {
   appConfig: {},
   translations: {
     fi: {
+      preferredFirstName: {
+        popupLink: 'Kutsumanimi',
+        title: 'Kutsumanimi',
+        description:
+          'Voit määritellä eVakassa käytössä olevan kutsumanimesi. Kutsumanimen tulee olla jokin etunimistäsi. Jos nimesi on vaihtunut ja sinulla on tarve päivittää eVakaan uusi nimesi, ole yhteydessä Oulun HelpDeskiin.',
+        select: 'Valitse kutsumanimi',
+        confirm: 'Vahvista'
+      },
       invoices: {
         buttons: {
           individualSendAlertText: ''
@@ -43,7 +51,34 @@ const customizations: EmployeeCustomizations = {
         assistanceAction: {
           title: 'Tukitoimet',
           fields: {
-            actions: 'Tukitoimet'
+            dateRange: 'Tukitoimien voimassaoloaika',
+            actions: 'Tukitoimet',
+            actionTypes: {
+              OTHER: 'Muu tukitoimi'
+            },
+            measures: 'Toimenpiteet',
+            measureTypes: {
+              SPECIAL_ASSISTANCE_DECISION: 'Erityisen tuen päätös\n',
+              SPECIAL_ASSISTANCE_DECISION_INFO:
+                'Lapsella on pidennetty oppivelvollisuus. (Tieto menee KOSKI-palveluun)',
+              INTENSIFIED_ASSISTANCE: 'Tehostettu tuki',
+              INTENSIFIED_ASSISTANCE_INFO:
+                'Lapsella on avustamispalvelu tai lapsi on pedagogisesti vahvistetussa ryhmässä. Koskee myös osaa laaja-alaisen veon tukea saavista lapsista. ',
+              EXTENDED_COMPULSORY_EDUCATION: 'Pidennetty oppivelvollisuus',
+              EXTENDED_COMPULSORY_EDUCATION_INFO:
+                'Päätös tehdään perusopetuksessa. (Tieto menee KOSKI-palveluun)',
+              CHILD_SERVICE: 'Lastensuojelu',
+              CHILD_SERVICE_INFO:
+                'Merkitään lapselle, jolla varhaiskasvatus on lastensuojelun avohuollon tukitoimena perhe- ja sosiaalipalvelujen päätöksellä.',
+              CHILD_ACCULTURATION_SUPPORT: 'Lapsen kotoutumisen tuki (ELY)',
+              CHILD_ACCULTURATION_SUPPORT_INFO:
+                'Lapsen tuen tarpeen perusteella järjestäjälle myönnetty korvaus (ELY)',
+              TRANSPORT_BENEFIT: 'Kuljetusetu',
+              TRANSPORT_BENEFIT_INFO:
+                'Kuljetusetu. (Tieto menee KOSKI-palveluun)'
+            },
+            otherActionPlaceholder:
+              'Voit kirjoittaa tähän lisätietoa muista tukitoimista.'
           }
         },
         assistanceNeedDecision: {

@@ -85,12 +85,10 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             )
         return EmailContent(
             subject =
-            "Läsnäolovarauksia puuttuu / Det finns några närvarobokningar som saknas / There are missing attendance reservations",
+            "Läsnäolovarauksia puuttuu / There are missing attendance reservations",
             text =
             """
             Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.
-            -----
-            Det finns några närvarobokningar som saknas för följande vecka: $start. Vänligen markera dem så snart som möjligt.
             ----
             There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.
                 """
@@ -98,8 +96,6 @@ internal class EmailMessageProvider(): IEmailMessageProvider {
             html =
             """
             <p>Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.</p>
-            <hr>
-            <p>Det finns några närvarobokningar som saknas för följande vecka: $start. Vänligen markera dem så snart som möjligt.</p>
             <hr>
             <p>There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.</p>
             """

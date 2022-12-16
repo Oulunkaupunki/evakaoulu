@@ -23,6 +23,10 @@ const features: Features = {
     daycareApplication: {
       dailyTimes: true
     },
+    preschoolApplication: {
+      connectedDaycarePreferredStartDate: false,
+      serviceNeedOption: false
+    },
     groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
@@ -43,6 +47,10 @@ const features: Features = {
     daycareApplication: {
       dailyTimes: true
     },
+    preschoolApplication: {
+      connectedDaycarePreferredStartDate: false,
+      serviceNeedOption: false
+    },
     groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
@@ -62,6 +70,10 @@ const features: Features = {
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
+    },
+    preschoolApplication: {
+      connectedDaycarePreferredStartDate: false,
+      serviceNeedOption: false
     },
     groupsTableServiceNeeds: true,
     preschool: true,

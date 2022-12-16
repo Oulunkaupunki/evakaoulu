@@ -84,7 +84,8 @@ class DecisionServiceTest {
                         ServiceNeedOptionId(UUID.randomUUID()),
                         "Palveluntarve 1",
                         "Palveluntarve 1",
-                        "Palveluntarve 1"
+                        "Palveluntarve 1",
+                        null
                     )
                 )
             },
@@ -142,7 +143,8 @@ class DecisionServiceTest {
                 shiftCare = false,
                 partTime = false,
                 ServiceNeedOption(
-                    ServiceNeedOptionId(UUID.randomUUID()), "Palveluntarve 1", "Palveluntarve 1", "Palveluntarve 1"
+                    ServiceNeedOptionId(UUID.randomUUID()), "Palveluntarve 1", "Palveluntarve 1", "Palveluntarve 1",
+                    null
                 )
             ),
             lang = DocumentLang.FI,
@@ -173,7 +175,8 @@ class DecisionServiceTest {
                     ServiceNeedOptionId(UUID.randomUUID()),
                     "Palveluntarve 1",
                     "Palveluntarve 1",
-                    "Palveluntarve 1"
+                    "Palveluntarve 1",
+                    null
                 )
             ),
             lang = DocumentLang.FI,
@@ -204,7 +207,8 @@ class DecisionServiceTest {
                     ServiceNeedOptionId(UUID.randomUUID()),
                     "Palveluntarve 1",
                     "Palveluntarve 1",
-                    "Palveluntarve 1"
+                    "Palveluntarve 1",
+                    null
                 )
             ),
             lang = DocumentLang.FI,
@@ -235,7 +239,8 @@ class DecisionServiceTest {
                     ServiceNeedOptionId(UUID.randomUUID()),
                     "Palveluntarve 1",
                     "Palveluntarve 1",
-                    "Palveluntarve 1"
+                    "Palveluntarve 1",
+                    null
                 )
             ),
             lang = DocumentLang.FI,

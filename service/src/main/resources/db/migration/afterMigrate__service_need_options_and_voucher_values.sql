@@ -29,7 +29,7 @@ VALUES
     ('5c8bdebc-3350-11ed-a1e8-23631d9473d4','Yksityinen perhepäivähoito osapäivä 4h palse','Yksityinen perhepäivähoito osapäivä 4h palse','Private family daycare part time 4h service voucher',NULL,'DAYCARE_PART_TIME',FALSE,0.5,0.54,20,TRUE,FALSE,'Yksityinen perhepäivähoito osapäivä 4h palse','Yksityinen perhepäivähoito osapäivä 4h palse','Yksityinen perhepäivähoito osapäivä 4h palse','Yksityinen perhepäivähoito osapäivä 4h palse', null,1.75, false),
 
     -- PRESCHOOL
-    ('de463c38-9f97-11ec-a22e-97907801ecdc', 'Esiopetus 4h ','Esiopetus 4h ','Pre-school education 4h ',NULL,'PRESCHOOL',TRUE,0,0.54,20,TRUE,FALSE,'Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h', null,1.75, true),
+    ('de463c38-9f97-11ec-a22e-97907801ecdc','Esiopetus 4h ','Esiopetus 4h ','Pre-school education 4h ',NULL,'PRESCHOOL',TRUE,0,0.54,20,TRUE,FALSE,'Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h', null,1.75, true),
     ('c288a152-9ef2-11ec-8540-2fc7b01eb49e','Esiopetus 4h ','Esiopetus 4h ','Pre-school education 4h ',NULL,'PRESCHOOL',FALSE,0,0.54,20,TRUE,FALSE,'Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h ','Esiopetus 4h', 2000,1.75, true),
     ('c288a26a-9ef2-11ec-8541-57b8edf0098f','Kaksivuotinen esiopetuskokeilu','Kaksivuotinen esiopetuskokeilu','A two-year pre-school trial',NULL,'PRESCHOOL',FALSE,0,0.54,20,TRUE,FALSE,'Kaksivuotinen esiopetuskokeilu','Kaksivuotinen esiopetuskokeilu','Kaksivuotinen esiopetuskokeilu','Kaksivuotinen esiopetuskokeilu', null,1.75, true),
     ('c288a2d8-9ef2-11ec-8542-231141d61e61','Yksityinen esiopetus 4 h palse','Yksityinen esiopetus 4 h palse','Private pre-school education 4 h service voucher',NULL,'PRESCHOOL',FALSE,0.0,0.54,20,TRUE,FALSE,'Yksityinen esiopetus 4 h palse','Yksityinen esioeptus 4 h palse','Yksityinen esioeptus 4 h palse','Yksityinen esioeptus 4 h palse', null,1.75, false),
@@ -122,9 +122,8 @@ VALUES
     --c288a2d8-9ef2-11ec-8542-231141d61e61  Yksityinen esiopetus 4 h palse
     ('a069ba6a-1185-11ed-80ed-9fe0cbbc284c','c288a2d8-9ef2-11ec-8542-231141d61e61',daterange('2022-08-01', NULL, '[]'),86800,0.5,43400,133200,1.0,133200),
     ('1fb0a03e-3d70-11ed-afc6-97a805608d77','c288a2d8-9ef2-11ec-8542-231141d61e61',daterange('2020-08-01', '2022-07-31', '[]'),82500,0.5,41200,126600,1.0,126600),
-    ('37f1aa02-3d80-11ed-af36-5725e2bfc8f8','c288a2d8-9ef2-11ec-8542-231141d61e61',daterange('2018-08-01', '2019-07-31', '[]'),72500,0.5,36300,122300,1.0,122300),
-
     ('352f66d5-e50d-4bc3-954d-305736d85272','c288a2d8-9ef2-11ec-8542-231141d61e61',daterange('2019-08-01', '2020-07-31', '[]'),79700,0.5,39900,126600,1.0,126600),
+    ('37f1aa02-3d80-11ed-af36-5725e2bfc8f8','c288a2d8-9ef2-11ec-8542-231141d61e61',daterange('2018-08-01', '2019-07-31', '[]'),72500,0.5,36300,122300,1.0,122300),
 
     --c288a490-9ef2-11ec-8547-ab2d0b032c1c	Yksityinen esiopetus + varhaiskasvatus palse
     ('e81c2a91-ec10-48ff-9ca7-22e62e93a828','c288a490-9ef2-11ec-8547-ab2d0b032c1c',daterange('2023-01-01', NULL, '[]'),87800,1.0,43900,149300,0.5,74700),
@@ -161,13 +160,14 @@ VALUES
     ('fe450d3a-a61c-4693-bcff-e1b1fc19b752','50359334-b961-11eb-b525-f3febdfea5d3',daterange('2019-08-01', '2020-07-31', '[]'),79700,0.55,43800,122300,0.55,67300),
 
     --d146f678-130d-11ed-a574-c39e98171347	Yksityinen perhep√§iv√§hoito osa-aikainen 12-13pv/kk palse
-    ('c0f5cf0a-130e-11ed-b90a-7f619c57012f','d146f678-130d-11ed-a574-c39e98171347',daterange('2022-08-01', NULL, '[]'),82000,0.7,57400,82000,0.7,57400),
+    ('2ee36c2c-9324-4ffa-8064-0fa517d0c475','d146f678-130d-11ed-a574-c39e98171347',daterange('2023-01-01', NULL, '[]'),83000,0.7,58100,83000,0.7,58100),
+    ('c0f5cf0a-130e-11ed-b90a-7f619c57012f','d146f678-130d-11ed-a574-c39e98171347',daterange('2022-08-01', '2022-12-31', '[]'),82000,0.7,57400,82000,0.7,57400),
     ('8baf9264-3d6f-11ed-afc0-cb163b2ab442','d146f678-130d-11ed-a574-c39e98171347',daterange('2020-08-01', '2022-07-31', '[]'),77900,0.7,54500,77900,0.7,54500),
     ('15b7d6ca-3d7e-11ed-af30-27e5a0f5cd47','d146f678-130d-11ed-a574-c39e98171347',daterange('2018-08-01', '2020-07-31', '[]'),75300,0.7,52700,75300,0.7,52700),
 
-
     --07a1bde8-130e-11ed-a575-bbe09459e8d0	Yksityinen perhep√§iv√§hoito osa-aikainen 29h/viikko palse
-    ('e0e7e924-130e-11ed-b90b-6be35ba0f06a','07a1bde8-130e-11ed-a575-bbe09459e8d0',daterange('2022-08-01', NULL, '[]'),82000,0.7,57400,82000,0.7,57400),
+    ('273c1bc1-087e-4eb5-a73a-6d7b4a7ee954','07a1bde8-130e-11ed-a575-bbe09459e8d0',daterange('2023-01-01', NULL, '[]'),83000,0.7,58100,83000,0.7,58100),
+    ('e0e7e924-130e-11ed-b90b-6be35ba0f06a','07a1bde8-130e-11ed-a575-bbe09459e8d0',daterange('2022-08-01', '2022-12-31', '[]'),82000,0.7,57400,82000,0.7,57400),
     ('a22af61e-3d6f-11ed-afc1-6f86988f6ea9','07a1bde8-130e-11ed-a575-bbe09459e8d0',daterange('2020-08-01', '2022-07-31', '[]'),77900,0.7,54500,77900,0.7,54500),
     ('63387652-3d7e-11ed-af31-432aaa1d53bf','07a1bde8-130e-11ed-a575-bbe09459e8d0',daterange('2018-08-01', '2020-07-31', '[]'),75300,0.7,52700,75300,0.7,52700),
 
@@ -177,18 +177,23 @@ VALUES
     ('8b7af72a-3d7e-11ed-af32-2331fa2a3e57','5c8bdebc-3350-11ed-a1e8-23631d9473d4',daterange('2018-08-01', '2020-07-31', '[]'),75300,0.55,41400,75300,0.55,41400),
 
     --86495b70-130d-11ed-a573-bfda992853b8	Yksityinen perhep√§iv√§hoito osaviikko 20h palse
-    
-    ('a2e8de44-130e-11ed-b909-4b7d84273804','86495b70-130d-11ed-a573-bfda992853b8',daterange('2022-08-01', NULL, '[]'),82000,0.55,45100,82000,0.55,45100),
+    ('f76169f2-de3f-4405-85f2-be7b856c4f0a','86495b70-130d-11ed-a573-bfda992853b8',daterange('2023-01-01', NULL, '[]'),83000,0.55,45700,83000,0.55,45700),
+    ('a2e8de44-130e-11ed-b909-4b7d84273804','86495b70-130d-11ed-a573-bfda992853b8',daterange('2022-08-01', '2022-12-31', '[]'),82000,0.55,45100,82000,0.55,45100),
     ('76a13b5c-3d6f-11ed-afbf-830e0a222ba5','86495b70-130d-11ed-a573-bfda992853b8',daterange('2020-08-01', '2022-07-31', '[]'),77900,0.55,42900,77900,0.55,42900),
     ('f6077af6-3d7d-11ed-af2f-17d04a90076d','86495b70-130d-11ed-a573-bfda992853b8',daterange('2018-08-01', '2020-07-31', '[]'),75300,0.55,41400,75300,0.55,41400),
 
-
     --c288a0c6-9ef2-11ec-853f-47b02ebd51bb	Yksityinen varhaiskasvatus palse
-    ('a0699b70-1185-11ed-80ed-f73cd8514a0b','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2023-01-01', NULL, '[]'),87800,1.0,87800,149300,1.0,149300),
+    ('9ffce8c3-6651-4444-a742-dc8e4ce2123b','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2023-01-01', NULL, '[]'),87800,1.0,87800,149300,1.0,149300),
     ('a0699b70-1185-11ed-80ed-f73cd8514a0b','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2022-08-01', '2022-12-31', '[]'),86800,1.0,86800,133200,1.0,133200),
     ('49e5c21e-3d6e-11ed-afb5-57493fd49d78','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('4ef6098c-3d7b-11ed-af25-fb5853405def','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2018-08-01', '2019-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('3efcf881-ea71-48e1-bd93-eb1b4134b34c','c288a0c6-9ef2-11ec-853f-47b02ebd51bb',daterange('2019-08-01', '2020-07-31', '[]'),79700,1.0,79700,126600,1.0,126600),
+
+    -- 19094188-130d-11ed-a572-473907d23b65 Yksityinen perhepäivähoito palse
+    ('1b512e92-dc5b-4e0a-a672-68d782d288b8','19094188-130d-11ed-a572-473907d23b65',daterange('2023-01-01', NULL, '[]'),83000,1.0,83000,83000,1.0,83000),
+    ('70051c0e-130e-11ed-b908-0f4908e167de','19094188-130d-11ed-a572-473907d23b65',daterange('2022-08-01', '2022-12-31', '[]'),82000,1.0,82000,82000,1.0,82000),
+    ('6640c166-3d6e-11ed-afb6-b354a4de12c5','19094188-130d-11ed-a572-473907d23b65',daterange('2020-08-01', '2022-07-31', '[]'),77900,1.0,77900,77900,1.0,77900),
+    ('6a4df9ba-3d7b-11ed-af26-075e6bfe6583','19094188-130d-11ed-a572-473907d23b65',daterange('2018-08-01', '2020-07-31', '[]'),75300,1.0,75300,75300,1.0,75300),
 
     -- 2022-08-01 -
     ('546fdfbe-123d-11ed-b5b1-9fd256edadac','de463972-9f97-11ec-a22c-931f5a294cea',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
@@ -196,7 +201,7 @@ VALUES
     ('a06993e6-1185-11ed-80ed-4bc089b67986','503590f0-b961-11eb-b520-53740af3f7ee',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a0699788-1185-11ed-80ed-77eb3184d140','503591ae-b961-11eb-b521-1fca99358eef',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a0699990-1185-11ed-80ed-fb1b3ae80278','c288a058-9ef2-11ec-853e-9bcaa26ea729',daterange('2022-08-01', NULL, '[]'),86800,0.0,0,133200,0.0,0),
-    ('70051c0e-130e-11ed-b908-0f4908e167de','19094188-130d-11ed-a572-473907d23b65',daterange('2022-08-01', NULL, '[]'),82000,1.0,82000,82000,1.0,82000),
+
     ('a0699d64-1185-11ed-80ed-334f889d313a','de463bd4-9f97-11ec-a22d-4791bc036bd9',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a0699f44-1185-11ed-80ed-6b21f4cc6fcd','86ef7370-bf85-11eb-91e7-6fcd728c518d',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
     ('a069a1ec-1185-11ed-80ed-4bda5bf9eb9f','c2886f84-9ef2-11ec-8538-734ab2ac6c71',daterange('2022-08-01', NULL, '[]'),86800,1.0,86800,133200,1.0,133200),
@@ -234,7 +239,7 @@ VALUES
     ('db2abfe6-3d6d-11ed-afb2-372110f4492e','503590f0-b961-11eb-b520-53740af3f7ee',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('11e5c850-3d6e-11ed-afb3-73c8fde65200','503591ae-b961-11eb-b521-1fca99358eef',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('2b3b1a4e-3d6e-11ed-afb4-1b0366d2f424','c288a058-9ef2-11ec-853e-9bcaa26ea729',daterange('2020-08-01', '2022-07-31', '[]'),82500,0.0,0,126600,0.0,0),
-    ('6640c166-3d6e-11ed-afb6-b354a4de12c5','19094188-130d-11ed-a572-473907d23b65',daterange('2020-08-01', '2022-07-31', '[]'),77900,1.0,77900,77900,1.0,77900),
+
     ('80874cc0-3d6e-11ed-afb7-1f1d7077bd84','de463bd4-9f97-11ec-a22d-4791bc036bd9',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('950610be-3d6e-11ed-afb8-0b3ab914f277','86ef7370-bf85-11eb-91e7-6fcd728c518d',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
     ('df7b59e2-3d6e-11ed-afb9-f36186c18b41','c2886f84-9ef2-11ec-8538-734ab2ac6c71',daterange('2020-08-01', '2022-07-31', '[]'),82500,1.0,82500,126600,1.0,126600),
@@ -272,7 +277,7 @@ VALUES
     ('065defaa-3d7b-11ed-af22-0bcd4cc2bb5d','503590f0-b961-11eb-b520-53740af3f7ee',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('1d10b124-3d7b-11ed-af23-b398dc699b3f','503591ae-b961-11eb-b521-1fca99358eef',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('340ee706-3d7b-11ed-af24-eb32787a9689','c288a058-9ef2-11ec-853e-9bcaa26ea729',daterange('2018-08-01', '2020-07-31', '[]'),72500,0.0,0,122300,0.0,0),
-    ('6a4df9ba-3d7b-11ed-af26-075e6bfe6583','19094188-130d-11ed-a572-473907d23b65',daterange('2018-08-01', '2020-07-31', '[]'),75300,1.0,75300,75300,1.0,75300),
+
     ('83da47b2-3d7b-11ed-af27-a32dc43e1eb5','de463bd4-9f97-11ec-a22d-4791bc036bd9',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('98905b10-3d7b-11ed-af28-ef37142e55bb','86ef7370-bf85-11eb-91e7-6fcd728c518d',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),
     ('ad0a23dc-3d7b-11ed-af29-03beb8f92eb4','c2886f84-9ef2-11ec-8538-734ab2ac6c71',daterange('2018-08-01', '2020-07-31', '[]'),72500,1.0,72500,122300,1.0,122300),

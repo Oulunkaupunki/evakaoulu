@@ -393,7 +393,7 @@ const fi: DeepPartial<Translations> = {
           </P>
         ),
         secondGuardianInfoPreschoolSeparated:
-          'Toisen huoltajan tiedot haetaan automaattisesti väestötietojärjestelmästä. Tietojemme mukaan lapsen toinen huoltaja asuu eri osoitteessa. Esiopetukseen ilmoittautumisesta tulee sopia yhdessä toisen huoltajan kanssa.',
+          'Toisen huoltajan tiedot haetaan automaattisesti väestötietojärjestelmästä. Tietojemme mukaan lapsen toinen huoltaja asuu eri osoitteessa. Hakemisesta tulee sopia yhdessä toisen huoltaja kanssa.',
         secondGuardianAgreementStatus: {
           label:
             'Oletteko sopineet hakemuksen tekemisestä yhdessä toisen huoltajan kanssa?*',

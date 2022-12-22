@@ -128,19 +128,20 @@ const fi: DeepPartial<Translations> = {
             PRESCHOOL: (
               <>
                 <P>
-                  Voit hakea 1-3 paikka paikkaa toivomassasi järjestyksessä.
-                  Hakutoiveet eivät takaa paikkaa toivotussa yksikössä, mutta
-                  mahdollisuus toivotun paikan saamiseen kasvaa antamalla
-                  useamman vaihtoehdon.
+                  Voit nimetä 1-3 paikkaa toivomassasi järjestyksessä. Valitse
+                  hakutoiveet -valikossa näkyvät yksiköt, missä järjestetään
+                  esiopetusta lukuvuonna 2023-2024.
                 </P>
                 <P>
                   Näet eri yksiköiden sijainnin valitsemalla ‘Yksiköt kartalla’.
                 </P>
                 <P>
-                  Palveluseteliä haetaan valitsemalla hakutoiveeksi se
-                  palveluseteliyksikkö, johon halutaan hakea.
-                  Palveluseteliyksikköön haettaessa myös yksikön esimies saa
-                  tiedon hakemuksesta.
+                  Lapselle osoitetaan esiopetuspaikka omalta lähialueelta tuleva
+                  koulupolku huomioiden. Jos toivotte, että lapsellenne
+                  osoitetaan esiopetuspaikka muualta kuin omalta lähialueelta,
+                  perustelkaa toiveenne lisätiedot-kohtaan. Paikkaa toiselta
+                  alueelta ei voida luvata ennen kuin alueen omat esioppilaat on
+                  sijoitettu.
                 </P>
               </>
             ),
@@ -197,19 +198,25 @@ const fi: DeepPartial<Translations> = {
             <>
               <P>
                 Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
-                alkamista. Esiopetus on maksutonta. Lukuvuoden 2022-2023
-                esiopetukseen ilmoittaudutaan 10.-23.1.2022. Esiopetus alkaa
-                15.8.2022.
+                alkamista. Esiopetus on maksutonta. Lukuvuoden 2023-2024
+                esiopetukseen ilmoittaudutaan 9.-22.1.2023. Esiopetus alkaa
+                14.8.2023.
               </P>
               <P>
-                Päätökset tulevat{' '}
+                Mikäli tarvitset lapsellesi esiopetuspaikkaa vielä keväälle 2023
+                (lukuvuosi 2022-2023), ole yhteydessä varhaiskasvatuksen
+                palveluohjaukseen p. 08 558 45300 TAI varhaiskasvatus@ouka.fi.
+              </P>
+              <P>
+                Päätökset tulevat sähköisesti{' '}
                 <ExternalLink
                   text="Suomi.fi-viestit"
                   href="https://www.suomi.fi/viestit"
                   newTab
                 />{' '}
-                -palveluun tai postitse, mikäli et ole ottanut Suomi.fi
-                -palvelua käyttöön.
+                -palveluun tai postitse kirjeenä, mikäli et ole ottanut Suomi.fi
+                -palvelua käyttöön. Käyttämällä sähköistä palvelua saat
+                päätökset nopeimmin.
               </P>
               <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
@@ -251,7 +258,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Esiopetus alkaa 15.8.2022. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, voitte hakea sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus. Uutta varhaiskasvatushakemusta ei tarvitse tehdä, mikäli lapsella on jo paikka Oulun varhaiskasvatuksessa ja lapsi jatkaa esiopetuksessa samassa päiväkodissa.'
+              'Esiopetus alkaa 14.8.2022. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, hakekaa sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus.'
             ],
             CLUB: [
               'Avoimen varhaiskasvatuksen kerhot noudattavat pääsääntöisesti esiopetuksen työ- ja loma-aikoja. Lapsi voi osallistua yhteen kaksi tai kolme kertaa viikossa kokoontuvaan kerhoon ja lisäksi perhekerhoon.'
@@ -261,18 +268,18 @@ const fi: DeepPartial<Translations> = {
             DAYCARE: (
               <>
                 Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi
-                siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn.
-                Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
-                yhteyttä varhaiskasvatuksen palveluohjaukseen
+                siihen saakka, kunnes palveluohjaus on ottanut hakemuksen
+                käsittelyyn. Tämän jälkeen toivotun aloituspäivän muutokset
+                tehdään ottamalla yhteyttä varhaiskasvatuksen palveluohjaukseen
                 {customerContactText()}
               </>
             ),
             PRESCHOOL: (
               <>
                 Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi
-                siihen saakka, kunnes palveluohjaus on ottanut sen käsittelyyn.
-                Tämän jälkeen toivotun aloituspäivän muutokset tehdään ottamalla
-                yhteyttä varhaiskasvatuksen palveluohjaukseen
+                siihen saakka, kunnes palveluohjaus on ottanut hakemuksen
+                käsittelyyn. Tämän jälkeen toivotun aloituspäivän muutokset
+                tehdään ottamalla yhteyttä varhaiskasvatuksen palveluohjaukseen
                 {customerContactText()}
               </>
             ),
@@ -342,8 +349,6 @@ const fi: DeepPartial<Translations> = {
                 maksullista varhaiskasvatusta. Jos haluat aloittaa
                 varhaiskasvatuksen myöhemmin kuin esiopetus alkaa, kirjoita
                 haluttu aloituspäivämäärä hakemuksen “Muut lisätiedot” -kohtaan.
-                Palveluseteliä yksityiseen päiväkotiin haetaan valitsemalla
-                hakutoiveeksi se palveluseteliyksikkö, johon halutaan hakea.
               </P>
               <P>
                 Saat varhaiskasvatuspaikasta kirjallisen päätöksen{' '}
@@ -356,7 +361,7 @@ const fi: DeepPartial<Translations> = {
                 </a>{' '}
                 -palveluun tai postitse, mikäli et ole ottanut Suomi.fi-viestit
                 -palvelua käyttöön. Päätös on nähtävillä myös eVaka-palvelussa
-                kohdassa Hakeminen - Päätökset.
+                kohdassa Valikko - Päätökset.
               </P>
             </>
           ),
@@ -370,7 +375,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
         preparatoryInfo:
-          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään Pienten kielireppu -kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma tai päätös perusopetukseen valmistavasta opetuksesta. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti. Valmistavaa opetusta annetaan kuusivuotiaille ja se koostuu päivittäin neljästä esiopetustunnista ja yhdestä suomen kielen tunnista. Valmistava opetus on maksutonta.'
+          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään Pienten kielireppu -kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma tai päätös valmistavasta esiopetuksesta. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti. Valmistavaa opetusta annetaan kuusivuotiaille ja se koostuu päivittäin neljästä esiopetustunnista ja yhdestä suomen kielen tunnista. Valmistava opetus on maksutonta.'
       },
       contactInfo: {
         familyInfo: undefined,
@@ -432,8 +437,7 @@ const fi: DeepPartial<Translations> = {
         links: (
           <>
             <P>
-              Tuloselvityslomake löytyy eVakassa Käyttäjä-valikosta kohdasta
-              Tulotiedot.
+              Tuloselvityslomake löytyy eVakassa kohdasta Valikko - Tulotiedot.
             </P>
             <P>
               Lisätietoa asiakasmaksuista löydät Oulun kaupungin nettisivuilta:{' '}
@@ -447,6 +451,9 @@ const fi: DeepPartial<Translations> = {
         )
       },
       additionalDetails: {
+        otherInfoLabel: 'Ilmoittautumiseen liittyvät lisätiedot',
+        otherInfoPlaceholder:
+          'Voit halutessasi antaa ilmoittautumiseen liittyvää tarkempaa lisätietoa',
         dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>
       }
     }

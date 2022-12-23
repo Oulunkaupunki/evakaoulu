@@ -109,10 +109,8 @@ const fi: DeepPartial<Translations> = {
               <>
                 <P>
                   You can apply to 1–3 units in the order of preference of your
-                  choosing. The order of preference does not guarantee a place
-                  in the unit of your choice, but the more options you name, the
-                  greater chances you have to receive a place at one of the
-                  desired units.
+                  choosing. Select the units shown in the preferred units menu,
+                  where preschool education is organized in the year 2023-2024
                 </P>
                 <P>
                   You can view the locations of the early childhood education
@@ -130,22 +128,23 @@ const fi: DeepPartial<Translations> = {
             PRESCHOOL: (
               <>
                 <P>
-                  You can apply to 1–3 units in the order of your choosing. The
-                  order of preference does not guarantee a place in the unit of
-                  your choice, but the more options you name, the greater
-                  chances you have to receive a place at one of the desired
-                  units.
+                  You can apply to 1–3 units in the order of your choosing.
+                  Select the units shown in the preferred units menu, where
+                  preschool education is organized in the academic year
+                  2023-2024
                 </P>
                 <P>
                   You can view the unit locations by selecting the option ‘Unit
                   map view’.
                 </P>
                 <P>
-                  If you wish to apply for a service voucher, please select the
-                  service voucher unit you want to apply to as your preferred
-                  option. If you apply for a service voucher for a private early
-                  childhood education and care unit, the head of the unit will
-                  also be informed of this.
+                  The child is assigned a pre-school place, taking into account
+                  the school path from their own neighborhood. If you wish for
+                  your child to be assigned a pre-school place in a place other
+                  than your own immediate area, justify your wish in the
+                  additional information section. A place from another area
+                  cannot be promised until the areas own preschoolers have been
+                  placed.
                 </P>
               </>
             ),
@@ -188,10 +187,10 @@ const fi: DeepPartial<Translations> = {
                 You will receive a written decision regarding your child’s early
                 childhood education and care unit in the Suomi.fi messages
                 service, or, if you have not yet started using the Suomi.fi
-                service, by mail. The decision can also be found in the
-                Applications – Decisions (Hakeminen – Päätökset) section of the
-                eVaka service. You can find more information about the Suomi.fi
-                service and how to start using the service
+                service, by mail. The decision can also be found in the Menu –
+                Decisions section of the eVaka service. You can find more
+                information about the Suomi.fi service and how to start using
+                the service
                 <ExternalLink
                   text="https://www.suomi.fi/viestit"
                   href="https://www.suomi.fi/viestit"
@@ -210,8 +209,13 @@ const fi: DeepPartial<Translations> = {
                 Pre-school education starts a year before the beginning of
                 compulsory education. Pre-school education is free of charge.
                 The application period for pre-school education for the school
-                year 2022–2023 is January 10 to January 23, 2022. Pre-school
-                education begins on August 15, 2022.
+                year 2023–2024 is January 9 to January 22, 2023. Pre-school
+                education begins on August 14, 2023.
+              </P>
+              <P>
+                If you still need a pre-school education for your child during
+                spring 2023 (2022-2023), contact the early childhood education
+                service guidance on 08 558 45300 OR varhaiskasvatus@ouka.fi.
               </P>
               <P>
                 You will receive the decisions either on the{' '}
@@ -221,7 +225,8 @@ const fi: DeepPartial<Translations> = {
                   newTab
                 />{' '}
                 service, or, if you have not yet started using Suomi.fi, by
-                mail.
+                mail. By using the electronic service, you will get decisions
+                the fastest way.
               </P>
               <P fitted={true}>
                 *Fields marked with an asterisk are mandatory.
@@ -273,7 +278,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Pre-school education begins on August 15, 2022. If you require early childhood education and care in connection with pre-school education, you can apply for it by going to the section for early childhood education in connection with pre-school education (Esiopetukseen liittyvä varhaiskasvatus). If your child already has a place in an early childhood education and care unit in Oulu and will continue at the same unit, there is no need to fill out a new application.'
+              'Pre-school education begins on August 14, 2023. If you require early childhood education and care in connection with pre-school education, you can apply for it by going to the section for early childhood education in connection with pre-school education (Early childhood education need related to pre-primary education).'
             ],
             CLUB: [
               'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in pre-school education. The child may attend one group that meets two or three times a week and a family group at the same time.'
@@ -470,8 +475,7 @@ const fi: DeepPartial<Translations> = {
           <>
             <P>
               You can find the income declaration form in the Income information
-              (Tulotiedot) section of the User (Käyttäjä) menu in the eVaka
-              service.
+              section of the User menu in the eVaka service.
             </P>
             <P>
               For more information on client fees, visit the website of the City

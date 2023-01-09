@@ -362,7 +362,12 @@ const customizations: EmployeeCustomizations = {
     'RELIEF_REJECTED'
   ],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
-  unitProviderTypes: ['MUNICIPAL', 'PRIVATE', 'PRIVATE_SERVICE_VOUCHER', 'PURCHASED']
+  unitProviderTypes: [
+    'MUNICIPAL',
+    'PRIVATE',
+    'PRIVATE_SERVICE_VOUCHER',
+    'PURCHASED'
+  ]
 }
 
 export default customizations

@@ -86,6 +86,36 @@ const fi: DeepPartial<Translations> = {
                 </P>
               </>
             ),
+            PRESCHOOL: (
+              <>
+                <P>
+                  A child enrolling for preschool education has a sibling-basis
+                  right to a
+                </P>
+                <ol type="a">
+                  <li>
+                    early childhood education in their own service area, where
+                    they have a sibling who has, at the moment of making the
+                    decision and in the coming preschool education year, a place
+                    at the preschool education unit
+                  </li>
+                  <li>
+                    local school determined by the city, which will be attended
+                    by their sibling in the coming school year.
+                  </li>
+                </ol>
+                <P>
+                  The guardian can choose whether to use the sibling criterion
+                  in accordance with (a) or (b) if the preschooler has a sibling
+                  criterion according to both sections.
+                </P>
+                <P>
+                  Fill in this information only if you are using the sibling
+                  criterion, and in the search requests below, select the same
+                  unit as the childs sibling as the primary wish.
+                </P>
+              </>
+            ),
             CLUB: (
               <>
                 <P>
@@ -130,17 +160,16 @@ const fi: DeepPartial<Translations> = {
                 <P>
                   You can apply to 1–3 units in the order of your choosing.
                   Select the units shown in the preferred units menu, where
-                  preschool education is organized in the academic year
-                  2023-2024
+                  preschool education is organized in the school year 2023-2024
                 </P>
                 <P>
                   You can view the unit locations by selecting the option ‘Unit
                   map view’.
                 </P>
                 <P>
-                  The child is assigned a pre-school place, taking into account
+                  The child is assigned a preschool place, taking into account
                   the school path from their own neighborhood. If you wish for
-                  your child to be assigned a pre-school place in a place other
+                  your child to be assigned a preschool place in a place other
                   than your own immediate area, justify your wish in the
                   additional information section. A place from another area
                   cannot be promised until the areas own preschoolers have been
@@ -171,6 +200,7 @@ const fi: DeepPartial<Translations> = {
       },
       heading: {
         title: {
+          PRESCHOOL: 'Enrollment in preschool education',
           CLUB: 'Apply for open early childhood education and care'
         },
         info: {
@@ -206,16 +236,17 @@ const fi: DeepPartial<Translations> = {
           PRESCHOOL: (
             <>
               <P>
-                Pre-school education starts a year before the beginning of
-                compulsory education. Pre-school education is free of charge.
-                The application period for pre-school education for the school
-                year 2023–2024 is January 9 to January 22, 2023. Pre-school
-                education begins on August 14, 2023.
+                Preschool education starts a year before the beginning of
+                compulsory education. Preschool education is free of charge. The
+                enrollment period for preschool education for the school year
+                2023–2024 is January 9 to January 22, 2023. Preschool education
+                begins on August 14, 2023.
               </P>
               <P>
-                If you still need a pre-school education for your child during
-                spring 2023 (2022-2023), contact the early childhood education
-                service guidance on 08 558 45300 OR varhaiskasvatus@ouka.fi.
+                If you still need a place in preschool education for your child
+                in spring 2023 (school year 2022-2023), please contact the early
+                childhood education and care service guidance, tel. 08 558 45300
+                OR varhaiskasvatus@ouka.fi.
               </P>
               <P>
                 You will receive the decisions either on the{' '}
@@ -278,7 +309,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Pre-school education begins on August 14, 2023. If you require early childhood education and care in connection with pre-school education, you can apply for it by going to the section for early childhood education in connection with pre-school education (Early childhood education need related to pre-primary education).'
+              'Preschool education begins on August 14, 2023. If you need early childhood education and care related to preschool education, apply for it under Early childhood education and care related to preschool education.'
             ],
             CLUB: [
               'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in pre-school education. The child may attend one group that meets two or three times a week and a family group at the same time.'
@@ -287,19 +318,19 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             DAYCARE: (
               <>
-                You can postpone the desired start date until the service
+                You can change the desired start date until the service
                 coordination team has begun to process the application. After
                 this, the date can only be postponed by contacting the early
-                childhood education and care service coordination team.
+                childhood education and care service.
                 {customerContactText()}
               </>
             ),
             PRESCHOOL: (
               <>
-                You can postpone the desired start date until the service
+                You can change the desired start date until the service
                 coordination team has begun to process the application. After
                 this, the date can only be postponed by contacting the early
-                childhood education and care service coordination team.
+                childhood education and care service guidance.
                 {customerContactText()}
               </>
             ),
@@ -338,7 +369,7 @@ const fi: DeepPartial<Translations> = {
         },
         shiftCare: {
           instructions:
-            'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you require evening or shift care, please specify your care needs in the Additional information field of the application.',
+            'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you need evening or shift care, please specify your care needs in the Additional information field of the application.',
           message: {
             text: 'Evening and shift care is intended for children whose parents are both employed in shift work or receive education mainly in the evenings and/or at weekends. A statement on the nature of the employment relationship and/or educational activities taking place during the evenings or weekends for both guardians living in the same household must be attached to the application.'
           },
@@ -353,7 +384,7 @@ const fi: DeepPartial<Translations> = {
             "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
           CLUB: "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
           PRESCHOOL:
-            "Select this section of the application if your child needs support for their development and/or learning during their year in pre-school education. Support is implemented in the child's daily life as part of other pre-school education and early childhood education and care activities. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at a pre-school education unit."
+            "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at a preschool education unit."
         },
         partTime: {
           true: 'Part-time',
@@ -361,20 +392,21 @@ const fi: DeepPartial<Translations> = {
         },
         dailyTime: {
           label: {
-            DAYCARE: 'Service need options'
+            DAYCARE: 'Service need options',
+            PRESCHOOL:
+              'Early childhood education need related to preschool education'
           },
+          connectedDaycare:
+            'I also apply for early childhood education and care related to preschool education.',
           connectedDaycareInfo: (
             <>
               <P>
                 If necessary, you can apply for charged early childhood
-                education in connection with pre-school education for your
-                child. If you want your child to start at the early childhood
-                education and care unit at a later date than the pre-school
-                education starts, please indicate the desired date in the
-                Additional information field of the application. If you wish to
-                apply for a service voucher for a private daycare unit, please
-                select the service voucher unit you want to apply to as your
-                preferred option.
+                education and care related to preschool pre-school education for
+                your child. If you want your child to start at the early
+                childhood education and care unit at a later date than the
+                preschool education starts, please indicate the desired date in
+                the Additional information field of the application.
               </P>
               <P>
                 You will receive a written decision regarding your child’s
@@ -394,15 +426,15 @@ const fi: DeepPartial<Translations> = {
           ),
           instructions: {
             PRESCHOOL:
-              'Daycare centers and schools provide pre-school education for four hours a day. Please indicate the hours during which your child requires early childhood education and care, including the time spent in pre-school education (e.g. 7 a.m. to 5 p.m.). You will be asked to specify the times in greater detail once your child enters early childhood education and care. If the care needs vary by day or week (e.g. in cases where shift care is required), please indicate the hours in greater detail in the Additional information field of this application.'
+              'Daycare centers and schools provide preschool education for four hours a day. Please indicate the hours during which your child needs early childhood education and care, including the time spent in preschool education (e.g. 7 a.m. to 5 p.m.). You will be asked to specify the times in greater detail once your child enters early childhood education and care. If the care needs vary by day or week (e.g. in cases where shift care is required), please indicate the hours in greater detail in the Additional information field of this application.'
           },
           usualArrivalAndDeparture: {
             DAYCARE: 'Daily time in early childhood education and care'
           }
         },
-        preparatory: 'The child requires support to learn Finnish.',
+        preparatory: 'The child needs support to learn Finnish.',
         preparatoryInfo:
-          'A language assessment (Pienten kielireppu) will be conducted for each child with a mother tongue other than Finnish, Swedish or Sámi. This assessment will serve as a basis for constructing a Finnish as a second language (S2) curriculum or a decision regarding instruction preparing for basic education. S2 education is integrated into the daily early childhood education and care or pre-school activities in accordance with the child’s individual needs. Children at the age of six will receive instruction preparing for basic education, which consists of four pre-school education lessons and one Finnish language lesson every day. This instruction is free of charge.'
+          'A language assessment (Pienten kielireppu) will be conducted for each child with a mother tongue other than Finnish, Swedish or Sámi. This assessment will serve as a basis for constructing a Finnish as a second language (S2) curriculum or a decision regarding preparatory preschool education. S2 education is integrated into the daily early childhood education and care or pre-school activities in accordance with the child’s individual needs. Children at the age of six will receive instruction preparing for basic education, which consists of four pre-school education lessons and one Finnish language lesson every day. This preparatory preschool education is free of charge.'
       },
       contactInfo: {
         familyInfo: undefined,
@@ -461,13 +493,13 @@ const fi: DeepPartial<Translations> = {
           ),
           PRESCHOOL: (
             <P>
-              Pre-school education is provided free of charge, but early
-              childhood education and care organized in connection with it is
-              subject to a fee. If the child attends early childhood education
-              and care in connection with pre-school education, the family must
-              submit an income declaration detailing their gross income using
-              the income declaration form as soon as possible after the child
-              has started attending early childhood education and care.
+              Preschool education is free of charge, but the related early
+              childhood education and care is subject to a fee. If the child
+              attends early childhood education and care in related to preschool
+              pre-school education, the family must submit an income declaration
+              detailing their gross income using the income declaration form as
+              soon as possible after the child has started attending early
+              childhood education and care.
             </P>
           )
         },
@@ -499,6 +531,11 @@ const fi: DeepPartial<Translations> = {
   applicationsList: {
     title:
       'Applying for early childhood education and enrolling in pre-school education',
+    type: {
+      DAYCARE: 'Application for early childhood education',
+      PRESCHOOL: 'Application for preschool education',
+      CLUB: 'Club application'
+    },
     summary: (
       <>
         <P width="800px">

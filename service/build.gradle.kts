@@ -5,6 +5,9 @@ plugins {
     id("org.unbroken-dome.xjc") version TrevakaServiceDeps.xjc
 }
 
+object Version {
+    const val openTracing = "0.33.0"
+}
 repositories {
     mavenCentral()
 }
@@ -29,6 +32,9 @@ dependencies {
     implementation("com.jcraft:jsch:0.1.55")
 
     implementation("software.amazon.awssdk:s3")
+
+    api("io.opentracing:opentracing-api:${Version.openTracing}")
+    api("io.opentracing:opentracing-util:${Version.openTracing}")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude( "com.vaadin.external.google", "android-json")

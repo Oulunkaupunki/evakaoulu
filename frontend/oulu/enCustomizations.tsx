@@ -270,7 +270,7 @@ const fi: DeepPartial<Translations> = {
                 The right to attend a club or group organized as a part of open
                 early childhood education and care (ECEC) is granted until the
                 applicant decides that it is no longer required or until the
-                child moves from open ECEC to ECEC or pre-school education.
+                child moves from open ECEC to ECEC or preschool education.
                 Applicants to open ECEC are considered in the following order:
                 children leaving early childhood education, children applying on
                 the basis of a sibling relationship, new applicants in order of
@@ -312,7 +312,7 @@ const fi: DeepPartial<Translations> = {
               'Preschool education begins on August 14, 2023. If you need early childhood education and care related to preschool education, apply for it under Early childhood education and care related to preschool education.'
             ],
             CLUB: [
-              'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in pre-school education. The child may attend one group that meets two or three times a week and a family group at the same time.'
+              'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in preschool education. The child may attend one group that meets two or three times a week and a family group at the same time.'
             ]
           },
           instructions: {
@@ -402,11 +402,11 @@ const fi: DeepPartial<Translations> = {
             <>
               <P>
                 If necessary, you can apply for charged early childhood
-                education and care related to preschool pre-school education for
-                your child. If you want your child to start at the early
-                childhood education and care unit at a later date than the
-                preschool education starts, please indicate the desired date in
-                the Additional information field of the application.
+                education and care related to preschool education for your
+                child. If you want your child to start at the early childhood
+                education and care unit at a later date than the preschool
+                education starts, please indicate the desired date in the
+                Additional information field of the application.
               </P>
               <P>
                 You will receive a written decision regarding your child’s
@@ -434,7 +434,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'The child needs support to learn Finnish.',
         preparatoryInfo:
-          'A language assessment (Pienten kielireppu) will be conducted for each child with a mother tongue other than Finnish, Swedish or Sámi. This assessment will serve as a basis for constructing a Finnish as a second language (S2) curriculum or a decision regarding preparatory preschool education. S2 education is integrated into the daily early childhood education and care or pre-school activities in accordance with the child’s individual needs. Children at the age of six will receive instruction preparing for basic education, which consists of four pre-school education lessons and one Finnish language lesson every day. This preparatory preschool education is free of charge.'
+          'A language assessment (Pienten kielireppu) will be conducted for each child with a mother tongue other than Finnish, Swedish or Sámi. This assessment will serve as a basis for constructing a Finnish as a second language (S2) curriculum or a decision regarding preparatory preschool education. S2 education is integrated into the daily early childhood education and care or preschool activities in accordance with the child’s individual needs. Children at the age of six will receive instruction preparing for basic education, which consists of four preschool education lessons and one Finnish language lesson every day. This preparatory preschool education is free of charge.'
       },
       contactInfo: {
         familyInfo: undefined,
@@ -455,13 +455,13 @@ const fi: DeepPartial<Translations> = {
             is only considered official once it has been updated in the
             population information system. The guardian’s information can be
             found in the population information system; decisions regarding
-            pre-school education and early childhood education and care will be
+            preschool education and early childhood education and care will be
             automatically submitted to any guardians living at a different
             address, as well.
           </P>
         ),
         secondGuardianInfoPreschoolSeparated:
-          'The address information for the other guardian is retrieved from the population information system automatically. According to our information, the child has another guardian living at a different address. Registration for pre-school education must be agreed upon jointly with the other guardian.',
+          'The address information for the other guardian is retrieved from the population information system automatically. According to our information, the child has another guardian living at a different address. Registration for preschool education must be agreed upon jointly with the other guardian.',
         secondGuardianAgreementStatus: {
           label:
             'Have you and the other guardian agreed to make this application?*',
@@ -496,7 +496,7 @@ const fi: DeepPartial<Translations> = {
               Preschool education is free of charge, but the related early
               childhood education and care is subject to a fee. If the child
               attends early childhood education and care in related to preschool
-              pre-school education, the family must submit an income declaration
+              preschool education, the family must submit an income declaration
               detailing their gross income using the income declaration form as
               soon as possible after the child has started attending early
               childhood education and care.
@@ -530,7 +530,7 @@ const fi: DeepPartial<Translations> = {
   },
   applicationsList: {
     title:
-      'Applying for early childhood education and enrolling in pre-school education',
+      'Applying for early childhood education and enrolling in preschool education',
     type: {
       DAYCARE: 'Application for early childhood education',
       PRESCHOOL: 'Application for preschool education',
@@ -542,7 +542,7 @@ const fi: DeepPartial<Translations> = {
           The child&apos;s guardian can make an application for the child to be
           granted a place in early childhood education and care and in clubs and
           groups organized as a part of open early childhood education, or
-          enroll the child in pre-school education. The same application can be
+          enroll the child in preschool education. The same application can be
           used for applying for a service voucher for early childhood education
           and care, by applying for a place a private early childhood education
           and care unit. The guardian’s and the children’s address information
@@ -585,7 +585,7 @@ const fi: DeepPartial<Translations> = {
     title: 'Early childhood education and care in the City of Oulu'
   },
   map: {
-    mainInfo: `You can use this view to search Oulu’s early childhood education care units, pre-school education units, and open early childhood education and care units by their geographic location. You can find information about private kindergartens on the website of the City of Oulu.`,
+    mainInfo: `You can use this view to search Oulu’s early childhood education care units, preschool education units, and open early childhood education and care units by their geographic location. You can find information about private kindergartens on the website of the City of Oulu.`,
     privateUnitInfo: <></>,
     serviceVoucherLink:
       'https://www.ouka.fi/oulu/palveluseteli/yksityisen-paivahoidon-palveluseteli',
@@ -593,14 +593,14 @@ const fi: DeepPartial<Translations> = {
     careTypes: {
       CLUB: 'Open early childhood education and care',
       DAYCARE: 'Early childhood education and care',
-      PRESCHOOL: 'Pre-school education'
+      PRESCHOOL: 'Preschool education'
     }
   },
   decisions: {
     summary: (
       <P width="800px">
         Any decisions or notifications regarding your child’s access to
-        pre-school education and groups or clubs will be displayed on this page.
+        preschool education and groups or clubs will be displayed on this page.
       </P>
     )
   },

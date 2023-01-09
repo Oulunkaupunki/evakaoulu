@@ -19,6 +19,7 @@ type Features = {
 const features: Features = {
   default: {
     citizenShiftCareAbsence: false,
+    citizenContractDayAbsence: false,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
@@ -27,6 +28,7 @@ const features: Features = {
       connectedDaycarePreferredStartDate: false,
       serviceNeedOption: false
     },
+    decisionDraftMultipleUnits: false,
     groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
@@ -43,6 +45,7 @@ const features: Features = {
   },
   staging: {
     citizenShiftCareAbsence: false,
+    citizenContractDayAbsence: false,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
@@ -51,6 +54,7 @@ const features: Features = {
       connectedDaycarePreferredStartDate: false,
       serviceNeedOption: false
     },
+    decisionDraftMultipleUnits: false,
     groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
@@ -67,6 +71,7 @@ const features: Features = {
   },
   prod: {
     citizenShiftCareAbsence: false,
+    citizenContractDayAbsence: false,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
@@ -75,6 +80,7 @@ const features: Features = {
       connectedDaycarePreferredStartDate: false,
       serviceNeedOption: false
     },
+    decisionDraftMultipleUnits: false,
     groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,

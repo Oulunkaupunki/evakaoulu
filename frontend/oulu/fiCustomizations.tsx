@@ -463,7 +463,7 @@ const fi: DeepPartial<Translations> = {
             huoltajalle. Jos tieto ei saa mennä toiselle huoltajalle, ole
             yhteydessä palveluohjaukseen..
           </span>
-        ),
+        )
       }
     }
   },

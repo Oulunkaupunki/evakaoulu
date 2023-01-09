@@ -534,8 +534,7 @@ const fi: DeepPartial<Translations> = {
             application, please contact the Early Childhood Education Service
             Guidance.
           </span>
-        ),
-
+        )
       }
     }
   },

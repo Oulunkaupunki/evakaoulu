@@ -455,6 +455,15 @@ const fi: DeepPartial<Translations> = {
         otherInfoPlaceholder:
           'Voit halutessasi antaa ilmoittautumiseen liittyvää tarkempaa lisätietoa',
         dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>
+      },
+      actions: {
+        allowOtherGuardianAccess: (
+          <span>
+            Ymmärrän, että tieto hakemuksesta menee myös lapsen toiselle
+            huoltajalle. Jos tieto ei saa mennä toiselle huoltajalle, ole
+            yhteydessä palveluohjaukseen..
+          </span>
+        ),
       }
     }
   },

@@ -525,6 +525,17 @@ const fi: DeepPartial<Translations> = {
         dietInfo: (
           <> If your child follows a special diet, please indicate it here. </>
         )
+      },
+      actions: {
+        allowOtherGuardianAccess: (
+          <span>
+            I understand that the application will also be visible to the other
+            guardian. If the other guardian should not be able to see this
+            application, please contact the Early Childhood Education Service
+            Guidance.
+          </span>
+        ),
+
       }
     }
   },

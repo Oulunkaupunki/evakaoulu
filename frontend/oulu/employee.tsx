@@ -82,6 +82,8 @@ const customizations: EmployeeCustomizations = {
           }
         },
         assistanceNeedDecision: {
+          jurisdiction: '',
+          jurisdictionText: '',
           appealInstructions: (
             <>
               <P>

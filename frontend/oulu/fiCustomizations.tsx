@@ -529,6 +529,8 @@ const fi: DeepPartial<Translations> = {
     ),
     assistanceDecisions: {
       decision: {
+        jurisdiction: '',
+        jurisdictionText: '',
         appealInstructions: (
           <>
             <P>

@@ -17,7 +17,14 @@ const mapConfig: MapConfig = {
     minLatitude: 65.00209678931624,
     maxLongitude: 25.55391750178106,
     minLongitude: 25.448039386735797
-  }
+  },
+  careTypeFilters: ['DAYCARE', 'PRESCHOOL', 'CLUB'],
+  unitProviderTypeFilters: [
+    'MUNICIPAL',
+    'PRIVATE',
+    'PRIVATE_SERVICE_VOUCHER',
+    'PURCHASED'
+  ]
 }
 
 export default mapConfig

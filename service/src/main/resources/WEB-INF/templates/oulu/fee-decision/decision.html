@@ -79,6 +79,16 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                 <span th:case="'NOT_AVAILABLE'" th:text="#{text.income.not_available}"></span>
             </td>
         </tr>
+        <tr>
+            <td th:text="#{decision.familySize}">
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td class="text-right" th:text="${familySize}">
+            </td>
+        </tr>
         </tbody>
         <tbody th:if="${showTotalIncome}">
         <tr>

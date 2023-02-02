@@ -592,7 +592,14 @@ const fi: DeepPartial<Translations> = {
     )
   },
   loginPage: {
-    title: 'Early childhood education and care in the City of Oulu'
+    title: 'Early childhood education and care in the City of Oulu',
+    login: {
+      title: 'Sign in with username',
+      paragraph:
+        'Take care of your child’s daily early childhood education affairs in eVaka.',
+      link: 'Log in',
+      infoBoxText: <></>
+    }
   },
   map: {
     mainInfo: `You can use this view to search Oulu’s early childhood education care units, preschool education units, and open early childhood education and care units by their geographic location. You can find information about private kindergartens on the website of the City of Oulu.`,

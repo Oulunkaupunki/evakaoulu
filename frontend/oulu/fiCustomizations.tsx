@@ -211,11 +211,6 @@ const fi: DeepPartial<Translations> = {
                 14.8.2023.
               </P>
               <P>
-                Mikäli tarvitset lapsellesi esiopetuspaikkaa vielä keväälle 2023
-                (lukuvuosi 2022-2023), ole yhteydessä varhaiskasvatuksen
-                palveluohjaukseen p. 08 558 45300 TAI varhaiskasvatus@ouka.fi.
-              </P>
-              <P>
                 Päätökset tulevat sähköisesti{' '}
                 <ExternalLink
                   text="Suomi.fi-viestit"
@@ -368,8 +363,8 @@ const fi: DeepPartial<Translations> = {
                   Suomi.fi-viestit
                 </a>{' '}
                 -palveluun tai postitse, mikäli et ole ottanut Suomi.fi-viestit
-                -palvelua käyttöön. Päätös on nähtävillä myös eVaka-palvelussa
-                kohdassa Valikko - Päätökset.
+                -palvelua käyttöön. Päätös on nähtävillä eVaka- palveluissa
+                kohdassa Valikko.
               </P>
             </>
           ),

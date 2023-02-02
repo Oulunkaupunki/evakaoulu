@@ -19,7 +19,7 @@ type Features = {
 const features: Features = {
   default: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: false,
+    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true

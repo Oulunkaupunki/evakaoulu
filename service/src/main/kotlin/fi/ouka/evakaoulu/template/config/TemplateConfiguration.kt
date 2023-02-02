@@ -4,6 +4,8 @@
 
 package fi.ouka.evakaoulu.template.config
 
+import fi.espoo.evaka.decision.DecisionType
+import fi.espoo.evaka.invoicing.service.DocumentLang
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,4 +28,15 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
     override fun getPreschoolDecisionPath(): String = "oulu/preschool/decision"
     override fun getPreparatoryDecisionPath(): String = "oulu/preschool/decision"
     override fun getAssistanceNeedDecisionPath(): String = "oulu/assistance-need/decision"
+
+    override fun getLocalizedFilename(type: DecisionType, lang: DocumentLang): String =
+        when (type) {
+            DecisionType.CLUB -> "Kerhopäätös"
+            DecisionType.DAYCARE,
+            DecisionType.DAYCARE_PART_TIME -> "Varhaiskasvatuspäätös"
+            DecisionType.PRESCHOOL -> "Esiopetuspäätös"
+            DecisionType.PRESCHOOL_DAYCARE,
+            DecisionType.PRESCHOOL_CLUB -> "Esiopetukseen liittyvän toiminnan päätös"
+            DecisionType.PREPARATORY_EDUCATION -> throw Error("Not supported")
+        }
 }

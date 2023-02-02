@@ -32,6 +32,8 @@ class EVakaOuluConfig {
         freeAbsenceGivesADailyRefund = true,
         invoiceNumberSeriesStart = 1,
         paymentNumberSeriesStart = 1,
+        serviceWorkerMessageAccountName = "Oulun kaupunki",
+        applyPlacementUnitFromDecision = false,
         unplannedAbsencesAreContractSurplusDays = false,
         maxContractDaySurplusThreshold = 13,
         useContractDaysAsDailyFeeDivisor = false,

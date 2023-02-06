@@ -188,10 +188,9 @@ const fi: DeepPartial<Translations> = {
               <P>
                 Saatte kirjallisen päätöksen varhaiskasvatuspaikasta
                 Suomi.fi-viestit -palveluun tai postitse, mikäli ette ole
-                ottaneet Suomi.fi-palvelua käyttöön. Päätös on nähtävillä myös
-                eVaka-palvelussa kohdassa Hakeminen - Päätökset.
-                Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte
-                lisätietoa{' '}
+                ottaneet Suomi.fi-palvelua käyttöön. Päätös on nähtävillä eVaka-
+                palveluissa kohdassa Valikko. Suomi.fi-viestit palvelusta ja sen
+                käyttöönotosta saatte lisätietoa{' '}
                 <ExternalLink
                   text="https://www.suomi.fi/viestit"
                   href="https://www.suomi.fi/viestit"
@@ -234,7 +233,7 @@ const fi: DeepPartial<Translations> = {
                 sisarukset, uudet hakijat hakujärjestyksessä huomioiden tuen
                 tarvitsijat. Päätös kerhopaikasta tulee Suomi.fi-palveluun tai
                 postitse, mikäli ette ole ottanut palvelua käyttöön. Päätös on
-                nähtävillä myös eVaka-palvelussa kohdassa Hakeminen - Päätökset.
+                nähtävillä eVaka- palveluissa kohdassa Valikko.
               </P>
               <P>
                 Avoin varhaiskasvatustoiminta on maksutonta, eikä siihen

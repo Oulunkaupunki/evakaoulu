@@ -29,18 +29,17 @@ const features: Features = {
       serviceNeedOption: false
     },
     decisionDraftMultipleUnits: false,
-    groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
     preparatory: true,
     experimental: {
       leops: true,
-      citizenVasu: true,
       voucherUnitPayments: true,
       assistanceNeedDecisions: true,
       assistanceNeedDecisionsLanguageSelect: false,
       staffAttendanceTypes: true,
-      fosterParents: true
+      fosterParents: true,
+      serviceWorkerMessaging: false
     }
   },
   staging: {
@@ -55,18 +54,17 @@ const features: Features = {
       serviceNeedOption: false
     },
     decisionDraftMultipleUnits: false,
-    groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
     preparatory: true,
     experimental: {
       leops: true,
-      citizenVasu: true,
       voucherUnitPayments: true,
       assistanceNeedDecisions: true,
       assistanceNeedDecisionsLanguageSelect: false,
       staffAttendanceTypes: true,
-      fosterParents: true
+      fosterParents: true,
+      serviceWorkerMessaging: false
     }
   },
   prod: {
@@ -81,18 +79,17 @@ const features: Features = {
       serviceNeedOption: false
     },
     decisionDraftMultipleUnits: false,
-    groupsTableServiceNeeds: true,
     preschool: true,
     urgencyAttachments: true,
     preparatory: true,
     experimental: {
       leops: true,
-      citizenVasu: true,
       voucherUnitPayments: true,
       assistanceNeedDecisions: true,
       assistanceNeedDecisionsLanguageSelect: false,
       staffAttendanceTypes: true,
-      fosterParents: true
+      fosterParents: true,
+      serviceWorkerMessaging: false
     }
   }
 }

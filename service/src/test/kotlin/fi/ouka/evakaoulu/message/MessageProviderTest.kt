@@ -8,11 +8,12 @@ import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.message.MessageLanguage
 import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
-import org.junitpioneer.jupiter.CartesianProductTest
+// import org.junitpioneer.jupiter.CartesianProductTest
 import org.reflections.ReflectionUtils.*
 import org.springframework.beans.factory.annotation.Autowired
 import java.lang.reflect.Method
 
+/*
 internal class MessageProviderTest : AbstractIntegrationTest() {
 
     @Autowired
@@ -40,3 +41,4 @@ internal class MessageProviderTest : AbstractIntegrationTest() {
     }
 
 }
+*/

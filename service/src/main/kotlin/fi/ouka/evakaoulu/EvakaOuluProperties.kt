@@ -5,12 +5,10 @@
 package fi.ouka.evakaoulu
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
 
 /**
  * All evakaoulu-specific configuration properties.
  */
-@ConstructorBinding
 @ConfigurationProperties(prefix = "evakaoulu", ignoreUnknownFields = false)
 data class EvakaOuluProperties(
     val intimeInvoices: SftpProperties,

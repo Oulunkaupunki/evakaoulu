@@ -23,10 +23,10 @@ import fi.espoo.evaka.invoicing.domain.VoucherValueDecisionStatus
 import fi.espoo.evaka.invoicing.domain.VoucherValueDecisionType
 import fi.espoo.evaka.invoicing.service.DocumentLang
 import fi.espoo.evaka.invoicing.service.FeeDecisionPdfData
-import fi.espoo.evaka.invoicing.service.PDFService
-import fi.espoo.evaka.invoicing.service.Page
-import fi.espoo.evaka.invoicing.service.Template
+import fi.espoo.evaka.pdfgen.Page
+import fi.espoo.evaka.pdfgen.Template
 import fi.espoo.evaka.invoicing.service.VoucherValueDecisionPdfData
+import fi.espoo.evaka.pdfgen.PdfGenerator
 import fi.espoo.evaka.placement.PlacementType
 import fi.espoo.evaka.setting.SettingType
 import fi.espoo.evaka.shared.AreaId
@@ -61,11 +61,11 @@ private val settings = mapOf(
 
 @Tag("PDFGenerationTest")
 internal class PDFServiceTest {
-    private lateinit var pdfService: PDFService
+    private lateinit var pdfService: PdfGenerator
 
     @BeforeEach
     fun setup() {
-        pdfService = PDFService(
+        pdfService = PdfGenerator(
             MessageConfiguration().messageProvider(),
             TemplateConfiguration().templateProvider(),
             PDFConfig.templateEngine())

@@ -19,9 +19,9 @@ import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
-import fi.espoo.voltti.pdfgen.PDFService
-import fi.espoo.voltti.pdfgen.Page
-import fi.espoo.voltti.pdfgen.Template
+import fi.espoo.evaka.pdfgen.PdfGenerator
+import fi.espoo.evaka.pdfgen.Page
+import fi.espoo.evaka.pdfgen.Template
 import fi.ouka.evakaoulu.message.config.MessageConfiguration
 import fi.ouka.evakaoulu.template.config.TemplateConfiguration
 import org.junit.jupiter.api.BeforeEach
@@ -45,13 +45,13 @@ private val settings = mapOf(
 class DecisionServiceTest {
     private lateinit var messageProvider: IMessageProvider
     private lateinit var templateProvider: ITemplateProvider
-    private lateinit var pdfService: PDFService
+    private lateinit var pdfService: PdfGenerator
 
     @BeforeEach
     fun setup() {
         messageProvider = MessageConfiguration().messageProvider()
         templateProvider = TemplateConfiguration().templateProvider()
-        pdfService = PDFService(PDFConfig.templateEngine())
+        pdfService = PdfGenerator(messageProvider, templateProvider, PDFConfig.templateEngine())
 
     }
 
@@ -403,7 +403,7 @@ fun generateAssistanceNeedPdf(
     decision: AssistanceNeedDecision,
     sendAddress: DecisionSendAddress? = null,
     guardian: PersonDTO? = null,
-    pdfService: PDFService,
+    pdfService: PdfGenerator,
     templateProvider: ITemplateProvider
 ): ByteArray {
     return pdfService.render(

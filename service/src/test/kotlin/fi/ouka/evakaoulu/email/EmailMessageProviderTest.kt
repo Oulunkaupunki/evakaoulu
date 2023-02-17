@@ -10,7 +10,6 @@ import fi.espoo.evaka.emailclient.IEmailMessageProvider
 import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.reflections.ReflectionUtils.*
 import org.springframework.beans.factory.annotation.Autowired
 
 internal class EmailMessageProviderTest : AbstractIntegrationTest() {

@@ -8,18 +8,20 @@ import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.message.MessageLanguage
 import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
-// import org.junitpioneer.jupiter.CartesianProductTest
+import org.junitpioneer.jupiter.cartesian.ArgumentSets
+import org.junitpioneer.jupiter.cartesian.CartesianTest
 import org.reflections.ReflectionUtils.*
 import org.springframework.beans.factory.annotation.Autowired
 import java.lang.reflect.Method
 
-/*
+
 internal class MessageProviderTest : AbstractIntegrationTest() {
 
     @Autowired
     private lateinit var messageProvider: IMessageProvider
 
-    @CartesianProductTest(factory = "methodsWithLang")
+    @CartesianTest()
+    @CartesianTest.MethodFactory("methodsWithLang")
     fun `get works for every message type and language`(method: Method, lang: MessageLanguage) {
         assertThat(((method.invoke(messageProvider, lang)) as String).also(::println))
             .isNotBlank
@@ -29,16 +31,16 @@ internal class MessageProviderTest : AbstractIntegrationTest() {
 
     companion object {
         @JvmStatic
-        fun methodsWithLang(): CartesianProductTest.Sets {
+        fun methodsWithLang(): ArgumentSets {
             val allMethods = getAllMethods(
                 IMessageProvider::class.java,
                 withParametersAssignableTo(MessageLanguage::class.java), withReturnType(String::class.java)
             )
-            return CartesianProductTest.Sets()
-                .addAll(allMethods)
-                .addAll(MessageLanguage.values().toList())
+            return ArgumentSets.create()
+                .argumentsForNextParameter(allMethods)
+                .argumentsForNextParameter(MessageLanguage.values().toList())
         }
     }
 
 }
-*/
+

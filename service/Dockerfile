@@ -11,8 +11,8 @@ RUN apt-get update \
        openjdk-17-jre-headless \
  && rm -rf /var/lib/apt/lists/*
 
-ARG DD_JAVA_AGENT_VERSION="0.91.0"
-ARG DD_JAVA_AGENT_SHA256="52c30ef421366a2a5c3d9725bb53e80b5ae9feb272cd69760ecb31bf8b019ef8"
+ARG DD_JAVA_AGENT_VERSION="1.8.0"
+ARG DD_JAVA_AGENT_SHA256="85ccbbf73f867d10ab867ae02ad34f381d65e1f4523636a0b41d3aa46f98d584"
 
 RUN curl -sSfo /opt/dd-java-agent.jar "https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/${DD_JAVA_AGENT_VERSION}/dd-java-agent-${DD_JAVA_AGENT_VERSION}.jar" \
  && echo "${DD_JAVA_AGENT_SHA256}  /opt/dd-java-agent.jar" | sha256sum -c -

@@ -10,13 +10,16 @@ import fi.espoo.evaka.s3.DocumentService
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.presigner.S3Presigner
 import fi.espoo.evaka.BucketEnv
-import fi.espoo.evaka.children.consent.ChildConsentType
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
+import fi.espoo.evaka.logging.defaultAccessLoggingValve
 import fi.espoo.evaka.shared.auth.UserRole
 import fi.ouka.evakaoulu.invoice.service.SftpConnector
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import fi.ouka.evakaoulu.payment.service.ProEPaymentGenerator
 import fi.ouka.evakaoulu.payment.service.OuluPaymentIntegrationClient
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
+import org.springframework.boot.web.server.WebServerFactoryCustomizer
+import org.springframework.core.env.Environment
 
 @Configuration
 class EVakaOuluConfig {
@@ -61,4 +64,11 @@ class EVakaOuluConfig {
         val sftpSender = SftpSender(evakaProperties.intimePayments, sftpConnector)
         return OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
     }
+
+    @Bean
+    fun tomcatCustomizer(env: Environment) =
+        WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
+            it.addContextValves(defaultAccessLoggingValve(env))
+        }
+
 }

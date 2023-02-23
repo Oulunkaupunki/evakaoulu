@@ -995,8 +995,8 @@ const fi: DeepPartial<Translations> = {
         Accessibility Control Unit
         <br />
         <ExternalLink
-          href="www.saavutettavuusvaatimukset.fi"
-          text="https://www.saavutettavuusvaatimukset.fi"
+          href="https://www.saavutettavuusvaatimukset.fi"
+          text="www.saavutettavuusvaatimukset.fi"
           newTab
         />
         <br />

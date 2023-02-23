@@ -960,6 +960,7 @@ const fi: DeepPartial<Translations> = {
         <ExternalLink
           href="https://www.ouka.fi/oulu/asiointi-ja-neuvonta"
           text="The service points of the City of Oulu"
+          newTab
         />{' '}
         offer guidance to using electronic services. The service point staff
         also provide help to users for whom digital services are not accessible.
@@ -971,6 +972,7 @@ const fi: DeepPartial<Translations> = {
         <ExternalLink
           href="https://e-kartta.ouka.fi/efeedback"
           text="online form"
+          newTab
         />{' '}
         or by mail{' '}
         <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
@@ -994,7 +996,8 @@ const fi: DeepPartial<Translations> = {
         <br />
         <ExternalLink
           href="www.saavutettavuusvaatimukset.fi"
-          text="www.saavutettavuusvaatimukset.fi"
+          text="https://www.saavutettavuusvaatimukset.fi"
+          newTab
         />
         <br />
         <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>

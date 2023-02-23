@@ -957,6 +957,7 @@ const fi: DeepPartial<Translations> = {
         <ExternalLink
           href="https://www.ouka.fi/oulu/asiointi-ja-neuvonta"
           text="Oulun kaupungin asiointipisteistä"
+          newTab
         />{' '}
         saa apua sähköiseen asiointiin. Asiointipisteiden palveluneuvojat
         auttavat käyttäjiä, joille digipalvelut eivät ole saavutettavissa.
@@ -968,6 +969,7 @@ const fi: DeepPartial<Translations> = {
         <ExternalLink
           href="https://e-kartta.ouka.fi/efeedback"
           text="verkkolomakkeella"
+          newTab
         />{' '}
         tai sähköpostitse{' '}
         <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
@@ -990,8 +992,9 @@ const fi: DeepPartial<Translations> = {
         Saavutettavuuden valvonnan yksikkö
         <br />
         <ExternalLink
-          href="www.saavutettavuusvaatimukset.fi"
+          href="https://www.saavutettavuusvaatimukset.fi"
           text="www.saavutettavuusvaatimukset.fi"
+          newTab
         />
         <br />
         <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>

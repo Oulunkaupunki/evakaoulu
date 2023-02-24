@@ -668,10 +668,6 @@ workflows:
       - check_licenses:
           requires:
             - checkout_repo
-      - build_base_image:
-          requires:
-            - checkout_repo
-
       - apigw_build:
           requires:
             - checkout_repo

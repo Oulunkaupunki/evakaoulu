@@ -17,11 +17,6 @@ class DevDataInitializerTest : AbstractIntegrationTest() {
     @Autowired
     private lateinit var jdbi: Jdbi
 
-    @AfterEach
-    fun cleanup() {
-        Database(jdbi, NoopTracerFactory.create()).connect { db -> db.transaction { tx -> tx.resetOuluDatabaseForE2ETests() } }
-    }
-
     @Test
     fun init() {
         DevDataInitializer(jdbi)

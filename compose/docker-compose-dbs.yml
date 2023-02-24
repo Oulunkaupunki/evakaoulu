@@ -48,7 +48,8 @@ services:
   s3.mock.evaka:
     image: adobe/s3mock
     ports:
-      - "9876:9090"
+      - "9090:9090"
+      - "9876:9090" # for core tests
     volumes:
       - s3-data:/data
     environment:

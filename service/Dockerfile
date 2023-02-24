@@ -2,17 +2,46 @@
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-FROM evaka-base:latest
+FROM eclipse-temurin:17-jre-jammy
 
-USER root
-RUN apt-get update \
- && apt-get -y --no-install-recommends install \
-       curl \
-       openjdk-17-jre-headless \
- && rm -rf /var/lib/apt/lists/*
+LABEL maintainer="https://github.com/Oulunkaupunki"
 
-ARG DD_JAVA_AGENT_VERSION="1.8.0"
-ARG DD_JAVA_AGENT_SHA256="85ccbbf73f867d10ab867ae02ad34f381d65e1f4523636a0b41d3aa46f98d584"
+# Increment this if we ever explicitly want to e.g. run apt-get upgrade
+ARG CACHE_BUST=2022-11-08
+
+# Use bash instead of dash
+SHELL ["/bin/bash", "-c"]
+
+# Install required packages and update time zone information
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV LANGUAGE C.UTF-8
+RUN set -euxo pipefail \
+    && apt-get update \
+    && apt-get -y dist-upgrade \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        tzdata \
+        ca-certificates \
+        curl \
+        jq \
+    && ln -fs /usr/share/zoneinfo/Europe/Helsinki /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set evaka username
+ENV USERNAME evaka
+ENV HOME_DIR /home/${USERNAME}
+ENV USER_ID 1000
+
+# Create a new user named evaka which should be used to run any software.
+RUN adduser ${USERNAME} --gecos "" -q --home ${HOME_DIR} --uid ${USER_ID} --disabled-password
+
+# Used for downloading keys from S3
+ADD --chown=evaka:evaka https://github.com/espoon-voltti/s3-downloader/releases/download/v1.3.0/s3downloader-linux-amd64 /usr/local/bin/s3download
+RUN chmod u+x /usr/local/bin/s3download
+
+ARG DD_JAVA_AGENT_VERSION="1.8.3"
+ARG DD_JAVA_AGENT_SHA256="188b3fc8992206c571e042e0edd972b64485f3216f1b62566512cb69045f92f6"
 
 RUN curl -sSfo /opt/dd-java-agent.jar "https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/${DD_JAVA_AGENT_VERSION}/dd-java-agent-${DD_JAVA_AGENT_VERSION}.jar" \
  && echo "${DD_JAVA_AGENT_SHA256}  /opt/dd-java-agent.jar" | sha256sum -c -
@@ -23,7 +52,6 @@ USER evaka
 WORKDIR /home/evaka
 
 COPY --chown=evaka:evaka "entrypoint.sh" "entrypoint.sh"
-RUN chmod +x "entrypoint.sh"
 COPY --chown=evaka:evaka "target/org/" "org/"
 COPY --chown=evaka:evaka "target/META-INF" "META-INF/"
 COPY --chown=evaka:evaka "target/BOOT-INF/lib" "BOOT-INF/lib/"

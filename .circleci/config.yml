@@ -9,7 +9,6 @@ orbs:
 
 aliases:
   - &workspace_root /home/circleci/repo
-  - &workspace_evaka_base /home/circleci/repo/evaka/evaka-base
   - &workspace_apigw /home/circleci/repo/evaka/apigw
   - &workspace_evaka_frontend /home/circleci/repo/evaka/frontend
   - &workspace_oulu_frontend /home/circleci/repo/frontend
@@ -207,19 +206,6 @@ commands:
           command: |
             export APP_COMMIT="$CIRCLE_SHA1"
             ICONS=free yarn build
-
-  load_base_image:
-    steps:
-      - restore:
-          path: evaka-base.tar
-      - restore:
-          path: evaka-yarn.tar
-      - run:
-          name: Load base image
-          working_directory: *workspace_root
-          command: |
-            docker load -i evaka-base.tar
-            docker load -i evaka-yarn.tar
 
   build_docker_image:
     parameters:
@@ -457,57 +443,13 @@ jobs:
 
   # BUILD JOBS
 
-  build_base_image:
-    executor: base_executor
-    steps:
-      - *restore_repo
-      - setup_authenticated_remote_docker
-      - run:
-          name: Build base image
-          working_directory: *workspace_evaka_base
-          command: docker build -t evaka-base .
-      - run:
-          name: Build base image
-          working_directory: *workspace_evaka_base
-          command: docker build -t evaka-yarn -f yarn.Dockerfile .
-      - run:
-          name: Save base image
-          working_directory: *workspace_root
-          command: docker save evaka-base > evaka-base.tar
-      - run:
-          name: Save base image
-          working_directory: *workspace_root
-          command: docker save evaka-yarn > evaka-yarn.tar
-      - save:
-          path: evaka-base.tar
-      - save:
-          path: evaka-yarn.tar
-
-  apigw_build:
-    executor: nodejs_executor
-    steps:
-      - *restore_repo
-      - *restore_apigw_deps
-      - run:
-          working_directory: *workspace_apigw
-          command: yarn install --immutable
-      - *store_apigw_deps
-      - run:
-          working_directory: *workspace_apigw
-          command: yarn build
-      - save:
-          path: evaka/apigw/dist
-
   apigw_build_image:
     executor: base_executor
     steps:
       - *restore_repo
-      - restore:
-          path: evaka/apigw/dist
       - setup_remote_docker:
           version: *remote_docker_version
           docker_layer_caching: *docker_layer_caching
-      - load_base_image
       - build_docker_image:
           image: evakaoulu/api-gateway
           dir: *workspace_apigw
@@ -640,7 +582,6 @@ jobs:
           name: Unzip executable
           working_directory: *workspace_service
           command: unzip -q build/libs/evakaoulu-service.jar -d target
-      - load_base_image
       - build_docker_image:
           image: evakaoulu/service
           dir: *workspace_service
@@ -736,7 +677,6 @@ workflows:
             - checkout_repo
       - apigw_build_image:
           requires:
-            - build_base_image
             - apigw_build
       - apigw_push_image:
           context:
@@ -783,7 +723,6 @@ workflows:
             - checkout_repo
       - service_build_image:
           requires:
-            - build_base_image
             - service_build
       - service_push_image:
           context:

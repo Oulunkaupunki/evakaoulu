@@ -716,9 +716,6 @@ jobs:
 workflows:
   version: 2
   build_test_and_deploy:
-    when:
-      not:
-        equal: [scheduled_pipeline, << pipeline.trigger_source >>]
     jobs:
       - checkout_repo
       - fetch_private_dependencies:
@@ -799,14 +796,6 @@ workflows:
           requires:
             - auth_build_image
 
-      - scheduled_tasks_reporting_build_image:
-          requires:
-            - checkout_repo
-      - scheduled_tasks_reporting_push_image:
-          context:
-            - trevaka-utility
-          requires:
-            - scheduled_tasks_reporting_build_image
 
       - trigger_deploy:
           context:
@@ -820,7 +809,6 @@ workflows:
             - service_test
             - service_push_image
             - auth_push_image
-            - scheduled_tasks_reporting_push_image
             - e2e-test-playwright
           filters:
             branches:
@@ -837,7 +825,6 @@ workflows:
             - service_test
             - service_push_image
             - auth_push_image
-            - scheduled_tasks_reporting_push_image
             - e2e-test-playwright
           filters:
             branches:

@@ -230,7 +230,7 @@ commands:
             EVAKA_CUSTOMIZATIONS: oulu
           command: |
             export APP_COMMIT="$CIRCLE_SHA1"
-            ICONS=pro yarn build
+            ICONS=free yarn build
 
   build_docker_image:
     parameters:
@@ -501,11 +501,11 @@ jobs:
           command: yarn install --immutable
           environment:
             PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-      - run:
-          name: Unpack commercial frontend dependencies
-          working_directory: *workspace_evaka_frontend
-          command: |
-            ./unpack-pro-icons.sh
+#      - run:
+#          name: Unpack commercial frontend dependencies
+#          working_directory: *workspace_evaka_frontend
+#          command: |
+#            ./unpack-pro-icons.sh
       - save_cache:
           key: yarn-cache-frontend-v1-{{ checksum ".circleci/config.yml" }}-{{ checksum "evaka/frontend/yarn.lock" }}
           paths:

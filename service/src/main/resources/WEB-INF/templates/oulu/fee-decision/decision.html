@@ -38,7 +38,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <p th:if="${isReliefDecision}"
        th:utext="${not #strings.isEmpty(validTo)} ? #{text.relief.decision_retroactive(${totalFee}, ${validFrom}, ${validTo})} : #{text.relief.decision(${totalFee}, ${validFrom})}"></p>
     <p th:unless="${isReliefDecision}"
-       th:utext="${not #strings.isEmpty(validTo)} ? #{text.decision_retroactive(${totalFee}, ${validFrom}, ${validTo})} : #{text.decision(${totalFee}, ${validFrom})}"></p>
+       th:utext="#{text.decision(${totalFee}, ${validFrom})}"></p>
 
     <table class="narrow">
         <tbody th:each="part: ${parts}">
@@ -57,6 +57,8 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         </tr>
         </tbody>
     </table>
+
+    <p th:text="#{decision.familySize(${familySize})}"></p>
 
     <h2 th:text="#{text.table.intro}"></h2>
     <table class="narrow">
@@ -79,21 +81,13 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                 <span th:case="'NOT_AVAILABLE'" th:text="#{text.income.not_available}"></span>
             </td>
         </tr>
-        <tr>
-            <td th:text="#{decision.familySize}">
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td class="text-right" th:text="${familySize}">
-            </td>
-        </tr>
         </tbody>
-        <tbody th:if="${showTotalIncome}">
-        <tr>
-            <td><strong class="semi" th:text="#{decision.combined}"></strong></td>
-            <td class="text-right" th:text="${totalIncome}"></td>
+        <tbody th:each="part: ${parts}">
+        <tr th:if="${part.hasChildIncome}">
+            <td th:text="${part.childName}"></td>
+            <td class="text-right">
+                <span th:text="${part.childIncomeTotal}"></span>
+            </td>
         </tr>
         </tbody>
     </table>

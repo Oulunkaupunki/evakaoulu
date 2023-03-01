@@ -35,8 +35,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     <p th:if="${decisionType == 'RELIEF_REJECTED'}" th:text="#{text.relief.rejected}"></p>
 
     <div>
-        <span th:if="${#strings.isEmpty(validTo)}" th:utext="#{decision.details.child(${child.firstName}, ${child.lastName}, ${#temporals.format(child.dateOfBirth, 'd.M.yyyy')}, ${validFrom})}"></span>
-        <span th:if="${not #strings.isEmpty(validTo)}" th:utext="#{decision.details.child2(${child.firstName}, ${child.lastName}, ${#temporals.format(child.dateOfBirth, 'd.M.yyyy')}, ${validFrom}, ${validTo})}"></span>
+        <span th:utext="#{decision.details.child(${child.firstName}, ${child.lastName}, ${#temporals.format(child.dateOfBirth, 'd.M.yyyy')}, ${validFrom})}"></span>
         <span th:text="#{decision.details.unitTitle(${placementUnit.name})}"></span>
     </div>
 

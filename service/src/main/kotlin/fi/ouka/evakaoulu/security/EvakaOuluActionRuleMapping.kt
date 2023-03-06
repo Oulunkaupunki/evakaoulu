@@ -8,7 +8,11 @@ import fi.espoo.evaka.shared.security.actionrule.ScopedActionRule
 import fi.espoo.evaka.shared.security.actionrule.UnscopedActionRule
 
 class EvakaOuluActionRuleMapping : ActionRuleMapping {
-    override fun rulesOf(action: Action.UnscopedAction): Sequence<UnscopedActionRule> = action.defaultRules.asSequence()
+    override fun rulesOf(action: Action.UnscopedAction): Sequence<UnscopedActionRule> = when (action) {
+        Action.Global.SUBMIT_PATU_REPORT -> sequenceOf()
+        else -> action.defaultRules.asSequence()
+    }
+
     override fun <T> rulesOf(action: Action.ScopedAction<in T>): Sequence<ScopedActionRule<in T>> = when (action) {
         Action.BackupCare.UPDATE,
         Action.BackupCare.DELETE -> {

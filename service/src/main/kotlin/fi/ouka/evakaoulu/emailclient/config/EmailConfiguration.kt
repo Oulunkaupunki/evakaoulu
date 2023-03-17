@@ -37,36 +37,36 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
 
 
     private fun baseUrl(language: Language) =
-        when (language) {
-            Language.sv -> env.frontendBaseUrlSv
-            else -> env.frontendBaseUrlFi
-        }
+            when (language) {
+                Language.sv -> env.frontendBaseUrlSv
+                else -> env.frontendBaseUrlFi
+            }
 
     override fun messageNotification(language: Language, thread: MessageThreadStub): EmailContent {
         val messageUrl = "${baseUrl(language)}/messages/${thread.id}"
         val (typeFi, typeSv, typeEn) =
-            when (thread.type) {
-                MessageType.MESSAGE ->
-                    if (thread.urgent)
-                        Triple(
-                            "kiireellinen viesti",
-                            "brådskande personligt meddelande",
-                            "urgent message"
-                        )
-                    else Triple("viesti", "personligt meddelande", "message")
-                MessageType.BULLETIN ->
-                    if (thread.urgent)
-                        Triple(
-                            "kiireellinen tiedote",
-                            "brådskande allmänt meddelande",
-                            "urgent bulletin"
-                        )
-                    else Triple("tiedote", "allmänt meddelande", "bulletin")
-            }
+                when (thread.type) {
+                    MessageType.MESSAGE ->
+                        if (thread.urgent)
+                            Triple(
+                                    "kiireellinen viesti",
+                                    "brådskande personligt meddelande",
+                                    "urgent message"
+                            )
+                        else Triple("viesti", "personligt meddelande", "message")
+                    MessageType.BULLETIN ->
+                        if (thread.urgent)
+                            Triple(
+                                    "kiireellinen tiedote",
+                                    "brådskande allmänt meddelande",
+                                    "urgent bulletin"
+                            )
+                        else Triple("tiedote", "allmänt meddelande", "bulletin")
+                }
         return EmailContent(
-            subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
-            text =
-            """
+                subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
+                text =
+                """
                 Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: $messageUrl
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
@@ -83,9 +83,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
         """
-                .trimIndent(),
-            html =
-            """
+                        .trimIndent(),
+                html =
+                """
                 <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: <a href="$messageUrl">$messageUrl</a></p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
             
@@ -99,7 +99,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 <p>You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: <a href="$messageUrl">$messageUrl</a></p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
         """
-                .trimIndent()
+                        .trimIndent()
         )
     }
 
@@ -146,30 +146,30 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
     """.trimIndent()
 
     override fun missingReservationsNotification(
-        language: Language,
-        checkedRange: FiniteDateRange
+            language: Language,
+            checkedRange: FiniteDateRange
     ): EmailContent {
         val start =
-            checkedRange.start.format(
-                DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale("fi", "FI"))
-            )
+                checkedRange.start.format(
+                        DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale("fi", "FI"))
+                )
         return EmailContent(
-            subject =
-            "Läsnäolovarauksia puuttuu / There are missing attendance reservations",
-            text =
-            """
+                subject =
+                "Läsnäolovarauksia puuttuu / There are missing attendance reservations",
+                text =
+                """
             Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.
             ----
             There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.
                 """
-                .trimIndent(),
-            html =
-            """
+                        .trimIndent(),
+                html =
+                """
             <p>Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.</p>
             <hr>
             <p>There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.</p>
             """
-                .trimIndent()
+                        .trimIndent()
         )
     }
 
@@ -311,11 +311,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
             
             <p>Hello!</p>
             
-            <p>The early childhood education and care application for your child has been received. The guardian who filed the application may edit it online at varhaiskasvatus.ouka.fi until such time as the service coordination team takes it up for processing. The time necessary to organize a birth in early childhood education and care is four months. If care must begin earlier due to a parent’s sudden employment or beginning of their studies, the minimum time of notice is two weeks. In such a case, a certificate of employment or student status must be presented as an appendix to the application. The two weeks’ notice begins at the date this certificate is submitted. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours.</p>
+            <p>The early childhood education and care application for your child has been received. The guardian who filed the application may edit it online at varhaiskasvatus.ouka.fi until such time as the service coordination team takes it up for processing. The time necessary to organize a place in early childhood education and care is four months. If care must begin earlier due to a parent’s sudden employment or beginning of their studies, the minimum time of notice is two weeks. In such a case, a certificate of employment or student status must be presented as an appendix to the application. The two weeks’ notice begins at the date this certificate is submitted. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours.</p>
             
             <p>If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application, we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.</p>
             
-            <p>If the first care location you picked is a private daycare centre or child minder, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre.</p>
+            <p>If the first care location you picked is a private daycare centre or child minder, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a place in care, we request you to contact the early childhood education and care services service counselling centre.</p>
             
             <p>Transfer applications (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually.</p>
             
@@ -359,11 +359,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
             
             Hello! 
             
-            The early childhood education and care application for your child has been received. The guardian who filed the application may edit it online at varhaiskasvatus.ouka.fi until such time as the service coordination team takes it up for processing. The time necessary to organize a birth in early childhood education and care is four months. If care must begin earlier due to a parent’s sudden employment or beginning of their studies, the minimum time of notice is two weeks. In such a case, a certificate of employment or student status must be presented as an appendix to the application. The two weeks’ notice begins at the date this certificate is submitted. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours. 
+            The early childhood education and care application for your child has been received. The guardian who filed the application may edit it online at varhaiskasvatus.ouka.fi until such time as the service coordination team takes it up for processing. The time necessary to organize a place in early childhood education and care is four months. If care must begin earlier due to a parent’s sudden employment or beginning of their studies, the minimum time of notice is two weeks. In such a case, a certificate of employment or student status must be presented as an appendix to the application. The two weeks’ notice begins at the date this certificate is submitted. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours. 
 
             If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application, we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.  
 
-            If the first care location you picked is a private daycare centre or child minder, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre. 
+            If the first care location you picked is a private daycare centre or child minder, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a place in care, we request you to contact the early childhood education and care services service counselling centre. 
 
             Transfer applications (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually. 
 
@@ -422,9 +422,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
    
             <p>If you have applied for early childhood education and care services in conjunction with preschool education, please consider the following:</p>
     
-            <ul><li>The time necessary to organize a birth in early childhood education and care is four months. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours or evening and/or weekend studies.</li>
+            <ul><li>The time necessary to organize a place in early childhood education and care is four months. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours or evening and/or weekend studies.</li>
             <li><b>If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application,</b> we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.</li>
-            <li><b>If the first care location you picked is a private daycare centre,</b> you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre.</li>
+            <li><b>If the first care location you picked is a private daycare centre,</b> you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a place in care, we request you to contact the early childhood education and care services service counselling centre.</li>
             <li><b>Transfer applications</b>  (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually.</li>
             </ul>
     
@@ -485,11 +485,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
              
             If you have applied for early childhood education and care services in conjunction with preschool education, please consider the following: 
 
-            - The time necessary to organize a birth in early childhood education and care is four months. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours or evening and/or weekend studies. 
+            - The time necessary to organize a place in early childhood education and care is four months. Extended opening hours and round-the-clock care services are provided if necessitated by the parents’ working hours or evening and/or weekend studies. 
 
             - If placement in early childhood care and education can be offered for your child in one of the municipal early childhood education and care locations specified in your application, we will inform you of the location two before the intended start date at the latest. If not, we will contact you by telephone.  
 
-            - If the first care location you picked is a private daycare centre, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a berth in care, we request you to contact the early childhood education and care services service counselling centre. 
+            - If the first care location you picked is a private daycare centre, you should directly contact the service provider in question to ensure placement can be offered to you. If the service provider your picked is unable to offer you a place in care, we request you to contact the early childhood education and care services service counselling centre. 
 
             - Transfer applications (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually. 
 
@@ -528,9 +528,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
     override fun vasuNotification(language: Language, childId: ChildId): EmailContent {
         val documentsUrl = "${baseUrl(language)}/children/$childId"
         return EmailContent(
-            subject = "Uusi dokumentti eVakassa / New document in eVaka",
-            text =
-            """
+                subject = "Uusi dokumentti eVakassa / New document in eVaka",
+                text =
+                """
                 Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: $documentsUrl
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
@@ -541,9 +541,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
         """
-                .trimIndent(),
-            html =
-            """
+                        .trimIndent(),
+                html =
+                """
                 <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: <a href="$documentsUrl">$documentsUrl</a></p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
             
@@ -552,17 +552,17 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 <p>You have received a new eVaka document. Read the document here: <a href="$documentsUrl">$documentsUrl</a></p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
         """
-                .trimIndent()
+                        .trimIndent()
         )
     }
 
     override fun pedagogicalDocumentNotification(language: Language): EmailContent {
         val documentsUrl = "${baseUrl(language)}/pedagogical-documents"
         return EmailContent(
-            subject =
-            "Uusi pedagoginen dokumentti eVakassa / New pedagogical document in eVaka",
-            text =
-            """
+                subject =
+                "Uusi pedagoginen dokumentti eVakassa / New pedagogical document in eVaka",
+                text =
+                """
                 Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: $documentsUrl
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
@@ -573,9 +573,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
         """
-                .trimIndent(),
-            html =
-            """
+                        .trimIndent(),
+                html =
+                """
                 <p>Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: <a href="$documentsUrl">$documentsUrl</a></p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
             
@@ -584,7 +584,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 <p>You have received a new eVaka pedagogical document. Read the document here: <a href="$documentsUrl">$documentsUrl</a></p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
         """
-                .trimIndent()
+                        .trimIndent()
         )
     }
 
@@ -603,7 +603,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
         val documentsUrl = "${baseUrl(language)}/income"
         return EmailContent(
                 subject =
-                "Tulotietojen tarkastus- kehotus / Uppmaning att göra en inkomstutredning / Request to review income information",
+                "Tulotietojen tarkastus- kehotus / Request to review income information",
                 text =
                 """
                 Hyvä asiakkaamme
@@ -612,9 +612,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                
                 Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta.eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.
                 
-                Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan. Puuttuvilla tulotiedoilla määrättyä maksua ei korjata takautuvasti.
+                Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.
                 
-                Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen Espoon kaupunki/ Kasvun ja oppimisen toimiala, talousyksikkö/ varhaiskasvatuksen asiakasmaksut PL 30 02070 Espoon kaupunki    
+                Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki    
                     
                 Tulotiedot: $documentsUrl
                 
@@ -628,11 +628,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 We ask you to submit your income statement through eVaka within 14 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.
                 
-                If you do not provide your latest income information, your client fee will be determined based on the highest fee category. We will not retroactively reimburse you for fees charged in a situation where you have not provided your income information.
+                If you do not provide your latest income information, your client fee will be determined based on the highest fee category.
                 
-                If necessary, you can also send your income information by post to the following address: City of Espoo / Growth and Learning Sector, Financial Management / Early childhood education client fees, P.O. Box 30, 02070 City of Espoo.
+                If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu
                 
-                Inquiries: vaka.maksut@espoo.fi
+                Inquiries: varhaiskasvatusmaksut@ouka.fi
 
                 Income information: $documentsUrl    
 
@@ -647,9 +647,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 <p>Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön. </p>
                 
-                <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan. Puuttuvilla tulotiedoilla määrättyä maksua ei korjata takautuvasti.</p>
+                <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.</p>
                 
-                <p>Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen Espoon kaupunki/ Kasvun ja oppimisen toimiala, talousyksikkö/ varhaiskasvatuksen asiakasmaksut PL 30 02070 Espoon kaupunki</p>
+                <p>Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen: Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki</p>
                 
                 <p>Tulotiedot: <a href="$documentsUrl">$documentsUrl</a></p>
                 
@@ -663,11 +663,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 <p>We ask you to submit your income statement through eVaka within 14 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.</p>
                 
-                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category. We will not retroactively reimburse you for fees charged in a situation where you have not provided your income information.</p>
+                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p>
                 
-                <p>If necessary, you can also send your income information by post to the following address: City of Espoo / Growth and Learning Sector, Financial Management / Early childhood education client fees, P.O. Box 30, 02070 City of Espoo.</p>
+                <p>If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu</p>
                 
-                <p>Inquiries: vaka.maksut@espoo.fi</p>
+                <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                 
                 <p>Income information: <a href="$documentsUrl">$documentsUrl</a></p>
 
@@ -681,7 +681,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
         val documentsUrl = "${baseUrl(language)}/income"
         return EmailContent(
                 subject =
-                "Tulotietojen tarkastus- kehotus / Uppmaning att göra en inkomstutredning / Request to review income information",
+                "Tulotietojen tarkastus- kehotus / Request to review income information",
                 text =
                 """
                 Hyvä asiakkaamme
@@ -690,9 +690,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 Pyydämme toimittamaan tuloselvityksen eVakassa 7 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.
                 
-                Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan. Puuttuvilla tulotiedoilla määrättyä maksua ei korjata takautuvasti.
+                Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.
                 
-                Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen Espoon kaupunki/ Kasvun ja oppimisen toimiala, talousyksikkö/ varhaiskasvatuksen asiakasmaksut PL 30 02070 Espoon kaupunki    
+                Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen: Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki    
                     
                 Tulotiedot: $documentsUrl
                 
@@ -706,9 +706,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 We ask you to submit your income statement through eVaka within 7 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.
                 
-                If you do not provide your latest income information, your client fee will be determined based on the highest fee category. We will not retroactively reimburse you for fees charged in a situation where you have not provided your income information. 
+                If you do not provide your latest income information, your client fee will be determined based on the highest fee category. 
                 
-                If necessary, you can also send your income information by post to the following address: City of Espoo / Growth and Learning Sector, Financial Management / Early childhood education client fees, P.O. Box 30, 02070 City of Espoo
+                If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu
                 
                 Income information: $documentsUrl
                 
@@ -723,9 +723,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 <p>Pyydämme toimittamaan tuloselvityksen eVakassa 7 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.</p>
                 
-                <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan. Puuttuvilla tulotiedoilla määrättyä maksua ei korjata takautuvasti.</p>
+                <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.</p>
                 
-                <p>Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen Espoon kaupunki/ Kasvun ja oppimisen toimiala, talousyksikkö/ varhaiskasvatuksen asiakasmaksut PL 30 02070 Espoon kaupunki</p>
+                <p>Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen: Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki</p>
                 
                 <p>Tulotiedot: <a href="$documentsUrl">$documentsUrl</a></p>
                 
@@ -739,11 +739,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 <p>We ask you to submit your income statement through eVaka within 7 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.</p>
                 
-                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category. We will not retroactively reimburse you for fees charged in a situation where you have not provided your income information.</p> 
+                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p> 
                 
-                <p>If necessary, you can also send your income information by post to the following address: City of Espoo / Growth and Learning Sector, Financial Management / Early childhood education client fees, P.O. Box 30, 02070 City of Espoo</p>
+                <p>If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu</p>
                                
-                <p>Inquiries: vaka.maksut@espoo.fi</p>
+                <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                                 
                 <p>Income information: <a href="$documentsUrl">$documentsUrl</a></p>
                                                 
@@ -756,14 +756,14 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
     fun outdatedIncomeNotificationExpired(): EmailContent {
         return EmailContent(
                 subject =
-                "Tulotietojen tarkastus- kehotus / Uppmaning att göra en inkomstutredning / Request to review income information",
+                "Tulotietojen tarkastus- kehotus / Request to review income information",
                 text =
                 """
                 Hyvä asiakkaamme
                 
                 Seuraava asiakasmaksunne määräytyy korkeimman maksuluokan mukaan, sillä ette ole toimittaneet uusia tulotietoja määräaikaan mennessä.
                 
-                Lisätietoja saatte tarvittaessa: vaka.maksut@espoo.fi.
+                Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
@@ -773,7 +773,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 Your next client fee will be determined based on the highest fee category as you did not provide your latest income information by the deadline.
                 
-                Inquiries: vaka.maksut@espoo.fi
+                Inquiries: varhaiskasvatusmaksut@ouka.fi
 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
         """
@@ -784,7 +784,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 <p>Seuraava asiakasmaksunne määräytyy korkeimman maksuluokan mukaan, sillä ette ole toimittaneet uusia tulotietoja määräaikaan mennessä.</p>
                 
-                <p>Lisätietoja saatte tarvittaessa: vaka.maksut@espoo.fi</p>
+                <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
                 
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
             
@@ -794,7 +794,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv): IEmailMessagePro
                 
                 <p>Your next client fee will be determined based on the highest fee category as you did not provide your latest income information by the deadline.</p>
                 
-                <p>Inquiries: vaka.maksut@espoo.fi</p>
+                <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
 
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                """

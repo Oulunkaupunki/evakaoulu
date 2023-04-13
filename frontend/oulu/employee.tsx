@@ -354,8 +354,7 @@ const customizations: EmployeeCustomizations = {
     'PLANNED_ABSENCE',
     'SICKLEAVE',
     'PARENTLEAVE',
-    'FORCE_MAJEURE',
-    'FREE_ABSENCE'
+    'FORCE_MAJEURE'
   ],
   voucherValueDecisionTypes: [
     'NORMAL',

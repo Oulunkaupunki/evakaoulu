@@ -598,7 +598,16 @@ const fi: DeepPartial<Translations> = {
       paragraph:
         'Take care of your child’s daily early childhood education affairs in eVaka.',
       link: 'Log in',
-      infoBoxText: <></>
+      infoBoxText: (
+        <>
+          <ExternalLink
+            href="https://www.ouka.fi/oulu/english/evaka"
+            text="eVaka - Electronic services - Early childhood education - City of Oulu"
+            newTab={true}
+            data-qa="footer-policy-link"
+          />
+        </>
+      )
     }
   },
   map: {

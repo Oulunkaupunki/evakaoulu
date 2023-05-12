@@ -37,6 +37,6 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
             DecisionType.PRESCHOOL -> "Esiopetuspäätös"
             DecisionType.PRESCHOOL_DAYCARE,
             DecisionType.PRESCHOOL_CLUB -> "Esiopetukseen liittyvän toiminnan päätös"
-            DecisionType.PREPARATORY_EDUCATION -> throw Error("Not supported")
+            DecisionType.PREPARATORY_EDUCATION -> "Valmistavan opetuksen päätös"
         }
 }

@@ -6,7 +6,10 @@ package fi.ouka.evakaoulu.invoice.service
 
 import fi.ouka.evakaoulu.SftpProperties
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.*
+import org.mockito.kotlin.argThat
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 internal class InvoiceSenderTest {
 
@@ -17,7 +20,8 @@ internal class InvoiceSenderTest {
         val proEInvoice = "one"
         val sftpConnector = mock<SftpConnector>()
         val sftpSender = SftpSender(
-            sftpProperties, sftpConnector
+            sftpProperties,
+            sftpConnector
         )
 
         sftpSender.send(proEInvoice)

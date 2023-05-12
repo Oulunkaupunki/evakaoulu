@@ -15,7 +15,6 @@ class TemplateConfiguration {
 
     @Bean
     fun templateProvider(): ITemplateProvider = EVakaOuluTemplateProvider()
-
 }
 
 internal class EVakaOuluTemplateProvider : ITemplateProvider {

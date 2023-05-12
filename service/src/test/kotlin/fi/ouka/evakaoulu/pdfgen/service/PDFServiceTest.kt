@@ -4,8 +4,8 @@
 
 package fi.ouka.evakaoulu.pdfgen.service
 
-import fi.espoo.evaka.pdfgen.PdfGenerator
 import fi.espoo.evaka.pdfgen.Page
+import fi.espoo.evaka.pdfgen.PdfGenerator
 import fi.espoo.evaka.pdfgen.Template
 import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.junit.jupiter.api.Test
@@ -21,5 +21,4 @@ internal class PDFServiceTest : AbstractIntegrationTest() {
     fun render() {
         pdfService.render(Page(Template("test"), Context()))
     }
-
 }

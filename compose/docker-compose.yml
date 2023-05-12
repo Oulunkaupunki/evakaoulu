@@ -26,18 +26,8 @@ services:
       timeout: 5s
       retries: 5
 
-  db_it:
-    build: ../evaka/compose/db-integration-test
-    ports:
-      - "15432:5432"
-    healthcheck:
-      test: "pg_isready -U postgres"
-      interval: 2s
-      timeout: 5s
-      retries: 5
-
   redis:
-    image: redis:4-alpine
+    image: redis:7.0-alpine
     ports:
       - "6379:6379"
     healthcheck:
@@ -67,7 +57,6 @@ services:
     hostname: evakaoulu-srv
     depends_on:
       - db
-      - redis
     env_file:
       - .env
     environment:
@@ -100,10 +89,6 @@ services:
       FI_ESPOO_INTEGRATION_KOSKI_USER: ""
       FI_ESPOO_INTEGRATION_KOSKI_SECRET: ""
       FI_ESPOO_INTEGRATION_KOSKI_SOURCE_SYSTEM: ""
-      REDIS_URL: ${EVAKA_REDIS_HOST}
-      REDIS_PORT: ${EVAKA_REDIS_PORT}
-      REDIS_PASSWORD: ""
-      REDIS_SSL: "false"
     restart: unless-stopped
 
 

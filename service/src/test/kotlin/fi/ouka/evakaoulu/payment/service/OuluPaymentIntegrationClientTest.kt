@@ -2,16 +2,11 @@ package fi.ouka.evakaoulu.payment.service
 
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.daycare.CareType
-import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.espoo.evaka.invoicing.domain.PaymentUnit
-import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.espoo.evaka.shared.DaycareId
 import fi.ouka.evakaoulu.invoice.service.SftpSender
-import fi.ouka.evakaoulu.invoice.service.StringInvoiceGenerator
-import fi.ouka.evakaoulu.invoice.service.personWithoutSSN
-import fi.ouka.evakaoulu.invoice.service.validInvoice
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -48,7 +43,8 @@ internal class OuluPaymentIntegrationClientTest {
         val validPayment = validPayment()
         val paymentList = listOf(validPayment)
         val proEPayment1 = ""
-        val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
+        val paymentGeneratorResult =
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
         paymentClient.send(paymentList)
@@ -72,7 +68,10 @@ internal class OuluPaymentIntegrationClientTest {
         val validPayment = validPayment()
         val paymentList = listOf(validPayment)
         val proEPayment1 = ""
-        val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(listOf(validPayment),listOf()), proEPayment1)
+        val paymentGeneratorResult = ProEPaymentGenerator.Result(
+            PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()),
+            proEPayment1
+        )
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
         val sendResult = paymentClient.send(paymentList)
@@ -83,11 +82,24 @@ internal class OuluPaymentIntegrationClientTest {
     @Test
     fun `should return unsuccessfully generated payments in failed list`() {
         val validPayment = validPayment()
-        val unitWithoutIban = PaymentUnit(DaycareId(UUID.randomUUID()), "No IBAN", "1234567-8", null, "PROVIDERID", setOf(CareType.CENTRE))
+        val unitWithoutIban = PaymentUnit(
+            DaycareId(UUID.randomUUID()),
+            "No IBAN",
+            "1234567-8",
+            null,
+            "PROVIDERID",
+            setOf(CareType.CENTRE)
+        )
         val paymentWithoutIban = validPayment().copy(unit = unitWithoutIban)
         val paymentList = listOf(validPayment, paymentWithoutIban)
         val proEPayment1 = ""
-        val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(listOf(validPayment), listOf(paymentWithoutIban)), proEPayment1)
+        val paymentGeneratorResult = ProEPaymentGenerator.Result(
+            PaymentIntegrationClient.SendResult(
+                listOf(validPayment),
+                listOf(paymentWithoutIban)
+            ),
+            proEPayment1
+        )
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
         // whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
 
@@ -136,8 +148,8 @@ internal class OuluPaymentIntegrationClientTest {
 
         Assertions.assertThat(output).contains("Successfully sent 1 payments")
     }
-    @Test
 
+    @Test
     fun `should log failed payment sends`(output: CapturedOutput) {
         val validPayment = validPayment()
         val paymentList = listOf(validPayment, validPayment)
@@ -151,5 +163,4 @@ internal class OuluPaymentIntegrationClientTest {
 
         Assertions.assertThat(output).contains("Failed to send 2 payments")
     }
-
 }

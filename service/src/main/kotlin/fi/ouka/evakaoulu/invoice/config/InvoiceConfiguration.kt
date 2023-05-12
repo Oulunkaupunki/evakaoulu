@@ -8,10 +8,16 @@ import com.jcraft.jsch.JSch
 import fi.espoo.evaka.invoicing.domain.FeeAlteration
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
-import fi.espoo.evaka.invoicing.service.*
+import fi.espoo.evaka.invoicing.service.IncomeTypesProvider
+import fi.espoo.evaka.invoicing.service.InvoiceProductProvider
+import fi.espoo.evaka.invoicing.service.ProductKey
+import fi.espoo.evaka.invoicing.service.ProductWithName
 import fi.espoo.evaka.placement.PlacementType
 import fi.ouka.evakaoulu.EvakaOuluProperties
-import fi.ouka.evakaoulu.invoice.service.*
+import fi.ouka.evakaoulu.invoice.service.EVakaOuluInvoiceClient
+import fi.ouka.evakaoulu.invoice.service.ProEInvoiceGenerator
+import fi.ouka.evakaoulu.invoice.service.SftpConnector
+import fi.ouka.evakaoulu.invoice.service.SftpSender
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -26,13 +32,13 @@ class InvoiceConfiguration {
         properties: EvakaOuluProperties,
         invoiceGenerator: ProEInvoiceGenerator,
         sftpConnector: SftpConnector
-        ): InvoiceIntegrationClient {
+    ): InvoiceIntegrationClient {
         val sftpSender = SftpSender(properties.intimeInvoices, sftpConnector)
         return EVakaOuluInvoiceClient(sftpSender, invoiceGenerator)
     }
 
     @Bean
-    fun jsch() : JSch = JSch()
+    fun jsch(): JSch = JSch()
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()
@@ -60,7 +66,7 @@ class OuluIncomeTypesProvider : IncomeTypesProvider {
             "PAID_ALIMONY" to IncomeType("Maksetut elatusavut", -1, true, false),
             "ALIMONY" to IncomeType("Saadut elatusavut", 1, true, false),
             "OTHER_INCOME" to IncomeType("Muu tulo", 1, true, false),
-            "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false),
+            "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false)
         )
     }
 }
@@ -73,7 +79,6 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
     override val fullMonthSickLeave = Product.SICK_LEAVE_100.key
     override val fullMonthAbsence = Product.ABSENCE.key
     override val contractSurplusDay = Product.OVER_CONTRACT.key
-
 
     override fun mapToProduct(placementType: PlacementType): ProductKey {
         val product = when (placementType) {
@@ -97,7 +102,6 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
         }
         return product.key
     }
-
 }
 
 fun findProduct(key: ProductKey) = Product.values().find { it.key == key } ?: error("Product with key $key not found")

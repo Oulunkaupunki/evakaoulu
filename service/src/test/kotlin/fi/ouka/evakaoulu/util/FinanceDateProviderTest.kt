@@ -17,7 +17,6 @@ class FinanceDateProviderTest {
         val actualDate = financeDateProvider.currentDate()
 
         assertThat(actualDate).isEqualTo(expectedDate)
-
     }
 
     @Test
@@ -29,6 +28,5 @@ class FinanceDateProviderTest {
         val actualDate = financeDateProvider.currentDateWithAbbreviatedYear()
 
         assertThat(actualDate).isEqualTo(expectedDate)
-
     }
 }

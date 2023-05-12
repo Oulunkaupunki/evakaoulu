@@ -1,7 +1,6 @@
 package fi.ouka.evakaoulu.payment.service
 
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 internal class PaymentCheckerTest {
     @Test
@@ -10,7 +9,7 @@ internal class PaymentCheckerTest {
         val unitWithoutIban = validPaymentUnit().copy(iban = null)
         val paymentWithoutIban = validPayment().copy(unit = unitWithoutIban)
 
-        assert(paymentChecker.shouldFail(paymentWithoutIban) == true)
+        assert(paymentChecker.shouldFail(paymentWithoutIban))
     }
 
     @Test
@@ -19,7 +18,7 @@ internal class PaymentCheckerTest {
         val unitWithoutBusinessId = validPaymentUnit().copy(businessId = null)
         val paymentWithoutBusinessId = validPayment().copy(unit = unitWithoutBusinessId)
 
-        assert(paymentChecker.shouldFail(paymentWithoutBusinessId) == true)
+        assert(paymentChecker.shouldFail(paymentWithoutBusinessId))
     }
 
     @Test
@@ -28,16 +27,15 @@ internal class PaymentCheckerTest {
         val unitWithoutProviderId = validPaymentUnit().copy(providerId = null)
         val paymentWithoutProviderId = validPayment().copy(unit = unitWithoutProviderId)
 
-        assert(paymentChecker.shouldFail(paymentWithoutProviderId) == true)
+        assert(paymentChecker.shouldFail(paymentWithoutProviderId))
     }
-
 
     @Test
     fun `should return true for Payments whose amount is negative`() {
         val paymentChecker = PaymentChecker()
         val paymentWithNegativeAmount = validPayment().copy(amount = -100050)
 
-        assert(paymentChecker.shouldFail(paymentWithNegativeAmount) == true)
+        assert(paymentChecker.shouldFail(paymentWithNegativeAmount))
     }
 
     @Test
@@ -45,7 +43,7 @@ internal class PaymentCheckerTest {
         val paymentChecker = PaymentChecker()
         val paymentWithNegativeAmount = validPayment().copy(amount = 0)
 
-        assert(paymentChecker.shouldFail(paymentWithNegativeAmount) == true)
+        assert(paymentChecker.shouldFail(paymentWithNegativeAmount))
     }
 
     @Test
@@ -53,6 +51,6 @@ internal class PaymentCheckerTest {
         val paymentChecker = PaymentChecker()
         val validPayment = validPayment()
 
-        assert(paymentChecker.shouldFail(validPayment) == false)
+        assert(!paymentChecker.shouldFail(validPayment))
     }
 }

@@ -11,8 +11,7 @@ class SftpConnector(val jsch: JSch) {
 
     lateinit var channelSftp: ChannelSftp
 
-    fun connect(address:String, username:String, password:String): Unit {
-
+    fun connect(address: String, username: String, password: String) {
         val jschSession: Session = jsch.getSession(username, address)
         jschSession.setConfig("StrictHostKeyChecking", "no")
         jschSession.setPassword(password)
@@ -22,12 +21,11 @@ class SftpConnector(val jsch: JSch) {
         channelSftp.connect()
     }
 
-    fun send(filePath:String, proEInvoice:String) : Unit {
+    fun send(filePath: String, proEInvoice: String) {
         channelSftp.put(ByteArrayInputStream(proEInvoice.toByteArray(Charsets.ISO_8859_1)), filePath)
     }
 
-    fun disconnect(){
+    fun disconnect() {
         channelSftp.disconnect()
     }
-
 }

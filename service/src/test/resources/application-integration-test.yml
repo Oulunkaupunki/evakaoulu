@@ -13,7 +13,7 @@ evaka:
     fee_decisions: evakaoulu-paymentdecisions-it
     voucher_value_decisions: evakaoulu-vouchervaluedecisions-it
   database:
-    url: jdbc:postgresql://localhost:15432/evaka_it
+    url: jdbc:postgresql://localhost:5432/evaka_it
     username: evaka_it
     password: evaka_it
     flyway:
@@ -66,6 +66,3 @@ evakaoulu:
     password: pass
     address: address
     path: path
-spring:
-  main:
-    allow-bean-definition-overriding: true # for redisPool

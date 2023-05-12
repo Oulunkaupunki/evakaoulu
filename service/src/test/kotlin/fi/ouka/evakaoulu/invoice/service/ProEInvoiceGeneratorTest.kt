@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-
 internal class ProEInvoiceGeneratorTest {
 
     val financeDateProvider = mock<FinanceDateProvider>()
@@ -23,7 +22,6 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should return successfully created invoices in success list`() {
-
         val invoice = validInvoice()
         val invoiceList = listOf(invoice, invoice)
 
@@ -35,7 +33,6 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should return manually sent invoices in manually list`() {
-
         val restrictedInvoice = validInvoice().copy(headOfFamily = personWithRestrictedDetails())
         val invoiceWithoutSsn = validInvoice().copy(headOfFamily = personWithoutSSN())
         val invoiceList = listOf(restrictedInvoice, invoiceWithoutSsn)
@@ -48,11 +45,10 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should format invoice rows according to data and formatting`() {
-
         val format = listOf(
-                InvoiceField(InvoiceFieldName.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
-                InvoiceField(InvoiceFieldName.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
-                InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2)
+            InvoiceField(InvoiceFieldName.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
+            InvoiceField(InvoiceFieldName.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
+            InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2)
         )
         val invoiceData = InvoiceData()
 
@@ -67,7 +63,6 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should check that invoice format is a proper one also with invoice function number`() {
-
         val invoice = validInvoice()
         val longNamedInvoice = validInvoice().copy(headOfFamily = personWithLongName())
         val invoiceList = listOf(invoice, longNamedInvoice)
@@ -78,5 +73,4 @@ internal class ProEInvoiceGeneratorTest {
 
         assertEquals(correctInvoice, generationResult.invoiceString)
     }
-
 }

@@ -11,6 +11,5 @@ import org.springframework.ws.transport.http.HttpComponentsMessageSender
 class TestConfig {
 
     @Bean
-    fun webServiceMessageSender(): WebServiceMessageSender =
-        HttpComponentsMessageSender()
+    fun webServiceMessageSender(): WebServiceMessageSender = HttpComponentsMessageSender()
 }

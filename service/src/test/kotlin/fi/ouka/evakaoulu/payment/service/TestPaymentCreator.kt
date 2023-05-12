@@ -11,7 +11,7 @@ import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.domain.HelsinkiDateTime
 import java.time.LocalDate
 import java.time.LocalTime
-import java.util.*
+import java.util.UUID
 
 fun validPayment(): Payment {
     return Payment(

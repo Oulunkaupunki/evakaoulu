@@ -16,7 +16,6 @@ class EVakaOuluInvoiceClient(
     private val invoiceGenerator: ProEInvoiceGenerator
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
-
         val failedList = mutableListOf<InvoiceDetailed>()
 
         val generatorResult = invoiceGenerator.generateInvoice(invoices)
@@ -28,7 +27,7 @@ class EVakaOuluInvoiceClient(
             try {
                 sftpSender.send(proEinvoices)
                 logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
-            } catch (e: SftpException){
+            } catch (e: SftpException) {
                 failedList.addAll(successList)
                 failedList.addAll(manuallySentList)
                 successList = listOf()
@@ -39,7 +38,6 @@ class EVakaOuluInvoiceClient(
 
         return InvoiceIntegrationClient.SendResult(successList, failedList, manuallySentList)
     }
-
 }
 
 interface StringInvoiceGenerator {
@@ -47,6 +45,6 @@ interface StringInvoiceGenerator {
         val sendResult: InvoiceIntegrationClient.SendResult = InvoiceIntegrationClient.SendResult(),
         val invoiceString: String = ""
     )
-    fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult
 
+    fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult
 }

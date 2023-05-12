@@ -3,13 +3,17 @@ package fi.ouka.evakaoulu.security
 import fi.espoo.evaka.shared.auth.UserRole
 import fi.espoo.evaka.shared.security.Action
 import fi.espoo.evaka.shared.security.actionrule.ActionRuleMapping
+import fi.espoo.evaka.shared.security.actionrule.HasGlobalRole
 import fi.espoo.evaka.shared.security.actionrule.HasUnitRole
 import fi.espoo.evaka.shared.security.actionrule.ScopedActionRule
 import fi.espoo.evaka.shared.security.actionrule.UnscopedActionRule
 
 class EvakaOuluActionRuleMapping : ActionRuleMapping {
     override fun rulesOf(action: Action.UnscopedAction): Sequence<UnscopedActionRule> = when (action) {
-        Action.Global.SUBMIT_PATU_REPORT -> sequenceOf()
+        Action.Global.SUBMIT_PATU_REPORT,
+        Action.Global.SEND_PATU_REPORT -> sequenceOf()
+        Action.Global.SETTINGS_PAGE,
+        Action.Global.UPDATE_SETTINGS -> action.defaultRules.asSequence() + sequenceOf(HasGlobalRole(UserRole.SERVICE_WORKER))
         else -> action.defaultRules.asSequence()
     }
 

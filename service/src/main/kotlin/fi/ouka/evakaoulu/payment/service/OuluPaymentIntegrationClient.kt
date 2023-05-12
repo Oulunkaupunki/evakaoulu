@@ -11,10 +11,9 @@ private val logger = KotlinLogging.logger {}
 class OuluPaymentIntegrationClient(
     private val paymentGenerator: ProEPaymentGenerator,
     private val sftpSender: SftpSender
-): PaymentIntegrationClient {
+) : PaymentIntegrationClient {
 
     override fun send(payments: List<Payment>): PaymentIntegrationClient.SendResult {
-
         var failedList: MutableList<Payment> = mutableListOf()
 
         logger.info { "OuluPaymentIntegrationClient.send() called with ${payments.size} payments" }

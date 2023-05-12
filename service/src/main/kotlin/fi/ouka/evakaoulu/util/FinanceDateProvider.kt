@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 
 @Component
 class FinanceDateProvider {
-    fun currentDate() : String {
+    fun currentDate(): String {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         return LocalDate.now().format(invoiceIdFormatter)
     }
@@ -29,10 +29,9 @@ class FinanceDateProvider {
         return previousMonthlastDate.format(invoiceIdFormatter)
     }
 
-    fun previousMonthYYMM() : String {
+    fun previousMonthYYMM(): String {
         val previousMonth = LocalDate.now().minusMonths(1)
         val titleFormatter = DateTimeFormatter.ofPattern("yyMM")
         return previousMonth.format(titleFormatter)
     }
-
 }

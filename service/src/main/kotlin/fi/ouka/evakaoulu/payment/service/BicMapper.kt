@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component
 @Component
 class BicMapper {
     fun mapIban(iban: String): String {
-
         val normalizedIban = iban.filterNot { it.isWhitespace() }
         val validIbanRegex = Regex("FI[0-9]{16}", RegexOption.IGNORE_CASE)
 

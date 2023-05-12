@@ -71,18 +71,6 @@ services:
       ENABLE_DEV_API: "true"
       PRETTY_LOGS: "false"
 
-  playwright:
-    image: 463484918991.dkr.ecr.eu-west-1.amazonaws.com/evaka/e2e-playwright:latest
-    build:
-      context: ./e2e
-      dockerfile: ./playwright.Dockerfile
-    volumes:
-      - ..:/repo
-    ipc: host
-    environment:
-      CI: ${CI:-false}
-      DEBUG: ${DEBUG:-}
-
 volumes:
   db-data:
     driver: local

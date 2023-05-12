@@ -5,3 +5,11 @@
 rootProject.name = "evakaoulu-service"
 includeBuild("../evaka/service")
 includeBuild("../evaka/evaka-bom")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            from(files("../evaka/service/gradle/libs.versions.toml"))
+        }
+    }
+}

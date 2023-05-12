@@ -10,10 +10,11 @@ import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junitpioneer.jupiter.cartesian.ArgumentSets
 import org.junitpioneer.jupiter.cartesian.CartesianTest
-import org.reflections.ReflectionUtils.*
+import org.reflections.ReflectionUtils.getAllMethods
+import org.reflections.util.ReflectionUtilsPredicates.withParametersAssignableTo
+import org.reflections.util.ReflectionUtilsPredicates.withReturnType
 import org.springframework.beans.factory.annotation.Autowired
 import java.lang.reflect.Method
-
 
 internal class MessageProviderTest : AbstractIntegrationTest() {
 
@@ -34,13 +35,12 @@ internal class MessageProviderTest : AbstractIntegrationTest() {
         fun methodsWithLang(): ArgumentSets {
             val allMethods = getAllMethods(
                 IMessageProvider::class.java,
-                withParametersAssignableTo(MessageLanguage::class.java), withReturnType(String::class.java)
+                withParametersAssignableTo(MessageLanguage::class.java),
+                withReturnType(String::class.java)
             )
             return ArgumentSets.create()
                 .argumentsForNextParameter(allMethods)
                 .argumentsForNextParameter(MessageLanguage.values().toList())
         }
     }
-
 }
-

@@ -4,13 +4,10 @@
 
 package fi.ouka.evakaoulu.database
 
-import fi.espoo.evaka.shared.db.Database
 import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.jdbi.v3.core.Jdbi
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import io.opentracing.noop.NoopTracerFactory
 
 class DevDataInitializerTest : AbstractIntegrationTest() {
 
@@ -21,5 +18,4 @@ class DevDataInitializerTest : AbstractIntegrationTest() {
     fun init() {
         DevDataInitializer(jdbi)
     }
-
 }

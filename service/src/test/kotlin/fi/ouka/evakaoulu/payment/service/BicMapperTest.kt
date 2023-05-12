@@ -1,6 +1,6 @@
 package fi.ouka.evakaoulu.payment.service
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class BicMapperTest {
@@ -12,12 +12,12 @@ internal class BicMapperTest {
     }
 
     fun oneDigitTest(bankIdentifier: Int, correctBic: String) {
-        for (i in bankIdentifier * 100 .. bankIdentifier * 100 + 99)
+        for (i in bankIdentifier * 100..bankIdentifier * 100 + 99)
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
     }
 
     fun twoDigitTest(bankIdentifier: Int, correctBic: String) {
-        for (i in bankIdentifier * 10 .. bankIdentifier * 10 + 9)
+        for (i in bankIdentifier * 10..bankIdentifier * 10 + 9)
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
     }
 
@@ -53,32 +53,27 @@ internal class BicMapperTest {
 
     @Test
     fun `should return DNBAFIHX for bank identifier 37`() {
-
         twoDigitTest(37, "DNBAFIHX")
     }
 
     @Test
     fun `should return OKOYFIHH for bank identifier 5`() {
-
         oneDigitTest(5, "OKOYFIHH")
     }
 
     @Test
     fun `should return POPFFI22 for bank identifiers 470-479`() {
-
         twoDigitTest(47, "POPFFI22")
     }
 
     @Test
     fun `should return DABAFIHH for bank identifiers 34 and 8`() {
-
         twoDigitTest(34, "DABAFIHH")
         oneDigitTest(8, "DABAFIHH")
     }
 
     @Test
     fun `should return HANDFIHH for bank identifier 31`() {
-
         twoDigitTest(31, "HANDFIHH")
     }
 
@@ -89,20 +84,17 @@ internal class BicMapperTest {
 
     @Test
     fun `should return NDEAFIHH for bank identifiers 1 and 2`() {
-
         oneDigitTest(1, "NDEAFIHH")
         oneDigitTest(2, "NDEAFIHH")
     }
 
     @Test
     fun `should return ESSEFIHX for bank identifier 33`() {
-
         twoDigitTest(33, "ESSEFIHX")
     }
 
     @Test
     fun `should return SBANFIHH for bank identifiers 36 and 39`() {
-
         twoDigitTest(36, "SBANFIHH")
         twoDigitTest(39, "SBANFIHH")
     }
@@ -126,15 +118,15 @@ internal class BicMapperTest {
     fun `should return ITELFIHH for various bank identifiers`() {
         val bic = "ITELFIHH"
         var identifiers = listOf(
-            402 .. 403,
-            406 .. 408,
-            410 .. 412,
-            414 .. 421,
-            423 .. 432,
-            435 .. 452,
-            454 .. 464,
-            483 .. 493,
-            495 .. 496
+            402..403,
+            406..408,
+            410..412,
+            414..421,
+            423..432,
+            435..452,
+            454..464,
+            483..493,
+            495..496
         )
         threeDigitTest(715, bic)
         threeDigitTest(400, bic)
@@ -146,7 +138,7 @@ internal class BicMapperTest {
     @Test
     fun `should return UNKNOWN for undefined bank identifiers`() {
         // some random undefined identifiers
-        val identifiers = listOf( 401, 791, 499, 300)
+        val identifiers = listOf(401, 791, 499, 300)
 
         for (identifier in identifiers)
             assertEquals(bicMapper.mapIban(ibanWithId(identifier)), "UNKNOWN")

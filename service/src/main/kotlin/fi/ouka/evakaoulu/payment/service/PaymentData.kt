@@ -1,9 +1,7 @@
 package fi.ouka.evakaoulu.payment.service
 
-import fi.ouka.evakaoulu.invoice.service.InvoiceFieldName
 import fi.ouka.evakaoulu.util.DataMapper
 import fi.ouka.evakaoulu.util.FieldType
-import java.awt.PageAttributes.MediaType.NOTE
 
 // NB, I have no idea what many of these things would properly be in English...
 enum class PaymentFieldName {
@@ -107,12 +105,16 @@ enum class PaymentFieldName {
     INSPECTOR_DATE,
     ACCOUNT_REFERENCE,
     EMPTY_FIELD,
-    ROW_NUMBER,
-
-
+    ROW_NUMBER
 }
 
-class PaymentField(val field: PaymentFieldName, val fieldType: FieldType, val start: Int, val length: Int, val decimals: Int = 0)
+class PaymentField(
+    val field: PaymentFieldName,
+    val fieldType: FieldType,
+    val start: Int,
+    val length: Int,
+    val decimals: Int = 0
+)
 
 val headerRowFields = listOf(
     PaymentField(PaymentFieldName.INTIME_COMPANY_ID, FieldType.ALPHANUMERIC, 1, 2),
@@ -192,8 +194,7 @@ val headerRowFields = listOf(
     PaymentField(PaymentFieldName.CONTRACT, FieldType.ALPHANUMERIC, 1050, 20),
     PaymentField(PaymentFieldName.CREDIT_TARGET_2, FieldType.ALPHANUMERIC, 1070, 20),
     PaymentField(PaymentFieldName.SUBSTITUTE_FIELD, FieldType.ALPHANUMERIC, 1090, 111)
-
-    )
+)
 
 val paymentRowFields = listOf(
     PaymentField(PaymentFieldName.INTIME_COMPANY_ID, FieldType.ALPHANUMERIC, 1, 2),
@@ -247,7 +248,6 @@ val paymentRowFields = listOf(
     PaymentField(PaymentFieldName.EMPTY_FIELD, FieldType.ALPHANUMERIC, 659, 30),
     PaymentField(PaymentFieldName.EMPTY_FIELD, FieldType.ALPHANUMERIC, 689, 212),
     PaymentField(PaymentFieldName.EMPTY_FIELD, FieldType.ALPHANUMERIC, 901, 300)
-
-    )
+)
 
 typealias PaymentData = DataMapper<PaymentFieldName>

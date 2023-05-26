@@ -191,7 +191,7 @@ commands:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "28:10:ed:11:bc:33:ba:47:8b:94:95:ec:df:c6:3d:e7"
+            - "47:5b:21:c9:e6:70:97:18:d4:83:d2:9d:24:d2:d0:17"
       - run: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run:
           name: Setup git
@@ -369,6 +369,31 @@ jobs:
           steps:
             - run: git submodule update --remote --merge
       - store_repo
+
+  sync_evaka_fork:
+    executor: base_executor
+    steps:
+      - checkout
+      - setup_git
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run: cd evaka && git checkout master
+      - run: cd evaka && git remote add upstream https://github.com/espoon-voltti/evaka.git
+      - run: cd evaka && git remote -v
+      - run: cd evaka && git fetch --all
+      - run: cd evaka && git pull --rebase upstream master
+      - run: cd evaka && git status
+      - run: cd evaka && git push -f origin master
+
+  rebase_oulu_customization_branch:
+    executor: base_executor
+    steps:
+      - checkout
+      - setup_git
+      - run: cd evaka && git fetch --all
+      - run: cd evaka && git checkout oulu-customization
+      - run: cd evaka && git rebase master
+      - run: cd evaka && git status
 
   fetch_private_dependencies:
     <<: *default_config
@@ -708,6 +733,9 @@ jobs:
 workflows:
   version: 2
   build_test_and_deploy:
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - checkout_repo
       - fetch_private_dependencies:
@@ -818,3 +846,14 @@ workflows:
               only:
                 - /evaka-update\/.*/
 
+  update_upstream:
+    # trigger is configured with circleci ui (project settings -> triggers)
+    when:
+      and:
+        - equal: [scheduled_pipeline, << pipeline.trigger_source >>]
+        - equal: ["update upstream", << pipeline.schedule.name >>]
+    jobs:
+      - sync_evaka_fork
+      - rebase_oulu_customization_branch:
+          requires:
+            - sync_evaka_fork

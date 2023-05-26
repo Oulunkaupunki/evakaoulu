@@ -209,8 +209,8 @@ commands:
       - run:
           name: Setup git
           command: |
-            git config user.email "97439387+evakaoulu-ci@users.noreply.github.com"
-            git config user.name "evakaoulu-ci"
+            git config --global user.email "97439387+evakaoulu-ci@users.noreply.github.com"
+            git config --global user.name "evakaoulu-ci"
 
   frontend_install:
     steps:

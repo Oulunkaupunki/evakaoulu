@@ -199,6 +199,19 @@ commands:
             git config user.email "97439387+evakaoulu-ci@users.noreply.github.com"
             git config user.name "evakaoulu-ci"
 
+
+  setup_git_submodule:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "c2:cb:32:3d:d0:6c:dd:6f:6c:13:db:6e:9b:86:66:13"
+      - run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run:
+          name: Setup git
+          command: |
+            git config user.email "97439387+evakaoulu-ci@users.noreply.github.com"
+            git config user.name "evakaoulu-ci"
+
   frontend_install:
     steps:
       - restore_cache:
@@ -374,7 +387,7 @@ jobs:
     executor: base_executor
     steps:
       - checkout
-      - setup_git
+      - setup_git_submodule
       - run: git submodule sync
       - run: git submodule update --init
       - run: cd evaka && git checkout master
@@ -389,7 +402,7 @@ jobs:
     executor: base_executor
     steps:
       - checkout
-      - setup_git
+      - setup_git_submodule
       - run: cd evaka && git fetch --all
       - run: cd evaka && git checkout oulu-customization
       - run: cd evaka && git rebase master

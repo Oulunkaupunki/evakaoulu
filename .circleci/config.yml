@@ -412,7 +412,7 @@ jobs:
       - run: git status
       - run: git add evaka
       - run: git commit -m "updated core $(date --iso-8601)"
-#      - run: git push
+      - run: git push
 
   fetch_private_dependencies:
     <<: *default_config

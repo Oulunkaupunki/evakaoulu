@@ -627,11 +627,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tarkistetaan vuosittain.
                 
-                Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta.eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.
+                Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.
                 
                 Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.
                 
-                Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki    
+                Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
                 Tulotiedot: $documentsUrl
                 
@@ -647,13 +647,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 If you do not provide your latest income information, your client fee will be determined based on the highest fee category.
                 
-                If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu
-                
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
 
-                Income information: $documentsUrl    
+                Income information: $documentsUrl
 
-                This is an automatic message from the eVaka system. Do not reply to this message.  
+                This is an automatic message from the eVaka system. Do not reply to this message.
             """
                 .trimIndent(),
             html =
@@ -666,7 +664,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.</p>
                 
-                <p>Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen: Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki</p>
+                <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
                 
                 <p>Tulotiedot: <a href="$documentsUrl">$documentsUrl</a></p>
                 
@@ -682,13 +680,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p>
                 
-                <p>If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu</p>
-                
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                 
                 <p>Income information: <a href="$documentsUrl">$documentsUrl</a></p>
                 
-                <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
+                <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
             """
                 .trimIndent()
         )
@@ -708,7 +704,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.
                 
-                Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen: Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki    
+                Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
                 Tulotiedot: $documentsUrl
                 
@@ -722,13 +718,13 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 We ask you to submit your income statement through eVaka within 7 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.
                 
-                If you do not provide your latest income information, your client fee will be determined based on the highest fee category. 
+                If you do not provide your latest income information, your client fee will be determined based on the highest fee category.
                 
-                If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu
+                Inquiries: varhaiskasvatusmaksut@ouka.fi
                 
                 Income information: $documentsUrl
                 
-                This is an automatic message from the eVaka system. Do not reply to this message.  
+                This is an automatic message from the eVaka system. Do not reply to this message.
             """
                 .trimIndent(),
             html =
@@ -741,7 +737,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.</p>
                 
-                <p>Voitte tarvittaessa toimittaa tulotiedot myös postitse osoitteeseen: Varhaiskasvatuksen asiakasmaksut, PL 75, 90015 Oulun kaupunki</p>
+                <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
                 
                 <p>Tulotiedot: <a href="$documentsUrl">$documentsUrl</a></p>
                 
@@ -755,15 +751,13 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>We ask you to submit your income statement through eVaka within 7 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.</p>
                 
-                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p> 
-                
-                <p>If necessary, you can also send your income information by post to the following address: Early childhood education client fees, P.O. Box 75, 90015 City of Oulu</p>
+                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p>
                 
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                 
                 <p>Income information: <a href="$documentsUrl">$documentsUrl</a></p>
                 
-                <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
+                <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
             """
                 .trimIndent()
         )

@@ -403,6 +403,8 @@ jobs:
     steps:
       - checkout
       - setup_git_submodule
+      - run: git submodule sync
+      - run: git submodule update --init
       - run: cd evaka && git fetch --all
       - run: cd evaka && git checkout oulu-customization
       - run: cd evaka && git rebase master

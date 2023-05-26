@@ -408,7 +408,11 @@ jobs:
       - run: cd evaka && git fetch --all
       - run: cd evaka && git checkout oulu-customization
       - run: cd evaka && git rebase master
-      - run: cd evaka && git status
+      - run: cd evaka && git push -f
+      - run: git status
+      - run: git add evaka
+      - run: git commit -m "updated core $(date --iso-8601)"
+#      - run: git push
 
   fetch_private_dependencies:
     <<: *default_config

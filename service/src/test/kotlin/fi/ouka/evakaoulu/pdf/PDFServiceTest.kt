@@ -34,6 +34,7 @@ import fi.espoo.evaka.shared.DaycareId
 import fi.espoo.evaka.shared.EmployeeId
 import fi.espoo.evaka.shared.FeeDecisionId
 import fi.espoo.evaka.shared.PersonId
+import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.VoucherValueDecisionId
 import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.DateRange
@@ -287,6 +288,7 @@ private fun validFeeDecision() = FeeDecisionDetailed(
             serviceNeedDescriptionFi = "Palveluntarve 1",
             serviceNeedDescriptionSv = "Palveluntarve 1 (sv)",
             serviceNeedMissing = false,
+            serviceNeedOptionId = ServiceNeedOptionId(UUID.randomUUID()),
             baseFee = 1,
             siblingDiscount = 1,
             fee = 1,

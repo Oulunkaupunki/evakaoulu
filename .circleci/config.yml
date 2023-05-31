@@ -593,7 +593,7 @@ jobs:
 
   frontend_build:
     executor: nodejs_executor
-    resource_class: medium+
+    resource_class: large
     steps:
       - restore_repo
       - restore_frontend_node_modules

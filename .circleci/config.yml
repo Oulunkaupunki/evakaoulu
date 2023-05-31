@@ -6,6 +6,7 @@ version: 2.1
 
 orbs:
   aws-cli: circleci/aws-cli@3.1.4
+  slack: circleci/slack@4.12.5
 
 aliases:
   - &workspace_root /home/circleci/repo
@@ -359,6 +360,13 @@ commands:
       - store_test_results:
           path: frontend/test-results
 
+  slack-notification:
+    steps:
+      - slack/notify:
+          channel: evaka-oulu-maintenance-ext
+          event: fail
+          template: basic_fail_1
+
 jobs:
   # MISC JOBS
 
@@ -382,6 +390,7 @@ jobs:
           steps:
             - run: git submodule update --remote --merge
       - store_repo
+      - slack-notification
 
   sync_evaka_fork:
     executor: base_executor
@@ -397,6 +406,7 @@ jobs:
       - run: cd evaka && git pull --rebase upstream master
       - run: cd evaka && git status
       - run: cd evaka && git push -f origin master
+      - slack-notification
 
   rebase_oulu_customization_branch:
     executor: base_executor
@@ -414,6 +424,7 @@ jobs:
       - run: git add evaka
       - run: git commit -m "updated core $(date --iso-8601)"
       - run: git push
+      - slack-notification
 
   fetch_private_dependencies:
     <<: *default_config
@@ -453,6 +464,7 @@ jobs:
       - run: git add evaka
       - run: git commit -m "Update evaka submodule"
       - run: git push --set-upstream origin evaka-update/$(date --iso-8601)
+      - slack-notification
 
   merge_branch:
     executor: base_executor
@@ -471,6 +483,7 @@ jobs:
       - run: git merge --no-ff --no-edit ${CIRCLE_BRANCH}
       - run: git push
       - run: git push --delete origin ${CIRCLE_BRANCH}
+      - slack-notification
 
   check_licenses:
     executor: reuse_tool
@@ -488,6 +501,7 @@ jobs:
               echo '=========================================';
               exit 1
             }
+      - slack-notification
 
   # BUILD JOBS
 
@@ -503,6 +517,7 @@ jobs:
           dir: *workspace_apigw
       - save:
           path: evaka/apigw/image.tar
+      - slack-notification
 
   apigw_push_image:
     <<: *default_config
@@ -517,6 +532,7 @@ jobs:
       - push_docker_image:
           image: evakaoulu/api-gateway
           dir: *workspace_apigw
+      - slack-notification
 
   frontend_dependencies:
     executor: nodejs_executor
@@ -546,6 +562,7 @@ jobs:
             - evaka/frontend/.yarn/cache
             - /home/circleci/.npm/sentry-cli
       - store_frontend_node_modules
+      - slack-notification
 
   frontend_test:
     executor: nodejs_executor
@@ -572,6 +589,7 @@ jobs:
             echo 'src/lib-customizations/*' >> .eslintignore
             echo '!src/lib-customizations/oulu' >> .eslintignore
             yarn lint
+      - slack-notification
 
   frontend_build:
     executor: nodejs_executor
@@ -584,6 +602,7 @@ jobs:
       - build_frontend
       - save:
           path: evaka/frontend/dist
+      - slack-notification
 
   frontend_upload_archive:
     <<: *default_config
@@ -605,6 +624,7 @@ jobs:
           name: Upload archive
           working_directory: /home/circleci/repo/evaka
           command: aws s3 cp dist.tar.gz s3://evakaoulu-dev-deployment/static/${CIRCLE_SHA1}.tar.gz
+      - slack-notification
 
   proxy_build_image:
     executor: base_executor
@@ -617,6 +637,7 @@ jobs:
           dir: *workspace_proxy
       - save:
           path: evaka/proxy/image.tar
+      - slack-notification
 
   proxy_push_image:
     <<: *default_config
@@ -631,6 +652,7 @@ jobs:
       - push_docker_image:
           image: evakaoulu/proxy
           dir: *workspace_proxy
+      - slack-notification
 
   service_build:
     executor: openjdk_executor
@@ -648,6 +670,7 @@ jobs:
       - store_service_gradle_wrapper
       - save:
           path: service/build/libs/evakaoulu-service.jar
+      - slack-notification
 
   service_test:
     executor: service_test_executor
@@ -664,6 +687,7 @@ jobs:
           path: /home/circleci/repo/service/build/test-results/
       - store_artifacts:
           path: /home/circleci/repo/service/build/reports/
+      - slack-notification
 
   service_build_image:
     executor: base_executor
@@ -683,6 +707,7 @@ jobs:
           dir: *workspace_service
       - save:
           path: service/image.tar
+      - slack-notification
 
   service_push_image:
     <<: *default_config
@@ -697,6 +722,7 @@ jobs:
       - push_docker_image:
           image: evakaoulu/service
           dir: *workspace_service
+      - slack-notification
 
   auth_build_image:
     executor: base_executor
@@ -714,6 +740,7 @@ jobs:
           contexts: core=../evaka/keycloak
       - save:
           path: auth/image.tar
+      - slack-notification
 
   auth_push_image:
     <<: *default_config
@@ -728,6 +755,7 @@ jobs:
       - push_docker_image:
           image: evakaoulu/auth
           dir: *workspace_auth
+      - slack-notification
 
   trigger_deploy:
     executor: base_executor
@@ -741,6 +769,7 @@ jobs:
               --user ''$CIRCLE_TOKEN':' \
               --header 'content-type: application/json' \
               --data '{"branch":"main","parameters":{"workflow":"deploy_pipeline","version":"'$CIRCLE_SHA1'"}}'
+      - slack-notification
 
   #E2E JOBS
 
@@ -749,6 +778,7 @@ jobs:
     resource_class: large
     steps:
       - e2e_test
+      - slack-notification
 
 workflows:
   version: 2
@@ -761,73 +791,101 @@ workflows:
       - fetch_private_dependencies:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - checkout_repo
       - check_licenses:
+          context:
+            - slack-secrets
           requires:
             - checkout_repo
 
       - apigw_build_image:
+          context:
+            - slack-secrets
           requires:
             - checkout_repo
       - apigw_push_image:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - apigw_build_image
 
       - frontend_dependencies:
+          context:
+            - slack-secrets
           requires:
             - fetch_private_dependencies
       - frontend_test:
+          context:
+            - slack-secrets
           requires:
             - frontend_dependencies
       - frontend_build:
+          context:
+            - slack-secrets
           requires:
             - frontend_dependencies
 
       - frontend_upload_archive:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - frontend_build
 
       - e2e_test:
+          context:
+            - slack-secrets
           requires:
             - frontend_build
             - apigw_build_image
             - service_build_image
 
       - proxy_build_image:
+          context:
+            - slack-secrets
           requires:
             - checkout_repo
       - proxy_push_image:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - proxy_build_image
 
       - service_build:
+          context:
+            - slack-secrets
           requires:
             - checkout_repo
       - service_test:
+          context:
+            - slack-secrets
           requires:
             - service_build
       - service_build_image:
+          context:
+            - slack-secrets
           requires:
             - service_build
       - service_push_image:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - service_build_image
 
       - auth_build_image:
+          context:
+            - slack-secrets
           requires:
             - fetch_private_dependencies
       - auth_push_image:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - auth_build_image
 
@@ -835,6 +893,7 @@ workflows:
       - trigger_deploy:
           context:
             - evakaoulu-infra
+            - slack-secrets
           requires:
             - check_licenses
             - apigw_push_image
@@ -851,6 +910,8 @@ workflows:
                 - main
 
       - merge_branch:
+          context:
+            - slack-secrets
           requires:
             - check_licenses
             - apigw_push_image
@@ -873,7 +934,11 @@ workflows:
         - equal: [scheduled_pipeline, << pipeline.trigger_source >>]
         - equal: ["update upstream", << pipeline.schedule.name >>]
     jobs:
-      - sync_evaka_fork
+      - sync_evaka_fork:
+          context:
+            - slack-secrets
       - rebase_oulu_customization_branch:
+          context:
+            - slack-secrets
           requires:
             - sync_evaka_fork

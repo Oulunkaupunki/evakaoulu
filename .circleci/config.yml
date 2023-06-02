@@ -421,6 +421,10 @@ jobs:
       - run: cd evaka && git push -f
       - setup_git
       - run: git status
+      - run: |
+          if git status | grep -q 'nothing to commit, working tree clean'; then
+            circleci-agent step halt
+          fi
       - run: git add evaka
       - run: git commit -m "updated core $(date --iso-8601)"
       - run: git push

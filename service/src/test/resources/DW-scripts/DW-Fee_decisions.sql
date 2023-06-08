@@ -1,10 +1,11 @@
 SELECT
     fd.decision_number AS maksupäätöksen_numero,
+    fd.id as maksupäätös_id,
     lower(fd.valid_during) AS alkupvm,
     upper(fd.valid_during) AS loppupvm,
     fd.decision_type AS huojennustyyppi,
     fd.family_size AS perhekoko,
-    fdc.child_id AS lapsen_id,
+    fdc.child_id AS lapsi_id,
     fdc.final_fee AS lapsikohtainen_maksu,
     fdc.placement_type AS toimintamuoto,
     ca.name AS palvelualue,

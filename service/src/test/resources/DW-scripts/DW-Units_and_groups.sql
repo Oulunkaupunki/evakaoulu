@@ -1,5 +1,6 @@
 SELECT
     d.name AS toimintayksikkö,
+    d.id AS toimintayksikkö_id,
     d.opening_date AS toimintayksikön_alkupvm,
     d.closing_date AS toimintayksikön_loppupvm,
     d.dw_cost_center AS dw_kustannuspaikka,
@@ -18,6 +19,7 @@ SELECT
             AND date_trunc('month', current_date) < p.end_date --Edellisen kuun viimeisen päivän mukaan
     ) AS toimintayksikön_lapsimäärä_ed_kuun_lopussa,
     dg.name AS ryhmä,
+    dg.id AS ryhmä_id,
     dg.start_date AS ryhmän_alkupvm,
     dg.end_date AS ryhmän_loppupvm,
     (

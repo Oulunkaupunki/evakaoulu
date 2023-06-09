@@ -1,4 +1,6 @@
+SET TIMEZONE='Europe/Helsinki';
 SELECT
+    now() as aikaleima,
     d.name AS toimintayksikkö,
     d.id AS toimintayksikkö_id,
     d.opening_date AS toimintayksikön_alkupvm,

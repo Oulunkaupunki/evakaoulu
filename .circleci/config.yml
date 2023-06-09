@@ -761,6 +761,33 @@ jobs:
           dir: *workspace_auth
       - slack-notification
 
+  scheduled_tasks_reporting_build_image:
+    executor: base_executor
+    resource_class: medium
+    steps:
+      - restore_repo
+      - setup_authenticated_remote_docker:
+          docker_layer_caching: true
+      - build_docker_image:
+          image: evakaoulu/scheduled-task/reporting
+          dir: scheduled-tasks/reporting
+      - save:
+          path: scheduled-tasks/reporting/image.tar
+
+  scheduled_tasks_reporting_push_image:
+    <<: *default_config
+    executor: aws-cli/default
+    resource_class: small
+    steps:
+      - restore_repo
+      - restore:
+          path: scheduled-tasks/reporting/image.tar
+      - setup_authenticated_remote_docker
+      - aws-cli/install
+      - push_docker_image:
+          image: evakaoulu/scheduled-task/reporting
+          dir: scheduled-tasks/reporting
+
   trigger_deploy:
     executor: base_executor
     resource_class: small
@@ -893,6 +920,14 @@ workflows:
           requires:
             - auth_build_image
 
+      - scheduled_tasks_reporting_build_image:
+          requires:
+            - checkout_repo
+      - scheduled_tasks_reporting_push_image:
+          context:
+            - evakaoulu-dev
+          requires:
+            - scheduled_tasks_reporting_build_image
 
       - trigger_deploy:
           context:
@@ -907,6 +942,7 @@ workflows:
             - service_test
             - service_push_image
             - auth_push_image
+            - scheduled_tasks_reporting_push_image
             - e2e_test
           filters:
             branches:
@@ -925,6 +961,7 @@ workflows:
             - service_test
             - service_push_image
             - auth_push_image
+            - scheduled_tasks_reporting_push_image
             - e2e_test
           filters:
             branches:

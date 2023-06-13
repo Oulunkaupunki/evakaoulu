@@ -1,19 +1,19 @@
-SET TIMEZONE='Europe/Helsinki';
+SET TIMEZONE = 'Europe/Helsinki';
 SELECT
-    now() AS aikaleima,
-    vvd.decision_number AS arvopäätöksen_numero,
-    vvd.valid_from AS alkupvm,
-    vvd.valid_to AS loppupvm,
-    vvd.decision_type AS huojennustyyppi,
-    vvd.family_size AS perhekoko,
-    vvd.voucher_value AS palvelusetelin_arvo,
+    now()                AS aikaleima,
+    vvd.decision_number  AS arvopäätöksen_numero,
+    vvd.valid_from       AS alkupvm,
+    vvd.valid_to         AS loppupvm,
+    vvd.decision_type    AS huojennustyyppi,
+    vvd.family_size      AS perhekoko,
+    vvd.voucher_value    AS palvelusetelin_arvo,
     vvd.final_co_payment AS omavastuuosuus,
-    vvd.child_id AS lapsen_id,
-    vvd.placement_type AS toimintamuoto,
-    ca.name AS palvelualue,
-    ca.id AS palvelualue_id,
-    d.name AS toimipaikka,
-    d.id AS toimipaikka_id
+    vvd.child_id         AS lapsen_id,
+    vvd.placement_type   AS toimintamuoto,
+    ca.name              AS palvelualue,
+    ca.id                AS palvelualue_id,
+    d.name               AS toimipaikka,
+    d.id                 AS toimipaikka_id
 FROM voucher_value_decision vvd
     JOIN daycare d ON vvd.placement_unit_id = d.id
     JOIN care_area ca ON d.care_area_id = ca.id

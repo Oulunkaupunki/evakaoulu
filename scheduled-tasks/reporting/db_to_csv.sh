@@ -12,3 +12,4 @@ echo "bye" >> sftp_batch.txt
 
 export SSHPASS=$SFTP_PASS
 sshpass -e sftp -o StrictHostKeyChecking=no -o BatchMode=no -b sftp_batch.txt $SFTP_USER@$SFTP_HOST:$SFTP_PATH
+aws s3 cp $FILE s3://$S3_BUCKET/$FILE

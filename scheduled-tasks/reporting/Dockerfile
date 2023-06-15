@@ -13,4 +13,5 @@ RUN apt-get update \
     && apt-get -y install postgresql-client-14 zip awscli \
     && rm -rf /var/lib/apt/lists/*
 ADD db_to_csv.sh db_to_csv.sh
+ADD sql sql
 CMD ["./db_to_csv.sh"]

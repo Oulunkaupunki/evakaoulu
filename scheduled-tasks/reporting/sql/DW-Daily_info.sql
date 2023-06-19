@@ -32,7 +32,7 @@ SELECT
     sno.part_week              AS osaviikkoinen,
     sn.shift_care              AS vuorohoito,
     sno.daycare_hours_per_week AS tunteja_viikossa,
-    abo.name_fi                AS tuentarve,
+    ARRAY(SELECT name_fi FROM assistance_basis_option WHERE id in (SELECT option_id FROM assistance_basis_option_ref WHERE need_id = an.id))                AS tuentarve,
     anvc.coefficient           AS tuentarpeen_kerroin,
     an.capacity_factor         AS lapsen_kapasiteetti,
     a.id IS NOT NULL           AS poissaolo,
@@ -41,7 +41,7 @@ FROM person p
     JOIN placement pl ON pl.child_id = p.id AND pl.start_date <= current_date AND pl.end_date >= current_date
     JOIN daycare d ON pl.unit_id = d.id
     JOIN care_area ca ON d.care_area_id = ca.id
-    JOIN daycare_group_placement dgp ON pl.id = dgp.daycare_placement_id
+    JOIN daycare_group_placement dgp ON pl.id = dgp.daycare_placement_id AND dgp.start_date <= current_date AND dgp.end_date >= current_date
     JOIN daycare_group dg ON d.id = dg.daycare_id AND dgp.daycare_group_id = dg.id
     JOIN daycare_caretaker dc ON dg.id = dc.group_id
         AND dc.start_date <= current_date
@@ -59,8 +59,6 @@ FROM person p
     left JOIN assistance_need an ON p.id = an.child_id
         AND an.start_date <= current_date
         AND an.end_date >= current_date
-    left JOIN assistance_basis_option_ref abor ON an.id = abor.need_id
-    left JOIN assistance_basis_option abo ON abor.option_id = abo.id
     left JOIN assistance_need_voucher_coefficient anvc ON p.id = anvc.child_id
         AND lower(anvc.validity_period) <= current_date
         AND upper(anvc.validity_period) >= current_date

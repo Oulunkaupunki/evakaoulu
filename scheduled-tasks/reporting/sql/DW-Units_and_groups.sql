@@ -5,6 +5,8 @@ SELECT
     d.id                                   AS toimintayksikkö_id,
     d.opening_date                         AS toimintayksikön_alkupvm,
     d.closing_date                         AS toimintayksikön_loppupvm,
+    ca.name                                AS palvelualue,
+    ca.id                                  AS palvelualue_id,
     d.dw_cost_center                       AS dw_kustannuspaikka,
     (SELECT count(*)
      FROM placement p
@@ -34,5 +36,6 @@ SELECT
     )                                      AS ryhmän_lapsimäärä_ed_kuun_lopussa
 FROM daycare_group dg
     JOIN daycare d on dg.daycare_id = d.id
+    JOIN care_area ca on ca.id = d.care_area_id
 WHERE (current_date - interval '3 months' <= d.closing_date OR d.closing_date is null)
     AND (current_date - interval '3 months' <= dg.end_date OR dg.end_date is null);

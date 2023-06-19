@@ -32,7 +32,15 @@ SELECT
     sno.part_week              AS osaviikkoinen,
     sn.shift_care              AS vuorohoito,
     sno.daycare_hours_per_week AS tunteja_viikossa,
-    ARRAY(SELECT name_fi FROM assistance_basis_option WHERE id in (SELECT option_id FROM assistance_basis_option_ref WHERE need_id = an.id))                AS tuentarve,
+    array(
+        SELECT name_fi
+        FROM assistance_basis_option
+        WHERE id IN (
+            SELECT option_id
+            FROM assistance_basis_option_ref
+            WHERE need_id = an.id
+        )
+    )                          AS tuentarve,
     anvc.coefficient           AS tuentarpeen_kerroin,
     an.capacity_factor         AS lapsen_kapasiteetti,
     a.id IS NOT NULL           AS poissaolo,

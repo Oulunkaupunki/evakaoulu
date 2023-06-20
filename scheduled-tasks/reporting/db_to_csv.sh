@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export SSHPASS=$SFTP_PASS
-export PGHOST=evakaoulu-dev.cp2n7ceiwm0p.eu-west-1.rds.amazonaws.com
 
 run_query() {
     SQL_FILE=$1

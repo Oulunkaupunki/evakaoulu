@@ -5,6 +5,8 @@ SELECT
     d.id                                   AS toimintayksikkö_id,
     d.opening_date                         AS toimintayksikön_alkupvm,
     d.closing_date                         AS toimintayksikön_loppupvm,
+    d.type                                 AS toimintamuoto,
+    d.provider_type                        AS järjestämistapa,
     ca.name                                AS palvelualue,
     ca.id                                  AS palvelualue_id,
     d.dw_cost_center                       AS dw_kustannuspaikka,
@@ -12,7 +14,8 @@ SELECT
      FROM placement p
      WHERE p.unit_id = d.id
          AND p.start_date <= current_date
-         AND current_date <= p.end_date)   AS toimintayksikön_lapsimäärä,
+         AND current_date <= p.end_date
+    )                                      AS toimintayksikön_lapsimäärä,
     (SELECT count(*)
      FROM placement p
      WHERE p.unit_id = d.id
@@ -27,7 +30,8 @@ SELECT
      FROM daycare_group_placement dgp
      WHERE dgp.daycare_group_id = dg.id
          AND dgp.start_date <= current_date
-         AND current_date <= dgp.end_date) AS ryhmän_lapsimäärä,
+         AND current_date <= dgp.end_date
+    )                                      AS ryhmän_lapsimäärä,
     (SELECT count(*)
      FROM daycare_group_placement dgp
      WHERE dgp.daycare_group_id = dg.id

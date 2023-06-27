@@ -1,3 +1,4 @@
+SET TIMEZONE = 'Europe/Helsinki';
 SELECT
     now()                      AS pvm,
     p.id                       AS lapsen_id,
@@ -8,7 +9,6 @@ SELECT
     p.postal_code              AS postinumero,
     p.post_office              AS postitoimipaikka,
     p.nationalities            AS kansalaisuudet,
-    p.language                 AS kieli,
     pl.type                    AS sijoitustyyppi,
     pl.unit_id                 AS sijoitusyksikkö_id,
     d.name                     AS yksikön_nimi,
@@ -19,22 +19,6 @@ SELECT
     d.dw_cost_center           AS kustannuspaikka,
     dg.id                      AS sijoitusryhmä_id,
     dg.name                    AS sijoitusryhmä,
-    dc.amount                  AS henkilökuntaa_ryhmässä,
-    sum(
-        CASE
-            WHEN sar.arrived IS NOT NULL
-                THEN ROUND(
-                    EXTRACT(
-                        EPOCH FROM (
-                            LEAST(sar.departed, timezone('Europe/Helsinki', (current_date + interval '1' day)::date::timestamp)) -
-                            GREATEST(sar.arrived, timezone('Europe/Helsinki', current_date::timestamp))
-                        )
-                    ) / 3600 / 7.75 * sar.occupancy_coefficient / 7,
-                    4
-                )
-            ELSE sa.count
-        END
-    )                          AS henkilökuntaa_läsnä,
     bc.unit_id                 AS varahoitoyksikkö_id,
     bu.name                    AS varahoitoyksikkö,
     bc.group_id                AS varahoitoryhmä_id,
@@ -74,21 +58,6 @@ FROM person p
         AND dgp.end_date >= current_date
     JOIN daycare_group dg ON d.id = dg.daycare_id
         AND dgp.daycare_group_id = dg.id
-    JOIN daycare_caretaker dc ON dg.id = dc.group_id
-        AND dc.start_date <= current_date
-        AND (dc.end_date >= current_date or dc.end_date is null)
-    LEFT JOIN staff_attendance sa ON dg.id = sa.group_id
-        AND sa.date = current_date
-    LEFT JOIN (
-        SELECT group_id, arrived, departed, occupancy_coefficient
-        FROM staff_attendance_realtime
-        WHERE departed IS NOT NULL
-            AND type NOT IN ('OTHER_WORK', 'TRAINING')
-        UNION ALL
-        SELECT group_id, arrived, departed, occupancy_coefficient
-        FROM staff_attendance_external
-        WHERE departed IS NOT NULL
-    ) sar ON sar.group_id = dg.id AND (date(arrived) = current_date OR date(departed) = current_date)
     LEFT JOIN backup_care bc ON p.id = bc.child_id
         AND bc.start_date <= current_date
         AND bc.end_date >= current_date
@@ -105,40 +74,4 @@ FROM person p
         AND lower(anvc.validity_period) <= current_date
         AND upper(anvc.validity_period) >= current_date
     LEFT JOIN absence a ON p.id = a.child_id
-        AND a.date = current_date
-GROUP BY
-    p.id,
-    p.social_security_number,
-    p.date_of_birth,
-    p.language,
-    p.street_address,
-    p.postal_code,
-    p.post_office,
-    p.nationalities,
-    p.language,
-    pl.type,
-    pl.unit_id,
-    d.name,
-    d.care_area_id,
-    ca.name,
-    d.type,
-    d.provider_type,
-    d.dw_cost_center,
-    dg.id,
-    dg.name,
-    dc.amount,
-    bc.unit_id,
-    bu.name,
-    bc.group_id,
-    bg.name,
-    sn.id,
-    sno.name_fi,
-    sno.id,
-    sno.part_day,
-    sno.part_week,
-    sn.shift_care,
-    sno.daycare_hours_per_week,
-    anvc.coefficient,
-    an.id,
-    an.capacity_factor,
-    a.date
+        AND a.date = current_date;

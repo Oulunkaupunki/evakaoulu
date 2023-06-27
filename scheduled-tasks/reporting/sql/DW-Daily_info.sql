@@ -26,7 +26,8 @@ SELECT
                 THEN ROUND(
                     EXTRACT(
                         EPOCH FROM (
-                            LEAST(sar.departed, timezone('Europe/Helsinki', (current_date + 1)::date::timestamp)) - GREATEST(sar.arrived, timezone('Europe/Helsinki', current_date::timestamp))
+                            LEAST(sar.departed, timezone('Europe/Helsinki', (current_date + interval '1' day)::date::timestamp)) -
+                            GREATEST(sar.arrived, timezone('Europe/Helsinki', current_date::timestamp))
                         )
                     ) / 3600 / 7.75 * sar.occupancy_coefficient / 7,
                     4
@@ -79,17 +80,15 @@ FROM person p
     LEFT JOIN staff_attendance sa ON dg.id = sa.group_id
         AND sa.date = current_date
     LEFT JOIN (
-        SELECT arrived, departed, occupancy_coefficient
+        SELECT group_id, arrived, departed, occupancy_coefficient
         FROM staff_attendance_realtime
         WHERE departed IS NOT NULL
             AND type NOT IN ('OTHER_WORK', 'TRAINING')
-            AND (date(arrived) = current_date OR date(departed) = current_date)
         UNION ALL
-        SELECT arrived, departed, occupancy_coefficient
+        SELECT group_id, arrived, departed, occupancy_coefficient
         FROM staff_attendance_external
         WHERE departed IS NOT NULL
-            AND (date(arrived) = current_date OR date(departed) = current_date)
-    ) sar ON dc.group_id = dg.id
+    ) sar ON sar.group_id = dg.id AND (date(arrived) = current_date OR date(departed) = current_date)
     LEFT JOIN backup_care bc ON p.id = bc.child_id
         AND bc.start_date <= current_date
         AND bc.end_date >= current_date

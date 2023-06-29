@@ -42,7 +42,7 @@ SELECT
     anvc.coefficient           AS tuentarpeen_kerroin,
     an.capacity_factor         AS lapsen_kapasiteetti,
     array(
-        SELECT absence_type
+        SELECT distinct absence_type
         FROM absence
         WHERE child_id = p.id
             AND a.date = current_date

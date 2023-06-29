@@ -1,5 +1,6 @@
+SET TIMEZONE = 'Europe/Helsinki';
 SELECT
-    now() AT TIME ZONE 'Europe/Helsinki'   AS aikaleima,
+    now()                                  AS aikaleima,
     d.name                                 AS toimintayksikkö,
     d.id                                   AS toimintayksikkö_id,
     d.opening_date                         AS toimintayksikön_alkupvm,
@@ -12,20 +13,20 @@ SELECT
     (SELECT count(*)
      FROM placement p
      WHERE p.unit_id = d.id
-         AND p.start_date <= (current_date AT TIME ZONE 'Europe/Helsinki')::date
-         AND (current_date AT TIME ZONE 'Europe/Helsinki')::date <= p.end_date
+         AND p.start_date <= current_date
+         AND current_date <= p.end_date
     )                                      AS toimintayksikön_lapsimäärä,
     (SELECT count(*)
      FROM placement p
      WHERE p.unit_id = d.id
-         AND p.start_date < date_trunc('month', (current_date AT TIME ZONE 'Europe/Helsinki')::date)
-         AND date_trunc('month', (current_date AT TIME ZONE 'Europe/Helsinki')::date) < p.end_date --Edellisen kuun viimeisen päivän mukaan
+         AND p.start_date < date_trunc('month', current_date)
+         AND date_trunc('month', current_date) < p.end_date --Edellisen kuun viimeisen päivän mukaan
     )                                      AS toimintayksikön_lapsimäärä_ed_kuun_lopussa,
     dg.name                                AS ryhmä,
     dg.id                                  AS ryhmä_id,
     dg.start_date                          AS ryhmän_alkupvm,
     dg.end_date                            AS ryhmän_loppupvm,
-    dc.amount                              AS henkilökuntaa_ryhmässä,
+    dc.amount                  AS henkilökuntaa_ryhmässä,
     sum(
             CASE
                 WHEN sar.arrived IS NOT NULL
@@ -44,23 +45,23 @@ SELECT
     (SELECT count(*)
      FROM daycare_group_placement dgp
      WHERE dgp.daycare_group_id = dg.id
-         AND dgp.start_date <= (current_date AT TIME ZONE 'Europe/Helsinki')::date
-         AND (current_date AT TIME ZONE 'Europe/Helsinki')::date <= dgp.end_date
+         AND dgp.start_date <= current_date
+         AND current_date <= dgp.end_date
     )                                      AS ryhmän_lapsimäärä,
     (SELECT count(*)
      FROM daycare_group_placement dgp
      WHERE dgp.daycare_group_id = dg.id
-         AND dgp.start_date < date_trunc('month', (current_date AT TIME ZONE 'Europe/Helsinki')::date)
-         AND date_trunc('month', (current_date AT TIME ZONE 'Europe/Helsinki')::date) < dgp.end_date --Edellisen kuun viimeisen päivän mukaan
+         AND dgp.start_date < date_trunc('month', current_date)
+         AND date_trunc('month', current_date) < dgp.end_date --Edellisen kuun viimeisen päivän mukaan
     )                                      AS ryhmän_lapsimäärä_ed_kuun_lopussa
 FROM daycare_group dg
     JOIN daycare d on dg.daycare_id = d.id
     JOIN care_area ca on ca.id = d.care_area_id
     JOIN daycare_caretaker dc ON dg.id = dc.group_id
-    AND dc.start_date <= (current_date AT TIME ZONE 'Europe/Helsinki')::date
-    AND (dc.end_date >= (current_date AT TIME ZONE 'Europe/Helsinki')::date or dc.end_date is null)
+    AND dc.start_date <= current_date
+    AND (dc.end_date >= current_date or dc.end_date is null)
     LEFT JOIN staff_attendance sa ON dg.id = sa.group_id
-    AND sa.date = (current_date AT TIME ZONE 'Europe/Helsinki')::date
+    AND sa.date = current_date
     LEFT JOIN (
     SELECT group_id, arrived, departed, occupancy_coefficient
     FROM staff_attendance_realtime
@@ -70,9 +71,9 @@ FROM daycare_group dg
     SELECT group_id, arrived, departed, occupancy_coefficient
     FROM staff_attendance_external
     WHERE departed IS NOT NULL
-) sar ON sar.group_id = dg.id AND (date(arrived) = (current_date AT TIME ZONE 'Europe/Helsinki')::date OR date(departed) = (current_date AT TIME ZONE 'Europe/Helsinki')::date)
-WHERE ((current_date AT TIME ZONE 'Europe/Helsinki')::date - interval '3 months' <= d.closing_date OR d.closing_date is null)
-    AND ((current_date AT TIME ZONE 'Europe/Helsinki')::date - interval '3 months' <= dg.end_date OR dg.end_date is null)
+) sar ON sar.group_id = dg.id AND (date(arrived) = current_date OR date(departed) = current_date)
+WHERE (current_date - interval '3 months' <= d.closing_date OR d.closing_date is null)
+    AND (current_date - interval '3 months' <= dg.end_date OR dg.end_date is null)
 GROUP BY
     d.name,
     d.id,
@@ -87,4 +88,4 @@ GROUP BY
     dg.id,
     dg.start_date,
     dg.end_date,
-    dc.amount
+    dc.amount;

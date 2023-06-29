@@ -6,7 +6,7 @@ run_query() {
     SQL_FILE=$1
     OUTPUT_FILE=$2
 
-    psql -c "\copy ($(<$SQL_FILE)) To $OUTPUT_FILE With CSV DELIMITER ';'"
+    psql --csv -P csv_fieldsep=';' < $SQL_FILE > $OUTPUT_FILE
 }
 
 send_file() {

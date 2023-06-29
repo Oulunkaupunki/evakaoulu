@@ -1,5 +1,5 @@
-SELECT
-    now() AT TIME ZONE 'Europe/Helsinki'               AS aikaleima,
+SET TIMEZONE = 'Europe/Helsinki';
+SELECT now()                                           AS aikaleima,
     decision_number                                    AS päätos_tuesta,
     child_id                                           AS lapsen_id,
     lower(validity_period)                             AS tuen_alkupvm,
@@ -17,4 +17,4 @@ SELECT
     service_opt_special_aides                          AS apuvälineet,
     assistance_levels                                  AS tuen_taso
 FROM assistance_need_decision
-WHERE (current_date AT TIME ZONE 'Europe/Helsinki')::date - INTERVAL '3 months' <= upper(validity_period)
+WHERE current_date - INTERVAL '3 months' <= upper(validity_period);

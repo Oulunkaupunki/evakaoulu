@@ -29,12 +29,12 @@ const fi: DeepPartial<Translations> = {
   applications: {
     creation: {
       daycareInfo:
-        'You can apply for a place in a municipal daycare center or in family day care using the application for early childhood education. The same application can be used to apply for an early childhood education service voucher for private childcare. In order to do this, simply choose the private unit for which you wish to acquire a voucher for as your preferred option.',
-      preschoolLabel: 'Enrolment for preschool',
+        'An application for early childhood education is used to apply for a place in a municipal daycare centre or family daycare. With the same application, you can also apply for an early childhood education service voucher for private early childhood education by selecting the private unit for which you want to apply for the service voucher in the "Application requests" section.',
+      preschoolLabel: 'Enrolment in preschool education',
       preschoolInfo:
-        'Free preschool is provided for four (4) hours a day. The preschool year mainly follows the annual holiday schedule used in basic education.',
+        'Free of charge preschool education is provided for four (4) hours a day. The preschool year mainly follows the annual holiday schedule used in basic education.',
       preschoolDaycareInfo:
-        'You can also apply for early childhood education and care (ECEC) related to preschool while enrolling in preschool. ECEC is provided in the same place as the preschool before and after the preschool education.',
+        'You can also apply for early childhood education related to preschool while enrolling in preschool. Early childhood education is provided in the same place as the preschool before and after the preschool education.',
       clubLabel: 'Application for open early childhood education and care',
       clubInfo:
         'With the application for open early childhood education and care, you can apply to groups that meet two to three times a week, as well as family groups.',

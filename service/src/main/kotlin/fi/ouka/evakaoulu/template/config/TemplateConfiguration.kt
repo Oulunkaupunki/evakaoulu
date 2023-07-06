@@ -27,6 +27,7 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
     override fun getPreschoolDecisionPath(): String = "oulu/preschool/decision"
     override fun getPreparatoryDecisionPath(): String = "oulu/preschool/decision"
     override fun getAssistanceNeedDecisionPath(): String = "oulu/assistance-need/decision"
+    override fun getAssistanceNeedPreschoolDecisionPath(): String = "oulu/assistance-need-preschool/decision"
 
     override fun getLocalizedFilename(type: DecisionType, lang: DocumentLang): String =
         when (type) {

@@ -77,12 +77,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 -----
                 
-                Du har fått ett nytt $typeSv i eVaka. Läs meddelandet ${if (thread.urgent) "så snart som möjligt " else ""}här: $messageUrl
-                
-                Detta besked skickas automatiskt av eVaka. Svara inte på detta besked. 
-                
-                -----
-                
                 You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: $messageUrl
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
@@ -92,11 +86,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             """
                 <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: <a href="$messageUrl">$messageUrl</a></p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
-                
-                <hr>
-                
-                <p>Du har fått ett nytt $typeSv i eVaka. Läs meddelandet ${if (thread.urgent) "så snart som möjligt " else ""}här: <a href="$messageUrl">$messageUrl</a></p>
-                <p>Detta besked skickas automatiskt av eVaka. Svara inte på detta besked.</p>          
                 
                 <hr>
                 

@@ -22,6 +22,7 @@ const features: Features = {
     citizenContractDayAbsence: true,
     assistanceActionOther: true,
     financeDecisionHandlerSelect: false,
+    feeDecisionPreschoolClubFilter: true,
     daycareApplication: {
       dailyTimes: true
     },
@@ -60,6 +61,7 @@ const features: Features = {
     urgencyAttachments: true,
     preparatory: true,
     financeDecisionHandlerSelect: false,
+    feeDecisionPreschoolClubFilter: true,
     experimental: {
       leops: true,
       voucherUnitPayments: true,
@@ -87,6 +89,7 @@ const features: Features = {
     urgencyAttachments: true,
     preparatory: true,
     financeDecisionHandlerSelect: false,
+    feeDecisionPreschoolClubFilter: true,
     experimental: {
       leops: true,
       voucherUnitPayments: true,

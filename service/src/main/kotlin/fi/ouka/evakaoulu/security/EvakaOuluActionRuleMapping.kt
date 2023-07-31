@@ -41,8 +41,6 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                 HasGlobalRole(UserRole.FINANCE_ADMIN) as ScopedActionRule<in T>
             )
         }
-        Action.ChildDiscussion.UPDATE,
-        Action.ChildDiscussion.DELETE,
         else -> action.defaultRules.asSequence()
     }
 }

@@ -25,6 +25,8 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                 HasUnitRole(UserRole.STAFF).inPlacementUnitOfChildOfBackupCare() as ScopedActionRule<in T>
             )
         }
+        Action.Child.READ_VASU_DOCUMENT,
+        Action.Child.READ_CHILD_DISCUSSION,
         Action.Child.CREATE_BACKUP_CARE,
         Action.Child.READ_ASSISTANCE_ACTION,
         Action.Child.READ_ASSISTANCE_NEED -> {
@@ -39,6 +41,8 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                 HasGlobalRole(UserRole.FINANCE_ADMIN) as ScopedActionRule<in T>
             )
         }
+        Action.ChildDiscussion.UPDATE,
+        Action.ChildDiscussion.DELETE,
         else -> action.defaultRules.asSequence()
     }
 }

@@ -56,6 +56,12 @@ internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMes
     override fun getAssistanceNeedDecisionContent(lang: MessageLanguage): String =
         messageSource.getMessage("$PREFIX.ASSISTANCE_NEED_DECISION_CONTENT", null, resolveLocale(lang))
 
+    override fun getAssistanceNeedPreschoolDecisionHeader(lang: MessageLanguage): String =
+        getAssistanceNeedDecisionHeader(lang)
+
+    override fun getAssistanceNeedPreschoolDecisionContent(lang: MessageLanguage): String =
+        getAssistanceNeedDecisionContent(lang)
+
     override fun getDefaultDecisionAddress(lang: MessageLanguage): DecisionSendAddress = when (lang) {
         MessageLanguage.FI -> DecisionSendAddress(
             street = "PL 75",

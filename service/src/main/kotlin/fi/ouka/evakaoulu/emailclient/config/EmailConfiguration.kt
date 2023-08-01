@@ -34,13 +34,14 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForDecisionEmail: String = "Päätös eVakassa / Decision in eVaka"
-
     private fun baseUrl(language: Language) =
         when (language) {
             Language.sv -> env.frontendBaseUrlSv
             else -> env.frontendBaseUrlFi
         }
 
+    override fun assistanceNeedPreschoolDecisionNotification(language: Language): EmailContent =
+        assistanceNeedDecisionNotification(language) // currently same content
     override fun messageNotification(language: Language, thread: MessageThreadStub): EmailContent {
         val messageUrl = "${baseUrl(language)}/messages/${thread.id}"
         val (typeFi, typeSv, typeEn) =

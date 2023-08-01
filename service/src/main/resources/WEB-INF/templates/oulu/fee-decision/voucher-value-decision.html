@@ -21,7 +21,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 <div class="page first-page">
     <div class="address">
         <div th:text="${headFullName}"></div>
-        <div th:if="${isElementaryFamily}" th:text="${partnerFullName}"></div>
+        <div th:if="${partnerIsCodebtor}" th:text="${partnerFullName}"></div>
         <div th:text="${sendAddress.row1}"></div>
         <div th:text="${sendAddress.row2}"></div>
         <div th:if="${not #strings.isEmpty(sendAddress.row3)}" th:text="${sendAddress.row3}"></div>
@@ -156,13 +156,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         </tr>
         </tbody>
     </table>
-
     <div th:utext="#{decision.details.customerFeeInfo}"></div>
     <div th:utext="#{decision.details.incomeChanges}"></div>
     <div>
         <span th:text="#{text.reference}"></span>
         <span><a th:href="#{text.referenceUrl}" th:text="#{text.referenceUrlText}"></a></span>
-        <span th:text="#{text.reference.p2}"></span>
     </div>
 
 </div>

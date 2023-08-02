@@ -45,7 +45,7 @@ SELECT
         SELECT distinct absence_type
         FROM absence
         WHERE child_id = p.id
-            AND a.date = current_date
+            AND absence.date = current_date
     )                          AS poissaolon_syy
 FROM person p
     JOIN placement pl ON pl.child_id = p.id
@@ -72,6 +72,4 @@ FROM person p
         AND an.end_date >= current_date
     LEFT JOIN assistance_need_voucher_coefficient anvc ON p.id = anvc.child_id
         AND lower(anvc.validity_period) <= current_date
-        AND upper(anvc.validity_period) >= current_date
-    LEFT JOIN absence a ON p.id = a.child_id
-        AND a.date = current_date;
+        AND upper(anvc.validity_period) >= current_date;

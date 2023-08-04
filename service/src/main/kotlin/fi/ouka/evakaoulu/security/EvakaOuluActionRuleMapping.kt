@@ -41,6 +41,12 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                 HasGlobalRole(UserRole.FINANCE_ADMIN) as ScopedActionRule<in T>
             )
         }
+        Action.Person.READ_FAMILY_OVERVIEW -> {
+            @Suppress("UNCHECKED_CAST")
+            action.defaultRules.asSequence() + sequenceOf(
+                HasGlobalRole(UserRole.SERVICE_WORKER) as ScopedActionRule<in T>
+            )
+        }
         else -> action.defaultRules.asSequence()
     }
 }

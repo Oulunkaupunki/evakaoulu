@@ -132,14 +132,6 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                     <span th:case="'INCOME'" th:text="${childIncomeTotal}"></span>
                 </td>
             </tr>
-            <tr th:if="${showTotalIncome}">
-                <td th:text="#{decision.combined}"></td>
-                <td></td>
-                <td></td>
-                <td class="text-right">
-                    <span th:text="${totalIncome}"></span>
-                </td>
-            </tr>
         </tbody>
     </table>
 

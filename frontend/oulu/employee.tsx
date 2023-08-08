@@ -8,6 +8,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
 
 import React from 'react'
 
+import {
+  daycareAssistanceLevels,
+  otherAssistanceMeasureTypes,
+  preschoolAssistanceLevels
+} from 'lib-common/generated/api-types/assistance'
 import { H3, P } from 'lib-components/typography'
 import { EmployeeCustomizations } from 'lib-customizations/types'
 
@@ -362,7 +367,10 @@ const customizations: EmployeeCustomizations = {
     'RELIEF_PARTLY_ACCEPTED',
     'RELIEF_REJECTED'
   ],
+  daycareAssistanceLevels: [...daycareAssistanceLevels],
+  otherAssistanceMeasureTypes: [...otherAssistanceMeasureTypes],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
+  preschoolAssistanceLevels: [...preschoolAssistanceLevels],
   unitProviderTypes: [
     'MUNICIPAL',
     'PRIVATE',

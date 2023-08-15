@@ -44,7 +44,8 @@ const features: Features = {
       fosterParents: true,
       serviceWorkerMessaging: true,
       childDocuments: true,
-      intermittentShiftCare: false
+      intermittentShiftCare: false,
+      assistanceNeedPreschoolDecisions: true
     }
   },
   staging: {
@@ -74,7 +75,8 @@ const features: Features = {
       fosterParents: true,
       serviceWorkerMessaging: true,
       childDocuments: true,
-      intermittentShiftCare: false
+      intermittentShiftCare: false,
+      assistanceNeedPreschoolDecisions: true
     }
   },
   prod: {
@@ -104,7 +106,8 @@ const features: Features = {
       fosterParents: true,
       serviceWorkerMessaging: true,
       childDocuments: true,
-      intermittentShiftCare: false
+      intermittentShiftCare: false,
+      assistanceNeedPreschoolDecisions: false
     }
   }
 }

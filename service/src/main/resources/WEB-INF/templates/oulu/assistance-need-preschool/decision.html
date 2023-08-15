@@ -1,19 +1,29 @@
 <!--
-SPDX-FileCopyrightText: 2017-2021 City of Oulu
+SPDX-FileCopyrightText: 2021 City of Oulu
 
 SPDX-License-Identifier: LGPL-2.1-or-later
 -->
+
 <!DOCTYPE html>
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{shared/layout}"
->
-  <body>
-    <div layout:fragment="content">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8"/>
+  <style th:replace="~{oulu/shared/common.html :: css}"></style>
+</head>
+
+<body>
+
+<header th:replace="~{ oulu/shared/common :: assistanceNeedHeader}"></header>
+<footer th:replace="~{ oulu/shared/common :: footer}"></footer>
+
       <div class="page first-page">
-        <strong th:text="#{decision.title}"></strong>
+        <address th:replace="~{ oulu/shared/common :: address}"></address>
+
+        <h1>
+          <strong th:text="#{decision.title}"></strong>
+        </h1>
+
         <div class="child-details">
           <p>
             <strong th:text="#{decision.details.child.prefix}"
@@ -128,10 +138,9 @@ SPDX-License-Identifier: LGPL-2.1-or-later
         <p th:utext="#{disclaimer}"></p>
       </div>
 
-      <div class="page">
-        <h2 th:text="#{appealInstructionTitle}"></h2>
-        <div th:utext="#{appealInstructions}"></div>
-      </div>
+    <div class="page last-page">
+      <h2 th:text="#{appealInstructionTitle}"></h2>
+      <div th:utext="#{appealInstructions}"></div>
     </div>
   </body>
 </html>

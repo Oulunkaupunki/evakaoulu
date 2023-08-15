@@ -37,7 +37,6 @@ import fi.espoo.evaka.pdfgen.Template
 import fi.espoo.evaka.pis.service.PersonDTO
 import fi.espoo.evaka.setting.SettingType
 import fi.espoo.evaka.shared.ApplicationId
-import fi.espoo.evaka.shared.AssistanceNeedDecisionGuardianId
 import fi.espoo.evaka.shared.AssistanceNeedDecisionId
 import fi.espoo.evaka.shared.AssistanceNeedPreschoolDecisionGuardianId
 import fi.espoo.evaka.shared.AssistanceNeedPreschoolDecisionId
@@ -46,7 +45,6 @@ import fi.espoo.evaka.shared.DaycareId
 import fi.espoo.evaka.shared.DecisionId
 import fi.espoo.evaka.shared.EmployeeId
 import fi.espoo.evaka.shared.PersonId
-import fi.espoo.evaka.shared.PreschoolAssistanceId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.DateRange
@@ -54,7 +52,6 @@ import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import fi.ouka.evakaoulu.message.config.MessageConfiguration
 import fi.ouka.evakaoulu.template.config.TemplateConfiguration
-import org.jdbi.v3.core.mapper.Nested
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -442,7 +439,7 @@ private val validAssistanceNeedDecision = AssistanceNeedDecision(
     annulmentReason = ""
 )
 
-private val validAssistanceNeedPreSchoolDecision = AssistanceNeedPreschoolDecision (
+private val validAssistanceNeedPreSchoolDecision = AssistanceNeedPreschoolDecision(
     id = AssistanceNeedPreschoolDecisionId(UUID.randomUUID()),
     decisionNumber = 125632424,
     child = AssistanceNeedPreschoolDecisionChild(

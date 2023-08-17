@@ -15,6 +15,6 @@ s//\1https:\/\/www.ouka.fi\/oulu\/verkkoasiointi\/tietosuoja/g
 w /dev/stdout
 }
 /^(doGiveFeedbackLink[[:blank:]]*=[[:blank:]]*).*/{
-s//\1https:\/\/e-kartta.ouka.fi\/efeedback/g
+s//\1https:\/\/e-kartta.ouka.fi\/eFeedback\/en/g
 w /dev/stdout
 }

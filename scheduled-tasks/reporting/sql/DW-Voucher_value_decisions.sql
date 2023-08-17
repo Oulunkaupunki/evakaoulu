@@ -19,4 +19,4 @@ FROM voucher_value_decision vvd
     JOIN care_area ca ON d.care_area_id = ca.id
 WHERE vvd.status = 'SENT'
     AND vvd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
-    AND current_date - INTERVAL '3 months' <= vvd.valid_to;
+    AND :date_val::DATE - INTERVAL '3 months' <= vvd.valid_to;

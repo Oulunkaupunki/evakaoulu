@@ -45,31 +45,31 @@ SELECT
         SELECT distinct absence_type
         FROM absence
         WHERE child_id = p.id
-            AND absence.date = current_date
+            AND absence.date = :date_val::DATE
     )                          AS poissaolon_syy
 FROM person p
     JOIN placement pl ON pl.child_id = p.id
-        AND pl.start_date <= current_date
-        AND pl.end_date >= current_date
+        AND pl.start_date <= :date_val::DATE
+        AND pl.end_date >= :date_val::DATE
     JOIN daycare d ON pl.unit_id = d.id
     JOIN care_area ca ON d.care_area_id = ca.id
     JOIN daycare_group_placement dgp ON pl.id = dgp.daycare_placement_id
-        AND dgp.start_date <= current_date
-        AND dgp.end_date >= current_date
+        AND dgp.start_date <= :date_val::DATE
+        AND dgp.end_date >= :date_val::DATE
     JOIN daycare_group dg ON d.id = dg.daycare_id
         AND dgp.daycare_group_id = dg.id
     LEFT JOIN backup_care bc ON p.id = bc.child_id
-        AND bc.start_date <= current_date
-        AND bc.end_date >= current_date
+        AND bc.start_date <= :date_val::DATE
+        AND bc.end_date >= :date_val::DATE
     LEFT JOIN daycare bu ON bu.id = bc.unit_id
     LEFT JOIN daycare_group bg ON bg.id = bc.group_id
     LEFT JOIN service_need sn ON pl.id = sn.placement_id
-        AND sn.start_date <= current_date
-        AND sn.end_date >= current_date
+        AND sn.start_date <= :date_val::DATE
+        AND sn.end_date >= :date_val::DATE
     JOIN service_need_option sno ON sno.id = sn.option_id
     LEFT JOIN assistance_need an ON p.id = an.child_id
-        AND an.start_date <= current_date
-        AND an.end_date >= current_date
+        AND an.start_date <= :date_val::DATE
+        AND an.end_date >= :date_val::DATE
     LEFT JOIN assistance_need_voucher_coefficient anvc ON p.id = anvc.child_id
-        AND lower(anvc.validity_period) <= current_date
-        AND upper(anvc.validity_period) >= current_date;
+        AND lower(anvc.validity_period) <= :date_val::DATE
+        AND upper(anvc.validity_period) >= :date_val::DATE;

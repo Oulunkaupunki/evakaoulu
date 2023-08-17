@@ -17,4 +17,4 @@ SELECT now()                                           AS aikaleima,
     service_opt_special_aides                          AS apuvälineet,
     assistance_levels                                  AS tuen_taso
 FROM assistance_need_decision
-WHERE current_date - INTERVAL '3 months' <= upper(validity_period);
+WHERE :date_val::DATE - INTERVAL '3 months' <= upper(validity_period);

@@ -22,4 +22,4 @@ FROM fee_decision fd
     JOIN care_area ca ON d.care_area_id = ca.id
 WHERE fd.status = 'SENT'
     AND fd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
-    AND current_date - INTERVAL '3 months' <= upper(fd.valid_during);
+    AND :date_val::DATE - INTERVAL '3 months' <= upper(fd.valid_during);

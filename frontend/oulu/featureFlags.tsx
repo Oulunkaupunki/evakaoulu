@@ -110,7 +110,7 @@ const features: Features = {
       childDocuments: true,
       intermittentShiftCare: false,
       assistanceNeedPreschoolDecisions: false,
-      citizenEmailNotificationSettings: false
+      citizenEmailNotificationSettings: true
     }
   }
 }

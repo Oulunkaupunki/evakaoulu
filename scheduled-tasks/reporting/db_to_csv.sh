@@ -33,10 +33,14 @@ send_history_file() {
 run_query_and_send_file() {
     SQL_FILE=$1
     OUTPUT_FILE=$2
-    CURRENT_DATE=$3
+    DATE_ARG=$3
 
-    run_query $SQL_FILE $OUTPUT_FILE $CURRENT_DATE
-    send_file $OUTPUT_FILE
+    if [[ "${DATE_ARG}" != "" && "${DATE_ARG}" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        run_query $SQL_FILE $OUTPUT_FILE $DATE_ARG
+        send_file $OUTPUT_FILE
+    else
+        echo "No date provided. Format has to be yyyy-mm-dd"
+    fi
 }
 
 run_history_batch_and_send_file() {

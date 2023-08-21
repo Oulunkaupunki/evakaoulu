@@ -664,7 +664,7 @@ const fi: DeepPartial<Translations> = {
           </P>
           <H3>Oikaisuvaatimusaika</H3>
           <P>
-            Oikaisuvaatimus on tehtävä 30 päivän kuluessa päätöksen
+            Oikaisuvaatimus on tehtävä 14 päivän kuluessa päätöksen
             tiedoksisaannista.
           </P>
           <H3>Tiedoksisaanti</H3>

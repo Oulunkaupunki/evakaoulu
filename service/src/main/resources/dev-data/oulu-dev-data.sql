@@ -157,6 +157,7 @@ INSERT INTO employee (id, first_name, last_name, email, external_id, roles) VALU
     ('00000000-0000-0000-0000-000000000001', 'Päivi', 'Pääkäyttäjä', 'paivi.paakayttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0000-000000000001', '{ADMIN, SERVICE_WORKER, FINANCE_ADMIN}'::user_role[]),
     ('00000000-0000-0000-0001-000000000000', 'Paula', 'Palveluohjaaja', 'paula.palveluohjaaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0001-000000000000', '{SERVICE_WORKER}'::user_role[]),
     ('00000000-0000-0000-0002-000000000000', 'Lasse', 'Laskuttaja', 'lasse.laskuttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0002-000000000000', '{FINANCE_ADMIN}'::user_role[]),
+    ('00000000-0000-0000-0009-000000000001', 'Lassi', 'Ulkoistettu Laskuttaja', 'ulkoistettu.laskuttaja@espoo.fi', 'oulu-ad:00000000-0000-0009-0000-000000000000', '{FINANCE_STAFF}'::user_role[]),
     ('00000000-0000-0000-0003-000000000000', 'Raisa', 'Raportoija', 'raisa.raportoija@ouka.fi', 'oulu-ad:00000000-0000-0000-0003-000000000000', '{DIRECTOR}'::user_role[]);
 INSERT INTO employee (id, first_name, last_name, email, external_id) VALUES
     ('00000000-0000-0000-0004-000000000000', 'Essi', 'Esimies', 'essi.esimies@ouka.fi', 'oulu-ad:00000000-0000-0000-0004-000000000000'),

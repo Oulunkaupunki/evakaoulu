@@ -7,7 +7,7 @@ run_query() {
     OUTPUT_FILE=$2
     DATE_ARG=$3
 
-    psql --csv -v date_val=$DATE_ARG -P csv_fieldsep=';' < $SQL_FILE > $OUTPUT_FILE
+    psql --csv -v date_val="'${DATE_ARG}'" -P csv_fieldsep=';' < $SQL_FILE > $OUTPUT_FILE
 }
 
 send_file() {

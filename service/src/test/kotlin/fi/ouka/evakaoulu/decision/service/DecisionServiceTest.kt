@@ -500,7 +500,11 @@ private val validAssistanceNeedPreSchoolDecision = AssistanceNeedPreschoolDecisi
         preparer2Title = "Valmistelija 2",
         preparer2PhoneNumber = "358 40 1234587",
         decisionMakerEmployeeId = EmployeeId(UUID.randomUUID()),
-        decisionMakerTitle = "Päättäjä"
+        decisionMakerTitle = "Päättäjä",
+        basisDocumentDoctorStatementDate = LocalDate.of(2022, 7, 1),
+        basisDocumentPedagogicalReportDate = LocalDate.of(2022, 7, 1),
+        basisDocumentPsychologistStatementDate = LocalDate.of(2022, 7, 1),
+        basisDocumentSocialReportDate = LocalDate.of(2022, 7, 1)
     )
 )
 

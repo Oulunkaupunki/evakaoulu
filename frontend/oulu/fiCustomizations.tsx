@@ -637,6 +637,8 @@ const fi: DeepPartial<Translations> = {
       }
     },
     assistancePreschoolDecisions: {
+      pageTitle: 'Päätös erityisestä tuesta esiopetuksessa',
+      lawReference: 'Perusopetuslaki 17 § ja 31 §',
       appealInstructions: (
         <>
           <P>

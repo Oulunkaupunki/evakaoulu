@@ -9,7 +9,6 @@ class PaymentChecker {
         if (payment.unit.iban == null) return true
         if (payment.unit.businessId == null) return true
         if (payment.unit.providerId == null) return true
-        if (payment.amount <= 0) return true
         return false
     }
 }

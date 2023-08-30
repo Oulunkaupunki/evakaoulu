@@ -188,8 +188,10 @@ class ProEPaymentGenerator(
 
         var paymentString = ""
         succeeded.forEach {
-            val paymentData = gatherPaymentData(it)
-            paymentString += formatPayment(paymentData)
+            if (it.amount > 0) {
+                val paymentData = gatherPaymentData(it)
+                paymentString += formatPayment(paymentData)
+            }
             successList.add(it)
         }
 

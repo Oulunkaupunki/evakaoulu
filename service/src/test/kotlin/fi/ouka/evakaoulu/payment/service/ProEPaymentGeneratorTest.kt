@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class ProEPaymentGeneratorTest {
     @Test
     fun `should not generate payment rows from payments with a negative amount`() {
-        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(),  BicMapper())
+        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(), BicMapper())
 
         val validPayment = validPayment()
         val otherPaymentUnit = validPaymentUnit().copy(providerId = "OTHERPROVIDERID")
@@ -19,7 +19,7 @@ class ProEPaymentGeneratorTest {
 
     @Test
     fun `should not generate payment rows from payments with a zero amount`() {
-        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(),  BicMapper())
+        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(), BicMapper())
 
         val validPayment = validPayment()
         val otherPaymentUnit = validPaymentUnit().copy(providerId = "OTHERPROVIDERID")
@@ -32,7 +32,7 @@ class ProEPaymentGeneratorTest {
 
     @Test
     fun `should include payments with negative amounts in the success list`() {
-        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(),  BicMapper())
+        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(), BicMapper())
 
         val validPayment = validPayment()
         val otherPaymentUnit = validPaymentUnit().copy(providerId = "OTHERPROVIDERID")
@@ -45,7 +45,7 @@ class ProEPaymentGeneratorTest {
 
     @Test
     fun `should include payments with zero amounts in the success list`() {
-        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(),  BicMapper())
+        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(), BicMapper())
 
         val validPayment = validPayment()
         val otherPaymentUnit = validPaymentUnit().copy(providerId = "OTHERPROVIDERID")

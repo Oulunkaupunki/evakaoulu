@@ -13,6 +13,7 @@ import fi.espoo.evaka.invoicing.service.IncomeNotificationType
 import fi.espoo.evaka.messaging.MessageThreadStub
 import fi.espoo.evaka.messaging.MessageType
 import fi.espoo.evaka.shared.ChildId
+import fi.espoo.evaka.shared.MessageThreadId
 import fi.espoo.evaka.shared.domain.FiniteDateRange
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -35,11 +36,22 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForDecisionEmail: String = "Päätös eVakassa / Decision in eVaka"
-    private fun baseUrl(language: Language) =
-        when (language) {
-            Language.sv -> env.frontendBaseUrlSv
-            else -> env.frontendBaseUrlFi
-        }
+    private fun link(language: Language, path: String): String {
+        val baseUrl =
+            when (language) {
+                Language.sv -> env.frontendBaseUrlSv
+                else -> env.frontendBaseUrlFi
+            }
+        val url = "$baseUrl$path"
+        return """<a href="$url">$url</a>"""
+    }
+
+    private fun calendarLink(language: Language) = link(language, "/calendar")
+    private fun messageLink(language: Language, threadId: MessageThreadId) =
+        link(language, "/messages/$threadId")
+    private fun childLink(language: Language, childId: ChildId) =
+        link(language, "/children/$childId")
+    private fun incomeLink(language: Language) = link(language, "/income")
 
     override fun calendarEventNotification(
         language: Language,
@@ -47,34 +59,36 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     ): EmailContent {
         val format =
             DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale("fi", "FI"))
+        val eventsHtml =
+            "<ul>" +
+                events.joinToString("\n") { event ->
+                    var period = event.period.start.format(format)
+                    if (event.period.end != event.period.start) {
+                        period += "-${event.period.end.format(format)}"
+                    }
+                    "<li>$period: ${event.title}</li>"
+                } +
+                "</ul>"
         return EmailContent.fromHtml(
             subject =
             "Uusia kalenteritapahtumia eVakassa / New calendar events in eVaka",
             html =
             """
-                <p>eVakaan on lisätty uusia kalenteritapahtumia / New calendar events have been added to eVaka:</p>
-                
-                """
-                .trimIndent() +
-                events.joinToString("\n\n") { event ->
-                    var period = event.period.start.format(format)
-                    if (event.period.end != event.period.start) {
-                        period += "-${event.period.end.format(format)}"
-                    }
-                    "<p>$period: ${event.title}</p>"
-                } +
-                """
-                    
-                    <p>Katso lisää kalenterissa / See more in the calendar: ${baseUrl(language)}/calendar</p>
-                    """
-                    .trimIndent()
+        <p>eVakaan on lisätty uusia kalenteritapahtumia:</p>
+        $eventsHtml
+        <p>Katso lisää kalenterissa: ${calendarLink(Language.fi)}</p>
+        <hr>
+        <p>New calendar events in eVaka:</p>
+        $eventsHtml
+        <p>See more in the calendar: ${calendarLink(Language.en)}</p>
+        """
+                .trimIndent()
         )
     }
 
     override fun assistanceNeedPreschoolDecisionNotification(language: Language): EmailContent =
         assistanceNeedDecisionNotification(language) // currently same content
     override fun messageNotification(language: Language, thread: MessageThreadStub): EmailContent {
-        val messageUrl = "${baseUrl(language)}/messages/${thread.id}"
         val (typeFi, typeSv, typeEn) =
             when (thread.type) {
                 MessageType.MESSAGE ->
@@ -103,25 +117,25 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
             text =
             """
-                Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: $messageUrl
+                Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(Language.fi, thread.id)}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
                 
-                You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: $messageUrl
+                You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(Language.en, thread.id)}
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
                 .trimIndent(),
             html =
             """
-                <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: <a href="$messageUrl">$messageUrl</a></p>
+                <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(Language.fi, thread.id)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 
                 <hr>
                 
-                <p>You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: <a href="$messageUrl">$messageUrl</a></p>
+                <p>You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(Language.en, thread.id)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
             """
                 .trimIndent()
@@ -566,61 +580,59 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     }
 
     override fun vasuNotification(language: Language, childId: ChildId): EmailContent {
-        val documentsUrl = "${baseUrl(language)}/children/$childId"
         return EmailContent(
             subject = "Uusi dokumentti eVakassa / New document in eVaka",
             text =
             """
-                Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: $documentsUrl
+                Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
                 
-                You have received a new eVaka document. Read the document here: $documentsUrl
+                You have received a new eVaka document. Read the document here: ${childLink(Language.en, childId)}
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
                 .trimIndent(),
             html =
             """
-                <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
             
                 <hr>
                 
-                <p>You have received a new eVaka document. Read the document here: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>You have received a new eVaka document. Read the document here: ${childLink(Language.en, childId)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
             """
                 .trimIndent()
         )
     }
 
-    override fun pedagogicalDocumentNotification(language: Language): EmailContent {
-        val documentsUrl = "${baseUrl(language)}/pedagogical-documents"
+    override fun pedagogicalDocumentNotification(language: Language, childId: ChildId): EmailContent {
         return EmailContent(
             subject = "Uusi pedagoginen dokumentti eVakassa / New pedagogical document in eVaka",
             text =
             """
-                Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: $documentsUrl
+                Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
                 
-                You have received a new eVaka pedagogical document. Read the document here: $documentsUrl
+                You have received a new eVaka pedagogical document. Read the document here:  ${childLink(Language.en, childId)}
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
                 .trimIndent(),
             html =
             """
-                <p>Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 
                 <hr>
                 
-                <p>You have received a new eVaka pedagogical document. Read the document here: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>You have received a new eVaka pedagogical document. Read the document here: ${childLink(Language.en, childId)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>       
             """
                 .trimIndent()
@@ -632,14 +644,13 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         language: Language
     ): EmailContent {
         return when (notificationType) {
-            IncomeNotificationType.INITIAL_EMAIL -> outdatedIncomeNotificationInitial(language)
-            IncomeNotificationType.REMINDER_EMAIL -> outdatedIncomeNotificationReminder(language)
+            IncomeNotificationType.INITIAL_EMAIL -> outdatedIncomeNotificationInitial()
+            IncomeNotificationType.REMINDER_EMAIL -> outdatedIncomeNotificationReminder()
             IncomeNotificationType.EXPIRED_EMAIL -> outdatedIncomeNotificationExpired()
         }
     }
 
-    fun outdatedIncomeNotificationInitial(language: Language): EmailContent {
-        val documentsUrl = "${baseUrl(language)}/income"
+    fun outdatedIncomeNotificationInitial(): EmailContent {
         return EmailContent(
             subject = "Tulotietojen tarkastus- kehotus / Request to review income information",
             text =
@@ -654,7 +665,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
-                Tulotiedot: $documentsUrl
+                Tulotiedot:  ${incomeLink(Language.fi)}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
@@ -670,7 +681,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
 
-                Income information: $documentsUrl
+                Income information:  ${incomeLink(Language.en)}
 
                 This is an automatic message from the eVaka system. Do not reply to this message.
             """
@@ -687,7 +698,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
                 
-                <p>Tulotiedot: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>Tulotiedot:  ${incomeLink(Language.fi)}</p>
                 
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 
@@ -703,7 +714,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                 
-                <p>Income information: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>Income information:  ${incomeLink(Language.en)}</p>
                 
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
             """
@@ -711,8 +722,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         )
     }
 
-    fun outdatedIncomeNotificationReminder(language: Language): EmailContent {
-        val documentsUrl = "${baseUrl(language)}/income"
+    fun outdatedIncomeNotificationReminder(): EmailContent {
         return EmailContent(
             subject = "Tulotietojen tarkastus- kehotus / Request to review income information",
             text =
@@ -727,7 +737,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
-                Tulotiedot: $documentsUrl
+                Tulotiedot: ${incomeLink(Language.fi)}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
@@ -743,7 +753,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
                 
-                Income information: $documentsUrl
+                Income information: ${incomeLink(Language.en)}
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.
             """
@@ -760,7 +770,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
                 
-                <p>Tulotiedot: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>Tulotiedot: ${incomeLink(Language.fi)}</p>
                 
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 
@@ -776,7 +786,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                 
-                <p>Income information: <a href="$documentsUrl">$documentsUrl</a></p>
+                <p>Income information: ${incomeLink(Language.en)}</p>
                 
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
             """

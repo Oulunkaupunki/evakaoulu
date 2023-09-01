@@ -949,6 +949,7 @@ workflows:
             branches:
               only:
                 - main
+                - keycloak_update_v22
 
       - merge_branch:
           context:

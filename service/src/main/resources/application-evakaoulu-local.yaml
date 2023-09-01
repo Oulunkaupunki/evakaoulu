@@ -34,7 +34,6 @@ evaka:
   integration:
     koski:
       enabled: false
-  use_new_assistance_model: true
 
 evakaoulu:
   intimeInvoices:

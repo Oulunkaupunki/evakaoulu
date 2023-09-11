@@ -1,5 +1,5 @@
-SET TIMEZONE = 'Europe/Helsinki';
-SELECT now()                                           AS aikaleima,
+SELECT
+    now() AT TIME ZONE 'Europe/Helsinki'               AS aikaleima,
     decision_number                                    AS päätos_tuesta,
     child_id                                           AS lapsen_id,
     lower(validity_period)                             AS tuen_alkupvm,

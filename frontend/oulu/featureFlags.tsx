@@ -19,7 +19,6 @@ type Features = {
 const features: Features = {
   default: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     financeDecisionHandlerSelect: false,
     feeDecisionPreschoolClubFilter: true,
@@ -50,7 +49,6 @@ const features: Features = {
   },
   staging: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
@@ -81,7 +79,6 @@ const features: Features = {
   },
   prod: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true

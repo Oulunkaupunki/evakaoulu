@@ -104,7 +104,7 @@ const features: Features = {
       serviceWorkerMessaging: true,
       childDocuments: true,
       intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: false
+      assistanceNeedPreschoolDecisions: true
     }
   }
 }

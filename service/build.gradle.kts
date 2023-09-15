@@ -24,10 +24,10 @@ repositories {
 }
 
 dependencies {
-    implementation(platform(":evaka-bom"))
-    testImplementation(platform(":evaka-bom"))
+    implementation(platform("evaka:evaka-bom"))
+    testImplementation(platform("evaka:evaka-bom"))
 
-    implementation(":evaka-service")
+    implementation("evaka:evaka-service")
 
     implementation("io.github.microutils:kotlin-logging-jvm")
     implementation("ch.qos.logback:logback-access")

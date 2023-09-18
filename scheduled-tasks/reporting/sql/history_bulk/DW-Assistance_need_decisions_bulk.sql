@@ -15,6 +15,7 @@ SELECT
     service_opt_full_time_special_ed                   AS veon_kokoaikainen_opetus,
     service_opt_interpretation_and_assistance_services AS tulkitsemis_ja_avustamispalvelut,
     service_opt_special_aides                          AS apuvälineet,
-    assistance_levels                                  AS tuen_taso
+    assistance_levels                                  AS tuen_taso,
+    status                                             AS tila
 FROM assistance_need_decision
 WHERE :date_val::DATE <= upper(validity_period);

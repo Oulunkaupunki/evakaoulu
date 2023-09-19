@@ -9,7 +9,6 @@ SELECT
     vvd.final_co_payment                    AS omavastuuosuus,
     vvd.child_id                            AS lapsen_id,
     vvd.placement_type                      AS toimintamuoto,
-    vvd.status                              AS tila,
     ca.name                                 AS palvelualue,
     ca.id                                   AS palvelualue_id,
     d.name                                  AS toimipaikka,
@@ -17,5 +16,6 @@ SELECT
 FROM voucher_value_decision vvd
     JOIN daycare d ON vvd.placement_unit_id = d.id
     JOIN care_area ca ON d.care_area_id = ca.id
-WHERE vvd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
+WHERE vvd.status = 'SENT'
+    AND vvd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
     AND :date_val::DATE <= vvd.valid_to;

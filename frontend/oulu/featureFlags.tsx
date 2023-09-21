@@ -19,7 +19,6 @@ type Features = {
 const features: Features = {
   default: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     financeDecisionHandlerSelect: false,
     feeDecisionPreschoolClubFilter: true,
@@ -35,6 +34,7 @@ const features: Features = {
     urgencyAttachments: true,
     preparatory: true,
     childDiscussion: true,
+    placementGuarantee: false,
     experimental: {
       leops: true,
       voucherUnitPayments: true,
@@ -45,12 +45,12 @@ const features: Features = {
       serviceWorkerMessaging: true,
       childDocuments: true,
       intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: true
+      assistanceNeedPreschoolDecisions: true,
+      feeDecisionIgnoredStatus: true
     }
   },
   staging: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
@@ -66,6 +66,7 @@ const features: Features = {
     financeDecisionHandlerSelect: false,
     feeDecisionPreschoolClubFilter: true,
     childDiscussion: true,
+    placementGuarantee: false,
     experimental: {
       leops: true,
       voucherUnitPayments: true,
@@ -76,12 +77,12 @@ const features: Features = {
       serviceWorkerMessaging: true,
       childDocuments: true,
       intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: true
+      assistanceNeedPreschoolDecisions: true,
+      feeDecisionIgnoredStatus: true
     }
   },
   prod: {
     citizenShiftCareAbsence: false,
-    citizenContractDayAbsence: true,
     assistanceActionOther: true,
     daycareApplication: {
       dailyTimes: true
@@ -97,6 +98,7 @@ const features: Features = {
     financeDecisionHandlerSelect: false,
     feeDecisionPreschoolClubFilter: true,
     childDiscussion: true,
+    placementGuarantee: false,
     experimental: {
       leops: true,
       voucherUnitPayments: true,
@@ -107,7 +109,8 @@ const features: Features = {
       serviceWorkerMessaging: true,
       childDocuments: true,
       intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: false
+      assistanceNeedPreschoolDecisions: true,
+      feeDecisionIgnoredStatus: false
     }
   }
 }

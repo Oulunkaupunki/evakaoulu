@@ -43,6 +43,7 @@ class EVakaOuluConfig {
         enabledChildConsentTypes = setOf(),
         curriculumDocumentPermissionToShareRequired = true,
         assistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
+        preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
         requestedStartUpperLimit = 7,
         partialAbsenceThresholdsEnabled = false,
         postOffice = "OULU",

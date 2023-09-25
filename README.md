@@ -14,7 +14,7 @@ This repository contains the code for customizing, configuring and extending the
 ### Prerequisites - needed software and tools
 See [eVaka README](evaka/compose/README.md#Dependencies)
 
-### Starting eVakaOulu dev environment
+### Starting eVakaOulu dev environment:
 1. `cd compose`
 2. `docker-compose -f docker-compose-dbs.yml up -d --build`
 3. `pm2 start` (starts all apps)

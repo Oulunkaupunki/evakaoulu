@@ -35,19 +35,17 @@ const features: Features = {
     preparatory: true,
     childDiscussion: true,
     placementGuarantee: false,
-    experimental: {
-      leops: true,
-      voucherUnitPayments: true,
-      assistanceNeedDecisions: true,
-      assistanceNeedDecisionsLanguageSelect: false,
-      staffAttendanceTypes: true,
-      fosterParents: true,
-      serviceWorkerMessaging: true,
-      childDocuments: true,
-      intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: true,
-      feeDecisionIgnoredStatus: true
-    }
+    voucherUnitPayments: true,
+    assistanceNeedDecisionsLanguageSelect: false,
+    staffAttendanceTypes: true,
+    childDocuments: true,
+    intermittentShiftCare: false,
+    assistanceNeedPreschoolDecisions: true,
+    feeDecisionIgnoredStatus: true,
+    hojks: false,
+    personDuplicate: false,
+    citizenAttendanceSummary: false,
+    noAbsenceType: false
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -67,19 +65,17 @@ const features: Features = {
     feeDecisionPreschoolClubFilter: true,
     childDiscussion: true,
     placementGuarantee: false,
-    experimental: {
-      leops: true,
-      voucherUnitPayments: true,
-      assistanceNeedDecisions: true,
-      assistanceNeedDecisionsLanguageSelect: false,
-      staffAttendanceTypes: true,
-      fosterParents: true,
-      serviceWorkerMessaging: true,
-      childDocuments: true,
-      intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: true,
-      feeDecisionIgnoredStatus: true
-    }
+    voucherUnitPayments: true,
+    assistanceNeedDecisionsLanguageSelect: false,
+    staffAttendanceTypes: true,
+    childDocuments: true,
+    intermittentShiftCare: false,
+    assistanceNeedPreschoolDecisions: true,
+    feeDecisionIgnoredStatus: true,
+    hojks: false,
+    personDuplicate: false,
+    citizenAttendanceSummary: false,
+    noAbsenceType: false
   },
   prod: {
     citizenShiftCareAbsence: false,
@@ -99,19 +95,17 @@ const features: Features = {
     feeDecisionPreschoolClubFilter: true,
     childDiscussion: true,
     placementGuarantee: false,
-    experimental: {
-      leops: true,
-      voucherUnitPayments: true,
-      assistanceNeedDecisions: true,
-      assistanceNeedDecisionsLanguageSelect: false,
-      staffAttendanceTypes: true,
-      fosterParents: true,
-      serviceWorkerMessaging: true,
-      childDocuments: true,
-      intermittentShiftCare: false,
-      assistanceNeedPreschoolDecisions: true,
-      feeDecisionIgnoredStatus: false
-    }
+    voucherUnitPayments: true,
+    assistanceNeedDecisionsLanguageSelect: false,
+    staffAttendanceTypes: true,
+    childDocuments: true,
+    intermittentShiftCare: false,
+    assistanceNeedPreschoolDecisions: true,
+    feeDecisionIgnoredStatus: false,
+    hojks: false,
+    personDuplicate: false,
+    citizenAttendanceSummary: false,
+    noAbsenceType: false
   }
 }
 

@@ -101,7 +101,7 @@ const features: Features = {
     childDocuments: true,
     intermittentShiftCare: false,
     assistanceNeedPreschoolDecisions: true,
-    feeDecisionIgnoredStatus: false,
+    feeDecisionIgnoredStatus: true,
     hojks: false,
     personDuplicate: false,
     citizenAttendanceSummary: false,

@@ -6,7 +6,7 @@ package fi.ouka.evakaoulu.pdf
 
 import fi.espoo.evaka.invoicing.domain.DecisionIncome
 import fi.espoo.evaka.invoicing.domain.EmployeeWithName
-import fi.espoo.evaka.invoicing.domain.FeeAlteration
+import fi.espoo.evaka.invoicing.domain.FeeAlterationType
 import fi.espoo.evaka.invoicing.domain.FeeAlterationWithEffect
 import fi.espoo.evaka.invoicing.domain.FeeDecisionChildDetailed
 import fi.espoo.evaka.invoicing.domain.FeeDecisionDetailed
@@ -214,7 +214,7 @@ internal class PDFServiceTest {
             validTo = LocalDate.now().plusYears(1),
             decisionType = VoucherValueDecisionType.RELIEF_ACCEPTED,
             feeAlterations = listOf(
-                FeeAlterationWithEffect(FeeAlteration.Type.RELIEF, 50, false, -10800)
+                FeeAlterationWithEffect(FeeAlterationType.RELIEF, 50, false, -10800)
             )
         )
         val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
@@ -231,7 +231,7 @@ internal class PDFServiceTest {
             validTo = LocalDate.now().plusYears(1),
             decisionType = VoucherValueDecisionType.RELIEF_PARTLY_ACCEPTED,
             feeAlterations = listOf(
-                FeeAlterationWithEffect(FeeAlteration.Type.RELIEF, 50, false, -100)
+                FeeAlterationWithEffect(FeeAlterationType.RELIEF, 50, false, -100)
             )
         )
         val data = VoucherValueDecisionPdfData(decision, settings, DocumentLang.FI)
@@ -293,7 +293,7 @@ private fun validFeeDecision() = FeeDecisionDetailed(
             siblingDiscount = 1,
             fee = 1,
             feeAlterations = listOf(
-                FeeAlterationWithEffect(FeeAlteration.Type.RELIEF, 50, false, -10800)
+                FeeAlterationWithEffect(FeeAlterationType.RELIEF, 50, false, -10800)
             ),
             finalFee = 1,
             childIncome = null

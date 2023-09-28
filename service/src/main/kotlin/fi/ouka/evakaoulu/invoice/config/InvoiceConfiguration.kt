@@ -5,7 +5,7 @@
 package fi.ouka.evakaoulu.invoice.config
 
 import com.jcraft.jsch.JSch
-import fi.espoo.evaka.invoicing.domain.FeeAlteration
+import fi.espoo.evaka.invoicing.domain.FeeAlterationType
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import fi.espoo.evaka.invoicing.service.IncomeTypesProvider
@@ -93,11 +93,11 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
         return product.key
     }
 
-    override fun mapToFeeAlterationProduct(productKey: ProductKey, feeAlterationType: FeeAlteration.Type): ProductKey {
+    override fun mapToFeeAlterationProduct(productKey: ProductKey, feeAlterationType: FeeAlterationType): ProductKey {
         val product = when (findProduct(productKey) to feeAlterationType) {
-            Product.DAYCARE to FeeAlteration.Type.DISCOUNT, Product.DAYCARE to FeeAlteration.Type.RELIEF, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.DISCOUNT, Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.RELIEF -> Product.DAYCARE_DISCOUNT
-            Product.DAYCARE to FeeAlteration.Type.INCREASE -> Product.CORRECTION
-            Product.PRESCHOOL_WITH_DAYCARE to FeeAlteration.Type.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
+            Product.DAYCARE to FeeAlterationType.DISCOUNT, Product.DAYCARE to FeeAlterationType.RELIEF, Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.DISCOUNT, Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.RELIEF -> Product.DAYCARE_DISCOUNT
+            Product.DAYCARE to FeeAlterationType.INCREASE -> Product.CORRECTION
+            Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
             else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
         }
         return product.key

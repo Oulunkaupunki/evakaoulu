@@ -725,8 +725,6 @@ workflows:
           requires:
             - check_licenses
             - apigw_build_image
-            - frontend_test
-            - frontend_upload_archive
             - proxy_build_image
             - service_test
             - service_build_image

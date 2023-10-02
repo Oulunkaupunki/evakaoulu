@@ -22,7 +22,7 @@ services:
     # command: [nginx-debug, '-g', 'daemon off;']
 
   enduser-gw:
-    image: evakaoulu/api-gateway
+    image: ${EVAKA_GW_IMAGE}
     ports:
       - "3010"
     hostname: enduser-gw
@@ -49,7 +49,7 @@ services:
       PRETTY_LOGS: "false"
 
   internal-gw:
-    image: evakaoulu/api-gateway
+    image: ${EVAKA_GW_IMAGE}
     ports:
       - "3020"
     hostname: internal-gw

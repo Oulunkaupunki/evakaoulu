@@ -80,25 +80,6 @@ commands:
 
   # Caching commands
 
-  save:
-    parameters:
-      path:
-        type: string
-    steps:
-      - save_cache:
-          name: Save << parameters.path >>
-          key: workspace-{{ .Environment.CIRCLE_WORKFLOW_WORKSPACE_ID }}-<< parameters.path >>
-          paths:
-            - << parameters.path >>
-  restore:
-    parameters:
-      path:
-        type: string
-    steps:
-      - restore_cache:
-          name: Restore << parameters.path >>
-          key: workspace-{{ .Environment.CIRCLE_WORKFLOW_WORKSPACE_ID }}-<< parameters.path >>
-
   store_service_gradle_wrapper:
     steps:
       - save_cache:
@@ -483,8 +464,6 @@ jobs:
       - restore_repo
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
-      - restore:
-          path: customizations
       - run: cp customizations/footer-logo-citizen.png auth/OuluLogo.png
       - build_docker_image:
           image: evakaoulu/auth

@@ -49,11 +49,7 @@ executors:
     docker:
       - image: *reuse_image
     working_directory: *workspace_root
-  openjdk_executor:
-    <<: *jvm_config
-    docker:
-      - image: *openjdk_image
-  service_test_executor:
+  service_build_executor:
     <<: *jvm_config
     docker:
       - image: *openjdk_image
@@ -474,8 +470,8 @@ jobs:
           dir: *workspace_proxy
       - slack-notification
 
-  service_build:
-    executor: openjdk_executor
+  service_build_image:
+    executor: service_build_executor
     resource_class: medium+
     steps:
       - restore_repo
@@ -483,45 +479,21 @@ jobs:
       - restore_service_gradle_dependencies
       - restore_service_gradle_build_cache
       - run:
+          name: gradle build
           working_directory: *workspace_service
-          command: ./gradlew --build-cache assemble testClasses
+          command: |
+            ./gradlew --build-cache build
+            java -Djarmode=layertools -jar build/libs/evakaoulu-service.jar extract --destination target
       - store_service_gradle_build_cache
       - store_service_gradle_dependencies
       - store_service_gradle_wrapper
-      - save:
-          path: service/build/libs/evakaoulu-service.jar
-      - slack-notification
-
-  service_test:
-    executor: service_test_executor
-    resource_class: medium+
-    steps:
-      - restore_repo
-      - restore_service_gradle_wrapper
-      - restore_service_gradle_dependencies
-      - restore_service_gradle_build_cache
-      - run:
-          working_directory: *workspace_service
-          command: ./gradlew --build-cache check --info
       - store_test_results:
           path: /home/circleci/repo/service/build/test-results/
       - store_artifacts:
           path: /home/circleci/repo/service/build/reports/
-      - slack-notification
-
-  service_build_image:
-    executor: aws_executor
-    resource_class: medium
-    steps:
-      - restore_repo
-      - restore:
-          path: service/build/libs/evakaoulu-service.jar
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Unzip executable
-          working_directory: *workspace_service
-          command: unzip -q build/libs/evakaoulu-service.jar -d target
+      - aws-cli/install
       - build_docker_image:
           image: evakaoulu/service
           dir: *workspace_service
@@ -671,29 +643,19 @@ workflows:
           requires:
             - checkout_repo
 
-      - service_build:
-          context:
-            - slack-secrets
-          requires:
-            - checkout_repo
-      - service_test:
-          context:
-            - slack-secrets
-          requires:
-            - service_build
       - service_build_image:
           context:
             - evakaoulu-dev
             - slack-secrets
           requires:
-            - service_build
+            - checkout_repo
 
       - auth_build_image:
           context:
             - evakaoulu-dev
             - slack-secrets
           requires:
-            - fetch_private_dependencies
+            - checkout_repo
 
       - scheduled_tasks_reporting_build_image:
           context:
@@ -709,7 +671,6 @@ workflows:
             - check_licenses
             - apigw_build_image
             - proxy_build_image
-            - service_test
             - service_build_image
             - auth_build_image
             - scheduled_tasks_reporting_build_image
@@ -726,7 +687,6 @@ workflows:
             - check_licenses
             - apigw_build_image
             - proxy_build_image
-            - service_test
             - service_build_image
             - auth_build_image
             - scheduled_tasks_reporting_build_image

@@ -423,7 +423,7 @@ jobs:
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
       - build_docker_image:
-          image: oulu/frontend
+          image: evakaoulu/frontend
           dir: *workspace_evaka_frontend
           build_args: EVAKA_CUSTOMIZATIONS=oulu,ICONS=free
       - slack-notification

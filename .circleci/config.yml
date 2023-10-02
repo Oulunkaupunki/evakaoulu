@@ -528,10 +528,6 @@ jobs:
             BASE_URL: http://localhost:9999
             JEST_JUNIT_OUTPUT_DIR: test-results
       - run:
-         name: Link customizations
-         working_directory: *workspace_oulu_frontend
-         command: ./link.sh
-      - run:
           name: yarn lint
           working_directory: *workspace_evaka_frontend
           command: |

@@ -13,7 +13,6 @@ aliases:
   - &workspace_apigw /home/circleci/repo/evaka/apigw
   - &workspace_evaka_frontend /home/circleci/repo/evaka/frontend
   - &workspace_oulu_frontend /home/circleci/repo/frontend
-  - &workspace_proxy /home/circleci/repo/evaka/proxy
   - &workspace_service /home/circleci/repo/service
   - &workspace_auth /home/circleci/repo/auth
   - &workspace_compose /home/circleci/repo/compose
@@ -260,6 +259,9 @@ commands:
         type: string
       dir:
         type: string
+      build_args:
+        type: string
+        default: ""
       contexts:
         type: string
         default: ""
@@ -269,6 +271,9 @@ commands:
           name: Build docker image
           working_directory: << parameters.dir >>
           command: |
+            for build_arg in $(eval echo << parameters.build_args >> | tr ',' '\n'); do
+              BUILD_ARGS="$BUILD_ARGS --build-arg=$build_arg"
+            done
             for context in $(eval echo << parameters.contexts >> | tr ',' '\n'); do
               CONTEXT_ARGS="$CONTEXT_ARGS --build-context=$context"
             done
@@ -276,6 +281,7 @@ commands:
               -t 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1} \
               --build-arg "build=${CIRCLE_BUILD_NUM}" \
               --build-arg "commit=${CIRCLE_SHA1}" \
+              $BUILD_ARGS \
               $CONTEXT_ARGS \
               --push \
               .
@@ -419,55 +425,26 @@ jobs:
           dir: *workspace_apigw
       - slack-notification
 
-  frontend_build:
+  frontend_build_image:
     executor: aws_executor
     resource_class: medium+
     steps:
       - restore_repo
-      - frontend_install
       - run:
           name: Fetch commercial frontend dependencies
           working_directory: *workspace_evaka_frontend
           command: |
             aws s3 sync s3://evakaoulu-dev-deployment/frontend/vendor/fortawesome/ ./vendor/fortawesome/
       - run:
-          name: link customizations
-          working_directory: *workspace_evaka_frontend
-          command: ln -v -s $(readlink -f ../../frontend/oulu) src/lib-customizations/oulu
-      - run:
-          name: yarn build
-          working_directory: *workspace_evaka_frontend
-          environment:
-            SENTRY_NO_PROGRESS_BAR: "1"
-            EVAKA_CUSTOMIZATIONS: oulu
-            NODE_OPTIONS: "--max-old-space-size=4096"
-          command: |
-            export APP_COMMIT="$CIRCLE_SHA1"
-            ICONS=free yarn build
-      - save:
-          path: evaka/frontend/dist
-      - run:
-          name: Create archive
-          working_directory: /home/circleci/repo/evaka
-          command: |
-            tar -cvf dist.tar --directory frontend/dist/bundle/ --transform 's,^\.,frontend,' .
-            tar -rvf dist.tar --directory frontend/src/ --transform 's,^,frontend/,' maintenance-page-frontend
-            gzip dist.tar
-      - run:
-          name: Upload archive
-          working_directory: /home/circleci/repo/evaka
-          command: aws s3 cp dist.tar.gz s3://evakaoulu-dev-deployment/static/${CIRCLE_SHA1}.tar.gz
-      - slack-notification
-
-  proxy_build_image:
-    executor: aws_executor
-    resource_class: medium
-    steps:
-      - restore_repo
-      - setup_authenticated_remote_docker
+          name: Copy customizations
+          working_directory: *workspace_root
+          command: cp -rp frontend/oulu evaka/frontend/src/lib-customizations
+      - setup_authenticated_remote_docker:
+          docker_layer_caching: true
       - build_docker_image:
-          image: evakaoulu/proxy
-          dir: *workspace_proxy
+          image: oulu/frontend
+          dir: *workspace_evaka_frontend
+          build_args: EVAKA_CUSTOMIZATIONS=oulu,ICONS=free
       - slack-notification
 
   service_build_image:
@@ -547,17 +524,16 @@ jobs:
     resource_class: large
     steps:
       - restore_repo
-      - restore:
-        path: evaka/frontend/dist
       - login_ecr
       - run:
           name: Start up compose stack
           working_directory: *workspace_compose
           command: |
             CI=true LOCAL_DIR='../evaka/frontend' \
+            EVAKA_FRONTEND_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/frontend:${CIRCLE_SHA1} \
             EVAKA_GW_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/api-gateway:${CIRCLE_SHA1} \
             EVAKA_SRV_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/service:${CIRCLE_SHA1} \
-            ./compose-e2e up -d --build
+            docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml up -d --build
       - frontend_install:
           include_e2e: true
       - run:
@@ -573,6 +549,10 @@ jobs:
             BASE_URL: http://localhost:9999
             JEST_JUNIT_OUTPUT_DIR: test-results
       - run:
+         name: Link customizations
+         working_directory: *workspace_oulu_frontend
+         command: ./link.sh
+      - run:
           name: yarn lint
           working_directory: *workspace_evaka_frontend
           command: |
@@ -584,7 +564,7 @@ jobs:
       - run:
           name: Collect docker-compose logs
           working_directory: *workspace_compose
-          command: ./compose-e2e logs --tail=all > /tmp/docker-compose-logs.txt
+          command: docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml logs --tail=all > /tmp/docker-compose-logs.txt
           when: always
       - store_artifacts:
           path: /tmp/docker-compose-logs.txt
@@ -620,26 +600,18 @@ workflows:
           requires:
             - checkout_repos
 
-      - frontend_build:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - checkout_repos
-
       - e2e_test:
           context:
             - evakaoulu-dev
             - slack-secrets
           requires:
-            - frontend_build
+            - frontend_build_image
             - apigw_build_image
             - service_build_image
 
-      - proxy_build_image:
+      - frontend_build_image:
           context:
             - evakaoulu-dev
-            - slack-secrets
           requires:
             - checkout_repo
 
@@ -669,9 +641,6 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - apigw_build_image
-            - proxy_build_image
-            - service_build_image
             - auth_build_image
             - scheduled_tasks_reporting_build_image
             - e2e_test
@@ -685,9 +654,6 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - apigw_build_image
-            - proxy_build_image
-            - service_build_image
             - auth_build_image
             - scheduled_tasks_reporting_build_image
             - e2e_test

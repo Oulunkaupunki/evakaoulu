@@ -5,7 +5,7 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.4
+  aws-cli: circleci/aws-cli@4.0.0
   slack: circleci/slack@4.12.5
 
 aliases:
@@ -18,14 +18,15 @@ aliases:
   - &workspace_auth /home/circleci/repo/auth
   - &workspace_compose /home/circleci/repo/compose
 
-  - &remote_docker_version "20.10.18"
+  - &remote_docker_version "20.10.24"
   - &base_image cimg/base:current-22.04
-  - &reuse_image fsfe/reuse:0.13.0 # NOTE: Update bin/add-license-headers.sh to match
+  - &aws_image cimg/aws:2023.07
+  - &reuse_image fsfe/reuse:1.1.2 # NOTE: Update bin/add-license-headers.sh to match
   - &nodejs_image cimg/node:18.16
   - &openjdk_image cimg/openjdk:17.0
   - &postgres_image cimg/postgres:14.6
-  - &s3mock_image adobe/s3mock:2.8.0
-  - &ubuntu_machine_image ubuntu-2204:2023.04.1
+  - &s3mock_image adobe/s3mock:3.0.0
+  - &ubuntu_machine_image ubuntu-2204:2023.07.2
 
   - &default_config
     working_directory: *workspace_root
@@ -44,6 +45,10 @@ executors:
     <<: *default_config
     docker:
       - image: *base_image
+  aws_executor:
+    <<: *default_config
+    docker:
+      - image: *aws_image
   reuse_tool:
     docker:
       - image: *reuse_image
@@ -176,6 +181,12 @@ commands:
     steps:
       - run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 
+  login_ecr:
+    steps:
+      - run:
+          name: Log into Amazon ECR
+          command: aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 463484918991.dkr.ecr.eu-west-1.amazonaws.com
+
   setup_authenticated_remote_docker:
     description: Setup remote Docker execution environment with Docker Hub authentication
     parameters:
@@ -268,6 +279,7 @@ commands:
         type: string
         default: ""
     steps:
+      - login_ecr
       - run:
           name: Build docker image
           working_directory: << parameters.dir >>
@@ -276,60 +288,27 @@ commands:
               CONTEXT_ARGS="$CONTEXT_ARGS --build-context=$context"
             done
             docker buildx build --progress=plain \
-              -t << parameters.image >> \
+              -t 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1} \
               --build-arg "build=${CIRCLE_BUILD_NUM}" \
               --build-arg "commit=${CIRCLE_SHA1}" \
               $CONTEXT_ARGS \
+              --push \
               .
-      - run:
-          name: Save docker image
-          working_directory: << parameters.dir >>
-          command: docker save << parameters.image >> > image.tar
-
-  load_docker_image:
-    parameters:
-      dir:
-        type: string
-    steps:
-      - run:
-          name: Load docker image
-          working_directory: << parameters.dir >>
-          command: docker load -i image.tar
-
-  push_docker_image:
-    parameters:
-      image:
-        type: string
-      dir:
-        type: string
-    steps:
-      - load_docker_image:
-          dir: << parameters.dir >>
-      - run:
-          name: Push docker image
-          command: |
-            aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 463484918991.dkr.ecr.eu-west-1.amazonaws.com
-            docker tag << parameters.image >> 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1}
-            docker push 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1}
 
   e2e_test:
     steps:
       - restore_repo
       - restore:
           path: evaka/frontend/dist
-      - restore:
-          path: evaka/apigw/image.tar
-      - restore:
-          path: service/image.tar
-      - load_docker_image:
-          dir: *workspace_apigw
-      - load_docker_image:
-          dir: *workspace_service
+      - login_ecr
       - run:
           name: Start up compose stack
           working_directory: *workspace_compose
           command: |
-            CI=true LOCAL_DIR='../evaka/frontend' ./compose-e2e up -d --build
+            CI=true LOCAL_DIR='../evaka/frontend' \
+            EVAKA_GW_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/api-gateway:${CIRCLE_SHA1} \
+            EVAKA_SRV_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/service:${CIRCLE_SHA1} \
+            ./compose-e2e up -d --build
       - restore_frontend_node_modules
       - frontend_install
       - run:
@@ -511,30 +490,13 @@ jobs:
   # BUILD JOBS
 
   apigw_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
       - build_docker_image:
-          image: evakaoulu/api-gateway
-          dir: *workspace_apigw
-      - save:
-          path: evaka/apigw/image.tar
-      - slack-notification
-
-  apigw_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: evaka/apigw/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
           image: evakaoulu/api-gateway
           dir: *workspace_apigw
       - slack-notification
@@ -632,29 +594,12 @@ jobs:
       - slack-notification
 
   proxy_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
       - setup_authenticated_remote_docker
       - build_docker_image:
-          image: evakaoulu/proxy
-          dir: *workspace_proxy
-      - save:
-          path: evaka/proxy/image.tar
-      - slack-notification
-
-  proxy_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: evaka/proxy/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
           image: evakaoulu/proxy
           dir: *workspace_proxy
       - slack-notification
@@ -695,7 +640,7 @@ jobs:
       - slack-notification
 
   service_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
@@ -710,27 +655,10 @@ jobs:
       - build_docker_image:
           image: evakaoulu/service
           dir: *workspace_service
-      - save:
-          path: service/image.tar
-      - slack-notification
-
-  service_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: service/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
-          image: evakaoulu/service
-          dir: *workspace_service
       - slack-notification
 
   auth_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
@@ -743,49 +671,16 @@ jobs:
           image: evakaoulu/auth
           dir: *workspace_auth
           contexts: core=../evaka/keycloak
-      - save:
-          path: auth/image.tar
-      - slack-notification
-
-  auth_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: auth/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
-          image: evakaoulu/auth
-          dir: *workspace_auth
       - slack-notification
 
   scheduled_tasks_reporting_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
       - build_docker_image:
-          image: evakaoulu/scheduled-task/reporting
-          dir: scheduled-tasks/reporting
-      - save:
-          path: scheduled-tasks/reporting/image.tar
-
-  scheduled_tasks_reporting_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: scheduled-tasks/reporting/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
           image: evakaoulu/scheduled-task/reporting
           dir: scheduled-tasks/reporting
 
@@ -836,13 +731,7 @@ workflows:
           context:
             - slack-secrets
           requires:
-            - checkout_repo
-      - apigw_push_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - apigw_build_image
+            - checkout_repos
 
       - frontend_dependencies:
           context:
@@ -880,12 +769,6 @@ workflows:
             - slack-secrets
           requires:
             - checkout_repo
-      - proxy_push_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - proxy_build_image
 
       - service_build:
           context:
@@ -902,33 +785,16 @@ workflows:
             - slack-secrets
           requires:
             - service_build
-      - service_push_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - service_build_image
 
       - auth_build_image:
           context:
             - slack-secrets
           requires:
             - fetch_private_dependencies
-      - auth_push_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - auth_build_image
 
       - scheduled_tasks_reporting_build_image:
           requires:
             - checkout_repo
-      - scheduled_tasks_reporting_push_image:
-          context:
-            - evakaoulu-dev
-          requires:
-            - scheduled_tasks_reporting_build_image
 
       - trigger_deploy:
           context:

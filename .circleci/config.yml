@@ -577,7 +577,7 @@ workflows:
             - evakaoulu-dev
             - slack-secrets
           requires:
-            - checkout_repos
+            - checkout_repo
 
       - e2e_test:
           context:

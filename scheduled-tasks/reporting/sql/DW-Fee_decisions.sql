@@ -7,6 +7,7 @@ SELECT
     fd.decision_type                        AS huojennustyyppi,
     fd.family_size                          AS perhekoko,
     fd.total_fee                            AS kokonaismaksu,
+    fd.status                               AS tila,
     fdc.child_id                            AS lapsi_id,
     fdc.final_fee                           AS lapsikohtainen_maksu,
     fdc.placement_type                      AS toimintamuoto,
@@ -19,6 +20,5 @@ FROM fee_decision fd
     JOIN fee_decision_child fdc on fd.id = fdc.fee_decision_id
     JOIN daycare d ON fdc.placement_unit_id = d.id
     JOIN care_area ca ON d.care_area_id = ca.id
-WHERE fd.status = 'SENT'
-    AND fd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
+WHERE fd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
     AND :date_val::DATE - INTERVAL '3 months' <= upper(fd.valid_during);

@@ -5,7 +5,7 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.4
+  aws-cli: circleci/aws-cli@4.0.0
   slack: circleci/slack@4.12.5
 
 aliases:
@@ -13,25 +13,21 @@ aliases:
   - &workspace_apigw /home/circleci/repo/evaka/apigw
   - &workspace_evaka_frontend /home/circleci/repo/evaka/frontend
   - &workspace_oulu_frontend /home/circleci/repo/frontend
-  - &workspace_proxy /home/circleci/repo/evaka/proxy
   - &workspace_service /home/circleci/repo/service
   - &workspace_auth /home/circleci/repo/auth
   - &workspace_compose /home/circleci/repo/compose
 
-  - &remote_docker_version "20.10.18"
+  - &remote_docker_version "20.10.24"
   - &base_image cimg/base:current-22.04
-  - &reuse_image fsfe/reuse:0.13.0 # NOTE: Update bin/add-license-headers.sh to match
-  - &nodejs_image cimg/node:18.16
+  - &aws_image cimg/aws:2023.07
+  - &reuse_image fsfe/reuse:1.1.2 # NOTE: Update bin/add-license-headers.sh to match
   - &openjdk_image cimg/openjdk:17.0
   - &postgres_image cimg/postgres:14.6
-  - &s3mock_image adobe/s3mock:2.8.0
-  - &ubuntu_machine_image ubuntu-2204:2023.04.1
+  - &s3mock_image adobe/s3mock:3.0.0
+  - &ubuntu_machine_image ubuntu-2204:2023.07.2
 
   - &default_config
     working_directory: *workspace_root
-
-  - &node_config
-    <<: *default_config
 
   - &jvm_config
     <<: *default_config
@@ -44,19 +40,15 @@ executors:
     <<: *default_config
     docker:
       - image: *base_image
+  aws_executor:
+    <<: *default_config
+    docker:
+      - image: *aws_image
   reuse_tool:
     docker:
       - image: *reuse_image
     working_directory: *workspace_root
-  nodejs_executor:
-    <<: *node_config
-    docker:
-      - image: *nodejs_image
-  openjdk_executor:
-    <<: *jvm_config
-    docker:
-      - image: *openjdk_image
-  service_test_executor:
+  service_build_executor:
     <<: *jvm_config
     docker:
       - image: *openjdk_image
@@ -67,7 +59,7 @@ executors:
           POSTGRES_DB: evaka_it
       - image: *s3mock_image
   e2e_executor:
-    <<: *node_config
+    <<: *default_config
     machine:
       image: *ubuntu_machine_image
     environment:
@@ -87,25 +79,6 @@ commands:
           at: .
 
   # Caching commands
-
-  save:
-    parameters:
-      path:
-        type: string
-    steps:
-      - save_cache:
-          name: Save << parameters.path >>
-          key: workspace-{{ .Environment.CIRCLE_WORKFLOW_WORKSPACE_ID }}-<< parameters.path >>
-          paths:
-            - << parameters.path >>
-  restore:
-    parameters:
-      path:
-        type: string
-    steps:
-      - restore_cache:
-          name: Restore << parameters.path >>
-          key: workspace-{{ .Environment.CIRCLE_WORKFLOW_WORKSPACE_ID }}-<< parameters.path >>
 
   store_service_gradle_wrapper:
     steps:
@@ -160,21 +133,18 @@ commands:
             - gradle-build-cache-service-v1-main-
             - gradle-build-cache-service-v1-
 
-  store_frontend_node_modules:
-    steps:
-      - save:
-          path: evaka/frontend/node_modules
-  restore_frontend_node_modules:
-    steps:
-      - restore:
-          path: evaka/frontend/node_modules
-
   # Misc commands
 
   login_docker_hub:
     description: Log in to Docker Hub for authenticated pulls
     steps:
       - run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+  login_ecr:
+    steps:
+      - run:
+          name: Log into Amazon ECR
+          command: aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 463484918991.dkr.ecr.eu-west-1.amazonaws.com
 
   setup_authenticated_remote_docker:
     description: Setup remote Docker execution environment with Docker Hub authentication
@@ -214,49 +184,55 @@ commands:
             git config --global user.name "evakaoulu-ci"
 
   frontend_install:
+    parameters:
+      include_e2e:
+        type: boolean
+        default: false
     steps:
       - restore_cache:
-          name: Restore e2e yarn cache
           keys:
-            - yarn-cache-e2e-v3-{{ checksum "frontend/yarn.lock" }}
-            - yarn-cache-e2e-v3-
-            - yarn-cache-e2e-
-      - restore_cache:
-          name: Restore playwright browser cache
-          keys:
-            - playwright-browser-cache-v1-{{ checksum "frontend/yarn.lock" }}
-            - playwright-browser-cache-v1-
-            - playwright-browser-cache-
+            - yarn-cache-frontend-v1-{{ checksum "evaka/frontend/yarn.lock" }}
+            - yarn-cache-frontend-v1-
+            - yarn-cache-frontend-
       - run:
-          working_directory: *workspace_oulu_frontend
+          working_directory: *workspace_evaka_frontend
           command: yarn install --immutable
-      - save_cache:
-          name: Store playwright browser cache
-          key: playwright-browser-cache-v1-{{ checksum "frontend/yarn.lock" }}
-          paths:
-            - /home/circleci/.cache/ms-playwright
-      - save_cache:
-          name: Store e2e yarn cache
-          key: yarn-cache-e2e-v3-{{ checksum "frontend/yarn.lock" }}
-          paths:
-            - frontend/.yarn/cache
-
-  build_frontend:
-    steps:
-      - run:
-          name: link customizations
-          working_directory: *workspace_evaka_frontend
-          command: ln -v -s $(readlink -f ../../frontend/oulu) src/lib-customizations/oulu
-      - run:
-          name: yarn build
-          working_directory: *workspace_evaka_frontend
           environment:
-            SENTRY_NO_PROGRESS_BAR: "1"
-            EVAKA_CUSTOMIZATIONS: oulu
-            NODE_OPTIONS: "--max-old-space-size=4096"
-          command: |
-            export APP_COMMIT="$CIRCLE_SHA1"
-            ICONS=free yarn build
+            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - save_cache:
+          key: yarn-cache-frontend-v1-{{ checksum "evaka/frontend/yarn.lock" }}
+          paths:
+            - evaka/frontend/.yarn/cache
+            - /home/circleci/.npm/sentry-cli
+      - when:
+          condition:
+            equal: [ true, << parameters.include_e2e >> ]
+          steps:
+            - restore_cache:
+                name: Restore e2e yarn cache
+                keys:
+                  - yarn-cache-e2e-v3-{{ checksum "frontend/yarn.lock" }}
+                  - yarn-cache-e2e-v3-
+                  - yarn-cache-e2e-
+            - restore_cache:
+                name: Restore playwright browser cache
+                keys:
+                  - playwright-browser-cache-v1-{{ checksum "frontend/yarn.lock" }}
+                  - playwright-browser-cache-v1-
+                  - playwright-browser-cache-
+            - run:
+                working_directory: *workspace_oulu_frontend
+                command: yarn install --immutable
+            - save_cache:
+                name: Store playwright browser cache
+                key: playwright-browser-cache-v1-{{ checksum "frontend/yarn.lock" }}
+                paths:
+                  - /home/circleci/.cache/ms-playwright
+            - save_cache:
+                name: Store e2e yarn cache
+                key: yarn-cache-e2e-v3-{{ checksum "frontend/yarn.lock" }}
+                paths:
+                  - frontend/.yarn/cache
 
   build_docker_image:
     parameters:
@@ -264,102 +240,32 @@ commands:
         type: string
       dir:
         type: string
+      build_args:
+        type: string
+        default: ""
       contexts:
         type: string
         default: ""
     steps:
+      - login_ecr
       - run:
           name: Build docker image
           working_directory: << parameters.dir >>
           command: |
+            for build_arg in $(eval echo << parameters.build_args >> | tr ',' '\n'); do
+              BUILD_ARGS="$BUILD_ARGS --build-arg=$build_arg"
+            done
             for context in $(eval echo << parameters.contexts >> | tr ',' '\n'); do
               CONTEXT_ARGS="$CONTEXT_ARGS --build-context=$context"
             done
             docker buildx build --progress=plain \
-              -t << parameters.image >> \
+              -t 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1} \
               --build-arg "build=${CIRCLE_BUILD_NUM}" \
               --build-arg "commit=${CIRCLE_SHA1}" \
+              $BUILD_ARGS \
               $CONTEXT_ARGS \
+              --push \
               .
-      - run:
-          name: Save docker image
-          working_directory: << parameters.dir >>
-          command: docker save << parameters.image >> > image.tar
-
-  load_docker_image:
-    parameters:
-      dir:
-        type: string
-    steps:
-      - run:
-          name: Load docker image
-          working_directory: << parameters.dir >>
-          command: docker load -i image.tar
-
-  push_docker_image:
-    parameters:
-      image:
-        type: string
-      dir:
-        type: string
-    steps:
-      - load_docker_image:
-          dir: << parameters.dir >>
-      - run:
-          name: Push docker image
-          command: |
-            aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 463484918991.dkr.ecr.eu-west-1.amazonaws.com
-            docker tag << parameters.image >> 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1}
-            docker push 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1}
-
-  e2e_test:
-    steps:
-      - restore_repo
-      - restore:
-          path: evaka/frontend/dist
-      - restore:
-          path: evaka/apigw/image.tar
-      - restore:
-          path: service/image.tar
-      - load_docker_image:
-          dir: *workspace_apigw
-      - load_docker_image:
-          dir: *workspace_service
-      - run:
-          name: Start up compose stack
-          working_directory: *workspace_compose
-          command: |
-            CI=true LOCAL_DIR='../evaka/frontend' ./compose-e2e up -d --build
-      - restore_frontend_node_modules
-      - frontend_install
-      - run:
-          name: Waiting for compose stack to be up...
-          working_directory: *workspace_evaka_frontend
-          command: ./wait-for-url.sh "http://localhost:9999/api/internal/dev-api"
-      - run:
-          name: Run E2E tests
-          working_directory: *workspace_oulu_frontend
-          command: yarn e2e-ci-playwright
-          environment:
-            HEADLESS: true
-            BASE_URL: http://localhost:9999
-            JEST_JUNIT_OUTPUT_DIR: test-results
-      - run:
-          name: Collect docker-compose logs
-          working_directory: *workspace_compose
-          command: ./compose-e2e logs --tail=all > /tmp/docker-compose-logs.txt
-          when: always
-      - store_artifacts:
-          path: /tmp/docker-compose-logs.txt
-          destination: docker-compose-logs.txt
-      - store_artifacts:
-          path: frontend/screenshots
-          destination: screenshots
-      - store_artifacts:
-          path: frontend/videos
-          destination: videos
-      - store_test_results:
-          path: frontend/test-results
 
   slack-notification:
     steps:
@@ -431,28 +337,6 @@ jobs:
       - run: git push
       - slack-notification
 
-  fetch_private_dependencies:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - aws-cli/install
-      - run:
-          name: Fetch build customizations
-          working_directory: *workspace_root
-          command: |
-            aws s3 sync s3://evakaoulu-dev-deployment/customizations/ ./customizations/
-      - save:
-          path: customizations
-      - run:
-          name: Fetch commercial frontend dependencies
-          working_directory: *workspace_evaka_frontend
-          command: |
-            aws s3 sync s3://evakaoulu-dev-deployment/frontend/vendor/fortawesome/ ./vendor/fortawesome/
-      - save:
-          path: evaka/frontend/vendor/fortawesome
-
   commit_and_push_branch:
     executor: base_executor
     resource_class: small
@@ -511,7 +395,7 @@ jobs:
   # BUILD JOBS
 
   apigw_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
@@ -520,147 +404,32 @@ jobs:
       - build_docker_image:
           image: evakaoulu/api-gateway
           dir: *workspace_apigw
-      - save:
-          path: evaka/apigw/image.tar
       - slack-notification
 
-  apigw_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: evaka/apigw/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
-          image: evakaoulu/api-gateway
-          dir: *workspace_apigw
-      - slack-notification
-
-  frontend_dependencies:
-    executor: nodejs_executor
+  frontend_build_image:
+    executor: aws_executor
     resource_class: medium+
     steps:
       - restore_repo
-      - restore_cache:
-          keys:
-            - yarn-cache-frontend-v1-{{ checksum ".circleci/config.yml" }}-{{ checksum "evaka/frontend/yarn.lock" }}
-            - yarn-cache-frontend-v1-
-            - yarn-cache-frontend-
-      - restore:
-          path: evaka/frontend/vendor/fortawesome
       - run:
-          working_directory: *workspace_evaka_frontend
-          command: yarn install --immutable
-          environment:
-            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-#      - run:
-#          name: Unpack commercial frontend dependencies
-#          working_directory: *workspace_evaka_frontend
-#          command: |
-#            ./unpack-pro-icons.sh
-      - save_cache:
-          key: yarn-cache-frontend-v1-{{ checksum ".circleci/config.yml" }}-{{ checksum "evaka/frontend/yarn.lock" }}
-          paths:
-            - evaka/frontend/.yarn/cache
-            - /home/circleci/.npm/sentry-cli
-      - store_frontend_node_modules
-      - slack-notification
-
-  frontend_test:
-    executor: nodejs_executor
-    resource_class: medium+
-    steps:
-      - restore_repo
-      - restore_frontend_node_modules
-      - restore:
-          path: customizations
-      - frontend_install
-      - run:
-          working_directory: *workspace_oulu_frontend
-          command: yarn test
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: test-results
-      - store_test_results:
-          path: frontend/test-results
-      - run:
-          name: yarn lint
+          name: Fetch commercial frontend dependencies
           working_directory: *workspace_evaka_frontend
           command: |
-            echo 'src/*' >> .eslintignore
-            echo '!src/lib-customizations' >> .eslintignore
-            echo 'src/lib-customizations/*' >> .eslintignore
-            echo '!src/lib-customizations/oulu' >> .eslintignore
-            yarn lint
-      - slack-notification
-
-  frontend_build:
-    executor: nodejs_executor
-    resource_class: large
-    steps:
-      - restore_repo
-      - restore_frontend_node_modules
-      - restore:
-          path: customizations
-      - build_frontend
-      - save:
-          path: evaka/frontend/dist
-      - slack-notification
-
-  frontend_upload_archive:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: evaka/frontend/dist
-      - aws-cli/install
+            aws s3 sync s3://evakaoulu-dev-deployment/frontend/vendor/fortawesome/ ./vendor/fortawesome/
       - run:
-          name: Create archive
-          working_directory: /home/circleci/repo/evaka
-          command: |
-            tar -cvf dist.tar --directory frontend/dist/bundle/ --transform 's,^\.,frontend,' .
-            tar -rvf dist.tar --directory frontend/src/ --transform 's,^,frontend/,' maintenance-page-frontend
-            gzip dist.tar
-      - run:
-          name: Upload archive
-          working_directory: /home/circleci/repo/evaka
-          command: aws s3 cp dist.tar.gz s3://evakaoulu-dev-deployment/static/${CIRCLE_SHA1}.tar.gz
-      - slack-notification
-
-  proxy_build_image:
-    executor: base_executor
-    resource_class: medium
-    steps:
-      - restore_repo
-      - setup_authenticated_remote_docker
+          name: Copy customizations
+          working_directory: *workspace_root
+          command: cp -rp frontend/oulu evaka/frontend/src/lib-customizations
+      - setup_authenticated_remote_docker:
+          docker_layer_caching: true
       - build_docker_image:
-          image: evakaoulu/proxy
-          dir: *workspace_proxy
-      - save:
-          path: evaka/proxy/image.tar
+          image: evakaoulu/frontend
+          dir: *workspace_evaka_frontend
+          build_args: EVAKA_CUSTOMIZATIONS=oulu,ICONS=free
       - slack-notification
 
-  proxy_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: evaka/proxy/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
-          image: evakaoulu/proxy
-          dir: *workspace_proxy
-      - slack-notification
-
-  service_build:
-    executor: openjdk_executor
+  service_build_image:
+    executor: service_build_executor
     resource_class: medium+
     steps:
       - restore_repo
@@ -668,124 +437,48 @@ jobs:
       - restore_service_gradle_dependencies
       - restore_service_gradle_build_cache
       - run:
+          name: gradle build
           working_directory: *workspace_service
-          command: ./gradlew --build-cache assemble testClasses
+          command: |
+            ./gradlew --build-cache build
+            java -Djarmode=layertools -jar build/libs/evakaoulu-service.jar extract --destination target
       - store_service_gradle_build_cache
       - store_service_gradle_dependencies
       - store_service_gradle_wrapper
-      - save:
-          path: service/build/libs/evakaoulu-service.jar
-      - slack-notification
-
-  service_test:
-    executor: service_test_executor
-    resource_class: medium+
-    steps:
-      - restore_repo
-      - restore_service_gradle_wrapper
-      - restore_service_gradle_dependencies
-      - restore_service_gradle_build_cache
-      - run:
-          working_directory: *workspace_service
-          command: ./gradlew --build-cache check --info
       - store_test_results:
           path: /home/circleci/repo/service/build/test-results/
       - store_artifacts:
           path: /home/circleci/repo/service/build/reports/
-      - slack-notification
-
-  service_build_image:
-    executor: base_executor
-    resource_class: medium
-    steps:
-      - restore_repo
-      - restore:
-          path: service/build/libs/evakaoulu-service.jar
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Unzip executable
-          working_directory: *workspace_service
-          command: unzip -q build/libs/evakaoulu-service.jar -d target
-      - build_docker_image:
-          image: evakaoulu/service
-          dir: *workspace_service
-      - save:
-          path: service/image.tar
-      - slack-notification
-
-  service_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: service/image.tar
-      - setup_authenticated_remote_docker
       - aws-cli/install
-      - push_docker_image:
+      - build_docker_image:
           image: evakaoulu/service
           dir: *workspace_service
       - slack-notification
 
   auth_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
-      - restore:
-          path: customizations
       - run: cp customizations/footer-logo-citizen.png auth/OuluLogo.png
       - build_docker_image:
           image: evakaoulu/auth
           dir: *workspace_auth
           contexts: core=../evaka/keycloak
-      - save:
-          path: auth/image.tar
-      - slack-notification
-
-  auth_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: auth/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
-          image: evakaoulu/auth
-          dir: *workspace_auth
       - slack-notification
 
   scheduled_tasks_reporting_build_image:
-    executor: base_executor
+    executor: aws_executor
     resource_class: medium
     steps:
       - restore_repo
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
       - build_docker_image:
-          image: evakaoulu/scheduled-task/reporting
-          dir: scheduled-tasks/reporting
-      - save:
-          path: scheduled-tasks/reporting/image.tar
-
-  scheduled_tasks_reporting_push_image:
-    <<: *default_config
-    executor: aws-cli/default
-    resource_class: small
-    steps:
-      - restore_repo
-      - restore:
-          path: scheduled-tasks/reporting/image.tar
-      - setup_authenticated_remote_docker
-      - aws-cli/install
-      - push_docker_image:
           image: evakaoulu/scheduled-task/reporting
           dir: scheduled-tasks/reporting
 
@@ -809,7 +502,56 @@ jobs:
     executor: e2e_executor
     resource_class: large
     steps:
-      - e2e_test
+      - restore_repo
+      - login_ecr
+      - run:
+          name: Start up compose stack
+          working_directory: *workspace_compose
+          command: |
+            CI=true LOCAL_DIR='../evaka/frontend' \
+            EVAKA_FRONTEND_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/frontend:${CIRCLE_SHA1} \
+            EVAKA_GW_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/api-gateway:${CIRCLE_SHA1} \
+            EVAKA_SRV_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/service:${CIRCLE_SHA1} \
+            docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml up -d --build
+      - frontend_install:
+          include_e2e: true
+      - run:
+          name: Waiting for compose stack to be up...
+          working_directory: *workspace_evaka_frontend
+          command: ./wait-for-url.sh "http://localhost:9999/api/internal/dev-api"
+      - run:
+          name: Run E2E tests
+          working_directory: *workspace_oulu_frontend
+          command: yarn e2e-ci-playwright
+          environment:
+            HEADLESS: true
+            BASE_URL: http://localhost:9999
+            JEST_JUNIT_OUTPUT_DIR: test-results
+      - run:
+          name: yarn lint
+          working_directory: *workspace_evaka_frontend
+          command: |
+            echo 'src/*' >> .eslintignore
+            echo '!src/lib-customizations' >> .eslintignore
+            echo 'src/lib-customizations/*' >> .eslintignore
+            echo '!src/lib-customizations/oulu' >> .eslintignore
+            yarn lint
+      - run:
+          name: Collect docker-compose logs
+          working_directory: *workspace_compose
+          command: docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml logs --tail=all > /tmp/docker-compose-logs.txt
+          when: always
+      - store_artifacts:
+          path: /tmp/docker-compose-logs.txt
+          destination: docker-compose-logs.txt
+      - store_artifacts:
+          path: frontend/screenshots
+          destination: screenshots
+      - store_artifacts:
+          path: frontend/videos
+          destination: videos
+      - store_test_results:
+          path: frontend/test-results
       - slack-notification
 
 workflows:
@@ -820,12 +562,6 @@ workflows:
         equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - checkout_repo
-      - fetch_private_dependencies:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - checkout_repo
       - check_licenses:
           context:
             - slack-secrets
@@ -834,101 +570,45 @@ workflows:
 
       - apigw_build_image:
           context:
+            - evakaoulu-dev
             - slack-secrets
           requires:
             - checkout_repo
-      - apigw_push_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - apigw_build_image
-
-      - frontend_dependencies:
-          context:
-            - slack-secrets
-          requires:
-            - fetch_private_dependencies
-      - frontend_test:
-          context:
-            - slack-secrets
-          requires:
-            - frontend_dependencies
-      - frontend_build:
-          context:
-            - slack-secrets
-          requires:
-            - frontend_dependencies
-
-      - frontend_upload_archive:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - frontend_build
 
       - e2e_test:
           context:
+            - evakaoulu-dev
             - slack-secrets
           requires:
-            - frontend_build
+            - frontend_build_image
             - apigw_build_image
             - service_build_image
 
-      - proxy_build_image:
-          context:
-            - slack-secrets
-          requires:
-            - checkout_repo
-      - proxy_push_image:
+      - frontend_build_image:
           context:
             - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - proxy_build_image
-
-      - service_build:
-          context:
-            - slack-secrets
           requires:
             - checkout_repo
-      - service_test:
-          context:
-            - slack-secrets
-          requires:
-            - service_build
+
       - service_build_image:
           context:
-            - slack-secrets
-          requires:
-            - service_build
-      - service_push_image:
-          context:
             - evakaoulu-dev
             - slack-secrets
           requires:
-            - service_build_image
+            - checkout_repo
 
       - auth_build_image:
           context:
-            - slack-secrets
-          requires:
-            - fetch_private_dependencies
-      - auth_push_image:
-          context:
             - evakaoulu-dev
             - slack-secrets
-          requires:
-            - auth_build_image
-
-      - scheduled_tasks_reporting_build_image:
           requires:
             - checkout_repo
-      - scheduled_tasks_reporting_push_image:
+
+      - scheduled_tasks_reporting_build_image:
           context:
             - evakaoulu-dev
           requires:
-            - scheduled_tasks_reporting_build_image
+            - checkout_repo
 
       - trigger_deploy:
           context:
@@ -936,14 +616,8 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - apigw_push_image
-            - frontend_test
-            - frontend_upload_archive
-            - proxy_push_image
-            - service_test
-            - service_push_image
-            - auth_push_image
-            - scheduled_tasks_reporting_push_image
+            - auth_build_image
+            - scheduled_tasks_reporting_build_image
             - e2e_test
           filters:
             branches:
@@ -955,14 +629,8 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - apigw_push_image
-            - frontend_test
-            - frontend_upload_archive
-            - proxy_push_image
-            - service_test
-            - service_push_image
-            - auth_push_image
-            - scheduled_tasks_reporting_push_image
+            - auth_build_image
+            - scheduled_tasks_reporting_build_image
             - e2e_test
           filters:
             branches:

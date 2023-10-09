@@ -659,11 +659,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             """
                 Hyvä asiakkaamme
                 
-                Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tarkistetaan vuosittain.
+                Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tulotietonne ovat vanhentumassa.
                 
-                Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.
+                Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta.
                 
-                Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.
+                Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksun mukaisesti.
                 
                 Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
@@ -675,11 +675,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
 
                 Dear client
                 
-                The income information used for determining the early childhood education fee or the out-of-pocket cost of a service voucher is reviewed every year.
+                The income information used for determining the early childhood education fee or the out-of-pocket cost of a service voucher is reviewed when income information is out of date.
                 
-                We ask you to submit your income statement through eVaka within 14 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.
+                We ask you to submit your income statement through eVaka within 14 days of this notification.
                 
-                If you do not provide your latest income information, your client fee will be determined based on the highest fee category.
+                If you do not provide your latest income information, your client fee will be determined based on the highest fee.
                 
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
 
@@ -691,18 +691,18 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             html =
             """
                 <p>Hyvä asiakkaamme</p>
-                <p>Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tarkistetaan vuosittain.</p>
-                <p>Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön. </p>
-                <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.</p>
+                <p>Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotietonne ovat vanhentumassa.</p>
+                <p>Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta.</p>
+                <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksun mukaisesti.</p>
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
                 <p>Tulotiedot:  ${incomeLink(Language.fi)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
                 <p>Dear client</p>
-                <p>The income information used for determining the early childhood education fee or the out-of-pocket cost of a service voucher is reviewed every year.</p>
-                <p>We ask you to submit your income statement through eVaka within 14 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.</p>
-                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p>
+                <p>The income information used for determining the early childhood education fee or the out-of-pocket cost of a service voucher is reviewed when income information is out of date.</p>
+                <p>We ask you to submit your income statement through eVaka within 14 days of this notification.</p>
+                <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee.</p>
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
                 <p>Income information:  ${incomeLink(Language.en)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>

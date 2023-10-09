@@ -64,6 +64,7 @@ dependencies {
     testImplementation("software.amazon.awssdk:s3")
     testImplementation("com.auth0:java-jwt")
     testImplementation("org.thymeleaf:thymeleaf")
+    testImplementation("com.networknt:json-schema-validator:1.0.87")
 }
 
 springBoot {

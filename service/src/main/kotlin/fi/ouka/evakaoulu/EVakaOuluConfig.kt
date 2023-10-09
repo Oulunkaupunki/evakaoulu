@@ -13,6 +13,7 @@ import fi.ouka.evakaoulu.invoice.service.SftpSender
 import fi.ouka.evakaoulu.payment.service.OuluPaymentIntegrationClient
 import fi.ouka.evakaoulu.payment.service.ProEPaymentGenerator
 import fi.ouka.evakaoulu.security.EvakaOuluActionRuleMapping
+import fi.ouka.evakaoulu.titania.TitaniaEmployeeIdConverter
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.server.WebServerFactoryCustomizer
 import org.springframework.context.annotation.Bean
@@ -52,6 +53,11 @@ class EVakaOuluConfig {
 
     @Bean
     fun actionRuleMapping(): ActionRuleMapping = EvakaOuluActionRuleMapping()
+
+    @Bean
+    fun titaniaEmployeeIdConverter(): TitaniaEmployeeIdConverter = object : TitaniaEmployeeIdConverter {
+        override fun fromTitania(employeeId: String): String = employeeId.trimStart('0')
+    }
 
     @Bean
     fun invoiceGenerationLogicChooser() = DefaultInvoiceGenerationLogic // TODO: implement

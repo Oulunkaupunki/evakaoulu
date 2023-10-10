@@ -56,21 +56,21 @@ SELECT
 FROM daycare_group dg
     JOIN daycare d on dg.daycare_id = d.id
     JOIN care_area ca on ca.id = d.care_area_id
-    JOIN daycare_caretaker dc ON dg.id = dc.group_id
-    AND dc.start_date <= :date_val::DATE
-    AND (dc.end_date >= :date_val::DATE or dc.end_date is null)
+    LEFT JOIN daycare_caretaker dc ON dg.id = dc.group_id
+        AND dc.start_date <= :date_val::DATE
+        AND (dc.end_date >= :date_val::DATE or dc.end_date is null)
     LEFT JOIN staff_attendance sa ON dg.id = sa.group_id
-    AND sa.date = :date_val::DATE
+        AND sa.date = :date_val::DATE
     LEFT JOIN (
-    SELECT group_id, arrived, departed, occupancy_coefficient
-    FROM staff_attendance_realtime
-    WHERE departed IS NOT NULL
-      AND type NOT IN ('OTHER_WORK', 'TRAINING')
-    UNION ALL
-    SELECT group_id, arrived, departed, occupancy_coefficient
-    FROM staff_attendance_external
-    WHERE departed IS NOT NULL
-) sar ON sar.group_id = dg.id AND (date(arrived) = :date_val::DATE OR date(departed) = :date_val::DATE)
+        SELECT group_id, arrived, departed, occupancy_coefficient
+        FROM staff_attendance_realtime
+        WHERE departed IS NOT NULL
+          AND type NOT IN ('OTHER_WORK', 'TRAINING')
+        UNION ALL
+        SELECT group_id, arrived, departed, occupancy_coefficient
+        FROM staff_attendance_external
+        WHERE departed IS NOT NULL
+    ) sar ON sar.group_id = dg.id AND (date(arrived) = :date_val::DATE OR date(departed) = :date_val::DATE)
 WHERE (:date_val::DATE - interval '3 months' <= d.closing_date OR d.closing_date is null)
     AND (:date_val::DATE - interval '3 months' <= dg.end_date OR dg.end_date is null)
 GROUP BY

@@ -46,6 +46,7 @@ class EVakaOuluConfig {
         preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
         requestedStartUpperLimit = 7,
         partialAbsenceThresholdsEnabled = false,
+        preferredStartRelativeApplicationDueDate = false,
         postOffice = "OULU",
         municipalMessageAccountName = "Oulun kaupunki"
     )

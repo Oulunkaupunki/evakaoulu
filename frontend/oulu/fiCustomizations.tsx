@@ -40,6 +40,16 @@ const fi: DeepPartial<Translations> = {
       selectChildrenInfo: 'Ilmoita tässä vain koko päivän poissaolot.'
     }
   },
+  personalDetails: {
+    title: 'Omat tiedot',
+    description: (
+      <P>
+        Täällä voit tarkistaa ja täydentää omat henkilö- ja yhteystietosi.
+        Nimesi ja osoitteesi haetaan väestötietojärjestelmästä. Mikäli tietosi
+        muuttuvat, sinun tulee tehdä ilmoitus Digi- ja väestötietovirastoon.
+      </P>
+    )
+  },
   applications: {
     creation: {
       daycareInfo:

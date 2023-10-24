@@ -153,18 +153,18 @@ INSERT INTO daycare_group (daycare_id, name, start_date, end_date)
 SELECT id, 'Ryhmä ' || r, opening_date, COALESCE(closing_date, NULL)
 FROM daycare CROSS JOIN generate_series(1, 3) AS r;
 
-INSERT INTO employee (id, first_name, last_name, email, external_id, roles) VALUES
-    ('00000000-0000-0000-0000-000000000001', 'Päivi', 'Pääkäyttäjä', 'paivi.paakayttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0000-000000000001', '{ADMIN, SERVICE_WORKER, FINANCE_ADMIN}'::user_role[]),
-    ('00000000-0000-0000-0001-000000000000', 'Paula', 'Palveluohjaaja', 'paula.palveluohjaaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0001-000000000000', '{SERVICE_WORKER}'::user_role[]),
-    ('00000000-0000-0000-0002-000000000000', 'Lasse', 'Laskuttaja', 'lasse.laskuttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0002-000000000000', '{FINANCE_ADMIN}'::user_role[]),
-    ('00000000-0000-0000-0009-000000000001', 'Lassi', 'Ulkoistettu Laskuttaja', 'ulkoistettu.laskuttaja@espoo.fi', 'oulu-ad:00000000-0000-0009-0000-000000000000', '{FINANCE_STAFF}'::user_role[]),
-    ('00000000-0000-0000-0003-000000000000', 'Raisa', 'Raportoija', 'raisa.raportoija@ouka.fi', 'oulu-ad:00000000-0000-0000-0003-000000000000', '{DIRECTOR}'::user_role[]);
-INSERT INTO employee (id, first_name, last_name, email, external_id) VALUES
-    ('00000000-0000-0000-0004-000000000000', 'Essi', 'Esimies', 'essi.esimies@ouka.fi', 'oulu-ad:00000000-0000-0000-0004-000000000000'),
-    ('00000000-0000-0000-0004-000000000001', 'Eemeli', 'Esimies', 'eemeli.esimies@ouka.fi', 'oulu-ad:00000000-0000-0000-0004-000000000001'),
-    ('00000000-0000-0000-0005-000000000000', 'Kaisa', 'Kasvattaja', 'kaisa.kasvattaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0005-000000000000'),
-    ('00000000-0000-0000-0005-000000000001', 'Kalle', 'Kasvattaja', 'kalle.kasvattaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0005-000000000001'),
-    ('00000000-0000-0000-0006-000000000000', 'Erkki', 'Erityisopettaja', 'erkki.erityisopettaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0006-000000000000');
+INSERT INTO employee (id, first_name, last_name, email, external_id, roles, active) VALUES
+    ('00000000-0000-0000-0000-000000000001', 'Päivi', 'Pääkäyttäjä', 'paivi.paakayttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0000-000000000001', '{ADMIN, SERVICE_WORKER, FINANCE_ADMIN}'::user_role[], true),
+    ('00000000-0000-0000-0001-000000000000', 'Paula', 'Palveluohjaaja', 'paula.palveluohjaaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0001-000000000000', '{SERVICE_WORKER}'::user_role[], true),
+    ('00000000-0000-0000-0002-000000000000', 'Lasse', 'Laskuttaja', 'lasse.laskuttaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0002-000000000000', '{FINANCE_ADMIN}'::user_role[], true),
+    ('00000000-0000-0000-0009-000000000001', 'Lassi', 'Ulkoistettu Laskuttaja', 'ulkoistettu.laskuttaja@espoo.fi', 'oulu-ad:00000000-0000-0009-0000-000000000000', '{FINANCE_STAFF}'::user_role[], true),
+    ('00000000-0000-0000-0003-000000000000', 'Raisa', 'Raportoija', 'raisa.raportoija@ouka.fi', 'oulu-ad:00000000-0000-0000-0003-000000000000', '{DIRECTOR}'::user_role[], true);
+INSERT INTO employee (id, first_name, last_name, email, external_id, active) VALUES
+    ('00000000-0000-0000-0004-000000000000', 'Essi', 'Esimies', 'essi.esimies@ouka.fi', 'oulu-ad:00000000-0000-0000-0004-000000000000', true),
+    ('00000000-0000-0000-0004-000000000001', 'Eemeli', 'Esimies', 'eemeli.esimies@ouka.fi', 'oulu-ad:00000000-0000-0000-0004-000000000001', true),
+    ('00000000-0000-0000-0005-000000000000', 'Kaisa', 'Kasvattaja', 'kaisa.kasvattaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0005-000000000000', true),
+    ('00000000-0000-0000-0005-000000000001', 'Kalle', 'Kasvattaja', 'kalle.kasvattaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0005-000000000001', true),
+    ('00000000-0000-0000-0006-000000000000', 'Erkki', 'Erityisopettaja', 'erkki.erityisopettaja@ouka.fi', 'oulu-ad:00000000-0000-0000-0006-000000000000', true);
 
 INSERT INTO daycare_acl (daycare_id, employee_id, role) VALUES
     ('340ea27a-a1bc-11eb-b5d2-dfc0dc6d2fcb', '00000000-0000-0000-0004-000000000000', 'UNIT_SUPERVISOR'),

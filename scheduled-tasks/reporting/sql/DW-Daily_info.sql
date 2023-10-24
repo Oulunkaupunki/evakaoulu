@@ -65,7 +65,7 @@ FROM person p
     LEFT JOIN service_need sn ON pl.id = sn.placement_id
         AND sn.start_date <= :date_val::DATE
         AND sn.end_date >= :date_val::DATE
-    JOIN service_need_option sno ON sno.id = sn.option_id
+    LEFT JOIN service_need_option sno ON sno.id = sn.option_id
     LEFT JOIN assistance_need an ON p.id = an.child_id
         AND an.start_date <= :date_val::DATE
         AND an.end_date >= :date_val::DATE

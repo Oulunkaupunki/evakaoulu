@@ -3,6 +3,7 @@ package fi.ouka.evakaoulu.payment.service
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
+import fi.espoo.evaka.shared.db.Database
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import mu.KotlinLogging
 
@@ -13,7 +14,7 @@ class OuluPaymentIntegrationClient(
     private val sftpSender: SftpSender
 ) : PaymentIntegrationClient {
 
-    override fun send(payments: List<Payment>): PaymentIntegrationClient.SendResult {
+    override fun send(payments: List<Payment>, tx: Database.Transaction): PaymentIntegrationClient.SendResult {
         var failedList: MutableList<Payment> = mutableListOf()
 
         logger.info { "OuluPaymentIntegrationClient.send() called with ${payments.size} payments" }

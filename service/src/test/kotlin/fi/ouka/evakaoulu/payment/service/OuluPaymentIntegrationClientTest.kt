@@ -6,6 +6,7 @@ import fi.espoo.evaka.invoicing.domain.Payment
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.espoo.evaka.invoicing.domain.PaymentUnit
 import fi.espoo.evaka.shared.DaycareId
+import fi.espoo.evaka.shared.db.Database
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
@@ -24,6 +25,7 @@ internal class OuluPaymentIntegrationClientTest {
     val paymentGenerator = mock<ProEPaymentGenerator>()
     val sftpSender = mock<SftpSender>()
     val paymentClient = OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
+    val tx = mock<Database.Transaction>()
 
     @Test
     fun `should pass payments to the payment generator`() {
@@ -33,7 +35,7 @@ internal class OuluPaymentIntegrationClientTest {
         val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(), proEPayment1)
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
-        paymentClient.send(paymentList)
+        paymentClient.send(paymentList, tx)
 
         verify(paymentGenerator).generatePayments(paymentList)
     }
@@ -47,7 +49,7 @@ internal class OuluPaymentIntegrationClientTest {
             ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
-        paymentClient.send(paymentList)
+        paymentClient.send(paymentList, tx)
 
         verify(sftpSender).send(proEPayment1)
     }
@@ -58,7 +60,7 @@ internal class OuluPaymentIntegrationClientTest {
         val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(), "")
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
-        paymentClient.send(paymentList)
+        paymentClient.send(paymentList, tx)
 
         verify(sftpSender, never()).send("")
     }
@@ -74,7 +76,7 @@ internal class OuluPaymentIntegrationClientTest {
         )
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
-        val sendResult = paymentClient.send(paymentList)
+        val sendResult = paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(sendResult.succeeded).hasSize(1)
     }
@@ -103,7 +105,7 @@ internal class OuluPaymentIntegrationClientTest {
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
         // whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
 
-        val sendResult = paymentClient.send(paymentList)
+        val sendResult = paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(sendResult.failed).hasSize(1)
     }
@@ -117,7 +119,7 @@ internal class OuluPaymentIntegrationClientTest {
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
         whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
 
-        val sendResult = paymentClient.send(paymentList)
+        val sendResult = paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(sendResult.failed).hasSize(2)
     }
@@ -130,7 +132,7 @@ internal class OuluPaymentIntegrationClientTest {
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
             ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), "xx")
         )
-        val sendResult = paymentClient.send(paymentList)
+        val sendResult = paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(sendResult.succeeded).hasSize(2)
         verify(sftpSender).send(proEPayment1)
@@ -144,7 +146,7 @@ internal class OuluPaymentIntegrationClientTest {
             ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()), "x")
         )
 
-        paymentClient.send(paymentList)
+        paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(output).contains("Successfully sent 1 payments")
     }
@@ -159,7 +161,7 @@ internal class OuluPaymentIntegrationClientTest {
         )
 
         whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
-        paymentClient.send(paymentList)
+        paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(output).contains("Failed to send 2 payments")
     }

@@ -46,7 +46,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    employeeMobileGroupMessages: true
+    sensitiveMessaging: false
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -77,7 +77,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    employeeMobileGroupMessages: true
+    sensitiveMessaging: false
   },
   prod: {
     citizenShiftCareAbsence: false,
@@ -108,7 +108,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    employeeMobileGroupMessages: false
+    sensitiveMessaging: false
   }
 }
 

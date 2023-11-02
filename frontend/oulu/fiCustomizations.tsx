@@ -510,7 +510,7 @@ const fi: DeepPartial<Translations> = {
     ),
     sendFeedbackLink: (
       <ExternalLink
-        href="https://e-kartta.ouka.fi/efeedback"
+        href="https://palvelupyynto.siku.ouka.fi/customerui"
         text="Lähetä palautetta"
         newTab={true}
         data-qa="footer-policy-link"

@@ -46,7 +46,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    sensitiveMessaging: false
+    sensitiveMessaging: true
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -77,7 +77,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    sensitiveMessaging: false
+    sensitiveMessaging: true
   },
   prod: {
     citizenShiftCareAbsence: false,

@@ -46,7 +46,8 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    sensitiveMessaging: true
+    employeeMobileStaffAttendanceEdit: true,
+    voucherValueDecisionIgnoredStatus: false
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -77,7 +78,8 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    sensitiveMessaging: true
+    employeeMobileStaffAttendanceEdit: true,
+    voucherValueDecisionIgnoredStatus: false
   },
   prod: {
     citizenShiftCareAbsence: false,
@@ -108,7 +110,8 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    sensitiveMessaging: false
+    employeeMobileStaffAttendanceEdit: false,
+    voucherValueDecisionIgnoredStatus: false
   }
 }
 

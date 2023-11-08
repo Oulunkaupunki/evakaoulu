@@ -29,17 +29,10 @@ SELECT
     sno.part_week                           AS osaviikkoinen,
     sn.shift_care                           AS vuorohoito,
     sno.daycare_hours_per_week              AS tunteja_viikossa,
-    array(
-        SELECT name_fi
-        FROM assistance_basis_option
-        WHERE id IN (
-            SELECT option_id
-            FROM assistance_basis_option_ref
-            WHERE need_id = an.id
-        )
-    )                                       AS tuentarve,
+    da.level                                AS tuentarve_varhaiskasvatuksessa,
+    pa.level								as tuentarve_esiopetuksessa,
     anvc.coefficient                        AS tuentarpeen_kerroin,
-    an.capacity_factor                      AS lapsen_kapasiteetti,
+    af.capacity_factor                      AS lapsen_kapasiteetti,
     array(
         SELECT distinct absence_type
         FROM absence
@@ -66,9 +59,15 @@ FROM person p
         AND sn.start_date <= :date_val::DATE
         AND sn.end_date >= :date_val::DATE
     LEFT JOIN service_need_option sno ON sno.id = sn.option_id
-    LEFT JOIN assistance_need an ON p.id = an.child_id
-        AND an.start_date <= :date_val::DATE
-        AND an.end_date >= :date_val::DATE
+    LEFT JOIN daycare_assistance da ON p.id = da.child_id
+        AND lower(da.valid_during) <= :date_val::DATE
+        AND upper(da.valid_during) >= :date_val::DATE
+    LEFT JOIN preschool_assistance pa ON p.id = pa.child_id
+        AND lower(pa.valid_during) <= :date_val::DATE
+        AND upper(pa.valid_during) >= :date_val::DATE
+    LEFT JOIN assistance_factor af ON p.id = af.child_id
+        AND lower(af.valid_during) <= :date_val::DATE
+        AND upper(af.valid_during) >= :date_val::DATE
     LEFT JOIN assistance_need_voucher_coefficient anvc ON p.id = anvc.child_id
         AND lower(anvc.validity_period) <= :date_val::DATE
         AND upper(anvc.validity_period) >= :date_val::DATE;

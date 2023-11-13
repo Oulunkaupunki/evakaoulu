@@ -4,7 +4,6 @@
 
 package fi.ouka.evakaoulu
 
-import com.github.kittinunf.fuel.core.FuelManager
 import fi.espoo.evaka.shared.db.Database
 import fi.espoo.evaka.shared.dev.runDevScript
 import fi.ouka.evakaoulu.database.resetOuluDatabaseForE2ETests
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.core.io.Resource
 import org.springframework.util.StreamUtils
@@ -33,14 +31,8 @@ import java.util.function.Function
 @AutoConfigureWireMock(port = 0)
 abstract class AbstractIntegrationTest(private val resetDbBeforeEach: Boolean = true) {
 
-    @LocalServerPort
-    var httpPort: Int = 0
-
     @Autowired
     private lateinit var jdbi: Jdbi
-
-    @Autowired
-    protected lateinit var http: FuelManager
 
     protected lateinit var db: Database.Connection
 
@@ -62,7 +54,6 @@ abstract class AbstractIntegrationTest(private val resetDbBeforeEach: Boolean = 
                 it.resetOuluDatabaseForE2ETests()
             }
         }
-        http.basePath = "http://localhost:$httpPort/"
     }
 
     @AfterAll

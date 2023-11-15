@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2021 City of Oulu
+SPDX-FileCopyrightText: 2023 City of Oulu
 
 SPDX-License-Identifier: LGPL-2.1-or-later
 -->
@@ -24,11 +24,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
     </h1>
     <div th:replace="~{ oulu/shared/common :: child-and-unit-details}"></div>
     <div th:utext="#{decision.instructions}"></div>
+    <div th:replace="~{ oulu/shared/common :: decision-details }"></div>
+    <div th:utext="#{decision.legalInstructions}"></div>
 </div>
 
 <div class="page last-page">
-    <div th:replace="~{ oulu/shared/common :: decision-details }"></div>
-    <div th:utext="#{decision.legalInstructions}"></div>
     <div th:replace="~{oulu/shared/daycare-correction :: daycare-correction}"></div>
 </div>
 

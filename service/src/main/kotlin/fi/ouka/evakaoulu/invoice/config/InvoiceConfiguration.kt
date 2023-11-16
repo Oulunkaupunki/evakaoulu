@@ -6,8 +6,10 @@ package fi.ouka.evakaoulu.invoice.config
 
 import com.jcraft.jsch.JSch
 import fi.espoo.evaka.invoicing.domain.FeeAlterationType
+import fi.espoo.evaka.invoicing.domain.IncomeCoefficient
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
+import fi.espoo.evaka.invoicing.service.IncomeCoefficientMultiplierProvider
 import fi.espoo.evaka.invoicing.service.IncomeTypesProvider
 import fi.espoo.evaka.invoicing.service.InvoiceProductProvider
 import fi.espoo.evaka.invoicing.service.ProductKey
@@ -22,6 +24,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
+import java.math.BigDecimal
 
 @Profile("evakaoulu")
 @Configuration
@@ -42,6 +45,9 @@ class InvoiceConfiguration {
 
     @Bean
     fun incomeTypesProvider(): IncomeTypesProvider = OuluIncomeTypesProvider()
+
+    @Bean
+    fun incomeCoefficientMultiplierProvider(): IncomeCoefficientMultiplierProvider = OuluIncomeCoefficientMultiplierProvider()
 
     @Bean
     fun invoiceProductProvider(): InvoiceProductProvider = OuluInvoiceProductProvider()
@@ -69,6 +75,19 @@ class OuluIncomeTypesProvider : IncomeTypesProvider {
             "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false)
         )
     }
+}
+
+class OuluIncomeCoefficientMultiplierProvider : IncomeCoefficientMultiplierProvider {
+    override fun multiplier(coefficient: IncomeCoefficient): BigDecimal =
+        when (coefficient) {
+            IncomeCoefficient.MONTHLY_WITH_HOLIDAY_BONUS -> BigDecimal("1.05") // = 12.5 / 12
+            IncomeCoefficient.MONTHLY_NO_HOLIDAY_BONUS -> BigDecimal("1.0000") // = 12 / 12
+            IncomeCoefficient.BI_WEEKLY_WITH_HOLIDAY_BONUS -> BigDecimal("2.23125") // = ???
+            IncomeCoefficient.BI_WEEKLY_NO_HOLIDAY_BONUS -> BigDecimal("2.125") // = ???
+            IncomeCoefficient.DAILY_ALLOWANCE_21_5 -> BigDecimal("21.5")
+            IncomeCoefficient.DAILY_ALLOWANCE_25 -> BigDecimal("25")
+            IncomeCoefficient.YEARLY -> BigDecimal("0.0833333") // 1 / 12
+        }
 }
 
 class OuluInvoiceProductProvider : InvoiceProductProvider {

@@ -30,8 +30,14 @@ SELECT
     sn.shift_care                           AS vuorohoito,
     sno.daycare_hours_per_week              AS tunteja_viikossa,
     da.level                                AS tuentarve_varhaiskasvatuksessa,
-    pa.level								as tuentarve_esiopetuksessa,
-    oam.type                                as muut_toimet,
+    pa.level								AS tuentarve_esiopetuksessa,
+    array(
+        SELECT oam.type
+        FROM other_assistance_measure oam
+        WHERE oam.child_id = p.id
+            AND lower(oam.valid_during) <= :date_val::DATE
+            AND upper(oam.valid_during) >= :date_val::DATE
+    )                                       AS muut_toimet,
     CASE WHEN ac.other_action != '' AND ac.other_action IS NOT NULL
         THEN array_append(
             array(
@@ -88,9 +94,6 @@ FROM person p
     LEFT JOIN preschool_assistance pa ON p.id = pa.child_id
         AND lower(pa.valid_during) <= :date_val::DATE
         AND upper(pa.valid_during) >= :date_val::DATE
-    LEFT JOIN other_assistance_measure oam ON p.id = oam.child_id
-        AND lower(oam.valid_during) <= :date_val::DATE
-        AND upper(oam.valid_during) >= :date_val::DATE
     LEFT JOIN assistance_factor af ON p.id = af.child_id
         AND lower(af.valid_during) <= :date_val::DATE
         AND upper(af.valid_during) >= :date_val::DATE

@@ -113,3 +113,7 @@ run_query_and_send_file sql/DW-Fee_decisions.sql fee_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Voucher_value_decisions.sql voucher_value_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Assistance_need_decisions.sql assistance_need_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Child_discussions.sql child_discussions_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Daycare_assistances.sql daycare_assistances_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Preschool_assistances.sql preschool_assistances_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Other_assistance_measures.sql other_assistance_measures_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Assistance_actions.sql assistance_actions_$DATE.csv $DATE

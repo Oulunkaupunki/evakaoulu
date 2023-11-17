@@ -29,37 +29,6 @@ SELECT
     sno.part_week                           AS osaviikkoinen,
     sn.shift_care                           AS vuorohoito,
     sno.daycare_hours_per_week              AS tunteja_viikossa,
-    da.level                                AS tuentarve_varhaiskasvatuksessa,
-    pa.level								AS tuentarve_esiopetuksessa,
-    array(
-        SELECT oam.type
-        FROM other_assistance_measure oam
-        WHERE oam.child_id = p.id
-            AND lower(oam.valid_during) <= :date_val::DATE
-            AND upper(oam.valid_during) >= :date_val::DATE
-    )                                       AS muut_toimet,
-    CASE WHEN ac.other_action != '' AND ac.other_action IS NOT NULL
-        THEN array_append(
-            array(
-                SELECT name_fi
-                FROM assistance_action_option
-                WHERE id IN (
-                    SELECT option_id
-                    FROM assistance_action_option_ref
-                    WHERE action_id = ac.id
-                )
-            ), ac.other_action
-        )
-        ELSE array(
-            SELECT name_fi
-            FROM assistance_action_option
-            WHERE id IN (
-                SELECT option_id
-                FROM assistance_action_option_ref
-                WHERE action_id = ac.id
-            )
-        )
-    END                                     AS tukitoimet,
     anvc.coefficient                        AS tuentarpeen_kerroin,
     af.capacity_factor                      AS lapsen_kapasiteetti,
     array(
@@ -88,18 +57,9 @@ FROM person p
         AND sn.start_date <= :date_val::DATE
         AND sn.end_date >= :date_val::DATE
     LEFT JOIN service_need_option sno ON sno.id = sn.option_id
-    LEFT JOIN daycare_assistance da ON p.id = da.child_id
-        AND lower(da.valid_during) <= :date_val::DATE
-        AND upper(da.valid_during) >= :date_val::DATE
-    LEFT JOIN preschool_assistance pa ON p.id = pa.child_id
-        AND lower(pa.valid_during) <= :date_val::DATE
-        AND upper(pa.valid_during) >= :date_val::DATE
     LEFT JOIN assistance_factor af ON p.id = af.child_id
         AND lower(af.valid_during) <= :date_val::DATE
         AND upper(af.valid_during) >= :date_val::DATE
-    LEFT JOIN assistance_action ac ON p.id = ac.child_id
-        AND ac.start_date <= :date_val::DATE
-        AND ac.end_date >= :date_val::DATE
     LEFT JOIN assistance_need_voucher_coefficient anvc ON p.id = anvc.child_id
         AND lower(anvc.validity_period) <= :date_val::DATE
         AND upper(anvc.validity_period) >= :date_val::DATE;

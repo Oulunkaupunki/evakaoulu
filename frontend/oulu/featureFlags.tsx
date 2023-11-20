@@ -111,7 +111,7 @@ const features: Features = {
     citizenAttendanceSummary: false,
     noAbsenceType: false,
     employeeMobileStaffAttendanceEdit: false,
-    voucherValueDecisionIgnoredStatus: false
+    voucherValueDecisionIgnoredStatus: true
   }
 }
 

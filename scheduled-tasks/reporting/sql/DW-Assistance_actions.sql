@@ -8,4 +8,4 @@ SELECT
 FROM assistance_action ac
     LEFT JOIN assistance_action_option_ref aaor ON aaor.action_id = ac.id
     LEFT JOIN assistance_action_option aao ON aao.id = aaor.option_id
-WHERE :date_val::DATE - INTERVAL '3 years' <= ac.end_date;
+WHERE :date_val::DATE - INTERVAL '3 months' <= ac.end_date;

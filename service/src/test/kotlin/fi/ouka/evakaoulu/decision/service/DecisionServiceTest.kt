@@ -340,6 +340,7 @@ private fun validDecisionUnit(providerType: ProviderType) = DecisionUnit(
 
 private fun validGuardian(restrictedDetailsEnabled: Boolean = false) = PersonDTO(
     PersonId(UUID.randomUUID()),
+    duplicateOf = null,
     ExternalIdentifier.SSN.getInstance("070682-924A"),
     ssnAddingDisabled = false,
     firstName = "Oili",
@@ -359,6 +360,7 @@ private fun validGuardian(restrictedDetailsEnabled: Boolean = false) = PersonDTO
 
 private fun validChild(restrictedDetailsEnabled: Boolean = false) = PersonDTO(
     PersonId(UUID.randomUUID()),
+    duplicateOf = null,
     ExternalIdentifier.SSN.getInstance("010115A9532"),
     ssnAddingDisabled = false,
     firstName = "Matti",

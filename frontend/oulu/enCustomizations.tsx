@@ -239,12 +239,12 @@ const fi: DeepPartial<Translations> = {
                 Preschool education starts a year before the beginning of
                 compulsory education. Preschool education is free of charge. The
                 enrollment period for preschool education for the school year
-                2023–2024 is January 9 to January 22, 2023. Preschool education
-                begins on August 14, 2023.
+                2024–2025 is January 8 to January 21, 2024. Preschool education
+                begins on August 12, 2024.
               </P>
               <P>
                 If you still need a place in preschool education for your child
-                in spring 2023 (school year 2022-2023), please contact the early
+                in spring 2024 (school year 2023-2024), please contact the early
                 childhood education and care service guidance, tel. 08 558 45300
                 OR varhaiskasvatus@ouka.fi.
               </P>

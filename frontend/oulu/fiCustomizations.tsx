@@ -215,9 +215,9 @@ const fi: DeepPartial<Translations> = {
             <>
               <P>
                 Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
-                alkamista. Esiopetus on maksutonta. Lukuvuoden 2023-2024
-                esiopetukseen ilmoittaudutaan 9.-22.1.2023. Esiopetus alkaa
-                14.8.2023.
+                alkamista. Esiopetus on maksutonta. Lukuvuoden 2024-2025
+                esiopetukseen ilmoittaudutaan 8.-21.1.2024. Esiopetus alkaa
+                12.8.2024.
               </P>
               <P>
                 Päätökset tulevat sähköisesti{' '}

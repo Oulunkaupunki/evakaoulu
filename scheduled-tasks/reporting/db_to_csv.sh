@@ -104,7 +104,6 @@ if [[ -v HISTORY_ENABLED && $HISTORY_ENABLED == true && -v HISTORY_FROM_DATE ]];
     run_history_bulk_and_send_file sql/history_bulk/DW-Fee_decisions_bulk.sql fee_decisions
     run_history_bulk_and_send_file sql/history_bulk/DW-Voucher_value_decisions_bulk.sql voucher_value_decisions
     run_history_bulk_and_send_file sql/history_bulk/DW-Assistance_need_decisions_bulk.sql assistance_need_decisions
-    run_history_bulk_and_send_file sql/history_bulk/DW-Child_discussions_bulk.sql child_discussions
 fi
 
 run_query_and_send_file sql/DW-Daily_info.sql daily_info_$DATE.csv $DATE
@@ -112,7 +111,6 @@ run_query_and_send_file sql/DW-Units_and_groups.sql units_and_groups_$DATE.csv $
 run_query_and_send_file sql/DW-Fee_decisions.sql fee_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Voucher_value_decisions.sql voucher_value_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Assistance_need_decisions.sql assistance_need_decisions_$DATE.csv $DATE
-run_query_and_send_file sql/DW-Child_discussions.sql child_discussions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Daycare_assistances.sql daycare_assistances_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Preschool_assistances.sql preschool_assistances_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Other_assistance_measures.sql other_assistance_measures_$DATE.csv $DATE

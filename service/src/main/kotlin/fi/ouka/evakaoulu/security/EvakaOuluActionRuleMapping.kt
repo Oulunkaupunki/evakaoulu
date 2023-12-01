@@ -26,7 +26,6 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
             )
         }
         Action.Child.READ_VASU_DOCUMENT,
-        Action.Child.READ_CHILD_DISCUSSION,
         Action.Child.CREATE_BACKUP_CARE,
         Action.Child.READ_ASSISTANCE_ACTION -> {
             @Suppress("UNCHECKED_CAST")

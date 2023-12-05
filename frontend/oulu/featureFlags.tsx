@@ -69,7 +69,7 @@ const features: Features = {
     staffAttendanceTypes: true,
     childDocuments: true,
     intermittentShiftCare: false,
-    assistanceNeedPreschoolDecisions: true
+    assistanceNeedPreschoolDecisions: true,
     hojks: true,
     personDuplicate: false,
     citizenAttendanceSummary: false,

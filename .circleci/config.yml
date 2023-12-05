@@ -584,6 +584,7 @@ workflows:
       - frontend_build_image:
           context:
             - evakaoulu-dev
+            - slack-secrets
           requires:
             - checkout_repo
 

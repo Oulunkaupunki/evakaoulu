@@ -104,8 +104,8 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    employeeMobileStaffAttendanceEdit: false,
-    employeeMobileChildAttendanceReservationEdit: false
+    employeeMobileStaffAttendanceEdit: true,
+    employeeMobileChildAttendanceReservationEdit: true
   }
 }
 

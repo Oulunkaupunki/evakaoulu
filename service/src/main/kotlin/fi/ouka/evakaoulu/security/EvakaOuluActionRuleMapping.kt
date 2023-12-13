@@ -45,6 +45,19 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                 HasGlobalRole(UserRole.SERVICE_WORKER) as ScopedActionRule<in T>
             )
         }
+        Action.OtherAssistanceMeasure.READ -> {
+            @Suppress("UNCHECKED_CAST")
+            // Enable UNIT_SUPERVISORS to see past other assistance measures
+            sequenceOf(
+                HasGlobalRole(UserRole.ADMIN) as ScopedActionRule<in T>
+            ) + sequenceOf(
+                HasUnitRole(UserRole.SPECIAL_EDUCATION_TEACHER, UserRole.UNIT_SUPERVISOR)
+                    .inPlacementUnitOfChildOfOtherAssistanceMeasure(false) as ScopedActionRule<in T>
+            ) + sequenceOf(
+                HasUnitRole(UserRole.STAFF)
+                    .inPlacementUnitOfChildOfOtherAssistanceMeasure(true) as ScopedActionRule<in T>
+            )
+        }
         else -> action.defaultRules.asSequence()
     }
 }

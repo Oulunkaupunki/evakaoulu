@@ -108,7 +108,7 @@ const features: Features = {
     noAbsenceType: false,
     employeeMobileStaffAttendanceEdit: true,
     employeeMobileChildAttendanceReservationEdit: true,
-    employeeMobileConfirmedDaysReservations: false
+    employeeMobileConfirmedDaysReservations: true
   }
 }
 

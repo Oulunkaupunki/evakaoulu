@@ -119,3 +119,5 @@ run_query_and_send_file sql/DW-Daycare_assistances.sql daycare_assistances_$DATE
 run_query_and_send_file sql/DW-Preschool_assistances.sql preschool_assistances_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Other_assistance_measures.sql other_assistance_measures_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Assistance_actions.sql assistance_actions_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Daily_units_occupancy_confirmed.sql daily_units_occupancy_confirmed_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Daily_units_occupancy_realized.sql daily_units_occupancy_realized_$DATE.csv $DATE

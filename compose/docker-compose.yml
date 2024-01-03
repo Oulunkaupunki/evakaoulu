@@ -36,10 +36,11 @@ services:
       timeout: 5s
       retries: 5
 
-  s3.mock.evaka:
-    image: adobe/s3mock
+  s3:
+    image: adobe/s3mock:3.3.0
     ports:
-      - "9876:9090"
+      - "9090:9090"
+      - "9876:9191"
     volumes:
       - s3-data:/data
     environment:

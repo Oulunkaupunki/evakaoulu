@@ -18,7 +18,7 @@ services:
       RESOLVER: "127.0.0.11 ipv6=off"
       ENDUSER_GW_URL: "http://enduser-gw:3010"
       INTERNAL_GW_URL: "http://internal-gw:3020"
-      STATIC_FILES_ENDPOINT_URL: "http://s3.mock.evaka:9090/static/frontend"
+      STATIC_FILES_ENDPOINT_URL: "http://s3:9090/static/frontend"
       RATE_LIMIT_CIDR_WHITELIST: "0.0.0.0/0;::/0"
       HTTP_SCHEME: "http"
     # Enable for debug logging
@@ -27,7 +27,7 @@ services:
       - enduser-gw
       - internal-gw
       - evakaoulu-srv
-      - s3.mock.evaka
+      - s3
 
   enduser-gw:
     image: ${EVAKA_GW_IMAGE}

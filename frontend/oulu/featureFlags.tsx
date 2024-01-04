@@ -37,16 +37,10 @@ const features: Features = {
     voucherUnitPayments: true,
     assistanceNeedDecisionsLanguageSelect: false,
     staffAttendanceTypes: true,
-    childDocuments: true,
     intermittentShiftCare: false,
-    assistanceNeedPreschoolDecisions: true,
-    hojks: true,
     personDuplicate: false,
     citizenAttendanceSummary: false,
-    noAbsenceType: false,
-    employeeMobileStaffAttendanceEdit: true,
-    employeeMobileChildAttendanceReservationEdit: true,
-    employeeMobileConfirmedDaysReservations: true
+    noAbsenceType: false
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -68,16 +62,10 @@ const features: Features = {
     voucherUnitPayments: true,
     assistanceNeedDecisionsLanguageSelect: false,
     staffAttendanceTypes: true,
-    childDocuments: true,
     intermittentShiftCare: false,
-    assistanceNeedPreschoolDecisions: true,
-    hojks: true,
     personDuplicate: false,
     citizenAttendanceSummary: false,
-    noAbsenceType: false,
-    employeeMobileStaffAttendanceEdit: true,
-    employeeMobileChildAttendanceReservationEdit: true,
-    employeeMobileConfirmedDaysReservations: true
+    noAbsenceType: false
   },
   prod: {
     citizenShiftCareAbsence: false,
@@ -99,16 +87,10 @@ const features: Features = {
     voucherUnitPayments: true,
     assistanceNeedDecisionsLanguageSelect: false,
     staffAttendanceTypes: true,
-    childDocuments: true,
     intermittentShiftCare: false,
-    assistanceNeedPreschoolDecisions: true,
-    hojks: true,
     personDuplicate: false,
     citizenAttendanceSummary: false,
-    noAbsenceType: false,
-    employeeMobileStaffAttendanceEdit: true,
-    employeeMobileChildAttendanceReservationEdit: true,
-    employeeMobileConfirmedDaysReservations: true
+    noAbsenceType: false
   }
 }
 

@@ -270,7 +270,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Esiopetus alkaa 14.8.2023. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, hakekaa sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus.'
+              'Esiopetus alkaa 12.8.2024. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, hakekaa sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus.'
             ],
             CLUB: [
               'Avoimen varhaiskasvatuksen kerhot noudattavat pääsääntöisesti esiopetuksen työ- ja loma-aikoja. Lapsi voi osallistua yhteen kaksi tai kolme kertaa viikossa kokoontuvaan kerhoon ja lisäksi perhekerhoon.'

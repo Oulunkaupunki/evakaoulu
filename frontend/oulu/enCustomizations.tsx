@@ -309,7 +309,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Preschool education begins on August 14, 2023. If you need early childhood education and care related to preschool education, apply for it under Early childhood education and care related to preschool education.'
+              'Preschool education begins on August 12, 2024. If you need early childhood education and care related to preschool education, apply for it under Early childhood education and care related to preschool education.'
             ],
             CLUB: [
               'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in preschool education. The child may attend one group that meets two or three times a week and a family group at the same time.'

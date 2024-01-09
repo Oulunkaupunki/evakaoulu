@@ -625,8 +625,7 @@ const fi: DeepPartial<Translations> = {
   decisions: {
     summary: (
       <P width="800px">
-        Any decisions or notifications regarding your child’s access to
-        preschool education and groups or clubs will be displayed on this page.
+        This page displays the received decisions regarding your child.
       </P>
     )
   },

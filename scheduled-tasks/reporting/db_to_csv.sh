@@ -104,10 +104,10 @@ if [[ -v HISTORY_ENABLED && $HISTORY_ENABLED == true && -v HISTORY_FROM_DATE ]];
     run_history_batch_and_send_file sql/DW-Daily_info.sql daily_info
     run_history_batch_and_send_file sql/DW-Units_and_groups.sql units_and_groups
 
-    echo "Running history bulk"
-    run_history_bulk_and_send_file sql/history_bulk/DW-Fee_decisions_bulk.sql fee_decisions
-    run_history_bulk_and_send_file sql/history_bulk/DW-Voucher_value_decisions_bulk.sql voucher_value_decisions
-    run_history_bulk_and_send_file sql/history_bulk/DW-Assistance_need_decisions_bulk.sql assistance_need_decisions
+    #echo "Running history bulk"
+    #run_history_bulk_and_send_file sql/history_bulk/DW-Fee_decisions_bulk.sql fee_decisions
+    #run_history_bulk_and_send_file sql/history_bulk/DW-Voucher_value_decisions_bulk.sql voucher_value_decisions
+    #run_history_bulk_and_send_file sql/history_bulk/DW-Assistance_need_decisions_bulk.sql assistance_need_decisions
 fi
 
 run_query_and_send_file sql/DW-Daily_info.sql daily_info_$DATE.csv $DATE

@@ -185,12 +185,12 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
             if (it.daycareType.contains(CareType.FAMILY) or it.daycareType.contains(CareType.GROUP_FAMILY)) {
                 invoiceRowData.setAlphanumericValue(
                     InvoiceFieldName.CREDIT_ACCOUNTING,
-                    "3271 1101171      " + it.costCenter
+                    "3271 1104171      " + it.costCenter
                 )
             } else {
                 invoiceRowData.setAlphanumericValue(
                     InvoiceFieldName.CREDIT_ACCOUNTING,
-                    "3271 1101170      " + it.costCenter
+                    "3271 1104170      " + it.costCenter
                 )
             }
 

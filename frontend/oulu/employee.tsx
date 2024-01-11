@@ -326,6 +326,7 @@ const customizations: EmployeeCustomizations = {
         absenceTypes: {
           OTHER_ABSENCE: 'Poissaolo',
           SICKLEAVE: 'Sairaus',
+          UNKNOWN_ABSENCE: 'Ilmoittamaton poissaolo',
           PLANNED_ABSENCE: 'Sopimuspoissaolo',
           TEMPORARY_RELOCATION: 'Lapsi varasijoitettuna muualla',
           PARENTLEAVE: 'Vanhempainvapaa',
@@ -336,6 +337,7 @@ const customizations: EmployeeCustomizations = {
         absenceTypesShort: {
           OTHER_ABSENCE: 'Poissaolo',
           SICKLEAVE: 'Sairaus',
+          UNKNOWN_ABSENCE: 'Ilmoittamaton',
           PLANNED_ABSENCE: 'Sopimus',
           TEMPORARY_RELOCATION: 'Varasijoitus',
           PARENTLEAVE: 'Vanhempainvapaa',
@@ -348,6 +350,8 @@ const customizations: EmployeeCustomizations = {
             'Käytetään aina, kun huoltaja on ilmoittanut poissaolosta mukaan lukien säännölliset vapaat ja loma-ajat. Käytetään myös vuoroyksiköissä lasten lomamerkinnöissä tai muissa poissaoloissa, jotka ovat suunniteltujen läsnäolovarausten ulkopuolella.',
           SICKLEAVE:
             'Merkitään, kun lapsi on sairaana tai kuntoutus- / tutkimusjaksolla.',
+          UNKNOWN_ABSENCE:
+              'Käytetään silloin, kun huoltaja ei ole ilmoittanut poissaolosta, vaikuttaa heinäkuussa myös laskutukseen. Koodi muutetaan vain, jos kyseessä on sairauspoissaolo, jonka jatkumisesta huoltaja ilmoittaa seuraavana päivänä.',
           PLANNED_ABSENCE:
             'Palveluntarvesopimuksen (10 tai 13 pv/kk) mukaiset etukäteen ilmoitetut poissaolot.',
           TEMPORARY_RELOCATION:
@@ -418,6 +422,7 @@ const customizations: EmployeeCustomizations = {
   ],
   absenceTypes: [
     'OTHER_ABSENCE',
+    'UNKNOWN_ABSENCE',
     'PLANNED_ABSENCE',
     'SICKLEAVE',
     'PARENTLEAVE',

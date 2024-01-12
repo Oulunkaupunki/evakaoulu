@@ -351,7 +351,7 @@ const customizations: EmployeeCustomizations = {
           SICKLEAVE:
             'Merkitään, kun lapsi on sairaana tai kuntoutus- / tutkimusjaksolla.',
           UNKNOWN_ABSENCE:
-              'Käytetään silloin, kun huoltaja ei ole ilmoittanut poissaolosta, vaikuttaa heinäkuussa myös laskutukseen. Koodi muutetaan vain, jos kyseessä on sairauspoissaolo, jonka jatkumisesta huoltaja ilmoittaa seuraavana päivänä.',
+              'Käytetään silloin, kun huoltaja ei ole ilmoittanut poissaolosta. Koodi muutetaan vain, jos kyseessä on sairauspoissaolo.',
           PLANNED_ABSENCE:
             'Palveluntarvesopimuksen (10 tai 13 pv/kk) mukaiset etukäteen ilmoitetut poissaolot.',
           TEMPORARY_RELOCATION:

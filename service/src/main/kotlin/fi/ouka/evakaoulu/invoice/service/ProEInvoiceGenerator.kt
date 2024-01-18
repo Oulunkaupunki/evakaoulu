@@ -203,31 +203,31 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
     }
 
     fun generateRow(fields: List<InvoiceField>, invoiceData: InvoiceData): String {
-        var result = ""
+        var result = StringBuilder("")
 
         fields.forEach {
             if (it.fieldType == FieldType.ALPHANUMERIC) {
                 var value = invoiceData.getAlphanumericValue(it.field) ?: ""
-                result = result + value.take(it.length).padEnd(it.length)
+                result.append(value.take(it.length).padEnd(it.length))
             } else if (it.fieldType == FieldType.NUMERIC) {
                 var value = invoiceData.getNumericValue(it.field) ?: 0
                 var stringValue = value.toString().padStart(it.length, '0')
                 // all Evaka values seem to be Int so we can just pad
                 // the decimal part with the correct number of zeroes
-                result = result + stringValue.padEnd(it.length + it.decimals, '0')
+                result.append(stringValue.padEnd(it.length + it.decimals, '0'))
             } else if (it.fieldType == FieldType.MONETARY) {
                 var value = invoiceData.getNumericValue(it.field) ?: 0
                 // if the value is non-zero it has been multiplied by 100 to already contain two decimals
                 val decimals = if (value == 0) it.decimals else it.decimals - 2
                 val length = if (value == 0) it.length else it.length + 2
                 var stringValue = value.toString().padStart(length, '0')
-                result = result + stringValue.padEnd(length + decimals, '0')
+                result.append(stringValue.padEnd(length + decimals, '0'))
             }
         }
 
-        result = result + "\n"
+        result.append("\n")
 
-        return result
+        return result.toString()
     }
 
     fun formatInvoice(invoiceData: InvoiceData): String {

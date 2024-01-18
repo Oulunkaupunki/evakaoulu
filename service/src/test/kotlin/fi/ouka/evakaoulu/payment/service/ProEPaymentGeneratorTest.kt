@@ -1,6 +1,7 @@
 package fi.ouka.evakaoulu.payment.service
 
 import fi.ouka.evakaoulu.util.FinanceDateProvider
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class ProEPaymentGeneratorTest {
@@ -54,5 +55,20 @@ class ProEPaymentGeneratorTest {
         val result = proEPaymentGenerator.generatePayments(listOf(validPayment, negativePayment))
 
         assert(result.sendResult.succeeded.containsAll(listOf(validPayment, negativePayment)))
+    }
+
+    @Test
+    fun `should check that payment format is a proper one also with invoice function number`() {
+        val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(), BicMapper())
+        val validPayment = validPayment()
+        val otherPaymentUnit = validPaymentUnit().copy(providerId = "OTHERPROVIDERID")
+        val otherPayment = validPayment().copy(unit = otherPaymentUnit)
+        val payments = listOf(validPayment, otherPayment)
+
+        val generationResult = proEPaymentGenerator.generatePayments(payments)
+
+        var correctPayments = object {}.javaClass.getResource("/payment-client/CorrectProEPayments.txt")?.readText()
+
+        Assertions.assertEquals(correctPayments, generationResult.paymentString)
     }
 }

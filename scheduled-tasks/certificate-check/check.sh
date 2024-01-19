@@ -76,9 +76,7 @@ list_expirations() {
             echo "$TITLE $CERT valid from $CERT_VALID_FROM, expiration at $CERT_EXPIRATION" >>$TMPDIR/output
         else
             EXPIRATION_IN=$(days_to_date $CERT_EXPIRATION)
-            # echo `days_to_date $CERT_EXPIRATION` >> $TMPDIR/output
             if (($EXPIRATION_IN <= 60)); then
-                # echo "$DAYS_TO_EXPIRATION until $TITLE $CERT expiration" >> $TMPDIR/output
                 echo "$TITLE $CERT expires in $EXPIRATION_IN days" >>$TMPDIR/output
             fi
         fi
@@ -131,13 +129,6 @@ ENVIRONMENT=$1
 ACTION='list'
 OUTPUT='print'
 
-# if [[ $# > 1 ]]
-# then
-#     if [[ $2 == '-c' || $2 == '--check' ]]
-#     then
-# 	ACTION='check'
-#     fi
-# fi
 
 for ARG in "$@"; do
     case $ARG in
@@ -170,9 +161,10 @@ done
 
 TMPDIR=$(mktemp -d)
 
-check_certificate enduser-gw saml_public_key.pem "suomi.fi identification"
-check_certificate enduser-gw auth_public_key.pem "Keycloak Citizen realm"
-check_certificate internal-gw saml_public_key.pem "AD SAML"
+# Cert expiration is not needed in SAML cases
+#check_certificate enduser-gw saml_public_key.pem "suomi.fi identification"
+#check_certificate enduser-gw auth_public_key.pem "Keycloak Citizen realm"
+#check_certificate internal-gw saml_public_key.pem "AD SAML"
 
 if [[ "ENVIRONMENT" == evakaturku-prod ]]; then
     copy_to_tmp internal-gw turkuad-internal-prod.pem

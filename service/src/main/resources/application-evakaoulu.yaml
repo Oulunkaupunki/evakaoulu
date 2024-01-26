@@ -27,3 +27,10 @@ evaka:
     municipality_code: "564"
   fee_decision:
     min_date: "2019-01-01"
+  integration:
+    sfi:
+      contact_organization:
+        name: "eVaka Oulu"
+        street_address: "PL 75"
+        postal_code: "90015"
+        post_office: "Oulu"

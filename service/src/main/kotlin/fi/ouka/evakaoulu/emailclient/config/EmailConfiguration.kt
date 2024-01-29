@@ -67,7 +67,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         events: List<CalendarEventNotificationData>
     ): EmailContent {
         val format =
-            DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale("fi", "FI"))
+            DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.of("fi", "FI"))
         val eventsHtml =
             "<ul>" +
                 events.joinToString("\n") { event ->
@@ -202,7 +202,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     ): EmailContent {
         val start =
             checkedRange.start.format(
-                DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale("fi", "FI"))
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.of("fi", "FI"))
             )
         return EmailContent(
             subject = "Läsnäolovarauksia puuttuu / There are missing attendance reservations",

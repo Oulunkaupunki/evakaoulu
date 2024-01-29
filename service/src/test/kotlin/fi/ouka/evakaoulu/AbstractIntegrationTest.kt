@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2021 City of Oulu
+// SPDX-FileCopyrightText: 2024 City of Oulu
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
@@ -15,17 +15,10 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
-import org.springframework.core.io.Resource
-import org.springframework.util.StreamUtils
-import java.nio.charset.Charset
-import java.nio.charset.StandardCharsets
-import java.util.function.Function
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(
-    webEnvironment = WebEnvironment.RANDOM_PORT,
     classes = [IntegrationTestConfiguration::class]
 )
 @AutoConfigureWireMock(port = 0)
@@ -60,10 +53,4 @@ abstract class AbstractIntegrationTest(private val resetDbBeforeEach: Boolean = 
     protected fun afterAll() {
         db.close()
     }
-
-    protected fun <T> runInTransaction(function: Function<Database.Transaction, T>) =
-        db.transaction { tx -> function.apply(tx) }
 }
-
-fun resourceAsString(resource: Resource, charset: Charset = StandardCharsets.UTF_8) =
-    resource.inputStream.use { StreamUtils.copyToString(it, charset) }

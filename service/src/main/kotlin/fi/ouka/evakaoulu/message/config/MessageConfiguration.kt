@@ -85,7 +85,7 @@ internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMes
 
     private fun resolveLocale(lang: MessageLanguage): Locale {
         if (MessageLanguage.SV.equals(lang)) return resolveLocale(MessageLanguage.FI)
-        return Locale(lang.name.lowercase())
+        return Locale.of(lang.name.lowercase())
     }
 }
 

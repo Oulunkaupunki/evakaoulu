@@ -37,7 +37,6 @@ class EVakaOuluConfig {
         unplannedAbsencesAreContractSurplusDays = false,
         maxContractDaySurplusThreshold = 13,
         useContractDaysAsDailyFeeDivisor = false,
-        enabledChildConsentTypes = setOf(),
         curriculumDocumentPermissionToShareRequired = true,
         assistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
         preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),

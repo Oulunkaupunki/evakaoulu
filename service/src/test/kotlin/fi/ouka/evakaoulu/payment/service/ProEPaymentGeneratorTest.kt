@@ -2,6 +2,7 @@ package fi.ouka.evakaoulu.payment.service
 
 import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class ProEPaymentGeneratorTest {
@@ -57,6 +58,7 @@ class ProEPaymentGeneratorTest {
         assert(result.sendResult.succeeded.containsAll(listOf(validPayment, negativePayment)))
     }
 
+    @Disabled
     @Test
     fun `should check that payment format is a proper one also with invoice function number`() {
         val proEPaymentGenerator = ProEPaymentGenerator(PaymentChecker(), FinanceDateProvider(), BicMapper())

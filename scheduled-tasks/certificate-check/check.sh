@@ -161,19 +161,20 @@ done
 
 TMPDIR=$(mktemp -d)
 
-# Cert expiration is not needed in SAML cases -- AD check is needed
-#check_certificate enduser-gw saml_public_key.pem "suomi.fi identification"
-#check_certificate enduser-gw auth_public_key.pem "Keycloak Citizen realm"
-check_certificate internal-gw saml_public_key.pem "AD SAML"
+check_certificate api-gw saml_suomifi_public_key.pem "suomi.fi identification"
+check_certificate api-gw auth_citizen_public_key.pem "Keycloak Citizen realm"
+check_certificate api-gw saml_ad_public_key.pem "AD SAML"
 
 if [[ "ENVIRONMENT" == evakaturku-prod ]]; then
-    copy_to_tmp internal-gw turkuad-internal-prod.pem
-    TURKUAD_VALID_FROM=$(get_valid_from turkuad-internal-prod.pem)
-    TURKUAD_EXPIRATION=$(get_expiration turkuad-internal-prod.pem)
-    echo "TURKU AD certificate valid from $TURKUAD_VALID_FROM, expiration at $TURKUAD_EXPIRATION" >>$TMPDIR/output
+    copy_to_tmp api-gw ouluad-internal-prod.pem
+    OULUAD_VALID_FROM=$(get_valid_from ouluad-internal-prod.pem)
+    OULUAD_EXPIRATION=$(get_expiration ouluad-internal-prod.pem)
+    echo "OULU AD certificate valid from $OULUAD_VALID_FROM, expiration at $OULUAD_EXPIRATION" >>$TMPDIR/output
 fi
 
-check_certificate internal-gw auth_public_key.pem "Keycloak Employee realm" internal_auth_public_key.pem
+#TODO check staging env also
+
+check_certificate api-gw auth_employees_public_key.pem "Keycloak Employee realm" internal_auth_public_key.pem
 
 if [ -z "$KEYSTORE_PASS" ]; then
     KEYSTORE_PASS=$(get_password /${ENVIRONMENT}/message-service/keystore/password)

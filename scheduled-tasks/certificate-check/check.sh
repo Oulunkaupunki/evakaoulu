@@ -161,10 +161,10 @@ done
 
 TMPDIR=$(mktemp -d)
 
-# Cert expiration is not needed in SAML cases
+# Cert expiration is not needed in SAML cases -- AD check is needed
 #check_certificate enduser-gw saml_public_key.pem "suomi.fi identification"
 #check_certificate enduser-gw auth_public_key.pem "Keycloak Citizen realm"
-#check_certificate internal-gw saml_public_key.pem "AD SAML"
+check_certificate internal-gw saml_public_key.pem "AD SAML"
 
 if [[ "ENVIRONMENT" == evakaturku-prod ]]; then
     copy_to_tmp internal-gw turkuad-internal-prod.pem

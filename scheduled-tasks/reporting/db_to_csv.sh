@@ -112,6 +112,7 @@ fi
 
 run_query_and_send_file sql/DW-Daily_info.sql daily_info_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Units_and_groups.sql units_and_groups_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Daily_units_and_groups_attendance.sql daily_units_and_groups_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Fee_decisions.sql fee_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Voucher_value_decisions.sql voucher_value_decisions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Assistance_need_decisions.sql assistance_need_decisions_$DATE.csv $DATE

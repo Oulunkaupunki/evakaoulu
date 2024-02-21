@@ -43,7 +43,8 @@ class EVakaOuluConfig {
         requestedStartUpperLimit = 7,
         preferredStartRelativeApplicationDueDate = true,
         postOffice = "OULU",
-        municipalMessageAccountName = "Oulun kaupunki"
+        municipalMessageAccountName = "Oulun kaupunki",
+        fiveYearsOldDaycareEnabled = false
     )
 
     @Bean

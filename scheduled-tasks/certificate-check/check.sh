@@ -161,9 +161,13 @@ done
 
 TMPDIR=$(mktemp -d)
 
-check_certificate api-gw saml_suomifi_public_key.pem "suomi.fi identification"
+# suomi.fi identification does not check certificate expiration in metadata
+# check_certificate api-gw saml_suomifi_public_key.pem "suomi.fi identification"
+
 check_certificate api-gw auth_citizen_public_key.pem "Keycloak Citizen realm"
-check_certificate api-gw saml_ad_public_key.pem "AD SAML"
+
+# Azure AD does not check certification expiration in metadata
+# check_certificate api-gw saml_ad_public_key.pem "AD SAML"
 
 if [[ "ENVIRONMENT" == evakaturku-prod ]]; then
     copy_to_tmp api-gw ouluad-internal-prod.pem

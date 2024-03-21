@@ -33,6 +33,7 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                 HasUnitRole(UserRole.STAFF).inPlacementUnitOfChild() as ScopedActionRule<in T>
             )
         }
+        Action.Person.ADD_SSN,
         Action.Person.UPDATE_FROM_VTJ -> {
             @Suppress("UNCHECKED_CAST")
             action.defaultRules.asSequence() + sequenceOf(

@@ -17,7 +17,7 @@ fi.ouka.evakaoulu:
       fi: |
         Olette saaneet päätöksen varhaiskasvatuksen asiakasmaksusta Oulun kaupungilta. Päätös on luettavissa oheisesta liitteestä.
         
-        Maksupäätös on voimassa toistaiseksi. Jos perheen bruttotuloissa tapahtuu olennaisia (+/-10 %) muutoksia, on uusi tuloselvitys tehtävä välittömästi.
+        Maksupäätös on voimassa toistaiseksi. Jos perheen bruttotuloissa tapahtuu olennaisia muutoksia, on uusi tuloselvitys tehtävä välittömästi.
         
         Lisätietoja maksun määräytymisestä löytyy Oulun kaupungin verkkosivuilta: Varhaiskasvatuksen asiakasmaksut.
     VOUCHER_VALUE_DECISION_HEADER:
@@ -26,7 +26,7 @@ fi.ouka.evakaoulu:
       fi: |
         Olette saaneet päätöksen varhaiskasvatuksen palvelusetelin arvosta ja omavastuuosuudesta. Päätös on luettavissa oheisesta liitteestä.
 
-        Päätös omavastuuosuudesta on voimassa toistaiseksi.  Päiväkodin / perhepäivähoitajan perimä omavastuu voi olla suurempi, kuin mitä päätöksessä ilmoitettu, jos päiväkodin hinta on suurempi kuin palvelusetelin enimmäisarvo. Jos perheen bruttotuloissa tapahtuu olennaisia (+/-10 %) muutoksia, on uusi tuloselvitys tehtävä välittömästi.
+        Päätös omavastuuosuudesta on voimassa toistaiseksi.  Päiväkodin / perhepäivähoitajan perimä omavastuu voi olla suurempi, kuin mitä päätöksessä ilmoitettu, jos päiväkodin hinta on suurempi kuin palvelusetelin enimmäisarvo. Jos perheen bruttotuloissa tapahtuu olennaisia muutoksia, on uusi tuloselvitys tehtävä välittömästi.
 
         Lisätietoja maksun määräytymisestä löytyy Oulun kaupungin verkkosivuilta: Varhaiskasvatuksen asiakasmaksut.
     ASSISTANCE_NEED_DECISION_HEADER:

@@ -201,8 +201,9 @@ TMPDIR=$(mktemp -d)
 # suomi.fi identification does not check certificate expiration in metadata
 # check_certificate api-gw saml_suomifi_public_key.pem "suomi.fi identification"
 
-check_certificate api-gw auth_citizen_public_key.pem "Keycloak Citizen realm"
-check_db_certificate evaka-customer keycloak_citizen_certificate.pem "Keycloak Citizen realm from db"
+# Keycloak certificate is checked from db
+# check_certificate api-gw auth_citizen_public_key.pem "Keycloak Citizen realm"
+check_db_certificate evaka-customer keycloak_citizen_certificate.pem "Keycloak Citizen realm"
 
 # Azure AD does not check certification expiration in metadata
 # check_certificate api-gw saml_ad_public_key.pem "AD SAML"
@@ -216,8 +217,9 @@ fi
 
 #TODO check staging env also
 
-check_certificate api-gw auth_employees_public_key.pem "Keycloak Employee realm" internal_auth_public_key.pem
-check_db_certificate evaka keycloak_employee_certificate.pem "Keycloak Employee realm from db"
+# Keycloak certificate is checked from db
+# check_certificate api-gw auth_employees_public_key.pem "Keycloak Employee realm" internal_auth_public_key.pem
+check_db_certificate evaka keycloak_employee_certificate.pem "Keycloak Employee realm"
 
 if [ -z "$KEYSTORE_PASS" ]; then
     KEYSTORE_PASS=$(get_password /${ENVIRONMENT}/message-service/keystore/password)
@@ -254,4 +256,4 @@ if [ -f $TMPDIR/output ]; then
     fi
 fi
 
-#rm -rf $TMPDIR
+rm -rf $TMPDIR

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# dependencies: AWS CLI, keytool, jq
+# dependencies: AWS CLI, keytool, jq, psql
 
 copy_to_tmp() {
 
@@ -11,6 +11,19 @@ copy_to_tmp() {
     if [ -z "$TARGET" ]; then TARGET=$FILE; fi
 
     aws s3 cp s3://${ENVIRONMENT}-deployment/$S3_DIR/$FILE $TMPDIR/$TARGET >/dev/null
+}
+
+dump_cert_from_db_to_tmp() {
+
+    SQL_FILE="sql/auth_certificate.sql"
+    CLIENT_ID=$1
+    TARGET=$2
+
+    if [ -z "$TARGET" ]; then TARGET="db_certificate.pem"; fi
+
+    echo "-----BEGIN CERTIFICATE-----" > $TMPDIR/$TARGET
+    psql -v client_val="'${CLIENT_ID}'" < $SQL_FILE | tail -n 3 | head -n 1 >> $TMPDIR/$TARGET
+    echo "-----END CERTIFICATE-----" >> $TMPDIR/$TARGET
 }
 
 dump_cert() {
@@ -109,6 +122,30 @@ check_certificate() {
     fi
 }
 
+check_db_certificate() {
+
+    CLIENT_ID=$1
+    LOCAL_FILE=$2
+    CERTNAME=$3
+
+    if [ -z "$LOCAL_FILE" ]; then
+        LOCAL_FILE="db_certificate.pem"
+    fi
+
+    dump_cert_from_db_to_tmp $CLIENT_ID $LOCAL_FILE
+    VALID_FROM=$(get_valid_from $LOCAL_FILE)
+    EXPIRATION=$(get_expiration $LOCAL_FILE)
+
+    if [[ $ACTION == 'list' ]]; then
+        echo "$CERTNAME certificate valid from $VALID_FROM, expiration at $EXPIRATION" >>$TMPDIR/output
+    else
+        EXPIRATION_IN=$(days_to_date "$EXPIRATION")
+        if ((EXPIRATION_IN <= 60)); then
+            echo "$CERTNAME certification expires in $EXPIRATION_IN days" >>$TMPDIR/output
+        fi
+    fi
+}
+
 check_keystore() {
 
     S3_DIR=$1
@@ -165,11 +202,12 @@ TMPDIR=$(mktemp -d)
 # check_certificate api-gw saml_suomifi_public_key.pem "suomi.fi identification"
 
 check_certificate api-gw auth_citizen_public_key.pem "Keycloak Citizen realm"
+check_db_certificate evaka-customer keycloak_citizen_certificate.pem "Keycloak Citizen realm from db"
 
 # Azure AD does not check certification expiration in metadata
 # check_certificate api-gw saml_ad_public_key.pem "AD SAML"
 
-if [[ "ENVIRONMENT" == evakaturku-prod ]]; then
+if [[ "ENVIRONMENT" == evakaoulu-prod ]]; then
     copy_to_tmp api-gw ouluad-internal-prod.pem
     OULUAD_VALID_FROM=$(get_valid_from ouluad-internal-prod.pem)
     OULUAD_EXPIRATION=$(get_expiration ouluad-internal-prod.pem)
@@ -179,6 +217,7 @@ fi
 #TODO check staging env also
 
 check_certificate api-gw auth_employees_public_key.pem "Keycloak Employee realm" internal_auth_public_key.pem
+check_db_certificate evaka keycloak_employee_certificate.pem "Keycloak Employee realm from db"
 
 if [ -z "$KEYSTORE_PASS" ]; then
     KEYSTORE_PASS=$(get_password /${ENVIRONMENT}/message-service/keystore/password)
@@ -210,9 +249,9 @@ if [ -f $TMPDIR/output ]; then
     else
         echo "Expiring certificates in $ENVIRONMENT" >$TMPDIR/output2
         echo >>$TMPDIR/output2
-        cat $TMPDIR/output >>$TMPDIR/output2
+        cat $TMPDIR/output >> $TMPDIR/output2
         aws sns publish --topic-arn $SNS_TOPIC_ARN --message file://$TMPDIR/output2
     fi
 fi
 
-rm -rf $TMPDIR
+#rm -rf $TMPDIR

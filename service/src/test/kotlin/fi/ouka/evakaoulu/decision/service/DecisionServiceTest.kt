@@ -466,6 +466,7 @@ private val validAssistanceNeedPreSchoolDecision = AssistanceNeedPreschoolDecisi
         language = AssistanceNeedDecisionLanguage.FI,
         type = AssistanceNeedPreschoolDecisionType.NEW,
         validFrom = LocalDate.now(),
+        validTo = null,
         extendedCompulsoryEducation = true,
         extendedCompulsoryEducationInfo = "Jotai infoo",
         grantedAssistanceService = true,

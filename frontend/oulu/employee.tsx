@@ -10,7 +10,6 @@ import React from 'react'
 
 import {
   daycareAssistanceLevels,
-  otherAssistanceMeasureTypes,
   preschoolAssistanceLevels
 } from 'lib-common/generated/api-types/assistance'
 import { H3, P } from 'lib-components/typography'
@@ -351,7 +350,7 @@ const customizations: EmployeeCustomizations = {
           SICKLEAVE:
             'Merkitään, kun lapsi on sairaana tai kuntoutus- / tutkimusjaksolla.',
           UNKNOWN_ABSENCE:
-              'Käytetään silloin, kun huoltaja ei ole ilmoittanut poissaolosta. Koodi muutetaan vain, jos kyseessä on sairauspoissaolo.',
+            'Käytetään silloin, kun huoltaja ei ole ilmoittanut poissaolosta. Koodi muutetaan vain, jos kyseessä on sairauspoissaolo.',
           PLANNED_ABSENCE:
             'Palveluntarvesopimuksen (10 tai 13 pv/kk) mukaiset etukäteen ilmoitetut poissaolot.',
           TEMPORARY_RELOCATION:
@@ -435,11 +434,13 @@ const customizations: EmployeeCustomizations = {
     'RELIEF_REJECTED'
   ],
   daycareAssistanceLevels: [...daycareAssistanceLevels],
-  otherAssistanceMeasureTypes: ['TRANSPORT_BENEFIT',
+  otherAssistanceMeasureTypes: [
+    'TRANSPORT_BENEFIT',
     'ANOMALOUS_EDUCATION_START',
     'CHILD_DISCUSSION_OFFERED',
     'CHILD_DISCUSSION_HELD',
-    'CHILD_DISCUSSION_COUNSELING'],
+    'CHILD_DISCUSSION_COUNSELING'
+  ],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
   preschoolAssistanceLevels: [...preschoolAssistanceLevels],
   unitProviderTypes: [

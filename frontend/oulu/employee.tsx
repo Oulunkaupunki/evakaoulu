@@ -435,7 +435,11 @@ const customizations: EmployeeCustomizations = {
     'RELIEF_REJECTED'
   ],
   daycareAssistanceLevels: [...daycareAssistanceLevels],
-  otherAssistanceMeasureTypes: [...otherAssistanceMeasureTypes],
+  otherAssistanceMeasureTypes: ['TRANSPORT_BENEFIT',
+    'ANOMALOUS_EDUCATION_START',
+    'CHILD_DISCUSSION_OFFERED',
+    'CHILD_DISCUSSION_HELD',
+    'CHILD_DISCUSSION_COUNSELING'],
   placementPlanRejectReasons: ['REASON_1', 'REASON_2', 'OTHER'],
   preschoolAssistanceLevels: [...preschoolAssistanceLevels],
   unitProviderTypes: [

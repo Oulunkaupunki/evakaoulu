@@ -6,4 +6,5 @@ FROM alpine:3.19.1
 # openjdk8-jre-base is needed because it contains keytool
 RUN apk add --no-cache bash coreutils aws-cli jq openssl openjdk8-jre-base postgresql16-client
 ADD check.sh check.sh
+ADD sql sql
 CMD ./check.sh $ENVIRONMENT --check --notify

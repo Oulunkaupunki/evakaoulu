@@ -90,7 +90,6 @@ class DecisionServiceTest {
     )
     fun createDecisionPdf(decisionType: DecisionType) {
         val bytes = createDecisionPdf(
-            messageProvider,
             templateProvider,
             pdfService,
             settings,
@@ -129,7 +128,6 @@ class DecisionServiceTest {
         // my kind of assertion
         assertDoesNotThrow {
             val bytes = createDecisionPdf(
-                messageProvider,
                 templateProvider,
                 pdfService,
                 settings,
@@ -156,7 +154,6 @@ class DecisionServiceTest {
     @Test
     fun createDecisionPdfWithoutSettings() {
         val bytes = createDecisionPdf(
-            messageProvider,
             templateProvider,
             pdfService,
             mapOf(),
@@ -188,7 +185,6 @@ class DecisionServiceTest {
     @Test
     fun createDaycareTransferDecisionPdf() {
         val bytes = createDecisionPdf(
-            messageProvider,
             templateProvider,
             pdfService,
             settings,
@@ -220,7 +216,6 @@ class DecisionServiceTest {
     @Test
     fun createDaycareVoucherDecisionPdf() {
         val bytes = createDecisionPdf(
-            messageProvider,
             templateProvider,
             pdfService,
             settings,
@@ -252,7 +247,6 @@ class DecisionServiceTest {
     @Test
     fun createRestrictedDetailsEnabledPdf() {
         val bytes = createDecisionPdf(
-            messageProvider,
             templateProvider,
             pdfService,
             settings,

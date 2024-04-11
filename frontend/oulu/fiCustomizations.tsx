@@ -502,7 +502,7 @@ const fi: DeepPartial<Translations> = {
     cityLabel: '© Oulun kaupunki',
     privacyPolicyLink: (
       <ExternalLink
-        href="https://www.ouka.fi/oulu/verkkoasiointi/tietosuojaselosteet?registerId=1939220"
+        href="https://www.ouka.fi/tietosuoja/tietosuojaselosteet?registerId=1939220"
         text="Tietosuojaselosteet"
         newTab={true}
         data-qa="footer-policy-link"

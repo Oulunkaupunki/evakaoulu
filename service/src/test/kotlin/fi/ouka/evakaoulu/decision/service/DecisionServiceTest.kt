@@ -94,7 +94,6 @@ class DecisionServiceTest {
             pdfService,
             settings,
             validDecision(decisionType, validDecisionUnit(ProviderType.MUNICIPAL)),
-            guardian = validGuardian(),
             child = validChild(),
             isTransferApplication = false,
             serviceNeed = when (decisionType) {
@@ -132,7 +131,6 @@ class DecisionServiceTest {
                 pdfService,
                 settings,
                 validDecision(DecisionType.PREPARATORY_EDUCATION, validDecisionUnit(ProviderType.MUNICIPAL)),
-                guardian = validGuardian(),
                 child = validChild(),
                 isTransferApplication = false,
                 serviceNeed = ServiceNeed(
@@ -158,7 +156,6 @@ class DecisionServiceTest {
             pdfService,
             mapOf(),
             validDecision(DecisionType.DAYCARE, validDecisionUnit(ProviderType.MUNICIPAL)),
-            guardian = validGuardian(),
             child = validChild(),
             isTransferApplication = false,
             serviceNeed = ServiceNeed(
@@ -189,7 +186,6 @@ class DecisionServiceTest {
             pdfService,
             settings,
             validDecision(DecisionType.DAYCARE, validDecisionUnit(ProviderType.MUNICIPAL)),
-            guardian = validGuardian(),
             child = validChild(),
             isTransferApplication = true,
             serviceNeed = ServiceNeed(
@@ -220,7 +216,6 @@ class DecisionServiceTest {
             pdfService,
             settings,
             validDecision(DecisionType.DAYCARE, validDecisionUnit(ProviderType.PRIVATE_SERVICE_VOUCHER)),
-            guardian = validGuardian(),
             child = validChild(),
             isTransferApplication = false,
             serviceNeed = ServiceNeed(
@@ -251,7 +246,6 @@ class DecisionServiceTest {
             pdfService,
             settings,
             validDecision(DecisionType.DAYCARE, validDecisionUnit(ProviderType.MUNICIPAL)),
-            guardian = validGuardian(true),
             child = validChild(true),
             isTransferApplication = false,
             serviceNeed = ServiceNeed(
@@ -280,7 +274,7 @@ class DecisionServiceTest {
     fun generateAssistanceNeedPdf() {
         val decision = validAssistanceNeedDecision
 
-        val bytes = generateAssistanceNeedPdf(decision, validAddress(), validGuardian(false), pdfService, templateProvider)
+        val bytes = generateAssistanceNeedPdf(decision, pdfService, templateProvider)
 
         val filepath = "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-assistance-need-decision.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -290,7 +284,7 @@ class DecisionServiceTest {
     fun generateAssistanceNeedPreschoolPdf() {
         val decision = validAssistanceNeedPreSchoolDecision
 
-        val bytes = generateAssistanceNeedPreschoolPdf(decision, validAddress(), validGuardian(false), pdfService, templateProvider)
+        val bytes = generateAssistanceNeedPreschoolPdf(decision, pdfService, templateProvider)
 
         val filepath = "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-preschool-assistance-need-decision.pdf"
         FileOutputStream(filepath).use { it.write(bytes) }
@@ -308,13 +302,13 @@ private fun validDecision(type: DecisionType, decisionUnit: DecisionUnit) = Deci
     childId = ChildId(UUID.randomUUID()),
     childName = "Matti",
     documentKey = null,
-    otherGuardianDocumentKey = null,
     decisionNumber = 12345,
     sentDate = LocalDate.now(),
     DecisionStatus.ACCEPTED,
     requestedStartDate = null,
     resolved = null,
-    resolvedByName = null
+    resolvedByName = null,
+    documentContainsContactInfo = false
 )
 
 private fun validDecisionUnit(providerType: ProviderType) = DecisionUnit(
@@ -509,8 +503,6 @@ private fun validAddress() = DecisionSendAddress("Kotikatu", "90100", "Oulu", ""
 
 fun generateAssistanceNeedPdf(
     decision: AssistanceNeedDecision,
-    sendAddress: DecisionSendAddress? = null,
-    guardian: PersonDTO? = null,
     pdfService: PdfGenerator,
     templateProvider: ITemplateProvider
 ): ByteArray {
@@ -521,16 +513,12 @@ fun generateAssistanceNeedPdf(
                 locale = Locale.Builder().setLanguage(decision.language.name.lowercase()).build()
                 setVariable("decision", decision)
                 setVariable("sentDate", LocalDate.now())
-                setVariable("sendAddress", sendAddress)
-                setVariable("guardian", guardian)
             }
         )
     )
 }
 fun generateAssistanceNeedPreschoolPdf(
     decision: AssistanceNeedPreschoolDecision,
-    sendAddress: DecisionSendAddress? = null,
-    guardian: PersonDTO? = null,
     pdfService: PdfGenerator,
     templateProvider: ITemplateProvider
 ): ByteArray {
@@ -540,8 +528,6 @@ fun generateAssistanceNeedPreschoolPdf(
             Context().apply {
                 setVariable("decision", decision)
                 setVariable("sentDate", LocalDate.now())
-                setVariable("sendAddress", sendAddress)
-                setVariable("guardian", guardian)
             }
         )
     )

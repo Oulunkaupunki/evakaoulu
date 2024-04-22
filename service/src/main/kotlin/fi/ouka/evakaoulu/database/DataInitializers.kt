@@ -8,7 +8,10 @@ import fi.espoo.evaka.shared.db.Database
 import fi.espoo.evaka.shared.dev.runDevScript
 
 fun Database.Transaction.ensureOuluDevData() {
-    if (createQuery("SELECT count(*) FROM daycare").mapTo<Int>().exactlyOne() == 0) {
+    if (createQuery {
+        sql("SELECT count(*) FROM daycare")
+    }.exactlyOne<Int>() == 0
+    ) {
         listOf("oulu-dev-data.sql").forEach { runDevScript(it) }
     }
 }

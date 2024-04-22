@@ -23,7 +23,8 @@ const features: Features = {
     financeDecisionHandlerSelect: false,
     feeDecisionPreschoolClubFilter: true,
     daycareApplication: {
-      dailyTimes: true
+      dailyTimes: true,
+      serviceNeedOption: true
     },
     preschoolApplication: {
       connectedDaycarePreferredStartDate: false,
@@ -48,7 +49,8 @@ const features: Features = {
     citizenShiftCareAbsence: false,
     assistanceActionOther: false,
     daycareApplication: {
-      dailyTimes: true
+      dailyTimes: true,
+      serviceNeedOption: true
     },
     preschoolApplication: {
       connectedDaycarePreferredStartDate: false,
@@ -75,7 +77,8 @@ const features: Features = {
     citizenShiftCareAbsence: false,
     assistanceActionOther: false,
     daycareApplication: {
-      dailyTimes: true
+      dailyTimes: true,
+      serviceNeedOption: true
     },
     preschoolApplication: {
       connectedDaycarePreferredStartDate: false,

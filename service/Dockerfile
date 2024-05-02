@@ -39,13 +39,13 @@ RUN adduser ${USERNAME} --gecos "" -q --home ${HOME_DIR} --uid ${USER_ID} --disa
 
 # Used for downloading keys from S3
 ADD --chown=evaka:evaka --chmod=0700 \
-    --checksum=sha256:d0ee074cbc04c1a36fb8cee6f99d9ff591fee89ea38d34a328d0ee1acb039a48 \
-    https://github.com/espoon-voltti/s3-downloader/releases/download/v1.3.0/s3downloader-linux-amd64 \
+    --checksum=sha256:520ea232e83a7cefe2a87d4f2af8433e383a4351464e213b7dd3b78ca0dc200f \
+    https://github.com/espoon-voltti/s3-downloader/releases/download/v1.4.1/s3downloader-linux-amd64 \
     /usr/local/bin/s3download
 
 ADD --chmod=0644 \
-    --checksum=sha256:843b87eb591e00c3f422ed575acdf51b433a8806d7ed421df622df8ce7d7ee16 \
-    https://github.com/DataDog/dd-trace-java/releases/download/v1.18.2/dd-java-agent-1.18.2.jar \
+    --checksum=sha256:776b76cfe05611cdc3d38c4b35fc92f563fcfd6e3df0e28c524da1d279d44223 \
+    https://github.com/DataDog/dd-trace-java/releases/download/v1.31.0/dd-java-agent.jar \
     /opt/dd-java-agent.jar
 
 ADD ./dd-jmxfetch/ /etc/jmxfetch/

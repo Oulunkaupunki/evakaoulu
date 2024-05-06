@@ -5,7 +5,7 @@
 package fi.ouka.evakaoulu.template.config
 
 import fi.espoo.evaka.decision.DecisionType
-import fi.espoo.evaka.invoicing.service.DocumentLang
+import fi.espoo.evaka.shared.domain.OfficialLanguage
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -29,7 +29,7 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
     override fun getAssistanceNeedDecisionPath(): String = "oulu/assistance-need/decision"
     override fun getAssistanceNeedPreschoolDecisionPath(): String = "oulu/assistance-need-preschool/decision"
 
-    override fun getLocalizedFilename(type: DecisionType, lang: DocumentLang): String =
+    override fun getLocalizedFilename(type: DecisionType, lang: OfficialLanguage): String =
         when (type) {
             DecisionType.CLUB -> "Kerhopäätös"
             DecisionType.DAYCARE,

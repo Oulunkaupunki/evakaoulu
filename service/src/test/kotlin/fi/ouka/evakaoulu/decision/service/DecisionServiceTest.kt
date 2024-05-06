@@ -10,7 +10,6 @@ import fi.espoo.evaka.assistanceneed.decision.AssistanceLevel
 import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecision
 import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionChild
 import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionEmployee
-import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionLanguage
 import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionMaker
 import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionStatus
 import fi.espoo.evaka.assistanceneed.decision.ServiceOptions
@@ -30,7 +29,6 @@ import fi.espoo.evaka.decision.DecisionType
 import fi.espoo.evaka.decision.DecisionUnit
 import fi.espoo.evaka.decision.createDecisionPdf
 import fi.espoo.evaka.identity.ExternalIdentifier
-import fi.espoo.evaka.invoicing.service.DocumentLang
 import fi.espoo.evaka.pdfgen.Page
 import fi.espoo.evaka.pdfgen.PdfGenerator
 import fi.espoo.evaka.pdfgen.Template
@@ -48,6 +46,7 @@ import fi.espoo.evaka.shared.PersonId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.DateRange
+import fi.espoo.evaka.shared.domain.OfficialLanguage
 import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
 import fi.ouka.evakaoulu.message.config.MessageConfiguration
@@ -114,7 +113,7 @@ class DecisionServiceTest {
                     )
                 )
             },
-            lang = DocumentLang.FI,
+            lang = OfficialLanguage.FI,
             DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
         )
 
@@ -140,7 +139,7 @@ class DecisionServiceTest {
                     partTime = false,
                     serviceNeedOption = null // this is null!!!
                 ),
-                lang = DocumentLang.FI,
+                lang = OfficialLanguage.FI,
                 DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
             )
 
@@ -171,7 +170,7 @@ class DecisionServiceTest {
                     null
                 )
             ),
-            lang = DocumentLang.FI,
+            lang = OfficialLanguage.FI,
             DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
         )
 
@@ -201,7 +200,7 @@ class DecisionServiceTest {
                     null
                 )
             ),
-            lang = DocumentLang.FI,
+            lang = OfficialLanguage.FI,
             DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
         )
 
@@ -231,7 +230,7 @@ class DecisionServiceTest {
                     null
                 )
             ),
-            lang = DocumentLang.FI,
+            lang = OfficialLanguage.FI,
             DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
         )
 
@@ -261,7 +260,7 @@ class DecisionServiceTest {
                     null
                 )
             ),
-            lang = DocumentLang.FI,
+            lang = OfficialLanguage.FI,
             DaycareManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234")
         )
 
@@ -376,7 +375,7 @@ private val validAssistanceNeedDecision = AssistanceNeedDecision(
     ),
     validityPeriod = DateRange(LocalDate.of(2022, 8, 2), LocalDate.of(2022, 12, 31)),
     status = AssistanceNeedDecisionStatus.ACCEPTED,
-    language = AssistanceNeedDecisionLanguage.FI,
+    language = OfficialLanguage.FI,
     decisionMade = LocalDate.of(2022, 7, 1),
     sentForDecision = LocalDate.of(2022, 5, 12),
     selectedUnit = UnitInfo(
@@ -451,7 +450,7 @@ private val validAssistanceNeedPreSchoolDecision = AssistanceNeedPreschoolDecisi
     preparer2Name = "Paula Palvelupäällikkö",
     decisionMakerName = "Pate Päättäjä",
     form = AssistanceNeedPreschoolDecisionForm(
-        language = AssistanceNeedDecisionLanguage.FI,
+        language = OfficialLanguage.FI,
         type = AssistanceNeedPreschoolDecisionType.NEW,
         validFrom = LocalDate.now(),
         validTo = null,

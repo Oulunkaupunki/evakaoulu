@@ -17,5 +17,5 @@ fun Database.Transaction.ensureOuluDevData() {
 }
 
 fun Database.Transaction.resetOuluDatabaseForE2ETests() {
-    execute("SELECT reset_oulu_database_for_e2e_tests()")
+    execute { sql("SELECT reset_oulu_database_for_e2e_tests()") }
 }

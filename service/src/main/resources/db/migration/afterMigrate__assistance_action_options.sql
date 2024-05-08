@@ -15,7 +15,6 @@ VALUES
     ('90', 'Alueellinen pienryhmä', 'Ryhmässä kokoaikainen varhaiskasvatuksen erityisopettaja.', 90),
     ('130', 'Apuvälineet', 'Merkitään hallintopäätöksen jälkeen.', 130),
     ('140', 'Tulkitsemispalvelut', 'Lapselle järjestetään kommunikaation tueksi erillisiä tulkitsemispalveluita. Viittomakieltä käyttävien lasten kommunikaation tukena voidaan tarvittaessa käyttää viittomakielen tulkkia tai viittomakielentaitoista avustajaa. Tulkitsemispalvelut on mahdollista järjestää avustamispalvelun yhteydessä.', 140),
-    ('170', 'Erityishuolto-ohjelma', 'Kehitysvammalain nojalla myönnettyjä palveluja saaville lapsille laaditaan erityishuolto-ohjelma. Erityishuolto-ohjelma sisältää asiakkaalle kehitysvammalain nojalla myönnetyt palvelut.', 170),
     ('180', 'S2 opetus', 'Merkitse tähän, jos lapsi saa S2 opetusta', 180)
 ON CONFLICT (value) DO
 UPDATE SET

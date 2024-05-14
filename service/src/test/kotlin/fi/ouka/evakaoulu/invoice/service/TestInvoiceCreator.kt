@@ -133,7 +133,8 @@ fun validInvoice(): InvoiceDetailed {
         null,
         HelsinkiDateTime.Companion.of(
             LocalDateTime.of(2022, 5, 5, 1, 1)
-        )
+        ),
+        relatedFeeDecisions = emptyList()
     )
 }
 

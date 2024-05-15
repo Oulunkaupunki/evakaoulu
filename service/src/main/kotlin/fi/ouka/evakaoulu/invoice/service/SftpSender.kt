@@ -16,10 +16,14 @@ class SftpSender(val sftpProperties: SftpProperties, val sftpConnector: SftpConn
         val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
         val filepath = "$path/$fileName"
 
-        sftpConnector.connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
+        try {
+            sftpConnector.connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
 
-        sftpConnector.send(filepath, content)
-
-        sftpConnector.disconnect()
+            sftpConnector.send(filepath, content)
+        } catch (e: Exception) {
+            throw e
+        } finally {
+            sftpConnector.disconnect()
+        }
     }
 }

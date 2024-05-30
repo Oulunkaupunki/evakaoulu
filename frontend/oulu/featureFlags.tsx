@@ -43,6 +43,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
+    discussionReservations: true,
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -70,6 +71,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
+    discussionReservations: true,
   },
   prod: {
     citizenShiftCareAbsence: false,
@@ -97,6 +99,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
+    discussionReservations: false,
   }
 }
 

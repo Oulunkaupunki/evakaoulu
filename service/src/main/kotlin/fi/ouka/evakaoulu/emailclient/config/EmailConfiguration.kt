@@ -9,6 +9,7 @@ import fi.espoo.evaka.daycare.domain.Language
 import fi.espoo.evaka.emailclient.CalendarEventNotificationData
 import fi.espoo.evaka.emailclient.EmailContent
 import fi.espoo.evaka.emailclient.IEmailMessageProvider
+import fi.espoo.evaka.invoicing.domain.FinanceDecisionType
 import fi.espoo.evaka.invoicing.service.IncomeNotificationType
 import fi.espoo.evaka.messaging.MessageThreadStub
 import fi.espoo.evaka.messaging.MessageType
@@ -45,7 +46,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         val url = "$baseUrl$path"
         return """<a href="$url">$url</a>"""
     }
-
+    private fun frontPageLink(language: Language) = link(language, "")
     private fun calendarLink(language: Language) = link(language, "/calendar")
     private fun messageLink(language: Language, threadId: MessageThreadId) =
         link(language, "/messages/$threadId")
@@ -878,6 +879,35 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             <p>Two days left to submit a holiday notification. If you have not submitted a notification for each day, please submit them through the eVaka calendar as soon as possible: ${calendarLink(Language.en)}</p>
             $unsubscribeEn
             """
+        )
+    }
+
+    override fun financeDecisionNotification(decisionType: FinanceDecisionType): EmailContent {
+        val (decisionTypeFi, decisionTypeSv, decisionTypeEn) =
+            when (decisionType) {
+                FinanceDecisionType.VOUCHER_VALUE_DECISION ->
+                    Triple("arvopäätös", "beslut om servicesedel", "voucher value decision")
+                FinanceDecisionType.FEE_DECISION ->
+                    Triple("maksupäätös", "betalningsbeslut", "fee decision")
+            }
+        return EmailContent.fromHtml(
+            subject =
+            "Uusi $decisionTypeFi eVakassa / Nytt $decisionTypeSv i eVaka / New $decisionTypeEn in eVaka",
+            html =
+            """
+                <p>Sinulle on saapunut uusi $decisionTypeFi eVakaan.</p>
+                <p>Päätös on nähtävissä eVakassa osoitteessa ${frontPageLink(Language.fi)}.</p>
+                $unsubscribeFi
+                <hr>
+                <p>Du har fått ett nytt $decisionTypeSv i eVaka.</p>
+                <p>Beslutet finns att se i eVaka på ${frontPageLink(Language.sv)}.</p>
+                $unsubscribeSv
+                <hr>
+                <p>You have received a new $decisionTypeEn in eVaka.</p>
+                <p>The decision can be viewed on eVaka at ${frontPageLink(Language.en)}.</p>
+                $unsubscribeEn
+            """
+                .trimIndent()
         )
     }
 }

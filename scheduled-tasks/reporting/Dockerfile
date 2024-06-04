@@ -4,6 +4,7 @@
 
 FROM ubuntu:22.04
 
+ARG CACHE_BUST
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y install curl lsb-release gnupg sshpass \

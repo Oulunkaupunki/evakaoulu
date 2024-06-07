@@ -45,7 +45,8 @@ class EVakaOuluConfig {
         preferredStartRelativeApplicationDueDate = true,
         postOffice = "OULU",
         municipalMessageAccountName = "Oulun kaupunki",
-        fiveYearsOldDaycareEnabled = false
+        fiveYearsOldDaycareEnabled = false,
+        archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus"
     )
 
     @Bean

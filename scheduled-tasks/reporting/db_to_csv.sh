@@ -108,7 +108,7 @@ if [[ -v HISTORY_ENABLED && $HISTORY_ENABLED == true && -v HISTORY_FROM_DATE ]];
     run_history_bulk_and_send_file sql/history_bulk/DW-Fee_decisions_bulk.sql fee_decisions
     run_history_bulk_and_send_file sql/history_bulk/DW-Voucher_value_decisions_bulk.sql voucher_value_decisions
     run_history_bulk_and_send_file sql/history_bulk/DW-Assistance_need_decisions_bulk.sql assistance_need_decisions
-#    run_history_bulk_and_send_file sql/history_bulk/DW-Placements_bulk.sql placements
+    run_history_bulk_and_send_file sql/history_bulk/DW-Placements_bulk.sql placements
 fi
 
 run_query_and_send_file sql/DW-Daily_info.sql daily_info_$DATE.csv $DATE
@@ -123,4 +123,4 @@ run_query_and_send_file sql/DW-Other_assistance_measures.sql other_assistance_me
 run_query_and_send_file sql/DW-Assistance_actions.sql assistance_actions_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Daily_units_occupancy_confirmed.sql daily_units_occupancy_confirmed_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Daily_units_occupancy_realized.sql daily_units_occupancy_realized_$DATE.csv $DATE
-#run_query_and_send_file sql/DW-Placements.sql placements_$DATE.csv $DATE
+run_query_and_send_file sql/DW-Placements.sql placements_$DATE.csv $DATE

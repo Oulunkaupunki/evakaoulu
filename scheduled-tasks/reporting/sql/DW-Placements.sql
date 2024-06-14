@@ -16,15 +16,15 @@ SELECT
 FROM person p
     JOIN placement pl ON pl.child_id = p.id
         AND pl.start_date <= :date_val::DATE
-        AND pl.end_date >= :date_val::DATE
+        AND pl.end_date >= :date_val::DATE - INTERVAL '15 days'
     JOIN daycare d ON pl.unit_id = d.id
     JOIN daycare_group_placement dgp ON pl.id = dgp.daycare_placement_id
         AND dgp.start_date <= :date_val::DATE
-        AND dgp.end_date >= :date_val::DATE
+        AND dgp.end_date >= :date_val::DATE - INTERVAL '15 days'
     JOIN daycare_group dg ON d.id = dg.daycare_id
         AND dgp.daycare_group_id = dg.id
     LEFT JOIN service_need sn ON pl.id = sn.placement_id
         AND sn.start_date <= :date_val::DATE
-        AND sn.end_date >= :date_val::DATE
+        AND sn.end_date >= :date_val::DATE - INTERVAL '15 days'
     LEFT JOIN service_need_option sno ON sn.option_id = sno.id
 WHERE :date_val::DATE - INTERVAL '3 months' <= pl.end_date;

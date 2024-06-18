@@ -46,7 +46,8 @@ class EVakaOuluConfig {
         postOffice = "OULU",
         municipalMessageAccountName = "Oulun kaupunki",
         fiveYearsOldDaycareEnabled = false,
-        archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus"
+        archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus",
+        archiveMetadataConfigs = emptyMap()
     )
 
     @Bean

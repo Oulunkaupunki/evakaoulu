@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2021-2024 City of Oulu
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+version: 2
+updates:
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "05:00"
+      timezone: "Europe/Helsinki"
+  - package-ecosystem: "docker"
+    directory: "/auth"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
+    ignore:
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
+    ignore:
+      - dependency-name: "@playwright/test" # version must match with core
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-patch"]
+    groups:
+      jest:
+        patterns:
+          - "@types/jest"
+          - "jest*"
+          - "ts-jest"
+        exclude-patterns:
+          - "jest-junit"
+      lodash:
+        patterns:
+          - "lodash"
+          - "@types/lodash"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+      typescript:
+        patterns:
+          - "tslib"
+          - "typescript"
+  - package-ecosystem: "gradle"
+    directory: "/mock/identification"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
+    ignore:
+      - dependency-name: "org.springframework.boot"
+  - package-ecosystem: "docker"
+    directory: "/scheduled-tasks/logs"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
+  - package-ecosystem: "gradle"
+    directory: "/service"
+    schedule:
+      interval: "daily"
+      time: "10:00"
+      timezone: "Europe/Helsinki"
+    ignore:
+      - dependency-name: "com.sun.xml.bind:jaxb-xjc"
+      - dependency-name: "com.sun.xml.bind:jaxb-impl"

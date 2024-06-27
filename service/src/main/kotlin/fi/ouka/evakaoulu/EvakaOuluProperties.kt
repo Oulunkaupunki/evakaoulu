@@ -12,12 +12,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 @ConfigurationProperties(prefix = "evakaoulu", ignoreUnknownFields = false)
 data class EvakaOuluProperties(
     val intimeInvoices: SftpProperties,
-    val intimePayments: SftpProperties
+    val intimePayments: SftpProperties,
 )
 
 data class SftpProperties(
     val address: String,
     val path: String,
     val username: String,
-    val password: String
+    val password: String,
 )

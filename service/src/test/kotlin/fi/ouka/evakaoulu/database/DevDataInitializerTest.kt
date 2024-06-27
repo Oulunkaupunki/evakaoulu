@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 class DevDataInitializerTest : AbstractIntegrationTest() {
-
     @Autowired
     private lateinit var jdbi: Jdbi
 

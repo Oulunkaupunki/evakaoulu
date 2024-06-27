@@ -26,7 +26,6 @@ import java.util.Locale
 @Profile("evakaoulu")
 @Configuration
 class EmailConfiguration {
-
     @Bean
     fun emailMessageProvider(env: EvakaEnv): IEmailMessageProvider = EmailMessageProvider(env)
 }
@@ -37,7 +36,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForDecisionEmail: String = "Päätös eVakassa / Decision in eVaka"
-    private fun link(language: Language, path: String): String {
+
+    private fun link(
+        language: Language,
+        path: String,
+    ): String {
         val baseUrl =
             when (language) {
                 Language.sv -> env.frontendBaseUrlSv
@@ -46,26 +49,41 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         val url = "$baseUrl$path"
         return """<a href="$url">$url</a>"""
     }
+
     private fun frontPageLink(language: Language) = link(language, "")
+
     private fun calendarLink(language: Language) = link(language, "/calendar")
-    private fun messageLink(language: Language, threadId: MessageThreadId) =
-        link(language, "/messages/$threadId")
-    private fun childLink(language: Language, childId: ChildId) =
-        link(language, "/children/$childId")
+
+    private fun messageLink(
+        language: Language,
+        threadId: MessageThreadId,
+    ) = link(language, "/messages/$threadId")
+
+    private fun childLink(
+        language: Language,
+        childId: ChildId,
+    ) = link(language, "/children/$childId")
+
     private fun incomeLink(language: Language) = link(language, "/income")
 
-    private fun unsubscribeLink(language: Language) =
-        link(language, "/personal-details#notifications")
+    private fun unsubscribeLink(language: Language) = link(language, "/personal-details#notifications")
 
     private val unsubscribeFi =
-        """<p><small>Jos et halua enää saada tämänkaltaisia viestejä, voit muuttaa asetuksia eVakan Omat tiedot -sivulla: ${unsubscribeLink(Language.fi)}</small></p>"""
+        """<p><small>Jos et halua enää saada tämänkaltaisia viestejä, voit muuttaa asetuksia eVakan Omat tiedot -sivulla: ${unsubscribeLink(
+            Language.fi,
+        )}</small></p>"""
     private val unsubscribeSv =
-        """<p><small>Om du inte längre vill ta emot meddelanden som detta, kan du ändra dina inställningar på eVakas Personuppgifter-sida: ${unsubscribeLink(Language.sv)}</small></p>"""
+        """<p><small>Om du inte längre vill ta emot meddelanden som detta, kan du ändra dina inställningar på eVakas Personuppgifter-sida: ${unsubscribeLink(
+            Language.sv,
+        )}</small></p>"""
     private val unsubscribeEn =
-        """<p><small>If you no longer want to receive messages like this, you can change your settings on eVaka's Personal information page: ${unsubscribeLink(Language.en)}</small></p>"""
+        """<p><small>If you no longer want to receive messages like this, you can change your settings on eVaka's Personal information page: ${unsubscribeLink(
+            Language.en,
+        )}</small></p>"""
+
     override fun calendarEventNotification(
         language: Language,
-        events: List<CalendarEventNotificationData>
+        events: List<CalendarEventNotificationData>,
     ): EmailContent {
         val format =
             DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.of("fi", "FI"))
@@ -81,9 +99,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 "</ul>"
         return EmailContent.fromHtml(
             subject =
-            "Uusia kalenteritapahtumia eVakassa / New calendar events in eVaka",
+                "Uusia kalenteritapahtumia eVakassa / New calendar events in eVaka",
             html =
-            """
+                """
         <p>eVakaan on lisätty uusia kalenteritapahtumia:</p>
         $eventsHtml
         <p>Katso lisää kalenterissa: ${calendarLink(Language.fi)}</p>
@@ -94,13 +112,17 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         <p>See more in the calendar: ${calendarLink(Language.en)}</p>
         $unsubscribeEn
         """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
     override fun assistanceNeedPreschoolDecisionNotification(language: Language): EmailContent =
         assistanceNeedDecisionNotification(language) // currently same content
-    override fun messageNotification(language: Language, thread: MessageThreadStub): EmailContent {
+
+    override fun messageNotification(
+        language: Language,
+        thread: MessageThreadStub,
+    ): EmailContent {
         val (typeFi, typeSv, typeEn) =
             when (thread.type) {
                 MessageType.MESSAGE ->
@@ -108,7 +130,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                         Triple(
                             "kiireellinen viesti",
                             "brådskande personligt meddelande",
-                            "urgent message"
+                            "urgent message",
                         )
                     } else {
                         Triple("viesti", "personligt meddelande", "message")
@@ -119,7 +141,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                         Triple(
                             "kiireellinen tiedote",
                             "brådskande allmänt meddelande",
-                            "urgent bulletin"
+                            "urgent bulletin",
                         )
                     } else {
                         Triple("tiedote", "allmänt meddelande", "bulletin")
@@ -128,34 +150,47 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
             text =
-            """
-                Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(Language.fi, thread.id)}
+                """
+                Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(
+                    Language.fi,
+                    thread.id,
+                )}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
                 
-                You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(Language.en, thread.id)}
+                You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(
+                    Language.en,
+                    thread.id,
+                )}
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
-                .trimIndent(),
+                    .trimIndent(),
             html =
-            """
-                <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(Language.fi, thread.id)}</p>
+                """
+                <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(
+                    Language.fi,
+                    thread.id,
+                )}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
                 
-                <p>You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(Language.en, thread.id)}</p>
+                <p>You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(
+                    Language.en,
+                    thread.id,
+                )}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>    
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
-    fun getDecisionEmailHtml(): String = """
+    fun getDecisionEmailHtml(): String =
+        """
         <p>Hei!</p>
         
         <p>Lapsellenne on tehty päätös.</p>
@@ -174,9 +209,10 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         
         <p>You may not reply to this message.</p>
         
-    """.trimIndent()
+        """.trimIndent()
 
-    fun getDecisionEmailText(): String = """
+    fun getDecisionEmailText(): String =
+        """
         Hei!
         
         Lapsellenne on tehty päätös.
@@ -195,34 +231,34 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         
         You may not reply to this message.
         
-    """.trimIndent()
+        """.trimIndent()
 
     override fun missingReservationsNotification(
         language: Language,
-        checkedRange: FiniteDateRange
+        checkedRange: FiniteDateRange,
     ): EmailContent {
         val start =
             checkedRange.start.format(
-                DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.of("fi", "FI"))
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.of("fi", "FI")),
             )
         return EmailContent(
             subject = "Läsnäolovarauksia puuttuu / There are missing attendance reservations",
             text =
-            """
+                """
             Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.
             ----
             There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.
             """
-                .trimIndent(),
+                    .trimIndent(),
             html =
-            """
+                """
             <p>Läsnäolovarauksia puuttuu seuraavalta viikolta: $start. Käythän merkitsemässä ne mahdollisimman pian.</p>
             $unsubscribeFi
             <hr>
             <p>There are missing attendance reservations for the following week: $start. Please mark them as soon as possible.</p>
             $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
@@ -237,7 +273,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             <p>A decision has been made for you by the Oulu early childhood education and care services and remains unanswered. The decision must be accepted or rejected within two weeks of its arrival online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> or by contacting the daycare centre manager listed in the decision.</p> 
             <p>You may not reply to this message.</p>
             $unsubscribeEn
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getPendingDecisionEmailText(): String {
@@ -256,7 +292,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
 
             You may not reply to this message.  
             
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getClubApplicationReceivedEmailHtml(): String {
@@ -292,7 +328,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
 
             <p>You may not reply to this message.</p>
             
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getClubApplicationReceivedEmailText(): String {
@@ -327,7 +363,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             You may not reply to this message. 
             
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getDaycareApplicationReceivedEmailHtml(): String {
@@ -376,7 +412,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             <p>You may not reply to this message.</p>
             
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getDaycareApplicationReceivedEmailText(): String {
@@ -423,7 +459,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
 
             You may not reply to this message. 
             
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getPreschoolApplicationReceivedEmailHtml(): String {
@@ -484,7 +520,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             </p>
             
             <p>You may not reply to this message.</p>
-        """.trimIndent()
+            """.trimIndent()
     }
 
     fun getPreschoolApplicationReceivedEmailText(): String {
@@ -549,7 +585,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             You may not reply to this message. 
             
-        """.trimIndent()
+            """.trimIndent()
     }
 
     override fun assistanceNeedDecisionNotification(language: Language): EmailContent {
@@ -560,7 +596,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subjectForPendingDecisionEmail,
             getPendingDecisionEmailText(),
-            getPendingDecisionEmailHtml()
+            getPendingDecisionEmailHtml(),
         )
     }
 
@@ -568,7 +604,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subjectForClubApplicationReceivedEmail,
             getClubApplicationReceivedEmailText(),
-            getClubApplicationReceivedEmailHtml()
+            getClubApplicationReceivedEmailHtml(),
         )
     }
 
@@ -576,23 +612,29 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subjectForDaycareApplicationReceivedEmail,
             getDaycareApplicationReceivedEmailText(),
-            getDaycareApplicationReceivedEmailHtml()
+            getDaycareApplicationReceivedEmailHtml(),
         )
     }
 
-    override fun preschoolApplicationReceived(language: Language, withinApplicationPeriod: Boolean): EmailContent {
+    override fun preschoolApplicationReceived(
+        language: Language,
+        withinApplicationPeriod: Boolean,
+    ): EmailContent {
         return EmailContent(
             subjectForPreschoolApplicationReceivedEmail,
             getPreschoolApplicationReceivedEmailText(),
-            getPreschoolApplicationReceivedEmailHtml()
+            getPreschoolApplicationReceivedEmailHtml(),
         )
     }
 
-    override fun childDocumentNotification(language: Language, childId: ChildId): EmailContent {
+    override fun childDocumentNotification(
+        language: Language,
+        childId: ChildId,
+    ): EmailContent {
         return EmailContent.fromHtml(
             subject = "Uusi dokumentti eVakassa / Nytt dokument i eVaka / New document in eVaka",
             html =
-            """
+                """
                 <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
@@ -604,18 +646,25 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>You have received a new eVaka document. Read the document here: ${childLink(Language.en, childId)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
-"""
+""",
         )
     }
 
-    override fun vasuNotification(language: Language, childId: ChildId): EmailContent {
+    override fun vasuNotification(
+        language: Language,
+        childId: ChildId,
+    ): EmailContent {
         return childDocumentNotification(language, childId)
     }
-    override fun pedagogicalDocumentNotification(language: Language, childId: ChildId): EmailContent {
+
+    override fun pedagogicalDocumentNotification(
+        language: Language,
+        childId: ChildId,
+    ): EmailContent {
         return EmailContent(
             subject = "Uusi pedagoginen dokumentti eVakassa / New pedagogical document in eVaka",
             text =
-            """
+                """
                 Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
@@ -626,9 +675,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
-                .trimIndent(),
+                    .trimIndent(),
             html =
-            """
+                """
                 <p>Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
@@ -638,13 +687,13 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
     override fun incomeNotification(
         notificationType: IncomeNotificationType,
-        language: Language
+        language: Language,
     ): EmailContent {
         return when (notificationType) {
             IncomeNotificationType.INITIAL_EMAIL -> outdatedIncomeNotificationInitial()
@@ -658,7 +707,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subject = "Tulotietojen tarkastus- kehotus / Request to review income information",
             text =
-            """
+                """
                 Hyvä asiakkaamme
                 
                 Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tulotietonne ovat vanhentumassa.
@@ -689,9 +738,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
 
                 This is an automatic message from the eVaka system. Do not reply to this message.
             """
-                .trimIndent(),
+                    .trimIndent(),
             html =
-            """
+                """
                 <p>Hyvä asiakkaamme</p>
                 <p>Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotietonne ovat vanhentumassa.</p>
                 <p>Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta.</p>
@@ -710,7 +759,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
@@ -718,7 +767,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subject = "Tulotietojen tarkastus- kehotus / Request to review income information",
             text =
-            """
+                """
                 Hyvä asiakkaamme
                 
                 Ette ole vielä toimittaneet uusia tulotietoja. Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tarkistetaan vuosittain.
@@ -749,9 +798,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.
             """
-                .trimIndent(),
+                    .trimIndent(),
             html =
-            """
+                """
                 <p>Hyvä asiakkaamme</p>
                 <p>Ette ole vielä toimittaneet uusia tulotietoja. Varhaiskasvatuksen asiakasmaksun tai palvelusetelin omavastuuosuuden perusteena olevat tulotiedot tarkistetaan vuosittain.</p>
                 <p>Pyydämme toimittamaan tuloselvityksen eVakassa 7 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.</p>
@@ -770,7 +819,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
@@ -778,7 +827,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return EmailContent(
             subject = "Tulotietojen tarkastus- kehotus / Request to review income information",
             text =
-            """
+                """
                 Hyvä asiakkaamme
                 
                 Seuraava asiakasmaksunne määräytyy korkeimman maksuluokan mukaan, sillä ette ole toimittaneet uusia tulotietoja määräaikaan mennessä.
@@ -797,9 +846,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
-                .trimIndent(),
+                    .trimIndent(),
             html =
-            """
+                """
                 <p>Hyvä asiakkaamme</p>
                 <p>Seuraava asiakasmaksunne määräytyy korkeimman maksuluokan mukaan, sillä ette ole toimittaneet uusia tulotietoja määräaikaan mennessä.</p>
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
@@ -812,16 +861,16 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
     fun newCustomerIncomeNotification(): EmailContent {
         return EmailContent(
             subject =
-            "Tulotietojen tarkastuskehotus / Uppmaning att göra en inkomstutredning / Request to review income information",
+                "Tulotietojen tarkastuskehotus / Uppmaning att göra en inkomstutredning / Request to review income information",
             text =
-            """
+                """
                 Hyvä asiakkaamme
                 
                 Lapsenne on aloittamassa varhaiskasvatuksessa tämän kuukauden aikana. Pyydämme teitä toimittamaan tulotiedot eVaka-järjestelmän kautta tämän kuukauden loppuun mennessä.
@@ -843,9 +892,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 Income information: ${incomeLink(Language.en)}
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.
-            """.trimIndent(),
+                """.trimIndent(),
             html =
-            """
+                """
                 <p>Hyvä asiakkaamme</p>
                 <p>Lapsenne on aloittamassa varhaiskasvatuksessa tämän kuukauden aikana. Pyydämme teitä toimittamaan tulotiedot eVaka-järjestelmän kautta tämän kuukauden loppuun mennessä.</p>
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
@@ -860,25 +909,31 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 
     override fun missingHolidayReservationsNotification(language: Language): EmailContent {
         return EmailContent.fromHtml(
             subject =
-            "Loma-ajan ilmoitus sulkeutuu / Semesteranmälan löper ut / Holiday notification period closing",
+                "Loma-ajan ilmoitus sulkeutuu / Semesteranmälan löper ut / Holiday notification period closing",
             html =
-            """
-            <p>Loma-ajan kysely sulkeutuu kahden päivän päästä. Jos lapseltanne/lapsiltanne puuttuu loma-ajan ilmoitus yhdeltä tai useammalta lomapäivältä, teettehän ilmoituksen eVakan kalenterissa mahdollisimman pian: ${calendarLink(Language.fi)}</p>
+                """
+            <p>Loma-ajan kysely sulkeutuu kahden päivän päästä. Jos lapseltanne/lapsiltanne puuttuu loma-ajan ilmoitus yhdeltä tai useammalta lomapäivältä, teettehän ilmoituksen eVakan kalenterissa mahdollisimman pian: ${calendarLink(
+                    Language.fi,
+                )}</p>
             $unsubscribeFi
             <hr>
-            <p>Förfrågan om barnets frånvaro i semestertider stängs om två dagar. Om ditt/dina barn saknar anmälan för en eller flera helgdagar, vänligen gör anmälan i eVaka-kalendern så snart som möjligt: ${calendarLink(Language.sv)}</p>
+            <p>Förfrågan om barnets frånvaro i semestertider stängs om två dagar. Om ditt/dina barn saknar anmälan för en eller flera helgdagar, vänligen gör anmälan i eVaka-kalendern så snart som möjligt: ${calendarLink(
+                    Language.sv,
+                )}</p>
             $unsubscribeSv
             <hr>
-            <p>Two days left to submit a holiday notification. If you have not submitted a notification for each day, please submit them through the eVaka calendar as soon as possible: ${calendarLink(Language.en)}</p>
+            <p>Two days left to submit a holiday notification. If you have not submitted a notification for each day, please submit them through the eVaka calendar as soon as possible: ${calendarLink(
+                    Language.en,
+                )}</p>
             $unsubscribeEn
-            """
+            """,
         )
     }
 
@@ -892,9 +947,9 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             }
         return EmailContent.fromHtml(
             subject =
-            "Uusi $decisionTypeFi eVakassa / Nytt $decisionTypeSv i eVaka / New $decisionTypeEn in eVaka",
+                "Uusi $decisionTypeFi eVakassa / Nytt $decisionTypeSv i eVaka / New $decisionTypeEn in eVaka",
             html =
-            """
+                """
                 <p>Sinulle on saapunut uusi $decisionTypeFi eVakaan.</p>
                 <p>Päätös on nähtävissä eVakassa osoitteessa ${frontPageLink(Language.fi)}.</p>
                 $unsubscribeFi
@@ -907,7 +962,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>The decision can be viewed on eVaka at ${frontPageLink(Language.en)}.</p>
                 $unsubscribeEn
             """
-                .trimIndent()
+                    .trimIndent(),
         )
     }
 }

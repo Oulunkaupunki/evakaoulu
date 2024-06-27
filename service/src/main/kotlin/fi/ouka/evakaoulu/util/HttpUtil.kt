@@ -7,9 +7,12 @@ package fi.ouka.evakaoulu.util
 import org.apache.http.HttpRequestInterceptor
 import org.apache.http.message.BasicHeader
 import java.nio.charset.StandardCharsets
-import java.util.*
+import java.util.Base64
 
-fun basicAuthInterceptor(username: String, password: String) = HttpRequestInterceptor { request, _ ->
+fun basicAuthInterceptor(
+    username: String,
+    password: String,
+) = HttpRequestInterceptor { request, _ ->
     request.addHeader(BasicHeader("Authorization", "Basic ${encode("$username:$password")}"))
 }
 

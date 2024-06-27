@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter
 @Component
 class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val financeDateProvider: FinanceDateProvider) :
     StringInvoiceGenerator {
-
     fun generateInvoiceTitle(): String {
         val previousMonth = financeDateProvider.previousMonth()
         return "Varhaiskasvatus " + previousMonth
@@ -39,16 +38,16 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
         // CLIENT_NAME1 and CLIENT_NAME2 are 50 characters wide, but Intime only reads the first 30(!)
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.CLIENT_NAME1,
-            clientName.substring(0, Math.min(30, clientName.length))
+            clientName.substring(0, Math.min(30, clientName.length)),
         )
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.CLIENT_NAME2,
-            if (clientName.length > 30) clientName.substring(30, Math.min(60, clientName.length)) else ""
+            if (clientName.length > 30) clientName.substring(30, Math.min(60, clientName.length)) else "",
         )
         invoiceData.setAlphanumericValue(InvoiceFieldName.STREET_ADDRESS, invoiceDetailed.headOfFamily.streetAddress)
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.POSTAL_ADDRESS,
-            invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice
+            invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice,
         )
         invoiceData.setAlphanumericValue(InvoiceFieldName.PHONE_NUMBER, invoiceDetailed.headOfFamily.phone)
         invoiceData.setAlphanumericValue(InvoiceFieldName.FAX_NUMBER, "")
@@ -67,22 +66,22 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
         invoiceData.setAlphanumericValue(InvoiceFieldName.PRINTING_METHOD, "K")
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.INVOICE_DATE,
-            invoiceDetailed.invoiceDate.format(invoiceDateFormatter)
+            invoiceDetailed.invoiceDate.format(invoiceDateFormatter),
         )
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.DUE_DATE,
-            invoiceDetailed.dueDate.format(invoiceDateFormatter)
+            invoiceDetailed.dueDate.format(invoiceDateFormatter),
         )
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.ACCOUNTING_DATE,
             invoiceDetailed.sentAt?.toLocalDateTime()?.format(invoiceDateFormatter) ?: LocalDate.now()
-                .format(invoiceDateFormatter)
+                .format(invoiceDateFormatter),
         )
         invoiceData.setNumericValue(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, 0)
         invoiceData.setAlphanumericValue(InvoiceFieldName.CREDIT_NOTE_INVOICE_NUMBER, "")
         invoiceData.setAlphanumericValue(
             InvoiceFieldName.INVOICE_NUMBER,
-            if (invoiceDetailed.number != null) invoiceDetailed.number.toString() else ""
+            if (invoiceDetailed.number != null) invoiceDetailed.number.toString() else "",
         )
         invoiceData.setAlphanumericValue(InvoiceFieldName.REFERENCE_NUMBER, "")
         // N = normal
@@ -113,12 +112,12 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
             invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_IDENTIFIER, codebtor.ssn ?: "")
             invoiceData.setAlphanumericValue(
                 InvoiceFieldName.CODEBTOR_NAME,
-                codebtor.lastName + " " + codebtor.firstName
+                codebtor.lastName + " " + codebtor.firstName,
             )
             invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_STREET_ADDRESS, codebtor.streetAddress)
             invoiceData.setAlphanumericValue(
                 InvoiceFieldName.CODEBTOR_POSTAL_ADDRESS,
-                codebtor.postalCode + " " + codebtor.postOffice
+                codebtor.postalCode + " " + codebtor.postOffice,
             )
             invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_PHONE_NUMBER, codebtor.phone)
         } else {
@@ -153,17 +152,17 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
             // we have previously made sure the head of family has an SSN but the compiler doesn't realize it
             invoiceRowData.setAlphanumericValue(
                 InvoiceFieldName.INVOICE_IDENTIFIER,
-                invoiceDetailed.headOfFamily.ssn ?: ""
+                invoiceDetailed.headOfFamily.ssn ?: "",
             )
             invoiceRowData.setAlphanumericValue(InvoiceFieldName.TEXT_ROW_CODE, "3")
             invoiceRowData.setAlphanumericValue(
                 InvoiceFieldName.CHILD_NAME,
-                it.child.lastName + " " + it.child.firstName
+                it.child.lastName + " " + it.child.firstName,
             )
             val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
             invoiceRowData.setAlphanumericValue(
                 InvoiceFieldName.TIME_PERIOD,
-                it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter)
+                it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter),
             )
             invoiceRowData.setAlphanumericValue(InvoiceFieldName.INVOICE_ROW_HEADER, "")
             invoiceRowData.setAlphanumericValue(InvoiceFieldName.CONSTANT_TEXT_IDENTIFIER, "")
@@ -185,12 +184,12 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
             if (it.daycareType.contains(CareType.FAMILY) or it.daycareType.contains(CareType.GROUP_FAMILY)) {
                 invoiceRowData.setAlphanumericValue(
                     InvoiceFieldName.CREDIT_ACCOUNTING,
-                    "3271 1104171      " + it.costCenter
+                    "3271 1104171      " + it.costCenter,
                 )
             } else {
                 invoiceRowData.setAlphanumericValue(
                     InvoiceFieldName.CREDIT_ACCOUNTING,
-                    "3271 1104170      " + it.costCenter
+                    "3271 1104170      " + it.costCenter,
                 )
             }
 
@@ -202,7 +201,10 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
         return invoiceData
     }
 
-    fun generateRow(fields: List<InvoiceField>, invoiceData: InvoiceData): String {
+    fun generateRow(
+        fields: List<InvoiceField>,
+        invoiceData: InvoiceData,
+    ): String {
         var result = StringBuilder("")
 
         fields.forEach {
@@ -268,9 +270,9 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
             InvoiceIntegrationClient.SendResult(
                 successList,
                 failedList,
-                manuallySentList
+                manuallySentList,
             ),
-            invoiceString
+            invoiceString,
         )
     }
 }

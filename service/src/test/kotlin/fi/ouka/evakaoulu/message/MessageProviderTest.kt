@@ -17,13 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.lang.reflect.Method
 
 internal class MessageProviderTest : AbstractIntegrationTest() {
-
     @Autowired
     private lateinit var messageProvider: IMessageProvider
 
     @CartesianTest()
     @CartesianTest.MethodFactory("methodsWithLang")
-    fun `get works for every message type and language`(method: Method, lang: OfficialLanguage) {
+    fun `get works for every message type and language`(
+        method: Method,
+        lang: OfficialLanguage,
+    ) {
         assertThat(((method.invoke(messageProvider, lang)) as String).also(::println))
             .isNotBlank
             .doesNotContainIgnoringCase("espoo")
@@ -33,11 +35,12 @@ internal class MessageProviderTest : AbstractIntegrationTest() {
     companion object {
         @JvmStatic
         fun methodsWithLang(): ArgumentSets {
-            val allMethods = getAllMethods(
-                IMessageProvider::class.java,
-                withParametersAssignableTo(OfficialLanguage::class.java),
-                withReturnType(String::class.java)
-            )
+            val allMethods =
+                getAllMethods(
+                    IMessageProvider::class.java,
+                    withParametersAssignableTo(OfficialLanguage::class.java),
+                    withReturnType(String::class.java),
+                )
             return ArgumentSets.create()
                 .argumentsForNextParameter(allMethods)
                 .argumentsForNextParameter(OfficialLanguage.values().toList())

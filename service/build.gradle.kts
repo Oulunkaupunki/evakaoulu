@@ -10,7 +10,7 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_21
 
 object Version {
-    const val openTracing = "0.33.0"
+    const val OPEN_TRACING = "0.33.0"
 }
 repositories {
     mavenCentral()
@@ -45,8 +45,8 @@ dependencies {
 
     implementation("software.amazon.awssdk:s3")
 
-    api("io.opentracing:opentracing-api:${Version.openTracing}")
-    api("io.opentracing:opentracing-util:${Version.openTracing}")
+    api("io.opentracing:opentracing-api:${Version.OPEN_TRACING}")
+    api("io.opentracing:opentracing-util:${Version.OPEN_TRACING}")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("com.vaadin.external.google", "android-json")

@@ -22,7 +22,6 @@ internal const val PREFIX: String = "fi.ouka.evakaoulu.MessageProvider"
 
 @Configuration
 class MessageConfiguration {
-
     @Bean
     fun messageProvider(): IMessageProvider {
         val messageSource = YamlMessageSource(ClassPathResource("messages.yaml"))
@@ -31,7 +30,6 @@ class MessageConfiguration {
 }
 
 internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMessageProvider {
-
     override fun getDecisionHeader(lang: OfficialLanguage): String =
         messageSource.getMessage("$PREFIX.DECISION_HEADER", null, resolveLocale(lang))
 
@@ -56,30 +54,31 @@ internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMes
     override fun getAssistanceNeedDecisionContent(lang: OfficialLanguage): String =
         messageSource.getMessage("$PREFIX.ASSISTANCE_NEED_DECISION_CONTENT", null, resolveLocale(lang))
 
-    override fun getAssistanceNeedPreschoolDecisionHeader(lang: OfficialLanguage): String =
-        getAssistanceNeedDecisionHeader(lang)
+    override fun getAssistanceNeedPreschoolDecisionHeader(lang: OfficialLanguage): String = getAssistanceNeedDecisionHeader(lang)
 
-    override fun getAssistanceNeedPreschoolDecisionContent(lang: OfficialLanguage): String =
-        getAssistanceNeedDecisionContent(lang)
+    override fun getAssistanceNeedPreschoolDecisionContent(lang: OfficialLanguage): String = getAssistanceNeedDecisionContent(lang)
 
-    override fun getDefaultDecisionAddress(lang: OfficialLanguage): DecisionSendAddress = when (lang) {
-        OfficialLanguage.FI -> DecisionSendAddress(
-            street = "PL 75",
-            postalCode = "90015",
-            postOffice = "Oulu",
-            row1 = "Varhaiskasvatuksen palveluohjaus",
-            row2 = "Asiakaspalvelu",
-            row3 = "PL 75, 90015 Oulu"
-        )
-        OfficialLanguage.SV -> DecisionSendAddress(
-            street = "PL 75",
-            postalCode = "90015",
-            postOffice = "Oulu",
-            row1 = "Varhaiskasvatuksen palveluohjaus",
-            row2 = "Asiakaspalvelu",
-            row3 = "PL 75, 90015 Oulu"
-        )
-    }
+    override fun getDefaultDecisionAddress(lang: OfficialLanguage): DecisionSendAddress =
+        when (lang) {
+            OfficialLanguage.FI ->
+                DecisionSendAddress(
+                    street = "PL 75",
+                    postalCode = "90015",
+                    postOffice = "Oulu",
+                    row1 = "Varhaiskasvatuksen palveluohjaus",
+                    row2 = "Asiakaspalvelu",
+                    row3 = "PL 75, 90015 Oulu",
+                )
+            OfficialLanguage.SV ->
+                DecisionSendAddress(
+                    street = "PL 75",
+                    postalCode = "90015",
+                    postOffice = "Oulu",
+                    row1 = "Varhaiskasvatuksen palveluohjaus",
+                    row2 = "Asiakaspalvelu",
+                    row3 = "PL 75, 90015 Oulu",
+                )
+        }
 
     override fun getDefaultFinancialDecisionAddress(lang: OfficialLanguage): DecisionSendAddress = getDefaultDecisionAddress(lang)
 
@@ -90,12 +89,14 @@ internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMes
 }
 
 internal class YamlMessageSource(resource: Resource) : AbstractMessageSource() {
+    private val properties: Properties =
+        YamlPropertiesFactoryBean().apply {
+            setResources(resource)
+            afterPropertiesSet()
+        }.`object`!!
 
-    private val properties: Properties = YamlPropertiesFactoryBean().apply {
-        setResources(resource)
-        afterPropertiesSet()
-    }.`object`!!
-
-    override fun resolveCode(code: String, locale: Locale): MessageFormat? =
-        properties.getProperty("$code.${locale.language.lowercase()}")?.let { MessageFormat(it, locale) }
+    override fun resolveCode(
+        code: String,
+        locale: Locale,
+    ): MessageFormat? = properties.getProperty("$code.${locale.language.lowercase()}")?.let { MessageFormat(it, locale) }
 }

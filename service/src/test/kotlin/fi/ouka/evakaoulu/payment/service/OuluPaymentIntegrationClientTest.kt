@@ -17,11 +17,10 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
-import java.util.*
+import java.util.UUID
 
 @ExtendWith(OutputCaptureExtension::class)
 internal class OuluPaymentIntegrationClientTest {
-
     val paymentGenerator = mock<ProEPaymentGenerator>()
     val sftpSender = mock<SftpSender>()
     val paymentClient = OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
@@ -70,10 +69,11 @@ internal class OuluPaymentIntegrationClientTest {
         val validPayment = validPayment()
         val paymentList = listOf(validPayment)
         val proEPayment1 = ""
-        val paymentGeneratorResult = ProEPaymentGenerator.Result(
-            PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()),
-            proEPayment1
-        )
+        val paymentGeneratorResult =
+            ProEPaymentGenerator.Result(
+                PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()),
+                proEPayment1,
+            )
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
 
         val sendResult = paymentClient.send(paymentList, tx)
@@ -84,24 +84,26 @@ internal class OuluPaymentIntegrationClientTest {
     @Test
     fun `should return unsuccessfully generated payments in failed list`() {
         val validPayment = validPayment()
-        val unitWithoutIban = PaymentUnit(
-            DaycareId(UUID.randomUUID()),
-            "No IBAN",
-            "1234567-8",
-            null,
-            "PROVIDERID",
-            setOf(CareType.CENTRE)
-        )
+        val unitWithoutIban =
+            PaymentUnit(
+                DaycareId(UUID.randomUUID()),
+                "No IBAN",
+                "1234567-8",
+                null,
+                "PROVIDERID",
+                setOf(CareType.CENTRE),
+            )
         val paymentWithoutIban = validPayment().copy(unit = unitWithoutIban)
         val paymentList = listOf(validPayment, paymentWithoutIban)
         val proEPayment1 = ""
-        val paymentGeneratorResult = ProEPaymentGenerator.Result(
-            PaymentIntegrationClient.SendResult(
-                listOf(validPayment),
-                listOf(paymentWithoutIban)
-            ),
-            proEPayment1
-        )
+        val paymentGeneratorResult =
+            ProEPaymentGenerator.Result(
+                PaymentIntegrationClient.SendResult(
+                    listOf(validPayment),
+                    listOf(paymentWithoutIban),
+                ),
+                proEPayment1,
+            )
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
         // whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
 
@@ -130,7 +132,7 @@ internal class OuluPaymentIntegrationClientTest {
         val paymentList = listOf(validPayment, validPayment)
         val proEPayment1 = "xx"
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
-            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), "xx")
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), "xx"),
         )
         val sendResult = paymentClient.send(paymentList, tx)
 
@@ -143,7 +145,7 @@ internal class OuluPaymentIntegrationClientTest {
         val validPayment = validPayment()
         val paymentList = listOf(validPayment, validPayment)
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
-            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()), "x")
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(listOf(validPayment), listOf()), "x"),
         )
 
         paymentClient.send(paymentList, tx)
@@ -157,7 +159,7 @@ internal class OuluPaymentIntegrationClientTest {
         val paymentList = listOf(validPayment, validPayment)
         val proEPayment1 = ""
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(
-            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
+            ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1),
         )
 
         whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)

@@ -15,112 +15,115 @@ import fi.espoo.evaka.shared.PersonId
 import fi.espoo.evaka.shared.domain.HelsinkiDateTime
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.util.*
+import java.util.UUID
 
 fun validInvoice(): InvoiceDetailed {
     val headOfFamily = validPerson()
-    val invoiceRow1 = InvoiceRowDetailed(
-        InvoiceRowId(UUID.randomUUID()),
-        PersonDetailed(
-            PersonId(UUID.randomUUID()),
-            LocalDate.of(2018, 1, 1),
+    val invoiceRow1 =
+        InvoiceRowDetailed(
+            InvoiceRowId(UUID.randomUUID()),
+            PersonDetailed(
+                PersonId(UUID.randomUUID()),
+                LocalDate.of(2018, 1, 1),
+                null,
+                "Matti",
+                "Meikäläinen",
+                null,
+                "",
+                "",
+                "",
+                "",
+                null,
+                "",
+                null,
+                restrictedDetailsEnabled = false,
+            ),
+            1,
+            24300,
+            LocalDate.of(2021, 1, 1),
+            LocalDate.of(2021, 1, 31),
+            ProductKey("DAYCARE"),
+            DaycareId(UUID.randomUUID()),
+            "",
+            ProviderType.MUNICIPAL,
+            setOf(CareType.CENTRE),
+            "2627",
             null,
-            "Matti",
-            "Meikäläinen",
             null,
+            "kuvaus1",
+            correctionId = null,
+            note = null,
+        )
+    val invoiceRow2 =
+        InvoiceRowDetailed(
+            InvoiceRowId(UUID.randomUUID()),
+            PersonDetailed(
+                PersonId(UUID.randomUUID()),
+                LocalDate.of(2015, 11, 26),
+                null,
+                "Maiju",
+                "Meikäläinen",
+                null,
+                "",
+                "",
+                "",
+                "",
+                null,
+                "",
+                null,
+                restrictedDetailsEnabled = false,
+            ),
+            1,
+            48200,
+            LocalDate.of(2021, 1, 1),
+            LocalDate.of(2021, 1, 31),
+            ProductKey("PRESCHOOL_WITH_DAYCARE"),
+            DaycareId(UUID.randomUUID()),
             "",
-            "",
-            "",
-            "",
+            ProviderType.MUNICIPAL,
+            setOf(CareType.CENTRE),
+            "2627",
             null,
-            "",
             null,
-            restrictedDetailsEnabled = false
-        ),
-        1,
-        24300,
-        LocalDate.of(2021, 1, 1),
-        LocalDate.of(2021, 1, 31),
-        ProductKey("DAYCARE"),
-        DaycareId(UUID.randomUUID()),
-        "",
-        ProviderType.MUNICIPAL,
-        setOf(CareType.CENTRE),
-        "2627",
-        null,
-        null,
-        "kuvaus1",
-        correctionId = null,
-        note = null
-    )
-    val invoiceRow2 = InvoiceRowDetailed(
-        InvoiceRowId(UUID.randomUUID()),
-        PersonDetailed(
-            PersonId(UUID.randomUUID()),
-            LocalDate.of(2015, 11, 26),
+            "kuvaus2",
+            correctionId = null,
+            note = null,
+        )
+    val invoiceRow3 =
+        InvoiceRowDetailed(
+            InvoiceRowId(UUID.randomUUID()),
+            PersonDetailed(
+                PersonId(UUID.randomUUID()),
+                LocalDate.of(2018, 1, 1),
+                null,
+                "Matti",
+                "Meikäläinen",
+                null,
+                "",
+                "",
+                "",
+                "",
+                null,
+                "",
+                null,
+                restrictedDetailsEnabled = false,
+            ),
+            1,
+            25000,
+            LocalDate.of(2021, 1, 1),
+            LocalDate.of(2021, 1, 31),
+            ProductKey("DAYCARE"),
+            DaycareId(UUID.randomUUID()),
+            "",
+            ProviderType.MUNICIPAL,
+            setOf(CareType.FAMILY),
+            "2627",
             null,
-            "Maiju",
-            "Meikäläinen",
             null,
-            "",
-            "",
-            "",
-            "",
-            null,
-            "",
-            null,
-            restrictedDetailsEnabled = false
-        ),
-        1,
-        48200,
-        LocalDate.of(2021, 1, 1),
-        LocalDate.of(2021, 1, 31),
-        ProductKey("PRESCHOOL_WITH_DAYCARE"),
-        DaycareId(UUID.randomUUID()),
-        "",
-        ProviderType.MUNICIPAL,
-        setOf(CareType.CENTRE),
-        "2627",
-        null,
-        null,
-        "kuvaus2",
-        correctionId = null,
-        note = null
-    )
-    val invoiceRow3 = InvoiceRowDetailed(
-        InvoiceRowId(UUID.randomUUID()),
-        PersonDetailed(
-            PersonId(UUID.randomUUID()),
-            LocalDate.of(2018, 1, 1),
-            null,
-            "Matti",
-            "Meikäläinen",
-            null,
-            "",
-            "",
-            "",
-            "",
-            null,
-            "",
-            null,
-            restrictedDetailsEnabled = false
-        ),
-        1,
-        25000,
-        LocalDate.of(2021, 1, 1),
-        LocalDate.of(2021, 1, 31),
-        ProductKey("DAYCARE"),
-        DaycareId(UUID.randomUUID()),
-        "",
-        ProviderType.MUNICIPAL,
-        setOf(CareType.FAMILY),
-        "2627",
-        null,
-        null,
-        "kuvaus3",
-        correctionId = null,
-        note = null
-    )
+            "kuvaus3",
+            correctionId = null,
+            note = null,
+        )
     return InvoiceDetailed(
         (InvoiceId(UUID.randomUUID())),
         InvoiceStatus.WAITING_FOR_SENDING,
@@ -136,76 +139,80 @@ fun validInvoice(): InvoiceDetailed {
         null,
         null,
         HelsinkiDateTime.Companion.of(
-            LocalDateTime.of(2022, 5, 5, 1, 1)
+            LocalDateTime.of(2022, 5, 5, 1, 1),
         ),
-        relatedFeeDecisions = emptyList()
+        relatedFeeDecisions = emptyList(),
     )
 }
 
-fun validPerson() = PersonDetailed(
-    PersonId(UUID.randomUUID()),
-    LocalDate.of(1982, 3, 31),
-    null,
-    "Matti",
-    "Meikäläinen",
-    "310382-956D",
-    "Meikäläisenkuja 6 B 7",
-    "90100",
-    "OULU",
-    "",
-    null,
-    "",
-    null,
-    restrictedDetailsEnabled = false
-)
+fun validPerson() =
+    PersonDetailed(
+        PersonId(UUID.randomUUID()),
+        LocalDate.of(1982, 3, 31),
+        null,
+        "Matti",
+        "Meikäläinen",
+        "310382-956D",
+        "Meikäläisenkuja 6 B 7",
+        "90100",
+        "OULU",
+        "",
+        null,
+        "",
+        null,
+        restrictedDetailsEnabled = false,
+    )
 
-fun personWithoutSSN() = PersonDetailed(
-    PersonId(UUID.randomUUID()),
-    LocalDate.of(1982, 3, 31),
-    null,
-    "Maija",
-    "Meikäläinen",
-    null,
-    "Meikäläisenkuja 6 B 7",
-    "90100",
-    "OULU",
-    "",
-    null,
-    "",
-    null,
-    restrictedDetailsEnabled = false
-)
+fun personWithoutSSN() =
+    PersonDetailed(
+        PersonId(UUID.randomUUID()),
+        LocalDate.of(1982, 3, 31),
+        null,
+        "Maija",
+        "Meikäläinen",
+        null,
+        "Meikäläisenkuja 6 B 7",
+        "90100",
+        "OULU",
+        "",
+        null,
+        "",
+        null,
+        restrictedDetailsEnabled = false,
+    )
 
-fun personWithRestrictedDetails() = PersonDetailed(
-    PersonId(UUID.randomUUID()),
-    LocalDate.of(1982, 3, 31),
-    null,
-    "Mysteeri",
-    "Meikäläinen",
-    "280691-943Z",
-    "Todistajansuojeluohjelmankatu 9",
-    "45600",
-    "OULU",
-    "",
-    null,
-    "",
-    null,
-    restrictedDetailsEnabled = true
-)
+fun personWithRestrictedDetails() =
+    PersonDetailed(
+        PersonId(UUID.randomUUID()),
+        LocalDate.of(1982, 3, 31),
+        null,
+        "Mysteeri",
+        "Meikäläinen",
+        "280691-943Z",
+        "Todistajansuojeluohjelmankatu 9",
+        "45600",
+        "OULU",
+        "",
+        null,
+        "",
+        null,
+        restrictedDetailsEnabled = true,
+    )
 
-fun personWithLongName() = PersonDetailed(
-    PersonId(UUID.randomUUID()),
-    LocalDate.of(1982, 3, 31),
-    null,
-    "Eskoensio Velipekka-Simopetteri",
-    "von und zu Aaltonen-Räyhäkäinen",
-    "310382-956D",
-    "Aateliskulma 3",
-    "90200",
-    "OULU",
-    "",
-    null,
-    "",
-    null,
-    restrictedDetailsEnabled = false
-)
+fun personWithLongName() =
+    PersonDetailed(
+        PersonId(UUID.randomUUID()),
+        LocalDate.of(1982, 3, 31),
+        null,
+        "Eskoensio Velipekka-Simopetteri",
+        "von und zu Aaltonen-Räyhäkäinen",
+        "310382-956D",
+        "Aateliskulma 3",
+        "90200",
+        "OULU",
+        "",
+        null,
+        "",
+        null,
+        restrictedDetailsEnabled = false,
+    )

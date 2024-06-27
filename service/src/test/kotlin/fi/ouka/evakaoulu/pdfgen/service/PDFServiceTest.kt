@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.thymeleaf.context.Context
 
 internal class PDFServiceTest : AbstractIntegrationTest() {
-
     @Autowired
     private lateinit var pdfService: PdfGenerator
 

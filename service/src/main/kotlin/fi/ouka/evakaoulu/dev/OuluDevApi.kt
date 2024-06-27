@@ -23,7 +23,7 @@ import java.time.Duration
 @RequestMapping("/dev-api/oulu")
 @ExcludeCodeGen
 class OuluDevApi(
-    private val asyncJobRunner: AsyncJobRunner<AsyncJob>
+    private val asyncJobRunner: AsyncJobRunner<AsyncJob>,
 ) {
     @GetMapping
     fun healthCheck(): ResponseEntity<Unit> {
@@ -31,7 +31,10 @@ class OuluDevApi(
     }
 
     @PostMapping("/reset-oulu-db-for-e2e-tests")
-    fun resetOuluDatabaseForE2ETests(db: Database, clock: EvakaClock): ResponseEntity<Unit> {
+    fun resetOuluDatabaseForE2ETests(
+        db: Database,
+        clock: EvakaClock,
+    ): ResponseEntity<Unit> {
         // Run async jobs before database reset to avoid database locks/deadlocks
         asyncJobRunner.runPendingJobsSync(clock)
         asyncJobRunner.waitUntilNoRunningJobs(timeout = Duration.ofSeconds(20))

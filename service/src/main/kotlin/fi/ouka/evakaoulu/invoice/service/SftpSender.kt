@@ -7,7 +7,7 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.SftpException
 import fi.ouka.evakaoulu.SftpProperties
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 class SftpSender(val sftpProperties: SftpProperties, val sftpConnector: SftpConnector) {
     @Throws(SftpException::class)

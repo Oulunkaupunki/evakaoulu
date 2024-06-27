@@ -12,17 +12,17 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
 internal class InvoiceSenderTest {
-
     @Test
     fun `should send invoice`() {
         val path = "/some/path"
         val sftpProperties = SftpProperties("", path, "", "")
         val proEInvoice = "one"
         val sftpConnector = mock<SftpConnector>()
-        val sftpSender = SftpSender(
-            sftpProperties,
-            sftpConnector
-        )
+        val sftpSender =
+            SftpSender(
+                sftpProperties,
+                sftpConnector,
+            )
 
         sftpSender.send(proEInvoice)
 
@@ -30,7 +30,7 @@ internal class InvoiceSenderTest {
         val fileNamePattern = """$path/proe-\d{8}-\d{6}.txt"""
         verify(sftpConnector).send(
             argThat { filePath -> filePath.matches(Regex(fileNamePattern)) },
-            eq("one")
+            eq("one"),
         )
         verify(sftpConnector).disconnect()
     }

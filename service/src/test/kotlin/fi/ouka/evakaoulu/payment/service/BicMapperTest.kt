@@ -4,28 +4,39 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class BicMapperTest {
-
     val bicMapper = BicMapper()
 
     fun ibanWithId(id: Int): String {
         return "FI42" + id.toString() + "12345678901"
     }
 
-    fun oneDigitTest(bankIdentifier: Int, correctBic: String) {
+    fun oneDigitTest(
+        bankIdentifier: Int,
+        correctBic: String,
+    ) {
         for (i in bankIdentifier * 100..bankIdentifier * 100 + 99)
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
     }
 
-    fun twoDigitTest(bankIdentifier: Int, correctBic: String) {
+    fun twoDigitTest(
+        bankIdentifier: Int,
+        correctBic: String,
+    ) {
         for (i in bankIdentifier * 10..bankIdentifier * 10 + 9)
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
     }
 
-    fun threeDigitTest(bankIdentifier: Int, correctBic: String) {
+    fun threeDigitTest(
+        bankIdentifier: Int,
+        correctBic: String,
+    ) {
         assertEquals(bicMapper.mapIban(ibanWithId(bankIdentifier)), correctBic)
     }
 
-    fun rangeTest(identifierRange: IntProgression, correctBic: String) {
+    fun rangeTest(
+        identifierRange: IntProgression,
+        correctBic: String,
+    ) {
         for (i in identifierRange)
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
     }
@@ -117,17 +128,18 @@ internal class BicMapperTest {
     @Test
     fun `should return ITELFIHH for various bank identifiers`() {
         val bic = "ITELFIHH"
-        var identifiers = listOf(
-            402..403,
-            406..408,
-            410..412,
-            414..421,
-            423..432,
-            435..452,
-            454..464,
-            483..493,
-            495..496
-        )
+        var identifiers =
+            listOf(
+                402..403,
+                406..408,
+                410..412,
+                414..421,
+                423..432,
+                435..452,
+                454..464,
+                483..493,
+                495..496,
+            )
         threeDigitTest(715, bic)
         threeDigitTest(400, bic)
 

@@ -5,7 +5,10 @@ class DataMapper<EnumClass> {
     val numericValues: MutableMap<EnumClass, Int> = mutableMapOf()
     var rowMap: Map<String, List<DataMapper<EnumClass>>> = mapOf()
 
-    fun setAlphanumericValue(field: EnumClass, value: String) {
+    fun setAlphanumericValue(
+        field: EnumClass,
+        value: String,
+    ) {
         alphanumericValues[field] = value
     }
 
@@ -13,7 +16,10 @@ class DataMapper<EnumClass> {
         return alphanumericValues[field]
     }
 
-    fun setNumericValue(field: EnumClass, value: Int) {
+    fun setNumericValue(
+        field: EnumClass,
+        value: Int,
+    ) {
         numericValues[field] = value
     }
 
@@ -35,5 +41,5 @@ enum class FieldType {
     NUMERIC,
 
     // we need a specific monetary type because they are prescaled by 100, so they include two decimals
-    MONETARY
+    MONETARY,
 }

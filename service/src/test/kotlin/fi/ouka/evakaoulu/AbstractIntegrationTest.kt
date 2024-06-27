@@ -19,11 +19,10 @@ import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(
-    classes = [IntegrationTestConfiguration::class]
+    classes = [IntegrationTestConfiguration::class],
 )
 @AutoConfigureWireMock(port = 0)
 abstract class AbstractIntegrationTest(private val resetDbBeforeEach: Boolean = true) {
-
     @Autowired
     private lateinit var jdbi: Jdbi
 

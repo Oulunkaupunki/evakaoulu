@@ -13,7 +13,7 @@ private val logger = KotlinLogging.logger {}
 
 class EVakaOuluInvoiceClient(
     private val sftpSender: SftpSender,
-    private val invoiceGenerator: ProEInvoiceGenerator
+    private val invoiceGenerator: ProEInvoiceGenerator,
 ) : InvoiceIntegrationClient {
     override fun send(invoices: List<InvoiceDetailed>): InvoiceIntegrationClient.SendResult {
         val failedList = mutableListOf<InvoiceDetailed>()
@@ -43,7 +43,7 @@ class EVakaOuluInvoiceClient(
 interface StringInvoiceGenerator {
     data class InvoiceGeneratorResult(
         val sendResult: InvoiceIntegrationClient.SendResult = InvoiceIntegrationClient.SendResult(),
-        val invoiceString: String = ""
+        val invoiceString: String = "",
     )
 
     fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult

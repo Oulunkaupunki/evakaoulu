@@ -22,33 +22,34 @@ import org.springframework.core.env.Environment
 
 @Configuration
 class EVakaOuluConfig {
-
     @Bean
-    fun featureConfig(): FeatureConfig = FeatureConfig(
-        valueDecisionCapacityFactorEnabled = false,
-        citizenReservationThresholdHours = 165, // (7*24) - 3 = 165
-        dailyFeeDivisorOperationalDaysOverride = null,
-        freeSickLeaveOnContractDays = true,
-        alwaysUseDaycareFinanceDecisionHandler = false,
-        freeAbsenceGivesADailyRefund = true,
-        invoiceNumberSeriesStart = 1,
-        paymentNumberSeriesStart = 1,
-        serviceWorkerMessageAccountName = "Oulun kaupunki",
-        applyPlacementUnitFromDecision = false,
-        unplannedAbsencesAreContractSurplusDays = false,
-        maxContractDaySurplusThreshold = 13,
-        useContractDaysAsDailyFeeDivisor = false,
-        curriculumDocumentPermissionToShareRequired = true,
-        assistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
-        preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
-        requestedStartUpperLimit = 7,
-        preferredStartRelativeApplicationDueDate = true,
-        postOffice = "OULU",
-        municipalMessageAccountName = "Oulun kaupunki",
-        fiveYearsOldDaycareEnabled = false,
-        archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus",
-        archiveMetadataConfigs = emptyMap()
-    )
+    fun featureConfig(): FeatureConfig =
+        FeatureConfig(
+            valueDecisionCapacityFactorEnabled = false,
+            // (7*24) - 3 = 165
+            citizenReservationThresholdHours = 165,
+            dailyFeeDivisorOperationalDaysOverride = null,
+            freeSickLeaveOnContractDays = true,
+            alwaysUseDaycareFinanceDecisionHandler = false,
+            freeAbsenceGivesADailyRefund = true,
+            invoiceNumberSeriesStart = 1,
+            paymentNumberSeriesStart = 1,
+            serviceWorkerMessageAccountName = "Oulun kaupunki",
+            applyPlacementUnitFromDecision = false,
+            unplannedAbsencesAreContractSurplusDays = false,
+            maxContractDaySurplusThreshold = 13,
+            useContractDaysAsDailyFeeDivisor = false,
+            curriculumDocumentPermissionToShareRequired = true,
+            assistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
+            preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
+            requestedStartUpperLimit = 7,
+            preferredStartRelativeApplicationDueDate = true,
+            postOffice = "OULU",
+            municipalMessageAccountName = "Oulun kaupunki",
+            fiveYearsOldDaycareEnabled = false,
+            archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus",
+            archiveMetadataConfigs = emptyMap(),
+        )
 
     @Bean
     fun actionRuleMapping(): ActionRuleMapping = EvakaOuluActionRuleMapping()
@@ -57,7 +58,11 @@ class EVakaOuluConfig {
     fun invoiceGenerationLogicChooser() = DefaultInvoiceGenerationLogic // TODO: implement
 
     @Bean
-    fun paymentIntegrationClient(evakaProperties: EvakaOuluProperties, paymentGenerator: ProEPaymentGenerator, sftpConnector: SftpConnector): PaymentIntegrationClient {
+    fun paymentIntegrationClient(
+        evakaProperties: EvakaOuluProperties,
+        paymentGenerator: ProEPaymentGenerator,
+        sftpConnector: SftpConnector,
+    ): PaymentIntegrationClient {
         val sftpSender = SftpSender(evakaProperties.intimePayments, sftpConnector)
         return OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
     }

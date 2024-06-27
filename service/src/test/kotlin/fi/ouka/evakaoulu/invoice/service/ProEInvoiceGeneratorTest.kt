@@ -10,7 +10,6 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 internal class ProEInvoiceGeneratorTest {
-
     val financeDateProvider = mock<FinanceDateProvider>()
     val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), financeDateProvider)
 
@@ -45,11 +44,12 @@ internal class ProEInvoiceGeneratorTest {
 
     @Test
     fun `should format invoice rows according to data and formatting`() {
-        val format = listOf(
-            InvoiceField(InvoiceFieldName.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
-            InvoiceField(InvoiceFieldName.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
-            InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2)
-        )
+        val format =
+            listOf(
+                InvoiceField(InvoiceFieldName.INVOICE_IDENTIFIER, FieldType.ALPHANUMERIC, 1, 11),
+                InvoiceField(InvoiceFieldName.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
+                InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2),
+            )
         val invoiceData = InvoiceData()
 
         invoiceData.setAlphanumericValue(InvoiceFieldName.INVOICE_IDENTIFIER, "121212A121A")

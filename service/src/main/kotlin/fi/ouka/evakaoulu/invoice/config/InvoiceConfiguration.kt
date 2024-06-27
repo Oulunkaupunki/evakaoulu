@@ -34,7 +34,7 @@ class InvoiceConfiguration {
     fun invoiceIntegrationClient(
         properties: EvakaOuluProperties,
         invoiceGenerator: ProEInvoiceGenerator,
-        sftpConnector: SftpConnector
+        sftpConnector: SftpConnector,
     ): InvoiceIntegrationClient {
         val sftpSender = SftpSender(properties.intimeInvoices, sftpConnector)
         return EVakaOuluInvoiceClient(sftpSender, invoiceGenerator)
@@ -72,7 +72,7 @@ class OuluIncomeTypesProvider : IncomeTypesProvider {
             "PAID_ALIMONY" to IncomeType("Maksetut elatusavut", -1, true, false),
             "ALIMONY" to IncomeType("Saadut elatusavut", 1, true, false),
             "OTHER_INCOME" to IncomeType("Muu tulo", 1, true, false),
-            "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false)
+            "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false),
         )
     }
 }
@@ -91,7 +91,6 @@ class OuluIncomeCoefficientMultiplierProvider : IncomeCoefficientMultiplierProvi
 }
 
 class OuluInvoiceProductProvider : InvoiceProductProvider {
-
     override val products = Product.values().map { ProductWithName(it.key, it.nameFi) }
     override val dailyRefund = Product.FREE_OF_CHARGE.key
     override val partMonthSickLeave = Product.SICK_LEAVE_50.key
@@ -100,25 +99,46 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
     override val contractSurplusDay = Product.OVER_CONTRACT.key
 
     override fun mapToProduct(placementType: PlacementType): ProductKey {
-        val product = when (placementType) {
-            PlacementType.DAYCARE, PlacementType.DAYCARE_PART_TIME, PlacementType.DAYCARE_FIVE_YEAR_OLDS, PlacementType.DAYCARE_PART_TIME_FIVE_YEAR_OLDS -> Product.DAYCARE
-            PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
-            PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
-            PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
-            PlacementType.PRESCHOOL, PlacementType.PREPARATORY, PlacementType.SCHOOL_SHIFT_CARE, PlacementType.CLUB, PlacementType.PRESCHOOL_CLUB, PlacementType.PRESCHOOL_DAYCARE_ONLY, PlacementType.PREPARATORY_DAYCARE_ONLY -> error(
-                "No product mapping found for placement type $placementType"
-            )
-        }
+        val product =
+            when (placementType) {
+                PlacementType.DAYCARE,
+                PlacementType.DAYCARE_PART_TIME,
+                PlacementType.DAYCARE_FIVE_YEAR_OLDS,
+                PlacementType.DAYCARE_PART_TIME_FIVE_YEAR_OLDS,
+                -> Product.DAYCARE
+                PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
+                PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
+                PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
+                PlacementType.PRESCHOOL,
+                PlacementType.PREPARATORY,
+                PlacementType.SCHOOL_SHIFT_CARE,
+                PlacementType.CLUB,
+                PlacementType.PRESCHOOL_CLUB,
+                PlacementType.PRESCHOOL_DAYCARE_ONLY,
+                PlacementType.PREPARATORY_DAYCARE_ONLY,
+                ->
+                    error(
+                        "No product mapping found for placement type $placementType",
+                    )
+            }
         return product.key
     }
 
-    override fun mapToFeeAlterationProduct(productKey: ProductKey, feeAlterationType: FeeAlterationType): ProductKey {
-        val product = when (findProduct(productKey) to feeAlterationType) {
-            Product.DAYCARE to FeeAlterationType.DISCOUNT, Product.DAYCARE to FeeAlterationType.RELIEF, Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.DISCOUNT, Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.RELIEF -> Product.DAYCARE_DISCOUNT
-            Product.DAYCARE to FeeAlterationType.INCREASE -> Product.CORRECTION
-            Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
-            else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
-        }
+    override fun mapToFeeAlterationProduct(
+        productKey: ProductKey,
+        feeAlterationType: FeeAlterationType,
+    ): ProductKey {
+        val product =
+            when (findProduct(productKey) to feeAlterationType) {
+                Product.DAYCARE to FeeAlterationType.DISCOUNT,
+                Product.DAYCARE to FeeAlterationType.RELIEF,
+                Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.DISCOUNT,
+                Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.RELIEF,
+                -> Product.DAYCARE_DISCOUNT
+                Product.DAYCARE to FeeAlterationType.INCREASE -> Product.CORRECTION
+                Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
+                else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
+            }
         return product.key
     }
 }
@@ -137,7 +157,8 @@ enum class Product(val nameFi: String, val code: String) {
     CORRECTION("Oikaisu", ""),
     FREE_MONTH("Poissaolovähennys 100 %", ""),
     OVER_CONTRACT("Sovittujen päivien ylitys", ""),
-    PRESCHOOL_DAYCARE_CORRECTION("Kokoaikainen varhaiskasvatus", "");
+    PRESCHOOL_DAYCARE_CORRECTION("Kokoaikainen varhaiskasvatus", ""),
+    ;
 
     val key = ProductKey(this.name)
 }

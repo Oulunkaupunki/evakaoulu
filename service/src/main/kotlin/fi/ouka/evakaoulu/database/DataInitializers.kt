@@ -9,8 +9,8 @@ import fi.espoo.evaka.shared.dev.runDevScript
 
 fun Database.Transaction.ensureOuluDevData() {
     if (createQuery {
-        sql("SELECT count(*) FROM daycare")
-    }.exactlyOne<Int>() == 0
+            sql("SELECT count(*) FROM daycare")
+        }.exactlyOne<Int>() == 0
     ) {
         listOf("oulu-dev-data.sql").forEach { runDevScript(it) }
     }

@@ -19,17 +19,20 @@ import java.security.interfaces.RSAPublicKey
 
 @TestConfiguration
 class IntegrationTestConfiguration {
-
     @Bean
-    fun s3Client(evakaEnv: EvakaEnv, bucketEnv: BucketEnv): S3Client {
-        val client = S3Client.builder()
-            .region(evakaEnv.awsRegion)
-            .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
-            .endpointOverride(bucketEnv.s3MockUrl)
-            .credentialsProvider(
-                StaticCredentialsProvider.create(AwsBasicCredentials.create("foo", "bar"))
-            )
-            .build()
+    fun s3Client(
+        evakaEnv: EvakaEnv,
+        bucketEnv: BucketEnv,
+    ): S3Client {
+        val client =
+            S3Client.builder()
+                .region(evakaEnv.awsRegion)
+                .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
+                .endpointOverride(bucketEnv.s3MockUrl)
+                .credentialsProvider(
+                    StaticCredentialsProvider.create(AwsBasicCredentials.create("foo", "bar")),
+                )
+                .build()
 
         val existingBuckets = client.listBuckets().buckets().map { it.name() }
         bucketEnv.allBuckets()
@@ -40,13 +43,16 @@ class IntegrationTestConfiguration {
     }
 
     @Bean
-    fun s3Presigner(evakaEnv: EvakaEnv, bucketEnv: BucketEnv): S3Presigner =
+    fun s3Presigner(
+        evakaEnv: EvakaEnv,
+        bucketEnv: BucketEnv,
+    ): S3Presigner =
         S3Presigner.builder()
             .region(evakaEnv.awsRegion)
             .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
             .endpointOverride(bucketEnv.s3MockUrl)
             .credentialsProvider(
-                StaticCredentialsProvider.create(AwsBasicCredentials.create("foo", "bar"))
+                StaticCredentialsProvider.create(AwsBasicCredentials.create("foo", "bar")),
             )
             .build()
 

@@ -12,31 +12,44 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class TemplateConfiguration {
-
     @Bean
     fun templateProvider(): ITemplateProvider = EVakaOuluTemplateProvider()
 }
 
 internal class EVakaOuluTemplateProvider : ITemplateProvider {
     override fun getFeeDecisionPath(): String = "oulu/fee-decision/decision"
+
     override fun getVoucherValueDecisionPath(): String = "oulu/fee-decision/voucher-value-decision"
+
     override fun getClubDecisionPath(): String = "oulu/club/decision"
+
     override fun getDaycareVoucherDecisionPath(): String = "oulu/daycare/voucher/decision"
+
     override fun getDaycareTransferDecisionPath(): String = "oulu/daycare/decision"
+
     override fun getDaycareDecisionPath(): String = "oulu/daycare/decision"
+
     override fun getPreschoolDecisionPath(): String = "oulu/preschool/decision"
+
     override fun getPreparatoryDecisionPath(): String = "oulu/preparatory/decision"
+
     override fun getAssistanceNeedDecisionPath(): String = "oulu/assistance-need/decision"
+
     override fun getAssistanceNeedPreschoolDecisionPath(): String = "oulu/assistance-need-preschool/decision"
 
-    override fun getLocalizedFilename(type: DecisionType, lang: OfficialLanguage): String =
+    override fun getLocalizedFilename(
+        type: DecisionType,
+        lang: OfficialLanguage,
+    ): String =
         when (type) {
             DecisionType.CLUB -> "Kerhopäätös"
             DecisionType.DAYCARE,
-            DecisionType.DAYCARE_PART_TIME -> "Varhaiskasvatuspäätös"
+            DecisionType.DAYCARE_PART_TIME,
+            -> "Varhaiskasvatuspäätös"
             DecisionType.PRESCHOOL -> "Esiopetuspäätös"
             DecisionType.PRESCHOOL_DAYCARE,
-            DecisionType.PRESCHOOL_CLUB -> "Esiopetukseen liittyvän toiminnan päätös"
+            DecisionType.PRESCHOOL_CLUB,
+            -> "Esiopetukseen liittyvän toiminnan päätös"
             DecisionType.PREPARATORY_EDUCATION -> "Valmistavan opetuksen päätös"
         }
 }

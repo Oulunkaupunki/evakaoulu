@@ -13,12 +13,11 @@ import java.time.format.DateTimeFormatter
 class ProEPaymentGenerator(
     private val paymentChecker: PaymentChecker,
     val financeDateProvider: FinanceDateProvider,
-    val bicMapper: BicMapper
+    val bicMapper: BicMapper,
 ) {
-
     data class Result(
         val sendResult: PaymentIntegrationClient.SendResult = PaymentIntegrationClient.SendResult(),
-        val paymentString: String = ""
+        val paymentString: String = "",
     )
 
     fun gatherPaymentData(payment: Payment): PaymentData {
@@ -39,11 +38,11 @@ class ProEPaymentGenerator(
         paymentData.setAlphanumericValue(
             PaymentFieldName.INVOICE_DATE,
             payment.paymentDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now()
-                .format(paymentDateFormatterYYMMDD)
+                .format(paymentDateFormatterYYMMDD),
         )
         paymentData.setAlphanumericValue(
             PaymentFieldName.DUE_DATE,
-            payment.dueDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now().format(paymentDateFormatterYYMMDD)
+            payment.dueDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now().format(paymentDateFormatterYYMMDD),
         )
         paymentData.setNumericValue(PaymentFieldName.INVOICE_SUM, payment.amount)
         paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_1, "")
@@ -63,7 +62,14 @@ class ProEPaymentGenerator(
         paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
         val calcIdentifier =
-            "1104" + if (payment.unit.careType.contains(CareType.FAMILY) or payment.unit.careType.contains(CareType.GROUP_FAMILY)) "372" else "371"
+            "1104" +
+                if (payment.unit.careType.contains(CareType.FAMILY) or
+                    payment.unit.careType.contains(CareType.GROUP_FAMILY)
+                ) {
+                    "372"
+                } else {
+                    "371"
+                }
         paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, calcIdentifier)
         paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
         paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
@@ -81,7 +87,7 @@ class ProEPaymentGenerator(
         paymentData.setAlphanumericValue(PaymentFieldName.BANK_ACCOUNT, payment.unit.iban.toString())
         paymentData.setAlphanumericValue(
             PaymentFieldName.NOTE,
-            payment.unit.providerId.toString() + " " + payment.unit.name.toString()
+            payment.unit.providerId.toString() + " " + payment.unit.name.toString(),
         )
         paymentData.setAlphanumericValue(PaymentFieldName.VAT_PERIOD, financeDateProvider.previousMonthYYMM())
         paymentData.setAlphanumericValue(PaymentFieldName.VAT_VAL, "0")
@@ -117,7 +123,7 @@ class ProEPaymentGenerator(
         paymentData.setAlphanumericValue(PaymentFieldName.BREAKDOWN_TYPE, "9")
         paymentData.setAlphanumericValue(
             PaymentFieldName.DESCRIPTION,
-            payment.unit.providerId.toString() + " " + payment.unit.name.toString()
+            payment.unit.providerId.toString() + " " + payment.unit.name.toString(),
         )
         paymentData.setAlphanumericValue(PaymentFieldName.SUB_ACCOUNT, "")
         paymentData.setAlphanumericValue(PaymentFieldName.VAT_CODE, "105")
@@ -145,7 +151,10 @@ class ProEPaymentGenerator(
         return paymentData
     }
 
-    fun generateRow(fields: List<PaymentField>, paymentData: PaymentData): String {
+    fun generateRow(
+        fields: List<PaymentField>,
+        paymentData: PaymentData,
+    ): String {
         var result = StringBuilder("")
 
         fields.forEach {

@@ -45,6 +45,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: true,
     forceUnpublishDocumentTemplate: true,
+    automaticFixedScheduleAbsences: true,
   },
   staging: {
     citizenShiftCareAbsence: false,
@@ -74,6 +75,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: true,
     forceUnpublishDocumentTemplate: true,
+    automaticFixedScheduleAbsences: true,
   },
   prod: {
     citizenShiftCareAbsence: false,
@@ -103,6 +105,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: false,
     forceUnpublishDocumentTemplate: false,
+    automaticFixedScheduleAbsences: false,
   }
 }
 

@@ -8,7 +8,7 @@ updates:
     directory: "/auth"
     schedule:
       interval: "daily"
-      time: "10:00"
+      time: "06:30"
       timezone: "Europe/Helsinki"
     ignore:
       - dependency-name: "node"
@@ -17,7 +17,7 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "daily"
-      time: "10:00"
+      time: "06:30"
       timezone: "Europe/Helsinki"
     ignore:
       - dependency-name: "@playwright/test" # version must match with core
@@ -47,7 +47,7 @@ updates:
     directory: "/mock/identification"
     schedule:
       interval: "daily"
-      time: "10:00"
+      time: "06:30"
       timezone: "Europe/Helsinki"
     ignore:
       - dependency-name: "org.springframework.boot"
@@ -55,13 +55,13 @@ updates:
     directory: "/scheduled-tasks/logs"
     schedule:
       interval: "daily"
-      time: "10:00"
+      time: "06:30"
       timezone: "Europe/Helsinki"
   - package-ecosystem: "gradle"
     directory: "/service"
     schedule:
       interval: "daily"
-      time: "10:00"
+      time: "06:30"
       timezone: "Europe/Helsinki"
     ignore:
       - dependency-name: "com.sun.xml.bind:jaxb-xjc"

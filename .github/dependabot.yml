@@ -52,7 +52,10 @@ updates:
     ignore:
       - dependency-name: "org.springframework.boot"
   - package-ecosystem: "docker"
-    directory: "/scheduled-tasks/logs"
+    directories:
+      - "/scheduled-tasks/logs"
+      - "/scheduled-tasks/certificate-check"
+      - "/scheduled-tasks/reporting"
     schedule:
       interval: "daily"
       time: "06:30"

@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG CACHE_BUST
 ARG DEBIAN_FRONTEND=noninteractive

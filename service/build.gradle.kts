@@ -56,7 +56,7 @@ dependencies {
     testImplementation("org.junit-pioneer:junit-pioneer:2.2.0") // for CartesianProductTest
     testImplementation("org.mockito.kotlin:mockito-kotlin")
     testImplementation("org.springframework.ws:spring-ws-test")
-    testImplementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.2"))
+    testImplementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.3"))
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
     testImplementation(platform("org.testcontainers:testcontainers-bom:1.19.8"))
     testImplementation("org.testcontainers:postgresql")

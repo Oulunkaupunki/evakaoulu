@@ -19,7 +19,7 @@ RUN apt-get update \
     && unzip awscliv2.zip \
     && ./aws/install \
     && cd .. \
-    && rm -rf awscli \
+    && rm -rf awscli
 ADD db_to_csv.sh db_to_csv.sh
 ADD sql sql
 CMD ["./db_to_csv.sh"]

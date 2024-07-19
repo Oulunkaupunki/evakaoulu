@@ -7,6 +7,7 @@ package fi.ouka.evakaoulu.emailclient.config
 import fi.espoo.evaka.EvakaEnv
 import fi.espoo.evaka.daycare.domain.Language
 import fi.espoo.evaka.emailclient.CalendarEventNotificationData
+import fi.espoo.evaka.emailclient.DiscussionSurveyReservationNotificationData
 import fi.espoo.evaka.emailclient.EmailContent
 import fi.espoo.evaka.emailclient.IEmailMessageProvider
 import fi.espoo.evaka.invoicing.domain.FinanceDecisionType
@@ -964,5 +965,19 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             """
                     .trimIndent(),
         )
+    }
+
+    override fun discussionSurveyReservationNotification(
+        language: Language,
+        notificationDetails: DiscussionSurveyReservationNotificationData,
+    ): EmailContent {
+        TODO("Not yet implemented")
+    }
+
+    override fun discussionSurveyReservationCancellationNotification(
+        language: Language,
+        notificationDetails: DiscussionSurveyReservationNotificationData,
+    ): EmailContent {
+        TODO("Not yet implemented")
     }
 }

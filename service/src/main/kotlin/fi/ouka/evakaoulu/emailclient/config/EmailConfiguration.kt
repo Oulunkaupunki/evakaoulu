@@ -971,13 +971,49 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         language: Language,
         notificationDetails: DiscussionSurveyReservationNotificationData,
     ): EmailContent {
-        TODO("Not yet implemented")
+        return EmailContent.fromHtml(
+            subject =
+                "Uusi keskusteluaika varattu eVakassa / Ett nytt diskussionsmöte bokad i eVaka / New discussion time reserved in eVaka",
+            html =
+                """
+                <p>Uusi keskusteluaika varattu / Ett nytt diskussionsmöte bokad / New discussion time reserved</p>
+                <p>${notificationDetails.unitName}: ${notificationDetails.title}</p>
+                <p>${notificationDetails.calendarEventTime.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))}</p>
+                <p>${notificationDetails.calendarEventTime.startTime.format(
+                    DateTimeFormatter.ofPattern("HH:mm"),
+                )} - ${notificationDetails.calendarEventTime.endTime.format(DateTimeFormatter.ofPattern("HH:mm"))}</p>
+                <hr>
+                $unsubscribeFi
+                $unsubscribeSv
+                $unsubscribeEn
+                <hr>
+            """
+                    .trimIndent(),
+        )
     }
 
     override fun discussionSurveyReservationCancellationNotification(
         language: Language,
         notificationDetails: DiscussionSurveyReservationNotificationData,
     ): EmailContent {
-        TODO("Not yet implemented")
+        return EmailContent.fromHtml(
+            subject =
+                "Keskusteluaika peruttu eVakassa / Diskussionsmöte avbokad i eVaka / Discussion time cancelled in eVaka",
+            html =
+                """
+                <p>Varattu keskusteluaika peruttu / Bokad diskussionsmöte avbruten / Reserved discussion time cancelled</p>
+                <p>${notificationDetails.unitName}: ${notificationDetails.title}</p>
+                <p>${notificationDetails.calendarEventTime.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))}</p>
+                <p>${notificationDetails.calendarEventTime.startTime.format(
+                    DateTimeFormatter.ofPattern("HH:mm"),
+                )} - ${notificationDetails.calendarEventTime.endTime.format(DateTimeFormatter.ofPattern("HH:mm"))}</p>
+                <hr>
+                $unsubscribeFi
+                $unsubscribeSv
+                $unsubscribeEn
+                <hr>
+            """
+                    .trimIndent(),
+        )
     }
 }

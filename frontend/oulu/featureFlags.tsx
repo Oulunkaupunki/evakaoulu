@@ -105,7 +105,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: false,
     forceUnpublishDocumentTemplate: false,
-    automaticFixedScheduleAbsences: false,
+    automaticFixedScheduleAbsences: true,
   }
 }
 

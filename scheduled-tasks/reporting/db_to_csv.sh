@@ -103,6 +103,7 @@ if [[ -v HISTORY_ENABLED && $HISTORY_ENABLED == true && -v HISTORY_FROM_DATE ]];
     echo "Running history batches enabled"
     run_history_batch_and_send_file sql/DW-Daily_info.sql daily_info
     run_history_batch_and_send_file sql/DW-Units_and_groups.sql units_and_groups
+    run_history_batch_and_send_file sql/DW-Daily_units_and_groups_attendance.sql daily_units_and_groups_attendance
 
     echo "Running history bulk"
     run_history_bulk_and_send_file sql/history_bulk/DW-Fee_decisions_bulk.sql fee_decisions

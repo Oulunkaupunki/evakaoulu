@@ -18,6 +18,7 @@ type Features = {
 
 const features: Features = {
   default: {
+    environmentLabel: 'Kehitys',
     citizenShiftCareAbsence: false,
     assistanceActionOther: false,
     financeDecisionHandlerSelect: false,
@@ -48,6 +49,7 @@ const features: Features = {
     automaticFixedScheduleAbsences: true,
   },
   staging: {
+    environmentLabel: 'Staging',
     citizenShiftCareAbsence: false,
     assistanceActionOther: false,
     daycareApplication: {
@@ -78,6 +80,7 @@ const features: Features = {
     automaticFixedScheduleAbsences: true,
   },
   prod: {
+    environmentLabel: null,
     citizenShiftCareAbsence: false,
     assistanceActionOther: false,
     daycareApplication: {

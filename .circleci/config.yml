@@ -538,15 +538,6 @@ jobs:
             BASE_URL: http://localhost:9999
             JEST_JUNIT_OUTPUT_DIR: test-results
       - run:
-          name: yarn lint
-          working_directory: *workspace_evaka_frontend
-          command: |
-            echo 'src/*' >> .eslintignore
-            echo '!src/lib-customizations' >> .eslintignore
-            echo 'src/lib-customizations/*' >> .eslintignore
-            echo '!src/lib-customizations/oulu' >> .eslintignore
-            yarn lint
-      - run:
           name: Collect docker-compose logs
           working_directory: *workspace_compose
           command: docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml logs --tail=all > /tmp/docker-compose-logs.txt

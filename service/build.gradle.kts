@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
@@ -30,7 +32,7 @@ dependencies {
     implementation("evaka:evaka-service")
 
     implementation("io.github.microutils:kotlin-logging-jvm")
-    implementation("ch.qos.logback:logback-access")
+    implementation("ch.qos.logback.access:tomcat")
     implementation("net.logstash.logback:logstash-logback-encoder")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -71,9 +73,9 @@ springBoot {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
+    compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "21"
+        jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
     }
 }
 

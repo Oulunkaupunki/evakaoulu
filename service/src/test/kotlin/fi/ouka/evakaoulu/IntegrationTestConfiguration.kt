@@ -6,7 +6,6 @@ package fi.ouka.evakaoulu
 
 import com.auth0.jwt.algorithms.Algorithm
 import fi.espoo.evaka.BucketEnv
-import fi.espoo.evaka.EvakaEnv
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
@@ -20,13 +19,9 @@ import java.security.interfaces.RSAPublicKey
 @TestConfiguration
 class IntegrationTestConfiguration {
     @Bean
-    fun s3Client(
-        evakaEnv: EvakaEnv,
-        bucketEnv: BucketEnv,
-    ): S3Client {
+    fun s3Client(bucketEnv: BucketEnv): S3Client {
         val client =
             S3Client.builder()
-                .region(evakaEnv.awsRegion)
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .endpointOverride(bucketEnv.s3MockUrl)
                 .credentialsProvider(
@@ -43,12 +38,8 @@ class IntegrationTestConfiguration {
     }
 
     @Bean
-    fun s3Presigner(
-        evakaEnv: EvakaEnv,
-        bucketEnv: BucketEnv,
-    ): S3Presigner =
+    fun s3Presigner(bucketEnv: BucketEnv): S3Presigner =
         S3Presigner.builder()
-            .region(evakaEnv.awsRegion)
             .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
             .endpointOverride(bucketEnv.s3MockUrl)
             .credentialsProvider(

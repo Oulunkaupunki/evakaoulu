@@ -20,6 +20,7 @@ import fi.espoo.evaka.shared.domain.FiniteDateRange
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
+import org.unbescape.html.HtmlEscape
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
@@ -123,6 +124,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     override fun messageNotification(
         language: Language,
         thread: MessageThreadStub,
+    ): EmailContent = messageNotification(language, thread, false)
+
+    override fun messageNotification(
+        language: Language,
+        thread: MessageThreadStub,
+        isSenderMunicipalAccount: Boolean,
     ): EmailContent {
         val (typeFi, typeSv, typeEn) =
             when (thread.type) {
@@ -148,30 +155,14 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                         Triple("tiedote", "allmänt meddelande", "bulletin")
                     }
             }
-        return EmailContent(
+
+        val showSubjectInBody = isSenderMunicipalAccount && thread.type == MessageType.BULLETIN
+
+        return EmailContent.fromHtml(
             subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
-            text =
-                """
-                Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(
-                    Language.fi,
-                    thread.id,
-                )}
-                
-                Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
-                
-                -----
-                
-                You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(
-                    Language.en,
-                    thread.id,
-                )}
-                
-                This is an automatic message from the eVaka system. Do not reply to this message.  
-            """
-                    .trimIndent(),
             html =
                 """
-                <p>Sinulle on saapunut uusi $typeFi eVakaan. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(
+                <p>Sinulle on saapunut uusi $typeFi eVakaan${if (showSubjectInBody) " otsikolla \"" + HtmlEscape.escapeHtml5(thread.title) + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(
                     Language.fi,
                     thread.id,
                 )}</p>
@@ -179,7 +170,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 $unsubscribeFi
                 <hr>
                 
-                <p>You have received a new $typeEn in eVaka. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(
+                <p>You have received a new $typeEn in eVaka${if (showSubjectInBody) " with title \"" + HtmlEscape.escapeHtml5(thread.title) + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(
                     Language.en,
                     thread.id,
                 )}</p>

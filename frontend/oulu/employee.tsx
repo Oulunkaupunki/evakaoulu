@@ -67,6 +67,22 @@ const customizations: EmployeeCustomizations = {
         assistanceNeedDecision: {
           jurisdiction: '',
           jurisdictionText: '',
+          pedagogicalMotivationInfo:
+            'Kirjaa tähän lyhyt yleiskuvaus lapsen tarvitsemasta tuesta ja tuen muodoista, jossa tulee esiin perustelu. Kirjaa konkreettisesti ja yksilöllisesti 2-3 olennaista tuen muotoa. Esim. Lapsi saa yksilöllisesti suunniteltua opetusta ja ohjausta kokonaiskehityksen tukemiseen. Esim. Lapsi saa kuvatukea ja pilkottuna annettuja ohjeita kielen kehityksen tueksi.',
+          structuralMotivationInfo:
+            'Valitse lapsen tarvitsemat rakenteellisen tuen muodot. Perustele, miksi lapsi saa näitä tuen muotoja. Esim. Tuki huomioidaan lapsiryhmän koossa. Esim. Lapsi saa ryhmäkohtaisen avustajan tukea vuorovaikutustilanteisiin ja keskittymisen tukemiseen. Esim. Lapsi saa lapsikohtaisen avustajan tukea kokonaiskehityksen tukemiseen. Esim. Lapsi saa tukea alueellisessa pienryhmässä tai lapsi saa tukea erityisryhmässä.',
+          careMotivationInfo:
+            'Kirjaa tähän lapsen tarvitsemat hoidollisen tuen muodot, esim. apuvälineiden käyttö, perushoito ja pitkäaikaissairauksien hoito. Perustele, miksi lapsi saa hoidollisen tuen muotoja. Esim. Lapsi saa hoidollista tukea sairauteen liittyvissä hoitotoimenpiteissä. Esim. Lapsi saa tukea apuvälineen käytössä. Huom: lapsen vasuun/leopsiin/HOJKS:aan kirjataan tarkemmin apuvälineiden käytöstä.',
+          servicesInfo:
+            'Valitse tästä lapselle esitettävät tukipalvelut. Perustele, miksi lapsi saa näitä tukipalveluja. Esim. Lapsi saa varhaiskasvatuksen erityisopettajan osa-aikaista opetusta kielenkehityksen tukemiseksi. Esim. Varhaiskasvatuksen erityisopettaja antaa konsultaatiota tuen järjestämiseksi.',
+          guardiansHeardInfo:
+            'Kaikilla lapsen huoltajilla tulee olla mahdollisuus tulla kuulluksi. Huoltaja voi tarvittaessa valtuuttaa toisen huoltajan edustamaan itseään valtakirjalla. Kirjaa tähän millä keinoin huoltajaa tai muuta laillista edustajaa on kuultu (esim. palaveri, etäyhteys, huoltajan kirjallinen vastine) sekä päivämäärä. Jos huoltajaa ei ole kuultu, kirjaa tähän miten ja milloin hänet on kutsuttu kuultavaksi. Esim. Kirjallinen kutsu lapsen tukeen liittyvään kuulemistilaisuuteen on lähetetty huoltajille eVakassa pvm.',
+          viewOfTheGuardiansInfo:
+            'Kirjaa tähän huoltajien näkemys lapselle esitetystä tuesta. Esim. Huoltajat ovat samaa mieltä esitetystä tuesta. Kirjaa näkemys niin, kuin huoltajat sen ilmaisevat tai liitä huoltajan kirjallinen näkemys.',
+          startDateIndefiniteInfo:
+            'Tehostettu ja erityinen tuki ovat voimassa toistaiseksi.',
+          startDateInfo:
+            'Yleisenä tukena annettavat tukipalvelut ovat voimassa määräajan. Voimassa alkaen päivämäärä on se, kun viimeistäkin huoltajaa on kuultu.',
           appealInstructions: (
             <>
               <P>

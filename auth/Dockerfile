@@ -11,8 +11,7 @@ COPY theme-fi.sed ./
 COPY theme-en.sed ./
 COPY city-logo-citizen.svg evaka/login/resources/img/EspooLogoBlue.svg
 RUN sed -i -E -f theme-fi.sed evaka/login/messages/messages_fi.properties && \
-    sed -i -E -f theme-en.sed evaka/login/messages/messages_en.properties && \
-    rm evaka/login/idp-review-user-profile.ftl
+    sed -i -E -f theme-en.sed evaka/login/messages/messages_en.properties
 RUN npm run build && rm -r evaka/account
 
 FROM quay.io/keycloak/keycloak:24.0.5

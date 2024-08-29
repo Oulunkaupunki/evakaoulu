@@ -49,8 +49,7 @@ dependencies {
 
     implementation("org.unbescape:unbescape:1.1.6.RELEASE")
 
-    api("io.opentracing:opentracing-api:${Version.OPEN_TRACING}")
-    api("io.opentracing:opentracing-util:${Version.OPEN_TRACING}")
+    implementation("io.opentelemetry:opentelemetry-api")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("com.vaadin.external.google", "android-json")

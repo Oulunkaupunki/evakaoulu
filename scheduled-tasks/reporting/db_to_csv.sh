@@ -112,6 +112,7 @@ if [[ -v HISTORY_ENABLED && $HISTORY_ENABLED == true && -v HISTORY_FROM_DATE ]];
     run_history_bulk_and_send_file sql/history_bulk/DW-Placements_bulk.sql placements
 fi
 
+run_query_and_send_file sql/DW-Application_info.sql application_info$DATE.csv $DATE
 run_query_and_send_file sql/DW-Daily_info.sql daily_info_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Units_and_groups.sql units_and_groups_$DATE.csv $DATE
 run_query_and_send_file sql/DW-Daily_units_and_groups_attendance.sql daily_units_and_groups_$DATE.csv $DATE

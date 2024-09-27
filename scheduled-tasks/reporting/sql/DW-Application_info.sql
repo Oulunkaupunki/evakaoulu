@@ -1,12 +1,21 @@
-SELECT
-    now() AT TIME ZONE 'Europe/Helsinki'    AS tiedoston_ajopaiva,
-    ap.id as hakemuksen_id,
-    ap.created as hakemus_luotu,
-    ap.type as tyyppi,
-    ap.child_id as lapsen_id,
-    pe.date_of_birth as syntymaaika,
-    jsonb_array_elements_text(ap.document->'apply'->'preferredUnits') AS yksikot
-FROM application ap, person pe
-WHERE :date_val::DATE - INTERVAL '12 months' <= ap.created
-AND ap.child_id = pe.id
-ORDER BY ap.created DESC;
+WITH application_infos AS (
+    SELECT
+        now() AT TIME ZONE 'Europe/Helsinki'    AS tiedoston_ajopaiva,
+        ap.id as hakemuksen_id,
+        ap.created as hakemus_luotu,
+        ap.updated as hakemusta_paivitetty,
+        ap.type as tyyppi,
+        ap.status as tilanne,
+        ap.origin as alkupera,
+        ap.transferapplication as siirtohakemus,
+        ap.child_id as lapsen_id,
+        pe.date_of_birth as syntymaaika,
+        jsonb_array_elements_text(ap.document->'apply'->'preferredUnits') AS yksikot
+    FROM application ap, person pe
+    WHERE :date_val::DATE - INTERVAL '12 months' <= ap.created
+    AND ap.child_id = pe.id
+ORDER BY ap.created DESC)
+SELECT hakemuksen_id, hakemus_luotu, hakemusta_paivitetty, tyyppi, tilanne, alkupera, siirtohakemus, lapsen_id, syntymaaika, yksikot, dg.name as yksikko_nimi, dg.care_area_id as alue_id, ca.name as alue_nimi
+FROM application_infos, daycare dg, care_area ca
+WHERE dg.id IN (application_infos.yksikot::uuid)
+  AND dg.care_area_id = ca.id;

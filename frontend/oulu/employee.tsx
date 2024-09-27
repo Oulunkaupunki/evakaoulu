@@ -415,10 +415,6 @@ const customizations: EmployeeCustomizations = {
     },
     sv: {}
   },
-  vasuTranslations: {
-    FI: {},
-    SV: {}
-  },
   cityLogo: {
     src: OuluLogo,
     alt: 'Oulu logo'

@@ -31,7 +31,6 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasUnitRole(UserRole.STAFF).inPlacementUnitOfChildOfBackupCare() as ScopedActionRule<in T>,
                     )
             }
-            Action.Child.READ_VASU_DOCUMENT,
             Action.Child.CREATE_BACKUP_CARE,
             Action.Child.READ_ASSISTANCE_ACTION,
             -> {

@@ -455,6 +455,7 @@ private val validAssistanceNeedDecision =
         motivationForDecision = null,
         hasDocument = false,
         annulmentReason = "",
+        endDateNotKnown = false,
     )
 
 private val validAssistanceNeedPreSchoolDecision =

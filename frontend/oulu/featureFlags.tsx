@@ -46,6 +46,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: true,
     forceUnpublishDocumentTemplate: true,
+    serviceApplications: false,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -76,6 +77,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: true,
     forceUnpublishDocumentTemplate: true,
+    serviceApplications: false,
   },
   prod: {
     environmentLabel: null,
@@ -106,6 +108,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: false,
     forceUnpublishDocumentTemplate: false,
+    serviceApplications: false,
   }
 }
 

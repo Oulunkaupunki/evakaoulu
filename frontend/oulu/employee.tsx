@@ -167,6 +167,10 @@ const customizations: EmployeeCustomizations = {
                 viraston aukiolon päättymistä. Oikaisuvaatimuksen lähettäminen
                 postitse tai sähköisesti tapahtuu lähettäjän omalla vastuulla.
               </P>
+              <P>
+                Oikaisuvaatimuksen aluehallintovirastolle voi tehdä myös sähköisessä asiointipalvelussa
+                https://www.avi.fi -> henkilöasiakas -> oikaisuvaatimukset -> sähköinen asiointi.
+              </P>
             </>
           )
         },

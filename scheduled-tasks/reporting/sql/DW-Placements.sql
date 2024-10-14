@@ -5,6 +5,7 @@ SELECT
     d.id                                 AS toimintayksikkö_id,
     pl.start_date                        AS sijoituksen_alkupvm,
     pl.end_date                          AS sijoituksen_loppupvm,
+    pl.type                              AS sijoitustyyppi,
     dg.name                              AS ryhmä,
     dg.id                                AS ryhmä_id,
     dg.start_date                        AS ryhmän_alkupvm,

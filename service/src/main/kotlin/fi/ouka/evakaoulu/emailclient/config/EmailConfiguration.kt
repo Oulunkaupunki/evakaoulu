@@ -17,7 +17,6 @@ import fi.espoo.evaka.invoicing.domain.FinanceDecisionType
 import fi.espoo.evaka.invoicing.service.IncomeNotificationType
 import fi.espoo.evaka.messaging.MessageType
 import fi.espoo.evaka.shared.ChildId
-import fi.espoo.evaka.shared.MessageThreadId
 import fi.espoo.evaka.shared.domain.FiniteDateRange
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -40,49 +39,18 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForDecisionEmail: String = "Päätös eVakassa / Decision in eVaka"
 
-    private fun link(
-        language: Language,
-        path: String,
-    ): String {
-        val baseUrl =
-            when (language) {
-                Language.sv -> env.frontendBaseUrlSv
-                else -> env.frontendBaseUrlFi
-            }
-        val url = "$baseUrl$path"
-        return """<a href="$url">$url</a>"""
-    }
-
-    private fun frontPageLink(language: Language) = link(language, "")
-
-    private fun calendarLink(language: Language) = link(language, "/calendar")
-
-    private fun messageLink(
-        language: Language,
-        threadId: MessageThreadId,
-    ) = link(language, "/messages/$threadId")
-
-    private fun childLink(
-        language: Language,
-        childId: ChildId,
-    ) = link(language, "/children/$childId")
-
-    private fun incomeLink(language: Language) = link(language, "/income")
-
-    private fun unsubscribeLink(language: Language) = link(language, "/personal-details#notifications")
-
     private val unsubscribeFi =
-        """<p><small>Jos et halua enää saada tämänkaltaisia viestejä, voit muuttaa asetuksia eVakan Omat tiedot -sivulla: ${unsubscribeLink(
-            Language.fi,
-        )}</small></p>"""
+        """
+        <p><small>Jos et halua enää saada tämänkaltaisia viestejä, voit muuttaa asetuksia eVakan Omat tiedot -sivulla.</small></p>
+        """.trimIndent()
     private val unsubscribeSv =
-        """<p><small>Om du inte längre vill ta emot meddelanden som detta, kan du ändra dina inställningar på eVakas Personuppgifter-sida: ${unsubscribeLink(
-            Language.sv,
-        )}</small></p>"""
+        """
+        <p><small>Om du inte längre vill ta emot meddelanden som detta, kan du ändra dina inställningar på eVakas Personuppgifter-sida.</small></p>
+        """.trimIndent()
     private val unsubscribeEn =
-        """<p><small>If you no longer want to receive messages like this, you can change your settings on eVaka's Personal information page: ${unsubscribeLink(
-            Language.en,
-        )}</small></p>"""
+        """
+        <p><small>If you no longer want to receive messages like this, you can change your settings on eVaka's Personal information page.</small></p>
+        """.trimIndent()
 
     override fun calendarEventNotification(
         language: Language,
@@ -107,12 +75,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 """
         <p>eVakaan on lisätty uusia kalenteritapahtumia:</p>
         $eventsHtml
-        <p>Katso lisää kalenterissa: ${calendarLink(Language.fi)}</p>
+        <p>Katso lisää kalenterissa eVakassa.</p>
         $unsubscribeFi
         <hr>
         <p>New calendar events in eVaka:</p>
         $eventsHtml
-        <p>See more in the calendar: ${calendarLink(Language.en)}</p>
+        <p>See more in the calendar in eVaka.</p>
         $unsubscribeEn
         """
                     .trimIndent(),
@@ -163,18 +131,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
             html =
                 """
-                <p>Sinulle on saapunut uusi $typeFi eVakaan${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}täältä: ${messageLink(
-                    Language.fi,
-                    thread.id,
-                )}</p>
+                <p>Sinulle on saapunut uusi $typeFi eVakaan${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}eVakassa.</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
-                
-                <p>You have received a new $typeEn in eVaka${if (showSubjectInBody) " with title \"" + thread.title + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}here: ${messageLink(
-                    Language.en,
-                    thread.id,
-                )}</p>
+                <p>You have received a new $typeEn in eVaka${if (showSubjectInBody) " with title \"" + thread.title + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}in eVaka. </p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>    
                 $unsubscribeEn
             """
@@ -188,7 +149,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         
         <p>Lapsellenne on tehty päätös.</p>
         
-        <p>Päätös on nähtävissä eVakassa osoitteessa <a href="https://varhaiskasvatus.ouka.fi/">https://varhaiskasvatus.ouka.fi/</a>.</p>
+        <p>Päätös on nähtävissä eVakassa.</p>
         
         <p>Tähän viestiin ei voi vastata.</p>
         
@@ -198,7 +159,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         
         <p>A decision has been made for you by the Oulu early childhood education and care services.</p>
         
-        <p>The decision can be seen online at <a href="https://varhaiskasvatus.ouka.fi/">https://varhaiskasvatus.ouka.fi/</a>.</p>
+        <p>The decision can be seen online in eVaka.</p>
         
         <p>You may not reply to this message.</p>
         
@@ -210,7 +171,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         
         Lapsellenne on tehty päätös.
         
-        Päätös on nähtävissä eVakassa osoitteessa https://varhaiskasvatus.ouka.fi/.
+        Päätös on nähtävissä eVakassa.
         
         Tähän viestiin ei voi vastata.
         
@@ -220,7 +181,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         
         A decision has been made for you by the Oulu early childhood education and care services. 
         
-        The decision can be seen online at varhaiskasvatus.ouka.fi.
+        The decision can be seen online in eVaka.
         
         You may not reply to this message.
         
@@ -258,12 +219,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     fun getPendingDecisionEmailHtml(): String {
         return """
             <p>Hei!</p>
-            <p>Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan.</p>
+            <p>Sinulla on vastaamaton päätös Oulun varhaiskasvatukselta. Päätös tulee hyväksyä tai hylätä kahden viikon sisällä sen saapumisesta osoitteessa varhaiskasvatus.ouka.fi tai ottamalla yhteyttä päätöksessä mainittuun päiväkodin johtajaan.</p>
             <p>Tähän viestiin ei voi vastata.</p>
             $unsubscribeFi
             <hr>
             <p>Hello!</p>
-            <p>A decision has been made for you by the Oulu early childhood education and care services and remains unanswered. The decision must be accepted or rejected within two weeks of its arrival online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> or by contacting the daycare centre manager listed in the decision.</p> 
+            <p>A decision has been made for you by the Oulu early childhood education and care services and remains unanswered. The decision must be accepted or rejected within two weeks of its arrival online at varhaiskasvatus.ouka.fi or by contacting the daycare centre manager listed in the decision.</p> 
             <p>You may not reply to this message.</p>
             $unsubscribeEn
             """.trimIndent()
@@ -296,7 +257,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             <p>Hakemuksia käsitellään pääsääntöisesti vastaanottopäivämäärän mukaan. Sisarukset valitaan myös hakujärjestyksessä, ellei ole erityisperustetta.</p>
             
-            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.</p>
 
             <p>
             Ystävällisesti <br/>
@@ -313,7 +274,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             <p>The applications are usually processed in the order they are received. Siblings will also be enrolled in the order of application unless special ground exist.</p>
             
-            <p>The decision may be viewed and accepted or rejected online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            <p>The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.</p>
             
             <p>Yours, <br/>
             Early childhood education services coordination team <br/>
@@ -363,7 +324,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return """
             <p>Hei!</p>
             
-            <p>Lapsenne varhaiskasvatushakemus on vastaanotettu. Hakemuksen tehnyt huoltaja voi muokata hakemusta osoitteessa <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a> siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuspaikan järjestelyaika on neljä kuukautta. Mikäli kyseessä on vanhemman äkillinen työllistyminen tai opintojen alkaminen, järjestelyaika on kaksi viikkoa. Toimittakaa tällöin työ- tai opiskelutodistus hakemuksen liitteeksi. Kahden viikon järjestelyaika alkaa todistuksen saapumispäivämäärästä. Jatketun aukiolon ja vuorohoidon palveluita järjestetään vanhempien vuorotyön perusteella.</p>
+            <p>Lapsenne varhaiskasvatushakemus on vastaanotettu. Hakemuksen tehnyt huoltaja voi muokata hakemusta osoitteessa varhaiskasvatus.ouka.fi siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuspaikan järjestelyaika on neljä kuukautta. Mikäli kyseessä on vanhemman äkillinen työllistyminen tai opintojen alkaminen, järjestelyaika on kaksi viikkoa. Toimittakaa tällöin työ- tai opiskelutodistus hakemuksen liitteeksi. Kahden viikon järjestelyaika alkaa todistuksen saapumispäivämäärästä. Jatketun aukiolon ja vuorohoidon palveluita järjestetään vanhempien vuorotyön perusteella.</p>
             
             <p><b>Mikäli lapsellenne järjestyy varhaiskasvatuspaikka jostakin hakemuksessa toivomastanne kunnallisesta varhaiskasvatuspaikasta</b>, ilmoitamme teille paikan viimeistään kaksi viikkoa ennen varhaiskasvatuksen toivottua aloitusajankohtaa. Muussa tapauksessa olemme teihin yhteydessä.</p>
             
@@ -373,7 +334,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             <p><b>Mikäli ilmoititte hakemuksessa lapsenne tuen tarpeesta</b>, varhaiskasvatuksen erityisopettaja on teihin yhteydessä, jotta lapsen tuen tarpeet voidaan ottaa huomioon paikkaa osoitettaessa.</p>
             
-            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.</p>
             
             <p>
             Ystävällisesti <br/>
@@ -397,7 +358,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             
             <p>If you have specified a need for special support for your child in the application, a special needs early childhood education teacher will contact you in order to best consider your child’s need for support in making the enrolment decision.</p>
             
-            <p>The decision may be viewed and accepted or rejected online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi</a></p>
+            <p>The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi</p>
             
             <p>Yours, <br/>
             Early childhood education services coordination team <br/>
@@ -459,7 +420,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         return """
             <p>Hei!</p>
             
-            <p>Olemme vastaanottaneet lapsenne ilmoittautumisen esiopetukseen. Hakemuksen tehnyt huoltaja voi muokata hakemusta siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuksen palveluohjaus sijoittaa kaikki esiopetukseen ilmoitetut lapset esiopetusyksiköihin maaliskuun aikana. Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            <p>Olemme vastaanottaneet lapsenne ilmoittautumisen esiopetukseen. Hakemuksen tehnyt huoltaja voi muokata hakemusta siihen saakka, kunnes palveluohjaus ottaa sen käsittelyyn. Varhaiskasvatuksen palveluohjaus sijoittaa kaikki esiopetukseen ilmoitetut lapset esiopetusyksiköihin maaliskuun aikana. Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.</p>
             
             <p>Mikäli hakemaanne yksikköön ei perusteta esiopetusryhmää, palveluohjaus on teihin yhteydessä ja tarjoaa paikkaa sellaisesta yksiköstä, johon esiopetusryhmä on muodostunut.</p>
             
@@ -473,7 +434,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             <li><b>Mikäli valitsitte ensimmäiseksi hakutoiveeksi yksityisen päiväkodin</b>, olkaa suoraan yhteydessä kyseiseen yksikköön varmistaaksenne varhaiskasvatuspaikan saamisen. Mikäli toivomanne palveluntuottaja ei pysty tarjoamaan varhaiskasvatuspaikkaa, pyydämme teitä olemaan yhteydessä varhaiskasvatuksen palveluohjaukseen.</li>
             <li><b>Siirtohakemukset</b> (lapsella on jo varhaiskasvatuspaikka Oulun kaupungin varhaiskasvatusyksikössä) käsitellään pääsääntöisesti hakemuksen saapumispäivämäärän mukaan. Merkittäviä syitä siirtoon ovat: aikaisemman varhaiskasvatuspaikan lakkauttaminen, sisarukset ovat eri yksiköissä, pitkä matka, huonot kulkuyhteydet, lapsen ikä, ryhmän ikärakenne, vuorohoidon tarpeen loppuminen sekä huomioon otettavat erityisperusteet.</li>
             </ul>
-            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            <p>Päätös on nähtävissä ja hyväksyttävissä/hylättävissä varhaiskasvatus.ouka.fi.</p>
             
             <p>Hakemuksen liitteet lisätään suoraan sähköiselle hakemukselle eVakassa.</p>
             
@@ -504,7 +465,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             <li><b>Transfer applications</b>  (for children who are already enrolled in a City of Oulu early childhood education and care unit) will usually be processed in the order such applications are received. Acceptable reasons for transfer include: shutdown of the current care location, siblings enrolled in a different unit, a long distance, poor transportation connections, the age of the child, the age structure of the group, the end of a need for round-the-clock care, and other specific grounds to be considered individually.</li>
             </ul>
             
-            <p>The decision may be viewed and accepted or rejected online at <a href="https://varhaiskasvatus.ouka.fi">varhaiskasvatus.ouka.fi.</a></p>
+            <p>The decision may be viewed and accepted or rejected online at varhaiskasvatus.ouka.fi.</p>
             
             <p>The appendices to the application may be directly submitted with the online application through the eVaka service.</p>
             
@@ -628,15 +589,15 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             subject = "Uusi dokumentti eVakassa / Nytt dokument i eVaka / New document in eVaka",
             html =
                 """
-                <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}</p>
+                <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti eVakassa.</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
-                <p>Du har fått ett nytt dokument i eVaka. Läs dokumentet här: ${childLink(Language.sv, childId)}</p>
+                <p>Du har fått ett nytt dokument i eVaka. Läs dokumentet i eVaka.</p>
                 <p>Detta besked skickas automatiskt av eVaka. Svara inte på detta besked.</p>
                 $unsubscribeSv
                 <hr>
-                <p>You have received a new eVaka document. Read the document here: ${childLink(Language.en, childId)}</p>
+                <p>You have received a new eVaka document. Read the document in eVaka.</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
 """,
@@ -651,25 +612,25 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             subject = "Uusi pedagoginen dokumentti eVakassa / New pedagogical document in eVaka",
             text =
                 """
-                Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}
+                Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti eVakassa.
                 
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
                 
-                You have received a new eVaka pedagogical document. Read the document here:  ${childLink(Language.en, childId)}
+                You have received a new eVaka pedagogical document. Read the document in eVaka.
                 
                 This is an automatic message from the eVaka system. Do not reply to this message.  
             """
                     .trimIndent(),
             html =
                 """
-                <p>Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti täältä: ${childLink(Language.fi, childId)}</p>
+                <p>Sinulle on saapunut uusi pedagoginen dokumentti eVakaan. Lue dokumentti eVakassa.</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
                 
-                <p>You have received a new eVaka pedagogical document. Read the document here: ${childLink(Language.en, childId)}</p>
+                <p>You have received a new eVaka pedagogical document. Read the document in eVaka.</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
@@ -704,8 +665,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
-                Tulotiedot:  ${incomeLink(Language.fi)}
-                
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
@@ -720,8 +679,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
 
-                Income information:  ${incomeLink(Language.en)}
-
                 This is an automatic message from the eVaka system. Do not reply to this message.
             """
                     .trimIndent(),
@@ -732,7 +689,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>Pyydämme toimittamaan tuloselvityksen eVakassa 14 päivän kuluessa tästä ilmoituksesta.</p>
                 <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksun mukaisesti.</p>
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
-                <p>Tulotiedot:  ${incomeLink(Language.fi)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
@@ -741,7 +697,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>We ask you to submit your income statement through eVaka within 14 days of this notification.</p>
                 <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee.</p>
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
-                <p>Income information:  ${incomeLink(Language.en)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
@@ -764,8 +719,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
-                Tulotiedot: ${incomeLink(Language.fi)}
-                
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
@@ -780,8 +733,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
                 
-                Income information: ${incomeLink(Language.en)}
-                
                 This is an automatic message from the eVaka system. Do not reply to this message.
             """
                     .trimIndent(),
@@ -792,7 +743,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>Pyydämme toimittamaan tuloselvityksen eVakassa 7 päivän kuluessa tästä ilmoituksesta. eVakassa voitte myös antaa suostumuksen korkeimpaan maksuluokkaan tai tulorekisterin käyttöön.</p>
                 <p>Mikäli ette toimita uusia tulotietoja, asiakasmaksu määräytyy korkeimman maksuluokan mukaan.</p>
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
-                <p>Tulotiedot: ${incomeLink(Language.fi)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
@@ -801,7 +751,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>We ask you to submit your income statement through eVaka within 7 days of this notification. Through eVaka, you can also give your consent to the highest fee or the use of the Incomes Register.</p>
                 <p>If you do not provide your latest income information, your client fee will be determined based on the highest fee category.</p>
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
-                <p>Income information: ${incomeLink(Language.en)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
@@ -863,8 +812,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi
                 
-                Tulotiedot: ${incomeLink(Language.fi)}
-                
                 Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.
                 
                 -----
@@ -875,8 +822,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 
                 Inquiries: varhaiskasvatusmaksut@ouka.fi
                 
-                Income information: ${incomeLink(Language.en)}
-                
                 This is an automatic message from the eVaka system. Do not reply to this message.
                 """.trimIndent(),
             html =
@@ -884,14 +829,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 <p>Hyvä asiakkaamme</p>
                 <p>Lapsenne on aloittamassa varhaiskasvatuksessa tämän kuukauden aikana. Pyydämme teitä toimittamaan tulotiedot eVaka-järjestelmän kautta tämän kuukauden loppuun mennessä.</p>
                 <p>Lisätietoja saatte tarvittaessa: varhaiskasvatusmaksut@ouka.fi</p>
-                <p>Tulotiedot: ${incomeLink(Language.fi)}</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
                 <p>Dear client</p>
                 <p>Your child is starting early childhood education during this month. We ask you to submit your income information via eVaka system by the end of this month.</p>
                 <p>Inquiries: varhaiskasvatusmaksut@ouka.fi</p>
-                <p>Income information: ${incomeLink(Language.en)}</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
                 $unsubscribeEn
             """
@@ -905,19 +848,13 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 "Loma-ajan ilmoitus sulkeutuu / Semesteranmälan löper ut / Holiday notification period closing",
             html =
                 """
-            <p>Loma-ajan kysely sulkeutuu kahden päivän päästä. Jos lapseltanne/lapsiltanne puuttuu loma-ajan ilmoitus yhdeltä tai useammalta lomapäivältä, teettehän ilmoituksen eVakan kalenterissa mahdollisimman pian: ${calendarLink(
-                    Language.fi,
-                )}</p>
+            <p>Loma-ajan kysely sulkeutuu kahden päivän päästä. Jos lapseltanne/lapsiltanne puuttuu loma-ajan ilmoitus yhdeltä tai useammalta lomapäivältä, teettehän ilmoituksen eVakan kalenterissa mahdollisimman pian.</p>
             $unsubscribeFi
             <hr>
-            <p>Förfrågan om barnets frånvaro i semestertider stängs om två dagar. Om ditt/dina barn saknar anmälan för en eller flera helgdagar, vänligen gör anmälan i eVaka-kalendern så snart som möjligt: ${calendarLink(
-                    Language.sv,
-                )}</p>
+            <p>Förfrågan om barnets frånvaro i semestertider stängs om två dagar. Om ditt/dina barn saknar anmälan för en eller flera helgdagar, vänligen gör anmälan i eVaka-kalendern så snart som möjligt.</p>
             $unsubscribeSv
             <hr>
-            <p>Two days left to submit a holiday notification. If you have not submitted a notification for each day, please submit them through the eVaka calendar as soon as possible: ${calendarLink(
-                    Language.en,
-                )}</p>
+            <p>Two days left to submit a holiday notification. If you have not submitted a notification for each day, please submit them through the eVaka calendar as soon as possible.</p>
             $unsubscribeEn
             """,
         )
@@ -937,15 +874,15 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             html =
                 """
                 <p>Sinulle on saapunut uusi $decisionTypeFi eVakaan.</p>
-                <p>Päätös on nähtävissä eVakassa osoitteessa ${frontPageLink(Language.fi)}.</p>
+                <p>Päätös on nähtävissä eVakassa.</p>
                 $unsubscribeFi
                 <hr>
                 <p>Du har fått ett nytt $decisionTypeSv i eVaka.</p>
-                <p>Beslutet finns att se i eVaka på ${frontPageLink(Language.sv)}.</p>
+                <p>Beslutet finns att se i eVaka.</p>
                 $unsubscribeSv
                 <hr>
                 <p>You have received a new $decisionTypeEn in eVaka.</p>
-                <p>The decision can be viewed on eVaka at ${frontPageLink(Language.en)}.</p>
+                <p>The decision can be viewed on eVaka.</p>
                 $unsubscribeEn
             """
                     .trimIndent(),

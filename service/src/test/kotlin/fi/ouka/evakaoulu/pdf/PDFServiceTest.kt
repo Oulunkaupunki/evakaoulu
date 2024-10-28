@@ -36,7 +36,7 @@ import fi.espoo.evaka.shared.PersonId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.VoucherValueDecisionId
 import fi.espoo.evaka.shared.config.PDFConfig
-import fi.espoo.evaka.shared.domain.DateRange
+import fi.espoo.evaka.shared.domain.FiniteDateRange
 import fi.espoo.evaka.shared.domain.HelsinkiDateTime
 import fi.espoo.evaka.shared.domain.OfficialLanguage
 import fi.ouka.evakaoulu.message.config.MessageConfiguration
@@ -135,7 +135,7 @@ internal class PDFServiceTest {
     fun generateFeeDecisionPdfValidTo() {
         val validFrom = LocalDate.now()
         val validTo = validFrom.plusYears(1)
-        val decision = validFeeDecision().copy(validDuring = DateRange(validFrom, validTo))
+        val decision = validFeeDecision().copy(validDuring = FiniteDateRange(validFrom, validTo))
 
         val bytes = pdfService.generateFeeDecisionPdf(FeeDecisionPdfData(decision, settings, OfficialLanguage.FI))
 
@@ -350,7 +350,7 @@ private fun validFeeDecision() =
                     childIncome = null,
                 ),
             ),
-        validDuring = DateRange(LocalDate.now(), null),
+        validDuring = FiniteDateRange(LocalDate.now(), LocalDate.now().plusYears(1)),
         FeeDecisionStatus.WAITING_FOR_SENDING,
         decisionNumber = 12345,
         FeeDecisionType.NORMAL,

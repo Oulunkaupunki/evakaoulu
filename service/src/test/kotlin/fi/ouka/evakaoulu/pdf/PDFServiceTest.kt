@@ -385,7 +385,7 @@ private fun validVoucherValueDecision() =
     VoucherValueDecisionDetailed(
         VoucherValueDecisionId(UUID.randomUUID()),
         LocalDate.now(),
-        null,
+        LocalDate.now().plusYears(1),
         VoucherValueDecisionStatus.WAITING_FOR_SENDING,
         decisionNumber = 12345,
         decisionType = VoucherValueDecisionType.NORMAL,

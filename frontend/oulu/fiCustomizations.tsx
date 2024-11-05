@@ -550,7 +550,7 @@ const fi: DeepPartial<Translations> = {
       title: 'Päätös tuesta varhaiskasvatuksessa',
       decision: {
         jurisdiction: '',
-        jurisdictionText: '',
+        jurisdictionText: (): React.ReactNode => '',
         appealInstructions: (
           <>
             <P>

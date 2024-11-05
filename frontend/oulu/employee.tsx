@@ -66,7 +66,7 @@ const customizations: EmployeeCustomizations = {
         },
         assistanceNeedDecision: {
           jurisdiction: '',
-          jurisdictionText: '',
+          jurisdictionText: (): React.ReactNode => '',
           pedagogicalMotivationInfo:
             'Kirjaa tähän lyhyt yleiskuvaus lapsen tarvitsemasta tuesta ja tuen muodoista, jossa tulee esiin perustelu. Kirjaa konkreettisesti ja yksilöllisesti 2-3 olennaista tuen muotoa. Esim. Lapsi saa yksilöllisesti suunniteltua opetusta ja ohjausta kokonaiskehityksen tukemiseen. Esim. Lapsi saa kuvatukea ja pilkottuna annettuja ohjeita kielen kehityksen tueksi.',
           structuralMotivationInfo:

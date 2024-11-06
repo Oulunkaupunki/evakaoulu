@@ -114,7 +114,7 @@ const features: Features = {
     forceUnpublishDocumentTemplate: false,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    calendarMonthView: false,
+    calendarMonthView: true,
   }
 }
 

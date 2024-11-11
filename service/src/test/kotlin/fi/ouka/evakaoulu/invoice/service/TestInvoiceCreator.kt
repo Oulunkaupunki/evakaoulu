@@ -142,6 +142,8 @@ fun validInvoice(): InvoiceDetailed {
             LocalDateTime.of(2022, 5, 5, 1, 1),
         ),
         relatedFeeDecisions = emptyList(),
+        revisionNumber = 0,
+        replacedInvoiceId = null,
     )
 }
 

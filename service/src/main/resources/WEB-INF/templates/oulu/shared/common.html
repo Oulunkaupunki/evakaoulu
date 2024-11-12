@@ -94,6 +94,11 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             margin-bottom: 15mm;
         }
 
+        .page .decision-details-container-preschool {
+            margin-top: 10mm;
+            margin-bottom: 15mm;
+        }
+
         .page.first-page h1 {
             margin-top: 15mm;
         }
@@ -411,16 +416,50 @@ SPDX-License-Identifier: LGPL-2.1-or-later
             <div style="text-indent: 6em">
                 <strong th:text="#{decision.placement.unit}">Varhaiskasvatusyksikkö</strong>
                 <th:block th:switch="${decision.type.toString()}">
+                    <div th:case="'CLUB'"
+                         th:text="${decision.unit.name}" />
+                    <div th:case="*"
+                         th:text="${#strings.isEmpty(decision.unit.daycareDecisionName)} ? ${decision.unit.name} : ${decision.unit.daycareDecisionName}" />
+                </th:block>
+                <div th:if="${not #strings.isEmpty(decision.unit.streetAddress)}"
+                     th:text="${decision.unit.streetAddress} + ', ' + ${decision.unit.postalCode} + ' ' + ${decision.unit.postOffice}">
+                </div>
+            </div>
+        </div>
+
+        <div class="decision-details">
+            <div style="text-indent: 6em">
+                <strong th:text="#{decision.unitsupervisor}">Päiväkodin johtaja</strong>
+                <div th:text="${manager.name}"></div>
+                <div th:if="${not #strings.isEmpty(manager.phone)}"
+                     th:text="|#{decision.phone.prefix} ${manager.phone}|">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="child-and-unit-details-preschool">
+    <div class="child-details">
+        <p>
+            <span th:utext="#{decision.details.child(${child.firstName}, ${child.lastName}, ${#temporals.format(child.dateOfBirth, 'd.M.yyyy')})}">Lapsellenne</span>
+            <span th:utext="#{decision.details.date}">on tehty varhaiskasvatuspäätös varhaiskasvatukseen
+                ajalle</span>
+            <span th:replace="~{oulu/shared/common :: placement-dates}"></span>
+        </p>
+    </div>
+
+    <div class="decision-details-container">
+        <div class="decision-details">
+            <div style="text-indent: 6em">
+                <strong th:text="#{decision.placement.unit}">Varhaiskasvatusyksikkö</strong>
+                <th:block th:switch="${decision.type.toString()}">
                     <div th:case="'PREPARATORY_EDUCATION'"
                          th:text="${#strings.isEmpty(decision.unit.preschoolDecisionName)} ? ${decision.unit.name} : ${decision.unit.preschoolDecisionName}" />
                     <div th:case="'PRESCHOOL'"
                          th:text="${#strings.isEmpty(decision.unit.preschoolDecisionName)} ? ${decision.unit.name} : ${decision.unit.preschoolDecisionName}" />
                     <div th:case="'PRESCHOOL_DAYCARE'"
                          th:text="${#strings.isEmpty(decision.unit.preschoolDecisionName)} ? ${decision.unit.name} : ${decision.unit.preschoolDecisionName}" />
-                    <div th:case="'CLUB'"
-                         th:text="${decision.unit.name}" />
-                    <div th:case="*"
-                         th:text="${#strings.isEmpty(decision.unit.daycareDecisionName)} ? ${decision.unit.name} : ${decision.unit.daycareDecisionName}" />
                 </th:block>
                 <div th:if="${not #strings.isEmpty(decision.unit.streetAddress)}"
                      th:text="${decision.unit.streetAddress} + ', ' + ${decision.unit.postalCode} + ' ' + ${decision.unit.postOffice}">

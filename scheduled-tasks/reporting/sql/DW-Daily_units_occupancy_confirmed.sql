@@ -16,10 +16,7 @@ caretaker_counts AS (
         JOIN care_area a ON a.id = u.care_area_id
         LEFT JOIN daycare_caretaker c ON g.id = c.group_id 
             AND daterange(c.start_date, c.end_date, '[]') @> :date_val::DATE
-        LEFT JOIN holiday h ON :date_val::DATE = h.date
-            AND NOT u.operation_days @> ARRAY[1, 2, 3, 4, 5, 6, 7]
     WHERE date_part('isodow', :date_val::DATE) = ANY(u.operation_days)
-        AND h.date IS NULL
         AND daterange(u.opening_date, u.closing_date, '[]') @> :date_val::DATE
     GROUP BY a.id, u.id
 ),

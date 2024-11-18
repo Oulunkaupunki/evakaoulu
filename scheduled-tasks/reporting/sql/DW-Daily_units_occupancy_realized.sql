@@ -36,10 +36,7 @@ caretaker_counts AS (
         ) sar ON g.id = sar.group_id
         LEFT JOIN staff_attendance s ON g.id = s.group_id
             AND :date_val::DATE = s.date
-        LEFT JOIN holiday h ON :date_val::DATE = h.date
-        AND NOT u.operation_days @> ARRAY[1, 2, 3, 4, 5, 6, 7]
     WHERE date_part('isodow', :date_val::DATE) = ANY(u.operation_days)
-        AND h.date IS NULL
         AND daterange(u.opening_date, u.closing_date, '[]') @> :date_val::DATE
     GROUP BY a.id, u.id
 ),

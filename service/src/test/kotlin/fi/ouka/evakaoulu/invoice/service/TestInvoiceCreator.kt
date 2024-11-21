@@ -144,6 +144,8 @@ fun validInvoice(): InvoiceDetailed {
         relatedFeeDecisions = emptyList(),
         revisionNumber = 0,
         replacedInvoiceId = null,
+        replacementNotes = null,
+        replacementReason = null,
     )
 }
 

@@ -48,7 +48,6 @@ const features: Features = {
     forceUnpublishDocumentTemplate: true,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    calendarMonthView: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -81,7 +80,6 @@ const features: Features = {
     forceUnpublishDocumentTemplate: true,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    calendarMonthView: true,
   },
   prod: {
     environmentLabel: null,
@@ -114,7 +112,6 @@ const features: Features = {
     forceUnpublishDocumentTemplate: false,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    calendarMonthView: true,
   }
 }
 

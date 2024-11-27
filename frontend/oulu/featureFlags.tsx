@@ -48,7 +48,7 @@ const features: Features = {
     forceUnpublishDocumentTemplate: true,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    multiSelectDeparture: false,
+    multiSelectDeparture: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -81,7 +81,7 @@ const features: Features = {
     forceUnpublishDocumentTemplate: true,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    multiSelectDeparture: false,
+    multiSelectDeparture: true,
   },
   prod: {
     environmentLabel: null,
@@ -114,7 +114,7 @@ const features: Features = {
     forceUnpublishDocumentTemplate: false,
     serviceApplications: false,
     titaniaErrorsReport: true,
-    multiSelectDeparture: false,
+    multiSelectDeparture: true,
   }
 }
 

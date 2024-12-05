@@ -370,14 +370,40 @@ const fi: DeepPartial<Translations> = {
         shiftCare: {
           instructions:
             'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you need evening or shift care, please specify your care needs in the Additional information field of the application.',
-          message: {
-            text: 'Evening and shift care is intended for children whose parents are both employed in shift work or receive education mainly in the evenings and/or at weekends. A statement on the nature of the employment relationship and/or educational activities taking place during the evenings or weekends for both guardians living in the same household must be attached to the application.'
-          },
           attachmentsMessage: {
-            text: 'Evening and shift care is intended for children whose parents are both employed in shift work or receive education mainly in the evenings and/or at weekends. A statement on the nature of the employment relationship or educational activities taking place during the evenings and/or weekends for both guardians living in the same household must be attached to the application.',
-            subtitle:
-              'Add a statement regarding the nature of the employment relationship and/or educational activities taking place during the evenings and/or weekends for both guardians here.'
-          }
+              DAYCARE: (
+                  <P>
+                      Evening and shift care is intended for children whose parents are
+                      both employed in shift work or receive education mainly in the
+                      evenings and/or at weekends. A statement on the nature of the
+                      employment relationship or educational activities taking place
+                      during the evenings and/or weekends for both guardians living
+                      in the same household must be attached to the application.
+                  </P>
+              ),
+              PRESCHOOL: (
+                  <>
+                      <P>
+                          If a guardian living in the same household does regular shift
+                          work or attends evening studies full-time, they must provide
+                          proof of this (a document issued by their employer or the
+                          educational institution) together with the application for
+                          pre-primary education. The documents must be dated in the year
+                          when the application for pre-primary education is submitted.
+                      </P>
+                      <P>
+                          Evening and shift care is intended for children whose parents are
+                          both employed in shift work or receive education mainly in the
+                          evenings and/or at weekends. A statement on the nature of the
+                          employment relationship or educational activities taking place
+                          during the evenings and/or weekends for both guardians living
+                          in the same household must be attached to the application.
+                      </P>
+                  </>
+              )
+          },
+            attachmentsSubtitle:
+                'Add a statement regarding the nature of the employment relationship and/or educational activities taking place during the evenings and/or weekends for both guardians here.'
         },
         assistanceNeedInstructions: {
           DAYCARE:

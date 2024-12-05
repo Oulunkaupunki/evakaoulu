@@ -1,5 +1,6 @@
 package fi.ouka.evakaoulu
 
+import fi.espoo.evaka.application.ApplicationStatus
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.espoo.evaka.invoicing.service.DefaultInvoiceGenerationLogic
 import fi.espoo.evaka.logging.defaultAccessLoggingValve
@@ -77,6 +78,7 @@ class EVakaOuluConfig {
                             archiveDurationMonths = 120 * 12,
                         ),
                 ),
+            placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
         )
 
     @Bean

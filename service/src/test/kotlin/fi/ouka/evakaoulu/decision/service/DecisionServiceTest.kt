@@ -364,6 +364,7 @@ private fun validGuardian(restrictedDetailsEnabled: Boolean = false) =
         postOffice = "Oulu",
         residenceCode = "",
         restrictedDetailsEnabled = restrictedDetailsEnabled,
+        municipalityOfResidence = "Oulu",
     )
 
 private fun validChild(restrictedDetailsEnabled: Boolean = false) =
@@ -385,6 +386,7 @@ private fun validChild(restrictedDetailsEnabled: Boolean = false) =
         postOffice = "Tampere",
         residenceCode = "",
         restrictedDetailsEnabled = restrictedDetailsEnabled,
+        municipalityOfResidence = "Tampere",
     )
 
 private val validAssistanceNeedDecision =

@@ -106,7 +106,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                 <td class="text-right" th:switch="${headIncomeEffect}">
                     <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{decision.income.maxFeeAccepted}"></span>
                     <span th:case="'INCOMPLETE'" th:text="#{decision.income.notAvailable}"></span>
-                    <span th:case="'INCOME'" th:text="${headIncomeTotal}"></span>
+                    <span th:case="'INCOME'" th:text="${headIncomeTotal} + ' ' + #{decision.currency}"></span>
                     <span th:case="'NOT_AVAILABLE'" th:text="#{decision.income.notAvailable}"></span>
                 </td>
             </tr>
@@ -117,7 +117,7 @@ SPDX-License-Identifier: LGPL-2.1-or-later
                 <td class="text-right" th:switch="${partnerIncomeEffect}">
                     <span th:case="'MAX_FEE_ACCEPTED'" th:text="#{decision.income.maxFeeAccepted}"></span>
                     <span th:case="'INCOMPLETE'" th:text="#{decision.income.notAvailable}"></span>
-                    <span th:case="'INCOME'" th:text="${partnerIncomeTotal}"></span>
+                    <span th:case="'INCOME'" th:text="${partnerIncomeTotal} + ' ' + #{decision.currency}"></span>
                     <span th:case="'NOT_AVAILABLE'" th:text="#{decision.income.notAvailable}"></span>
                 </td>
             </tr>

@@ -49,6 +49,7 @@ const features: Features = {
     serviceApplications: true,
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
+    voucherValueSeparation: false,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -82,6 +83,7 @@ const features: Features = {
     serviceApplications: true,
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
+    voucherValueSeparation: false,
   },
   prod: {
     environmentLabel: null,
@@ -115,6 +117,7 @@ const features: Features = {
     serviceApplications: false,
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
+    voucherValueSeparation: false,
   }
 }
 

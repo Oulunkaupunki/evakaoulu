@@ -1,6 +1,7 @@
 package fi.ouka.evakaoulu
 
 import fi.espoo.evaka.application.ApplicationStatus
+import fi.espoo.evaka.holidayperiod.QuestionnaireType
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.espoo.evaka.invoicing.service.DefaultInvoiceGenerationLogic
 import fi.espoo.evaka.logging.defaultAccessLoggingValve
@@ -79,6 +80,7 @@ class EVakaOuluConfig {
                         ),
                 ),
             placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
+            holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,
         )
 
     @Bean

@@ -78,6 +78,16 @@ class EVakaOuluConfig {
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 120 * 12,
                         ),
+                    ArchiveProcessType.FEE_DECISION to
+                        ArchiveProcessConfig(
+                            processDefinitionNumber = "12.06.01",
+                            archiveDurationMonths = 192,
+                        ),
+                    ArchiveProcessType.VOUCHER_VALUE_DECISION to
+                        ArchiveProcessConfig(
+                            processDefinitionNumber = "12.06.01",
+                            archiveDurationMonths = 192,
+                        ),
                 ),
             placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
             holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,

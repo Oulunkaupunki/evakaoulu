@@ -99,6 +99,19 @@ const fi: DeepPartial<Translations> = {
                 </P>
               </>
             ),
+            PRESCHOOL: (
+              <>
+                  <P>
+                      Esioppilaalla on sisarusperuste oman lähialueen päiväkotiin,
+                      jossa esioppilaan sisaruksella on paikka esiopetusvuoden alkaessa.
+                  </P>
+                  <P>
+                      Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä
+                      valitse alla olevissa hakutoiveissa ensisijaiseksi toiveeksi
+                      sama yksikkö, jossa lapsen sisarus on.
+                  </P>
+              </>
+            ),
             CLUB: (
               <>
                 <P>
@@ -113,8 +126,11 @@ const fi: DeepPartial<Translations> = {
                 </P>
               </>
             )
-          }
+          },
+        unit: 'Sisaruksen päiväkoti',
+        unitPlaceholder: 'päiväkodin nimi',
         },
+
         units: {
           info: {
             DAYCARE: (
@@ -142,7 +158,7 @@ const fi: DeepPartial<Translations> = {
                 <P>
                   Voit nimetä 1-3 paikkaa toivomassasi järjestyksessä. Valitse
                   hakutoiveet -valikossa näkyvät yksiköt, missä järjestetään
-                  esiopetusta lukuvuonna 2023-2024.
+                  esiopetusta lukuvuonna 2025-2026.
                 </P>
                 <P>
                   Näet eri yksiköiden sijainnin valitsemalla ‘Yksiköt kartalla’.
@@ -209,20 +225,24 @@ const fi: DeepPartial<Translations> = {
             <>
               <P>
                 Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
-                alkamista. Esiopetus on maksutonta. Lukuvuoden 2024-2025
-                esiopetukseen ilmoittaudutaan 8.-21.1.2024. Esiopetus alkaa
-                12.8.2024.
+                alkamista. Esiopetus on maksutonta. Lukuvuoden 2025–2026
+                esiopetukseen ilmoittaudutaan 7.-20.1.2025. Esiopetus alkaa
+                11.8.2025.
               </P>
               <P>
-                Päätökset tulevat sähköisesti{' '}
+                Ilmoittautumisen tehnyt huoltaja saa kirjallisen päätöksen
+                paikasta Suomi.fi-viestit -palveluun tai postitse, jos
+                Suomi.fi-palvelu ei ole käytössä. Päätös on nähtävillä
+                eVakassa kohdassa Valikko – Päätökset ja se tulee
+                hyväksyä tai hylätä kahden viikon kuluessa.
+              </P>
+              <P>
+                Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte lisätietoa {' '}
                 <ExternalLink
                   text="Suomi.fi-viestit"
                   href="https://www.suomi.fi/viestit"
                   newTab
-                />{' '}
-                -palveluun tai postitse kirjeenä, mikäli et ole ottanut Suomi.fi
-                -palvelua käyttöön. Käyttämällä sähköistä palvelua saat
-                päätökset nopeimmin.
+                />
               </P>
               <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
@@ -264,7 +284,7 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Esiopetus alkaa 12.8.2024. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, hakekaa sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus.'
+              'Esiopetus alkaa 11.8.2025. Jos tarvitsette esiopetukseen liittyvää varhaiskasvatusta, hakekaa sitä kohdassa Esiopetukseen liittyvä varhaiskasvatus.'
             ],
             CLUB: [
               'Avoimen varhaiskasvatuksen kerhot noudattavat pääsääntöisesti esiopetuksen työ- ja loma-aikoja. Lapsi voi osallistua yhteen kaksi tai kolme kertaa viikossa kokoontuvaan kerhoon ja lisäksi perhekerhoon.'
@@ -282,10 +302,11 @@ const fi: DeepPartial<Translations> = {
             ),
             PRESCHOOL: (
               <>
-                Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi
-                siihen saakka, kunnes palveluohjaus on ottanut hakemuksen
-                käsittelyyn. Tämän jälkeen toivotun aloituspäivän muutokset
-                tehdään ottamalla yhteyttä varhaiskasvatuksen palveluohjaukseen
+                Toivottua aloituspäivää on mahdollista siirtää eteenpäin,
+                kunnes palveluohjaus on ottanut hakemuksen käsittelyyn.
+                Toivotun aloituspäivän aikaistaminen tai käsittelyssä
+                olevan hakemuksen muutokset tehdään ottamalla yhteyttä
+                varhaiskasvatuksen palveluohjaukseen
                 {customerContactText()}
               </>
             ),
@@ -323,7 +344,7 @@ const fi: DeepPartial<Translations> = {
         },
         shiftCare: {
           instructions:
-            'Ilta- ja vuorohoidolla tarkoitetaan pääasiassa klo 6.00-18.00 ulkopuolella ja viikonloppuisin sekä ympärivuorokautisesti tapahtuvaa varhaiskasvatusta. Mikäli tarvitset ilta- tai vuorohoitoa, täsmennä tarvetta hakemuksen Muut lisätiedot -kohdassa.',
+            'Ilta- ja vuorohoidolla tarkoitetaan pääasiassa klo 6.00-18.00 ulkopuolella ja viikonloppuisin sekä ympärivuorokautisesti tapahtuvaa varhaiskasvatusta. Jos tarvitset ilta- tai vuorohoitoa, täsmennä tarvetta hakemuksen Muut lisätiedot -kohdassa.',
           attachmentsMessage: {
               DAYCARE: (
                   <P>
@@ -336,13 +357,6 @@ const fi: DeepPartial<Translations> = {
               ),
               PRESCHOOL: (
                   <>
-                      <P>
-                          Esiopetushakemukselle pyydämme liittämään samassa taloudessa
-                          asuvien huoltajien osalta todistukset työnantajalta
-                          säännöllisestä vuorotyöstä tai oppilaitoksen edustajalta
-                          päätoimisesta iltaopiskelusta. Dokumenttien tulee olla
-                          kirjattu sinä vuonna, kun hakemus esiopetukseen tehdään.
-                      </P>
                       <P>
                           Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
                           vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin
@@ -360,7 +374,7 @@ const fi: DeepPartial<Translations> = {
             'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
           CLUB: 'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
           PRESCHOOL:
-            'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukea toteutetaan lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon esiopetuspaikkaa osoitettaessa.'
+            'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukitoimet toteutuvat lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa tarvittaessa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan huomioida esiopetuspaikkaa osoitettaessa. Ilmoita tuen tarve myös, jos kyse on siirtohakemuksesta'
         },
         partTime: {
           true: 'Osapäiväinen',
@@ -374,9 +388,9 @@ const fi: DeepPartial<Translations> = {
             <>
               <P>
                 Voit hakea lapselle tarvittaessa esiopetukseen liittyvää
-                maksullista varhaiskasvatusta. Jos haluat aloittaa
-                varhaiskasvatuksen myöhemmin kuin esiopetus alkaa, kirjoita
-                haluttu aloituspäivämäärä hakemuksen “Muut lisätiedot” -kohtaan.
+                maksullista varhaiskasvatusta. Jos lapsesi tarvitsee
+                varhaiskasvatusta elokuussa ennen esiopetuksen alkamista,
+                täytä lapsellesi erillinen varhaiskasvatushakemus tälle ajalle.
               </P>
               <P>
                 Saat varhaiskasvatuspaikasta kirjallisen päätöksen{' '}
@@ -389,7 +403,7 @@ const fi: DeepPartial<Translations> = {
                 </a>{' '}
                 -palveluun tai postitse, mikäli et ole ottanut Suomi.fi-viestit
                 -palvelua käyttöön. Päätös on nähtävillä eVaka- palveluissa
-                kohdassa Valikko.
+                kohdassa Valikko - Päätökset.
               </P>
             </>
           ),
@@ -403,7 +417,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
         preparatoryInfo:
-          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään Pienten kielireppu -kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma tai päätös valmistavasta esiopetuksesta. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti. Valmistavaa opetusta annetaan kuusivuotiaille ja se koostuu päivittäin neljästä esiopetustunnista ja yhdestä suomen kielen tunnista. Valmistava opetus on maksutonta.'
+          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti.',
       },
       contactInfo: {
         familyInfo: undefined,
@@ -417,7 +431,7 @@ const fi: DeepPartial<Translations> = {
               href="https://dvv.fi/henkiloasiakkaat"
               newTab
             />
-            . Mikäli osoitteenne on muuttumassa, voit lisätä tulevan osoitteen
+            . Jos osoitteenne on muuttumassa, voit lisätä tulevan osoitteen
             erilliseen kohtaan hakemuksella; lisää tuleva osoite sekä lapselle
             että huoltajalle. Virallisena osoitetietoa pidetään vasta, kun se on
             päivittynyt väestötietojärjestelmään. Päätökset esiopetus- ja
@@ -436,7 +450,7 @@ const fi: DeepPartial<Translations> = {
             'Toisella huoltajalla on vain tiedonsaantioikeus.'
         },
         futureAddressInfo:
-          'Oulun varhaiskasvatuksessa virallisena osoitteena pidetään väestötiedoista saatavaa osoitetta. Osoite väestötiedoissa muuttuu hakijan tehdessä muuttoilmoituksen postiin tai Digi- ja väestötietovirastoon.'
+          'Oulun esiopetuksessa ja varhaiskasvatuksessa virallisena osoitteena pidetään väestötiedoista saatavaa osoitetta. Osoite väestötiedoissa muuttuu hakijan tehdessä muuttoilmoituksen Digi- ja väestötietovirastoon.'
       },
       fee: {
         info: {
@@ -482,7 +496,9 @@ const fi: DeepPartial<Translations> = {
         otherInfoLabel: 'Ilmoittautumiseen liittyvät lisätiedot',
         otherInfoPlaceholder:
           'Voit halutessasi antaa ilmoittautumiseen liittyvää tarkempaa lisätietoa',
-        dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>
+        dietPlaceholder: 'Ilmoita tähän lapsesi erityisruokavalio',
+        dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>,
+        allergiesPlaceholder: 'Ilmoita tähän lapsesi allergiat'
       },
       actions: {
         allowOtherGuardianAccess: (

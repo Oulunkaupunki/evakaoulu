@@ -160,7 +160,7 @@ const fi: DeepPartial<Translations> = {
                 <P>
                   You can apply to 1–3 units in the order of your choosing.
                   Select the units shown in the preferred units menu, where
-                  preschool education is organized in the school year 2023-2024
+                  preschool education is organized in the school year 2025-2026
                 </P>
                 <P>
                   You can view the unit locations by selecting the option ‘Unit
@@ -200,7 +200,7 @@ const fi: DeepPartial<Translations> = {
       },
       heading: {
         title: {
-          PRESCHOOL: 'Enrollment in preschool education',
+          PRESCHOOL: 'Enrollment in preschool education and/or applying for early childhood education related to preschool education',
           CLUB: 'Apply for open early childhood education and care'
         },
         info: {
@@ -236,28 +236,26 @@ const fi: DeepPartial<Translations> = {
           PRESCHOOL: (
             <>
               <P>
-                Preschool education starts a year before the beginning of
-                compulsory education. Preschool education is free of charge. The
-                enrollment period for preschool education for the school year
-                2024–2025 is January 8 to January 21, 2024. Preschool education
-                begins on August 12, 2024.
+                  Preschool education starts a year before the beginning of
+                  compulsory education. Preschool education is free of charge.
+                  The enrollment period for preschool education for the school
+                  year 2025–2026 is January 7 to January 20, 2025. Preschool
+                  education begins on August 11, 2025.
               </P>
               <P>
-                If you still need a place in preschool education for your child
-                in spring 2024 (school year 2023-2024), please contact the early
-                childhood education and care service guidance, tel. 08 558 45300
-                OR varhaiskasvatus@ouka.fi.
+                  The guardian who has made the enrollment will receive a
+                  written decision about the place via the Suomi.fi Messages
+                  service or by mail if the Suomi.fi service is not in use.
+                  The decision can be viewed in eVaka under Menu – Decisions
+                  and must be accepted or rejected within two weeks.
               </P>
               <P>
-                You will receive the decisions either on the{' '}
+                  You can find more information about the Suomi.fi Messages service and how to activate it at{' '}
                 <ExternalLink
                   text="Suomi.fi messages"
                   href="https://www.suomi.fi/viestit"
                   newTab
-                />{' '}
-                service, or, if you have not yet started using Suomi.fi, by
-                mail. By using the electronic service, you will get decisions
-                the fastest way.
+                />{'.'}
               </P>
               <P fitted={true}>
                 *Fields marked with an asterisk are mandatory.
@@ -309,11 +307,14 @@ const fi: DeepPartial<Translations> = {
           },
           info: {
             PRESCHOOL: [
-              'Preschool education begins on August 12, 2024. If you need early childhood education and care related to preschool education, apply for it under Early childhood education and care related to preschool education.'
+              'Preschool education begins on August 11, 2025. If you need early childhood education and care related to preschool education, apply for it under Early childhood education and care related to preschool education.'
             ],
             CLUB: [
               'Clubs and groups organized as a part of open early childhood education and care generally follow the hours and annual holiday schedule used in preschool education. The child may attend one group that meets two or three times a week and a family group at the same time.'
             ]
+          },
+          label: {
+              PRESCHOOL: 'Desired start date'
           },
           instructions: {
             DAYCARE: (
@@ -327,10 +328,12 @@ const fi: DeepPartial<Translations> = {
             ),
             PRESCHOOL: (
               <>
-                You can change the desired start date until the service
-                coordination team has begun to process the application. After
-                this, the date can only be postponed by contacting the early
-                childhood education and care service guidance.
+                It is possible to postpone the desired start date until the
+                early childhood education guidance team has taken the
+                application into processing. To advance the desired start
+                date or make changes to an application that is being
+                processed, please contact the early childhood education
+                guidance team
                 {customerContactText()}
               </>
             ),
@@ -384,14 +387,6 @@ const fi: DeepPartial<Translations> = {
               PRESCHOOL: (
                   <>
                       <P>
-                          If a guardian living in the same household does regular shift
-                          work or attends evening studies full-time, they must provide
-                          proof of this (a document issued by their employer or the
-                          educational institution) together with the application for
-                          pre-primary education. The documents must be dated in the year
-                          when the application for pre-primary education is submitted.
-                      </P>
-                      <P>
                           Evening and shift care is intended for children whose parents are
                           both employed in shift work or receive education mainly in the
                           evenings and/or at weekends. A statement on the nature of the
@@ -410,7 +405,7 @@ const fi: DeepPartial<Translations> = {
             "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
           CLUB: "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
           PRESCHOOL:
-            "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at a preschool education unit."
+            "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. The special education teacher in early childhood education will contact the applicant if necessary to ensure the child's support needs are considered when assigning a preschool education place. Please also indicate the need for support if this is a transfer application.",
         },
         partTime: {
           true: 'Part-time',
@@ -427,12 +422,11 @@ const fi: DeepPartial<Translations> = {
           connectedDaycareInfo: (
             <>
               <P>
-                If necessary, you can apply for charged early childhood
-                education and care related to preschool education for your
-                child. If you want your child to start at the early childhood
-                education and care unit at a later date than the preschool
-                education starts, please indicate the desired date in the
-                Additional information field of the application.
+                You can apply for charged early childhood education related
+                to preschool education if needed. If your child needs early
+                childhood education in August before the start of preschool
+                education, please fill out a separate early childhood
+                education application for this period.
               </P>
               <P>
                 You will receive a written decision regarding your child’s
@@ -446,7 +440,7 @@ const fi: DeepPartial<Translations> = {
                 </a>{' '}
                 service, or, if you have not yet started using the service, by
                 mail. The decision can also be found in the Applications –
-                Decisions (Hakeminen – Päätökset) section of the eVaka service.
+                Decisions section of the eVaka service.
               </P>
             </>
           ),
@@ -460,7 +454,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'The child needs support to learn Finnish.',
         preparatoryInfo:
-          'A language assessment (Pienten kielireppu) will be conducted for each child with a mother tongue other than Finnish, Swedish or Sámi. This assessment will serve as a basis for constructing a Finnish as a second language (S2) curriculum or a decision regarding preparatory preschool education. S2 education is integrated into the daily early childhood education and care or preschool activities in accordance with the child’s individual needs. Children at the age of six will receive instruction preparing for basic education, which consists of four preschool education lessons and one Finnish language lesson every day. This preparatory preschool education is free of charge.'
+          'A language assessment is conducted for each child whose mother tongue is not Finnish, Swedish, or Sami. This assessment will serve as a basis for constructing a Finnish as a Second Language (S2) curriculum. S2 education is integrated into daily activities according to the child\'s needs.'
       },
       contactInfo: {
         familyInfo: undefined,

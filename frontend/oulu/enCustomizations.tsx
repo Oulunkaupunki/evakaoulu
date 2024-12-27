@@ -89,25 +89,9 @@ const fi: DeepPartial<Translations> = {
             PRESCHOOL: (
               <>
                 <P>
-                  A child enrolling for preschool education has a sibling-basis
-                  right to a
-                </P>
-                <ol type="a">
-                  <li>
-                    early childhood education in their own service area, where
-                    they have a sibling who has, at the moment of making the
-                    decision and in the coming preschool education year, a place
-                    at the preschool education unit
-                  </li>
-                  <li>
-                    local school determined by the city, which will be attended
-                    by their sibling in the coming school year.
-                  </li>
-                </ol>
-                <P>
-                  The guardian can choose whether to use the sibling criterion
-                  in accordance with (a) or (b) if the preschooler has a sibling
-                  criterion according to both sections.
+                  A preschool pupil has sibling priority for a local daycare
+                  center where the preschool pupil's sibling has a place at
+                  the start of the preschool year.
                 </P>
                 <P>
                   Fill in this information only if you are using the sibling
@@ -480,6 +464,9 @@ const fi: DeepPartial<Translations> = {
             address, as well.
           </P>
         ),
+        otherChildrenInfo:
+          'Other children under 18 years of age living in the same household according to the population register affect the cost of daycare.',
+        otherChildrenChoiceInfo: 'Select the children who live in the same household according to the population register.',
         secondGuardianInfoPreschoolSeparated:
           'The address information for the other guardian is retrieved from the population information system automatically. According to our information, the child has another guardian living at a different address. Registration for preschool education must be agreed upon jointly with the other guardian.',
         secondGuardianAgreementStatus: {
@@ -493,7 +480,7 @@ const fi: DeepPartial<Translations> = {
             'The other guardian only has the right of information.'
         },
         futureAddressInfo:
-          'Oulu’s early childhood education and care services consider the address obtained from the population information system to be the official address. The address entered in the population information system changes when you submit a notification of change of address to the Digital and Population Data Services Agency.'
+          'Oulu’s preschool education and early childhood education and care services consider the address obtained from the population information system to be the official address. The address entered in the population information system changes when you submit a notification of change of address to the Digital and Population Data Services Agency.'
       },
       fee: {
         info: {

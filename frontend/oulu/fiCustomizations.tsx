@@ -93,7 +93,7 @@ const fi: DeepPartial<Translations> = {
               <>
                 <P>
                   Lapsella on sisarusperuste samaan varhaiskasvatuspaikkaan,
-                  jossa hänen sisaruksensa on päätöksentekohetkellä. Tavoitteena
+                  jossa hänen sisaruksensa on varhaiskasvatuksen alkaessa. Tavoitteena
                   on sijoittaa sisarukset samaan varhaiskasvatuspaikkaan perheen
                   niin toivoessa. Jos haet paikkaa sisaruksille, jotka eivät
                   vielä ole varhaiskasvatuksessa, kirjoita tieto hakemuksen Muut
@@ -155,7 +155,7 @@ const fi: DeepPartial<Translations> = {
                 <P>
                   Palveluseteliä haetaan valitsemalla hakutoiveeksi se
                   yksityinen varhaiskasvatusyksikkö, johon halutaan hakea.
-                  Palveluseteliyksikköön haettaessa myös yksikön esimies saa
+                  Palveluseteliyksikköön haettaessa myös yksikön esihenkilö saa
                   tiedon hakemuksesta.
                 </P>
               </>
@@ -208,15 +208,18 @@ const fi: DeepPartial<Translations> = {
             <>
               <P>
                 Hakemus on jätettävä viimeistään neljä kuukautta ennen kuin
-                tarvitsette paikan. Mikäli tarvitsette varhaiskasvatusta
-                kiireellisesti työn tai opiskelujen vuoksi, käsittelyaika on
+                tarvitsette paikan. Jos tarvitsette varhaiskasvatusta
+                kiireellisesti työn tai opiskelujen alkamisen vuoksi, käsittelyaika on
                 kaksi viikkoa hakemuksen saapumisesta.
               </P>
               <P>
-                Saatte kirjallisen päätöksen varhaiskasvatuspaikasta
-                Suomi.fi-viestit -palveluun tai postitse, mikäli ette ole
-                ottaneet Suomi.fi-palvelua käyttöön. Päätös on nähtävillä eVaka-
-                palveluissa kohdassa Valikko. Suomi.fi-viestit palvelusta ja sen
+                Hakemuksen tehnyt huoltaja saa kirjallisen päätöksen varhaiskasvatuspaikasta
+                Suomi.fi-viestit -palveluun tai postitse, jos Suomi.fi-palvelu ei ole
+                käytössä. Päätös on nähtävillä eVakassa kohdassa Valikko – Päätökset
+                ja se tulee hyväksyä tai hylätä kahden viikon kuluessa.
+              </P>
+              <P>
+                Suomi.fi-viestit palvelusta ja sen
                 käyttöönotosta saatte lisätietoa{' '}
                 <ExternalLink
                   text="https://www.suomi.fi/viestit"
@@ -300,10 +303,11 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             DAYCARE: (
               <>
-                Toivottua aloituspäivää on mahdollista muuttaa myöhemmäksi
-                siihen saakka, kunnes palveluohjaus on ottanut hakemuksen
-                käsittelyyn. Tämän jälkeen toivotun aloituspäivän muutokset
-                tehdään ottamalla yhteyttä varhaiskasvatuksen palveluohjaukseen
+                Toivottua aloituspäivää on mahdollista siirtää eteenpäin,
+                kunnes palveluohjaus on ottanut hakemuksen käsittelyyn.
+                Toivotun aloituspäivän aikaistaminen tai käsittelyssä
+                olevan hakemuksen muutokset tehdään ottamalla yhteyttä
+                varhaiskasvatuksen palveluohjaukseen
                 {customerContactText()}
               </>
             ),
@@ -336,7 +340,7 @@ const fi: DeepPartial<Translations> = {
           attachmentsMessage: {
             text: (
               <P fitted={true}>
-                Mikäli varhaiskasvatuspaikan tarve johtuu äkillisestä
+                Jos varhaiskasvatuspaikan tarve johtuu äkillisestä
                 työllistymisestä tai opiskelusta, tulee paikkaa hakea
                 viimeistään kaksi viikkoa ennen kuin tarve alkaa. Hakemuksen
                 liitteenä tulee olla selvitys työ- tai opiskelupaikasta
@@ -346,7 +350,7 @@ const fi: DeepPartial<Translations> = {
               </P>
             ),
             subtitle:
-              'Lisää tähän työ- tai opiskelutodistus molemmilta vanhemmilta.'
+              'Lisää tähän työ- tai opiskelutodistus molemmilta huoltajilta.'
           }
         },
         shiftCare: {
@@ -378,7 +382,7 @@ const fi: DeepPartial<Translations> = {
         },
         assistanceNeedInstructions: {
           DAYCARE:
-            'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
+            'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea varhaiskasvatuksessa. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa tarvittaessa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan huomioida varhaiskasvatuspaikkaa myönnettäessä. Ilmoita tuen tarve myös, jos kyse on siirtohakemuksesta.',
           CLUB: 'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
           PRESCHOOL:
             'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukitoimet toteutuvat lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa tarvittaessa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan huomioida esiopetuspaikkaa osoitettaessa. Ilmoita tuen tarve myös, jos kyse on siirtohakemuksesta'
@@ -415,6 +419,8 @@ const fi: DeepPartial<Translations> = {
             </>
           ),
           instructions: {
+            DAYCARE:
+              'Ilmoita lapsen yleisimmin tarvitsema varhaiskasvatusaika. Jos lapsesi tarvitsee ilta- ja vuorohoitoa, merkitse aikaisin ja myöhäisin kellonaika, jolloin lapsesi tarvitsee varhaiskasvatusta.',
             PRESCHOOL:
               'Esiopetusta tarjotaan päiväkodeissa ja kouluissa neljä tuntia päivässä. Ilmoita lapsen tarvitsema varhaiskasvatusaika siten, että se sisältää myös esiopetusajan (esim. 7.00–17.00). Aika tarkennetaan varhaiskasvatuksen alkaessa. Päivittäisen varhaiskasvatusajan vaihdellessa päivittäin tai viikoittain (esim. vuorohoidossa), ilmoita tarve tarkemmin hakemuksen Muut lisätiedot -kohdassa.'
           },
@@ -506,9 +512,9 @@ const fi: DeepPartial<Translations> = {
         )
       },
       additionalDetails: {
-        otherInfoLabel: 'Ilmoittautumiseen liittyvät lisätiedot',
+        otherInfoLabel: 'Hakemukseen liittyvät lisätiedot',
         otherInfoPlaceholder:
-          'Voit halutessasi antaa ilmoittautumiseen liittyvää tarkempaa lisätietoa',
+          'Voit halutessasi antaa hakemiseen liittyvää tarkempaa lisätietoa',
         dietPlaceholder: 'Ilmoita tähän lapsesi erityisruokavalio',
         dietInfo: <>Ilmoita tähän lapsesi erityisruokavalio.</>,
         allergiesPlaceholder: 'Ilmoita tähän lapsesi allergiat'

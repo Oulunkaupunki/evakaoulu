@@ -57,13 +57,20 @@ const fi: DeepPartial<Translations> = {
       clubInfo:
         'Hakemuksella avoimeen varhaiskasvatukseen haetaan kahden ja kolmen kerran kerhoihin sekä perhekerhoon.',
       applicationInfo: (
-        <P>
-          Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus on
-          ottanut sen käsittelyyn. Tämän jälkeen muutokset tai hakemuksen
-          peruminen tehdään ottamalla yhteyttä varhaiskasvatuksen
-          palveluohjaukseen
-          {customerContactText()}
-        </P>
+        <>
+          <P>
+            Jos lapsellasi on jo paikka Oulun varhaiskasvatuksessa tai
+            esiopetuksessa, täyttämällä uuden hakemuksen tallentuu se
+            siirtohakemuksena. Nykyistä paikkaa ei tarvitse irtisanoa.
+          </P>
+          <P>
+            Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus on
+            ottanut sen käsittelyyn. Tämän jälkeen muutokset tai hakemuksen
+            peruminen tehdään ottamalla yhteyttä varhaiskasvatuksen
+            palveluohjaukseen
+            {customerContactText()}
+          </P>
+        </>
       ),
       duplicateWarning:
         'Lapsella on jo samantyyppinen, keskeneräinen hakemus. Palaa Hakemukset-näkymään ja muokkaa olemassa olevaa hakemusta tai ota yhteyttä varhaiskasvatuksen palveluohjaukseen.',
@@ -194,7 +201,7 @@ const fi: DeepPartial<Translations> = {
       },
       heading: {
         title: {
-          CLUB: 'Hakemus avoimeen varhaiskasvatukseen'
+          CLUB: 'Hakemus avoimeen varhaiskasvatuksen kerhotoimintaan'
         },
         info: {
           DAYCARE: (

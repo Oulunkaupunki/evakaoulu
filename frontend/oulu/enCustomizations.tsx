@@ -30,22 +30,30 @@ const fi: DeepPartial<Translations> = {
     creation: {
       daycareInfo:
         'An application for early childhood education is used to apply for a place in a municipal daycare centre or family daycare. With the same application, you can also apply for an early childhood education service voucher for private early childhood education by selecting the private unit for which you want to apply for the service voucher in the "Application requests" section.',
-      preschoolLabel: 'Enrolment in preschool education',
+      preschoolLabel: 'Enrolment in preschool education and/or applying for early childhood education related to preschool education',
       preschoolInfo:
         'Free of charge preschool education is provided for four (4) hours a day. The preschool year mainly follows the annual holiday schedule used in basic education.',
       preschoolDaycareInfo:
         'You can also apply for early childhood education related to preschool while enrolling in preschool. Early childhood education is provided in the same place as the preschool before and after the preschool education.',
-      clubLabel: 'Application for open early childhood education and care',
+      clubLabel: 'Application for open early childhood education club activities',
       clubInfo:
         'With the application for open early childhood education and care, you can apply to groups that meet two to three times a week, as well as family groups.',
       applicationInfo: (
-        <P>
-          You can make changes to the application until the service coordination
-          unit has begun to process it. After this, you can only cancel the
-          application or make changes to it by contacting the early childhood
-          education service coordination unit.
-          {customerContactText()}
-        </P>
+        <>
+          <P>
+            If your child already has a place in early childhood education or
+            preschool education in Oulu, submitting a new application will
+            be recorded as a transfer application. There is no need to
+            terminate the current place.
+          </P>
+          <P>
+            You can make changes to the application until the service coordination
+            unit has begun to process it. After this, you can only cancel the
+            application or make changes to it by contacting the early childhood
+            education service coordination unit.
+            {customerContactText()}
+          </P>
+        </>
       ),
       duplicateWarning:
         'You have already saved a similar, unfinished application for your child. In order to edit the existing application, return to the Applications view or contact the early childhood service coordination unit.',

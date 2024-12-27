@@ -48,7 +48,7 @@ const fi: DeepPartial<Translations> = {
     creation: {
       daycareInfo:
         'Varhaiskasvatushakemuksella haetaan paikkaa kunnalliseen päiväkotiin tai perhepäivähoitoon. Samalla hakemuksella voi hakea myös varhaiskasvatuksen palveluseteliä yksityiseen varhaiskasvatukseen valitsemalla Hakutoiveet-kohtaan se yksityinen yksikkö, johon palveluseteliä halutaan hakea.',
-      preschoolLabel: 'Ilmoittautuminen esiopetukseen',
+      preschoolLabel: 'Ilmoittautuminen esiopetukseen ja/tai hakeminen esiopetukseen liittyvään varhaiskasvatukseen',
       preschoolInfo:
         'Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen työ- ja loma-aikoja.',
       preschoolDaycareInfo:
@@ -417,7 +417,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
         preparatoryInfo:
-          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään kielenkartoitus ja sen perusteella suomi toisena kielenä (s2) -opetussuunnitelma. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti.',
+          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään kielenkartoitus ja sen perusteella suomi toisena kielenä (S2) -opetussuunnitelma. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti.',
       },
       contactInfo: {
         familyInfo: undefined,
@@ -439,6 +439,12 @@ const fi: DeepPartial<Translations> = {
             osoitteessa asuvalle väestötiedoista löytyvälle huoltajalle.
           </P>
         ),
+        emailInfoText:
+          'Sähköpostiosoitteen avulla saat ilmoituksen uusista viesteistä, jotka saapuvat sinulle varhaiskasvatuksen asiointipalvelu eVakaan. Esitäytetty sähköpostiosoite on haettu eVakan asiakastiedoista. Jos muokkaat sitä, päivitetään vanha sähköpostiosoite, kun lähetät hakemuksen.',
+        otherChildrenInfo:
+          'Samassa taloudessa väestörekisterin mukaan asuvat alle 18-vuotiaat lapset vaikuttavat varhaiskasvatuksen asiakasmaksuun.',
+        otherChildrenChoiceInfo:
+          'Valitse lapset, jotka asuvat väestörekisterin mukaan samassa taloudessa.',
         secondGuardianInfoPreschoolSeparated:
           'Toisen huoltajan tiedot haetaan automaattisesti väestötietojärjestelmästä. Tietojemme mukaan lapsen toinen huoltaja asuu eri osoitteessa. Hakemisesta tulee sopia yhdessä toisen huoltaja kanssa.',
         secondGuardianAgreementStatus: {

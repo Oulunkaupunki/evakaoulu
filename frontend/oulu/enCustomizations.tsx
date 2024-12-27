@@ -75,10 +75,9 @@ const fi: DeepPartial<Translations> = {
             DAYCARE: (
               <>
                 <P>
-                  If your child has a sibling who has already received a place
-                  in an early childhood education and care unit, they can apply
-                  to be placed in the same unit on the basis of the sibling
-                  relationship. The city strives to place all siblings in the
+                  The child has a sibling basis for the same early childhood
+                  education place where their sibling will be when early childhood
+                  education begins. The city strives to place all siblings in the
                   same unit, if this is what the parents wish. If you are
                   filling out applications for siblings of who are not yet
                   included within the scope of early childhood education and
@@ -131,8 +130,9 @@ const fi: DeepPartial<Translations> = {
               <>
                 <P>
                   You can apply to 1–3 units in the order of preference of your
-                  choosing. Select the units shown in the preferred units menu,
-                  where preschool education is organized in the year 2023-2024
+                  choosing. Preferred choices do not guarantee a place in the
+                  desired unit, but the chances of getting the desired place
+                  increase by providing multiple options.
                 </P>
                 <P>
                   You can view the locations of the early childhood education
@@ -199,21 +199,23 @@ const fi: DeepPartial<Translations> = {
           DAYCARE: (
             <>
               <P>
-                Please apply for open early childhood education and care at
-                least four months before you require a place for your child. If
-                you require open early childhood education and care urgently due
-                to a change in your employment or student status, the processing
-                time for the application is two weeks upon receipt.
+                  Please apply for open early childhood education and care
+                  at least four months before you require a place for your
+                  child. If you urgently need early childhood education due
+                  to starting work or studies, the processing time for the
+                  application is two weeks upon receipt.
               </P>
               <P>
-                You will receive a written decision regarding your child’s early
-                childhood education and care unit in the Suomi.fi messages
-                service, or, if you have not yet started using the Suomi.fi
-                service, by mail. The decision can also be found in the Menu –
-                Decisions section of the eVaka service. You can find more
-                information about the Suomi.fi service and how to start using
-                the service
-                <ExternalLink
+                  The guardian who has made the enrollment will receive a
+                  written decision about the place via the Suomi.fi Messages
+                  service or by mail if the Suomi.fi service is not in use.
+                  The decision can be viewed in eVaka under Menu – Decisions
+                  and must be accepted or rejected within two weeks.
+              </P>
+              <P>
+                  You can find more information about the Suomi.fi Messages
+                  service and how to activate it at{' '}
+                  <ExternalLink
                   text="https://www.suomi.fi/viestit"
                   href="https://www.suomi.fi/viestit"
                   newTab
@@ -311,10 +313,12 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             DAYCARE: (
               <>
-                You can change the desired start date until the service
-                coordination team has begun to process the application. After
-                this, the date can only be postponed by contacting the early
-                childhood education and care service.
+                It is possible to postpone the desired start date until
+                the early childhood education guidance team has taken
+                the application into processing. To advance the desired
+                start date or make changes to an application that is
+                being processed, please contact the early childhood
+                education guidance team
                 {customerContactText()}
               </>
             ),
@@ -363,6 +367,7 @@ const fi: DeepPartial<Translations> = {
           }
         },
         shiftCare: {
+          label: 'Evening and shift- care',
           instructions:
             'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you need evening or shift care, please specify your care needs in the Additional information field of the application.',
           attachmentsMessage: {
@@ -394,7 +399,7 @@ const fi: DeepPartial<Translations> = {
         },
         assistanceNeedInstructions: {
           DAYCARE:
-            "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
+            "Select this option on the application if your child needs support for their development and/or learning in early childhood education. Support measures will be implemented in the child's daily life as part of other early childhood education activities. If necessary, a special education teacher in early childhood education will contact the applicant to ensure the child's support needs are considered when granting an early childhood education place. Please also indicate the need for support if this is a transfer application.",
           CLUB: "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
           PRESCHOOL:
             "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. The special education teacher in early childhood education will contact the applicant if necessary to ensure the child's support needs are considered when assigning a preschool education place. Please also indicate the need for support if this is a transfer application.",
@@ -437,6 +442,8 @@ const fi: DeepPartial<Translations> = {
             </>
           ),
           instructions: {
+            DAYCARE:
+              'Indicate the most common times your child needs early childhood education. If your child requires evening and shift care, please specify the earliest and latest times your child needs early childhood education.',
             PRESCHOOL:
               'Daycare centers and schools provide preschool education for four hours a day. Please indicate the hours during which your child needs early childhood education and care, including the time spent in preschool education (e.g. 7 a.m. to 5 p.m.). You will be asked to specify the times in greater detail once your child enters early childhood education and care. If the care needs vary by day or week (e.g. in cases where shift care is required), please indicate the hours in greater detail in the Additional information field of this application.'
           },
@@ -488,7 +495,7 @@ const fi: DeepPartial<Translations> = {
             'The other guardian only has the right of information.'
         },
         futureAddressInfo:
-          'Oulu’s preschool education and early childhood education and care services consider the address obtained from the population information system to be the official address. The address entered in the population information system changes when you submit a notification of change of address to the Digital and Population Data Services Agency.'
+          'Oulu’s early childhood education, preschool education and care services consider the address obtained from the population information system to be the official address. The address entered in the population information system changes when you submit a notification of change of address to the Digital and Population Data Services Agency.'
       },
       fee: {
         info: {
@@ -538,7 +545,7 @@ const fi: DeepPartial<Translations> = {
       },
       additionalDetails: {
         dietInfo: (
-          <> If your child follows a special diet, please indicate it here. </>
+          <> Indicate your child's special diet here. </>
         )
       },
       actions: {

@@ -53,7 +53,7 @@ const fi: DeepPartial<Translations> = {
         'Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen työ- ja loma-aikoja.',
       preschoolDaycareInfo:
         'Ilmoittautumisen yhteydessä voit hakea myös esiopetukseen liittyvää varhaiskasvatusta, jota tarjotaan esiopetuspaikoissa aamulla ennen esiopetuksen alkua ja iltapäivisin esiopetuksen jälkeen.',
-      clubLabel: 'Hakemus avoimeen varhaiskasvatukseen',
+      clubLabel: 'Hakemus avoimeen varhaiskasvatuksen kerhotoimintaan',
       clubInfo:
         'Hakemuksella avoimeen varhaiskasvatukseen haetaan kahden ja kolmen kerran kerhoihin sekä perhekerhoon.',
       applicationInfo: (
@@ -262,12 +262,13 @@ const fi: DeepPartial<Translations> = {
               <P>
                 Avoimen varhaiskasvatuksen kerhopaikka myönnetään siihen saakka,
                 kunnes paikka irtisanotaan tai lapsi siirtyy varhaiskasvatukseen
-                tai esiopetukseen. Avoimen toiminnan valintajärjestys on
-                seuraava: lapset, jotka luopuvat varhaiskasvatuspaikasta,
-                sisarukset, uudet hakijat hakujärjestyksessä huomioiden tuen
-                tarvitsijat. Päätös kerhopaikasta tulee Suomi.fi-palveluun tai
-                postitse, mikäli ette ole ottanut palvelua käyttöön. Päätös on
-                nähtävillä eVaka- palveluissa kohdassa Valikko.
+                tai esiopetukseen.
+              </P>
+              <P>
+                Hakemuksen tehnyt huoltaja saa kirjallisen päätöksen paikasta
+                Suomi.fi-viestit -palveluun tai postitse, jos Suomi.fi-palvelu
+                ei ole käytössä. Päätös on nähtävillä eVakassa kohdassa
+                Valikko – Päätökset ja se tulee hyväksyä tai hylätä kahden viikon kuluessa.
               </P>
               <P>
                 Avoin varhaiskasvatustoiminta on maksutonta, eikä siihen
@@ -383,7 +384,7 @@ const fi: DeepPartial<Translations> = {
         assistanceNeedInstructions: {
           DAYCARE:
             'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea varhaiskasvatuksessa. Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa tarvittaessa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan huomioida varhaiskasvatuspaikkaa myönnettäessä. Ilmoita tuen tarve myös, jos kyse on siirtohakemuksesta.',
-          CLUB: 'Tukitoimet toteutuvat lapsen arjessa osana varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan ottaa huomioon varhaiskasvatuspaikkaa myönnettäessä.',
+          CLUB: 'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea avoimessa varhaiskasvatuksessa. Tukitoimet toteutuvat lapsen arjessa osana avoimen varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa tarvittaessa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan huomioida paikkaa myönnettäessä.',
           PRESCHOOL:
             'Valitse hakemuksesta tämä kohta, jos lapsi tarvitsee kehitykselleen ja/tai oppimiselleen tukea esiopetusvuonna. Tukitoimet toteutuvat lapsen arjessa osana esiopetuksen ja varhaiskasvatuksen muuta toimintaa. Varhaiskasvatuksen erityisopettaja ottaa tarvittaessa hakijaan yhteyttä, jotta lapsen tuen tarve voidaan huomioida esiopetuspaikkaa osoitettaessa. Ilmoita tuen tarve myös, jos kyse on siirtohakemuksesta'
         },

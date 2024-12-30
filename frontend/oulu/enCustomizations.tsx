@@ -70,7 +70,7 @@ const fi: DeepPartial<Translations> = {
       },
       unitPreference: {
         siblingBasis: {
-          title: 'Application on the basis of a sibling relationship',
+          title: 'Application based on a sibling relationship',
           info: {
             DAYCARE: (
               <>
@@ -114,11 +114,11 @@ const fi: DeepPartial<Translations> = {
                   the family so wishes.
                 </P>
                 <P>
-                  Fill out this section only if you are applying for a place at
-                  an early childhood education and care unit on the basis of a
+                  Fill out this section only if you are applying for a place
+                  at an early childhood education and care unit based on a
                   sibling relationship. Make sure that you choose the sibling’s
-                  current open early childhood education and care unit as the
-                  preferred option.
+                  current open early childhood education and care unit as
+                  the preferred option.
                 </P>
               </>
             )
@@ -259,19 +259,16 @@ const fi: DeepPartial<Translations> = {
           CLUB: (
             <>
               <P>
-                The right to attend a club or group organized as a part of open
-                early childhood education and care (ECEC) is granted until the
-                applicant decides that it is no longer required or until the
-                child moves from open ECEC to ECEC or preschool education.
-                Applicants to open ECEC are considered in the following order:
-                children leaving early childhood education, children applying on
-                the basis of a sibling relationship, new applicants in order of
-                application. Individual support needs are also taken into
-                consideration. The decision regarding a place in a club or group
-                will be provided to you via the Suomi.fi service, or, if you
-                have not yet started using the service, by mail. The decision
-                can also be found in the Applications – Decisions (Hakeminen –
-                Päätökset) section of the eVaka service.
+                A place in open early childhood education club activities is
+                granted until the place is terminated or the child transitions
+                to early childhood education or preschool education.
+              </P>
+              <P>
+                The guardian who has made the enrollment will receive a
+                written decision about the place via the Suomi.fi Messages
+                service or by mail if the Suomi.fi service is not in use.
+                The decision can be viewed in eVaka under Menu – Decisions and
+                must be accepted or rejected within two weeks.
               </P>
               <P>
                 Open early childhood education activities are provided free of
@@ -400,7 +397,7 @@ const fi: DeepPartial<Translations> = {
         assistanceNeedInstructions: {
           DAYCARE:
             "Select this option on the application if your child needs support for their development and/or learning in early childhood education. Support measures will be implemented in the child's daily life as part of other early childhood education activities. If necessary, a special education teacher in early childhood education will contact the applicant to ensure the child's support needs are considered when granting an early childhood education place. Please also indicate the need for support if this is a transfer application.",
-          CLUB: "Support measures are implemented in the child's daily life as part of other early childhood education and care. A special education teacher in early childhood education and care will contact the applicant so that the child’s support needs may be taken into account when granting a place at an early childhood education and care unit.",
+          CLUB: "Select this option on the application if your child needs support for their development and/or learning in open early childhood education. Support measures will be implemented in the child's daily life as part of other open early childhood education activities. If necessary, a special education teacher in early childhood education will contact the applicant to ensure the child's support needs are considered when granting an open early childhood education place.",
           PRESCHOOL:
             "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. The special education teacher in early childhood education will contact the applicant if necessary to ensure the child's support needs are considered when assigning a preschool education place. Please also indicate the need for support if this is a transfer application.",
         },

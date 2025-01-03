@@ -201,6 +201,7 @@ const fi: DeepPartial<Translations> = {
       },
       heading: {
         title: {
+          PRESCHOOL: 'Ilmoittautuminen esiopetukseen ja/tai hakeminen esiopetukseen liittyvään varhaiskasvatukseen',
           CLUB: 'Hakemus avoimeen varhaiskasvatuksen kerhotoimintaan'
         },
         info: {

@@ -541,9 +541,11 @@ const fi: DeepPartial<Translations> = {
         )
       },
       additionalDetails: {
+        dietPlaceholder: 'Indicate your child’s special diet here',
         dietInfo: (
           <> Indicate your child's special diet here. </>
-        )
+        ),
+        allergiesPlaceholder: 'Indicate your child’s allergies here'
       },
       actions: {
         allowOtherGuardianAccess: (

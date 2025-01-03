@@ -457,7 +457,7 @@ const fi: DeepPartial<Translations> = {
         emailInfoText:
           'Sähköpostiosoitteen avulla saat ilmoituksen uusista viesteistä, jotka saapuvat sinulle varhaiskasvatuksen asiointipalvelu eVakaan. Esitäytetty sähköpostiosoite on haettu eVakan asiakastiedoista. Jos muokkaat sitä, päivitetään vanha sähköpostiosoite, kun lähetät hakemuksen.',
         otherChildrenInfo:
-          'Samassa taloudessa väestörekisterin mukaan asuvat alle 18-vuotiaat lapset vaikuttavat varhaiskasvatuksen asiakasmaksuun.',
+          'Samassa taloudessa väestörekisterin mukaan asuvat alle 18-vuotiaat lapset vaikuttavat varhaiskasvatusmaksuihin tai palvelusetelin omavastuuosuuteen.',
         otherChildrenChoiceInfo:
           'Valitse lapset, jotka asuvat väestörekisterin mukaan samassa taloudessa.',
         secondGuardianInfoPreschoolSeparated:

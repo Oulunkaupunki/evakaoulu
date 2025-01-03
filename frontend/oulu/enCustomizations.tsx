@@ -364,7 +364,7 @@ const fi: DeepPartial<Translations> = {
           }
         },
         shiftCare: {
-          label: 'Evening and shift- care',
+          label: 'Evening and shift care',
           instructions:
             'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you need evening or shift care, please specify your care needs in the Additional information field of the application.',
           attachmentsMessage: {
@@ -477,7 +477,7 @@ const fi: DeepPartial<Translations> = {
           </P>
         ),
         otherChildrenInfo:
-          'Other children under 18 years of age living in the same household according to the population register affect the cost of daycare.',
+          'Other children under 18 years of age living in the same household according to the population register affect the cost of daycare or the deductible for the service voucher.',
         otherChildrenChoiceInfo: 'Select the children who live in the same household according to the population register.',
         secondGuardianInfoPreschoolSeparated:
           'The address information for the other guardian is retrieved from the population information system automatically. According to our information, the child has another guardian living at a different address. Registration for preschool education must be agreed upon jointly with the other guardian.',

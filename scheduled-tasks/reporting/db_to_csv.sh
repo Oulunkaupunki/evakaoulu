@@ -11,7 +11,8 @@ run_query() {
     OUTPUT_FILE=$2
     DATE_ARG=$3
 
-    psql --csv -v date_val="'${DATE_ARG}'" -P csv_fieldsep=';' < $SQL_FILE > $OUTPUT_FILE
+    psql --csv -v date_val="'${DATE_ARG}'" -P csv_fieldsep=';' < $SQL_FILE > $OUTPUT_FILE \
+        || aws sns publish --topic-arn $ALARM_TOPIC --message "Failed to run query '$SQL_FILE'"
 }
 
 send_file() {
@@ -20,8 +21,10 @@ send_file() {
     echo "put $FILE" > sftp_batch.txt
     echo "bye" >> sftp_batch.txt
 
-    sshpass -e sftp -o StrictHostKeyChecking=no -o BatchMode=no -b sftp_batch.txt $SFTP_USER@$SFTP_HOST:$SFTP_PATH
-    aws s3 cp $FILE s3://$S3_BUCKET/$FILE
+    sshpass -e sftp -o StrictHostKeyChecking=no -o BatchMode=no -b sftp_batch.txt $SFTP_USER@$SFTP_HOST:$SFTP_PATH \
+        || aws sns publish --topic-arn $ALARM_TOPIC --message "Failed to upload file '$FILE' via SFTP"
+    aws s3 cp $FILE s3://$S3_BUCKET/$FILE \
+        || aws sns publish --topic-arn $ALARM_TOPIC --message "Failed to upload file '$FILE' to AWS S3"
 }
 
 send_history_file() {
@@ -30,8 +33,10 @@ send_history_file() {
     echo "put $FILE" > sftp_batch.txt
     echo "bye" >> sftp_batch.txt
 
-    sshpass -e sftp -o StrictHostKeyChecking=no -o BatchMode=no -b sftp_batch.txt $SFTP_USER@$SFTP_HOST:$SFTP_PATH/history
-    aws s3 cp $FILE s3://$S3_BUCKET/history/$FILE
+    sshpass -e sftp -o StrictHostKeyChecking=no -o BatchMode=no -b sftp_batch.txt $SFTP_USER@$SFTP_HOST:$SFTP_PATH/history \
+        || aws sns publish --topic-arn $ALARM_TOPIC --message "Failed to upload history file '$FILE' via SFTP"
+    aws s3 cp $FILE s3://$S3_BUCKET/history/$FILE \
+        || aws sns publish --topic-arn $ALARM_TOPIC --message "Failed to upload history file '$FILE' to AWS S3"
 }
 
 run_query_and_send_file() {
@@ -53,7 +58,7 @@ run_history_batch_and_send_file() {
 
     if [[ "${HISTORY_FROM_DATE}" != "" && "${HISTORY_FROM_DATE}" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
         # Conversion to ISO date is required, because date as environment variable is transformed automatically to YYYY-MM-DD hh:mm:ss +0000 UTC -format
-        FROM_DATE=$(date -I -d "$(echo $HISTORY_FROM_DATE | grep -Eo '^[0-9]{4}-[0-9]{2}-[0-9]{2}')") || exit -1
+        FROM_DATE=$(date -I -d "$(echo $HISTORY_FROM_DATE | grep -Eo '^[0-9]{4}-[0-9]{2}-[0-9]{2}')") || exit 1
         TO_DATE=$(date +%F)
 
         echo "Running history batches from ${FROM_DATE} -> ${TO_DATE}"
@@ -65,7 +70,7 @@ run_history_batch_and_send_file() {
             run_query $SQL_FILE $OUTPUT_FILE $DATE_VAL
             send_history_file $OUTPUT_FILE
 
-            DATE_VAL=$(date -I -d "$DATE_VAL + 1 day") || exit -1
+            DATE_VAL=$(date -I -d "$DATE_VAL + 1 day") || exit 1
         done
     else
         echo "Invalid value set for environment variable HISTORY_FROM_DATE. Format has to be yyyy-mm-dd"
@@ -78,7 +83,7 @@ run_history_bulk_and_send_file() {
 
     if [[ "${HISTORY_FROM_DATE}" != "" && "${HISTORY_FROM_DATE}" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
         # Conversion to ISO date is required, because date as environment variable is transformed automatically to YYYY-MM-DD hh:mm:ss +0000 UTC -format
-        FROM_DATE=$(date -I -d "$(echo $HISTORY_FROM_DATE | grep -Eo '^[0-9]{4}-[0-9]{2}-[0-9]{2}')") || exit -1
+        FROM_DATE=$(date -I -d "$(echo $HISTORY_FROM_DATE | grep -Eo '^[0-9]{4}-[0-9]{2}-[0-9]{2}')") || exit 1
         TO_DATE=$(date +%F)
 
         echo "Running history bulk between ${FROM_DATE} - ${TO_DATE}"

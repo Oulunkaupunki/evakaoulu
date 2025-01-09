@@ -13,7 +13,7 @@ WITH application_infos AS (
         jsonb_array_elements_text(ap.document->'apply'->'preferredUnits') AS yksikot,
         ap.document->'preferredStartDate' AS haluttu_aloituspaiva
     FROM application ap, person pe
-    WHERE :date_val::DATE - INTERVAL '3 months' <= ap.created_at
+    WHERE :date_val::DATE - INTERVAL '12 months' <= ap.created_at
     AND ap.child_id = pe.id
 ORDER BY ap.created_at DESC)
 SELECT hakemuksen_id, hakemus_luotu, hakemusta_paivitetty, tyyppi, tilanne, alkupera, siirtohakemus, lapsen_id, syntymaaika, yksikot, haluttu_aloituspaiva, dg.name as yksikko_nimi, dg.care_area_id as alue_id, ca.name as alue_nimi

@@ -132,11 +132,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
             html =
                 """
-                <p>Sinulle on saapunut uusi $typeFi eVakaan${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}eVakassa.</p>
+                <p>Sinulle on saapunut uusi $typeFi eVakaan lähettäjältä ${thread.senderName}${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}eVakassa.</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
                 <hr>
-                <p>You have received a new $typeEn in eVaka${if (showSubjectInBody) " with title \"" + thread.title + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}in eVaka. </p>
+                <p>You have received a new $typeEn in eVaka in eVaka from ${thread.senderName}${if (showSubjectInBody) " with title \"" + thread.title + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}in eVaka. </p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>    
                 $unsubscribeEn
             """

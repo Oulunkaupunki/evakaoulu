@@ -46,6 +46,7 @@ SELECT
     d.operation_days                       AS toimintapäivät,
     d.provides_shift_care                  AS vuorohoitoyksikkö,
     d.shift_care_operation_days            AS vuorohoitopäivät,
+    d.shift_care_open_on_holidays          AS vuorohoitopyhäpäivinä,
     dg.name                                AS ryhmä,
     dg.id                                  AS ryhmä_id,
     d.capacity                             AS toimintayksikön_laskennallinen_lapsimäärä,

@@ -788,7 +788,9 @@ const fi: DeepPartial<Translations> = {
                   https://www.avi.fi -{'>'} henkilöasiakas -{'>'} oikaisuvaatimukset -{'>'} sähköinen asiointi.
               </P>
           </>
-      )
+      ),
+      disclaimer:
+        'Perusopetuslain 17 §:n mukaan tämä päätös voidaan panna täytäntöön muutoksenhausta huolimatta.'
     }
   },
     income: {

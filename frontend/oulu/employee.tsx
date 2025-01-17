@@ -262,7 +262,9 @@ const customizations: EmployeeCustomizations = {
                 postitse tai sähköisesti tapahtuu lähettäjän omalla vastuulla.
               </P>
             </>
-          )
+          ),
+          disclaimer:
+              'Perusopetuslain 17 §:n mukaan tämä päätös voidaan panna täytäntöön muutoksenhausta huolimatta.'
         },
         assistanceNeedVoucherCoefficient: {
           sectionTitle: 'Palvelusetelikerroin',

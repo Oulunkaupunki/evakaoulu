@@ -44,10 +44,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         """
         <p><small>Jos et halua enää saada tämänkaltaisia viestejä, voit muuttaa asetuksia eVakan Omat tiedot -sivulla.</small></p>
         """.trimIndent()
-    private val unsubscribeSv =
-        """
-        <p><small>Om du inte längre vill ta emot meddelanden som detta, kan du ändra dina inställningar på eVakas Personuppgifter-sida.</small></p>
-        """.trimIndent()
     private val unsubscribeEn =
         """
         <p><small>If you no longer want to receive messages like this, you can change your settings on eVaka's Personal information page.</small></p>
@@ -587,16 +583,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         childId: ChildId,
     ): EmailContent {
         return EmailContent.fromHtml(
-            subject = "Uusi dokumentti eVakassa / Nytt dokument i eVaka / New document in eVaka",
+            subject = "Uusi dokumentti eVakassa / New document in eVaka",
             html =
                 """
                 <p>Sinulle on saapunut uusi dokumentti eVakaan. Lue dokumentti eVakassa.</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $unsubscribeFi
-                <hr>
-                <p>Du har fått ett nytt dokument i eVaka. Läs dokumentet i eVaka.</p>
-                <p>Detta besked skickas automatiskt av eVaka. Svara inte på detta besked.</p>
-                $unsubscribeSv
                 <hr>
                 <p>You have received a new eVaka document. Read the document in eVaka.</p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
@@ -846,14 +838,11 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     override fun missingHolidayReservationsNotification(language: Language): EmailContent {
         return EmailContent.fromHtml(
             subject =
-                "Loma-ajan ilmoitus sulkeutuu / Semesteranmälan löper ut / Holiday notification period closing",
+                "Loma-ajan ilmoitus sulkeutuu / Holiday notification period closing",
             html =
                 """
             <p>Loma-ajan kysely sulkeutuu kahden päivän päästä. Jos lapseltanne/lapsiltanne puuttuu loma-ajan ilmoitus yhdeltä tai useammalta lomapäivältä, teettehän ilmoituksen eVakan kalenterissa mahdollisimman pian.</p>
             $unsubscribeFi
-            <hr>
-            <p>Förfrågan om barnets frånvaro i semestertider stängs om två dagar. Om ditt/dina barn saknar anmälan för en eller flera helgdagar, vänligen gör anmälan i eVaka-kalendern så snart som möjligt.</p>
-            $unsubscribeSv
             <hr>
             <p>Two days left to submit a holiday notification. If you have not submitted a notification for each day, please submit them through the eVaka calendar as soon as possible.</p>
             $unsubscribeEn
@@ -871,16 +860,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
             }
         return EmailContent.fromHtml(
             subject =
-                "Uusi $decisionTypeFi eVakassa / Nytt $decisionTypeSv i eVaka / New $decisionTypeEn in eVaka",
+                "Uusi $decisionTypeFi eVakassa / New $decisionTypeEn in eVaka",
             html =
                 """
                 <p>Sinulle on saapunut uusi $decisionTypeFi eVakaan.</p>
                 <p>Päätös on nähtävissä eVakassa.</p>
                 $unsubscribeFi
-                <hr>
-                <p>Du har fått ett nytt $decisionTypeSv i eVaka.</p>
-                <p>Beslutet finns att se i eVaka.</p>
-                $unsubscribeSv
                 <hr>
                 <p>You have received a new $decisionTypeEn in eVaka.</p>
                 <p>The decision can be viewed on eVaka.</p>
@@ -896,7 +881,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     ): EmailContent {
         return EmailContent.fromHtml(
             subject =
-                "Uusi keskusteluaika varattu eVakassa / Ett nytt diskussionsmöte bokad i eVaka / New discussion time reserved in eVaka",
+                "Uusi keskusteluaika varattu eVakassa / New discussion time reserved in eVaka",
             html =
                 """
                 <p>Uusi keskusteluaika varattu / Ett nytt diskussionsmöte bokad / New discussion time reserved</p>
@@ -906,7 +891,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 )} - ${notificationDetails.calendarEventTime.endTime.format(DateTimeFormatter.ofPattern("HH:mm"))}</p>
                 <hr>
                 $unsubscribeFi
-                $unsubscribeSv
                 $unsubscribeEn
                 <hr>
             """
@@ -920,7 +904,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     ): EmailContent {
         return EmailContent.fromHtml(
             subject =
-                "Keskusteluaika peruttu eVakassa / Diskussionsmöte avbokad i eVaka / Discussion time cancelled in eVaka",
+                "Keskusteluaika peruttu eVakassa / Discussion time cancelled in eVaka",
             html =
                 """
                 <p>Varattu keskusteluaika peruttu / Bokad diskussionsmöte avbruten / Reserved discussion time cancelled</p>
@@ -930,7 +914,6 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 )} - ${notificationDetails.calendarEventTime.endTime.format(DateTimeFormatter.ofPattern("HH:mm"))}</p>
                 <hr>
                 $unsubscribeFi
-                $unsubscribeSv
                 $unsubscribeEn
                 <hr>
             """
@@ -998,16 +981,12 @@ $unsubscribeEn
 
     override fun decisionNotification(): EmailContent {
         return EmailContent.fromHtml(
-            subject = "Uusi päätös eVakassa / Nytt beslut i eVaka / New decision in eVaka",
+            subject = "Uusi päätös eVakassa / New decision in eVaka",
             html =
                 """
 <p>Sinulle on saapunut uusi päätös eVakaan.</p>
 <p>Päätös on nähtävissä eVakassa.</p>
 $unsubscribeFi
-<hr>
-<p>Du har fått ett nytt beslut i eVaka.</p>
-<p>Beslutet finns att se i eVaka.</p>
-$unsubscribeSv
 <hr>
 <p>You have received a new decision in eVaka.</p>
 <p>The decision can be viewed on eVaka.</p>

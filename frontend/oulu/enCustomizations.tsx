@@ -26,6 +26,12 @@ const customerContactText = function () {
 }
 
 const fi: DeepPartial<Translations> = {
+  children: {
+    serviceApplication: {
+      createInfo:
+          "This allows you to propose a change in your child's need for service. The director of the early childhood education unit will accept or reject your proposal. For more information about changing the service need, ask directly at your child's unit. The contract is concluded for at least five months and it can be changed in the middle of the contract period only for a justified reason.",
+        }
+    },
   applications: {
     creation: {
       daycareInfo:

@@ -198,15 +198,9 @@ done
 
 TMPDIR=$(mktemp -d)
 
-# suomi.fi identification does not check certificate expiration in metadata
-# check_certificate api-gw saml_suomifi_public_key.pem "suomi.fi identification"
-
 # Keycloak certificate is checked from db
 # check_certificate api-gw auth_citizen_public_key.pem "Keycloak Citizen realm"
 check_db_certificate evaka-customer keycloak_citizen_certificate.pem "Keycloak Citizen realm"
-
-# Azure AD does not check certification expiration in metadata
-# check_certificate api-gw saml_ad_public_key.pem "AD SAML"
 
 if [[ "ENVIRONMENT" == evakaoulu-prod ]]; then
     copy_to_tmp api-gw ouluad-internal-prod.pem
@@ -220,18 +214,6 @@ fi
 # Keycloak certificate is checked from db
 # check_certificate api-gw auth_employees_public_key.pem "Keycloak Employee realm" internal_auth_public_key.pem
 check_db_certificate evaka keycloak_employee_certificate.pem "Keycloak Employee realm"
-
-if [ -z "$KEYSTORE_PASS" ]; then
-    KEYSTORE_PASS=$(get_password /${ENVIRONMENT}/message-service/keystore/password)
-fi
-
-check_keystore evaka-srv keystore.p12 $KEYSTORE_PASS "eVaka suomi.fi messages certificate"
-
-if [ -z "$TRUSTSTORE_PASS" ]; then
-    TRUSTSTORE_PASS=$(get_password /${ENVIRONMENT}/message-service/truststore/password)
-fi
-
-check_keystore evaka-srv truststore.p12 $TRUSTSTORE_PASS "suomi.fi messages public certificate"
 
 if [ -z "$VTJ_KEYSTORE_PASS" ]; then
     VTJ_KEYSTORE_PASS=$(get_password /${ENVIRONMENT}/service/xroad/keystore/password)

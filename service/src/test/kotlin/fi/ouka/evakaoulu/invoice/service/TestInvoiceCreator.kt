@@ -146,6 +146,7 @@ fun validInvoice(): InvoiceDetailed {
         replacedInvoiceId = null,
         replacementNotes = null,
         replacementReason = null,
+        attachments = emptyList(),
     )
 }
 

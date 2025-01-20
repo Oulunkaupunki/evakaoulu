@@ -30,6 +30,8 @@ const fi: DeepPartial<Translations> = {
       serviceApplication: {
           createInfo:
               'Tästä voit ehdottaa muutosta lapsesi palveluntarpeeseen. Varhaiskasvatusyksikön johtaja hyväksyy tai hylkää ehdotuksesi. Tarkempaa lisätietoa palveluntarpeen muuttamisesta voit kysyä lapsesi yksiköstä. Sopimus tehdään vähintään viiden kuukauden ajalle ja se voidaan muuttaa kesken sopimuskauden vain perustellusta syystä.',
+          openApplicationInfo:
+              'Lapsellesi on ehdotettu uutta palveluntarvetta. Ehdotuksesi on yksikön johtajalla hyväksyttävänä.',
       }
 
   },

@@ -30,6 +30,8 @@ const fi: DeepPartial<Translations> = {
     serviceApplication: {
       createInfo:
           "This allows you to propose a change in your child's need for service. The director of the early childhood education unit will accept or reject your proposal. For more information about changing the service need, ask directly at your child's unit. The contract is concluded for at least five months and it can be changed in the middle of the contract period only for a justified reason.",
+      openApplicationInfo:
+          'A new service need has been proposed for your child. Your proposal has been submitted to the director of the unit for approval.',
         }
     },
   applications: {

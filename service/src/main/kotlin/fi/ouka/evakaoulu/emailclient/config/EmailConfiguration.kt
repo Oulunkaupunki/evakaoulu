@@ -1002,7 +1002,8 @@ $unsubscribeEn
     ): EmailContent {
         val start = startDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         return EmailContent.fromHtml(
-            subject = "Palveluntarpeen muutoshakemuksesi on käsitelty / Your application for a change in the service need has been processed",
+            subject = "Palveluntarpeen muutoshakemuksesi on käsitelty / " +
+                    "Your application for a change in the service need has been processed",
             html =
                 if (accepted) {
                     """

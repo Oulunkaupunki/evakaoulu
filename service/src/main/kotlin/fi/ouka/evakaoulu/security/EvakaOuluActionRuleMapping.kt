@@ -11,6 +11,7 @@ import fi.espoo.evaka.shared.security.actionrule.UnscopedActionRule
 class EvakaOuluActionRuleMapping : ActionRuleMapping {
     override fun rulesOf(action: Action.UnscopedAction): Sequence<UnscopedActionRule> =
         when (action) {
+            Action.Global.READ_TAMPERE_REGIONAL_SURVEY_REPORT,
             Action.Global.SUBMIT_PATU_REPORT,
             Action.Global.SEND_PATU_REPORT,
             -> sequenceOf()

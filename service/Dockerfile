@@ -43,6 +43,11 @@ ADD --chown=evaka:evaka --chmod=0700 \
     /usr/local/bin/s3download
 
 ADD --chmod=0644 \
+    --checksum=sha256:424a3e03a17df0a2bc2b3ca749d81b04e79d59cb7aeec8876a5a3f308d0caf51 \
+    https://raw.githubusercontent.com/danielmiessler/SecLists/2023.1/Passwords/xato-net-10-million-passwords-1000000.txt \
+    /opt/password-blacklists/xato-net-10-million-passwords-1000000.txt
+
+ADD --chmod=0644 \
     --checksum=sha256:776b76cfe05611cdc3d38c4b35fc92f563fcfd6e3df0e28c524da1d279d44223 \
     https://github.com/DataDog/dd-trace-java/releases/download/v1.31.0/dd-java-agent.jar \
     /opt/dd-java-agent.jar

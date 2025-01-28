@@ -78,6 +78,7 @@ services:
       EVAKA_BUCKET_FEE_DECISIONS: evaka-paymentdecisions-dev
       EVAKA_S3MOCK_URL: ${S3MOCK_URL:-http://s3-mock:9090}
       EVAKA_BUCKET_PROXY_THROUGH_NGINX: "true"
+      EVAKA_PASSWORD_BLACKLIST_DIRECTORY: /opt/password-blacklists
       ESPOO_INTEGRATION_INVOICE_ENABLED: "false"
       EVAKA_INTEGRATION_KOSKI_ENABLED: "false"
       EVAKA_INTEGRATION_SFI_ENABLED: "false"

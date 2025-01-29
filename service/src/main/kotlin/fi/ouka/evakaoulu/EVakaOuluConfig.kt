@@ -39,7 +39,6 @@ class EVakaOuluConfig {
             freeSickLeaveOnContractDays = true,
             alwaysUseDaycareFinanceDecisionHandler = false,
             freeAbsenceGivesADailyRefund = true,
-            invoiceNumberSeriesStart = 1,
             paymentNumberSeriesStart = 1,
             serviceWorkerMessageAccountName = "Oulun kaupunki",
             applyPlacementUnitFromDecision = false,

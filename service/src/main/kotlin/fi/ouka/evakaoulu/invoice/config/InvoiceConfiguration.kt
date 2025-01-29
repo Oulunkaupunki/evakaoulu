@@ -9,8 +9,10 @@ import fi.espoo.evaka.invoicing.domain.FeeAlterationType
 import fi.espoo.evaka.invoicing.domain.IncomeCoefficient
 import fi.espoo.evaka.invoicing.domain.IncomeType
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
+import fi.espoo.evaka.invoicing.service.DefaultInvoiceNumberProvider
 import fi.espoo.evaka.invoicing.service.IncomeCoefficientMultiplierProvider
 import fi.espoo.evaka.invoicing.service.IncomeTypesProvider
+import fi.espoo.evaka.invoicing.service.InvoiceNumberProvider
 import fi.espoo.evaka.invoicing.service.InvoiceProductProvider
 import fi.espoo.evaka.invoicing.service.ProductKey
 import fi.espoo.evaka.invoicing.service.ProductWithName
@@ -51,6 +53,9 @@ class InvoiceConfiguration {
 
     @Bean
     fun invoiceProductProvider(): InvoiceProductProvider = OuluInvoiceProductProvider()
+
+    @Bean
+    fun invoiceNumberProvider(): InvoiceNumberProvider = DefaultInvoiceNumberProvider(1)
 }
 
 class OuluIncomeTypesProvider : IncomeTypesProvider {

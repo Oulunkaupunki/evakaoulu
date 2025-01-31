@@ -92,6 +92,7 @@ internal class OuluPaymentIntegrationClientTest {
                 null,
                 "PROVIDERID",
                 setOf(CareType.CENTRE),
+                "1234",
             )
         val paymentWithoutIban = validPayment().copy(unit = unitWithoutIban)
         val paymentList = listOf(validPayment, paymentWithoutIban)

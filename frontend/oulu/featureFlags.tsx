@@ -123,7 +123,7 @@ const features: Features = {
     multiSelectDeparture: true,
     voucherValueSeparation: false,
     weakLogin: false,
-    employeeSfiLogin: false,
+    employeeSfiLogin: true,
   }
 }
 

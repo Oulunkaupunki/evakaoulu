@@ -10,8 +10,6 @@ services:
   db:
     build:
       context: ../evaka/compose/db
-      args:
-        BASE_IMAGE_VERSION: 16-alpine3.19
     ports:
       - "5432:5432"
     volumes:

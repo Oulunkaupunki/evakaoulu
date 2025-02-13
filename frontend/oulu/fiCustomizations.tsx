@@ -973,12 +973,16 @@ const fi: DeepPartial<Translations> = {
         ALIMONY_PAYOUT: 'Maksutosite elatusmaksuista',
         INTEREST_AND_INVESTMENT_INCOME: 'Tositteet korko- ja osinkotuloista',
         RENTAL_INCOME: 'Tositteet vuokratuloista ja vastikkeesta',
-        PAYSLIP: 'Viimeisin palkkalaskelma',
+        PAYSLIP_GROSS: 'Viimeisin palkkalaskelma',
+        PAYSLIP_LLC: 'Viimeisin palkkalaskelma',
         STARTUP_GRANT: 'Starttirahapäätös',
-        ACCOUNTANT_REPORT: 'Kirjanpitäjän selvitys palkasta ja luontoiseduista',
+        ACCOUNTANT_REPORT_PARTNERSHIP:
+          'Kirjanpitäjän selvitys palkasta ja luontoiseduista',
         ACCOUNTANT_REPORT_LLC:
           'Kirjanpitäjän selvitys luontoiseduista ja osingoista',
-        PROFIT_AND_LOSS_STATEMENT: 'Tuloslaskelma ja tase',
+        PROFIT_AND_LOSS_STATEMENT_SELF_EMPLOYED:
+          'Tulos- ja taselaskelma tai veropäätös',
+        PROFIT_AND_LOSS_STATEMENT_PARTNERSHIP: 'Tulos- ja taselaskelma',
         SALARY: 'Maksutositteet palkoista ja työkorvauksista',
         PROOF_OF_STUDIES:
           'Opiskelutodistus tai päätös työttömyyskassan opintoetuudesta / työllisyysrahaston koulutustuesta',

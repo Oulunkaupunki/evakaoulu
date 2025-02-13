@@ -837,12 +837,17 @@ const fi: DeepPartial<Translations> = {
         INTEREST_AND_INVESTMENT_INCOME:
           'Receipts for received interest and dividend income',
         RENTAL_INCOME: 'Receipts for rental income and condominium payment',
-        PAYSLIP: 'Latest payslip',
+        PAYSLIP_GROSS: 'Latest payslip',
+        PAYSLIP_LLC: 'Latest payslip',
         STARTUP_GRANT: 'Start-up grant',
-        ACCOUNTANT_REPORT: "Accountant's statement of salary and benefits",
+        ACCOUNTANT_REPORT_PARTNERSHIP:
+          'Accountant’s account salary and fringe benefits',
         ACCOUNTANT_REPORT_LLC:
           "Accountant's statement of benefits in kind and dividends",
-        PROFIT_AND_LOSS_STATEMENT: 'Income statement and balance sheet',
+        PROFIT_AND_LOSS_STATEMENT_SELF_EMPLOYED:
+          'Profit and loss account or taxation decision',
+        PROFIT_AND_LOSS_STATEMENT_PARTNERSHIP:
+          'Profit and loss account and balance sheet',
         SALARY: 'Receipts for paid salaries and wages',
         PROOF_OF_STUDIES:
           'Study certificate or decision on adult education allowance from an unemployment fund / education allowance from an employment fund',

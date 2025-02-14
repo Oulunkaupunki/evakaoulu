@@ -895,16 +895,8 @@ const fi: DeepPartial<Translations> = {
     },
     entrepreneurIncome: {
       title: 'Yrittäjän tulotietojen täyttäminen',
-      description: (
-        <>
-          Tällä lomakkeella voit tarvittaessa täyttää tiedot myös useammalle
-          yritykselle valitsemalla kaikkia yrityksiäsi koskevat kohdat. Toimita
-          tarkemmat yrityskohtaiset tiedot liitteinä.
-          <br />
-          Listan tarvittavista liitteistä löydät lomakkeen alaosasta kohdasta
-          “Tuloihin ja varhaiskasvatusmaksuihin liittyvät liitteet”.
-        </>
-      ),
+      description:
+          'Tällä lomakkeella voit tarvittaessa täyttää tiedot myös useammalle yritykselle valitsemalla kaikkia yrityksiäsi koskevat kohdat.',
       fullTimeLabel: 'Onko yritystoiminta päätoimista vai sivutoimista?',
       fullTime: 'Päätoimista',
       partTime: 'Sivutoimista',

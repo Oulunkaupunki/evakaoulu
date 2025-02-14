@@ -751,18 +751,7 @@ const fi: DeepPartial<Translations> = {
     },
     entrepreneurIncome: {
       title: 'Filling out the income information for entrepreneurs',
-      description: (
-        <>
-          If necessary, you can also use this form to enter the information for
-          several companies at once by selecting all options that apply to your
-          companies. Please provide more detailed information on each company in
-          the attachments.
-          <br />
-          You can find a list of all required attachments at the bottom of the
-          form under the section Attachments relating to income and early
-          childhood education fees.
-        </>
-      ),
+      description: 'If necessary, you can fill in the information for more than one company by ticking the boxes that apply to all of your companies.',
       fullTimeLabel: 'Is the business activity full-time or part-time?',
       fullTime: 'Full-time',
       partTime: 'Part-time',

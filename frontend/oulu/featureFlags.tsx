@@ -116,7 +116,7 @@ const features: Features = {
     personDuplicate: false,
     citizenAttendanceSummary: false,
     noAbsenceType: false,
-    discussionReservations: false,
+    discussionReservations: true,
     forceUnpublishDocumentTemplate: false,
     serviceApplications: false,
     titaniaErrorsReport: true,

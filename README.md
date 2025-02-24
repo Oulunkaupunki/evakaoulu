@@ -35,7 +35,8 @@ Install a tool for running X Window System, eg. [GWSL](https://www.microsoft.com
 
 
 ## Submodules:
-eVakaOulu utilizes the [eVaka-repository](https://github.com/espoon-voltti/evaka) as its submodule. When cloning the repository use `--recurse-submodules` or manually initialize and update the submodule after cloning with `git submodule update --init`.
+eVakaOulu utilizes the [eVaka-repository](https://github.com/espoon-voltti/evaka) as its submodule. When cloning the repository use `--recurse-submodules` 
+or manually initialize and update the submodule after cloning with `git submodule update --init`.
 
 
 ## License

@@ -14,7 +14,6 @@ aliases:
   - &workspace_evaka_frontend /home/circleci/repo/evaka/frontend
   - &workspace_oulu_frontend /home/circleci/repo/frontend
   - &workspace_service /home/circleci/repo/service
-  - &workspace_auth /home/circleci/repo/auth
   - &workspace_compose /home/circleci/repo/compose
 
   - &base_image cimg/base:current-22.04
@@ -442,20 +441,6 @@ jobs:
           dir: *workspace_service
       - slack-notification
 
-  auth_build_image:
-    executor: aws_executor
-    resource_class: medium
-    steps:
-      - restore_repo
-      - setup_authenticated_remote_docker:
-          docker_layer_caching: true
-      - run: cp customizations/footer-logo-citizen.png auth/OuluLogo.png
-      - build_docker_image:
-          image: evakaoulu/auth
-          dir: *workspace_auth
-          extra_build_args: --build-context core=../evaka/keycloak
-      - slack-notification
-
   scheduled_tasks_reporting_build_image:
     executor: aws_executor
     resource_class: medium
@@ -599,13 +584,6 @@ workflows:
           requires:
             - checkout_repo
 
-      - auth_build_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - checkout_repo
-
       - scheduled_tasks_reporting_build_image:
           context:
             - evakaoulu-dev
@@ -634,7 +612,6 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - auth_build_image
             - scheduled_tasks_reporting_build_image
             - scheduled_tasks_logs_build_image
             - scheduled_tasks_certificate_check_build_image
@@ -649,7 +626,6 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - auth_build_image
             - scheduled_tasks_reporting_build_image
             - scheduled_tasks_logs_build_image
             - scheduled_tasks_certificate_check_build_image

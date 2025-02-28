@@ -4,15 +4,6 @@
 
 version: 2
 updates:
-  - package-ecosystem: "docker"
-    directory: "/auth"
-    schedule:
-      interval: "daily"
-      time: "06:30"
-      timezone: "Europe/Helsinki"
-    ignore:
-      - dependency-name: "node"
-        update-types: ["version-update:semver-major"]
   - package-ecosystem: "npm"
     directory: "/frontend"
     schedule:

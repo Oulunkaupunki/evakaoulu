@@ -50,8 +50,6 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
-    weakLogin: true,
-    employeeSfiLogin: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -86,8 +84,6 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
-    weakLogin: true,
-    employeeSfiLogin: true,
   },
   prod: {
     environmentLabel: null,
@@ -122,8 +118,6 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
-    weakLogin: true,
-    employeeSfiLogin: true,
   }
 }
 

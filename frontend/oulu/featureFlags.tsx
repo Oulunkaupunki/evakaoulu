@@ -50,6 +50,7 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
+    nekkuIntegration: false,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -84,6 +85,7 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
+    nekkuIntegration: true,
   },
   prod: {
     environmentLabel: null,
@@ -118,6 +120,7 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
+    nekkuIntegration: false,
   }
 }
 

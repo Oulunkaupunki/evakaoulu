@@ -85,7 +85,7 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
-    nekkuIntegration: true,
+    nekkuIntegration: false,
   },
   prod: {
     environmentLabel: null,

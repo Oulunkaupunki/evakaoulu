@@ -13,13 +13,6 @@ copy_to_tmp() {
     aws s3 cp s3://${ENVIRONMENT}-deployment/$S3_DIR/$FILE $TMPDIR/$TARGET >/dev/null
 }
 
-dump_cert() {
-
-    CERT_FILE=$1
-
-    openssl x509 -in $TMPDIR/$CERT_FILE -noout -text
-}
-
 get_valid_from() {
 
     CERT_FILE=$1
@@ -82,31 +75,6 @@ list_expirations() {
         fi
     done
     IFS=$OLD_IFS
-}
-
-check_certificate() {
-
-    S3_DIR=$1
-    S3_FILE=$2
-    CERTNAME=$3
-    LOCAL_FILE=$4
-
-    if [ -z "$LOCAL_FILE" ]; then
-        LOCAL_FILE=$S3_FILE
-    fi
-
-    copy_to_tmp $S3_DIR $S3_FILE $LOCAL_FILE
-    VALID_FROM=$(get_valid_from $LOCAL_FILE)
-    EXPIRATION=$(get_expiration $LOCAL_FILE)
-
-    if [[ $ACTION == 'list' ]]; then
-        echo "$CERTNAME certificate valid from $VALID_FROM, expiration at $EXPIRATION" >>$TMPDIR/output
-    else
-        EXPIRATION_IN=$(days_to_date "$EXPIRATION")
-        if ((EXPIRATION_IN <= 60)); then
-            echo "$CERTNAME certification expires in $EXPIRATION_IN days" >>$TMPDIR/output
-        fi
-    fi
 }
 
 check_keystore() {

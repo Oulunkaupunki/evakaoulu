@@ -37,6 +37,7 @@ fun validPaymentUnit(): PaymentUnit {
         "1234567-8",
         "FI01 2345 6789 0123 4567 89",
         "PROVIDERID",
+        "PARTNERCODE",
         setOf(CareType.CENTRE),
         "1234",
     )

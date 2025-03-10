@@ -91,6 +91,7 @@ internal class OuluPaymentIntegrationClientTest {
                 "1234567-8",
                 null,
                 "PROVIDERID",
+                "PARTNERCODE",
                 setOf(CareType.CENTRE),
                 "1234",
             )

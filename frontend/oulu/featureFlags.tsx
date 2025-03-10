@@ -116,7 +116,7 @@ const features: Features = {
     noAbsenceType: false,
     discussionReservations: true,
     forceUnpublishDocumentTemplate: false,
-    serviceApplications: false,
+    serviceApplications: true,
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,

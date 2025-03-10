@@ -10,7 +10,7 @@ copy_to_tmp() {
 
     if [ -z "$TARGET" ]; then TARGET=$FILE; fi
 
-    aws s3 cp s3://${ENVIRONMENT}-deployment/$S3_DIR/$FILE $TMPDIR/$TARGET >/dev/null
+    aws s3 cp s3://${ENVIRONMENT}-deployment/$S3_DIR/$FILE $TMPDIR/$TARGET > /dev/null
 }
 
 get_valid_from() {
@@ -43,7 +43,7 @@ export_cert() {
     ALIAS=$3
     OUTPUT_FILE=$4
 
-    keytool -keystore $TMPDIR/$KEYSTORE -exportcert -rfc -storepass "$PASSWORD" -alias $ALIAS -file $TMPDIR/$OUTPUT_FILE 2>/dev/null
+    keytool -keystore $TMPDIR/$KEYSTORE -exportcert -rfc -storepass "$PASSWORD" -alias $ALIAS -file $TMPDIR/$OUTPUT_FILE 2> /dev/null
 }
 
 days_to_date() {
@@ -66,11 +66,11 @@ list_expirations() {
         CERT_VALID_FROM=$(get_valid_from ${CERT}_cert.p12)
         CERT_EXPIRATION=$(get_expiration ${CERT}_cert.p12)
         if [[ $ACTION == "list" ]]; then
-            echo "$TITLE $CERT valid from $CERT_VALID_FROM, expiration at $CERT_EXPIRATION" >>$TMPDIR/output
+            echo "$TITLE $CERT valid from $CERT_VALID_FROM, expiration at $CERT_EXPIRATION" >> $TMPDIR/output
         else
             EXPIRATION_IN=$(days_to_date $CERT_EXPIRATION)
             if (($EXPIRATION_IN <= 60)); then
-                echo "$TITLE $CERT expires in $EXPIRATION_IN days" >>$TMPDIR/output
+                echo "$TITLE $CERT expires in $EXPIRATION_IN days" >> $TMPDIR/output
             fi
         fi
     done
@@ -138,7 +138,8 @@ fi
 
 #TODO check staging env also
 
-if [ -z "$VTJ_KEYSTORE_PASS" ]; then
+if [ -z "$VTJ_KEYSTORE_PASS" ]
+then
     VTJ_KEYSTORE_PASS=$(get_password /${ENVIRONMENT}/service/xroad/keystore/password)
 fi
 
@@ -154,8 +155,8 @@ if [ -f $TMPDIR/output ]; then
     if [[ $OUTPUT == "print" ]]; then
         cat $TMPDIR/output
     else
-        echo "Expiring certificates in $ENVIRONMENT" >$TMPDIR/output2
-        echo >>$TMPDIR/output2
+        echo "Expiring certificates in $ENVIRONMENT" > $TMPDIR/output2
+        echo >> $TMPDIR/output2
         cat $TMPDIR/output >> $TMPDIR/output2
         aws sns publish --topic-arn $SNS_TOPIC_ARN --message file://$TMPDIR/output2
     fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# dependencies: AWS CLI, keytool, jq, psql
+# dependencies: AWS CLI, keytool, jq
 
 copy_to_tmp() {
 

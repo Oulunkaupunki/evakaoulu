@@ -699,7 +699,6 @@ const fi: DeepPartial<Translations> = {
       highestFeeInfo:
         'The highest possible client fee according to my family’s service needs is valid until further notice or until my child’s early childhood education and care ends. (Income information not required)',
       grossIncome: 'Determining the client fee based on gross income.',
-      entrepreneurIncome: 'Entrepreneur’s income information'
     },
     grossIncome: {
       title: 'Filling out the information on your gross income',
@@ -752,9 +751,6 @@ const fi: DeepPartial<Translations> = {
     entrepreneurIncome: {
       title: 'Filling out the income information for entrepreneurs',
       description: 'If necessary, you can fill in the information for more than one company by ticking the boxes that apply to all of your companies.',
-      fullTimeLabel: 'Is the business activity full-time or part-time?',
-      fullTime: 'Full-time',
-      partTime: 'Part-time',
       startOfEntrepreneurship: 'Entrepreneurship started on',
       spouseWorksInCompany: 'Does your spouse work for the company?',
       yes: 'Yes',

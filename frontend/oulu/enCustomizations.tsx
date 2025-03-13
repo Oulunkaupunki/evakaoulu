@@ -683,14 +683,6 @@ const fi: DeepPartial<Translations> = {
       </>
     ),
     incomeType: {
-      description: (
-        <>
-          If you&apos;re an entrepreneur, but also have other sources of income,
-          choose both of the following options:
-          <strong> Entrepreneur’s income information </strong> and
-          <strong>Determining the client fee based on gross income.</strong>.
-        </>
-      ),
       startDate: 'Valid from',
       endDate: 'Expires on',
       title: 'Grounds for determining the client fee',

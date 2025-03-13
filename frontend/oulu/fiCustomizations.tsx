@@ -831,13 +831,6 @@ const fi: DeepPartial<Translations> = {
       </>
     ),
     incomeType: {
-      description: (
-        <>
-          Jos olet yrittäjä, mutta sinulla on myös muita tuloja, valitse sekä{' '}
-          <strong>Yrittäjän tulotiedot</strong>, että{' '}
-          <strong>Asiakasmaksun määritteleminen bruttotulojen mukaan</strong>.
-        </>
-      ),
       startDate: 'Voimassa alkaen',
       endDate: 'Voimassaolo päättyy',
       title: 'Asiakasmaksun perusteet',

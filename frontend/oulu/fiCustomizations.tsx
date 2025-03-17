@@ -848,7 +848,7 @@ const fi: DeepPartial<Translations> = {
       ),
       incomeSource: 'Tulotietojen toimitus',
       incomesRegisterConsent:
-        'Hyväksyn, että tietojani tarkistetaan Tulorekisteristä ja Kelasta.',
+        'Tietojani tarkistetaan Tulorekisteristä ja Kelasta.',
       provideAttachments: 'Toimitan tulotietoni liitteenä. Tarvittaessa tietojen oikeellisuus tarkistetaan Tulorekisteristä tai Kelasta.',
       estimate: 'Arvio bruttotuloistani',
       estimatedMonthlyIncome: 'Keskimääräiset tulot sisältäen lomarahat, €/kk',

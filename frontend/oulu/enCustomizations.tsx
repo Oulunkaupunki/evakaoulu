@@ -700,7 +700,9 @@ const fi: DeepPartial<Translations> = {
         </>
       ),
       incomeSource: 'Submitting the income information',
-      provideAttachments: 'I submit my income information attached',
+      incomesRegisterConsent:
+        'My information is being verified from the income register and Kela.',
+      provideAttachments: 'I will provide my income details as an attachment. If necessary, the accuracy of the information will be verified from the income register or Kela.',
       estimate: 'My estimated gross income',
       estimatedMonthlyIncome:
         'Average income including holiday compensation, €/month',

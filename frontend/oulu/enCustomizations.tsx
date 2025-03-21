@@ -1008,8 +1008,8 @@ const fi: DeepPartial<Translations> = {
           Digital Accessibility Supervision Unit
         <br />
         <ExternalLink
-          href="https://www.saavutettavuusvaatimukset.fi"
-          text="www.saavutettavuusvaatimukset.fi"
+          href="https://www.saavutettavuusvaatimukset.fi/en"
+          text="Web accessibility"
           newTab
         />
         <br />

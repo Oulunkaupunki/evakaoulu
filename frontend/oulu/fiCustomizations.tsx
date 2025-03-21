@@ -1084,14 +1084,13 @@ const fi: DeepPartial<Translations> = {
       </P>
       <ul>
         <li>
-          Viestit-sivulla liikkuminen näppäimistöllä tai ruudunlukijalla vaatii
-          vielä korjauksia siirtymien ja kohdistettavien elementtien osalta.
+            Palvelun päivämäärävalitsinta ja monivalintojen alasvetovalikkoa
+            ei ole optimoitu käytettäväksi ruudunlukijalla.
         </li>
         <li>
-          Palvelun yksikkökartassa ei pysty liikkumaan
-          näppäimistöllä/ruudunlukijalla, mutta yksikköjä voi selata samassa
-          näkymässä olevalta listalta. Palvelussa käytetty kartta on kolmannen
-          osapuolen tuottama.
+            Palvelun yksikkökartassa ei pysty liikkumaan näppäimistöllä/ruudunlukijalla,
+            mutta yksikköjä voi selata samassa näkymässä olevalta listalta.
+            Palvelussa käytetty kartta on kolmannen osapuolen tuottama
         </li>
       </ul>
       <H2>Kolmannet osapuolet</H2>
@@ -1100,7 +1099,6 @@ const fi: DeepPartial<Translations> = {
         joiden saavutettavuudesta emme voi vastata.
       </P>
       <ul>
-        <li>Keycloak käyttäjän tunnistautumispalvelu</li>
         <li>Suomi.fi-tunnistautuminen</li>
         <li>Leaflet-karttapalvelu</li>
       </ul>
@@ -1128,15 +1126,13 @@ const fi: DeepPartial<Translations> = {
       </P>
       <H2>Valvontaviranomainen</H2>
       <P>
-        Jos huomaat sivustolla saavutettavuusongelmia, anna ensin palautetta
-        meille sivuston ylläpitäjille. Vastauksessa voi mennä 14 päivää. Jos et
-        ole tyytyväinen saamaasi vastaukseen, tai et saa vastausta lainkaan
-        kahden viikon aikana, voit antaa palautteen Etelä-Suomen
-        aluehallintovirastoon. Etelä-Suomen aluehallintoviraston sivulla
-        kerrotaan tarkasti, miten valituksen voi tehdä, ja miten asia
-        käsitellään.
+          Jos huomaat sivustolla saavutettavuusongelmia, anna ensin palautetta
+          meille sivuston ylläpitäjille. Vastauksessa voi mennä 14 päivää.
+          Jos et ole tyytyväinen saamaasi vastaukseen, tai et saa vastausta
+          lainkaan kahden viikon aikana, voit antaa palautteen Liikenne- ja
+          viestintävirasto Traficomiin. Liikenne- ja viestintävirasto Traficomin
+          sivulla kerrotaan tarkasti, miten valituksen voi tehdä, ja miten asia käsitellään.
       </P>
-
       <P>
         <strong>Valvontaviranomaisen yhteystiedot </strong>
         <br />
@@ -1149,11 +1145,9 @@ const fi: DeepPartial<Translations> = {
           newTab
         />
         <br />
-        <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>
+        <a href="mailto:saavutettavuus@traficom.fi">saavutettavuus@traficom.fi</a>
         <br />
-        puhelinnumero vaihde 0295 016 000
-        <br />
-        Avoinna: ma-pe klo 8.00–16.15
+          puhelinnumero vaihde 029 534 5000
       </P>
     </>
   )

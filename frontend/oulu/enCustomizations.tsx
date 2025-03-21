@@ -951,13 +951,13 @@ const fi: DeepPartial<Translations> = {
       </P>
       <ul>
         <li>
-          Navigating the Messages page with a keyboard or a screen reader
-          requires corrections with regard to transitions and aligned elements.
+            Date pickers and multi-select dropdowns in the service are not
+            optimised to be used with a screen reader.
         </li>
         <li>
-          The unit map provided in the service cannot be navigated with only a
-          keyboard or a screen reader, but the units can be browsed using the
-          list feature on the same page. The service utilizes a third-party map.
+            The service’s unit map cannot be navigated using the keyboard/screen
+            reader, but the units can be browsed on the list available in the
+            same view. The map used in the service is produced by a third party.
         </li>
       </ul>
       <H2>Third parties</H2>
@@ -966,8 +966,7 @@ const fi: DeepPartial<Translations> = {
         service utilizes the following third-party services:
       </P>
       <ul>
-        <li>The user authentication service Keycloak</li>
-        <li>Suomi.fi e-identification</li>
+        <li>Suomi.fi authorization</li>
         <li>The map service Leaflet</li>
       </ul>
       <H2>Alternative ways of using the service</H2>
@@ -992,22 +991,21 @@ const fi: DeepPartial<Translations> = {
         or by mail{' '}
         <a href="mailto:varhaiskasvatus@ouka.fi">varhaiskasvatus@ouka.fi</a>.
       </P>
-      <H2>Control authority</H2>
+      <H2>Supervisory authority</H2>
       <P>
-        If you notice issues with the accessibility of this website, please
-        contact the site administrators first. It may take up to 14 days until
-        you receive a response. If you are not satisfied with the reply you
-        received or do not receive a reply within two weeks, you can send your
-        feedback to the Regional State Administrative Agency for Southern
-        Finland. The website of the Regional State Administrative Agency for
-        Southern Finland provides more in-depth information on submitting a
-        complaint and how the complaints are processed.
+          If you detect any accessibility problems on the website, please
+          first give feedback to the site administrators. It may take 14
+          days until you get a reply. If you are not happy with the response
+          or do not receive a reply in two weeks, you can send your feedback
+          to the Finnish Transport and Communications Agency Traficom.
+          Finnish Transport and Communications Agency Traficom will tell you
+          in detail how to file a complaint and how the matter will be dealt with.
       </P>
       <P>
         <strong>Control authority contact details</strong>
         <br />
-        Regional State Administrative Agency for Southern Finland <br />
-        Accessibility Control Unit
+          Finnish Transport and Communications Agency Traficom <br />
+          Digital Accessibility Supervision Unit
         <br />
         <ExternalLink
           href="https://www.saavutettavuusvaatimukset.fi"
@@ -1015,11 +1013,9 @@ const fi: DeepPartial<Translations> = {
           newTab
         />
         <br />
-        <a href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>
+        <a href="mailto:saavutettavuus@traficom.fi">saavutettavuus@traficom.fi</a>
         <br />
-        phone number switchboard 0295 016 000
-        <br />
-        Open: Mon–Fri 8 a.m. to 4.15 p.m.
+          telephone switchboard 029 534 5000
       </P>
     </>
   )

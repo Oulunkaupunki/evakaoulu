@@ -1136,8 +1136,8 @@ const fi: DeepPartial<Translations> = {
       <P>
         <strong>Valvontaviranomaisen yhteystiedot </strong>
         <br />
-        Etelä-Suomen aluehallintovirasto <br />
-        Saavutettavuuden valvonnan yksikkö
+          Liikenne- ja viestintävirasto Traficom <br />
+          Digitaalisen esteettömyyden ja saavutettavuuden valvontayksikkö
         <br />
         <ExternalLink
           href="https://www.saavutettavuusvaatimukset.fi"

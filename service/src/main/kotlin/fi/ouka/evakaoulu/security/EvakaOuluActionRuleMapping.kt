@@ -81,6 +81,14 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                             .inPlacementUnitOfChildOfOtherAssistanceMeasure(true) as ScopedActionRule<in T>,
                     )
             }
+
+            Action.Unit.READ_TRANSFER_APPLICATIONS -> {
+                @Suppress("UNCHECKED_CAST")
+                action.defaultRules.asSequence() +
+                    sequenceOf(
+                        HasUnitRole(UserRole.UNIT_SUPERVISOR).inUnit() as ScopedActionRule<in T>,
+                    )
+            }
             else -> action.defaultRules.asSequence()
         }
 }

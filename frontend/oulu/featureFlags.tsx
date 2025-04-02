@@ -51,6 +51,7 @@ const features: Features = {
     multiSelectDeparture: true,
     voucherValueSeparation: false,
     nekkuIntegration: false,
+    citizenChildDocumentTypes: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -86,6 +87,7 @@ const features: Features = {
     multiSelectDeparture: true,
     voucherValueSeparation: false,
     nekkuIntegration: true,
+    citizenChildDocumentTypes: true,
   },
   prod: {
     environmentLabel: null,
@@ -121,6 +123,7 @@ const features: Features = {
     multiSelectDeparture: true,
     voucherValueSeparation: false,
     nekkuIntegration: false,
+    citizenChildDocumentTypes: false,
   }
 }
 

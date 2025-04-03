@@ -95,6 +95,7 @@ class EVakaOuluConfig {
                 ),
             placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
             holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,
+            minimumInvoiceAmount = 800,
         )
 
     @Bean

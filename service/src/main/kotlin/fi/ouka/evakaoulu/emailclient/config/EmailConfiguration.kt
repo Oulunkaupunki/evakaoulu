@@ -108,35 +108,33 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
         thread: MessageThreadData,
         isSenderMunicipalAccount: Boolean,
     ): EmailContent {
-        val (typeFi, typeSv, typeEn) =
+        val (typeFi, typeEn) =
             when (thread.type) {
                 MessageType.MESSAGE ->
                     if (thread.urgent) {
-                        Triple(
+                        Pair(
                             "kiireellinen viesti",
-                            "brådskande personligt meddelande",
                             "urgent message",
                         )
                     } else {
-                        Triple("viesti", "personligt meddelande", "message")
+                        Pair("viesti", "message")
                     }
 
                 MessageType.BULLETIN ->
                     if (thread.urgent) {
-                        Triple(
+                        Pair(
                             "kiireellinen tiedote",
-                            "brådskande allmänt meddelande",
                             "urgent bulletin",
                         )
                     } else {
-                        Triple("tiedote", "allmänt meddelande", "bulletin")
+                        Pair("tiedote", "bulletin")
                     }
             }
 
         val showSubjectInBody = isSenderMunicipalAccount && thread.type == MessageType.BULLETIN
 
         return EmailContent.fromHtml(
-            subject = "Uusi $typeFi eVakassa / Nytt $typeSv i eVaka / New $typeEn in eVaka",
+            subject = "Uusi $typeFi eVakassa / New $typeEn in eVaka",
             html =
                 """
                 <p>Sinulle on saapunut uusi $typeFi eVakaan lähettäjältä ${thread.senderName}${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}eVakassa.</p>
@@ -917,7 +915,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 "Uusi keskusteluaika varattu eVakassa / New discussion time reserved in eVaka",
             html =
                 """
-                <p>Uusi keskusteluaika varattu / Ett nytt diskussionsmöte bokad / New discussion time reserved</p>
+                <p>Uusi keskusteluaika varattu / New discussion time reserved</p>
                 <p>${notificationDetails.calendarEventTime.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))}</p>
                 <p>${notificationDetails.calendarEventTime.startTime.format(
                     DateTimeFormatter.ofPattern("HH:mm"),
@@ -942,7 +940,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
                 "Keskusteluaika peruttu eVakassa / Discussion time cancelled in eVaka",
             html =
                 """
-                <p>Varattu keskusteluaika peruttu / Bokad diskussionsmöte avbruten / Reserved discussion time cancelled</p>
+                <p>Varattu keskusteluaika peruttu / Reserved discussion time cancelled</p>
                 <p>${notificationDetails.calendarEventTime.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))}</p>
                 <p>${notificationDetails.calendarEventTime.startTime.format(
                     DateTimeFormatter.ofPattern("HH:mm"),

@@ -53,7 +53,7 @@ class EVakaOuluConfig {
             municipalMessageAccountName = "Oulun kaupunki",
             fiveYearsOldDaycareEnabled = false,
             financeMessageAccountName =
-                "Varhaiskasvatuksen asiakasmaksut - Småbarnspedagogikens avgifter - Early childhood education fees",
+                "Varhaiskasvatuksen asiakasmaksut - Early childhood education fees",
             archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus",
             archiveMetadataConfigs =
                 mapOf(

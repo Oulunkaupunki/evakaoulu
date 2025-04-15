@@ -19,20 +19,20 @@ afterEach(async () => {
 describe('Citizen footer', () => {
   test('Oulu footer label', async () => {
     await waitUntilEqual(
-      () => page.find('[data-qa="footer-citylabel"]').innerText,
+      () => page.find('[data-qa="footer-citylabel"]').text,
       '© Oulun kaupunki'
     )
   })
   test('Oulu policy link', async () => {
     await waitUntilEqual(
       () => page.find('[data-qa="footer-policy-link"]').getAttribute('href'),
-      'https://www.ouka.fi/oulu/verkkoasiointi/tietosuoja-ja-rekisteriselosteet-kasvatus-ja-koulutus'
+      'https://www.ouka.fi/tietosuoja/tietosuojaselosteet?registerId=1939220'
     )
   })
   test('Oulu feedback link', async () => {
     await waitUntilEqual(
       () => page.find('[data-qa="footer-feedback-link"]').getAttribute('href'),
-      'https://e-kartta.ouka.fi/efeedback'
+      'https://palvelupyynto.siku.ouka.fi/customerui'
     )
   })
 })

@@ -575,7 +575,7 @@ const fi: DeepPartial<Translations> = {
         href="https://palvelupyynto.siku.ouka.fi/customerui"
         text="Lähetä palautetta"
         newTab={true}
-        data-qa="footer-policy-link"
+        data-qa="footer-feedback-link"
       />
     )
   },

@@ -610,7 +610,7 @@ const fi: DeepPartial<Translations> = {
         href="https://e-kartta.ouka.fi/efeedback"
         text="Give feedback"
         newTab={true}
-        data-qa="footer-policy-link"
+        data-qa="footer-feedback-link"
       />
     )
   },

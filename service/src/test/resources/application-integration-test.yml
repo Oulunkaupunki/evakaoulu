@@ -53,7 +53,7 @@ evaka:
       password: pass
       xroad:
         address: address
-  s3mock:
+  local_s3:
     url: "http://localhost:9090"
 evakaoulu:
   intimeInvoices:

@@ -23,9 +23,11 @@ class IntegrationTestConfiguration {
         val client =
             S3Client.builder()
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
-                .endpointOverride(bucketEnv.s3MockUrl)
+                .endpointOverride(bucketEnv.localS3Url)
                 .credentialsProvider(
-                    StaticCredentialsProvider.create(AwsBasicCredentials.create("foo", "bar")),
+                    StaticCredentialsProvider.create(
+                        AwsBasicCredentials.create(bucketEnv.localS3AccessKeyId, bucketEnv.localS3SecretAccessKey),
+                    ),
                 )
                 .build()
 
@@ -41,9 +43,11 @@ class IntegrationTestConfiguration {
     fun s3Presigner(bucketEnv: BucketEnv): S3Presigner =
         S3Presigner.builder()
             .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
-            .endpointOverride(bucketEnv.s3MockUrl)
+            .endpointOverride(bucketEnv.localS3Url)
             .credentialsProvider(
-                StaticCredentialsProvider.create(AwsBasicCredentials.create("foo", "bar")),
+                StaticCredentialsProvider.create(
+                    AwsBasicCredentials.create(bucketEnv.localS3AccessKeyId, bucketEnv.localS3SecretAccessKey),
+                ),
             )
             .build()
 

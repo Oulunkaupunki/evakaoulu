@@ -34,14 +34,6 @@ updates:
         patterns:
           - "tslib"
           - "typescript"
-  - package-ecosystem: "gradle"
-    directory: "/mock/identification"
-    schedule:
-      interval: "daily"
-      time: "06:30"
-      timezone: "Europe/Helsinki"
-    ignore:
-      - dependency-name: "org.springframework.boot"
   - package-ecosystem: "docker"
     directories:
       - "/scheduled-tasks/logs"

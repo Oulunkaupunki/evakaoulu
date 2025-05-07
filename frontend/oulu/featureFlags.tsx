@@ -50,7 +50,7 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
-    nekkuIntegration: false,
+    nekkuIntegration: true,
     citizenChildDocumentTypes: true,
   },
   staging: {
@@ -122,7 +122,7 @@ const features: Features = {
     titaniaErrorsReport: true,
     multiSelectDeparture: true,
     voucherValueSeparation: false,
-    nekkuIntegration: false,
+    nekkuIntegration: true,
     citizenChildDocumentTypes: false,
   }
 }

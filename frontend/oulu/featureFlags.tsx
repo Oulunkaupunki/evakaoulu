@@ -52,6 +52,7 @@ const features: Features = {
     voucherValueSeparation: false,
     nekkuIntegration: true,
     citizenChildDocumentTypes: true,
+    decisionChildDocumentTypes: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -88,6 +89,7 @@ const features: Features = {
     voucherValueSeparation: false,
     nekkuIntegration: true,
     citizenChildDocumentTypes: true,
+    decisionChildDocumentTypes: true,
   },
   prod: {
     environmentLabel: null,
@@ -124,6 +126,7 @@ const features: Features = {
     voucherValueSeparation: false,
     nekkuIntegration: true,
     citizenChildDocumentTypes: false,
+    decisionChildDocumentTypes: false,
   }
 }
 

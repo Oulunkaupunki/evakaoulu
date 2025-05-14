@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
@@ -9,11 +7,12 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_21
-
-object Version {
-    const val OPEN_TRACING = "0.33.0"
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
+    }
 }
+
 repositories {
     mavenCentral()
     maven("https://build.shibboleth.net/maven/releases") {
@@ -31,8 +30,8 @@ dependencies {
 
     implementation("evaka:evaka-service")
 
-    implementation("io.github.oshai:kotlin-logging-jvm")
     implementation("ch.qos.logback.access:logback-access-tomcat")
+    implementation("io.github.oshai:kotlin-logging-jvm")
     implementation("net.logstash.logback:logstash-logback-encoder")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -40,7 +39,7 @@ dependencies {
 
     implementation("com.github.kittinunf.fuel:fuel")
     implementation("org.jdbi:jdbi3-core")
-    implementation("com.jcraft:jsch:0.1.55")
+    implementation("com.github.mwiede:jsch")
 
     implementation("software.amazon.awssdk:s3")
 
@@ -53,10 +52,10 @@ dependencies {
     }
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit-pioneer:junit-pioneer:2.2.0") // for CartesianProductTest
+    testImplementation("org.junit-pioneer:junit-pioneer:2.3.0") // for CartesianProductTest
     testImplementation("org.mockito.kotlin:mockito-kotlin")
     testImplementation("org.springframework.ws:spring-ws-test")
-    testImplementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.3"))
+    testImplementation(platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.1"))
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
     testImplementation(platform("org.testcontainers:testcontainers-bom:1.20.1"))
     testImplementation("org.testcontainers:postgresql")
@@ -70,10 +69,9 @@ springBoot {
     mainClass.set("fi.ouka.evakaoulu.EVakaOuluMainKt")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+kotlin {
     compilerOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = JvmTarget.fromTarget(libs.versions.java.get())
     }
 }
 

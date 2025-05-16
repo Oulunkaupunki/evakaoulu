@@ -339,10 +339,6 @@ const fi: DeepPartial<Translations> = {
               </>
             ),
             CLUB: null
-          } as {
-            DAYCARE: JSX.Element | null
-            PRESCHOOL: JSX.Element | null
-            CLUB: JSX.Element | null
           }
         },
         clubDetails: {

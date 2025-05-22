@@ -13,7 +13,7 @@ import {
   preschoolAssistanceLevels
 } from 'lib-common/generated/api-types/assistance'
 import { H3, P } from 'lib-components/typography'
-import { EmployeeCustomizations } from 'lib-customizations/types'
+import type { EmployeeCustomizations } from 'lib-customizations/types'
 
 import OuluLogo from './city-logo.svg'
 import featureFlags from './featureFlags'

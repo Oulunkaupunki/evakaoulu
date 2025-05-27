@@ -821,7 +821,7 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     fun newCustomerIncomeNotification(): EmailContent {
         return EmailContent(
             subject =
-                "Tulotietojen tarkastuskehotus / Uppmaning att göra en inkomstutredning / Request to review income information",
+                "Tulotietojen tarkastuskehotus / Request to review income information",
             text =
                 """
                 Hyvä asiakkaamme

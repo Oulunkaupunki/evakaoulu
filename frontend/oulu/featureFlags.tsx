@@ -54,6 +54,7 @@ const features: Features = {
     nekkuIntegration: true,
     citizenChildDocumentTypes: true,
     decisionChildDocumentTypes: true,
+    absenceApplications: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -91,6 +92,7 @@ const features: Features = {
     nekkuIntegration: true,
     citizenChildDocumentTypes: true,
     decisionChildDocumentTypes: true,
+    absenceApplications: true,
   },
   prod: {
     environmentLabel: null,
@@ -128,6 +130,7 @@ const features: Features = {
     nekkuIntegration: true,
     citizenChildDocumentTypes: false,
     decisionChildDocumentTypes: false,
+    absenceApplications: false,
   }
 }
 

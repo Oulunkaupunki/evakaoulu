@@ -55,6 +55,7 @@ const features: Features = {
     citizenChildDocumentTypes: true,
     decisionChildDocumentTypes: true,
     absenceApplications: true,
+    missingHolidayReservationMarkerEnabled: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -93,6 +94,7 @@ const features: Features = {
     citizenChildDocumentTypes: true,
     decisionChildDocumentTypes: true,
     absenceApplications: true,
+    missingHolidayReservationMarkerEnabled: true,
   },
   prod: {
     environmentLabel: null,

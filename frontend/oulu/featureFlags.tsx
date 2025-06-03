@@ -133,6 +133,7 @@ const features: Features = {
     citizenChildDocumentTypes: false,
     decisionChildDocumentTypes: false,
     absenceApplications: false,
+    missingHolidayReservationMarkerEnabled: true,
   }
 }
 

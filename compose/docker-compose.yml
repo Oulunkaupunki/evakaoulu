@@ -37,7 +37,7 @@ services:
   s3:
     image: adobe/s3mock:4.1.1
     ports:
-      - "9090:9090"
+      - "9091:9090"
       - "9876:9191"
     volumes:
       - s3-data:/data
@@ -50,6 +50,23 @@ services:
       interval: 1s
       timeout: 5s
       retries: 5
+
+  sftp:
+    image: atmoz/sftp:alpine
+    ports:
+      - "2222:22"
+    volumes:
+      - ../evaka/compose/sftp/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+      - ../evaka/compose/sftp/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+    command: foo:pass:::upload
+
+  dummy-idp:
+    build:
+      context: ../evaka/dummy-idp
+    init: true
+    restart: on-failure
+    ports:
+      - "9090:9090"
 
   evakaoulu-srv:
     image: ${EVAKA_SRV_IMAGE}

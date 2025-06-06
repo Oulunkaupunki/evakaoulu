@@ -54,7 +54,7 @@ evaka:
       xroad:
         address: address
   local_s3:
-    url: "http://localhost:9091"
+    url: "https://localhost:9191"
 evakaoulu:
   intimeInvoices:
     username: user

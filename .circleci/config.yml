@@ -56,8 +56,6 @@ executors:
           POSTGRES_PASSWORD: evaka_it
           POSTGRES_DB: evaka_it
       - image: *s3mock_image
-        ports:
-          - "9091:9090"
 
   e2e_executor:
     <<: *default_config

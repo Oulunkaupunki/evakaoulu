@@ -37,6 +37,7 @@ services:
   s3:
     image: adobe/s3mock:4.1.1
     ports:
+      - "9191:9191"
       - "9876:9191"
     volumes:
       - s3-data:/data

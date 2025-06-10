@@ -55,44 +55,51 @@ class EVakaOuluConfig {
             financeMessageAccountName =
                 "Varhaiskasvatuksen asiakasmaksut - Early childhood education fees",
             archiveMetadataOrganization = "Oulun kaupungin varhaiskasvatus",
-            archiveMetadataConfigs =
-                mapOf(
-                    ArchiveProcessType.APPLICATION_DAYCARE to
+            archiveMetadataConfigs = { type: ArchiveProcessType, year: Int ->
+                when (type) {
+                    ArchiveProcessType.APPLICATION_DAYCARE ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 10 * 12,
-                        ),
-                    ArchiveProcessType.APPLICATION_PRESCHOOL to
+                        )
+
+                    ArchiveProcessType.APPLICATION_PRESCHOOL ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 10 * 12,
-                        ),
-                    ArchiveProcessType.APPLICATION_CLUB to
+                        )
+
+                    ArchiveProcessType.APPLICATION_CLUB ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 10 * 12,
-                        ),
-                    ArchiveProcessType.ASSISTANCE_NEED_DECISION_DAYCARE to
+                        )
+
+                    ArchiveProcessType.ASSISTANCE_NEED_DECISION_DAYCARE ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 120 * 12,
-                        ),
-                    ArchiveProcessType.ASSISTANCE_NEED_DECISION_PRESCHOOL to
+                        )
+
+                    ArchiveProcessType.ASSISTANCE_NEED_DECISION_PRESCHOOL ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 120 * 12,
-                        ),
-                    ArchiveProcessType.FEE_DECISION to
+                        )
+
+                    ArchiveProcessType.FEE_DECISION ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 192,
-                        ),
-                    ArchiveProcessType.VOUCHER_VALUE_DECISION to
+                        )
+
+                    ArchiveProcessType.VOUCHER_VALUE_DECISION ->
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 192,
-                        ),
-                ),
+                        )
+                }
+            },
             placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
             holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,
             minimumInvoiceAmount = 800,

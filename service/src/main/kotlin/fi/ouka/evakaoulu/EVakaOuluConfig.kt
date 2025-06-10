@@ -26,6 +26,7 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
+import java.time.MonthDay
 
 @Configuration
 class EVakaOuluConfig {
@@ -104,6 +105,7 @@ class EVakaOuluConfig {
             holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,
             minimumInvoiceAmount = 800,
             nekkuMealDeductionFactor = 0.9,
+            daycarePlacementPlanEndMonthDay = MonthDay.of(8, 15),
         )
 
     @Bean

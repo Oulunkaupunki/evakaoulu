@@ -56,6 +56,7 @@ const features: Features = {
     decisionChildDocumentTypes: true,
     absenceApplications: true,
     missingQuestionnaireAnswerMarkerEnabled: true,
+    showCitizenApplicationPreschoolTerms: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -95,6 +96,7 @@ const features: Features = {
     decisionChildDocumentTypes: true,
     absenceApplications: true,
     missingQuestionnaireAnswerMarkerEnabled: true,
+    showCitizenApplicationPreschoolTerms: true,
   },
   prod: {
     environmentLabel: null,
@@ -134,6 +136,7 @@ const features: Features = {
     decisionChildDocumentTypes: false,
     absenceApplications: false,
     missingQuestionnaireAnswerMarkerEnabled: true,
+    showCitizenApplicationPreschoolTerms: false,
   }
 }
 

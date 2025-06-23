@@ -880,12 +880,12 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     }
 
     override fun financeDecisionNotification(decisionType: FinanceDecisionType): EmailContent {
-        val (decisionTypeFi, decisionTypeSv, decisionTypeEn) =
+        val (decisionTypeFi, decisionTypeEn) =
             when (decisionType) {
                 FinanceDecisionType.VOUCHER_VALUE_DECISION ->
-                    Triple("arvopäätös", "beslut om servicesedel", "voucher value decision")
+                    Pair("arvopäätös", "voucher value decision")
                 FinanceDecisionType.FEE_DECISION ->
-                    Triple("maksupäätös", "betalningsbeslut", "fee decision")
+                    Pair("maksupäätös", "fee decision")
             }
         return EmailContent.fromHtml(
             subject =
@@ -1081,7 +1081,7 @@ $unsubscribeEn
 <hr>
 <p>This confirmation code has been sent from eVaka for editing your information. Enter the provided confirmation code in the requested field in eVaka.</p>
 <hr>
-<p>Vahvistuskoodi / bekräftelsekod / confirmation code: <strong>$confirmationCode</strong></p>
+<p>Vahvistuskoodi / confirmation code: <strong>$confirmationCode</strong></p>
 """,
         )
 

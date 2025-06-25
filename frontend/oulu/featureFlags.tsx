@@ -57,6 +57,7 @@ const features: Features = {
     absenceApplications: true,
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
+    showMetadataToCitizen: true,
   },
   staging: {
     environmentLabel: 'Staging',
@@ -97,6 +98,7 @@ const features: Features = {
     absenceApplications: true,
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
+    showMetadataToCitizen: true,
   },
   prod: {
     environmentLabel: null,
@@ -137,6 +139,7 @@ const features: Features = {
     absenceApplications: false,
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
+    showMetadataToCitizen: true,
   }
 }
 

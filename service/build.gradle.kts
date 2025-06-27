@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.spring.boot)
     id("org.unbroken-dome.xjc") version "2.0.0"
     id("com.gorylenko.gradle-git-properties") version "2.4.2"
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
 }
 
 java {

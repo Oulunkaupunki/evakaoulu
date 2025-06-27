@@ -90,3 +90,7 @@ tasks.register<Test>("pdfGenerationTest") {
         includeTags("PDFGenerationTest")
     }
 }
+
+gitProperties {
+    dotGitDirectory = project.rootProject.layout.projectDirectory.dir("../.git")
+}

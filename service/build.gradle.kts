@@ -57,7 +57,7 @@ dependencies {
     testImplementation("org.springframework.ws:spring-ws-test")
     testImplementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.2"))
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.3"))
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.reflections:reflections:0.10.2")
     testImplementation("software.amazon.awssdk:s3")

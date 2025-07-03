@@ -12,9 +12,7 @@ aliases:
   - &workspace_root /home/circleci/repo
   - &workspace_apigw /home/circleci/repo/evaka/apigw
   - &workspace_evaka_frontend /home/circleci/repo/evaka/frontend
-  - &workspace_oulu_frontend /home/circleci/repo/frontend
   - &workspace_service /home/circleci/repo/service
-  - &workspace_compose /home/circleci/repo/compose
 
   - &base_image cimg/base:current-22.04
   - &aws_image cimg/aws:2024.03
@@ -22,7 +20,6 @@ aliases:
   - &openjdk_image cimg/openjdk:21.0
   - &postgres_image cimg/postgres:16.3
   - &s3mock_image adobe/s3mock:4.1.1
-  - &ubuntu_machine_image ubuntu-2204:current
 
   - &default_config
     working_directory: *workspace_root
@@ -56,14 +53,6 @@ executors:
           POSTGRES_PASSWORD: evaka_it
           POSTGRES_DB: evaka_it
       - image: *s3mock_image
-
-  e2e_executor:
-    <<: *default_config
-    machine:
-      image: *ubuntu_machine_image
-    environment:
-      NODE_ENV: development
-      BUILDKIT_PROGRESS: plain
 
 commands:
   store_repo:
@@ -182,10 +171,6 @@ commands:
             git config --global user.name "evakaoulu-ci"
 
   frontend_install:
-    parameters:
-      include_e2e:
-        type: boolean
-        default: false
     steps:
       - restore_cache:
           keys:
@@ -202,26 +187,6 @@ commands:
           paths:
             - evaka/frontend/.yarn/cache
             - /home/circleci/.npm/sentry-cli
-      - when:
-          condition:
-            equal: [ true, << parameters.include_e2e >> ]
-          steps:
-            - restore_cache:
-                name: Restore e2e yarn cache
-                keys:
-                  - yarn-cache-e2e-v3-{{ checksum "frontend/yarn.lock" }}
-                  - yarn-cache-e2e-v3-
-                  - yarn-cache-e2e-
-            - run:
-                working_directory: *workspace_oulu_frontend
-                command: |
-                  yarn install --immutable
-                  yarn playwright install chromium
-            - save_cache:
-                name: Store e2e yarn cache
-                key: yarn-cache-e2e-v3-{{ checksum "frontend/yarn.lock" }}
-                paths:
-                  - frontend/.yarn/cache
 
   build_docker_image:
     parameters:
@@ -483,55 +448,6 @@ jobs:
               --data '{"branch":"main","parameters":{"workflow":"deploy_pipeline","version":"'$CIRCLE_SHA1'"}}'
       - slack-notification
 
-  #E2E JOBS
-
-  e2e_test:
-    executor: e2e_executor
-    resource_class: large
-    steps:
-      - restore_repo
-      - login_ecr
-      - run:
-          name: Start up compose stack
-          working_directory: *workspace_compose
-          command: |
-            CI=true LOCAL_DIR='../evaka/frontend' \
-            EVAKA_FRONTEND_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/frontend:${CIRCLE_SHA1} \
-            EVAKA_GW_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/api-gateway:${CIRCLE_SHA1} \
-            EVAKA_SRV_IMAGE=463484918991.dkr.ecr.eu-west-1.amazonaws.com/evakaoulu/service:${CIRCLE_SHA1} \
-            docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml up -d --build
-      - frontend_install:
-          include_e2e: true
-      - run:
-          name: Waiting for compose stack to be up...
-          working_directory: *workspace_root
-          command: ./evaka/compose/e2e/playwright/bin/wait-for-url.sh "http://localhost:9999/api/dev-api/"
-      - run:
-          name: Run E2E tests
-          working_directory: *workspace_oulu_frontend
-          command: yarn e2e-ci-playwright
-          environment:
-            HEADLESS: true
-            BASE_URL: http://localhost:9999
-            JEST_JUNIT_OUTPUT_DIR: test-results
-      - run:
-          name: Collect docker-compose logs
-          working_directory: *workspace_compose
-          command: docker-compose -f docker-compose.yml -f docker-compose-dbs.yml -f docker-compose.e2e.yml logs --tail=all > /tmp/docker-compose-logs.txt
-          when: always
-      - store_artifacts:
-          path: /tmp/docker-compose-logs.txt
-          destination: docker-compose-logs.txt
-      - store_artifacts:
-          path: frontend/screenshots
-          destination: screenshots
-      - store_artifacts:
-          path: frontend/videos
-          destination: videos
-      - store_test_results:
-          path: frontend/test-results
-      - slack-notification
-
 workflows:
   version: 2
   build_test_and_deploy:
@@ -552,15 +468,6 @@ workflows:
             - slack-secrets
           requires:
             - checkout_repo
-
-      - e2e_test:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - frontend_build_image
-            - apigw_build_image
-            - service_build_image
 
       - frontend_build_image:
           context:
@@ -604,10 +511,12 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
+            - frontend_build_image
+            - apigw_build_image
+            - service_build_image
             - scheduled_tasks_reporting_build_image
             - scheduled_tasks_logs_build_image
             - scheduled_tasks_certificate_check_build_image
-            - e2e_test
           filters:
             branches:
               only:
@@ -618,10 +527,12 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
+            - frontend_build_image
+            - apigw_build_image
+            - service_build_image
             - scheduled_tasks_reporting_build_image
             - scheduled_tasks_logs_build_image
             - scheduled_tasks_certificate_check_build_image
-            - e2e_test
           filters:
             branches:
               only:

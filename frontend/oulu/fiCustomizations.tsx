@@ -607,6 +607,18 @@ const fi: DeepPartial<Translations> = {
     }
   },
   decisions: {
+    applicationDecisions: {
+      decision: 'Päätös',
+      type: {
+        CLUB: 'kerhosta',
+        DAYCARE: 'varhaiskasvatuksesta',
+        DAYCARE_PART_TIME: 'osa-aikaisesta varhaiskasvatuksesta',
+        PRESCHOOL: 'esiopetuksesta',
+        PRESCHOOL_DAYCARE: 'täydentävästä varhaiskasvatuksesta',
+        PRESCHOOL_CLUB: 'esiopetuksen kerhosta',
+        PREPARATORY_EDUCATION: 'valmistavasta opetuksesta'
+      },
+    },
     summary: (
       <P width="800px">Tälle sivulle saapuvat kaikki lapsen päätökset.</P>
     ),

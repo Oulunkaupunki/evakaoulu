@@ -22,6 +22,41 @@ const customizations: EmployeeCustomizations = {
   appConfig: {},
   translations: {
     fi: {
+      application: {
+        serviceNeed: {
+          connectedLabel: 'Täydentävä varhaiskasvatus',
+          connectedValue: 'Haen myös täydentävää varhaiskasvatusta',
+          connectedDaycarePreferredStartDateLabel:
+              'Täydentävän varhaiskasvatuksen toivottu aloituspäivä',
+        },
+        decisions: {
+          types: {
+            CLUB: 'Kerhopäätös',
+            DAYCARE: 'Varhaiskasvatuspäätös',
+            DAYCARE_PART_TIME: 'Varhaiskasvatuspäätös (osapäiväinen)',
+            PRESCHOOL: 'Esiopetuspäätös',
+            PRESCHOOL_DAYCARE: 'Täydentävä varhaiskasvatuspäätös',
+            PRESCHOOL_CLUB: 'Esiopetuksen kerho',
+            PREPARATORY_EDUCATION: 'Valmistavan opetuksen päätös'
+          }
+        }
+      },
+      placementDraft: {
+        preschoolDaycare: 'Täydentävä varhaiskasvatus',
+      },
+      decisionDraft: {
+        types: {
+          CLUB: 'Kerho',
+          DAYCARE: 'Varhaiskasvatus',
+          DAYCARE_PART_TIME: 'Osapäiväinen varhaiskasvatus',
+          PRESCHOOL_DAYCARE: 'Esiopetusta täydentävä varhaiskasvatus',
+          PRESCHOOL_CLUB: 'Esiopetuksen kerho',
+          PRESCHOOL: 'Esiopetus',
+          PREPARATORY: 'Valmistava opetus',
+          PREPARATORY_EDUCATION: 'Valmistava opetus',
+          PREPARATORY_DAYCARE: 'Valmistavaan opetusta täydentävä varhaiskasvatus'
+        },
+      },
       preferredFirstName: {
         popupLink: 'Kutsumanimi',
         title: 'Kutsumanimi',

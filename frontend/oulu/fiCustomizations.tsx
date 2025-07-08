@@ -27,13 +27,12 @@ const customerContactText = function () {
 
 const fi: DeepPartial<Translations> = {
   children: {
-      serviceApplication: {
-          createInfo:
-              'Tästä voit ehdottaa muutosta lapsesi palveluntarpeeseen. Varhaiskasvatusyksikön johtaja hyväksyy tai hylkää ehdotuksesi. Tarkempaa lisätietoa palveluntarpeen muuttamisesta voit kysyä lapsesi yksiköstä. Sopimus tehdään vähintään viiden kuukauden ajalle ja se voidaan muuttaa kesken sopimuskauden vain perustellusta syystä.',
-          openApplicationInfo:
-              'Lapsellesi on ehdotettu uutta palveluntarvetta. Ehdotuksesi on yksikön johtajalla hyväksyttävänä.',
-      }
-
+    serviceApplication: {
+      createInfo:
+        'Tästä voit ehdottaa muutosta lapsesi palveluntarpeeseen. Varhaiskasvatusyksikön johtaja hyväksyy tai hylkää ehdotuksesi. Tarkempaa lisätietoa palveluntarpeen muuttamisesta voit kysyä lapsesi yksiköstä. Sopimus tehdään vähintään viiden kuukauden ajalle ja se voidaan muuttaa kesken sopimuskauden vain perustellusta syystä.',
+      openApplicationInfo:
+        'Lapsellesi on ehdotettu uutta palveluntarvetta. Ehdotuksesi on yksikön johtajalla hyväksyttävänä.'
+    }
   },
   calendar: {
     absenceModal: {
@@ -57,7 +56,8 @@ const fi: DeepPartial<Translations> = {
     creation: {
       daycareInfo:
         'Varhaiskasvatushakemuksella haetaan paikkaa kunnalliseen päiväkotiin tai perhepäivähoitoon. Samalla hakemuksella voi hakea myös varhaiskasvatuksen palveluseteliä yksityiseen varhaiskasvatukseen valitsemalla Hakutoiveet-kohtaan se yksityinen yksikkö, johon palveluseteliä halutaan hakea.',
-      preschoolLabel: 'Ilmoittautuminen esiopetukseen ja/tai hakeminen esiopetukseen liittyvään varhaiskasvatukseen',
+      preschoolLabel:
+        'Ilmoittautuminen esiopetukseen ja/tai hakeminen esiopetukseen liittyvään varhaiskasvatukseen',
       preschoolInfo:
         'Maksutonta esiopetusta järjestetään neljä (4) tuntia päivässä. Lukuvuosi noudattaa pääosin koulujen työ- ja loma-aikoja.',
       preschoolDaycareInfo:
@@ -73,8 +73,8 @@ const fi: DeepPartial<Translations> = {
             siirtohakemuksena. Nykyistä paikkaa ei tarvitse irtisanoa.
           </P>
           <P>
-            Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus on
-            ottanut sen käsittelyyn. Tämän jälkeen muutokset tai hakemuksen
+            Hakemukseen voi tehdä muutoksia siihen saakka, kunnes palveluohjaus
+            on ottanut sen käsittelyyn. Tämän jälkeen muutokset tai hakemuksen
             peruminen tehdään ottamalla yhteyttä varhaiskasvatuksen
             palveluohjaukseen
             {customerContactText()}
@@ -102,10 +102,11 @@ const fi: DeepPartial<Translations> = {
               <>
                 <P>
                   Lapsella on sisarusperuste samaan varhaiskasvatuspaikkaan,
-                  jossa hänen sisaruksensa on varhaiskasvatuksen alkaessa. Tavoitteena
-                  on sijoittaa sisarukset samaan varhaiskasvatuspaikkaan perheen
-                  niin toivoessa. Jos haet paikkaa sisaruksille, jotka eivät
-                  vielä ole varhaiskasvatuksessa, kirjoita tieto hakemuksen Muut
+                  jossa hänen sisaruksensa on varhaiskasvatuksen alkaessa.
+                  Tavoitteena on sijoittaa sisarukset samaan
+                  varhaiskasvatuspaikkaan perheen niin toivoessa. Jos haet
+                  paikkaa sisaruksille, jotka eivät vielä ole
+                  varhaiskasvatuksessa, kirjoita tieto hakemuksen Muut
                   lisätiedot -kohtaan.
                 </P>
                 <P>
@@ -117,15 +118,16 @@ const fi: DeepPartial<Translations> = {
             ),
             PRESCHOOL: (
               <>
-                  <P>
-                      Esioppilaalla on sisarusperuste oman lähialueen päiväkotiin,
-                      jossa esioppilaan sisaruksella on paikka esiopetusvuoden alkaessa.
-                  </P>
-                  <P>
-                      Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä
-                      valitse alla olevissa hakutoiveissa ensisijaiseksi toiveeksi
-                      sama yksikkö, jossa lapsen sisarus on.
-                  </P>
+                <P>
+                  Esioppilaalla on sisarusperuste oman lähialueen päiväkotiin,
+                  jossa esioppilaan sisaruksella on paikka esiopetusvuoden
+                  alkaessa.
+                </P>
+                <P>
+                  Täytä nämä tiedot vain, jos käytät sisarusperustetta, sekä
+                  valitse alla olevissa hakutoiveissa ensisijaiseksi toiveeksi
+                  sama yksikkö, jossa lapsen sisarus on.
+                </P>
               </>
             ),
             CLUB: (
@@ -143,8 +145,8 @@ const fi: DeepPartial<Translations> = {
               </>
             )
           },
-        unit: 'Sisaruksen päiväkoti',
-        unitPlaceholder: 'päiväkodin nimi',
+          unit: 'Sisaruksen päiväkoti',
+          unitPlaceholder: 'päiväkodin nimi'
         },
 
         units: {
@@ -210,7 +212,8 @@ const fi: DeepPartial<Translations> = {
       },
       heading: {
         title: {
-          PRESCHOOL: 'Ilmoittautuminen esiopetukseen ja/tai hakeminen esiopetukseen liittyvään varhaiskasvatukseen',
+          PRESCHOOL:
+            'Ilmoittautuminen esiopetukseen ja/tai hakeminen esiopetukseen liittyvään varhaiskasvatukseen',
           CLUB: 'Hakemus avoimeen varhaiskasvatuksen kerhotoimintaan'
         },
         info: {
@@ -219,18 +222,19 @@ const fi: DeepPartial<Translations> = {
               <P>
                 Hakemus on jätettävä viimeistään neljä kuukautta ennen kuin
                 tarvitsette paikan. Jos tarvitsette varhaiskasvatusta
-                kiireellisesti työn tai opiskelujen alkamisen vuoksi, käsittelyaika on
-                kaksi viikkoa hakemuksen saapumisesta.
+                kiireellisesti työn tai opiskelujen alkamisen vuoksi,
+                käsittelyaika on kaksi viikkoa hakemuksen saapumisesta.
               </P>
               <P>
-                Hakemuksen tehnyt huoltaja saa kirjallisen päätöksen varhaiskasvatuspaikasta
-                Suomi.fi-viestit -palveluun tai postitse, jos Suomi.fi-palvelu ei ole
-                käytössä. Päätös on nähtävillä eVakassa kohdassa Valikko – Päätökset
-                ja se tulee hyväksyä tai hylätä kahden viikon kuluessa.
+                Hakemuksen tehnyt huoltaja saa kirjallisen päätöksen
+                varhaiskasvatuspaikasta Suomi.fi-viestit -palveluun tai
+                postitse, jos Suomi.fi-palvelu ei ole käytössä. Päätös on
+                nähtävillä eVakassa kohdassa Valikko – Päätökset ja se tulee
+                hyväksyä tai hylätä kahden viikon kuluessa.
               </P>
               <P>
-                Suomi.fi-viestit palvelusta ja sen
-                käyttöönotosta saatte lisätietoa{' '}
+                Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte
+                lisätietoa{' '}
                 <ExternalLink
                   text="https://www.suomi.fi/viestit"
                   href="https://www.suomi.fi/viestit"
@@ -252,12 +256,13 @@ const fi: DeepPartial<Translations> = {
               <P>
                 Ilmoittautumisen tehnyt huoltaja saa kirjallisen päätöksen
                 paikasta Suomi.fi-viestit -palveluun tai postitse, jos
-                Suomi.fi-palvelu ei ole käytössä. Päätös on nähtävillä
-                eVakassa kohdassa Valikko – Päätökset ja se tulee
-                hyväksyä tai hylätä kahden viikon kuluessa.
+                Suomi.fi-palvelu ei ole käytössä. Päätös on nähtävillä eVakassa
+                kohdassa Valikko – Päätökset ja se tulee hyväksyä tai hylätä
+                kahden viikon kuluessa.
               </P>
               <P>
-                Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte lisätietoa {' '}
+                Suomi.fi-viestit palvelusta ja sen käyttöönotosta saatte
+                lisätietoa{' '}
                 <ExternalLink
                   text="Suomi.fi-viestit"
                   href="https://www.suomi.fi/viestit"
@@ -277,8 +282,9 @@ const fi: DeepPartial<Translations> = {
               <P>
                 Hakemuksen tehnyt huoltaja saa kirjallisen päätöksen paikasta
                 Suomi.fi-viestit -palveluun tai postitse, jos Suomi.fi-palvelu
-                ei ole käytössä. Päätös on nähtävillä eVakassa kohdassa
-                Valikko – Päätökset ja se tulee hyväksyä tai hylätä kahden viikon kuluessa.
+                ei ole käytössä. Päätös on nähtävillä eVakassa kohdassa Valikko
+                – Päätökset ja se tulee hyväksyä tai hylätä kahden viikon
+                kuluessa.
               </P>
               <P>
                 Avoin varhaiskasvatustoiminta on maksutonta, eikä siihen
@@ -314,21 +320,21 @@ const fi: DeepPartial<Translations> = {
           instructions: {
             DAYCARE: (
               <>
-                Toivottua aloituspäivää on mahdollista siirtää eteenpäin,
-                kunnes palveluohjaus on ottanut hakemuksen käsittelyyn.
-                Toivotun aloituspäivän aikaistaminen tai käsittelyssä
-                olevan hakemuksen muutokset tehdään ottamalla yhteyttä
-                varhaiskasvatuksen palveluohjaukseen
+                Toivottua aloituspäivää on mahdollista siirtää eteenpäin, kunnes
+                palveluohjaus on ottanut hakemuksen käsittelyyn. Toivotun
+                aloituspäivän aikaistaminen tai käsittelyssä olevan hakemuksen
+                muutokset tehdään ottamalla yhteyttä varhaiskasvatuksen
+                palveluohjaukseen
                 {customerContactText()}
               </>
             ),
             PRESCHOOL: (
               <>
-                Toivottua aloituspäivää on mahdollista siirtää eteenpäin,
-                kunnes palveluohjaus on ottanut hakemuksen käsittelyyn.
-                Toivotun aloituspäivän aikaistaminen tai käsittelyssä
-                olevan hakemuksen muutokset tehdään ottamalla yhteyttä
-                varhaiskasvatuksen palveluohjaukseen
+                Toivottua aloituspäivää on mahdollista siirtää eteenpäin, kunnes
+                palveluohjaus on ottanut hakemuksen käsittelyyn. Toivotun
+                aloituspäivän aikaistaminen tai käsittelyssä olevan hakemuksen
+                muutokset tehdään ottamalla yhteyttä varhaiskasvatuksen
+                palveluohjaukseen
                 {customerContactText()}
               </>
             ),
@@ -364,28 +370,31 @@ const fi: DeepPartial<Translations> = {
           instructions:
             'Ilta- ja vuorohoidolla tarkoitetaan pääasiassa klo 6.00-18.00 ulkopuolella ja viikonloppuisin sekä ympärivuorokautisesti tapahtuvaa varhaiskasvatusta. Jos tarvitset ilta- tai vuorohoitoa, täsmennä tarvetta hakemuksen Muut lisätiedot -kohdassa.',
           attachmentsMessage: {
-              DAYCARE: (
-                  <P>
-                      Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
-                      vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin
-                      ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys
-                      vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta
-                      opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta.
-                  </P>
-              ),
-              PRESCHOOL: (
-                  <>
-                      <P>
-                          Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
-                          vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti iltaisin
-                          ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla selvitys
-                          vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta
-                          opiskelusta molemmilta samassa taloudessa asuvilta huoltajilta.
-                      </P>
-                  </>
-              )
+            DAYCARE: (
+              <P>
+                Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
+                vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti
+                iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee olla
+                selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin
+                tapahtuvasta opiskelusta molemmilta samassa taloudessa asuvilta
+                huoltajilta.
+              </P>
+            ),
+            PRESCHOOL: (
+              <>
+                <P>
+                  Ilta- ja vuorohoito on tarkoitettu lapsille, joiden molemmat
+                  vanhemmat ovat vuorotyössä tai opiskelevat pääsääntöisesti
+                  iltaisin ja/tai viikonloppuisin. Hakemuksen liitteenä tulee
+                  olla selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin
+                  tapahtuvasta opiskelusta molemmilta samassa taloudessa
+                  asuvilta huoltajilta.
+                </P>
+              </>
+            )
           },
-            attachmentsSubtitle: 'Lisää tähän selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molempien huoltajien osalta.',
+          attachmentsSubtitle:
+            'Lisää tähän selvitys vuorotyöstä tai iltaisin ja/tai viikonloppuisin tapahtuvasta opiskelusta molempien huoltajien osalta.'
         },
         assistanceNeedInstructions: {
           DAYCARE:
@@ -407,8 +416,8 @@ const fi: DeepPartial<Translations> = {
               <P>
                 Voit hakea lapselle tarvittaessa esiopetukseen liittyvää
                 maksullista varhaiskasvatusta. Jos lapsesi tarvitsee
-                varhaiskasvatusta elokuussa ennen esiopetuksen alkamista,
-                täytä lapsellesi erillinen varhaiskasvatushakemus tälle ajalle.
+                varhaiskasvatusta elokuussa ennen esiopetuksen alkamista, täytä
+                lapsellesi erillinen varhaiskasvatushakemus tälle ajalle.
               </P>
               <P>
                 Saat varhaiskasvatuspaikasta kirjallisen päätöksen{' '}
@@ -437,7 +446,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'Lapsi tarvitsee tukea suomen kielen oppimisessa.',
         preparatoryInfo:
-          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään kielenkartoitus ja sen perusteella suomi toisena kielenä (S2) -opetussuunnitelma. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti.',
+          'Jokaiselle lapselle, jonka äidinkieli ei ole suomi, ruotsi tai saame, tehdään kielenkartoitus ja sen perusteella suomi toisena kielenä (S2) -opetussuunnitelma. S2-opetus sisällytetään päivittäiseen toimintaan lapsen tarpeiden mukaisesti.'
       },
       contactInfo: {
         familyInfo: undefined,
@@ -617,7 +626,7 @@ const fi: DeepPartial<Translations> = {
         PRESCHOOL_DAYCARE: 'täydentävästä varhaiskasvatuksesta',
         PRESCHOOL_CLUB: 'esiopetuksen kerhosta',
         PREPARATORY_EDUCATION: 'valmistavasta opetuksesta'
-      },
+      }
     },
     summary: (
       <P width="800px">Tälle sivulle saapuvat kaikki lapsen päätökset.</P>
@@ -718,104 +727,105 @@ const fi: DeepPartial<Translations> = {
       pageTitle: 'Päätös erityisestä tuesta esiopetuksessa',
       lawReference: 'Perusopetuslaki 17 § ja 31 §',
       appealInstructions: (
-          <>
-              <P>
-                  Tähän päätökseen tyytymätön voi tehdä kirjallisen
-                  oikaisuvaatimuksen.
-              </P>
-              <H3>Oikaisuvaatimusoikeus</H3>
-              <P>
-                  Oikaisuvaatimuksen saa tehdä se, johon päätös on kohdistettu tai
-                  jonka oikeuteen, velvollisuuteen tai etuun päätös välittömästi
-                  vaikuttaa (asianosainen).
-              </P>
-              <H3>Oikaisuviranomainen</H3>
-              <P>Oikaisu tehdään Pohjois-Suomen aluehallintovirastolle.</P>
-              <P>
-                  Pohjois-Suomen aluehallintovirasto
-                  <br/>
-                  Käyntiosoite: Linnankatu 3, 90100 Oulu
-                  <br/>
-                  Postiosoite: PL 6, 13035 AVI
-                  <br/>
-                  Sähköpostiosoite: kirjaamo.pohjois@avi.fi
-                  <br/>
-                  Puhelinvaihde: 0295 017 500
-              </P>
-              <H3>Oikaisuvaatimusaika</H3>
-              <P>
-                  Oikaisuvaatimus on tehtävä 14 päivän kuluessa päätöksen
-                  tiedoksisaannista.
-              </P>
-              <H3>Tiedoksisaanti</H3>
-              <P>
-                  Asianosaisen katsotaan saaneen päätöksestä tiedon, jollei muuta
-                  näytetä, 7 päivän kuluttua kirjeen lähettämisestä, 3 päivän kuluttua
-                  sähköpostin lähettämisestä, saantitodistuksen osoittamana aikana tai
-                  erilliseen tiedoksisaantitodistukseen merkittynä aikana.
-                  Tiedoksisaantipäivää ei lueta määräaikaan. Jos määräajan viimeinen
-                  päivä on pyhäpäivä, itsenäisyyspäivä, vapunpäivä, joulu- tai
-                  juhannusaatto tai arkilauantai, saa tehtävän toimittaa ensimmäisenä
-                  arkipäivänä sen jälkeen.
-              </P>
-              <H3>Oikaisuvaatimus</H3>
-              <P noMargin>Oikaisuvaatimuksessa on ilmoitettava</P>
-              <ul>
-                  <li>
-                      Oikaisuvaatimuksen tekijän nimi, kotikunta, postiosoite ja
-                      puhelinnumero
-                  </li>
-                  <li>päätös, johon haetaan oikaisua</li>
-                  <li>
-                      miltä osin päätökseen haetaan oikaisua ja mitä oikaisua siihen
-                      vaaditaan tehtäväksi
-                  </li>
-                  <li>vaatimuksen perusteet</li>
-              </ul>
-              <P noMargin>Oikaisuvaatimukseen on liitettävä</P>
-              <ul>
-                  <li>
-                      päätös, johon haetaan oikaisua, alkuperäisenä tai jäljennöksenä
-                  </li>
-                  <li>
-                      todistus siitä, minä päivänä päätös on annettu tiedoksi, tai muu
-                      selvitys oikaisuvaatimusajan alkamisen ajankohdasta
-                  </li>
-                  <li>
-                      asiakirjat, joihin oikaisuvaatimuksen tekijä vetoaa
-                      oikaisuvaatimuksensa tueksi, jollei niitä ole jo aikaisemmin
-                      toimitettu viranomaiselle.
-                  </li>
-              </ul>
-              <P>
-                  Asiamiehen on liitettävä valituskirjelmään valtakirja, kuten
-                  oikeudenkäynnistä hallintoasioissa annetun lain (808/2019) 32 §:ssä
-                  säädetään.
-              </P>
-              <H3>Oikaisuvaatimuksen toimittaminen</H3>
-              <P>
-                  Oikaisuvaatimuskirjelmä on toimitettava oikaisuvaatimusajan kuluessa
-                  oikaisuvaatimusviranomaiselle. Oikaisuvaatimuskirjelmän tulee olla
-                  perillä oikaisuvaatimusajan viimeisenä päivänä ennen viraston
-                  aukiolon päättymistä. Oikaisuvaatimuksen lähettäminen postitse tai
-                  sähköisesti tapahtuu lähettäjän omalla vastuulla.
-              </P>
-              <P>
-                  Oikaisuvaatimuksen aluehallintovirastolle voi tehdä myös sähköisessä asiointipalvelussa
-                  https://www.avi.fi -{'>'} henkilöasiakas -{'>'} oikaisuvaatimukset -{'>'} sähköinen asiointi.
-              </P>
-          </>
+        <>
+          <P>
+            Tähän päätökseen tyytymätön voi tehdä kirjallisen
+            oikaisuvaatimuksen.
+          </P>
+          <H3>Oikaisuvaatimusoikeus</H3>
+          <P>
+            Oikaisuvaatimuksen saa tehdä se, johon päätös on kohdistettu tai
+            jonka oikeuteen, velvollisuuteen tai etuun päätös välittömästi
+            vaikuttaa (asianosainen).
+          </P>
+          <H3>Oikaisuviranomainen</H3>
+          <P>Oikaisu tehdään Pohjois-Suomen aluehallintovirastolle.</P>
+          <P>
+            Pohjois-Suomen aluehallintovirasto
+            <br />
+            Käyntiosoite: Linnankatu 3, 90100 Oulu
+            <br />
+            Postiosoite: PL 6, 13035 AVI
+            <br />
+            Sähköpostiosoite: kirjaamo.pohjois@avi.fi
+            <br />
+            Puhelinvaihde: 0295 017 500
+          </P>
+          <H3>Oikaisuvaatimusaika</H3>
+          <P>
+            Oikaisuvaatimus on tehtävä 14 päivän kuluessa päätöksen
+            tiedoksisaannista.
+          </P>
+          <H3>Tiedoksisaanti</H3>
+          <P>
+            Asianosaisen katsotaan saaneen päätöksestä tiedon, jollei muuta
+            näytetä, 7 päivän kuluttua kirjeen lähettämisestä, 3 päivän kuluttua
+            sähköpostin lähettämisestä, saantitodistuksen osoittamana aikana tai
+            erilliseen tiedoksisaantitodistukseen merkittynä aikana.
+            Tiedoksisaantipäivää ei lueta määräaikaan. Jos määräajan viimeinen
+            päivä on pyhäpäivä, itsenäisyyspäivä, vapunpäivä, joulu- tai
+            juhannusaatto tai arkilauantai, saa tehtävän toimittaa ensimmäisenä
+            arkipäivänä sen jälkeen.
+          </P>
+          <H3>Oikaisuvaatimus</H3>
+          <P noMargin>Oikaisuvaatimuksessa on ilmoitettava</P>
+          <ul>
+            <li>
+              Oikaisuvaatimuksen tekijän nimi, kotikunta, postiosoite ja
+              puhelinnumero
+            </li>
+            <li>päätös, johon haetaan oikaisua</li>
+            <li>
+              miltä osin päätökseen haetaan oikaisua ja mitä oikaisua siihen
+              vaaditaan tehtäväksi
+            </li>
+            <li>vaatimuksen perusteet</li>
+          </ul>
+          <P noMargin>Oikaisuvaatimukseen on liitettävä</P>
+          <ul>
+            <li>
+              päätös, johon haetaan oikaisua, alkuperäisenä tai jäljennöksenä
+            </li>
+            <li>
+              todistus siitä, minä päivänä päätös on annettu tiedoksi, tai muu
+              selvitys oikaisuvaatimusajan alkamisen ajankohdasta
+            </li>
+            <li>
+              asiakirjat, joihin oikaisuvaatimuksen tekijä vetoaa
+              oikaisuvaatimuksensa tueksi, jollei niitä ole jo aikaisemmin
+              toimitettu viranomaiselle.
+            </li>
+          </ul>
+          <P>
+            Asiamiehen on liitettävä valituskirjelmään valtakirja, kuten
+            oikeudenkäynnistä hallintoasioissa annetun lain (808/2019) 32 §:ssä
+            säädetään.
+          </P>
+          <H3>Oikaisuvaatimuksen toimittaminen</H3>
+          <P>
+            Oikaisuvaatimuskirjelmä on toimitettava oikaisuvaatimusajan kuluessa
+            oikaisuvaatimusviranomaiselle. Oikaisuvaatimuskirjelmän tulee olla
+            perillä oikaisuvaatimusajan viimeisenä päivänä ennen viraston
+            aukiolon päättymistä. Oikaisuvaatimuksen lähettäminen postitse tai
+            sähköisesti tapahtuu lähettäjän omalla vastuulla.
+          </P>
+          <P>
+            Oikaisuvaatimuksen aluehallintovirastolle voi tehdä myös sähköisessä
+            asiointipalvelussa https://www.avi.fi -{'>'} henkilöasiakas -{'>'}{' '}
+            oikaisuvaatimukset -{'>'} sähköinen asiointi.
+          </P>
+        </>
       ),
       disclaimer:
         'Perusopetuslain 17 §:n mukaan tämä päätös voidaan panna täytäntöön muutoksenhausta huolimatta.'
     }
   },
-    income: {
-        description: (
-            <>
-                <p data-qa="income-description-p1">
-                    Tällä sivulla voit lähettää selvitykset varhaiskasvatusmaksuun
-                    vaikuttavista tuloistasi. Voit myös tarkastella palauttamiasi
+  income: {
+    description: (
+      <>
+        <p data-qa="income-description-p1">
+          Tällä sivulla voit lähettää selvitykset varhaiskasvatusmaksuun
+          vaikuttavista tuloistasi. Voit myös tarkastella palauttamiasi
           tuloselvityksiä ja muokata tai poistaa niitä kunnes viranomainen on
           käsitellyt tiedot. Lomakkeen käsittelyn jälkeen voit päivittää
           tulotietojasi toimittamalla uuden lomakkeen.
@@ -845,7 +855,7 @@ const fi: DeepPartial<Translations> = {
       agreeToHighestFee: 'Suostun korkeimpaan varhaiskasvatusmaksuun',
       highestFeeInfo:
         'Palveluntarpeen mukainen korkein maksu on voimassa toistaiseksi siihen saakka, kunnes toisin ilmoitan tai kunnes lapseni varhaiskasvatus päättyy. (Tulotietoja ei tarvitse toimittaa)',
-      grossIncome: 'Maksun määritteleminen bruttotulojen mukaan',
+      grossIncome: 'Maksun määritteleminen bruttotulojen mukaan'
     },
     grossIncome: {
       title: 'Bruttotulotietojen täyttäminen',
@@ -857,7 +867,8 @@ const fi: DeepPartial<Translations> = {
       incomeSource: 'Tulotietojen toimitus',
       incomesRegisterConsent:
         'Tietojani tarkistetaan Tulorekisteristä ja Kelasta.',
-      provideAttachments: 'Toimitan tulotietoni liitteenä. Tarvittaessa tietojen oikeellisuus tarkistetaan Tulorekisteristä tai Kelasta.',
+      provideAttachments:
+        'Toimitan tulotietoni liitteenä. Tarvittaessa tietojen oikeellisuus tarkistetaan Tulorekisteristä tai Kelasta.',
       estimate: 'Arvio bruttotuloistani',
       estimatedMonthlyIncome: 'Keskimääräiset tulot sisältäen lomarahat, €/kk',
       otherIncome: 'Muut tulot',
@@ -898,7 +909,7 @@ const fi: DeepPartial<Translations> = {
     entrepreneurIncome: {
       title: 'Yrittäjän tulotietojen täyttäminen',
       description:
-          'Tällä lomakkeella voit tarvittaessa täyttää tiedot myös useammalle yritykselle valitsemalla kaikkia yrityksiäsi koskevat kohdat.',
+        'Tällä lomakkeella voit tarvittaessa täyttää tiedot myös useammalle yritykselle valitsemalla kaikkia yrityksiäsi koskevat kohdat.',
       startOfEntrepreneurship: 'Yrittäjyys alkanut',
       spouseWorksInCompany: 'Työskenteleekö puoliso yrityksessä?',
       yes: 'Kyllä',
@@ -1092,13 +1103,14 @@ const fi: DeepPartial<Translations> = {
       </P>
       <ul>
         <li>
-            Palvelun päivämäärävalitsinta ja monivalintojen alasvetovalikkoa
-            ei ole optimoitu käytettäväksi ruudunlukijalla.
+          Palvelun päivämäärävalitsinta ja monivalintojen alasvetovalikkoa ei
+          ole optimoitu käytettäväksi ruudunlukijalla.
         </li>
         <li>
-            Palvelun yksikkökartassa ei pysty liikkumaan näppäimistöllä/ruudunlukijalla,
-            mutta yksikköjä voi selata samassa näkymässä olevalta listalta.
-            Palvelussa käytetty kartta on kolmannen osapuolen tuottama
+          Palvelun yksikkökartassa ei pysty liikkumaan
+          näppäimistöllä/ruudunlukijalla, mutta yksikköjä voi selata samassa
+          näkymässä olevalta listalta. Palvelussa käytetty kartta on kolmannen
+          osapuolen tuottama
         </li>
       </ul>
       <H2>Kolmannet osapuolet</H2>
@@ -1134,18 +1146,19 @@ const fi: DeepPartial<Translations> = {
       </P>
       <H2>Valvontaviranomainen</H2>
       <P>
-          Jos huomaat sivustolla saavutettavuusongelmia, anna ensin palautetta
-          meille sivuston ylläpitäjille. Vastauksessa voi mennä 14 päivää.
-          Jos et ole tyytyväinen saamaasi vastaukseen, tai et saa vastausta
-          lainkaan kahden viikon aikana, voit antaa palautteen Liikenne- ja
-          viestintävirasto Traficomiin. Liikenne- ja viestintävirasto Traficomin
-          sivulla kerrotaan tarkasti, miten valituksen voi tehdä, ja miten asia käsitellään.
+        Jos huomaat sivustolla saavutettavuusongelmia, anna ensin palautetta
+        meille sivuston ylläpitäjille. Vastauksessa voi mennä 14 päivää. Jos et
+        ole tyytyväinen saamaasi vastaukseen, tai et saa vastausta lainkaan
+        kahden viikon aikana, voit antaa palautteen Liikenne- ja
+        viestintävirasto Traficomiin. Liikenne- ja viestintävirasto Traficomin
+        sivulla kerrotaan tarkasti, miten valituksen voi tehdä, ja miten asia
+        käsitellään.
       </P>
       <P>
         <strong>Valvontaviranomaisen yhteystiedot </strong>
         <br />
-          Liikenne- ja viestintävirasto Traficom <br />
-          Digitaalisen esteettömyyden ja saavutettavuuden valvontayksikkö
+        Liikenne- ja viestintävirasto Traficom <br />
+        Digitaalisen esteettömyyden ja saavutettavuuden valvontayksikkö
         <br />
         <ExternalLink
           href="https://www.saavutettavuusvaatimukset.fi"
@@ -1153,9 +1166,11 @@ const fi: DeepPartial<Translations> = {
           newTab
         />
         <br />
-        <a href="mailto:saavutettavuus@traficom.fi">saavutettavuus@traficom.fi</a>
+        <a href="mailto:saavutettavuus@traficom.fi">
+          saavutettavuus@traficom.fi
+        </a>
         <br />
-          puhelinnumero vaihde 029 534 5000
+        puhelinnumero vaihde 029 534 5000
       </P>
     </>
   )

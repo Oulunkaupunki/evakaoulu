@@ -29,36 +29,38 @@ const fi: DeepPartial<Translations> = {
   children: {
     serviceApplication: {
       createInfo:
-          "This allows you to propose a change in your child's need for service. The director of the early childhood education unit will accept or reject your proposal. For more information about changing the service need, ask directly at your child's unit. The contract is concluded for at least five months and it can be changed in the middle of the contract period only for a justified reason.",
+        "This allows you to propose a change in your child's need for service. The director of the early childhood education unit will accept or reject your proposal. For more information about changing the service need, ask directly at your child's unit. The contract is concluded for at least five months and it can be changed in the middle of the contract period only for a justified reason.",
       openApplicationInfo:
-          'A new service need has been proposed for your child. Your proposal has been submitted to the director of the unit for approval.',
-        }
-    },
+        'A new service need has been proposed for your child. Your proposal has been submitted to the director of the unit for approval.'
+    }
+  },
   applications: {
     creation: {
       daycareInfo:
         'An application for early childhood education is used to apply for a place in a municipal daycare centre or family daycare. With the same application, you can also apply for an early childhood education service voucher for private early childhood education by selecting the private unit for which you want to apply for the service voucher in the "Application requests" section.',
-      preschoolLabel: 'Enrolment in preschool education and/or applying for early childhood education related to preschool education',
+      preschoolLabel:
+        'Enrolment in preschool education and/or applying for early childhood education related to preschool education',
       preschoolInfo:
         'Free of charge preschool education is provided for four (4) hours a day. The preschool year mainly follows the annual holiday schedule used in basic education.',
       preschoolDaycareInfo:
         'You can also apply for early childhood education related to preschool while enrolling in preschool. Early childhood education is provided in the same place as the preschool before and after the preschool education.',
-      clubLabel: 'Application for open early childhood education club activities',
+      clubLabel:
+        'Application for open early childhood education club activities',
       clubInfo:
         'With the application for open early childhood education and care, you can apply to groups that meet two to three times a week, as well as family groups.',
       applicationInfo: (
         <>
           <P>
             If your child already has a place in early childhood education or
-            preschool education in Oulu, submitting a new application will
-            be recorded as a transfer application. There is no need to
-            terminate the current place.
+            preschool education in Oulu, submitting a new application will be
+            recorded as a transfer application. There is no need to terminate
+            the current place.
           </P>
           <P>
-            You can make changes to the application until the service coordination
-            unit has begun to process it. After this, you can only cancel the
-            application or make changes to it by contacting the early childhood
-            education service coordination unit.
+            You can make changes to the application until the service
+            coordination unit has begun to process it. After this, you can only
+            cancel the application or make changes to it by contacting the early
+            childhood education service coordination unit.
             {customerContactText()}
           </P>
         </>
@@ -84,13 +86,13 @@ const fi: DeepPartial<Translations> = {
               <>
                 <P>
                   The child has a sibling basis for the same early childhood
-                  education place where their sibling will be when early childhood
-                  education begins. The city strives to place all siblings in the
-                  same unit, if this is what the parents wish. If you are
-                  filling out applications for siblings of who are not yet
-                  included within the scope of early childhood education and
-                  care, enter the information about the sibling relationship in
-                  the Additional information field of the application.
+                  education place where their sibling will be when early
+                  childhood education begins. The city strives to place all
+                  siblings in the same unit, if this is what the parents wish.
+                  If you are filling out applications for siblings of who are
+                  not yet included within the scope of early childhood education
+                  and care, enter the information about the sibling relationship
+                  in the Additional information field of the application.
                 </P>
                 <P>
                   Fill out this section only if you are applying for a place at
@@ -105,7 +107,7 @@ const fi: DeepPartial<Translations> = {
               <>
                 <P>
                   A preschool pupil has sibling priority for a local daycare
-                  center where the preschool pupil's sibling has a place at
+                  center where the preschool pupil&apos;s sibling has a place at
                   the start of the preschool year.
                 </P>
                 <P>
@@ -122,11 +124,11 @@ const fi: DeepPartial<Translations> = {
                   the family so wishes.
                 </P>
                 <P>
-                  Fill out this section only if you are applying for a place
-                  at an early childhood education and care unit based on a
-                  sibling relationship. Make sure that you choose the sibling’s
-                  current open early childhood education and care unit as
-                  the preferred option.
+                  Fill out this section only if you are applying for a place at
+                  an early childhood education and care unit based on a sibling
+                  relationship. Make sure that you choose the sibling’s current
+                  open early childhood education and care unit as the preferred
+                  option.
                 </P>
               </>
             )
@@ -200,30 +202,31 @@ const fi: DeepPartial<Translations> = {
       },
       heading: {
         title: {
-          PRESCHOOL: 'Enrollment in preschool education and/or applying for early childhood education related to preschool education',
+          PRESCHOOL:
+            'Enrollment in preschool education and/or applying for early childhood education related to preschool education',
           CLUB: 'Apply for open early childhood education and care'
         },
         info: {
           DAYCARE: (
             <>
               <P>
-                  Please apply for open early childhood education and care
-                  at least four months before you require a place for your
-                  child. If you urgently need early childhood education due
-                  to starting work or studies, the processing time for the
-                  application is two weeks upon receipt.
+                Please apply for open early childhood education and care at
+                least four months before you require a place for your child. If
+                you urgently need early childhood education due to starting work
+                or studies, the processing time for the application is two weeks
+                upon receipt.
               </P>
               <P>
-                  The guardian who has made the enrollment will receive a
-                  written decision about the place via the Suomi.fi Messages
-                  service or by mail if the Suomi.fi service is not in use.
-                  The decision can be viewed in eVaka under Menu – Decisions
-                  and must be accepted or rejected within two weeks.
+                The guardian who has made the enrollment will receive a written
+                decision about the place via the Suomi.fi Messages service or by
+                mail if the Suomi.fi service is not in use. The decision can be
+                viewed in eVaka under Menu – Decisions and must be accepted or
+                rejected within two weeks.
               </P>
               <P>
-                  You can find more information about the Suomi.fi Messages
-                  service and how to activate it at{' '}
-                  <ExternalLink
+                You can find more information about the Suomi.fi Messages
+                service and how to activate it at{' '}
+                <ExternalLink
                   text="https://www.suomi.fi/viestit"
                   href="https://www.suomi.fi/viestit"
                   newTab
@@ -238,26 +241,28 @@ const fi: DeepPartial<Translations> = {
           PRESCHOOL: (
             <>
               <P>
-                  Preschool education starts a year before the beginning of
-                  compulsory education. Preschool education is free of charge.
-                  The enrollment period for preschool education for the school
-                  year 2025–2026 is January 7 to January 20, 2025. Preschool
-                  education begins on August 11, 2025.
+                Preschool education starts a year before the beginning of
+                compulsory education. Preschool education is free of charge. The
+                enrollment period for preschool education for the school year
+                2025–2026 is January 7 to January 20, 2025. Preschool education
+                begins on August 11, 2025.
               </P>
               <P>
-                  The guardian who has made the enrollment will receive a
-                  written decision about the place via the Suomi.fi Messages
-                  service or by mail if the Suomi.fi service is not in use.
-                  The decision can be viewed in eVaka under Menu – Decisions
-                  and must be accepted or rejected within two weeks.
+                The guardian who has made the enrollment will receive a written
+                decision about the place via the Suomi.fi Messages service or by
+                mail if the Suomi.fi service is not in use. The decision can be
+                viewed in eVaka under Menu – Decisions and must be accepted or
+                rejected within two weeks.
               </P>
               <P>
-                  You can find more information about the Suomi.fi Messages service and how to activate it at{' '}
+                You can find more information about the Suomi.fi Messages
+                service and how to activate it at{' '}
                 <ExternalLink
                   text="Suomi.fi messages"
                   href="https://www.suomi.fi/viestit"
                   newTab
-                />{'.'}
+                />
+                .
               </P>
               <P fitted={true}>
                 *Fields marked with an asterisk are mandatory.
@@ -272,11 +277,11 @@ const fi: DeepPartial<Translations> = {
                 to early childhood education or preschool education.
               </P>
               <P>
-                The guardian who has made the enrollment will receive a
-                written decision about the place via the Suomi.fi Messages
-                service or by mail if the Suomi.fi service is not in use.
-                The decision can be viewed in eVaka under Menu – Decisions and
-                must be accepted or rejected within two weeks.
+                The guardian who has made the enrollment will receive a written
+                decision about the place via the Suomi.fi Messages service or by
+                mail if the Suomi.fi service is not in use. The decision can be
+                viewed in eVaka under Menu – Decisions and must be accepted or
+                rejected within two weeks.
               </P>
               <P>
                 Open early childhood education activities are provided free of
@@ -313,17 +318,16 @@ const fi: DeepPartial<Translations> = {
             ]
           },
           label: {
-              PRESCHOOL: 'Desired start date'
+            PRESCHOOL: 'Desired start date'
           },
           instructions: {
             DAYCARE: (
               <>
-                It is possible to postpone the desired start date until
-                the early childhood education guidance team has taken
-                the application into processing. To advance the desired
-                start date or make changes to an application that is
-                being processed, please contact the early childhood
-                education guidance team
+                It is possible to postpone the desired start date until the
+                early childhood education guidance team has taken the
+                application into processing. To advance the desired start date
+                or make changes to an application that is being processed,
+                please contact the early childhood education guidance team
                 {customerContactText()}
               </>
             ),
@@ -331,10 +335,9 @@ const fi: DeepPartial<Translations> = {
               <>
                 It is possible to postpone the desired start date until the
                 early childhood education guidance team has taken the
-                application into processing. To advance the desired start
-                date or make changes to an application that is being
-                processed, please contact the early childhood education
-                guidance team
+                application into processing. To advance the desired start date
+                or make changes to an application that is being processed,
+                please contact the early childhood education guidance team
                 {customerContactText()}
               </>
             ),
@@ -372,38 +375,40 @@ const fi: DeepPartial<Translations> = {
           instructions:
             'Evening and shift care mainly refers to early childhood education and care provided at times other than from 6 a.m. to 6 p.m., during the weekends, or around the clock. If you need evening or shift care, please specify your care needs in the Additional information field of the application.',
           attachmentsMessage: {
-              DAYCARE: (
-                  <P>
-                      Evening and shift care is intended for children whose parents are
-                      both employed in shift work or receive education mainly in the
-                      evenings and/or at weekends. A statement on the nature of the
-                      employment relationship or educational activities taking place
-                      during the evenings and/or weekends for both guardians living
-                      in the same household must be attached to the application.
-                  </P>
-              ),
-              PRESCHOOL: (
-                  <>
-                      <P>
-                          Evening and shift care is intended for children whose parents are
-                          both employed in shift work or receive education mainly in the
-                          evenings and/or at weekends. A statement on the nature of the
-                          employment relationship or educational activities taking place
-                          during the evenings and/or weekends for both guardians living
-                          in the same household must be attached to the application.
-                      </P>
-                  </>
-              )
+            DAYCARE: (
+              <P>
+                Evening and shift care is intended for children whose parents
+                are both employed in shift work or receive education mainly in
+                the evenings and/or at weekends. A statement on the nature of
+                the employment relationship or educational activities taking
+                place during the evenings and/or weekends for both guardians
+                living in the same household must be attached to the
+                application.
+              </P>
+            ),
+            PRESCHOOL: (
+              <>
+                <P>
+                  Evening and shift care is intended for children whose parents
+                  are both employed in shift work or receive education mainly in
+                  the evenings and/or at weekends. A statement on the nature of
+                  the employment relationship or educational activities taking
+                  place during the evenings and/or weekends for both guardians
+                  living in the same household must be attached to the
+                  application.
+                </P>
+              </>
+            )
           },
-            attachmentsSubtitle:
-                'Add a statement regarding the nature of the employment relationship and/or educational activities taking place during the evenings and/or weekends for both guardians here.'
+          attachmentsSubtitle:
+            'Add a statement regarding the nature of the employment relationship and/or educational activities taking place during the evenings and/or weekends for both guardians here.'
         },
         assistanceNeedInstructions: {
           DAYCARE:
             "Select this option on the application if your child needs support for their development and/or learning in early childhood education. Support measures will be implemented in the child's daily life as part of other early childhood education activities. If necessary, a special education teacher in early childhood education will contact the applicant to ensure the child's support needs are considered when granting an early childhood education place. Please also indicate the need for support if this is a transfer application.",
           CLUB: "Select this option on the application if your child needs support for their development and/or learning in open early childhood education. Support measures will be implemented in the child's daily life as part of other open early childhood education activities. If necessary, a special education teacher in early childhood education will contact the applicant to ensure the child's support needs are considered when granting an open early childhood education place.",
           PRESCHOOL:
-            "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. The special education teacher in early childhood education will contact the applicant if necessary to ensure the child's support needs are considered when assigning a preschool education place. Please also indicate the need for support if this is a transfer application.",
+            "Select this section of the application if your child needs support for his/hers development and/or learning during their year in preschool education. Support is implemented in the child's daily life as part of other preschool education and early childhood education and care activities. The special education teacher in early childhood education will contact the applicant if necessary to ensure the child's support needs are considered when assigning a preschool education place. Please also indicate the need for support if this is a transfer application."
         },
         partTime: {
           true: 'Part-time',
@@ -420,11 +425,11 @@ const fi: DeepPartial<Translations> = {
           connectedDaycareInfo: (
             <>
               <P>
-                You can apply for charged early childhood education related
-                to preschool education if needed. If your child needs early
+                You can apply for charged early childhood education related to
+                preschool education if needed. If your child needs early
                 childhood education in August before the start of preschool
-                education, please fill out a separate early childhood
-                education application for this period.
+                education, please fill out a separate early childhood education
+                application for this period.
               </P>
               <P>
                 You will receive a written decision regarding your child’s
@@ -454,7 +459,7 @@ const fi: DeepPartial<Translations> = {
         },
         preparatory: 'The child needs support to learn Finnish.',
         preparatoryInfo:
-          'A language assessment is conducted for each child whose mother tongue is not Finnish, Swedish, or Sami. This assessment will serve as a basis for constructing a Finnish as a Second Language (S2) curriculum. S2 education is integrated into daily activities according to the child\'s needs.'
+          "A language assessment is conducted for each child whose mother tongue is not Finnish, Swedish, or Sami. This assessment will serve as a basis for constructing a Finnish as a Second Language (S2) curriculum. S2 education is integrated into daily activities according to the child's needs."
       },
       contactInfo: {
         familyInfo: undefined,
@@ -482,7 +487,8 @@ const fi: DeepPartial<Translations> = {
         ),
         otherChildrenInfo:
           'Other children under 18 years of age living in the same household according to the population register affect the cost of daycare or the deductible for the service voucher.',
-        otherChildrenChoiceInfo: 'Select the children who live in the same household according to the population register.',
+        otherChildrenChoiceInfo:
+          'Select the children who live in the same household according to the population register.',
         secondGuardianInfoPreschoolSeparated:
           'The address information for the other guardian is retrieved from the population information system automatically. According to our information, the child has another guardian living at a different address. Registration for preschool education must be agreed upon jointly with the other guardian.',
         secondGuardianAgreementStatus: {
@@ -546,9 +552,7 @@ const fi: DeepPartial<Translations> = {
       },
       additionalDetails: {
         dietPlaceholder: 'Indicate your child’s special diet here',
-        dietInfo: (
-          <> Indicate your child's special diet here. </>
-        ),
+        dietInfo: <> Indicate your child&apos;s special diet here. </>,
         allergiesPlaceholder: 'Indicate your child’s allergies here'
       },
       actions: {
@@ -686,7 +690,7 @@ const fi: DeepPartial<Translations> = {
         'I acknowledge and accept that I will be charged the highest possible client fee for early childhood education and care',
       highestFeeInfo:
         'The highest possible client fee according to my family’s service needs is valid until further notice or until my child’s early childhood education and care ends. (Income information not required)',
-      grossIncome: 'Determining the client fee based on gross income.',
+      grossIncome: 'Determining the client fee based on gross income.'
     },
     grossIncome: {
       title: 'Filling out the information on your gross income',
@@ -698,7 +702,8 @@ const fi: DeepPartial<Translations> = {
       incomeSource: 'Submitting the income information',
       incomesRegisterConsent:
         'My information is being verified from the income register and Kela.',
-      provideAttachments: 'I will provide my income details as an attachment. If necessary, the accuracy of the information will be verified from the income register or Kela.',
+      provideAttachments:
+        'I will provide my income details as an attachment. If necessary, the accuracy of the information will be verified from the income register or Kela.',
       estimate: 'My estimated gross income',
       estimatedMonthlyIncome:
         'Average income including holiday compensation, €/month',
@@ -740,7 +745,8 @@ const fi: DeepPartial<Translations> = {
     },
     entrepreneurIncome: {
       title: 'Filling out the income information for entrepreneurs',
-      description: 'If necessary, you can fill in the information for more than one company by ticking the boxes that apply to all of your companies.',
+      description:
+        'If necessary, you can fill in the information for more than one company by ticking the boxes that apply to all of your companies.',
       startOfEntrepreneurship: 'Entrepreneurship started on',
       spouseWorksInCompany: 'Does your spouse work for the company?',
       yes: 'Yes',
@@ -947,13 +953,13 @@ const fi: DeepPartial<Translations> = {
       </P>
       <ul>
         <li>
-            Date pickers and multi-select dropdowns in the service are not
-            optimised to be used with a screen reader.
+          Date pickers and multi-select dropdowns in the service are not
+          optimised to be used with a screen reader.
         </li>
         <li>
-            The service’s unit map cannot be navigated using the keyboard/screen
-            reader, but the units can be browsed on the list available in the
-            same view. The map used in the service is produced by a third party.
+          The service’s unit map cannot be navigated using the keyboard/screen
+          reader, but the units can be browsed on the list available in the same
+          view. The map used in the service is produced by a third party.
         </li>
       </ul>
       <H2>Third parties</H2>
@@ -989,19 +995,19 @@ const fi: DeepPartial<Translations> = {
       </P>
       <H2>Supervisory authority</H2>
       <P>
-          If you detect any accessibility problems on the website, please
-          first give feedback to the site administrators. It may take 14
-          days until you get a reply. If you are not happy with the response
-          or do not receive a reply in two weeks, you can send your feedback
-          to the Finnish Transport and Communications Agency Traficom.
-          Finnish Transport and Communications Agency Traficom will tell you
-          in detail how to file a complaint and how the matter will be dealt with.
+        If you detect any accessibility problems on the website, please first
+        give feedback to the site administrators. It may take 14 days until you
+        get a reply. If you are not happy with the response or do not receive a
+        reply in two weeks, you can send your feedback to the Finnish Transport
+        and Communications Agency Traficom. Finnish Transport and Communications
+        Agency Traficom will tell you in detail how to file a complaint and how
+        the matter will be dealt with.
       </P>
       <P>
         <strong>Control authority contact details</strong>
         <br />
-          Finnish Transport and Communications Agency Traficom <br />
-          Digital Accessibility Supervision Unit
+        Finnish Transport and Communications Agency Traficom <br />
+        Digital Accessibility Supervision Unit
         <br />
         <ExternalLink
           href="https://www.saavutettavuusvaatimukset.fi/en"
@@ -1009,9 +1015,11 @@ const fi: DeepPartial<Translations> = {
           newTab
         />
         <br />
-        <a href="mailto:saavutettavuus@traficom.fi">saavutettavuus@traficom.fi</a>
+        <a href="mailto:saavutettavuus@traficom.fi">
+          saavutettavuus@traficom.fi
+        </a>
         <br />
-          telephone switchboard 029 534 5000
+        telephone switchboard 029 534 5000
       </P>
     </>
   )

@@ -27,7 +27,7 @@ const customizations: EmployeeCustomizations = {
           connectedLabel: 'Täydentävä varhaiskasvatus',
           connectedValue: 'Haen myös täydentävää varhaiskasvatusta',
           connectedDaycarePreferredStartDateLabel:
-              'Täydentävän varhaiskasvatuksen toivottu aloituspäivä',
+            'Täydentävän varhaiskasvatuksen toivottu aloituspäivä'
         },
         decisions: {
           types: {
@@ -42,7 +42,7 @@ const customizations: EmployeeCustomizations = {
         }
       },
       placementDraft: {
-        preschoolDaycare: 'Täydentävä varhaiskasvatus',
+        preschoolDaycare: 'Täydentävä varhaiskasvatus'
       },
       decisionDraft: {
         types: {
@@ -54,8 +54,9 @@ const customizations: EmployeeCustomizations = {
           PRESCHOOL: 'Esiopetus',
           PREPARATORY: 'Valmistava opetus',
           PREPARATORY_EDUCATION: 'Valmistava opetus',
-          PREPARATORY_DAYCARE: 'Valmistavaan opetusta täydentävä varhaiskasvatus'
-        },
+          PREPARATORY_DAYCARE:
+            'Valmistavaan opetusta täydentävä varhaiskasvatus'
+        }
       },
       preferredFirstName: {
         popupLink: 'Kutsumanimi',
@@ -203,8 +204,10 @@ const customizations: EmployeeCustomizations = {
                 postitse tai sähköisesti tapahtuu lähettäjän omalla vastuulla.
               </P>
               <P>
-                Oikaisuvaatimuksen aluehallintovirastolle voi tehdä myös sähköisessä asiointipalvelussa
-                https://www.avi.fi -{'>'} henkilöasiakas -{'>'} oikaisuvaatimukset -{'>'} sähköinen asiointi.
+                Oikaisuvaatimuksen aluehallintovirastolle voi tehdä myös
+                sähköisessä asiointipalvelussa https://www.avi.fi -{'>'}{' '}
+                henkilöasiakas -{'>'} oikaisuvaatimukset -{'>'} sähköinen
+                asiointi.
               </P>
             </>
           )
@@ -299,7 +302,7 @@ const customizations: EmployeeCustomizations = {
             </>
           ),
           disclaimer:
-              'Perusopetuslain 17 §:n mukaan tämä päätös voidaan panna täytäntöön muutoksenhausta huolimatta.'
+            'Perusopetuslain 17 §:n mukaan tämä päätös voidaan panna täytäntöön muutoksenhausta huolimatta.'
         },
         assistanceNeedVoucherCoefficient: {
           sectionTitle: 'Palvelusetelikerroin',

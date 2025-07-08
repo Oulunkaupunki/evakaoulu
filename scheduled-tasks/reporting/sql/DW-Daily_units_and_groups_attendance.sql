@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2023-2025 City of Oulu
+--
+-- SPDX-License-Identifier: LGPL-2.1-or-later
+
 WITH staff_attendance_aggregate AS (
     SELECT group_id, arrived, departed, occupancy_coefficient
     FROM staff_attendance_realtime

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023-2025 City of Oulu
+//
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 package fi.ouka.evakaoulu.payment.service
 
 import org.springframework.stereotype.Component

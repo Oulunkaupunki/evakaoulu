@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# SPDX-FileCopyrightText: 2023-2025 City of Oulu
+#
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
 # dependencies: AWS CLI, keytool, jq
 
 copy_to_tmp() {

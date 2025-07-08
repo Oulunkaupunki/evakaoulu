@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2023-2025 City of Oulu
+--
+-- SPDX-License-Identifier: LGPL-2.1-or-later
+
 INSERT INTO public.unit_manager (id, name, phone, email)
 VALUES  ('5b1b23be-1e27-11ed-86d2-73721ee6d518', 'Helena Lehtola', 'p. 044 7035334', 'helena.lehtola@ouka.fi'),
         ('5b54c1d4-d2b2-11ec-ae16-3f9644c55de6', 'Elina Tolonen', '447035306', 'elina.tolonen@ouka.fi'),

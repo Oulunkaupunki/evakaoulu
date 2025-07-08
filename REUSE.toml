@@ -1,0 +1,70 @@
+version = 1
+SPDX-PackageName = "evakaoulu"
+SPDX-PackageDownloadLocation = "https://github.com/Oulunkaupunki/evakaoulu"
+
+[[annotations]]
+path = ".github/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2017-2020 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "frontend/.yarn/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2016-present Yarn Contributors"
+SPDX-License-Identifier = "BSD-2-Clause"
+SPDX-FileComment = "Directory also includes code with other licenses and other copyright holders but those are clearly identified\n  in the source code with prefixed comments. Only the not-explicitly licensed portions are licensed with information\n  described here."
+
+[[annotations]]
+path = "**.gitignore"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = ".gitmodules"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "e2e/package.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "e2e/tsconfig.json"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "e2e/yarn.lock"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "compose/.env"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "service/build.gradle.kts"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2021 City of Oulu"
+SPDX-License-Identifier = "LGPL-2.1-or-later"
+
+[[annotations]]
+path = "**/gradlew**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2007-2020 The original author or authors <info@gradle.com>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "**/gradle/wrapper/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2007-2020 The original author or authors <info@gradle.com>"
+SPDX-License-Identifier = "Apache-2.0"

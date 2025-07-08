@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2023-2025 City of Oulu
+--
+-- SPDX-License-Identifier: LGPL-2.1-or-later
+
 WITH application_infos AS (
     SELECT
         now() AT TIME ZONE 'Europe/Helsinki'    AS tiedoston_ajopaiva,

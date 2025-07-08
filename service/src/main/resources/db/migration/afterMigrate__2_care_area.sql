@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2023-2025 City of Oulu
+--
+-- SPDX-License-Identifier: LGPL-2.1-or-later
+
 INSERT INTO public.care_area (id, name, area_code, sub_cost_center, short_name)
 VALUES  ('185be10c-7aae-11ec-a67e-4bbf8c64d06c', 'Ritaharju-Kuivasjärvi-Pöllökangas', null, null, 'ritaharju-kuivasjarvi-pollokangas'),
         ('185be5a8-7aae-11ec-a67f-1b71d8cde045', 'Haukipudas', null, null, 'haukipudas'),

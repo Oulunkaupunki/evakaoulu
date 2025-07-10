@@ -6,6 +6,7 @@ package fi.ouka.evakaoulu.emailclient.config
 
 import fi.espoo.evaka.EvakaEnv
 import fi.espoo.evaka.daycare.domain.Language
+import fi.espoo.evaka.document.childdocument.ChildDocumentNotificationType
 import fi.espoo.evaka.emailclient.CalendarEventNotificationData
 import fi.espoo.evaka.emailclient.DiscussionSurveyCreationNotificationData
 import fi.espoo.evaka.emailclient.DiscussionSurveyReservationNotificationData
@@ -596,7 +597,24 @@ internal class EmailMessageProvider(private val env: EvakaEnv) : IEmailMessagePr
     override fun childDocumentNotification(
         language: Language,
         childId: ChildId,
+        notificationType: ChildDocumentNotificationType,
     ): EmailContent {
+        if (notificationType == ChildDocumentNotificationType.EDITABLE_DOCUMENT) {
+            return EmailContent.fromHtml(
+                subject =
+                    "Uusi täytettävä asiakirja eVakassa / New fillable document in eVaka",
+                html =
+                    """
+                <p>Sinua on pyydetty täyttämään asiakirja eVakassa. Lue dokumentti eVakassa.</p>
+                <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
+                $unsubscribeFi
+                <hr>
+                <p>You have been requested to fill out a document in eVaka. Read the document in eVaka.</p>
+                <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>
+                $unsubscribeEn
+""",
+            )
+        }
         return EmailContent.fromHtml(
             subject = "Uusi dokumentti eVakassa / New document in eVaka",
             html =

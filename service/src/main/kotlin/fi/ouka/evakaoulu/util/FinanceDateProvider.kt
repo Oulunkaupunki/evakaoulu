@@ -10,31 +10,33 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 @Component
-class FinanceDateProvider {
+class FinanceDateProvider(
+    val currentDate: LocalDate = LocalDate.now()
+) {
     fun currentDate(): String {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        return LocalDate.now().format(invoiceIdFormatter)
+        return currentDate.format(invoiceIdFormatter)
     }
 
     fun previousMonth(): String {
-        val previousMonth = LocalDate.now().minusMonths(1)
+        val previousMonth = currentDate.minusMonths(1)
         val titleFormatter = DateTimeFormatter.ofPattern("MM.yyyy")
         return previousMonth.format(titleFormatter)
     }
 
     fun currentDateWithAbbreviatedYear(): String {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
-        return LocalDate.now().format(invoiceIdFormatter)
+        return currentDate.format(invoiceIdFormatter)
     }
 
     fun previousMonthLastDate(): String {
-        val previousMonthlastDate = YearMonth.now().minusMonths(1).atEndOfMonth()
+        val previousMonthlastDate = YearMonth.from(currentDate).minusMonths(1).atEndOfMonth()
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyMMdd")
         return previousMonthlastDate.format(invoiceIdFormatter)
     }
 
     fun previousMonthYYMM(): String {
-        val previousMonth = LocalDate.now().minusMonths(1)
+        val previousMonth = currentDate.minusMonths(1)
         val titleFormatter = DateTimeFormatter.ofPattern("yyMM")
         return previousMonth.format(titleFormatter)
     }

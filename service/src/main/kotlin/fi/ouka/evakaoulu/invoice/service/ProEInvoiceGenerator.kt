@@ -7,6 +7,7 @@ package fi.ouka.evakaoulu.invoice.service
 import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
+import fi.espoo.evaka.shared.PersonId
 import fi.ouka.evakaoulu.invoice.config.Product
 import fi.ouka.evakaoulu.util.FieldType
 import fi.ouka.evakaoulu.util.FinanceDateProvider
@@ -14,216 +15,185 @@ import org.springframework.stereotype.Component
 import java.lang.Math.abs
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
+
+data class InvoiceData(
+    val invoiceHeader: Map<InvoiceFieldName, String>,
+    val rowsPerChild: Map<PersonId, List<Map<InvoiceFieldName, String>>>
+)
 
 @Component
 class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val financeDateProvider: FinanceDateProvider) :
     StringInvoiceGenerator {
     fun generateInvoiceTitle(): String {
         val previousMonth = financeDateProvider.previousMonth()
-        return "Varhaiskasvatus " + previousMonth
+        return "Varhaiskasvatus $previousMonth"
     }
 
     fun gatherInvoiceData(invoiceDetailed: InvoiceDetailed): InvoiceData {
-        var invoiceData = InvoiceData()
 
-        var invoiceDateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        val invoiceDataMap = mutableMapOf<InvoiceFieldName, String>()
 
-        invoiceData.setAlphanumericValue(InvoiceFieldName.NOT_USED, "")
+        val invoiceDateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+
+        invoiceDataMap[InvoiceFieldName.NOT_USED] = ""
 
         // we have previously made sure the head of family has an SSN but the compiler doesn't realize it
-        invoiceData.setAlphanumericValue(InvoiceFieldName.INVOICE_IDENTIFIER, invoiceDetailed.headOfFamily.ssn ?: "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.HEADER_ROW_CODE, "L")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CLIENT_GROUP, "10")
+        invoiceDataMap[InvoiceFieldName.INVOICE_IDENTIFIER] = invoiceDetailed.headOfFamily.ssn ?: ""
+        invoiceDataMap[InvoiceFieldName.HEADER_ROW_CODE] = "L"
+        invoiceDataMap[InvoiceFieldName.CLIENT_GROUP] = "10"
         val clientName = invoiceDetailed.headOfFamily.lastName + " " + invoiceDetailed.headOfFamily.firstName
         // CLIENT_NAME1 and CLIENT_NAME2 are 50 characters wide, but Intime only reads the first 30(!)
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.CLIENT_NAME1,
-            clientName.substring(0, Math.min(30, clientName.length)),
-        )
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.CLIENT_NAME2,
-            if (clientName.length > 30) clientName.substring(30, Math.min(60, clientName.length)) else "",
-        )
-        invoiceData.setAlphanumericValue(InvoiceFieldName.STREET_ADDRESS, invoiceDetailed.headOfFamily.streetAddress)
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.POSTAL_ADDRESS,
-            invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice,
-        )
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PHONE_NUMBER, invoiceDetailed.headOfFamily.phone)
-        invoiceData.setAlphanumericValue(InvoiceFieldName.FAX_NUMBER, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CLIENT_CONTACT, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CLIENT_BANK, "")
+        invoiceDataMap[InvoiceFieldName.CLIENT_NAME1] = clientName.substring(0, Math.min(30, clientName.length))
+        invoiceDataMap[InvoiceFieldName.CLIENT_NAME2] =
+            if (clientName.length > 30) clientName.substring(30, Math.min(60, clientName.length)) else ""
+        invoiceDataMap[InvoiceFieldName.STREET_ADDRESS] = invoiceDetailed.headOfFamily.streetAddress
+        invoiceDataMap[InvoiceFieldName.POSTAL_ADDRESS] = invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice
+        invoiceDataMap[InvoiceFieldName.PHONE_NUMBER] = invoiceDetailed.headOfFamily.phone
+        invoiceDataMap[InvoiceFieldName.FAX_NUMBER] = ""
+        invoiceDataMap[InvoiceFieldName.CLIENT_CONTACT] = ""
+        invoiceDataMap[InvoiceFieldName.CLIENT_BANK] = ""
         // 0 = external client
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CLIENT_TYPE, "0")
+        invoiceDataMap[InvoiceFieldName.CLIENT_TYPE] = "0"
         // 1 = Finnish
-        invoiceData.setAlphanumericValue(InvoiceFieldName.LANGUAGE_CODE, "1")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.REMINDER_CODE, "")
+        invoiceDataMap[InvoiceFieldName.LANGUAGE_CODE] = "1"
+        invoiceDataMap[InvoiceFieldName.REMINDER_CODE] = ""
         // N = normal invoicing
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PAYMENT_METHOD, "N")
+        invoiceDataMap[InvoiceFieldName.PAYMENT_METHOD] = "N"
         // 0 = no payments defaulted
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PAYMENT_DEFAULT_CODE, "0")
+        invoiceDataMap[InvoiceFieldName.PAYMENT_DEFAULT_CODE] = "0"
         // K = print a normal invoice
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PRINTING_METHOD, "K")
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.INVOICE_DATE,
-            invoiceDetailed.invoiceDate.format(invoiceDateFormatter),
-        )
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.DUE_DATE,
-            invoiceDetailed.dueDate.format(invoiceDateFormatter),
-        )
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.ACCOUNTING_DATE,
+        invoiceDataMap[InvoiceFieldName.PRINTING_METHOD] = "K"
+        invoiceDataMap[InvoiceFieldName.INVOICE_DATE] = invoiceDetailed.invoiceDate.format(invoiceDateFormatter)
+        invoiceDataMap[InvoiceFieldName.DUE_DATE] = invoiceDetailed.dueDate.format(invoiceDateFormatter)
+        invoiceDataMap[InvoiceFieldName.ACCOUNTING_DATE] =
             invoiceDetailed.sentAt?.toLocalDateTime()?.format(invoiceDateFormatter) ?: LocalDate.now()
-                .format(invoiceDateFormatter),
-        )
-        invoiceData.setNumericValue(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, 0)
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CREDIT_NOTE_INVOICE_NUMBER, "")
-        invoiceData.setAlphanumericValue(
-            InvoiceFieldName.INVOICE_NUMBER,
-            if (invoiceDetailed.number != null) invoiceDetailed.number.toString() else "",
-        )
-        invoiceData.setAlphanumericValue(InvoiceFieldName.REFERENCE_NUMBER, "")
+                .format(invoiceDateFormatter)
+        invoiceDataMap[InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST] = "0"
+        invoiceDataMap[InvoiceFieldName.CREDIT_NOTE_INVOICE_NUMBER] = ""
+        invoiceDataMap[InvoiceFieldName.INVOICE_NUMBER] = if (invoiceDetailed.number != null) invoiceDetailed.number.toString() else ""
+        invoiceDataMap[InvoiceFieldName.REFERENCE_NUMBER] = ""
         // N = normal
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PAYMENT_TYPE, "N")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PARTNER_CODE, "N")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CURRENCY, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.INVOICE_TYPE, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.INVOICING_UNIT, "000")
+        invoiceDataMap[InvoiceFieldName.PAYMENT_TYPE] = "N"
+        invoiceDataMap[InvoiceFieldName.PARTNER_CODE] = "N"
+        invoiceDataMap[InvoiceFieldName.CURRENCY] = ""
+        invoiceDataMap[InvoiceFieldName.INVOICE_TYPE] = ""
+        invoiceDataMap[InvoiceFieldName.INVOICING_UNIT] = "000"
         // what should we put here?
-        invoiceData.setAlphanumericValue(InvoiceFieldName.DESCRIPTION, generateInvoiceTitle())
-        invoiceData.setAlphanumericValue(InvoiceFieldName.SECURITY_DENIAL, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CONTRACT_NUMBER, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.ORDER_NUMBER, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.ADDRESS2, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.COUNTRY, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.SSN, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.LATE_PAYMENT_INTEREST, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.VAT_IDENTIFIER, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.DELIVERY_DATE, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.OVT_IDENTIFIER, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.PAYMENT_TERM, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.RF_REFERENCE, "")
+        invoiceDataMap[InvoiceFieldName.DESCRIPTION] = generateInvoiceTitle()
+        invoiceDataMap[InvoiceFieldName.SECURITY_DENIAL] = ""
+        invoiceDataMap[InvoiceFieldName.CONTRACT_NUMBER] = ""
+        invoiceDataMap[InvoiceFieldName.ORDER_NUMBER] = ""
+        invoiceDataMap[InvoiceFieldName.ADDRESS2] = ""
+        invoiceDataMap[InvoiceFieldName.COUNTRY] = ""
+        invoiceDataMap[InvoiceFieldName.SSN] = ""
+        invoiceDataMap[InvoiceFieldName.LATE_PAYMENT_INTEREST] = ""
+        invoiceDataMap[InvoiceFieldName.VAT_IDENTIFIER] = ""
+        invoiceDataMap[InvoiceFieldName.DELIVERY_DATE] = ""
+        invoiceDataMap[InvoiceFieldName.OVT_IDENTIFIER] = ""
+        invoiceDataMap[InvoiceFieldName.PAYMENT_TERM] = ""
+        invoiceDataMap[InvoiceFieldName.RF_REFERENCE] = ""
 
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_ROW_CODE, "Y")
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_ROW_CODE] = "Y"
 
         val codebtor = invoiceDetailed.codebtor
         if (codebtor != null) {
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_IDENTIFIER, codebtor.ssn ?: "")
-            invoiceData.setAlphanumericValue(
-                InvoiceFieldName.CODEBTOR_NAME,
-                codebtor.lastName + " " + codebtor.firstName,
-            )
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_STREET_ADDRESS, codebtor.streetAddress)
-            invoiceData.setAlphanumericValue(
-                InvoiceFieldName.CODEBTOR_POSTAL_ADDRESS,
-                codebtor.postalCode + " " + codebtor.postOffice,
-            )
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_PHONE_NUMBER, codebtor.phone)
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_IDENTIFIER] = codebtor.ssn ?: ""
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_NAME] = codebtor.lastName + " " + codebtor.firstName
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_STREET_ADDRESS] = codebtor.streetAddress
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_POSTAL_ADDRESS] = codebtor.postalCode + " " + codebtor.postOffice
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_PHONE_NUMBER] = codebtor.phone
         } else {
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_IDENTIFIER, "")
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_NAME, "")
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_STREET_ADDRESS, "")
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_POSTAL_ADDRESS, "")
-            invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_PHONE_NUMBER, "")
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_IDENTIFIER] = ""
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_NAME] = ""
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_STREET_ADDRESS] = ""
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_POSTAL_ADDRESS] = ""
+            invoiceDataMap[InvoiceFieldName.CODEBTOR_PHONE_NUMBER] = ""
         }
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_LANGUAGE_CODE, "1")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_ADDRESS2, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_COUNTRY, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_NAME2, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_VAT_IDENTIFIER, "")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CODEBTOR_OVT_IDENTIFIER, "")
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_LANGUAGE_CODE] = "1"
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_ADDRESS2] = ""
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_COUNTRY] = ""
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_NAME2] = ""
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_VAT_IDENTIFIER] = ""
+        invoiceDataMap[InvoiceFieldName.CODEBTOR_OVT_IDENTIFIER] = ""
 
-        val sortedRows = invoiceDetailed.rows.sortedBy { row -> row.child.firstName }
+        val sortedRows = invoiceDetailed.rows.sortedBy { row -> row.child.id }
 
-        val rowsPerChild: MutableMap<String, List<InvoiceData>> = mutableMapOf()
-        var currentChild = ""
-        var childRows: MutableList<InvoiceData> = mutableListOf()
+        val rowsPerChild: MutableMap<PersonId, List<Map<InvoiceFieldName, String>>> = mutableMapOf()
+        var currentChild = PersonId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+        var childRows: MutableList<Map<InvoiceFieldName, String>> = mutableListOf()
 
         sortedRows.forEach {
-            if (it.child.firstName != currentChild) {
-                currentChild = it.child.firstName
+            if (it.child.id != currentChild) {
+                currentChild = it.child.id
                 childRows = mutableListOf()
-                rowsPerChild.put(currentChild, childRows)
+                rowsPerChild[currentChild] = childRows
             }
 
-            val invoiceRowData = InvoiceData()
+            val invoiceRowDataMap = mutableMapOf<InvoiceFieldName, String>()
 
             // we have previously made sure the head of family has an SSN but the compiler doesn't realize it
-            invoiceRowData.setAlphanumericValue(
-                InvoiceFieldName.INVOICE_IDENTIFIER,
-                invoiceDetailed.headOfFamily.ssn ?: "",
-            )
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.TEXT_ROW_CODE, "3")
-            invoiceRowData.setAlphanumericValue(
-                InvoiceFieldName.CHILD_NAME,
-                it.child.lastName + " " + it.child.firstName,
-            )
+            invoiceRowDataMap[InvoiceFieldName.INVOICE_IDENTIFIER] = invoiceDetailed.headOfFamily.ssn ?: ""
+            invoiceRowDataMap[InvoiceFieldName.TEXT_ROW_CODE] = "3"
+            invoiceRowDataMap[InvoiceFieldName.CHILD_NAME] = it.child.lastName + " " + it.child.firstName
             val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-            invoiceRowData.setAlphanumericValue(
-                InvoiceFieldName.TIME_PERIOD,
-                it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter),
-            )
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.INVOICE_ROW_HEADER, "")
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.CONSTANT_TEXT_IDENTIFIER, "")
+            invoiceRowDataMap[InvoiceFieldName.TIME_PERIOD] = it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter)
+            invoiceRowDataMap[InvoiceFieldName.INVOICE_ROW_HEADER] = ""
+            invoiceRowDataMap[InvoiceFieldName.CONSTANT_TEXT_IDENTIFIER] = ""
 
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.DETAIL_ROW_CODE, "1")
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.PRODUCT_NAME, Product.valueOf(it.product.value).nameFi)
+            invoiceRowDataMap[InvoiceFieldName.DETAIL_ROW_CODE] = "1"
+            invoiceRowDataMap[InvoiceFieldName.PRODUCT_NAME] = Product.valueOf(it.product.value).nameFi
             // sign of unitPrice is moved to a separate field - empty value is interpreted as a plus sign
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.PRICE_SIGN, if (it.unitPrice < 0) "-" else "")
-            invoiceRowData.setNumericValue(InvoiceFieldName.UNIT_PRICE, abs(it.unitPrice))
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.UNIT, "kpl")
+            invoiceRowDataMap[InvoiceFieldName.PRICE_SIGN] = if (it.unitPrice < 0) "-" else ""
+            invoiceRowDataMap[InvoiceFieldName.UNIT_PRICE] = abs(it.unitPrice).toString()
+            invoiceRowDataMap[InvoiceFieldName.UNIT] = "kpl"
             // empty value is interpreted as a plus sign
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.AMOUNT_SIGN, "")
-            invoiceRowData.setNumericValue(InvoiceFieldName.AMOUNT, it.amount)
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.VAT_CODE, "00")
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.VAT_ACCOUNT, "")
+            invoiceRowDataMap[InvoiceFieldName.AMOUNT_SIGN] = ""
+            invoiceRowDataMap[InvoiceFieldName.AMOUNT] = it.amount.toString()
+            invoiceRowDataMap[InvoiceFieldName.VAT_CODE] = "00"
+            invoiceRowDataMap[InvoiceFieldName.VAT_ACCOUNT] = ""
             // format description says "value of this field has not been used", example file has "0" here
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.BRUTTO_NETTO, "0")
-            invoiceRowData.setAlphanumericValue(InvoiceFieldName.DEBIT_ACCOUNTING, "")
+            invoiceRowDataMap[InvoiceFieldName.BRUTTO_NETTO] = "0"
+            invoiceRowDataMap[InvoiceFieldName.DEBIT_ACCOUNTING] = ""
             if (it.daycareType.contains(CareType.FAMILY) or it.daycareType.contains(CareType.GROUP_FAMILY)) {
-                invoiceRowData.setAlphanumericValue(
-                    InvoiceFieldName.CREDIT_ACCOUNTING,
-                    "3271 1104171      " + it.costCenter,
-                )
+                invoiceRowDataMap[InvoiceFieldName.CREDIT_ACCOUNTING] = "3271 1104171      " + it.costCenter
             } else {
-                invoiceRowData.setAlphanumericValue(
-                    InvoiceFieldName.CREDIT_ACCOUNTING,
-                    "3271 1104170      " + it.costCenter,
-                )
+                invoiceRowDataMap[InvoiceFieldName.CREDIT_ACCOUNTING] = "3271 1104170      " + it.costCenter
             }
 
-            childRows.add(invoiceRowData)
+            childRows.add(invoiceRowDataMap)
         }
 
-        invoiceData.setChildRowMap(rowsPerChild)
-
-        return invoiceData
+        return InvoiceData(invoiceDataMap, rowsPerChild)
     }
 
     fun generateRow(
         fields: List<InvoiceField>,
-        invoiceData: InvoiceData,
+        invoiceData: Map<InvoiceFieldName, String>,
     ): String {
-        var result = StringBuilder("")
+        val result = StringBuilder("")
 
         fields.forEach {
-            if (it.fieldType == FieldType.ALPHANUMERIC) {
-                var value = invoiceData.getAlphanumericValue(it.field) ?: ""
-                result.append(value.take(it.length).padEnd(it.length))
-            } else if (it.fieldType == FieldType.NUMERIC) {
-                var value = invoiceData.getNumericValue(it.field) ?: 0
-                var stringValue = value.toString().padStart(it.length, '0')
-                // all Evaka values seem to be Int so we can just pad
-                // the decimal part with the correct number of zeroes
-                result.append(stringValue.padEnd(it.length + it.decimals, '0'))
-            } else if (it.fieldType == FieldType.MONETARY) {
-                var value = invoiceData.getNumericValue(it.field) ?: 0
-                // if the value is non-zero it has been multiplied by 100 to already contain two decimals
-                val decimals = if (value == 0) it.decimals else it.decimals - 2
-                val length = if (value == 0) it.length else it.length + 2
-                var stringValue = value.toString().padStart(length, '0')
-                result.append(stringValue.padEnd(length + decimals, '0'))
+            when (it.fieldType) {
+                FieldType.ALPHANUMERIC -> {
+                    val value = invoiceData[it.field] ?: ""
+                    result.append(value.take(it.length).padEnd(it.length))
+                }
+                FieldType.NUMERIC -> {
+                    val value = invoiceData[it.field] ?: "0"
+                    val paddedValue = value.padStart(it.length, '0')
+                    // all Evaka values seem to be Int so we can just pad
+                    // the decimal part with the correct number of zeroes
+                    result.append(paddedValue.padEnd(it.length + it.decimals, '0'))
+                }
+                FieldType.MONETARY -> {
+                    val value = invoiceData[it.field] ?: "0"
+                    // if the value is non-zero it has been multiplied by 100 to already contain two decimals
+                    val decimals = if (value == "0") it.decimals else it.decimals - 2
+                    val length = if (value == "0") it.length else it.length + 2
+                    val paddedValue = value.padStart(length, '0')
+                    result.append(paddedValue.padEnd(length + decimals, '0'))
+                }
             }
         }
 
@@ -233,16 +203,16 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
     }
 
     fun formatInvoice(invoiceData: InvoiceData): String {
-        var result = generateRow(headerRowFields, invoiceData)
+        var result = generateRow(headerRowFields, invoiceData.invoiceHeader)
 
-        if (invoiceData.getAlphanumericValue(InvoiceFieldName.CODEBTOR_IDENTIFIER) != "") {
-            result += generateRow(codebtorRowFields, invoiceData)
+        if ((invoiceData.invoiceHeader[InvoiceFieldName.CODEBTOR_IDENTIFIER] ?: "") != "") {
+            result += generateRow(codebtorRowFields, invoiceData.invoiceHeader)
         }
 
-        var rowsPerChild = invoiceData.getChildRowMap()
-        rowsPerChild.forEach {
-            result += generateRow(childHeaderRowFields, it.value.get(0))
-            it.value.forEach {
+        val rowsPerChild = invoiceData.rowsPerChild
+        rowsPerChild.forEach { childRows ->
+            result += generateRow(childHeaderRowFields, childRows.value[0])
+            childRows.value.forEach {
                 result += generateRow(rowHeaderRowFields, it)
                 result += generateRow(detailRowFields, it)
             }
@@ -253,15 +223,15 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
 
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
         var invoiceString = ""
-        var successList = mutableListOf<InvoiceDetailed>()
-        var failedList = mutableListOf<InvoiceDetailed>()
-        var manuallySentList = mutableListOf<InvoiceDetailed>()
+        val successList = mutableListOf<InvoiceDetailed>()
+        val failedList = mutableListOf<InvoiceDetailed>()
+        val manuallySentList = mutableListOf<InvoiceDetailed>()
 
         val (manuallySent, succeeded) = invoices.partition { invoice -> invoiceChecker.shouldSendManually(invoice) }
         manuallySentList.addAll(manuallySent)
 
         succeeded.forEach {
-            var invoiceData = gatherInvoiceData(it)
+            val invoiceData = gatherInvoiceData(it)
             invoiceString += formatInvoice(invoiceData)
             successList.add(it)
         }

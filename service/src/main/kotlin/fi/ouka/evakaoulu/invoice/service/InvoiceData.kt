@@ -4,7 +4,6 @@
 
 package fi.ouka.evakaoulu.invoice.service
 
-import fi.ouka.evakaoulu.util.DataMapper
 import fi.ouka.evakaoulu.util.FieldType
 
 enum class InvoiceFieldName {
@@ -202,5 +201,3 @@ var detailRowFields =
         // empty which is not possible the way we implemented numeric fields
         InvoiceField(InvoiceFieldName.ROW_SUM, FieldType.ALPHANUMERIC, 265, 11),
     )
-
-typealias InvoiceData = DataMapper<InvoiceFieldName>

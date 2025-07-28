@@ -27,7 +27,7 @@ fun validInvoice(): InvoiceDetailed {
         InvoiceRowDetailed(
             InvoiceRowId(UUID.randomUUID()),
             PersonDetailed(
-                PersonId(UUID.randomUUID()),
+                PersonId(UUID.fromString("22222222-2222-2222-2222-222222222222")),
                 LocalDate.of(2018, 1, 1),
                 null,
                 "Matti",
@@ -62,7 +62,7 @@ fun validInvoice(): InvoiceDetailed {
         InvoiceRowDetailed(
             InvoiceRowId(UUID.randomUUID()),
             PersonDetailed(
-                PersonId(UUID.randomUUID()),
+                PersonId(UUID.fromString("11111111-1111-1111-1111-111111111111")),
                 LocalDate.of(2015, 11, 26),
                 null,
                 "Maiju",
@@ -97,7 +97,7 @@ fun validInvoice(): InvoiceDetailed {
         InvoiceRowDetailed(
             InvoiceRowId(UUID.randomUUID()),
             PersonDetailed(
-                PersonId(UUID.randomUUID()),
+                PersonId(UUID.fromString("22222222-2222-2222-2222-222222222222")),
                 LocalDate.of(2018, 1, 1),
                 null,
                 "Matti",

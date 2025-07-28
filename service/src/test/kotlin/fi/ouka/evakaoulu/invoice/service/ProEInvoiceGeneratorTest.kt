@@ -12,16 +12,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import java.time.LocalDate
 
 internal class ProEInvoiceGeneratorTest {
-    val financeDateProvider = mock<FinanceDateProvider>()
+    val financeDateProvider = FinanceDateProvider(LocalDate.of(2022, 5, 5))
     val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), financeDateProvider)
-
-    @BeforeEach
-    fun setup() {
-        whenever(financeDateProvider.currentDate()).thenReturn("20220505")
-        whenever(financeDateProvider.previousMonth()).thenReturn("04.2022")
-    }
 
     @Test
     fun `should return successfully created invoices in success list`() {
@@ -54,13 +49,14 @@ internal class ProEInvoiceGeneratorTest {
                 InvoiceField(InvoiceFieldName.CLIENT_NAME1, FieldType.ALPHANUMERIC, 12, 30),
                 InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2),
             )
-        val invoiceData = InvoiceData()
 
-        invoiceData.setAlphanumericValue(InvoiceFieldName.INVOICE_IDENTIFIER, "121212A121A")
-        invoiceData.setAlphanumericValue(InvoiceFieldName.CLIENT_NAME1, "Jokunen Jaska")
-        invoiceData.setNumericValue(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, 42)
+        val invoiceDataMap = mutableMapOf<InvoiceFieldName,String>()
 
-        val result = proEInvoiceGenerator.generateRow(format, invoiceData)
+        invoiceDataMap[InvoiceFieldName.INVOICE_IDENTIFIER] = "121212A121A"
+        invoiceDataMap[InvoiceFieldName.CLIENT_NAME1] = "Jokunen Jaska"
+        invoiceDataMap[InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST] = "42"
+
+        val result = proEInvoiceGenerator.generateRow(format, invoiceDataMap)
 
         assertEquals(result, "121212A121AJokunen Jaska                 00004200\n")
     }
@@ -73,7 +69,7 @@ internal class ProEInvoiceGeneratorTest {
 
         val generationResult = proEInvoiceGenerator.generateInvoice(invoiceList)
 
-        var correctInvoice = object {}.javaClass.getResource("/invoice-client/CorrectProEInvoice.txt")?.readText()
+        val correctInvoice = object {}.javaClass.getResource("/invoice-client/CorrectProEInvoice.txt")?.readText()
 
         assertEquals(correctInvoice, generationResult.invoiceString)
     }

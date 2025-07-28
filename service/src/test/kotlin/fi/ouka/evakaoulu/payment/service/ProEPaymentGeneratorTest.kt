@@ -55,11 +55,11 @@ class ProEPaymentGeneratorTest {
 
         val validPayment = validPayment()
         val otherPaymentUnit = validPaymentUnit().copy(providerId = "OTHERPROVIDERID")
-        val negativePayment = validPayment().copy(unit = otherPaymentUnit, amount = 0)
+        val zeroPayment = validPayment().copy(unit = otherPaymentUnit, amount = 0)
 
-        val result = proEPaymentGenerator.generatePayments(listOf(validPayment, negativePayment))
+        val result = proEPaymentGenerator.generatePayments(listOf(validPayment, zeroPayment))
 
-        assert(result.sendResult.succeeded.containsAll(listOf(validPayment, negativePayment)))
+        assert(result.sendResult.succeeded.containsAll(listOf(validPayment, zeroPayment)))
     }
 
     @Test

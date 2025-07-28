@@ -4,7 +4,6 @@
 
 package fi.ouka.evakaoulu.payment.service
 
-import fi.ouka.evakaoulu.util.DataMapper
 import fi.ouka.evakaoulu.util.FieldType
 
 // NB, I have no idea what many of these things would properly be in English...
@@ -255,5 +254,3 @@ val paymentRowFields =
         PaymentField(PaymentFieldName.EMPTY_FIELD, FieldType.ALPHANUMERIC, 689, 212),
         PaymentField(PaymentFieldName.EMPTY_FIELD, FieldType.ALPHANUMERIC, 901, 300),
     )
-
-typealias PaymentData = DataMapper<PaymentFieldName>

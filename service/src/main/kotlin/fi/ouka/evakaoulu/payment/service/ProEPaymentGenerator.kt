@@ -24,47 +24,43 @@ class ProEPaymentGenerator(
         val paymentString: String = "",
     )
 
-    fun gatherPaymentData(payment: Payment): PaymentData {
-        var paymentData = PaymentData()
+    fun gatherPaymentData(payment: Payment): Map<PaymentFieldName, String> {
+        // var paymentData = PaymentData()
+        val paymentDataMap = mutableMapOf<PaymentFieldName, String>()
 
-        var paymentDateFormatterYYMMDD = DateTimeFormatter.ofPattern("yyMMdd")
+        val paymentDateFormatterYYMMDD = DateTimeFormatter.ofPattern("yyMMdd")
 
-        paymentData.setAlphanumericValue(PaymentFieldName.INTIME_COMPANY_ID, "20")
-        paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ID, payment.unit.providerId ?: "")
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID, payment.number.toString())
-        paymentData.setNumericValue(PaymentFieldName.INVOICE_ACCEPTANCE, 1)
-        paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_TYPE, "3B")
-        paymentData.setNumericValue(PaymentFieldName.VOUCHER_NUMBER, payment.number?.toInt() ?: 0)
-        paymentData.setAlphanumericValue(PaymentFieldName.VOUCHER_DATE, financeDateProvider.previousMonthLastDate())
-        paymentData.setNumericValue(PaymentFieldName.INVOICE_TYPE, 1)
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_SUGGESTION, "1")
-        paymentData.setAlphanumericValue(PaymentFieldName.PERIOD, financeDateProvider.previousMonthYYMM())
-        paymentData.setAlphanumericValue(
-            PaymentFieldName.INVOICE_DATE,
-            payment.paymentDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now()
-                .format(paymentDateFormatterYYMMDD),
-        )
-        paymentData.setAlphanumericValue(
-            PaymentFieldName.DUE_DATE,
-            payment.dueDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now().format(paymentDateFormatterYYMMDD),
-        )
-        paymentData.setNumericValue(PaymentFieldName.INVOICE_SUM, payment.amount)
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_1, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CURRENCY, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_DATE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_SUM, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CASHBOX_MINUS, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.DEBT_ACCOUNT, "00002545")
-        paymentData.setAlphanumericValue(PaymentFieldName.SI_DEBT_ACCOUNT, "")
-        paymentData.setNumericValue(PaymentFieldName.KP_PURCHASE_ACCOUNT, 4335)
-        paymentData.setAlphanumericValue(PaymentFieldName.SI_PURCHASE_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KP_CASHBOX_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.SI_CASHBOX_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KP_OTHER_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.SI_OTHER_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KP_KERO_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.SI_KERO_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.STATS, "")
+        paymentDataMap[PaymentFieldName.INTIME_COMPANY_ID] = "20"
+        paymentDataMap[PaymentFieldName.PROVIDER_ID] = payment.unit.providerId ?: ""
+        paymentDataMap[PaymentFieldName.INVOICE_ID] = payment.number.toString()
+        paymentDataMap[PaymentFieldName.INVOICE_ACCEPTANCE] = "1"
+        paymentDataMap[PaymentFieldName.VOUCHER_TYPE] = "3B"
+        paymentDataMap[PaymentFieldName.VOUCHER_NUMBER] = payment.number?.toString() ?: "0"
+        paymentDataMap[PaymentFieldName.VOUCHER_DATE] = financeDateProvider.previousMonthLastDate()
+        paymentDataMap[PaymentFieldName.INVOICE_TYPE] = "1"
+        paymentDataMap[PaymentFieldName.ACCOUNT_SUGGESTION] = "1"
+        paymentDataMap[PaymentFieldName.PERIOD] = financeDateProvider.previousMonthYYMM()
+        paymentDataMap[PaymentFieldName.INVOICE_DATE] = payment.paymentDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now()
+            .format(paymentDateFormatterYYMMDD)
+        paymentDataMap[PaymentFieldName.DUE_DATE] =
+            payment.dueDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now().format(paymentDateFormatterYYMMDD)
+        paymentDataMap[PaymentFieldName.INVOICE_SUM] = payment.amount.toString()
+        paymentDataMap[PaymentFieldName.INVOICE_1] = ""
+        paymentDataMap[PaymentFieldName.CURRENCY] = ""
+        paymentDataMap[PaymentFieldName.CASHBOX_DATE] = ""
+        paymentDataMap[PaymentFieldName.CASHBOX_SUM] = ""
+        paymentDataMap[PaymentFieldName.CASHBOX_MINUS] = ""
+        paymentDataMap[PaymentFieldName.DEBT_ACCOUNT] = "00002545"
+        paymentDataMap[PaymentFieldName.SI_DEBT_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.KP_PURCHASE_ACCOUNT] = "4335"
+        paymentDataMap[PaymentFieldName.SI_PURCHASE_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.KP_CASHBOX_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.SI_CASHBOX_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.KP_OTHER_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.SI_OTHER_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.KP_KERO_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.SI_KERO_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.STATS] = ""
         val calcIdentifier =
             "1104" +
                 if (payment.unit.careType.contains(CareType.FAMILY) or
@@ -74,110 +70,108 @@ class ProEPaymentGenerator(
                 } else {
                     "371"
                 }
-        paymentData.setAlphanumericValue(PaymentFieldName.CALC_IDENTIFIER, calcIdentifier)
-        paymentData.setAlphanumericValue(PaymentFieldName.RESP_PERSON, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.FACTORING_NUMBER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.MACHINE_REFERENCE_NUMBER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.APPR_TARGET, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ALPHABETICAL_NAME, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.NAME, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ADDRESS1, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ADDRESS2, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.POSTAL_NUMBER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.COUNTRY, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.LANGUAGE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.COUNTRY_CODE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.BANK, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.BANK_ACCOUNT, payment.unit.iban.toString())
-        paymentData.setAlphanumericValue(
-            PaymentFieldName.NOTE,
-            payment.unit.providerId.toString() + " " + payment.unit.name.toString(),
-        )
-        paymentData.setAlphanumericValue(PaymentFieldName.VAT_PERIOD, financeDateProvider.previousMonthYYMM())
-        paymentData.setAlphanumericValue(PaymentFieldName.VAT_VAL, "0")
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_2, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.RECLAMATION_DATE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_TERM, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_MESSAGE, "1")
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_BANK_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TRANSFER_BAN, "0")
-        paymentData.setAlphanumericValue(PaymentFieldName.VALUATION_BAN, "0")
-        paymentData.setAlphanumericValue(PaymentFieldName.PAYMENT_TERM_CODE, "00")
-        paymentData.setAlphanumericValue(PaymentFieldName.EURO_CODE, "1")
-        paymentData.setAlphanumericValue(PaymentFieldName.PROVIDER_ADDITIONAL_KEY, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.APP_KEY, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ADDITIONAL_INFO, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.BANKS_2_3, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.FACT_PROVIDER_ADD_KEY, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID_ARCHIVE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.XML_ATTACHMENT_ID, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.INVOICE_ID_2, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.PICTURE_FILE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.INT_REF_NRO, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.BANK_BIC_CODE, bicMapper.mapIban(payment.unit.iban ?: ""))
-        paymentData.setAlphanumericValue(PaymentFieldName.SUBLEDGER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.DOC_ID, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.SUBST_DOC_ID, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CONSTRUCTION_KEY, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CONSTRUCTION_NUMBER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CONTRACT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.CREDIT_TARGET_2, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.SUBSTITUTE_FIELD, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.BREAKDOWN_TYPE, "9")
-        paymentData.setAlphanumericValue(
-            PaymentFieldName.DESCRIPTION,
-            payment.unit.providerId.toString() + " " + payment.unit.name.toString(),
-        )
-        paymentData.setAlphanumericValue(PaymentFieldName.SUB_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.VAT_CODE, "105")
-        paymentData.setAlphanumericValue(PaymentFieldName.AMOUNT1, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.AMOUNT2, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.DELIVERY_PERIOD, financeDateProvider.previousMonthYYMM())
-        paymentData.setAlphanumericValue(PaymentFieldName.VAT_BALANCE_SUM, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_ACCOUNT, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_PERIODS, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCURUAL_START, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.FIXED_ASSET_ITEM, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_NAME, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_RESP_PERSON, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_GROUP, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_REM_GROUP, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.KOM_TARGET_START_DATE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.APPROVER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.APPROVE_DATE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.INSPECTOR, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.INSPECTOR_DATE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ACCOUNT_REFERENCE, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.ROW_NUMBER, "")
-        paymentData.setAlphanumericValue(PaymentFieldName.EMPTY_FIELD, "")
+        paymentDataMap[PaymentFieldName.CALC_IDENTIFIER] = calcIdentifier
+        paymentDataMap[PaymentFieldName.RESP_PERSON] = ""
+        paymentDataMap[PaymentFieldName.FACTORING_NUMBER] = ""
+        paymentDataMap[PaymentFieldName.MACHINE_REFERENCE_NUMBER] = ""
+        paymentDataMap[PaymentFieldName.APPR_TARGET] = ""
+        paymentDataMap[PaymentFieldName.ALPHABETICAL_NAME] = ""
+        paymentDataMap[PaymentFieldName.NAME] = ""
+        paymentDataMap[PaymentFieldName.ADDRESS1] = ""
+        paymentDataMap[PaymentFieldName.ADDRESS2] = ""
+        paymentDataMap[PaymentFieldName.POSTAL_NUMBER] = ""
+        paymentDataMap[PaymentFieldName.COUNTRY] = ""
+        paymentDataMap[PaymentFieldName.LANGUAGE] = ""
+        paymentDataMap[PaymentFieldName.COUNTRY_CODE] = ""
+        paymentDataMap[PaymentFieldName.BANK] = ""
+        paymentDataMap[PaymentFieldName.BANK_ACCOUNT] = payment.unit.iban.toString()
+        paymentDataMap[PaymentFieldName.NOTE] = (payment.unit.providerId ?: "") + " " + payment.unit.name
+        paymentDataMap[PaymentFieldName.VAT_PERIOD] = financeDateProvider.previousMonthYYMM()
+        paymentDataMap[PaymentFieldName.VAT_VAL] = "0"
+        paymentDataMap[PaymentFieldName.INVOICE_2] = ""
+        paymentDataMap[PaymentFieldName.RECLAMATION_DATE] = ""
+        paymentDataMap[PaymentFieldName.PAYMENT_TERM] = ""
+        paymentDataMap[PaymentFieldName.PAYMENT_MESSAGE] = "1"
+        paymentDataMap[PaymentFieldName.INVOICE_BANK_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.KOM_TRANSFER_BAN] = "0"
+        paymentDataMap[PaymentFieldName.VALUATION_BAN] = "0"
+        paymentDataMap[PaymentFieldName.PAYMENT_TERM_CODE] = "00"
+        paymentDataMap[PaymentFieldName.EURO_CODE] = "1"
+        paymentDataMap[PaymentFieldName.PROVIDER_ADDITIONAL_KEY] = ""
+        paymentDataMap[PaymentFieldName.APP_KEY] = ""
+        paymentDataMap[PaymentFieldName.SUBSTITUTE] = ""
+        paymentDataMap[PaymentFieldName.ADDITIONAL_INFO] = ""
+        paymentDataMap[PaymentFieldName.BANKS_2_3] = ""
+        paymentDataMap[PaymentFieldName.FACT_PROVIDER_ADD_KEY] = ""
+        paymentDataMap[PaymentFieldName.INVOICE_ID_ARCHIVE] = ""
+        paymentDataMap[PaymentFieldName.XML_ATTACHMENT_ID] = ""
+        paymentDataMap[PaymentFieldName.INVOICE_ID_2] = ""
+        paymentDataMap[PaymentFieldName.PICTURE_FILE] = ""
+        paymentDataMap[PaymentFieldName.INT_REF_NRO] = ""
+        paymentDataMap[PaymentFieldName.BANK_BIC_CODE] = bicMapper.mapIban(payment.unit.iban ?: "")
+        paymentDataMap[PaymentFieldName.SUBLEDGER] = ""
+        paymentDataMap[PaymentFieldName.DOC_ID] = ""
+        paymentDataMap[PaymentFieldName.SUBST_DOC_ID] = ""
+        paymentDataMap[PaymentFieldName.CONSTRUCTION_KEY] = ""
+        paymentDataMap[PaymentFieldName.CONSTRUCTION_NUMBER] = ""
+        paymentDataMap[PaymentFieldName.CONTRACT] = ""
+        paymentDataMap[PaymentFieldName.CREDIT_TARGET_2] = ""
+        paymentDataMap[PaymentFieldName.SUBSTITUTE_FIELD] = ""
+        paymentDataMap[PaymentFieldName.BREAKDOWN_TYPE] = "9"
+        paymentDataMap[PaymentFieldName.DESCRIPTION] = (payment.unit.providerId ?: "") + " " + payment.unit.name
+        paymentDataMap[PaymentFieldName.SUB_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.VAT_CODE] = "105"
+        paymentDataMap[PaymentFieldName.AMOUNT1] = ""
+        paymentDataMap[PaymentFieldName.AMOUNT2] = ""
+        paymentDataMap[PaymentFieldName.DELIVERY_PERIOD] = financeDateProvider.previousMonthYYMM()
+        paymentDataMap[PaymentFieldName.VAT_BALANCE_SUM] = ""
+        paymentDataMap[PaymentFieldName.ACCURUAL_ACCOUNT] = ""
+        paymentDataMap[PaymentFieldName.ACCURUAL_PERIODS] = ""
+        paymentDataMap[PaymentFieldName.ACCURUAL_START] = ""
+        paymentDataMap[PaymentFieldName.FIXED_ASSET_ITEM] = ""
+        paymentDataMap[PaymentFieldName.KOM_TARGET_NAME] = ""
+        paymentDataMap[PaymentFieldName.KOM_TARGET_RESP_PERSON] = ""
+        paymentDataMap[PaymentFieldName.KOM_TARGET_GROUP] = ""
+        paymentDataMap[PaymentFieldName.KOM_TARGET_REM_GROUP] = ""
+        paymentDataMap[PaymentFieldName.KOM_TARGET_START_DATE] = ""
+        paymentDataMap[PaymentFieldName.APPROVER] = ""
+        paymentDataMap[PaymentFieldName.APPROVE_DATE] = ""
+        paymentDataMap[PaymentFieldName.INSPECTOR] = ""
+        paymentDataMap[PaymentFieldName.INSPECTOR_DATE] = ""
+        paymentDataMap[PaymentFieldName.ACCOUNT_REFERENCE] = ""
+        paymentDataMap[PaymentFieldName.ROW_NUMBER] = ""
+        paymentDataMap[PaymentFieldName.EMPTY_FIELD] = ""
 
-        return paymentData
+        return paymentDataMap
     }
 
     fun generateRow(
         fields: List<PaymentField>,
-        paymentData: PaymentData,
+        paymentData: Map<PaymentFieldName, String>,
     ): String {
-        var result = StringBuilder("")
+        val result = StringBuilder("")
 
         fields.forEach {
-            if (it.fieldType == FieldType.ALPHANUMERIC) {
-                var value = paymentData.getAlphanumericValue(it.field) ?: ""
-                result.append(value.take(it.length).padEnd(it.length))
-            } else if (it.fieldType == FieldType.NUMERIC) {
-                var value = paymentData.getNumericValue(it.field) ?: 0
-                var stringValue = value.toString().padStart(it.length, '0')
-                // all Evaka values seem to be Int so we can just pad
-                // the decimal part with the correct number of zeroes
-                result.append(stringValue.padEnd(it.length + it.decimals, '0'))
-            } else if (it.fieldType == FieldType.MONETARY) {
-                var value = paymentData.getNumericValue(it.field) ?: 0
-                // if the value is non-zero it has been multiplied by 100 to already contain two decimals
-                val decimals = if (value == 0) it.decimals else it.decimals - 2
-                val length = if (value == 0) it.length else it.length + 2
-                var stringValue = value.toString().padStart(length, '0')
-                result.append(stringValue.padEnd(length + decimals, '0'))
+            when (it.fieldType) {
+                FieldType.ALPHANUMERIC -> {
+                    val value = paymentData[it.field] ?: ""
+                    result.append(value.take(it.length).padEnd(it.length))
+                }
+                FieldType.NUMERIC  -> {
+                    val value = paymentData[it.field] ?: "0"
+                    val paddedValue = value.padStart(it.length, '0')
+                    // all Evaka values seem to be Int so we can just pad
+                    // the decimal part with the correct number of zeroes
+                    result.append(paddedValue.padEnd(it.length + it.decimals, '0'))
+                }
+                FieldType.MONETARY ->  {
+                    val value = paymentData[it.field] ?: "0"
+                    // if the value is non-zero it has been multiplied by 100 to already contain two decimals
+                    val decimals = if (value == "0") it.decimals else it.decimals - 2
+                    val length = if (value == "0") it.length else it.length + 2
+                    val paddedValue = value.padStart(length, '0')
+                    result.append(paddedValue.padEnd(length + decimals, '0'))
+                }
             }
         }
 
@@ -186,15 +180,15 @@ class ProEPaymentGenerator(
         return result.toString()
     }
 
-    fun formatPayment(paymentData: PaymentData): String {
+    fun formatPayment(paymentData: Map<PaymentFieldName, String>): String {
         var result = generateRow(headerRowFields, paymentData)
         result += generateRow(paymentRowFields, paymentData)
         return result
     }
 
     fun generatePayments(payments: List<Payment>): Result {
-        var successList = mutableListOf<Payment>()
-        var failedList = mutableListOf<Payment>()
+        val successList = mutableListOf<Payment>()
+        val failedList = mutableListOf<Payment>()
 
         val (failed, succeeded) = payments.partition { payment -> paymentChecker.shouldFail(payment) }
         failedList.addAll(failed)

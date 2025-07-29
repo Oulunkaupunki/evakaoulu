@@ -148,7 +148,7 @@ class ProEPaymentGenerator(
     fun generateRow(
         fields: List<PaymentField>,
         paymentData: Map<PaymentFieldName, String>,
-    ): String {
+    ): StringBuilder {
         val result = StringBuilder("")
 
         fields.forEach {
@@ -177,12 +177,12 @@ class ProEPaymentGenerator(
 
         result.append("\n")
 
-        return result.toString()
+        return result
     }
 
-    fun formatPayment(paymentData: Map<PaymentFieldName, String>): String {
-        var result = generateRow(headerRowFields, paymentData)
-        result += generateRow(paymentRowFields, paymentData)
+    fun formatPayment(paymentData: Map<PaymentFieldName, String>): StringBuilder {
+        val result = StringBuilder(generateRow(headerRowFields, paymentData))
+        result.append(generateRow(paymentRowFields, paymentData))
         return result
     }
 
@@ -193,15 +193,15 @@ class ProEPaymentGenerator(
         val (failed, succeeded) = payments.partition { payment -> paymentChecker.shouldFail(payment) }
         failedList.addAll(failed)
 
-        var paymentString = ""
+        val paymentString = StringBuilder("")
         succeeded.forEach {
             if (it.amount > 0) {
                 val paymentData = gatherPaymentData(it)
-                paymentString += formatPayment(paymentData)
+                paymentString.append(formatPayment(paymentData))
             }
             successList.add(it)
         }
 
-        return Result(PaymentIntegrationClient.SendResult(successList, failedList), paymentString)
+        return Result(PaymentIntegrationClient.SendResult(successList, failedList), paymentString.toString())
     }
 }

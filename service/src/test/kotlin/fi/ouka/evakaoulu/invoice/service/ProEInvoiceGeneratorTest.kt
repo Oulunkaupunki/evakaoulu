@@ -53,7 +53,7 @@ internal class ProEInvoiceGeneratorTest {
         invoiceDataMap[InvoiceFieldName.CLIENT_NAME1] = "Jokunen Jaska"
         invoiceDataMap[InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST] = "42"
 
-        val result = proEInvoiceGenerator.generateRow(format, invoiceDataMap)
+        val result = proEInvoiceGenerator.generateRow(format, invoiceDataMap).toString()
 
         assertEquals(result, "121212A121AJokunen Jaska                 00004200\n")
     }

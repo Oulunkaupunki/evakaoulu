@@ -171,7 +171,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
     fun generateRow(
         fields: List<InvoiceField>,
         invoiceData: Map<InvoiceFieldName, String>,
-    ): String {
+    ): StringBuilder {
         val result = StringBuilder("")
 
         fields.forEach {
@@ -200,22 +200,22 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
 
         result.append("\n")
 
-        return result.toString()
+        return result
     }
 
-    fun formatInvoice(invoiceData: InvoiceData): String {
-        var result = generateRow(headerRowFields, invoiceData.invoiceHeader)
+    fun formatInvoice(invoiceData: InvoiceData): StringBuilder {
+        val result = generateRow(headerRowFields, invoiceData.invoiceHeader)
 
         if ((invoiceData.invoiceHeader[InvoiceFieldName.CODEBTOR_IDENTIFIER] ?: "") != "") {
-            result += generateRow(codebtorRowFields, invoiceData.invoiceHeader)
+            result.append(generateRow(codebtorRowFields, invoiceData.invoiceHeader))
         }
 
         val rowsPerChild = invoiceData.rowsPerChild
         rowsPerChild.forEach { childRows ->
-            result += generateRow(childHeaderRowFields, childRows.value[0])
+            result.append(generateRow(childHeaderRowFields, childRows.value[0]))
             childRows.value.forEach {
-                result += generateRow(rowHeaderRowFields, it)
-                result += generateRow(detailRowFields, it)
+                result.append(generateRow(rowHeaderRowFields, it))
+                result.append(generateRow(detailRowFields, it))
             }
         }
 
@@ -223,7 +223,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
     }
 
     override fun generateInvoice(invoices: List<InvoiceDetailed>): StringInvoiceGenerator.InvoiceGeneratorResult {
-        var invoiceString = ""
+        val invoiceString = StringBuilder("")
         val successList = mutableListOf<InvoiceDetailed>()
         val failedList = mutableListOf<InvoiceDetailed>()
         val manuallySentList = mutableListOf<InvoiceDetailed>()
@@ -233,7 +233,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
 
         succeeded.forEach {
             val invoiceData = gatherInvoiceData(it)
-            invoiceString += formatInvoice(invoiceData)
+            invoiceString.append(formatInvoice(invoiceData))
             successList.add(it)
         }
 
@@ -243,7 +243,7 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
                 failedList,
                 manuallySentList,
             ),
-            invoiceString,
+            invoiceString.toString(),
         )
     }
 }

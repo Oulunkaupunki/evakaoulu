@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter
 
 @Component
 class FinanceDateProvider(
-    val currentDate: LocalDate = LocalDate.now()
+    val currentDate: LocalDate = LocalDate.now(),
 ) {
     fun currentDate(): String {
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")

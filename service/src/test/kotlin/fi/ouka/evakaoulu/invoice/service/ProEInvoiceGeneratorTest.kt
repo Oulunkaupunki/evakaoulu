@@ -8,10 +8,7 @@ import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.ouka.evakaoulu.util.FieldType
 import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.whenever
 import java.time.LocalDate
 
 internal class ProEInvoiceGeneratorTest {
@@ -50,7 +47,7 @@ internal class ProEInvoiceGeneratorTest {
                 InvoiceField(InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST, FieldType.NUMERIC, 42, 6, 2),
             )
 
-        val invoiceDataMap = mutableMapOf<InvoiceFieldName,String>()
+        val invoiceDataMap = mutableMapOf<InvoiceFieldName, String>()
 
         invoiceDataMap[InvoiceFieldName.INVOICE_IDENTIFIER] = "121212A121A"
         invoiceDataMap[InvoiceFieldName.CLIENT_NAME1] = "Jokunen Jaska"

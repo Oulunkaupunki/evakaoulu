@@ -157,14 +157,14 @@ class ProEPaymentGenerator(
                     val value = paymentData[it.field] ?: ""
                     result.append(value.take(it.length).padEnd(it.length))
                 }
-                FieldType.NUMERIC  -> {
+                FieldType.NUMERIC -> {
                     val value = paymentData[it.field] ?: "0"
                     val paddedValue = value.padStart(it.length, '0')
                     // all Evaka values seem to be Int so we can just pad
                     // the decimal part with the correct number of zeroes
                     result.append(paddedValue.padEnd(it.length + it.decimals, '0'))
                 }
-                FieldType.MONETARY ->  {
+                FieldType.MONETARY -> {
                     val value = paymentData[it.field] ?: "0"
                     // if the value is non-zero it has been multiplied by 100 to already contain two decimals
                     val decimals = if (value == "0") it.decimals else it.decimals - 2

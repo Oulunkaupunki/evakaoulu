@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component
 import java.lang.Math.abs
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.UUID
 
 data class InvoiceData(
     val invoiceHeader: Map<InvoiceFieldName, String>,
-    val rowsPerChild: Map<PersonId, List<Map<InvoiceFieldName, String>>>
+    val rowsPerChild: Map<PersonId, List<Map<InvoiceFieldName, String>>>,
 )
 
 @Component
@@ -31,7 +31,6 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
     }
 
     fun gatherInvoiceData(invoiceDetailed: InvoiceDetailed): InvoiceData {
-
         val invoiceDataMap = mutableMapOf<InvoiceFieldName, String>()
 
         val invoiceDateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
@@ -48,7 +47,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
         invoiceDataMap[InvoiceFieldName.CLIENT_NAME2] =
             if (clientName.length > 30) clientName.substring(30, Math.min(60, clientName.length)) else ""
         invoiceDataMap[InvoiceFieldName.STREET_ADDRESS] = invoiceDetailed.headOfFamily.streetAddress
-        invoiceDataMap[InvoiceFieldName.POSTAL_ADDRESS] = invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice
+        invoiceDataMap[InvoiceFieldName.POSTAL_ADDRESS] =
+            invoiceDetailed.headOfFamily.postalCode + " " + invoiceDetailed.headOfFamily.postOffice
         invoiceDataMap[InvoiceFieldName.PHONE_NUMBER] = invoiceDetailed.headOfFamily.phone
         invoiceDataMap[InvoiceFieldName.FAX_NUMBER] = ""
         invoiceDataMap[InvoiceFieldName.CLIENT_CONTACT] = ""
@@ -137,7 +137,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
             invoiceRowDataMap[InvoiceFieldName.TEXT_ROW_CODE] = "3"
             invoiceRowDataMap[InvoiceFieldName.CHILD_NAME] = it.child.lastName + " " + it.child.firstName
             val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-            invoiceRowDataMap[InvoiceFieldName.TIME_PERIOD] = it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter)
+            invoiceRowDataMap[InvoiceFieldName.TIME_PERIOD] =
+                it.periodStart.format(dateFormatter) + " - " + it.periodEnd.format(dateFormatter)
             invoiceRowDataMap[InvoiceFieldName.INVOICE_ROW_HEADER] = ""
             invoiceRowDataMap[InvoiceFieldName.CONSTANT_TEXT_IDENTIFIER] = ""
 

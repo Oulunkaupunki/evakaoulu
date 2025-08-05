@@ -5,14 +5,14 @@
 package fi.ouka.evakaoulu.invoice.service
 
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
+import fi.espoo.evaka.shared.domain.MockEvakaClock
 import fi.ouka.evakaoulu.util.FieldType
 import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 
 internal class ProEInvoiceGeneratorTest {
-    val financeDateProvider = FinanceDateProvider(LocalDate.of(2022, 5, 5))
+    val financeDateProvider = FinanceDateProvider(MockEvakaClock(2022, 5, 5, 12, 34, 56))
     val proEInvoiceGenerator = ProEInvoiceGenerator(InvoiceChecker(), financeDateProvider)
 
     @Test

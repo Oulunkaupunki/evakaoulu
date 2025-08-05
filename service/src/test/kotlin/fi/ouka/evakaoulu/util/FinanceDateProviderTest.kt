@@ -4,9 +4,11 @@
 
 package fi.ouka.evakaoulu.invoice.service
 
+import fi.espoo.evaka.shared.domain.MockEvakaClock
 import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -24,7 +26,7 @@ class FinanceDateProviderTest {
 
     @Test
     fun `should obey the date the LocalDate parameter if given`() {
-        val financeDateProvider = FinanceDateProvider(LocalDate.of(2025, 7, 14))
+        val financeDateProvider = FinanceDateProvider(MockEvakaClock(2025, 7, 14, 12, 34, 56))
         val expectedDate = "20250714"
 
         val actualDate = financeDateProvider.currentDate()
@@ -34,14 +36,14 @@ class FinanceDateProviderTest {
 
     @Test
     fun `should return correct previous month`() {
-        val financeDateProvider = FinanceDateProvider(LocalDate.of(2025, 7, 14))
+        val financeDateProvider = FinanceDateProvider(MockEvakaClock(2025, 7, 14, 12, 34, 56))
         val expectedDate = "06.2025"
 
         val actualDate = financeDateProvider.previousMonth()
 
         assertThat(actualDate).isEqualTo(expectedDate)
 
-        val anotherFinanceDateProvider = FinanceDateProvider(LocalDate.of(2025, 1, 14))
+        val anotherFinanceDateProvider = FinanceDateProvider(MockEvakaClock(2025, 1, 14, 12, 34, 56))
         val anotherExpectedDate = "12.2024"
 
         val anotherActualDate = anotherFinanceDateProvider.previousMonth()
@@ -51,7 +53,7 @@ class FinanceDateProviderTest {
 
     @Test
     fun `should return date with correct abbreviated format`() {
-        val financeDateProvider = FinanceDateProvider(LocalDate.of(2025, 7, 14))
+        val financeDateProvider = FinanceDateProvider(MockEvakaClock(2025, 7, 14, 12, 34, 56))
         val expectedDate = "250714"
 
         val actualDate = financeDateProvider.currentDateWithAbbreviatedYear()
@@ -61,14 +63,17 @@ class FinanceDateProviderTest {
 
     @Test
     fun `should return correct last date of previous month`() {
-        val financeDateProvider = FinanceDateProvider(LocalDate.of(2025, 7, 14))
+        val financeDateProvider =
+            FinanceDateProvider(
+                MockEvakaClock(2025, 7, 14, 12, 34, 56),
+            )
         val expectedDate = "250630"
 
         val actualDate = financeDateProvider.previousMonthLastDate()
 
         assertThat(actualDate).isEqualTo(expectedDate)
 
-        val anotherFinanceDateProvider = FinanceDateProvider(LocalDate.of(2024, 3, 7))
+        val anotherFinanceDateProvider = FinanceDateProvider(MockEvakaClock(2024, 3, 7, 12, 34, 56))
         val anotherExpectedDate = "240229"
 
         val anotherActualDate = anotherFinanceDateProvider.previousMonthLastDate()
@@ -78,11 +83,20 @@ class FinanceDateProviderTest {
 
     @Test
     fun `should return correct previous month in YYMM format`() {
-        val financeDateProvider = FinanceDateProvider(LocalDate.of(2025, 7, 14))
+        val financeDateProvider = FinanceDateProvider(MockEvakaClock(2025, 7, 14, 12, 34, 56))
         val expectedDate = "2506"
 
         val actualDate = financeDateProvider.previousMonthYYMM()
 
         assertThat(actualDate).isEqualTo(expectedDate)
+    }
+
+    @Test
+    fun `should return different date tomorrow`() {
+        val mockClock = MockEvakaClock(2025, 7, 14, 12, 34, 56)
+        val financeDateProvider = FinanceDateProvider(mockClock)
+        assertThat("20250714").isEqualTo(financeDateProvider.currentDate())
+        mockClock.tick(Duration.ofHours(24))
+        assertThat("20250715").isEqualTo(financeDateProvider.currentDate())
     }
 }

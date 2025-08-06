@@ -116,7 +116,7 @@ class EVakaOuluConfig {
     fun actionRuleMapping(): ActionRuleMapping = EvakaOuluActionRuleMapping()
 
     @Bean
-    fun invoiceGenerationLogicChooser() = DefaultInvoiceGenerationLogic // TODO: implement
+    fun invoiceGenerationLogicChooser() = DefaultInvoiceGenerationLogic
 
     @Bean
     fun paymentIntegrationClient(

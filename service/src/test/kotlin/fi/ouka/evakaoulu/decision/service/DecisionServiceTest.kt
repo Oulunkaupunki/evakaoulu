@@ -47,9 +47,7 @@ import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.DateRange
 import fi.espoo.evaka.shared.domain.OfficialLanguage
-import fi.espoo.evaka.shared.message.IMessageProvider
 import fi.espoo.evaka.shared.template.ITemplateProvider
-import fi.ouka.evakaoulu.message.config.MessageConfiguration
 import fi.ouka.evakaoulu.template.config.TemplateConfiguration
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
@@ -72,15 +70,13 @@ private val settings =
 
 @Tag("PDFGenerationTest")
 class DecisionServiceTest {
-    private lateinit var messageProvider: IMessageProvider
     private lateinit var templateProvider: ITemplateProvider
     private lateinit var pdfService: PdfGenerator
 
     @BeforeEach
     fun setup() {
-        messageProvider = MessageConfiguration().messageProvider()
         templateProvider = TemplateConfiguration().templateProvider()
-        pdfService = PdfGenerator(messageProvider, templateProvider, PDFConfig.templateEngine())
+        pdfService = PdfGenerator(templateProvider, PDFConfig.templateEngine())
     }
 
     @ParameterizedTest

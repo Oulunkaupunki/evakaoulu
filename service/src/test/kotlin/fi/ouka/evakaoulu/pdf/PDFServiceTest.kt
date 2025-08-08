@@ -39,7 +39,6 @@ import fi.espoo.evaka.shared.config.PDFConfig
 import fi.espoo.evaka.shared.domain.FiniteDateRange
 import fi.espoo.evaka.shared.domain.HelsinkiDateTime
 import fi.espoo.evaka.shared.domain.OfficialLanguage
-import fi.ouka.evakaoulu.message.config.MessageConfiguration
 import fi.ouka.evakaoulu.template.config.TemplateConfiguration
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
@@ -69,7 +68,6 @@ internal class PDFServiceTest {
     fun setup() {
         pdfService =
             PdfGenerator(
-                MessageConfiguration().messageProvider(),
                 TemplateConfiguration().templateProvider(),
                 PDFConfig.templateEngine(),
             )

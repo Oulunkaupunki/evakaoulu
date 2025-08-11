@@ -1127,7 +1127,7 @@ $unsubscribeEn
                         .trimIndent()
                 } else {
                     """
-                <p>Lapsesi esiopetuksen poissaolohakemus on hylätty. Lue lisää eVakasta.</p>
+                <p>Lapsesi esiopetuksen poissaolohakemus on hylätty. Lue lisää eVakasta. </p>
                 <p>Your child's application for absence from pre-primary educationhas been declined. Read more about eVaka.</p>
             """
                         .trimIndent()

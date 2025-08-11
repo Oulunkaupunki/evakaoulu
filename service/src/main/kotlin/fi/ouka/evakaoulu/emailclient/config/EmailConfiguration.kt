@@ -1120,17 +1120,17 @@ $unsubscribeEn
             html =
                 if (accepted) {
                     """
-                <p>Lapsesi esiopetuksen poissaolohakemus ajalle $range on hyväksytty ja poissaolot on merkitty eVakaan. 
-                Lue lisää eVakasta.</p>
-                <p>Your child's application for absence from pre-primary education for the period $range has been 
-                approved, and the absence has been recorded in eVaka. Read more about eVaka.</p>
+                <p>Lapsesi esiopetuksen poissaolohakemus on hyväksytty ja poissaolot on merkitty eVakaan. Lue lisää eVakasta.</p>
+                <p>Ditt barns ansökan om frånvaro från förskoleundervisningen har godkänts och frånvaron har markerats i eVaka. Läs mer om eVaka.</p>
+                <p>Your child's application for absence from pre-primary education has been approved, and the absence has been 
+                recorded in eVaka. Read more about eVaka.</p>
             """
                         .trimIndent()
                 } else {
                     """
-                <p>Lapsesi esiopetuksen poissaolohakemus ajalle $range on hylätty. Lue lisää eVakasta.</p>
-                <p>Your child's application for absence from pre-primary education for the period $range has been 
-                declined. Read more about eVaka.</p>
+                <p>Lapsesi esiopetuksen poissaolohakemus on hylätty. Lue lisää eVakasta.</p>
+                <p>Ansökan om frånvaro från förskoleundervisningen för ditt barn  har avslagits. Läs mer om eVaka.</p>
+                <p>Your child's application for absence from pre-primary educationhas been declined. Read more about eVaka.</p>
             """
                         .trimIndent()
                 },

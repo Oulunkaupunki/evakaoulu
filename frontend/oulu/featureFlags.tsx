@@ -134,7 +134,7 @@ const features: Features = {
     nekkuIntegration: true,
     citizenChildDocumentTypes: false,
     decisionChildDocumentTypes: false,
-    absenceApplications: true,
+    absenceApplications: false,
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true

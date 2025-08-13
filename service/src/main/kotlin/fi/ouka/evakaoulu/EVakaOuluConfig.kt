@@ -41,7 +41,7 @@ class EVakaOuluConfig {
             // (7*24) - 3 = 165
             citizenReservationThresholdHours = 165,
             dailyFeeDivisorOperationalDaysOverride = null,
-            freeSickLeaveOnContractDays = true,
+            freeSickLeaveOnContractDays = false,
             alwaysUseDaycareFinanceDecisionHandler = false,
             freeAbsenceGivesADailyRefund = true,
             paymentNumberSeriesStart = 1,

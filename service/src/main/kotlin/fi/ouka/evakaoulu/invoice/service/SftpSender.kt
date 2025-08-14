@@ -6,14 +6,14 @@ package fi.ouka.evakaoulu.invoice.service
 
 import com.jcraft.jsch.SftpException
 import fi.ouka.evakaoulu.SftpProperties
-import java.text.SimpleDateFormat
-import java.util.Date
 
 class SftpSender(val sftpProperties: SftpProperties, val sftpConnector: SftpConnector) {
     @Throws(SftpException::class)
-    fun send(content: String) {
+    fun send(
+        content: String,
+        fileName: String,
+    ) {
         val path = sftpProperties.path
-        val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
         val filepath = "$path/$fileName"
 
         try {

@@ -46,3 +46,12 @@ evakaoulu:
     password: pass
     address: address
     path: path
+  bucket:
+    export: evakaoulu-export-it
+  dwExport:
+    prefix: reports
+    sftp:
+      username: user
+      password: pass
+      address: address
+      path: path

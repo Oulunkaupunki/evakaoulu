@@ -19,7 +19,7 @@ enum class EvakaOuluScheduledJob(
 ) {
     PlanDWExportJobs(
         { jobs, db, clock -> jobs.planDWJobs(db, clock, DWQuery.entries) },
-        ScheduledJobSettings(enabled = false, schedule = JobSchedule.daily(LocalTime.of(1, 0))),
+        ScheduledJobSettings(enabled = false, schedule = JobSchedule.daily(LocalTime.of(20, 0))),
     ),
 }
 

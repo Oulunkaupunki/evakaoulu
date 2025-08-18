@@ -7,7 +7,9 @@ import fi.espoo.evaka.shared.domain.EvakaClock
 import fi.ouka.evakaoulu.EvakaOuluAsyncJob
 import java.time.Duration
 
-class DWExportJob(private val client: DWExportClient) {
+class DWExportJob(
+    private val client: DWExportClient,
+) {
     fun sendDWQuery(
         db: Database.Connection,
         clock: EvakaClock,

@@ -8,7 +8,9 @@ import fi.ouka.evakaoulu.dw.DWExportJob
 import fi.ouka.evakaoulu.dw.DWQuery
 
 sealed interface EvakaOuluAsyncJob : AsyncJobPayload {
-    data class SendDWQuery(val query: DWQuery) : EvakaOuluAsyncJob {
+    data class SendDWQuery(
+        val query: DWQuery,
+    ) : EvakaOuluAsyncJob {
         override val user: AuthenticatedUser? = null
     }
 

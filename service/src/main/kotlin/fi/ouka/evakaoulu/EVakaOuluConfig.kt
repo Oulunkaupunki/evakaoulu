@@ -163,7 +163,8 @@ class EVakaOuluConfig {
         bucketEnv: BucketEnv,
         credentialsProvider: AwsCredentialsProvider,
     ): S3AsyncClient =
-        S3AsyncClient.crtBuilder()
+        S3AsyncClient
+            .crtBuilder()
             .credentialsProvider(credentialsProvider)
             .build()
 
@@ -173,7 +174,8 @@ class EVakaOuluConfig {
         bucketEnv: BucketEnv,
         credentialsProvider: AwsCredentialsProvider,
     ): S3AsyncClient =
-        S3AsyncClient.crtBuilder()
+        S3AsyncClient
+            .crtBuilder()
             .region(Region.EU_WEST_1)
             .credentialsProvider(credentialsProvider)
             .build()

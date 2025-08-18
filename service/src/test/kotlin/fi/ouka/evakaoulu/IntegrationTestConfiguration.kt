@@ -56,7 +56,8 @@ class IntegrationTestConfiguration {
 
     @Bean
     fun testS3AsyncClient(bucketEnv: BucketEnv): S3AsyncClient =
-        S3AsyncClient.crtBuilder()
+        S3AsyncClient
+            .crtBuilder()
             .httpConfiguration { it.trustAllCertificatesEnabled(true) }
             .region(Region.EU_WEST_1)
             .forcePathStyle(true)
@@ -65,8 +66,7 @@ class IntegrationTestConfiguration {
                 StaticCredentialsProvider.create(
                     AwsBasicCredentials.create(bucketEnv.localS3AccessKeyId, bucketEnv.localS3SecretAccessKey),
                 ),
-            )
-            .build()
+            ).build()
 
     @Bean
     fun s3Presigner(bucketEnv: BucketEnv): S3Presigner =

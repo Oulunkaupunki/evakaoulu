@@ -1,6 +1,9 @@
 package fi.ouka.evakaoulu.dw
 
-enum class DWQuery(val queryName: String, val query: DWQueries.CsvQuery) {
+enum class DWQuery(
+    val queryName: String,
+    val query: DWQueries.CsvQuery,
+) {
     ABSENCE("absences", DWQueries.getAbsences),
     APPLICATION_INFO("applicationInfos", DWQueries.getApplicationInfos),
     ASSISTANCE_ACTION("assistanceActions", DWQueries.getAssistanceActions),

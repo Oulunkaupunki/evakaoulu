@@ -64,13 +64,15 @@ class DWExportJobTest : AbstractIntegrationTest() {
             val employeeId = tx.insert(DevEmployee())
             tx.getEmployee(employeeId)
             val areaId =
-                tx.createQuery(
-                    QuerySql { sql("select id from care_area order by short_name limit 1") },
-                ).exactlyOne<AreaId>()
+                tx
+                    .createQuery(
+                        QuerySql { sql("select id from care_area order by short_name limit 1") },
+                    ).exactlyOne<AreaId>()
             val snoId =
-                tx.createQuery(
-                    QuerySql { sql("select id from service_need_option order by name_fi limit 1") },
-                ).exactlyOne<ServiceNeedOptionId>()
+                tx
+                    .createQuery(
+                        QuerySql { sql("select id from service_need_option order by name_fi limit 1") },
+                    ).exactlyOne<ServiceNeedOptionId>()
             val daycareId = tx.insert(DevDaycare(areaId = areaId))
             tx.insert(DevDaycareGroup(daycareId = daycareId))
             val childId = tx.insert(DevPerson(), DevPersonType.CHILD)

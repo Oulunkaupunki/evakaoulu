@@ -8,6 +8,8 @@ import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.text.SimpleDateFormat
+import java.util.Date
 
 private val logger = KotlinLogging.logger {}
 
@@ -25,7 +27,8 @@ class EVakaOuluInvoiceClient(
 
         if (!successList.isEmpty()) {
             try {
-                sftpSender.send(proEinvoices)
+                val fileName = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
+                sftpSender.send(proEinvoices, fileName)
                 logger.info { "Successfully sent ${successList.size} invoices and created ${manuallySentList.size} manual invoice" }
             } catch (e: SftpException) {
                 failedList.addAll(successList)

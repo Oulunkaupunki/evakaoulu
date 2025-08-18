@@ -4,6 +4,8 @@
 
 package fi.ouka.evakaoulu
 
+import fi.espoo.evaka.BucketEnv
+import fi.espoo.evaka.ScheduledJobsEnv
 import fi.espoo.evaka.application.ApplicationStatus
 import fi.espoo.evaka.espoo.DefaultPasswordSpecification
 import fi.espoo.evaka.holidayperiod.QuestionnaireType
@@ -15,24 +17,36 @@ import fi.espoo.evaka.mealintegration.MealTypeMapper
 import fi.espoo.evaka.shared.ArchiveProcessConfig
 import fi.espoo.evaka.shared.ArchiveProcessType
 import fi.espoo.evaka.shared.FeatureConfig
+import fi.espoo.evaka.shared.async.AsyncJobRunner
 import fi.espoo.evaka.shared.auth.PasswordConstraints
 import fi.espoo.evaka.shared.auth.PasswordSpecification
 import fi.espoo.evaka.shared.auth.UserRole
 import fi.espoo.evaka.shared.security.actionrule.ActionRuleMapping
 import fi.espoo.evaka.titania.TitaniaEmployeeIdConverter
+import fi.ouka.evakaoulu.dw.DWExportClient
+import fi.ouka.evakaoulu.dw.DWExportJob
+import fi.ouka.evakaoulu.dw.FileDWExportClient
 import fi.ouka.evakaoulu.invoice.service.SftpConnector
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import fi.ouka.evakaoulu.payment.service.OuluPaymentIntegrationClient
 import fi.ouka.evakaoulu.payment.service.ProEPaymentGenerator
 import fi.ouka.evakaoulu.security.EvakaOuluActionRuleMapping
+import io.opentelemetry.api.trace.Tracer
+import org.jdbi.v3.core.Jdbi
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.server.WebServerFactoryCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Import
+import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider
+import software.amazon.awssdk.regions.Region
+import software.amazon.awssdk.services.s3.S3AsyncClient
 import java.time.MonthDay
 
 @Configuration
+@Import(EvakaOuluAsyncJobRegistration::class)
 class EVakaOuluConfig {
     @Bean
     fun featureConfig(): FeatureConfig =
@@ -142,6 +156,58 @@ class EVakaOuluConfig {
 
     @Bean
     fun mealTypeMapper(): MealTypeMapper = DefaultMealTypeMapper
+
+    @Bean
+    @Profile("production")
+    fun productionS3AsyncClient(
+        bucketEnv: BucketEnv,
+        credentialsProvider: AwsCredentialsProvider,
+    ): S3AsyncClient =
+        S3AsyncClient.crtBuilder()
+            .credentialsProvider(credentialsProvider)
+            .build()
+
+    @Bean
+    @Profile("local")
+    fun localS3AsyncClient(
+        bucketEnv: BucketEnv,
+        credentialsProvider: AwsCredentialsProvider,
+    ): S3AsyncClient =
+        S3AsyncClient.crtBuilder()
+            .region(Region.EU_WEST_1)
+            .credentialsProvider(credentialsProvider)
+            .build()
+
+    @Bean
+    fun fileDWExportClient(
+        asyncClient: S3AsyncClient,
+        sftpConnector: SftpConnector,
+        properties: EvakaOuluProperties,
+    ): DWExportClient = FileDWExportClient(asyncClient, SftpSender(properties.dwExport.sftp, sftpConnector), properties)
+
+    @Bean
+    fun evakaOuluAsyncJobRunner(
+        jdbi: Jdbi,
+        tracer: Tracer,
+        env: Environment,
+    ): AsyncJobRunner<EvakaOuluAsyncJob> = AsyncJobRunner(EvakaOuluAsyncJob::class, listOf(EvakaOuluAsyncJob.pool), jdbi, tracer)
+
+    @Bean
+    fun evakaOuluDWJob(dwExportClient: DWExportClient) = DWExportJob(dwExportClient)
+
+    @Bean
+    fun evakaOuluScheduledJobEnv(env: Environment): ScheduledJobsEnv<EvakaOuluScheduledJob> =
+        ScheduledJobsEnv.fromEnvironment(
+            EvakaOuluScheduledJob.entries.associateWith { it.defaultSettings },
+            "oulu.job",
+            env,
+        )
+
+    @Bean
+    fun evakaOuluScheduledJobs(
+        evakaOuluRunner: AsyncJobRunner<EvakaOuluAsyncJob>,
+        env: ScheduledJobsEnv<EvakaOuluScheduledJob>,
+    ): EvakaOuluScheduledJobs = EvakaOuluScheduledJobs(evakaOuluRunner, env)
 
     @Bean
     fun passwordSpecification(): PasswordSpecification =

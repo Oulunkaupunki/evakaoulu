@@ -13,6 +13,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 data class EvakaOuluProperties(
     val intimeInvoices: SftpProperties,
     val intimePayments: SftpProperties,
+    val bucket: BucketProperties,
+    val dwExport: DWExportProperties,
 )
 
 data class SftpProperties(
@@ -20,4 +22,15 @@ data class SftpProperties(
     val path: String,
     val username: String,
     val password: String,
+)
+
+data class BucketProperties(
+    val export: String,
+) {
+    fun allBuckets() = listOf(export)
+}
+
+data class DWExportProperties(
+    val prefix: String,
+    val sftp: SftpProperties,
 )

@@ -40,12 +40,13 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel")
     implementation("org.jdbi:jdbi3-core")
     implementation("com.github.mwiede:jsch")
-
     implementation("software.amazon.awssdk:s3")
-
+    implementation("software.amazon.awssdk:http-auth-aws-crt")
     implementation("org.unbescape:unbescape:1.1.6.RELEASE")
-
     implementation("io.opentelemetry:opentelemetry-api")
+    implementation("com.github.kagkarlsson:db-scheduler")
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("com.vaadin.external.google", "android-json")

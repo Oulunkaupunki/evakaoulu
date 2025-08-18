@@ -15,12 +15,15 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
+import java.text.SimpleDateFormat
+import java.util.Date
 
 @ExtendWith(OutputCaptureExtension::class)
 internal class EVakaOuluInvoiceClientTest {
     val invoiceGenerator = mock<ProEInvoiceGenerator>()
     val sftpSender = mock<SftpSender>()
     val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(sftpSender, invoiceGenerator)
+    val fileName: String = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
 
     @Test
     fun `should pass invoices to the invoice generator`() {
@@ -54,7 +57,7 @@ internal class EVakaOuluInvoiceClientTest {
 
         eVakaOuluInvoiceClient.send(invoiceList)
 
-        verify(sftpSender).send(proEInvoice1)
+        verify(sftpSender).send(proEInvoice1, fileName)
     }
 
     @Test
@@ -65,7 +68,7 @@ internal class EVakaOuluInvoiceClientTest {
 
         eVakaOuluInvoiceClient.send(invoiceList)
 
-        verify(sftpSender, never()).send("")
+        verify(sftpSender, never()).send("", fileName)
     }
 
     @Test
@@ -105,7 +108,7 @@ internal class EVakaOuluInvoiceClientTest {
                 proEInvoice1,
             )
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
-        whenever(sftpSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
+        whenever(sftpSender.send(proEInvoice1, fileName)).thenThrow(SftpException::class.java)
 
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
@@ -130,7 +133,7 @@ internal class EVakaOuluInvoiceClientTest {
         val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
 
         assertThat(sendResult.succeeded).hasSize(2)
-        verify(sftpSender).send(proEInvoice1)
+        verify(sftpSender).send(proEInvoice1, fileName)
     }
 
     @Test
@@ -153,7 +156,7 @@ internal class EVakaOuluInvoiceClientTest {
 
         assertThat(sendResult.succeeded).hasSize(1)
         assertThat(sendResult.manuallySent).hasSize(1)
-        verify(sftpSender).send(proEInvoice1)
+        verify(sftpSender).send(proEInvoice1, fileName)
     }
 
     @Test
@@ -194,7 +197,7 @@ internal class EVakaOuluInvoiceClientTest {
             ),
         )
 
-        whenever(sftpSender.send(proEInvoice1)).thenThrow(SftpException::class.java)
+        whenever(sftpSender.send(proEInvoice1, fileName)).thenThrow(SftpException::class.java)
         eVakaOuluInvoiceClient.send(invoiceList)
 
         assertThat(output).contains("Failed to send 2 invoices")

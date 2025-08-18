@@ -10,6 +10,8 @@ import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
 import fi.espoo.evaka.shared.db.Database
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.text.SimpleDateFormat
+import java.util.Date
 
 private val logger = KotlinLogging.logger {}
 
@@ -30,7 +32,10 @@ class OuluPaymentIntegrationClient(
 
         if (!successList.isEmpty()) {
             try {
-                sftpSender.send(generatorResult.paymentString)
+                sftpSender.send(
+                    generatorResult.paymentString,
+                    SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date()),
+                )
                 logger.info { "Successfully sent ${successList.size} payments" }
             } catch (e: SftpException) {
                 logger.error { "Failed to send ${successList.size} payments" }

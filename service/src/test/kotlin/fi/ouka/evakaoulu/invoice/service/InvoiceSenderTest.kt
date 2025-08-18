@@ -10,6 +10,8 @@ import org.mockito.kotlin.argThat
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
+import java.text.SimpleDateFormat
+import java.util.Date
 
 internal class InvoiceSenderTest {
     @Test
@@ -24,7 +26,7 @@ internal class InvoiceSenderTest {
                 sftpConnector,
             )
 
-        sftpSender.send(proEInvoice)
+        sftpSender.send(proEInvoice, SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date()))
 
         verify(sftpConnector).connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
         val fileNamePattern = """$path/proe-\d{8}-\d{6}.txt"""

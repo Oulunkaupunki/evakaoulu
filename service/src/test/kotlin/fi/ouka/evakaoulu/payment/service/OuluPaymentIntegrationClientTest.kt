@@ -21,6 +21,8 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.UUID
 
 @ExtendWith(OutputCaptureExtension::class)
@@ -29,6 +31,7 @@ internal class OuluPaymentIntegrationClientTest {
     val sftpSender = mock<SftpSender>()
     val paymentClient = OuluPaymentIntegrationClient(paymentGenerator, sftpSender)
     val tx = mock<Database.Transaction>()
+    val fileName: String = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
 
     @Test
     fun `should pass payments to the payment generator`() {
@@ -54,7 +57,7 @@ internal class OuluPaymentIntegrationClientTest {
 
         paymentClient.send(paymentList, tx)
 
-        verify(sftpSender).send(proEPayment1)
+        verify(sftpSender).send(proEPayment1, fileName)
     }
 
     @Test
@@ -65,7 +68,7 @@ internal class OuluPaymentIntegrationClientTest {
 
         paymentClient.send(paymentList, tx)
 
-        verify(sftpSender, never()).send("")
+        verify(sftpSender, never()).send("", fileName)
     }
 
     @Test
@@ -125,7 +128,7 @@ internal class OuluPaymentIntegrationClientTest {
         val proEPayment1 = ""
         val paymentGeneratorResult = ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1)
         whenever(paymentGenerator.generatePayments(paymentList)).thenReturn(paymentGeneratorResult)
-        whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
+        whenever(sftpSender.send(proEPayment1, fileName)).thenThrow(SftpException::class.java)
 
         val sendResult = paymentClient.send(paymentList, tx)
 
@@ -143,7 +146,7 @@ internal class OuluPaymentIntegrationClientTest {
         val sendResult = paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(sendResult.succeeded).hasSize(2)
-        verify(sftpSender).send(proEPayment1)
+        verify(sftpSender).send(proEPayment1, fileName)
     }
 
     @Test
@@ -168,7 +171,7 @@ internal class OuluPaymentIntegrationClientTest {
             ProEPaymentGenerator.Result(PaymentIntegrationClient.SendResult(paymentList, listOf()), proEPayment1),
         )
 
-        whenever(sftpSender.send(proEPayment1)).thenThrow(SftpException::class.java)
+        whenever(sftpSender.send(proEPayment1, fileName)).thenThrow(SftpException::class.java)
         paymentClient.send(paymentList, tx)
 
         Assertions.assertThat(output).contains("Failed to send 2 payments")

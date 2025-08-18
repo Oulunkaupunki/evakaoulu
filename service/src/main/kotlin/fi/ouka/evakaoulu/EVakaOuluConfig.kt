@@ -199,7 +199,7 @@ class EVakaOuluConfig {
     fun evakaOuluScheduledJobEnv(env: Environment): ScheduledJobsEnv<EvakaOuluScheduledJob> =
         ScheduledJobsEnv.fromEnvironment(
             EvakaOuluScheduledJob.entries.associateWith { it.defaultSettings },
-            "turku.job",
+            "oulu.job",
             env,
         )
 

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
-import software.amazon.awssdk.crt.s3.S3Client
+import software.amazon.awssdk.services.s3.S3Client
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(

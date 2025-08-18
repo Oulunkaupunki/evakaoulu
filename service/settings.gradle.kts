@@ -7,8 +7,11 @@ includeBuild("../evaka/service") {
     dependencySubstitution {
         substitute(module("evaka:evaka-bom")).using(project(":evaka-bom"))
         substitute(module("evaka:evaka-service")).using(project(":"))
+        substitute(module("evaka:custom-ktlint-rules")).using(project(":custom-ktlint-rules"))
     }
 }
+
+include("custom-ktlint-rules")
 
 dependencyResolutionManagement {
     versionCatalogs {

@@ -12,6 +12,7 @@ includeBuild("../evaka/service") {
 }
 
 include("custom-ktlint-rules")
+project(":custom-ktlint-rules").projectDir.mkdirs()
 
 dependencyResolutionManagement {
     versionCatalogs {

@@ -542,8 +542,8 @@ fun generateAssistanceNeedPdf(
     decision: AssistanceNeedDecision,
     pdfService: PdfGenerator,
     templateProvider: ITemplateProvider,
-): ByteArray {
-    return pdfService.render(
+): ByteArray =
+    pdfService.render(
         Page(
             Template(templateProvider.getAssistanceNeedDecisionPath()),
             Context().apply {
@@ -553,14 +553,13 @@ fun generateAssistanceNeedPdf(
             },
         ),
     )
-}
 
 fun generateAssistanceNeedPreschoolPdf(
     decision: AssistanceNeedPreschoolDecision,
     pdfService: PdfGenerator,
     templateProvider: ITemplateProvider,
-): ByteArray {
-    return pdfService.render(
+): ByteArray =
+    pdfService.render(
         Page(
             Template(templateProvider.getAssistanceNeedPreschoolDecisionPath()),
             Context().apply {
@@ -569,4 +568,3 @@ fun generateAssistanceNeedPreschoolPdf(
             },
         ),
     )
-}

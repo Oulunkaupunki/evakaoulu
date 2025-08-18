@@ -9,7 +9,10 @@ import fi.ouka.evakaoulu.SftpProperties
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class SftpSender(val sftpProperties: SftpProperties, val sftpConnector: SftpConnector) {
+class SftpSender(
+    val sftpProperties: SftpProperties,
+    val sftpConnector: SftpConnector,
+) {
     @Throws(SftpException::class)
     fun send(content: String) {
         val path = sftpProperties.path

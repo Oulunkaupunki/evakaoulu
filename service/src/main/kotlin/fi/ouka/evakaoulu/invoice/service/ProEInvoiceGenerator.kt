@@ -23,8 +23,10 @@ data class InvoiceData(
 )
 
 @Component
-class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val financeDateProvider: FinanceDateProvider) :
-    StringInvoiceGenerator {
+class ProEInvoiceGenerator(
+    private val invoiceChecker: InvoiceChecker,
+    val financeDateProvider: FinanceDateProvider,
+) : StringInvoiceGenerator {
     fun generateInvoiceTitle(): String {
         val previousMonth = financeDateProvider.previousMonth()
         return "Varhaiskasvatus $previousMonth"
@@ -67,7 +69,8 @@ class ProEInvoiceGenerator(private val invoiceChecker: InvoiceChecker, val finan
         invoiceDataMap[InvoiceFieldName.INVOICE_DATE] = invoiceDetailed.invoiceDate.format(invoiceDateFormatter)
         invoiceDataMap[InvoiceFieldName.DUE_DATE] = invoiceDetailed.dueDate.format(invoiceDateFormatter)
         invoiceDataMap[InvoiceFieldName.ACCOUNTING_DATE] =
-            invoiceDetailed.sentAt?.toLocalDateTime()?.format(invoiceDateFormatter) ?: LocalDate.now()
+            invoiceDetailed.sentAt?.toLocalDateTime()?.format(invoiceDateFormatter) ?: LocalDate
+                .now()
                 .format(invoiceDateFormatter)
         invoiceDataMap[InvoiceFieldName.INCLUDED_LATE_PAYMENT_INTEREST] = "0"
         invoiceDataMap[InvoiceFieldName.CREDIT_NOTE_INVOICE_NUMBER] = ""

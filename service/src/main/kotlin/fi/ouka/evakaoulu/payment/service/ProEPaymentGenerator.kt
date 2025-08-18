@@ -40,7 +40,8 @@ class ProEPaymentGenerator(
         paymentDataMap[PaymentFieldName.INVOICE_TYPE] = "1"
         paymentDataMap[PaymentFieldName.ACCOUNT_SUGGESTION] = "1"
         paymentDataMap[PaymentFieldName.PERIOD] = financeDateProvider.previousMonthYYMM()
-        paymentDataMap[PaymentFieldName.INVOICE_DATE] = payment.paymentDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now()
+        paymentDataMap[PaymentFieldName.INVOICE_DATE] = payment.paymentDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate
+            .now()
             .format(paymentDateFormatterYYMMDD)
         paymentDataMap[PaymentFieldName.DUE_DATE] =
             payment.dueDate?.format(paymentDateFormatterYYMMDD) ?: LocalDate.now().format(paymentDateFormatterYYMMDD)

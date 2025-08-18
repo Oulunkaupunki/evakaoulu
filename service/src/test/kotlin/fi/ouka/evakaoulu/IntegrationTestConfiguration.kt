@@ -24,11 +24,13 @@ class IntegrationTestConfiguration {
     @Bean
     fun s3Client(bucketEnv: BucketEnv): S3Client {
         val attrs =
-            AttributeMap.builder()
+            AttributeMap
+                .builder()
                 .put(SdkHttpConfigurationOption.TRUST_ALL_CERTIFICATES, true)
                 .build()
         val client =
-            S3Client.builder()
+            S3Client
+                .builder()
                 .httpClient(DefaultSdkHttpClientBuilder().buildWithDefaults(attrs))
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .endpointOverride(bucketEnv.localS3Url)
@@ -36,11 +38,11 @@ class IntegrationTestConfiguration {
                     StaticCredentialsProvider.create(
                         AwsBasicCredentials.create(bucketEnv.localS3AccessKeyId, bucketEnv.localS3SecretAccessKey),
                     ),
-                )
-                .build()
+                ).build()
 
         val existingBuckets = client.listBuckets().buckets().map { it.name() }
-        bucketEnv.allBuckets()
+        bucketEnv
+            .allBuckets()
             .filterNot { bucket -> existingBuckets.contains(bucket) }
             .forEach { bucket -> client.createBucket { it.bucket(bucket) } }
 
@@ -49,15 +51,15 @@ class IntegrationTestConfiguration {
 
     @Bean
     fun s3Presigner(bucketEnv: BucketEnv): S3Presigner =
-        S3Presigner.builder()
+        S3Presigner
+            .builder()
             .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
             .endpointOverride(bucketEnv.localS3Url)
             .credentialsProvider(
                 StaticCredentialsProvider.create(
                     AwsBasicCredentials.create(bucketEnv.localS3AccessKeyId, bucketEnv.localS3SecretAccessKey),
                 ),
-            )
-            .build()
+            ).build()
 
     @Bean
     fun jwtAlgorithm(): Algorithm {

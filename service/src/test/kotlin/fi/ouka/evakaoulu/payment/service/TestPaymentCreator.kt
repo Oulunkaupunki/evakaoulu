@@ -17,8 +17,8 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.UUID
 
-fun validPayment(): Payment {
-    return Payment(
+fun validPayment(): Payment =
+    Payment(
         PaymentId(UUID.randomUUID()),
         HelsinkiDateTime.Companion.of(LocalDate.of(2022, 8, 8), LocalTime.of(12, 0, 0)),
         HelsinkiDateTime.Companion.of(LocalDate.of(2022, 8, 8), LocalTime.of(12, 0, 0)),
@@ -32,10 +32,9 @@ fun validPayment(): Payment {
         HelsinkiDateTime.Companion.of(LocalDate.of(2022, 7, 31), LocalTime.of(12, 0, 0)),
         EvakaUserId(UUID.randomUUID()),
     )
-}
 
-fun validPaymentUnit(): PaymentUnit {
-    return PaymentUnit(
+fun validPaymentUnit(): PaymentUnit =
+    PaymentUnit(
         DaycareId(UUID.randomUUID()),
         "Private test care provider",
         "1234567-8",
@@ -45,4 +44,3 @@ fun validPaymentUnit(): PaymentUnit {
         setOf(CareType.CENTRE),
         "1234",
     )
-}

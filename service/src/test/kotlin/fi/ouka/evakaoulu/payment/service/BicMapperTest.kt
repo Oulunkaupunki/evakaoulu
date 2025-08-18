@@ -10,24 +10,24 @@ import org.junit.jupiter.api.Test
 internal class BicMapperTest {
     val bicMapper = BicMapper()
 
-    fun ibanWithId(id: Int): String {
-        return "FI42" + id.toString() + "12345678901"
-    }
+    fun ibanWithId(id: Int): String = "FI42" + id.toString() + "12345678901"
 
     fun oneDigitTest(
         bankIdentifier: Int,
         correctBic: String,
     ) {
-        for (i in bankIdentifier * 100..bankIdentifier * 100 + 99)
+        for (i in bankIdentifier * 100..bankIdentifier * 100 + 99) {
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
+        }
     }
 
     fun twoDigitTest(
         bankIdentifier: Int,
         correctBic: String,
     ) {
-        for (i in bankIdentifier * 10..bankIdentifier * 10 + 9)
+        for (i in bankIdentifier * 10..bankIdentifier * 10 + 9) {
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
+        }
     }
 
     fun threeDigitTest(
@@ -41,8 +41,9 @@ internal class BicMapperTest {
         identifierRange: IntProgression,
         correctBic: String,
     ) {
-        for (i in identifierRange)
+        for (i in identifierRange) {
             assertEquals(bicMapper.mapIban(ibanWithId(i)), correctBic)
+        }
     }
 
     @Test
@@ -147,8 +148,9 @@ internal class BicMapperTest {
         threeDigitTest(715, bic)
         threeDigitTest(400, bic)
 
-        for (identifierRange in identifiers)
+        for (identifierRange in identifiers) {
             rangeTest(identifierRange, bic)
+        }
     }
 
     @Test
@@ -156,8 +158,9 @@ internal class BicMapperTest {
         // some random undefined identifiers
         val identifiers = listOf(401, 791, 499, 300)
 
-        for (identifier in identifiers)
+        for (identifier in identifiers) {
             assertEquals(bicMapper.mapIban(ibanWithId(identifier)), "UNKNOWN")
+        }
     }
 
     @Test

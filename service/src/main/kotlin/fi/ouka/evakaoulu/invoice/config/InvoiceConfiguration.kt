@@ -59,8 +59,8 @@ class InvoiceConfiguration {
 }
 
 class OuluIncomeTypesProvider : IncomeTypesProvider {
-    override fun get(): Map<String, IncomeType> {
-        return linkedMapOf(
+    override fun get(): Map<String, IncomeType> =
+        linkedMapOf(
             "MAIN_INCOME" to IncomeType("Palkkatulo", 1, true, false),
             "HOLIDAY_BONUS" to IncomeType("Lomaraha", 1, true, false),
             "PERKS" to IncomeType("Luontaisetu", 1, true, false),
@@ -79,7 +79,6 @@ class OuluIncomeTypesProvider : IncomeTypesProvider {
             "OTHER_INCOME" to IncomeType("Muu tulo", 1, true, false),
             "ADJUSTED_DAILY_ALLOWANCE" to IncomeType("Soviteltu päiväraha", 1, true, false),
         )
-    }
 }
 
 class OuluIncomeCoefficientMultiplierProvider : IncomeCoefficientMultiplierProvider {
@@ -150,7 +149,10 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
 
 fun findProduct(key: ProductKey) = Product.values().find { it.key == key } ?: error("Product with key $key not found")
 
-enum class Product(val nameFi: String, val code: String) {
+enum class Product(
+    val nameFi: String,
+    val code: String,
+) {
     DAYCARE("Varhaiskasvatus", ""),
     DAYCARE_DISCOUNT("Alennus", ""),
     PRESCHOOL_WITH_DAYCARE("Esiopetusta täydentävä varhaiskasvatus", ""),

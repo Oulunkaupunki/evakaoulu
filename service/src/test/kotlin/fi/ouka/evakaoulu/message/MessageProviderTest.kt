@@ -41,7 +41,8 @@ internal class MessageProviderTest : AbstractIntegrationTest() {
                     withParametersAssignableTo(OfficialLanguage::class.java),
                     withReturnType(String::class.java),
                 )
-            return ArgumentSets.create()
+            return ArgumentSets
+                .create()
                 .argumentsForNextParameter(allMethods)
                 .argumentsForNextParameter(OfficialLanguage.values().toList())
         }

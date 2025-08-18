@@ -29,7 +29,9 @@ class MessageConfiguration {
     }
 }
 
-internal class EVakaOuluMessageProvider(val messageSource: MessageSource) : IMessageProvider {
+internal class EVakaOuluMessageProvider(
+    val messageSource: MessageSource,
+) : IMessageProvider {
     override fun getDecisionHeader(lang: OfficialLanguage): String =
         messageSource.getMessage("$PREFIX.DECISION_HEADER", null, resolveLocale(lang))
 
@@ -110,17 +112,16 @@ If you accept the assigned pre-school place, you don't have to do anything.
             OfficialLanguage.SV,
             ->
                 """
-            Lapsellenne on tehty päätös. Voit katsella päätöstä eVakassa.
-    
-            Koska olette ottanut Suomi.fi -palvelun käyttöönne, on päätös myös luettavissa alla olevista liitteistä.
-            
-            In English:
-            
-            A decision has been made for your child. You can view the decision on eVaka.
-            
-            As you are a user of Suomi.fi, you can also find the decision in the attachments below.
-            """
-                    .trimIndent()
+                Lapsellenne on tehty päätös. Voit katsella päätöstä eVakassa.
+                
+                Koska olette ottanut Suomi.fi -palvelun käyttöönne, on päätös myös luettavissa alla olevista liitteistä.
+                
+                In English:
+                
+                A decision has been made for your child. You can view the decision on eVaka.
+                
+                As you are a user of Suomi.fi, you can also find the decision in the attachments below.
+                """.trimIndent()
         }
 
     private fun resolveLocale(lang: OfficialLanguage): Locale {
@@ -129,12 +130,15 @@ If you accept the assigned pre-school place, you don't have to do anything.
     }
 }
 
-internal class YamlMessageSource(resource: Resource) : AbstractMessageSource() {
+internal class YamlMessageSource(
+    resource: Resource,
+) : AbstractMessageSource() {
     private val properties: Properties =
-        YamlPropertiesFactoryBean().apply {
-            setResources(resource)
-            afterPropertiesSet()
-        }.`object`!!
+        YamlPropertiesFactoryBean()
+            .apply {
+                setResources(resource)
+                afterPropertiesSet()
+            }.`object`!!
 
     override fun resolveCode(
         code: String,

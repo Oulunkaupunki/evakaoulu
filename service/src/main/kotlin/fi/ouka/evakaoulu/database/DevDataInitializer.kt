@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component
 
 @Component
 @Profile("local")
-class DevDataInitializer(jdbi: Jdbi) {
+class DevDataInitializer(
+    jdbi: Jdbi,
+) {
     init {
         Database(jdbi, noopTracer()).connect { db ->
             db.transaction { tx ->

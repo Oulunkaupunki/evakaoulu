@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component
 import java.io.ByteArrayInputStream
 
 @Component
-class SftpConnector(val jsch: JSch) {
+class SftpConnector(
+    val jsch: JSch,
+) {
     var jschSession: Session? = null
     var channelSftp: ChannelSftp? = null
 

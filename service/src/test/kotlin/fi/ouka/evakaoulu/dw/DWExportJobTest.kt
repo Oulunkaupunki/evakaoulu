@@ -62,7 +62,6 @@ class DWExportJobTest : AbstractIntegrationTest() {
     private fun insertCriticalTestData() {
         db.transaction { tx ->
             val employeeId = tx.insert(DevEmployee())
-            tx.getEmployee(employeeId)
             val areaId =
                 tx
                     .createQuery(
@@ -77,7 +76,14 @@ class DWExportJobTest : AbstractIntegrationTest() {
             tx.insert(DevDaycareGroup(daycareId = daycareId))
             val childId = tx.insert(DevPerson(), DevPersonType.CHILD)
             val guardianId = tx.insert(DevPerson(), DevPersonType.RAW_ROW)
-            tx.insert(DevPlacement(childId = childId, unitId = daycareId))
+            tx.insert(
+                DevPlacement(
+                    childId = childId,
+                    unitId = daycareId,
+                    createdBy = EvakaUserId(employeeId.raw),
+                    modifiedBy = EvakaUserId(employeeId.raw),
+                ),
+            )
 
             tx.insert(
                 DevAbsence(

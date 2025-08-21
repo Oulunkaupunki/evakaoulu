@@ -1115,8 +1115,8 @@ $unsubscribeEn
 """,
         )
 
-    override fun newBrowserLoginNotification(): EmailContent {
-        return EmailContent.fromHtml(
+    override fun newBrowserLoginNotification(): EmailContent =
+        EmailContent.fromHtml(
             subject =
                 "Kirjautuminen uudella laitteella eVakaan / Login on a new device to eVaka",
             html =
@@ -1132,6 +1132,4 @@ $unsubscribeEn
 <p>Sign into eVaka using strong authentication (Sign in using Suomi.fi) and change your password.</p>
 """,
         )
-    }
-
 }

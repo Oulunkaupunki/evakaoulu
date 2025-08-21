@@ -122,7 +122,6 @@ class EVakaOuluConfig {
             placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
             holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,
             minimumInvoiceAmount = 800,
-            nekkuMealDeductionFactor = 0.9,
             daycarePlacementPlanEndMonthDay = MonthDay.of(8, 15),
         )
 

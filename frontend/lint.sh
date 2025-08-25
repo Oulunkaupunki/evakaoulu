@@ -8,3 +8,4 @@ set -euo pipefail
 
 cd "$(dirname "$0")/../evaka/frontend"; \
 yarn eslint --max-warnings 0 src/lib-customizations/oulu/.
+yarn tsc --build --force src/lib-customizations/

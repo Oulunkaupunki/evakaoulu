@@ -23,9 +23,9 @@ import fi.espoo.evaka.shared.auth.PasswordSpecification
 import fi.espoo.evaka.shared.auth.UserRole
 import fi.espoo.evaka.shared.security.actionrule.ActionRuleMapping
 import fi.espoo.evaka.titania.TitaniaEmployeeIdConverter
-import fi.ouka.evakaoulu.dw.DWExportClient
-import fi.ouka.evakaoulu.dw.DWExportJob
-import fi.ouka.evakaoulu.dw.FileDWExportClient
+import fi.ouka.evakaoulu.dw.DwExportClient
+import fi.ouka.evakaoulu.dw.DwExportJob
+import fi.ouka.evakaoulu.dw.FileDwExportClient
 import fi.ouka.evakaoulu.invoice.service.SftpConnector
 import fi.ouka.evakaoulu.invoice.service.SftpSender
 import fi.ouka.evakaoulu.payment.service.OuluPaymentIntegrationClient
@@ -184,7 +184,7 @@ class EVakaOuluConfig {
         asyncClient: S3AsyncClient,
         sftpConnector: SftpConnector,
         properties: EvakaOuluProperties,
-    ): DWExportClient = FileDWExportClient(asyncClient, SftpSender(properties.dwExport.sftp, sftpConnector), properties)
+    ): DwExportClient = FileDwExportClient(asyncClient, SftpSender(properties.dwExport.sftp, sftpConnector), properties)
 
     @Bean
     fun evakaOuluAsyncJobRunner(
@@ -194,7 +194,7 @@ class EVakaOuluConfig {
     ): AsyncJobRunner<EvakaOuluAsyncJob> = AsyncJobRunner(EvakaOuluAsyncJob::class, listOf(EvakaOuluAsyncJob.pool), jdbi, tracer)
 
     @Bean
-    fun evakaOuluDWJob(dwExportClient: DWExportClient) = DWExportJob(dwExportClient)
+    fun evakaOuluDWJob(dwExportClient: DwExportClient) = DwExportJob(dwExportClient)
 
     @Bean
     fun evakaOuluScheduledJobEnv(env: Environment): ScheduledJobsEnv<EvakaOuluScheduledJob> =

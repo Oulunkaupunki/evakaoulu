@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter
 import java.util.UUID
 import kotlin.reflect.KClass
 import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.primaryConstructor
 
-val CSV_CHARSET = Charsets.UTF_8
-const val CSV_FIELD_SEPARATOR = ","
+const val CSV_FIELD_SEPARATOR = ";"
 const val CSV_RECORD_SEPARATOR = "\r\n"
 
 fun convertToCsv(value: Any?): String =
@@ -36,12 +36,22 @@ fun <T : Any> toCsvRecords(
     values: Sequence<T>,
 ): Sequence<String> {
     check(clazz.isData)
-    val props = clazz.declaredMemberProperties.toList()
-    val header = props.joinToString(CSV_FIELD_SEPARATOR, postfix = CSV_RECORD_SEPARATOR) { it.name }
+    val orderByIndex =
+        clazz.primaryConstructor
+            ?.parameters
+            ?.withIndex()
+            ?.associate { it.value.name to it.index }!!
+    val props = clazz.declaredMemberProperties.toList().sortedBy { orderByIndex[it.name] }
+    val header = props.joinToString(CSV_FIELD_SEPARATOR, postfix = CSV_RECORD_SEPARATOR) { it.name.toSnakeCase() }
     return sequenceOf(header) +
         values.map { record ->
-            props.joinToString(CSV_FIELD_SEPARATOR, postfix = CSV_RECORD_SEPARATOR) {
-                CsvEscape.escapeCsv(converter(it.get(record)))
+            props.joinToString(separator = CSV_FIELD_SEPARATOR, postfix = CSV_RECORD_SEPARATOR) {
+                CsvEscape.escapeCsv(converter(it.get(record))).trim('"')
             }
         }
+}
+
+fun String.toSnakeCase(): String {
+    val pattern = "(?<=.)[A-Z]".toRegex()
+    return this.replace(pattern, "_$0").lowercase()
 }

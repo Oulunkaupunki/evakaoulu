@@ -4,9 +4,9 @@ import fi.espoo.evaka.shared.db.Database
 import fi.espoo.evaka.shared.db.QuerySql
 import kotlin.reflect.KClass
 
-object DWQueries {
+object DwQueries {
     val getAbsences =
-        csvQuery<DWAbsence> {
+        csvQuery<DwAbsence> {
             sql(
                 """
 SELECT
@@ -26,7 +26,7 @@ ORDER BY ab.date, ab.child_id
         }
 
     val getApplicationInfos =
-        csvQuery<DWApplicationInfo> {
+        csvQuery<DwApplicationInfo> {
             sql(
                 """
 WITH application_infos AS (
@@ -56,7 +56,7 @@ WHERE dg.id IN (application_infos.yksikot::uuid)
         }
 
     val getAssistanceActions =
-        csvQuery<DWAssistanceAction> {
+        csvQuery<DwAssistanceAction> {
             sql(
                 """
 SELECT
@@ -75,7 +75,7 @@ WHERE current_date - INTERVAL '3 months' <= ac.end_date
         }
 
     val getAssistanceNeedDecisions =
-        csvQuery<DWAssistanceNeedDecision> {
+        csvQuery<DwAssistanceNeedDecision> {
             sql(
                 """
 SELECT
@@ -104,7 +104,7 @@ WHERE current_date - INTERVAL '3 months' <= upper(validity_period)
         }
 
     val getDailyInfos =
-        csvQuery<DWDailyInfo> {
+        csvQuery<DwDailyInfo> {
             sql(
                 """
 SELECT
@@ -177,7 +177,7 @@ FROM person p
         }
 
     val getDailyUnitsAndGroupsAttendances =
-        csvQuery<DWDailyUnitsAndGroupsAttendance> {
+        csvQuery<DwDailyUnitsAndGroupsAttendance> {
             sql(
                 """
 WITH staff_attendance_aggregate AS (
@@ -278,7 +278,7 @@ ORDER BY dg.name, cc.date
         }
 
     val getDailyUnitsOccupanciesConfirmed =
-        csvQuery<DWDailyUnitsOccupanciesConfirmed> {
+        csvQuery<DwDailyUnitsOccupanciesConfirmed> {
             sql(
                 """
 WITH
@@ -386,7 +386,7 @@ GROUP BY
         }
 
     val getDailyUnitsOccupanciesRealized =
-        csvQuery<DWDailyUnitsOccupanciesRealized> {
+        csvQuery<DwDailyUnitsOccupanciesRealized> {
             sql(
                 """
 WITH
@@ -535,7 +535,7 @@ GROUP BY
         }
 
     val getDaycareAssistances =
-        csvQuery<DWDaycareAssistance> {
+        csvQuery<DwDaycareAssistance> {
             sql(
                 """
 SELECT
@@ -551,7 +551,7 @@ WHERE current_date - INTERVAL '3 months' <= upper(valid_during)
         }
 
     val getFeeDecisions =
-        csvQuery<DWFeeDecision> {
+        csvQuery<DwFeeDecision> {
             sql(
                 """
 SELECT
@@ -583,7 +583,7 @@ WHERE fd.decision_number IS NOT NULL -- ei tuoda effican päätöksiä
         }
 
     val getOtherAssistanceMeasures =
-        csvQuery<DWOtherAssistanceMeasure> {
+        csvQuery<DwOtherAssistanceMeasure> {
             sql(
                 """
 SELECT
@@ -599,7 +599,7 @@ WHERE current_date - INTERVAL '3 months' <= upper(valid_during)
         }
 
     val getPlacements =
-        csvQuery<DWPlacement> {
+        csvQuery<DwPlacement> {
             sql(
                 """
 SELECT
@@ -638,7 +638,7 @@ WHERE current_date - INTERVAL '3 months' <= pl.end_date
         }
 
     val getPreschoolAssistances =
-        csvQuery<DWPreschoolAssistance> {
+        csvQuery<DwPreschoolAssistance> {
             sql(
                 """
 SELECT
@@ -654,7 +654,7 @@ WHERE current_date - INTERVAL '3 months' <= upper(valid_during)
         }
 
     val getUnitsAndGroups =
-        csvQuery<DWUnitAndGroup> {
+        csvQuery<DwUnitAndGroup> {
             sql(
                 """
 SELECT
@@ -705,7 +705,7 @@ ORDER BY d.name
         }
 
     val getVoucherValueDecisions =
-        csvQuery<DWVoucherValueDecision> {
+        csvQuery<DwVoucherValueDecision> {
             sql(
                 """
 SELECT

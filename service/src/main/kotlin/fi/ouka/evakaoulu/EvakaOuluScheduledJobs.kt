@@ -9,7 +9,7 @@ import fi.espoo.evaka.shared.domain.EvakaClock
 import fi.espoo.evaka.shared.job.JobSchedule
 import fi.espoo.evaka.shared.job.ScheduledJobDefinition
 import fi.espoo.evaka.shared.job.ScheduledJobSettings
-import fi.ouka.evakaoulu.dw.DWQuery
+import fi.ouka.evakaoulu.dw.DwQuery
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.time.LocalTime
 
@@ -18,7 +18,7 @@ enum class EvakaOuluScheduledJob(
     val defaultSettings: ScheduledJobSettings,
 ) {
     PlanDWExportJobs(
-        { jobs, db, clock -> jobs.planDWJobs(db, clock, DWQuery.entries) },
+        { jobs, db, clock -> jobs.planDWJobs(db, clock, DwQuery.entries) },
         ScheduledJobSettings(enabled = false, schedule = JobSchedule.daily(LocalTime.of(20, 0))),
     ),
 }
@@ -37,9 +37,9 @@ class EvakaOuluScheduledJobs(
     fun planDWJobs(
         db: Database.Connection,
         clock: EvakaClock,
-        selected: List<DWQuery>?,
+        selectedQueries: List<DwQuery>?,
     ) {
-        val queries = selected ?: DWQuery.entries
+        val queries = selectedQueries ?: DwQuery.entries
         logger.info { "Planning DW jobs for ${queries.size} queries" }
         db.transaction { tx ->
             tx.removeUnclaimedJobs(setOf(AsyncJobType(EvakaOuluAsyncJob.SendDWQuery::class)))

@@ -21,7 +21,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class DWAbsence(
+data class DwAbsence(
     val lapsenid: UUID,
     val poissaolonpvm: LocalDate,
     val poissaolontyyppi: AbsenceType,
@@ -29,7 +29,7 @@ data class DWAbsence(
     val sijoitustyyppi: PlacementType,
 )
 
-data class DWApplicationInfo(
+data class DwApplicationInfo(
     val hakemuksenId: UUID,
     val hakemusLuotu: LocalDateTime,
     val hakemustaPaivitetty: LocalDateTime,
@@ -46,7 +46,7 @@ data class DWApplicationInfo(
     val alueNimi: String,
 )
 
-data class DWAssistanceAction(
+data class DwAssistanceAction(
     val pvm: LocalDate,
     val lapsenId: UUID,
     val tukitoimi: String?,
@@ -55,7 +55,7 @@ data class DWAssistanceAction(
     val loppuPvm: LocalDate,
 )
 
-data class DWAssistanceNeedDecision(
+data class DwAssistanceNeedDecision(
     val aikaleima: LocalDateTime,
     val päätosTuesta: Int,
     val lapsenId: UUID,
@@ -76,7 +76,7 @@ data class DWAssistanceNeedDecision(
     val tila: AssistanceNeedDecisionStatus,
 )
 
-data class DWDailyInfo(
+data class DwDailyInfo(
     val pvm: LocalDate,
     val lapsenId: UUID,
     val henkilöturvatunnus: String?,
@@ -112,7 +112,7 @@ data class DWDailyInfo(
     val poissaolonSyy: List<AbsenceType>,
 )
 
-data class DWDailyUnitsAndGroupsAttendance(
+data class DwDailyUnitsAndGroupsAttendance(
     val aikaleima: LocalDateTime,
     val pvm: LocalDate?,
     val toimintayksikkö: String,
@@ -131,7 +131,7 @@ data class DWDailyUnitsAndGroupsAttendance(
     val ryhmänLapsimäärä: Int,
 )
 
-data class DWDailyUnitsOccupanciesConfirmed(
+data class DwDailyUnitsOccupanciesConfirmed(
     val pvm: LocalDate?,
     val toimintayksikköId: UUID,
     val toimintayksikkö: String,
@@ -141,7 +141,7 @@ data class DWDailyUnitsOccupanciesConfirmed(
     val täyttöasteProsentteina: Double?,
 )
 
-data class DWDailyUnitsOccupanciesRealized(
+data class DwDailyUnitsOccupanciesRealized(
     val pvm: LocalDate?,
     val toimintayksikköId: UUID,
     val toimintayksikkö: String,
@@ -151,7 +151,7 @@ data class DWDailyUnitsOccupanciesRealized(
     val käyttöasteProsentteina: Double?,
 )
 
-data class DWDaycareAssistance(
+data class DwDaycareAssistance(
     val pvm: LocalDate,
     val lapsenId: UUID,
     val tuentarveVarhaiskasvatuksessa: DaycareAssistanceLevel,
@@ -159,7 +159,7 @@ data class DWDaycareAssistance(
     val loppuPvm: LocalDate,
 )
 
-data class DWFeeDecision(
+data class DwFeeDecision(
     val aikaleima: LocalDateTime,
     val maksupäätöksenNumero: Long?,
     val maksupäätösId: UUID,
@@ -179,7 +179,7 @@ data class DWFeeDecision(
     val kustannuspaikka: String?,
 )
 
-data class DWOtherAssistanceMeasure(
+data class DwOtherAssistanceMeasure(
     val pvm: LocalDate,
     val lapsenId: UUID,
     val muuToimi: OtherAssistanceMeasureType,
@@ -187,7 +187,7 @@ data class DWOtherAssistanceMeasure(
     val loppuPvm: LocalDate,
 )
 
-data class DWPlacement(
+data class DwPlacement(
     val aikaleima: LocalDate,
     val lapsenId: UUID,
     val toimintayksikkö: String,
@@ -205,7 +205,7 @@ data class DWPlacement(
     val palveluntarpeenLoppupvm: LocalDate?,
 )
 
-data class DWPreschoolAssistance(
+data class DwPreschoolAssistance(
     val pvm: LocalDate,
     val lapsenId: UUID,
     val tuentarveEsiopetuksessa: PreschoolAssistanceLevel,
@@ -213,7 +213,7 @@ data class DWPreschoolAssistance(
     val loppuPvm: LocalDate,
 )
 
-data class DWUnitAndGroup(
+data class DwUnitAndGroup(
     val aikaleima: LocalDateTime,
     val toimintayksikkö: String,
     val toimintayksikköId: UUID,
@@ -234,7 +234,7 @@ data class DWUnitAndGroup(
     val ryhmänLoppupvm: LocalDate?,
 )
 
-data class DWVoucherValueDecision(
+data class DwVoucherValueDecision(
     val aikaleima: LocalDateTime,
     val arvopäätöksenNumero: Long?,
     val alkupvm: LocalDate,

@@ -12,14 +12,14 @@ import java.nio.file.Files
 import java.time.format.DateTimeFormatter
 import kotlin.io.path.deleteIfExists
 
-class FileDWExportClient(
+class FileDwExportClient(
     private val asyncClient: S3AsyncClient,
     private val sftpSender: SftpSender,
     private val properties: EvakaOuluProperties,
-) : DWExportClient {
+) : DwExportClient {
     private val logger = KotlinLogging.logger {}
 
-    override fun sendDWCsvFile(
+    override fun sendDwCsvFile(
         queryName: String,
         clock: EvakaClock,
         stream: EspooBiJob.CsvInputStream,

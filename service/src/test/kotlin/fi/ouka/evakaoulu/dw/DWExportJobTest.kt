@@ -1,7 +1,6 @@
 package fi.ouka.evakaoulu.dw
 
 import fi.espoo.evaka.absence.AbsenceCategory
-import fi.espoo.evaka.pis.getEmployee
 import fi.espoo.evaka.shared.AreaId
 import fi.espoo.evaka.shared.EvakaUserId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
@@ -36,12 +35,12 @@ class DWExportJobTest : AbstractIntegrationTest() {
     @Autowired
     private lateinit var sftpSender: SftpSender
 
-    private lateinit var job: DWExportJob
+    private lateinit var job: DwExportJob
 
     @BeforeAll
     fun beforeAll() {
-        val exportClient = FileDWExportClient(s3AsyncClient, sftpSender, properties)
-        job = DWExportJob(exportClient)
+        val exportClient = FileDwExportClient(s3AsyncClient, sftpSender, properties)
+        job = DwExportJob(exportClient)
     }
 
     @BeforeEach
@@ -51,12 +50,12 @@ class DWExportJobTest : AbstractIntegrationTest() {
 
     @TestFactory
     fun testDWExports() =
-        DWQuery.entries.map {
+        DwQuery.entries.map {
             DynamicTest.dynamicTest("Test '${it.queryName}' export") { sendAndAssertDWQueryCsv(it) }
         }
 
-    private fun sendAndAssertDWQueryCsv(query: DWQuery) {
-        job.sendDWQuery(db, clock, query.queryName, query.query)
+    private fun sendAndAssertDWQueryCsv(query: DwQuery) {
+        job.sendDwQuery(db, clock, query.queryName, query.query)
     }
 
     private fun insertCriticalTestData() {

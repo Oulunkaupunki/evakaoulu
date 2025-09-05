@@ -26,7 +26,7 @@ import software.amazon.awssdk.services.s3.S3AsyncClient
 import java.time.LocalDate
 import java.time.LocalTime
 
-class DWExportJobTest : AbstractIntegrationTest() {
+class DwExportJobTest : AbstractIntegrationTest() {
     private val clock = MockEvakaClock(HelsinkiDateTime.of(LocalDate.of(2019, 7, 15), LocalTime.of(23, 0)))
 
     @Autowired
@@ -49,7 +49,7 @@ class DWExportJobTest : AbstractIntegrationTest() {
     }
 
     @TestFactory
-    fun testDWExports() =
+    fun testDwExports() =
         DwQuery.entries.map {
             DynamicTest.dynamicTest("Test '${it.queryName}' export") { sendAndAssertDWQueryCsv(it) }
         }

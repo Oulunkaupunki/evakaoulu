@@ -180,7 +180,7 @@ class EVakaOuluConfig {
             .build()
 
     @Bean
-    fun fileDWExportClient(
+    fun fileDwExportClient(
         asyncClient: S3AsyncClient,
         sftpConnector: SftpConnector,
         properties: EvakaOuluProperties,

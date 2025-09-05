@@ -17,8 +17,8 @@ enum class EvakaOuluScheduledJob(
     val fn: (EvakaOuluScheduledJobs, Database.Connection, EvakaClock) -> Unit,
     val defaultSettings: ScheduledJobSettings,
 ) {
-    PlanDWExportJobs(
-        { jobs, db, clock -> jobs.planDWJobs(db, clock, DwQuery.entries) },
+    PlanDwExportJobs(
+        { jobs, db, clock -> jobs.planDwJobs(db, clock, DwQuery.entries) },
         ScheduledJobSettings(enabled = false, schedule = JobSchedule.daily(LocalTime.of(20, 0))),
     ),
 }
@@ -34,7 +34,7 @@ class EvakaOuluScheduledJobs(
             ScheduledJobDefinition(it.key, it.value) { db, clock -> it.key.fn(this, db, clock) }
         }
 
-    fun planDWJobs(
+    fun planDwJobs(
         db: Database.Connection,
         clock: EvakaClock,
         selectedQueries: List<DwQuery>?,

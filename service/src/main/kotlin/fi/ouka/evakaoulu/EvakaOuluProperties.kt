@@ -14,7 +14,7 @@ data class EvakaOuluProperties(
     val intimeInvoices: SftpProperties,
     val intimePayments: SftpProperties,
     val bucket: BucketProperties,
-    val dwExport: DWExportProperties,
+    val dwExport: DwExportProperties,
 )
 
 data class SftpProperties(
@@ -30,7 +30,7 @@ data class BucketProperties(
     fun allBuckets() = listOf(export)
 }
 
-data class DWExportProperties(
+data class DwExportProperties(
     val prefix: String,
     val sftp: SftpProperties,
 )

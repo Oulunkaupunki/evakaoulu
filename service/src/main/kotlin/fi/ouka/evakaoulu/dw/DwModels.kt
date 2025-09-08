@@ -18,7 +18,6 @@ import fi.espoo.evaka.invoicing.domain.VoucherValueDecisionType
 import fi.espoo.evaka.placement.PlacementType
 import fi.espoo.evaka.serviceneed.ShiftCareType
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.UUID
 
 data class DwAbsence(
@@ -31,8 +30,8 @@ data class DwAbsence(
 
 data class DwApplicationInfo(
     val hakemuksenId: UUID,
-    val hakemusLuotu: LocalDateTime,
-    val hakemustaPaivitetty: LocalDateTime,
+    val hakemusLuotu: String,
+    val hakemustaPaivitetty: String,
     val tyyppi: ApplicationType,
     val tilanne: ApplicationStatus,
     val alkupera: ApplicationOrigin,
@@ -56,7 +55,7 @@ data class DwAssistanceAction(
 )
 
 data class DwAssistanceNeedDecision(
-    val aikaleima: LocalDateTime,
+    val aikaleima: String,
     val päätosTuesta: Int,
     val lapsenId: UUID,
     val tuenAlkupvm: String,
@@ -113,13 +112,13 @@ data class DwDailyInfo(
 )
 
 data class DwDailyUnitsAndGroupsAttendance(
-    val aikaleima: LocalDateTime,
+    val aikaleima: String,
     val pvm: LocalDate?,
     val toimintayksikkö: String,
     val toimintayksikköId: UUID,
     val toimintapäivät: List<Int>,
     val vuorohoitoyksikkö: Boolean?,
-    val vuorohoitopäivät: List<Int>,
+    val vuorohoitopäivät: List<Int>?,
     val vuorohoitopyhäpäivinä: Boolean,
     val ryhmä: String,
     val ryhmäId: UUID,
@@ -160,7 +159,7 @@ data class DwDaycareAssistance(
 )
 
 data class DwFeeDecision(
-    val aikaleima: LocalDateTime,
+    val aikaleima: String,
     val maksupäätöksenNumero: Long?,
     val maksupäätösId: UUID,
     val alkupvm: String,
@@ -214,7 +213,7 @@ data class DwPreschoolAssistance(
 )
 
 data class DwUnitAndGroup(
-    val aikaleima: LocalDateTime,
+    val aikaleima: String,
     val toimintayksikkö: String,
     val toimintayksikköId: UUID,
     val toimintayksikönAlkupvm: LocalDate?,
@@ -235,7 +234,7 @@ data class DwUnitAndGroup(
 )
 
 data class DwVoucherValueDecision(
-    val aikaleima: LocalDateTime,
+    val aikaleima: String,
     val arvopäätöksenNumero: Long?,
     val alkupvm: LocalDate,
     val loppupvm: LocalDate,

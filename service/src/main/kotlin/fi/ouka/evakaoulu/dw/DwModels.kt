@@ -39,14 +39,14 @@ data class DwApplicationInfo(
     val lapsenId: UUID,
     val syntymaaika: LocalDate,
     val yksikot: String,
-    val haluttuAloituspaiva: LocalDate?,
+    val haluttuAloituspaiva: String?,
     val yksikkoNimi: String,
     val alueId: UUID,
     val alueNimi: String,
 )
 
 data class DwAssistanceAction(
-    val pvm: LocalDate,
+    val pvm: String,
     val lapsenId: UUID,
     val tukitoimi: String?,
     val muuTukitoimi: String,
@@ -76,7 +76,7 @@ data class DwAssistanceNeedDecision(
 )
 
 data class DwDailyInfo(
-    val pvm: LocalDate,
+    val pvm: String,
     val lapsenId: UUID,
     val henkilöturvatunnus: String?,
     val syntymäaika: LocalDate,
@@ -122,16 +122,16 @@ data class DwDailyUnitsAndGroupsAttendance(
     val vuorohoitopyhäpäivinä: Boolean,
     val ryhmä: String,
     val ryhmäId: UUID,
-    val toimintayksikönLaskennallinenLapsimäärä: Int,
-    val toimintayksikönLapsimäärä: Int,
+    val toimintayksikönLaskennallinenLapsimäärä: Int?,
+    val toimintayksikönLapsimäärä: Int?,
     val henkilökuntaaRyhmässä: Int?,
     val henkilökuntaaLäsnä: Int?,
-    val kasvatusvastuullistenLkmYksikössä: Int,
-    val ryhmänLapsimäärä: Int,
+    val kasvatusvastuullistenLkmYksikössä: Int?,
+    val ryhmänLapsimäärä: Int?,
 )
 
 data class DwDailyUnitsOccupanciesConfirmed(
-    val pvm: LocalDate?,
+    val pvm: LocalDate,
     val toimintayksikköId: UUID,
     val toimintayksikkö: String,
     val kasvattajienLkm: Int?,
@@ -141,7 +141,7 @@ data class DwDailyUnitsOccupanciesConfirmed(
 )
 
 data class DwDailyUnitsOccupanciesRealized(
-    val pvm: LocalDate?,
+    val pvm: LocalDate,
     val toimintayksikköId: UUID,
     val toimintayksikkö: String,
     val kasvattajienLkm: Int?,
@@ -151,7 +151,7 @@ data class DwDailyUnitsOccupanciesRealized(
 )
 
 data class DwDaycareAssistance(
-    val pvm: LocalDate,
+    val pvm: String,
     val lapsenId: UUID,
     val tuentarveVarhaiskasvatuksessa: DaycareAssistanceLevel,
     val aloitusPvm: String,
@@ -179,7 +179,7 @@ data class DwFeeDecision(
 )
 
 data class DwOtherAssistanceMeasure(
-    val pvm: LocalDate,
+    val pvm: String,
     val lapsenId: UUID,
     val muuToimi: OtherAssistanceMeasureType,
     val aloitusPvm: String,
@@ -187,7 +187,7 @@ data class DwOtherAssistanceMeasure(
 )
 
 data class DwPlacement(
-    val aikaleima: LocalDate,
+    val aikaleima: String,
     val lapsenId: UUID,
     val toimintayksikkö: String,
     val toimintayksikköId: UUID,
@@ -205,7 +205,7 @@ data class DwPlacement(
 )
 
 data class DwPreschoolAssistance(
-    val pvm: LocalDate,
+    val pvm: String,
     val lapsenId: UUID,
     val tuentarveEsiopetuksessa: PreschoolAssistanceLevel,
     val aloitusPvm: String,
@@ -223,7 +223,7 @@ data class DwUnitAndGroup(
     val katuosoite: String,
     val postinumero: String,
     val postitoimipaikka: String,
-    val toimintayksikönLaskennallinenLapsimäärä: Int,
+    val toimintayksikönLaskennallinenLapsimäärä: Int?,
     val palvelualue: String,
     val palvelualueId: UUID,
     val dwKustannuspaikka: String?,

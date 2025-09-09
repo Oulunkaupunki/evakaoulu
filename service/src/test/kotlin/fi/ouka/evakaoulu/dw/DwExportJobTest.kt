@@ -6,13 +6,19 @@ import fi.espoo.evaka.shared.EvakaUserId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.db.QuerySql
 import fi.espoo.evaka.shared.dev.DevAbsence
+import fi.espoo.evaka.shared.dev.DevAssistanceNeedDecision
 import fi.espoo.evaka.shared.dev.DevDaycare
 import fi.espoo.evaka.shared.dev.DevDaycareGroup
+import fi.espoo.evaka.shared.dev.DevDaycareGroupPlacement
 import fi.espoo.evaka.shared.dev.DevEmployee
+import fi.espoo.evaka.shared.dev.DevFeeDecision
 import fi.espoo.evaka.shared.dev.DevPerson
 import fi.espoo.evaka.shared.dev.DevPersonType
 import fi.espoo.evaka.shared.dev.DevPlacement
+import fi.espoo.evaka.shared.dev.DevVoucherValueDecision
 import fi.espoo.evaka.shared.dev.insert
+import fi.espoo.evaka.shared.domain.DateRange
+import fi.espoo.evaka.shared.domain.FiniteDateRange
 import fi.espoo.evaka.shared.domain.HelsinkiDateTime
 import fi.espoo.evaka.shared.domain.MockEvakaClock
 import fi.ouka.evakaoulu.AbstractIntegrationTest
@@ -72,15 +78,22 @@ class DwExportJobTest : AbstractIntegrationTest() {
                         QuerySql { sql("select id from service_need_option order by name_fi limit 1") },
                     ).exactlyOne<ServiceNeedOptionId>()
             val daycareId = tx.insert(DevDaycare(areaId = areaId))
-            tx.insert(DevDaycareGroup(daycareId = daycareId))
+            val groupId = tx.insert(DevDaycareGroup(daycareId = daycareId))
             val childId = tx.insert(DevPerson(), DevPersonType.CHILD)
             val guardianId = tx.insert(DevPerson(), DevPersonType.RAW_ROW)
+            val placementId =
+                tx.insert(
+                    DevPlacement(
+                        childId = childId,
+                        unitId = daycareId,
+                        createdBy = EvakaUserId(employeeId.raw),
+                        modifiedBy = EvakaUserId(employeeId.raw),
+                    ),
+                )
             tx.insert(
-                DevPlacement(
-                    childId = childId,
-                    unitId = daycareId,
-                    createdBy = EvakaUserId(employeeId.raw),
-                    modifiedBy = EvakaUserId(employeeId.raw),
+                DevDaycareGroupPlacement(
+                    daycarePlacementId = placementId,
+                    daycareGroupId = groupId,
                 ),
             )
 
@@ -90,6 +103,27 @@ class DwExportJobTest : AbstractIntegrationTest() {
                     date = LocalDate.of(2019, 7, 15),
                     modifiedBy = EvakaUserId(employeeId.raw),
                     absenceCategory = AbsenceCategory.BILLABLE,
+                ),
+            )
+            tx.insert(
+                DevAssistanceNeedDecision(
+                    childId = childId,
+                    validityPeriod = DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31)),
+                ),
+            )
+            tx.insert(
+                DevVoucherValueDecision(
+                    childId = childId,
+                    headOfFamilyId = guardianId,
+                    placementUnitId = daycareId,
+                    validFrom = LocalDate.of(2019, 1, 1),
+                    validTo = LocalDate.of(2019, 12, 31),
+                ),
+            )
+            tx.insert(
+                DevFeeDecision(
+                    validDuring = FiniteDateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31)),
+                    headOfFamilyId = guardianId,
                 ),
             )
         }

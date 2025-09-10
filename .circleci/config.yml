@@ -5,9 +5,9 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@5.4.0
+  aws-cli: circleci/aws-cli@5.4.1
   aws-ecr: circleci/aws-ecr@9.5.2
-  slack: circleci/slack@5.1.1
+  slack: circleci/slack@5.2.3
 
 aliases:
   - &workspace_root /home/circleci/repo
@@ -234,100 +234,13 @@ jobs:
   # MISC JOBS
 
   checkout_repo:
-    parameters:
-      latest_upstream:
-        type: boolean
-        default: false
     executor: base_executor
     resource_class: small
     steps:
       - checkout
-      - when:
-          condition: << parameters.latest_upstream >>
-          steps:
-            - run: git submodule set-url evaka https://github.com/espoon-voltti/evaka.git
       - run: git submodule sync
       - run: git submodule update --init
-      - when:
-          condition: << parameters.latest_upstream >>
-          steps:
-            - run: git submodule update --remote --merge
       - store_repo
-      - slack-notification
-
-  sync_evaka_fork:
-    executor: base_executor
-    steps:
-      - checkout
-      - setup_git_submodule
-      - run: git submodule sync
-      - run: git submodule update --init
-      - run: cd evaka && git checkout master
-      - run: cd evaka && git remote add upstream https://github.com/espoon-voltti/evaka.git
-      - run: cd evaka && git remote -v
-      - run: cd evaka && git fetch --all
-      - run: cd evaka && git pull --rebase upstream master
-      - run: cd evaka && git status
-      - run: cd evaka && git push -f origin master
-      - slack-notification
-
-  rebase_oulu_customization_branch:
-    executor: base_executor
-    steps:
-      - checkout
-      - setup_git_submodule
-      - run: git submodule sync
-      - run: git submodule update --init
-      - run: cd evaka && git fetch --all
-      - run: cd evaka && git checkout oulu-customization
-      - run: cd evaka && git rebase master
-      - run: cd evaka && git push -f
-      - setup_git
-      - run: git status
-      - run: |
-          if git status | grep -q 'nothing to commit, working tree clean'; then
-            circleci-agent step halt
-          fi
-      - run: git add evaka
-      - run: git commit -m "updated core $(date --iso-8601)"
-      - run: git push
-      - slack-notification
-
-  commit_and_push_branch:
-    executor: base_executor
-    resource_class: small
-    steps:
-      - restore_repo
-      - setup_git
-      - run:
-          name: Verify changes
-          command: |
-            if [ -z "$(git status --porcelain -- evaka)" ]; then
-                circleci-agent step halt
-            fi
-      - run: git checkout -b evaka-update/$(date --iso-8601)
-      - run: git add evaka
-      - run: git commit -m "Update evaka submodule"
-      - run: git push --set-upstream origin evaka-update/$(date --iso-8601)
-      - slack-notification
-
-  merge_branch:
-    executor: base_executor
-    resource_class: small
-    steps:
-      - restore_repo
-      - setup_git
-      - run:
-          name: Verify commit
-          command: |
-            if [ "$(git show -s --format='%cn')" != "evakaoulu-ci" ]; then
-                circleci-agent step halt
-            fi
-      - run: git checkout main
-      - run: git pull
-      - run: git merge --no-ff --no-edit ${CIRCLE_BRANCH}
-      - run: git push
-      - run: git push --delete origin ${CIRCLE_BRANCH}
       - slack-notification
 
   check_licenses:
@@ -596,33 +509,3 @@ workflows:
             branches:
               only:
                 - main
-
-      - merge_branch:
-          context:
-            - slack-secrets
-          requires:
-            - check_licenses
-            - scheduled_tasks_reporting_build_image
-            - scheduled_tasks_logs_build_image
-            - scheduled_tasks_certificate_check_build_image
-            - e2e_test
-          filters:
-            branches:
-              only:
-                - /evaka-update\/.*/
-
-  update_upstream:
-    # trigger is configured with circleci ui (project settings -> triggers)
-    when:
-      and:
-        - equal: [scheduled_pipeline, << pipeline.trigger_source >>]
-        - equal: ["update upstream", << pipeline.schedule.name >>]
-    jobs:
-      - sync_evaka_fork:
-          context:
-            - slack-secrets
-      - rebase_oulu_customization_branch:
-          context:
-            - slack-secrets
-          requires:
-            - sync_evaka_fork

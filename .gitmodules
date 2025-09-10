@@ -1,4 +1,4 @@
 [submodule "evaka"]
     path = evaka
-    url = https://github.com/Oulunkaupunki/evaka
+    url = https://github.com/espoon-voltti/evaka.git
 

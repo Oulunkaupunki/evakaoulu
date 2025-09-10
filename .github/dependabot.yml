@@ -4,8 +4,14 @@
 
 version: 2
 updates:
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "02:00"
+      timezone: "europe/helsinki"
   - package-ecosystem: "npm"
-    directory: "/frontend"
+    directory: "/e2e"
     schedule:
       interval: "daily"
       time: "06:30"

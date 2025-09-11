@@ -105,29 +105,3 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
             .get(),
     )
 }
-
-allprojects {
-    tasks.register("resolveDependencies") {
-        description = "Resolves all dependencies"
-        val counts =
-            configurations
-                .matching {
-                    it.isCanBeResolved &&
-                        // ignore configurations that fetch sources (e.g. Java source code)
-                        !it.name.endsWith("dependencySources", ignoreCase = true)
-                }
-                .map {
-                    val files = it.resolve()
-                    it.name to files.size
-                }
-                .groupBy({ (_, count) -> count }) { (name, _) -> name }
-        doLast {
-            counts.forEach { (count, names) ->
-                @Suppress("ktlint:evaka:no-println")
-                println(
-                    "Resolved $count dependency files for configurations: ${names.joinToString(", ")}"
-                )
-            }
-        }
-    }
-}

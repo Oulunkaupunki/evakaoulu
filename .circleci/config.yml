@@ -304,7 +304,6 @@ jobs:
           name: gradle build
           working_directory: *workspace_service
           command: |
-            ./gradlew resolveDependencies service:copyDownloadOnlyDeps
             ./gradlew --build-cache build
             java -Djarmode=layertools -jar build/libs/evakaoulu-service.jar extract --destination target
       - store_service_gradle_build_cache

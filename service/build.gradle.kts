@@ -76,6 +76,28 @@ kotlin {
     }
 }
 
+allprojects {
+    tasks.register("resolveDependencies") {
+        description = "Resolves all dependencies"
+        doLast {
+            configurations
+                .matching {
+                    it.isCanBeResolved &&
+                        // ignore configurations that fetch sources (e.g. Java source code)
+                        !it.name.endsWith("dependencySources", ignoreCase = true)
+                }.map {
+                    val files = it.resolve()
+                    it.name to files.size
+                }.groupBy({ (_, count) -> count }) { (name, _) -> name }
+                .forEach { (count, names) ->
+                    println(
+                        "Resolved $count dependency files for configurations: ${names.joinToString(", ")}",
+                    )
+                }
+        }
+    }
+}
+
 tasks {
     test {
         useJUnitPlatform()

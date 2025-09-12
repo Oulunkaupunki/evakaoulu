@@ -47,21 +47,17 @@ ADD --chmod=0644 \
     https://raw.githubusercontent.com/danielmiessler/SecLists/2023.1/Passwords/xato-net-10-million-passwords-1000000.txt \
     /opt/password-blacklists/xato-net-10-million-passwords-1000000.txt
 
-ADD --chmod=0644 \
-    --checksum=sha256:776b76cfe05611cdc3d38c4b35fc92f563fcfd6e3df0e28c524da1d279d44223 \
-    https://github.com/DataDog/dd-trace-java/releases/download/v1.31.0/dd-java-agent.jar \
-    /opt/dd-java-agent.jar
-
-ADD ./dd-jmxfetch/ /etc/jmxfetch/
+ADD ./service/dd-jmxfetch/ /etc/jmxfetch/
 
 USER evaka
 WORKDIR /home/evaka
 
-COPY --chown=evaka:evaka "entrypoint.sh" "entrypoint.sh"
-COPY --chown=evaka:evaka "target/dependencies/" "./"
-COPY --chown=evaka:evaka "target/spring-boot-loader/" "./"
-COPY --chown=evaka:evaka "target/snapshot-dependencies/" "./"
-COPY --chown=evaka:evaka "target/application/" "./"
+COPY --chown=evaka:evaka "service/entrypoint.sh" "entrypoint.sh"
+COPY --chown=evaka:evaka "service/target/dependencies/" "./"
+COPY --chown=evaka:evaka "service/target/spring-boot-loader/" "./"
+COPY --chown=evaka:evaka "service/target/snapshot-dependencies/" "./"
+COPY --chown=evaka:evaka "service/target/application/" "./"
+COPY --chown=evaka:evaka "evaka/service/build/download-only/dd-java-agent.jar" "/opt/dd-java-agent.jar"
 
 # Add build and commit environment variables and labels
 # for tracing the image to the commit and build from which the image has been built.

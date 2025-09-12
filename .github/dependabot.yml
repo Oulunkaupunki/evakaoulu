@@ -9,7 +9,7 @@ updates:
     schedule:
       interval: "daily"
       time: "02:00"
-      timezone: "europe/helsinki"
+      timezone: "Europe/Helsinki"
   - package-ecosystem: "npm"
     directory: "/e2e"
     schedule:

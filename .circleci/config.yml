@@ -205,9 +205,6 @@ commands:
         type: string
       dir:
         type: string
-      dockerfile:
-        type: string
-        default: "./Dockerfile"
       extra_build_args:
         type: string
         default: ""
@@ -219,7 +216,6 @@ commands:
           command: |
             docker buildx build --progress=plain \
               -t 463484918991.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.image >>:${CIRCLE_SHA1} \
-              -f << parameters.dockerfile >> \
               --build-arg "CACHE_BUST=$(date '+%Y-%V')" \
               --build-arg "build=${CIRCLE_BUILD_NUM}" \
               --build-arg "commit=${CIRCLE_SHA1}" \
@@ -311,6 +307,7 @@ jobs:
             ./gradlew resolveDependencies service:copyDownloadOnlyDeps
             ./gradlew --build-cache build
             java -Djarmode=layertools -jar build/libs/evakaoulu-service.jar extract --destination target
+            cp -r ../evaka/service/build/download-only target
       - store_service_gradle_build_cache
       - store_service_gradle_dependencies
       - store_service_gradle_wrapper
@@ -323,8 +320,7 @@ jobs:
       - aws-cli/install
       - build_docker_image:
           image: evakaoulu/service
-          dir: *workspace_root
-          dockerfile: service/Dockerfile
+          dir: *workspace_service
       - slack-notification
 
   scheduled_tasks_reporting_build_image:

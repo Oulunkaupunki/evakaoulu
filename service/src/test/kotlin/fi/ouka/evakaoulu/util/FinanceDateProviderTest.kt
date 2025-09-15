@@ -2,10 +2,9 @@
 //
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-package fi.ouka.evakaoulu.invoice.service
+package fi.ouka.evakaoulu.util
 
 import fi.espoo.evaka.shared.domain.MockEvakaClock
-import fi.ouka.evakaoulu.util.FinanceDateProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.Duration

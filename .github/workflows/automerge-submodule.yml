@@ -1,0 +1,19 @@
+name: 'Automerge dependabot submodule update PRs'
+on:
+  push:
+    branches:
+      - 'dependabot/submodule/**'
+  pull_request:
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v3
+        with:
+          merge-method: 'merge'

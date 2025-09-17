@@ -125,7 +125,7 @@ data class DwDailyUnitsAndGroupsAttendance(
     val toimintayksikönLaskennallinenLapsimäärä: Int?,
     val toimintayksikönLapsimäärä: Int?,
     val henkilökuntaaRyhmässä: Int?,
-    val henkilökuntaaLäsnä: Int?,
+    val henkilökuntaaLäsnä: Double?,
     val kasvatusvastuullistenLkmYksikössä: Double?,
     val ryhmänLapsimäärä: Int?,
 )
@@ -135,8 +135,8 @@ data class DwDailyUnitsOccupanciesConfirmed(
     val toimintayksikköId: UUID,
     val toimintayksikkö: String,
     val kasvattajienLkm: Double?,
-    val sijoituksienLkm: Int,
-    val täyttöasteSumma: Double,
+    val sijoituksienLkm: Int?,
+    val täyttöasteSumma: Double?,
     val täyttöasteProsentteina: Double?,
 )
 
@@ -144,9 +144,9 @@ data class DwDailyUnitsOccupanciesRealized(
     val pvm: LocalDate,
     val toimintayksikköId: UUID,
     val toimintayksikkö: String,
-    val kasvattajienLkm: Int?,
-    val sijoituksienLkm: Double,
-    val käyttöasteSumma: Double,
+    val kasvattajienLkm: Double?,
+    val sijoituksienLkm: Int?,
+    val käyttöasteSumma: Double?,
     val käyttöasteProsentteina: Double?,
 )
 

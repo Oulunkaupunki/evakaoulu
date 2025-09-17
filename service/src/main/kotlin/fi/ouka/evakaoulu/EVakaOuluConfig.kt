@@ -7,6 +7,7 @@ package fi.ouka.evakaoulu
 import fi.espoo.evaka.BucketEnv
 import fi.espoo.evaka.ScheduledJobsEnv
 import fi.espoo.evaka.application.ApplicationStatus
+import fi.espoo.evaka.document.archival.ArchivalIntegrationClient
 import fi.espoo.evaka.espoo.DefaultPasswordSpecification
 import fi.espoo.evaka.holidayperiod.QuestionnaireType
 import fi.espoo.evaka.invoicing.domain.PaymentIntegrationClient
@@ -221,4 +222,7 @@ class EVakaOuluConfig {
                 minSymbols = 1,
             ),
         )
+
+    @Bean
+    fun archivalIntegrationClient(): ArchivalIntegrationClient = ArchivalIntegrationClient.FailingClient()
 }

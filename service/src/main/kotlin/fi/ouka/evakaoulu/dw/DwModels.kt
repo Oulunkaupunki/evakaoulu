@@ -8,6 +8,7 @@ import fi.espoo.evaka.application.ApplicationType
 import fi.espoo.evaka.assistance.DaycareAssistanceLevel
 import fi.espoo.evaka.assistance.OtherAssistanceMeasureType
 import fi.espoo.evaka.assistance.PreschoolAssistanceLevel
+import fi.espoo.evaka.assistanceaction.AssistanceActionOptionCategory
 import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionStatus
 import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.daycare.domain.ProviderType
@@ -49,9 +50,10 @@ data class DwAssistanceAction(
     val pvm: String,
     val lapsenId: UUID,
     val tukitoimi: String?,
-    val muuTukitoimi: String,
+    val muuTukitoimi: String?,
     val aloitusPvm: LocalDate,
     val loppuPvm: LocalDate,
+    val tuenTyyppi: AssistanceActionOptionCategory?,
 )
 
 data class DwAssistanceNeedDecision(

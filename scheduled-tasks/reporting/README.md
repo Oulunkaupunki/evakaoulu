@@ -60,15 +60,15 @@ SQL script: [DW-Assistance_actions.sql](./sql/DW-Assistance_actions.sql)
 
 Fields in csv -report:
 
-| Name          | Type      |
-|---------------|-----------|
-| pvm           | timestamp |
-| lapsen_id     | UUID      |
-| tukitoimi     | String    |
-| muu_tukitoimi | String    |
-| aloitus_pvm   | Date      |
-| loppu_pvm     | Date      |
-
+| Name          | Type                                                                 |
+|---------------|----------------------------------------------------------------------|
+| pvm           | timestamp                                                            |
+| lapsen_id     | UUID                                                                 |
+| tukitoimi     | String                                                               |
+| muu_tukitoimi | String                                                               |
+| aloitus_pvm   | Date                                                                 |
+| loppu_pvm     | Date                                                                 |
+| tuen_tyyppi   | Enum: fi.espoo.evaka.assistanceaction.AssistanceActionOptionCategory |
 
 ### Assistance need decisions
 Assistance need decisions -report contains all decisions from the last three months.
@@ -407,6 +407,15 @@ Origin of application.
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | ELECTRONIC | Citizen has created application via eVaka                                                                                                  |
 | PAPER      | Employee has created application based on paper application from citizen or together with citizen, or application is made programmatically |
+
+
+### AssistanceActionOptionCategory
+
+| Value     | Description              |
+|-----------|--------------------------|
+| DAYCARE   | Daycare action option    |
+| PRESCHOOL | Pre-school action option |
+
 
 ### CareType
 Types of unit providing daycare.

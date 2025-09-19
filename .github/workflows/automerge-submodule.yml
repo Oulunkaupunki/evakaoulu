@@ -13,6 +13,8 @@ jobs:
     if: ${{ github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/submodules/') }}
 
     steps:
+      - name: wait for verification
+        run: sleep 600
       - name: Enable auto-merge for Dependabot PRs
         run: gh pr merge --auto --merge "$PR_URL"
         env:

@@ -9,6 +9,7 @@ import com.jcraft.jsch.JSch
 import com.jcraft.jsch.Session
 import org.springframework.stereotype.Component
 import java.io.ByteArrayInputStream
+import java.nio.charset.Charset
 
 @Component
 class SftpConnector(
@@ -36,8 +37,9 @@ class SftpConnector(
     fun send(
         filePath: String,
         proEInvoice: String,
+        encoding: Charset,
     ) {
-        channelSftp?.put(ByteArrayInputStream(proEInvoice.toByteArray(Charsets.ISO_8859_1)), filePath)
+        channelSftp?.put(ByteArrayInputStream(proEInvoice.toByteArray(encoding)), filePath)
     }
 
     fun disconnect() {

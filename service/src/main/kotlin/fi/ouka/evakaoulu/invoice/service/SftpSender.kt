@@ -6,6 +6,7 @@ package fi.ouka.evakaoulu.invoice.service
 
 import com.jcraft.jsch.SftpException
 import fi.ouka.evakaoulu.SftpProperties
+import java.nio.charset.Charset
 
 class SftpSender(
     val sftpProperties: SftpProperties,
@@ -15,6 +16,7 @@ class SftpSender(
     fun send(
         content: String,
         fileName: String,
+        encoding: Charset = Charsets.ISO_8859_1,
     ) {
         val path = sftpProperties.path
         val filepath = "$path/$fileName"
@@ -22,7 +24,7 @@ class SftpSender(
         try {
             sftpConnector.connect(sftpProperties.address, sftpProperties.username, sftpProperties.password)
 
-            sftpConnector.send(filepath, content)
+            sftpConnector.send(filepath, content, encoding)
         } catch (e: Exception) {
             throw e
         } finally {

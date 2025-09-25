@@ -40,7 +40,7 @@ class FileDwExportClient(
 
             logger.info { "Sending DW content for '$queryName' via SFTP" }
 
-            sftpSender.send(tempFile.toFile().readText(Charsets.UTF_8), fileName)
+            sftpSender.send(tempFile.toFile().readText(Charsets.UTF_8), fileName, Charsets.UTF_8)
 
             logger.info { "Sending DW content for '$queryName' to S3" }
 

@@ -33,6 +33,7 @@ internal class InvoiceSenderTest {
         verify(sftpConnector).send(
             argThat { filePath -> filePath.matches(Regex(fileNamePattern)) },
             eq("one"),
+            eq(Charsets.ISO_8859_1),
         )
         verify(sftpConnector).disconnect()
     }

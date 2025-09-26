@@ -329,6 +329,7 @@ private fun validDecision(
     resolved = null,
     resolvedByName = null,
     documentContainsContactInfo = false,
+    archivedAt = null,
 )
 
 private fun validDecisionUnit(providerType: ProviderType) =

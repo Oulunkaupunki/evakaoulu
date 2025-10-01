@@ -463,13 +463,6 @@ workflows:
           requires:
             - checkout_repo
 
-      - scheduled_tasks_reporting_build_image:
-          context:
-            - evakaoulu-dev
-            - slack-secrets
-          requires:
-            - checkout_repo
-
       - scheduled_tasks_logs_build_image:
           context:
             - evakaoulu-dev
@@ -491,7 +484,6 @@ workflows:
             - slack-secrets
           requires:
             - check_licenses
-            - scheduled_tasks_reporting_build_image
             - scheduled_tasks_logs_build_image
             - scheduled_tasks_certificate_check_build_image
             - e2e_test

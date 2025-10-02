@@ -985,12 +985,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.1.8":
-  version: 19.1.8
-  resolution: "@types/react@npm:19.1.8"
+"@types/react@npm:^19.2.0":
+  version: 19.2.0
+  resolution: "@types/react@npm:19.2.0"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10c0/4908772be6dc941df276931efeb0e781777fa76e4d5d12ff9f75eb2dcc2db3065e0100efde16fde562c5bafa310cc8f50c1ee40a22640459e066e72cd342143e
+  checksum: 10c0/a280e146df2abd3b06eaa2f5332dade9f7ebe916334a40699ee11139c5f22aeb49b5b78b6de8c55b53ef2fa94285e1bc2feaf4fbce6fe259a7de92dc1bf67b17
   languageName: node
   linkType: hard
 
@@ -1739,7 +1739,7 @@ __metadata:
   dependencies:
     "@types/jest": "npm:^30.0.0"
     "@types/node": "npm:^22.18.6"
-    "@types/react": "npm:^19.1.8"
+    "@types/react": "npm:^19.2.0"
     axios: "npm:^1.12.2"
     e2e-test: "link:../evaka/frontend/src/e2e-test"
     jest: "npm:^29.7.0"

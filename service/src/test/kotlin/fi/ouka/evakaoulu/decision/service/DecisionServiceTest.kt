@@ -461,6 +461,7 @@ private val validAssistanceNeedDecision =
         hasDocument = false,
         annulmentReason = "",
         endDateNotKnown = false,
+        processId = null,
     )
 
 private val validAssistanceNeedPreSchoolDecision =
@@ -486,6 +487,7 @@ private val validAssistanceNeedPreSchoolDecision =
         preparer1Name = "JOHTAJA JORMA PERTTILÄ",
         preparer2Name = "Paula Palvelupäällikkö",
         decisionMakerName = "Pate Päättäjä",
+        processId = null,
         form =
             AssistanceNeedPreschoolDecisionForm(
                 language = OfficialLanguage.FI,

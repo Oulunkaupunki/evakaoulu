@@ -1,5 +1,3 @@
-import {faChild} from "Icons";
-
 {
   /*
 SPDX-FileCopyrightText: 2021 City of Oulu

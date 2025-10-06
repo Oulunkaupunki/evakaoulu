@@ -1,3 +1,5 @@
+import {faChild} from "Icons";
+
 {
   /*
 SPDX-FileCopyrightText: 2021 City of Oulu
@@ -56,7 +58,9 @@ const features: Features = {
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true,
     hideOvertimeSelection: false,
-    placementDesktop: false
+    placementDesktop: false,
+    hideSicknessSelection: false,
+    hideChildSicknessSelection: false
   },
   staging: {
     environmentLabel: 'Staging',
@@ -98,7 +102,9 @@ const features: Features = {
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true,
     hideOvertimeSelection: false,
-    placementDesktop: true
+    placementDesktop: true,
+    hideSicknessSelection: false,
+    hideChildSicknessSelection: false
   },
   prod: {
     environmentLabel: null,
@@ -140,7 +146,9 @@ const features: Features = {
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true,
     hideOvertimeSelection: false,
-    placementDesktop: false
+    placementDesktop: false,
+    hideSicknessSelection: false,
+    hideChildSicknessSelection: false
   }
 }
 

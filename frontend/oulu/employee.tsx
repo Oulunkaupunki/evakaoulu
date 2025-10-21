@@ -17,6 +17,7 @@ import type { EmployeeCustomizations } from 'lib-customizations/types'
 
 import OuluLogo from './city-logo.svg'
 import featureFlags from './featureFlags'
+import { additionalStaffAttendanceTypes } from './shared'
 
 const customizations: EmployeeCustomizations = {
   appConfig: {},
@@ -505,7 +506,8 @@ const customizations: EmployeeCustomizations = {
     'PRIVATE',
     'PRIVATE_SERVICE_VOUCHER',
     'PURCHASED'
-  ]
+  ],
+  additionalStaffAttendanceTypes
 }
 
 export default customizations

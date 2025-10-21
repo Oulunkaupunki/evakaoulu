@@ -37,7 +37,6 @@ const features: Features = {
     placementGuarantee: false,
     voucherUnitPayments: true,
     assistanceNeedDecisionsLanguageSelect: false,
-    staffAttendanceTypes: true,
     extendedPreschoolTerm: false,
     intermittentShiftCare: false,
     citizenAttendanceSummary: false,
@@ -55,10 +54,7 @@ const features: Features = {
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true,
-    hideOvertimeSelection: false,
-    placementDesktop: false,
-    hideSicknessSelection: true,
-    hideChildSicknessSelection: true
+    placementDesktop: false
   },
   staging: {
     environmentLabel: 'Staging',
@@ -81,7 +77,6 @@ const features: Features = {
     placementGuarantee: false,
     voucherUnitPayments: true,
     assistanceNeedDecisionsLanguageSelect: false,
-    staffAttendanceTypes: true,
     extendedPreschoolTerm: false,
     intermittentShiftCare: false,
     citizenAttendanceSummary: false,
@@ -99,10 +94,7 @@ const features: Features = {
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true,
-    hideOvertimeSelection: false,
-    placementDesktop: true,
-    hideSicknessSelection: false,
-    hideChildSicknessSelection: false
+    placementDesktop: true
   },
   prod: {
     environmentLabel: null,
@@ -125,7 +117,6 @@ const features: Features = {
     placementGuarantee: false,
     voucherUnitPayments: true,
     assistanceNeedDecisionsLanguageSelect: false,
-    staffAttendanceTypes: true,
     extendedPreschoolTerm: false,
     intermittentShiftCare: false,
     citizenAttendanceSummary: false,
@@ -143,10 +134,7 @@ const features: Features = {
     missingQuestionnaireAnswerMarkerEnabled: true,
     showCitizenApplicationPreschoolTerms: true,
     showMetadataToCitizen: true,
-    hideOvertimeSelection: false,
-    placementDesktop: false,
-    hideSicknessSelection: true,
-    hideChildSicknessSelection: true
+    placementDesktop: false
   }
 }
 

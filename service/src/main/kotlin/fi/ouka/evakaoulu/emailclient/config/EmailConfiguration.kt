@@ -17,6 +17,7 @@ import fi.espoo.evaka.emailclient.MessageThreadData
 import fi.espoo.evaka.invoicing.domain.FinanceDecisionType
 import fi.espoo.evaka.invoicing.service.IncomeNotificationType
 import fi.espoo.evaka.messaging.MessageType
+import fi.espoo.evaka.shared.ApplicationId
 import fi.espoo.evaka.shared.ChildId
 import fi.espoo.evaka.shared.HtmlSafe
 import fi.espoo.evaka.shared.domain.FiniteDateRange
@@ -103,12 +104,13 @@ internal class EmailMessageProvider(
     override fun messageNotification(
         language: Language,
         thread: MessageThreadData,
-    ): EmailContent = messageNotification(language, thread, false)
+    ): EmailContent = messageNotification(language, thread, false, null)
 
     override fun messageNotification(
         language: Language,
         thread: MessageThreadData,
         isSenderMunicipalAccount: Boolean,
+        applicationId: ApplicationId?,
     ): EmailContent {
         val (typeFi, typeEn) =
             when (thread.type) {
@@ -139,12 +141,12 @@ internal class EmailMessageProvider(
             subject = "Uusi $typeFi eVakassa / New $typeEn in eVaka",
             html =
                 """
-                <p>Sinulle on saapunut uusi $typeFi eVakaan lähettäjältä ${thread.senderName}${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}eVakassa.</p>
+                <p>Sinulle on saapunut uusi ${if (applicationId != null) "hakemustasi koskeva " else ""}$typeFi eVakaan lähettäjältä ${thread.senderName}${if (showSubjectInBody) " otsikolla \"" + thread.title + "\"" else ""}. Lue viesti ${if (thread.urgent) "mahdollisimman pian " else ""}eVakassa.</p>
                 <p>Tämä on eVaka-järjestelmän automaattisesti lähettämä ilmoitus. Älä vastaa tähän viestiin.</p>
                 $securityFi
                 $unsubscribeFi
                 <hr>
-                <p>You have received a new $typeEn in eVaka in eVaka from ${thread.senderName}${if (showSubjectInBody) " with title \"" + thread.title + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}in eVaka. </p>
+                <p>You have received a new $typeEn ${if (applicationId != null) "regarding your application " else ""}in eVaka in eVaka from ${thread.senderName}${if (showSubjectInBody) " with title \"" + thread.title + "\"" else ""}. Read the message ${if (thread.urgent) "as soon as possible " else ""}in eVaka. </p>
                 <p>This is an automatic message from the eVaka system. Do not reply to this message.</p>    
                 $securityEn
                 $unsubscribeEn

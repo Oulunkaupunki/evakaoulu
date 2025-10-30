@@ -123,7 +123,7 @@ class EVakaOuluConfig {
             placementToolApplicationStatus = ApplicationStatus.WAITING_DECISION,
             holidayQuestionnaireType = QuestionnaireType.OPEN_RANGES,
             minimumInvoiceAmount = 800,
-            daycarePlacementPlanEndMonthDay = MonthDay.of(8, 15),
+            daycarePlacementPlanEndMonthDay = MonthDay.of(8, 20),
         )
 
     @Bean

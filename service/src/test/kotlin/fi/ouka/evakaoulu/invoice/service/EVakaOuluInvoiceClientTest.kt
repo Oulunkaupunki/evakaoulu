@@ -6,6 +6,8 @@ package fi.ouka.evakaoulu.invoice.service
 import com.jcraft.jsch.SftpException
 import fi.espoo.evaka.invoicing.domain.InvoiceDetailed
 import fi.espoo.evaka.invoicing.integration.InvoiceIntegrationClient
+import fi.espoo.evaka.shared.domain.HelsinkiDateTime
+import fi.espoo.evaka.shared.domain.MockEvakaClock
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -15,15 +17,17 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.boot.test.system.CapturedOutput
 import org.springframework.boot.test.system.OutputCaptureExtension
-import java.text.SimpleDateFormat
-import java.util.Date
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 @ExtendWith(OutputCaptureExtension::class)
 internal class EVakaOuluInvoiceClientTest {
     val invoiceGenerator = mock<ProEInvoiceGenerator>()
     val sftpSender = mock<SftpSender>()
     val eVakaOuluInvoiceClient = EVakaOuluInvoiceClient(sftpSender, invoiceGenerator)
-    val fileName: String = SimpleDateFormat("'proe-'yyyyMMdd-hhmmss'.txt'").format(Date())
+    val mockClock = MockEvakaClock(HelsinkiDateTime.of(LocalDate.of(2022, 10, 12), LocalTime.of(13, 34, 56)))
+    val fileName: String = "proe-" + mockClock.now().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + ".txt"
 
     @Test
     fun `should pass invoices to the invoice generator`() {
@@ -55,7 +59,7 @@ internal class EVakaOuluInvoiceClientTest {
             )
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
 
-        eVakaOuluInvoiceClient.send(invoiceList)
+        eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
 
         verify(sftpSender).send(proEInvoice1, fileName)
     }
@@ -66,7 +70,7 @@ internal class EVakaOuluInvoiceClientTest {
         val invoiceGeneratorResult = StringInvoiceGenerator.InvoiceGeneratorResult(InvoiceIntegrationClient.SendResult(), "")
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
 
-        eVakaOuluInvoiceClient.send(invoiceList)
+        eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
 
         verify(sftpSender, never()).send("", fileName)
     }
@@ -110,7 +114,7 @@ internal class EVakaOuluInvoiceClientTest {
         whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(invoiceGeneratorResult)
         whenever(sftpSender.send(proEInvoice1, fileName)).thenThrow(SftpException::class.java)
 
-        val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
+        val sendResult = eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
 
         assertThat(sendResult.failed).hasSize(2)
     }
@@ -130,7 +134,7 @@ internal class EVakaOuluInvoiceClientTest {
                 "xx",
             ),
         )
-        val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
+        val sendResult = eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
 
         assertThat(sendResult.succeeded).hasSize(2)
         verify(sftpSender).send(proEInvoice1, fileName)
@@ -152,7 +156,7 @@ internal class EVakaOuluInvoiceClientTest {
                 "x",
             ),
         )
-        val sendResult = eVakaOuluInvoiceClient.send(invoiceList)
+        val sendResult = eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
 
         assertThat(sendResult.succeeded).hasSize(1)
         assertThat(sendResult.manuallySent).hasSize(1)
@@ -198,8 +202,28 @@ internal class EVakaOuluInvoiceClientTest {
         )
 
         whenever(sftpSender.send(proEInvoice1, fileName)).thenThrow(SftpException::class.java)
-        eVakaOuluInvoiceClient.send(invoiceList)
+        eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
 
         assertThat(output).contains("Failed to send 2 invoices")
+    }
+
+    @Test
+    fun `should format the sent file name correctly`() {
+        val validInvoice = validInvoice()
+        val invoiceList = listOf(validInvoice)
+        val proEInvoice1 = "xx"
+        whenever(invoiceGenerator.generateInvoice(invoiceList)).thenReturn(
+            StringInvoiceGenerator.InvoiceGeneratorResult(
+                InvoiceIntegrationClient.SendResult(
+                    invoiceList,
+                    listOf(),
+                    listOf(),
+                ),
+                "xx",
+            ),
+        )
+        val sendResult = eVakaOuluInvoiceClient.sendWithClock(invoiceList, mockClock)
+
+        verify(sftpSender).send(proEInvoice1, "proe-20221012-133456.txt")
     }
 }

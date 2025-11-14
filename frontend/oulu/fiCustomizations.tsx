@@ -248,12 +248,12 @@ const fi: DeepPartial<Translations> = {
           PRESCHOOL: (
             <>
               <P>
-                Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden alkamista.
+                Esiopetukseen osallistutaan vuosi ennen oppivelvollisuuden
                 Esiopetus on maksutonta. Lukuvuoden 2026–2027 esiopetuspaikat
                 ilmoitetaan huoltajille 8.1.2026 alkaen ilman ilmoittautumis-
                 tai hakuvaihetta lapsen kotiosoitteen perusteella. Halutessaan
-                huoltajat voivat tehdä toissijaisen hakemuksen 19.-31.1.2026 välisenä
-                aikana. Esiopetus alkaa 17.8.2026.
+                huoltajat voivat tehdä toissijaisen hakemuksen 19.-31.1.2026
+                välisenä aikana. Esiopetus alkaa 17.8.2026.
               </P>
               <P>
                 Ilmoittautumisen tehnyt huoltaja saa kirjallisen päätöksen

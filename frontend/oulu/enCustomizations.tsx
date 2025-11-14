@@ -241,11 +241,13 @@ const fi: DeepPartial<Translations> = {
           PRESCHOOL: (
             <>
               <P>
-                Preschool education starts a year before the beginning of
-                compulsory education. Preschool education is free of charge. The
-                enrollment period for preschool education for the school year
-                2025–2026 is January 7 to January 20, 2025. Preschool education
-                begins on August 11, 2025.
+                Preschool education is attended one year before the start of
+                compulsory education. Preschool education is free of charge.
+                Preschool places for the 2026–2027 school year will be announced
+                starting on January 8, 2026, without a registration or
+                application phase based on the child&#39;s home address. If they
+                wish, guardians can make a secondary application between January
+                19 and 31, 2026. Preschool education starts on August 17, 2026.
               </P>
               <P>
                 The guardian who has made the enrollment will receive a written

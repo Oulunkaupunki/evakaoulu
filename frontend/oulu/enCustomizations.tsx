@@ -241,13 +241,14 @@ const fi: DeepPartial<Translations> = {
           PRESCHOOL: (
             <>
               <P>
-                Preschool education is attended one year before the start of
-                compulsory education. Preschool education is free of charge.
-                Preschool places for the 2026–2027 school year will be announced
-                starting on January 8, 2026, without a registration or
-                application phase based on the child&#39;s home address. If they
-                wish, guardians can make a secondary application between January
-                19 and 31, 2026. Preschool education starts on August 17, 2026.
+                Children attend pre-primary education one year before compulsory
+                schooling begins. schooling begins. Pre-primary education is
+                free of charge. For the school year 2026–2027, pre-primary
+                placements will be assigned to guardians starting January 8,
+                2026, based on the home address, without a separate registration
+                or application process. If they wish, guardians can submit a
+                secondary application between January 19 and January 31, 2026.
+                Pre-primary education begins on August 17, 2026.
               </P>
               <P>
                 The guardian who has made the enrollment will receive a written

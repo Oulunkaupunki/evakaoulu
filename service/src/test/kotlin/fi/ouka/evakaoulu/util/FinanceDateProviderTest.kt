@@ -9,6 +9,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.Duration
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class FinanceDateProviderTest {
@@ -16,7 +17,7 @@ class FinanceDateProviderTest {
     fun `should default to today`() {
         val financeDateProvider = FinanceDateProvider()
         val invoiceIdFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        val expectedDate = LocalDate.now().format(invoiceIdFormatter)
+        val expectedDate = LocalDate.now(ZoneId.of("Europe/Helsinki")).format(invoiceIdFormatter)
 
         val actualDate = financeDateProvider.currentDate()
 
@@ -24,7 +25,7 @@ class FinanceDateProviderTest {
     }
 
     @Test
-    fun `should obey the date the LocalDate parameter if given`() {
+    fun `should obey the date in the constructor parameter if given`() {
         val financeDateProvider = FinanceDateProvider(MockEvakaClock(2025, 7, 14, 12, 34, 56))
         val expectedDate = "20250714"
 

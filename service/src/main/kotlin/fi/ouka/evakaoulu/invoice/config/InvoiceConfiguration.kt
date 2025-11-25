@@ -84,12 +84,22 @@ class OuluIncomeTypesProvider : IncomeTypesProvider {
 class OuluIncomeCoefficientMultiplierProvider : IncomeCoefficientMultiplierProvider {
     override fun multiplier(coefficient: IncomeCoefficient): BigDecimal =
         when (coefficient) {
-            IncomeCoefficient.MONTHLY_WITH_HOLIDAY_BONUS -> BigDecimal("1.05") // = 12.5 / 12
-            IncomeCoefficient.MONTHLY_NO_HOLIDAY_BONUS -> BigDecimal("1.0000") // = 12 / 12
-            IncomeCoefficient.BI_WEEKLY_WITH_HOLIDAY_BONUS -> BigDecimal("2.23125") // = ???
-            IncomeCoefficient.BI_WEEKLY_NO_HOLIDAY_BONUS -> BigDecimal("2.125") // = ???
+            IncomeCoefficient.MONTHLY_WITH_HOLIDAY_BONUS -> BigDecimal("1.05")
+
+            // = 12.5 / 12
+            IncomeCoefficient.MONTHLY_NO_HOLIDAY_BONUS -> BigDecimal("1.0000")
+
+            // = 12 / 12
+            IncomeCoefficient.BI_WEEKLY_WITH_HOLIDAY_BONUS -> BigDecimal("2.23125")
+
+            // = ???
+            IncomeCoefficient.BI_WEEKLY_NO_HOLIDAY_BONUS -> BigDecimal("2.125")
+
+            // = ???
             IncomeCoefficient.DAILY_ALLOWANCE_21_5 -> BigDecimal("21.5")
+
             IncomeCoefficient.DAILY_ALLOWANCE_25 -> BigDecimal("25")
+
             IncomeCoefficient.YEARLY -> BigDecimal("0.0833333") // 1 / 12
         }
 }
@@ -109,10 +119,22 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
                 PlacementType.DAYCARE_PART_TIME,
                 PlacementType.DAYCARE_FIVE_YEAR_OLDS,
                 PlacementType.DAYCARE_PART_TIME_FIVE_YEAR_OLDS,
-                -> Product.DAYCARE
-                PlacementType.PRESCHOOL_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
-                PlacementType.PREPARATORY_DAYCARE -> Product.PRESCHOOL_WITH_DAYCARE
-                PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> Product.TEMPORARY_CARE
+                -> {
+                    Product.DAYCARE
+                }
+
+                PlacementType.PRESCHOOL_DAYCARE -> {
+                    Product.PRESCHOOL_WITH_DAYCARE
+                }
+
+                PlacementType.PREPARATORY_DAYCARE -> {
+                    Product.PRESCHOOL_WITH_DAYCARE
+                }
+
+                PlacementType.TEMPORARY_DAYCARE, PlacementType.TEMPORARY_DAYCARE_PART_DAY -> {
+                    Product.TEMPORARY_CARE
+                }
+
                 PlacementType.PRESCHOOL,
                 PlacementType.PREPARATORY,
                 PlacementType.SCHOOL_SHIFT_CARE,
@@ -120,10 +142,11 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
                 PlacementType.PRESCHOOL_CLUB,
                 PlacementType.PRESCHOOL_DAYCARE_ONLY,
                 PlacementType.PREPARATORY_DAYCARE_ONLY,
-                ->
+                -> {
                     error(
                         "No product mapping found for placement type $placementType",
                     )
+                }
             }
         return product.key
     }
@@ -139,8 +162,11 @@ class OuluInvoiceProductProvider : InvoiceProductProvider {
                 Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.DISCOUNT,
                 Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.RELIEF,
                 -> Product.DAYCARE_DISCOUNT
+
                 Product.DAYCARE to FeeAlterationType.INCREASE -> Product.CORRECTION
+
                 Product.PRESCHOOL_WITH_DAYCARE to FeeAlterationType.INCREASE -> Product.PRESCHOOL_DAYCARE_CORRECTION
+
                 else -> error("No product mapping found for product + fee alteration type combo ($productKey + $feeAlterationType)")
             }
         return product.key

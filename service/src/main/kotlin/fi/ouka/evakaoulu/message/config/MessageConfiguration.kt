@@ -66,7 +66,7 @@ internal class EVakaOuluMessageProvider(
         when (lang) {
             OfficialLanguage.FI,
             OfficialLanguage.SV,
-            ->
+            -> {
                 DecisionSendAddress(
                     street = "PL 75",
                     postalCode = "90015",
@@ -75,6 +75,7 @@ internal class EVakaOuluMessageProvider(
                     row2 = "Asiakaspalvelu",
                     row3 = "PL 75, 90015 Oulu",
                 )
+            }
         }
 
     override fun getDefaultFinancialDecisionAddress(lang: OfficialLanguage): DecisionSendAddress = getDefaultDecisionAddress(lang)
@@ -110,7 +111,7 @@ If you accept the assigned pre-school place, you don't have to do anything.
         when (lang) {
             OfficialLanguage.FI,
             OfficialLanguage.SV,
-            ->
+            -> {
                 """
                 Lapsellenne on tehty päätös. Voit katsella päätöstä eVakassa.
                 
@@ -122,6 +123,7 @@ If you accept the assigned pre-school place, you don't have to do anything.
                 
                 As you are a user of Suomi.fi, you can also find the decision in the attachments below.
                 """.trimIndent()
+            }
         }
 
     private fun resolveLocale(lang: OfficialLanguage): Locale {

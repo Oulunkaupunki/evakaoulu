@@ -96,10 +96,19 @@ class DecisionServiceTest {
                 isTransferApplication = false,
                 serviceNeed =
                     when (decisionType) {
-                        DecisionType.CLUB -> null
-                        DecisionType.PRESCHOOL -> null
-                        DecisionType.PREPARATORY_EDUCATION -> null
-                        else ->
+                        DecisionType.CLUB -> {
+                            null
+                        }
+
+                        DecisionType.PRESCHOOL -> {
+                            null
+                        }
+
+                        DecisionType.PREPARATORY_EDUCATION -> {
+                            null
+                        }
+
+                        else -> {
                             ServiceNeed(
                                 startTime = "08:00",
                                 endTime = "16:00",
@@ -113,6 +122,7 @@ class DecisionServiceTest {
                                     null,
                                 ),
                             )
+                        }
                     },
                 lang = OfficialLanguage.FI,
                 unitManager = UnitManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234"),

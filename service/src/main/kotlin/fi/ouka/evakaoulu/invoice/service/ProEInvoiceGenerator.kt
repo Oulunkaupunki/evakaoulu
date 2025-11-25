@@ -183,6 +183,7 @@ class ProEInvoiceGenerator(
                     val value = invoiceData[it.field] ?: ""
                     result.append(value.take(it.length).padEnd(it.length))
                 }
+
                 FieldType.NUMERIC -> {
                     val value = invoiceData[it.field] ?: "0"
                     val paddedValue = value.padStart(it.length, '0')
@@ -190,6 +191,7 @@ class ProEInvoiceGenerator(
                     // the decimal part with the correct number of zeroes
                     result.append(paddedValue.padEnd(it.length + it.decimals, '0'))
                 }
+
                 FieldType.MONETARY -> {
                     val value = invoiceData[it.field] ?: "0"
                     // if the value is non-zero it has been multiplied by 100 to already contain two decimals

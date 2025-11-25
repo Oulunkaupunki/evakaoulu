@@ -114,7 +114,7 @@ internal class EmailMessageProvider(
     ): EmailContent {
         val (typeFi, typeEn) =
             when (thread.type) {
-                MessageType.MESSAGE ->
+                MessageType.MESSAGE -> {
                     if (thread.urgent) {
                         Pair(
                             "kiireellinen viesti",
@@ -123,8 +123,9 @@ internal class EmailMessageProvider(
                     } else {
                         Pair("viesti", "message")
                     }
+                }
 
-                MessageType.BULLETIN ->
+                MessageType.BULLETIN -> {
                     if (thread.urgent) {
                         Pair(
                             "kiireellinen tiedote",
@@ -133,6 +134,7 @@ internal class EmailMessageProvider(
                     } else {
                         Pair("tiedote", "bulletin")
                     }
+                }
             }
 
         val showSubjectInBody = isSenderMunicipalAccount && thread.type == MessageType.BULLETIN
@@ -871,10 +873,13 @@ internal class EmailMessageProvider(
     override fun financeDecisionNotification(decisionType: FinanceDecisionType): EmailContent {
         val (decisionTypeFi, decisionTypeEn) =
             when (decisionType) {
-                FinanceDecisionType.VOUCHER_VALUE_DECISION ->
+                FinanceDecisionType.VOUCHER_VALUE_DECISION -> {
                     Pair("arvopäätös", "voucher value decision")
-                FinanceDecisionType.FEE_DECISION ->
+                }
+
+                FinanceDecisionType.FEE_DECISION -> {
                     Pair("maksupäätös", "fee decision")
+                }
             }
         return EmailContent.fromHtml(
             subject =

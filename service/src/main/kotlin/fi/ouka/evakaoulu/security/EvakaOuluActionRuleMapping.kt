@@ -19,9 +19,11 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
             Action.Global.SUBMIT_PATU_REPORT,
             Action.Global.SEND_PATU_REPORT,
             -> sequenceOf()
+
             Action.Global.SETTINGS_PAGE,
             Action.Global.UPDATE_SETTINGS,
             -> action.defaultRules.asSequence() + sequenceOf(HasGlobalRole(UserRole.SERVICE_WORKER))
+
             else -> action.defaultRules.asSequence()
         }
 
@@ -36,6 +38,7 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasUnitRole(UserRole.STAFF).inPlacementUnitOfChildOfBackupCare() as ScopedActionRule<in T>,
                     )
             }
+
             Action.Child.CREATE_BACKUP_CARE,
             Action.Child.READ_ASSISTANCE_ACTION,
             -> {
@@ -45,6 +48,7 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasUnitRole(UserRole.STAFF).inPlacementUnitOfChild() as ScopedActionRule<in T>,
                     )
             }
+
             Action.Person.ADD_SSN,
             Action.Person.UPDATE_FROM_VTJ,
             -> {
@@ -54,6 +58,7 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasGlobalRole(UserRole.FINANCE_ADMIN) as ScopedActionRule<in T>,
                     )
             }
+
             Action.Person.READ_FAMILY_OVERVIEW -> {
                 @Suppress("UNCHECKED_CAST")
                 action.defaultRules.asSequence() +
@@ -61,6 +66,7 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasGlobalRole(UserRole.SERVICE_WORKER) as ScopedActionRule<in T>,
                     )
             }
+
             Action.Person.READ_FOSTER_CHILDREN,
             Action.Person.READ_FOSTER_PARENTS,
             -> {
@@ -70,6 +76,7 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasGlobalRole(UserRole.FINANCE_ADMIN) as ScopedActionRule<in T>,
                     )
             }
+
             Action.OtherAssistanceMeasure.READ -> {
                 @Suppress("UNCHECKED_CAST")
                 // Enable UNIT_SUPERVISORS to see past other assistance measures
@@ -93,6 +100,9 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                         HasUnitRole(UserRole.UNIT_SUPERVISOR).inUnit() as ScopedActionRule<in T>,
                     )
             }
-            else -> action.defaultRules.asSequence()
+
+            else -> {
+                action.defaultRules.asSequence()
+            }
         }
 }

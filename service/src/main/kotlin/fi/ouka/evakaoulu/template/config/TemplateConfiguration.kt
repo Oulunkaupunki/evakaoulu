@@ -43,13 +43,17 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
     ): String =
         when (type) {
             DecisionType.CLUB -> "Kerhopäätös"
+
             DecisionType.DAYCARE,
             DecisionType.DAYCARE_PART_TIME,
             -> "Varhaiskasvatuspäätös"
+
             DecisionType.PRESCHOOL -> "Esiopetuspäätös"
+
             DecisionType.PRESCHOOL_DAYCARE,
             DecisionType.PRESCHOOL_CLUB,
             -> "Esiopetukseen liittyvän toiminnan päätös"
+
             DecisionType.PREPARATORY_EDUCATION -> "Valmistavan opetuksen päätös"
         }
 }

@@ -118,6 +118,28 @@ WHERE current_date - INTERVAL '3 months' <= upper(validity_period)
             )
         }
 
+    val getChildReservations =
+        csvQuery<DwChildReservations> {
+            sql(
+                """
+                SELECT
+                    ca.child_id AS lapsen_id,
+                    COALESCE(ar.date, ca.date) AS paivamaara,
+                    ar.start_time AS varaus_alkaa,
+                    ar.end_time AS varaus_paattyy,
+                    ca.start_time AS toteuma_alkaa,
+                    ca.end_time AS toteuma_paattyy,
+                    ca.unit_id AS yksikon_id
+                FROM person p
+                         LEFT JOIN (SELECT child_id, date, start_time, end_time FROM attendance_reservation) ar ON p.id = ar.child_id
+                         FULL OUTER JOIN (SELECT child_id, date, start_time, end_time, unit_id FROM child_attendance) ca ON p.id = ca.child_id
+                    AND ca.date = ar.date
+                WHERE ca.date is not null
+                ORDER BY ca.date DESC;
+                """.trimIndent(),
+            )
+        }
+
     val getDailyInfos =
         csvQuery<DwDailyInfo> {
             sql(

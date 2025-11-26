@@ -77,6 +77,16 @@ data class DwAssistanceNeedDecision(
     val tila: AssistanceNeedDecisionStatus,
 )
 
+data class DwChildReservations(
+    val lapsenId: UUID,
+    val paivamaara: LocalDate,
+    val varausAlkaa: String?,
+    val varausPaattyy: String?,
+    val toteumaAlkaa: String?,
+    val toteumaPaattyy: String?,
+    val yksikonId: UUID,
+)
+
 data class DwDailyInfo(
     val pvm: String,
     val lapsenId: UUID,

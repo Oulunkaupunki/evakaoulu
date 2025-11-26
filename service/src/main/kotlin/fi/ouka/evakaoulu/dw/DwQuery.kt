@@ -8,6 +8,7 @@ enum class DwQuery(
     APPLICATION_INFO("application_info", DwQueries.getApplicationInfos),
     ASSISTANCE_ACTION("assistance_actions_", DwQueries.getAssistanceActions),
     ASSISTANCE_NEED_DECISION("assistance_need_decisions_", DwQueries.getAssistanceNeedDecisions),
+    CHILD_RESERVATIONS("child_reservations_", DwQueries.getChildReservations),
     DAILY_INFO("daily_info_", DwQueries.getDailyInfos),
     DAILY_ATTENDANCE("daily_units_and_groups_", DwQueries.getDailyUnitsAndGroupsAttendances),
     DAILY_OCCUPANCY_CONFIRMED("daily_units_occupancy_confirmed_", DwQueries.getDailyUnitsOccupanciesConfirmed),

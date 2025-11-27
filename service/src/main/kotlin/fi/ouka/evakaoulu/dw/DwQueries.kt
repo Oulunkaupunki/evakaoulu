@@ -133,7 +133,8 @@ WHERE current_date - INTERVAL '3 months' <= upper(validity_period)
                 FROM child_attendance ca
                          LEFT JOIN attendance_reservation ar ON ca.child_id = ar.child_id
                     AND ca.date = ar.date
-                ORDER BY ca.date DESC;
+                WHERE current_date::DATE - INTERVAL '3 months' <= ca.date
+                ORDER BY ca.date DESC
                 """.trimIndent(),
             )
         }

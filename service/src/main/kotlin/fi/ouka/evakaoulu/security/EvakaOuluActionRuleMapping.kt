@@ -49,6 +49,14 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                     )
             }
 
+            Action.ChildDocument.UPDATE_DECISION_VALIDITY -> {
+                @Suppress("UNCHECKED_CAST")
+                action.defaultRules.asSequence() +
+                    sequenceOf(
+                        HasGlobalRole(UserRole.DIRECTOR) as ScopedActionRule<in T>,
+                    )
+            }
+
             Action.Person.ADD_SSN,
             Action.Person.UPDATE_FROM_VTJ,
             -> {

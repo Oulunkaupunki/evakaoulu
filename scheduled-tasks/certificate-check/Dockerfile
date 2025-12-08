@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-FROM alpine:3.22.2
+FROM alpine:3.23.0
 ARG CACHE_BUST
 # openjdk8-jre-base is needed because it contains keytool
 RUN apk add --no-cache bash coreutils aws-cli jq openssl openjdk8-jre-base postgresql16-client

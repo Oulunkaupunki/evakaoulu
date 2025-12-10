@@ -298,6 +298,40 @@ class DecisionServiceTest {
     }
 
     @Test
+    fun createDecisionPdfBySystemInternalUser() {
+        val bytes =
+            createDecisionPdf(
+                templateProvider,
+                pdfService,
+                settings,
+                validDecision(DecisionType.PRESCHOOL, validDecisionUnit(ProviderType.MUNICIPAL)).copy(createdBy = "eVaka"),
+                child = validChild(),
+                isTransferApplication = false,
+                serviceNeed =
+                    ServiceNeed(
+                        startTime = "08:00",
+                        endTime = "16:00",
+                        shiftCare = false,
+                        partTime = false,
+                        ServiceNeedOption(
+                            ServiceNeedOptionId(UUID.randomUUID()),
+                            "Palveluntarve 1",
+                            "Palveluntarve 1",
+                            "Palveluntarve 1",
+                            null,
+                        ),
+                    ),
+                lang = OfficialLanguage.FI,
+                unitManager = UnitManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234"),
+                preschoolManager = UnitManager("Päivi Päiväkodinjohtaja", "paivi.paivakodinjohtaja@example.com", "0451231234"),
+            )
+
+        val filepath =
+            "${Paths.get("build").toAbsolutePath()}/reports/DecisionServiceTest-PRESCHOOL-by-system-internal-user.pdf"
+        FileOutputStream(filepath).use { it.write(bytes) }
+    }
+
+    @Test
     fun generateAssistanceNeedPdf() {
         val decision = validAssistanceNeedDecision
 

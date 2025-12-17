@@ -14,13 +14,26 @@ class DwExportJob(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendDWQuery,
-    ) = sendDwQuery(db, clock, msg.query.queryName, msg.query.query)
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query)
 
-    fun sendDwQuery(
+    fun sendFabricQuery(
+        db: Database.Connection,
+        clock: EvakaClock,
+        msg: EvakaOuluAsyncJob.SendFabricQuery,
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "FABRIC_")
+
+    fun sendFabricHistoryQuery(
+        db: Database.Connection,
+        clock: EvakaClock,
+        msg: EvakaOuluAsyncJob.SendFabricHistoryQuery,
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "FABRIC_HISTORY_")
+
+    fun sendQuery(
         db: Database.Connection,
         clock: EvakaClock,
         queryName: String,
-        query: DwQueries.CsvQuery,
+        query: CsvQuery,
+        prefix: String = "",
     ) {
         db.read { tx ->
             tx.setStatementTimeout(Duration.ofMinutes(10))

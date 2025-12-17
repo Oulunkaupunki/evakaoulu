@@ -57,11 +57,32 @@ class DwExportJobTest : AbstractIntegrationTest() {
     @TestFactory
     fun testDwExports() =
         DwQuery.entries.map {
-            DynamicTest.dynamicTest("Test '${it.queryName}' export") { sendAndAssertDWQueryCsv(it) }
+            DynamicTest.dynamicTest("Test DW '${it.queryName}' export") {
+                sendAndAssertQueryCsv(it.queryName, it.query)
+            }
         }
 
-    private fun sendAndAssertDWQueryCsv(query: DwQuery) {
-        job.sendDwQuery(db, clock, query.queryName, query.query)
+    @TestFactory
+    fun testFabricExports() =
+        FabricQuery.entries.map {
+            DynamicTest.dynamicTest("Test Fabric '${it.queryName}' export") {
+                sendAndAssertQueryCsv(it.queryName, it.query)
+            }
+        }
+
+    @TestFactory
+    fun testFabricHistoryExports() =
+        FabricHistoryQuery.entries.map {
+            DynamicTest.dynamicTest("Test Fabric History '${it.queryName}' export") {
+                sendAndAssertQueryCsv(it.queryName, it.query)
+            }
+        }
+
+    private fun sendAndAssertQueryCsv(
+        name: String,
+        query: CsvQuery,
+    ) {
+        job.sendQuery(db, clock, name, query)
     }
 
     private fun insertCriticalTestData() {

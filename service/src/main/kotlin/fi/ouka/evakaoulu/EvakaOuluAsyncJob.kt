@@ -44,5 +44,7 @@ class EvakaOuluAsyncJobRegistration(
 ) {
     init {
         dwExportJob.let { runner.registerHandler(it::sendDwQuery) }
+        dwExportJob.let { runner.registerHandler(it::sendFabricQuery) }
+        dwExportJob.let { runner.registerHandler(it::sendFabricHistoryQuery) }
     }
 }

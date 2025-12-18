@@ -14,33 +14,33 @@ class DwExportJob(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendDWQuery,
-    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query)
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, prefix = "dw")
 
     fun sendFabricQuery(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendFabricQuery,
-    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "FABRIC_")
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "fabric")
 
     fun sendFabricHistoryQuery(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendFabricHistoryQuery,
-    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "FABRIC_HISTORY_")
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "fabric-history")
 
     fun sendQuery(
         db: Database.Connection,
         clock: EvakaClock,
         queryName: String,
         query: CsvQuery,
-        prefix: String = "",
+        prefix: String,
     ) {
         db.read { tx ->
             tx.setStatementTimeout(Duration.ofMinutes(10))
 
             query(tx) { records ->
                 val stream = EspooBiJob.CsvInputStream(CSV_CHARSET, records)
-                client.sendDwCsvFile(queryName, clock, stream)
+                client.sendDwCsvFile(queryName, clock, stream, prefix)
             }
         }
     }

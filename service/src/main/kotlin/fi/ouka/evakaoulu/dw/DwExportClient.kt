@@ -8,5 +8,6 @@ interface DwExportClient {
         queryName: String,
         clock: EvakaClock,
         stream: EspooBiJob.CsvInputStream,
+        fileNamePrefix: String,
     ): Pair<String, String>
 }

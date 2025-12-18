@@ -82,7 +82,7 @@ class DwExportJobTest : AbstractIntegrationTest() {
         name: String,
         query: CsvQuery,
     ) {
-        job.sendQuery(db, clock, name, query)
+        job.sendQuery(db, clock, name, query, "test")
     }
 
     private fun insertCriticalTestData() {

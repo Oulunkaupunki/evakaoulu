@@ -14,7 +14,7 @@ class DwExportJob(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendDWQuery,
-    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, prefix = "dw")
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, prefix = "")
 
     fun sendFabricQuery(
         db: Database.Connection,

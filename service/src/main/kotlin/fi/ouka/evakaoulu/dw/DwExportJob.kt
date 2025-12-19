@@ -20,13 +20,13 @@ class DwExportJob(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendFabricQuery,
-    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "fabric")
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "fabric_")
 
     fun sendFabricHistoryQuery(
         db: Database.Connection,
         clock: EvakaClock,
         msg: EvakaOuluAsyncJob.SendFabricHistoryQuery,
-    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "fabric-history")
+    ) = sendQuery(db, clock, msg.query.queryName, msg.query.query, "fabric-history_")
 
     fun sendQuery(
         db: Database.Connection,

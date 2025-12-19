@@ -26,7 +26,7 @@ class FileDwExportClient(
         fileNamePrefix: String,
     ): Pair<String, String> {
         val date = clock.now().toLocalDate()
-        val fileName = "$fileNamePrefix${'_'}$queryName${date.format(DateTimeFormatter.ISO_DATE)}.csv"
+        val fileName = "$fileNamePrefix$$queryName${date.format(DateTimeFormatter.ISO_DATE)}.csv"
         val tempFile = Files.createTempFile("", fileName)
         val bucket = properties.bucket.export
         val prefix = properties.dwExport.prefix

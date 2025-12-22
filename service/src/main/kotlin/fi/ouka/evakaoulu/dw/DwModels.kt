@@ -458,8 +458,8 @@ data class FabricPlacement(
     val ryhmänLoppupvm: LocalDate?,
     val palveluntarve: String?,
     val palveluntarveId: UUID?,
-    val palveluntarpeenLuontiaika: String,
-    val palveluntarpeenMuokkausaika: String,
+    val palveluntarpeenLuontiaika: String?,
+    val palveluntarpeenMuokkausaika: String?,
     val palveluntarpeenAlkupvm: LocalDate?,
     val palveluntarpeenLoppupvm: LocalDate?,
 )

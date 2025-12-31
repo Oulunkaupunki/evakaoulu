@@ -21,7 +21,7 @@ aliases:
   - &base_image cimg/base:current-24.04
   - &aws_image cimg/aws:2024.03
   - &reuse_image fsfe/reuse:5.0.2 # NOTE: Update bin/add-license-headers.sh to match
-  - &openjdk_image cimg/openjdk:21.0
+  - &openjdk_image cimg/openjdk:25.0
   - &postgres_image cimg/postgres:16.3
   - &s3mock_image adobe/s3mock:4.1.1
   - &ubuntu_machine ubuntu-2404:current

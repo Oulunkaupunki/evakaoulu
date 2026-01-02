@@ -400,7 +400,7 @@ const customizations: EmployeeCustomizations = {
           UNKNOWN_ABSENCE: 'Ilmoittamaton',
           PLANNED_ABSENCE: 'Sopimus',
           TEMPORARY_RELOCATION: 'Varasijoitus',
-          PARENTLEAVE: 'Vanhempainvapaa',
+          PARENTLEAVE: 'Vanh.vap.',
           FORCE_MAJEURE: 'Hyvitys',
           FREE_ABSENCE: 'Maksuton',
           NO_ABSENCE: 'Ei poissa'

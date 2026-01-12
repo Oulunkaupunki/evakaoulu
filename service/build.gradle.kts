@@ -32,12 +32,16 @@ dependencies {
     implementation("ch.qos.logback.access:logback-access-tomcat")
     implementation("io.github.oshai:kotlin-logging-jvm")
     implementation("net.logstash.logback:logstash-logback-encoder")
+    implementation("org.thymeleaf:thymeleaf")
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-web-services")
+    implementation("org.springframework.boot:spring-boot-tomcat")
+    implementation("org.springframework.boot:spring-boot-webservices")
+    implementation("org.springframework.boot:spring-boot-jdbc")
 
     implementation("com.github.kittinunf.fuel:fuel")
     implementation("org.jdbi:jdbi3-core")
+    implementation("org.jdbi:jdbi3-kotlin")
+    implementation("org.jdbi:jdbi3-json")
     implementation("com.github.mwiede:jsch")
     implementation("software.amazon.awssdk:s3")
     implementation("software.amazon.awssdk:http-auth-aws-crt")
@@ -51,18 +55,14 @@ dependencies {
         exclude("com.vaadin.external.google", "android-json")
     }
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit-pioneer:junit-pioneer:2.3.0") // for CartesianProductTest
     testImplementation("org.mockito.kotlin:mockito-kotlin")
-    testImplementation("org.springframework.ws:spring-ws-test")
-    testImplementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
-    testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.3"))
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.reflections:reflections:0.10.2")
-    testImplementation("software.amazon.awssdk:s3")
+    testImplementation("org.springframework.boot:spring-boot-starter-webservices-test")
+    testImplementation("org.wiremock.integrations:wiremock-spring-boot:4.0.8")
     testImplementation("com.auth0:java-jwt")
-    testImplementation("org.thymeleaf:thymeleaf")
+
+    developmentOnly(platform("evaka:evaka-bom"))
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 springBoot {

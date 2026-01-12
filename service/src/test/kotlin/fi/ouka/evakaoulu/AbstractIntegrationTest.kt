@@ -15,14 +15,14 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
+import org.wiremock.spring.EnableWireMock
 import software.amazon.awssdk.services.s3.S3Client
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(
     classes = [IntegrationTestConfiguration::class],
 )
-@AutoConfigureWireMock(port = 0)
+@EnableWireMock
 abstract class AbstractIntegrationTest(
     private val resetDbBeforeEach: Boolean = true,
 ) {

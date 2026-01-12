@@ -10,11 +10,11 @@ import fi.ouka.evakaoulu.AbstractIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junitpioneer.jupiter.cartesian.ArgumentSets
 import org.junitpioneer.jupiter.cartesian.CartesianTest
-import org.reflections.ReflectionUtils.getAllMethods
-import org.reflections.util.ReflectionUtilsPredicates.withParametersAssignableTo
-import org.reflections.util.ReflectionUtilsPredicates.withReturnType
 import org.springframework.beans.factory.annotation.Autowired
 import java.lang.reflect.Method
+import kotlin.reflect.full.functions
+import kotlin.reflect.full.valueParameters
+import kotlin.reflect.jvm.javaMethod
 
 internal class MessageProviderTest : AbstractIntegrationTest() {
     @Autowired
@@ -36,15 +36,15 @@ internal class MessageProviderTest : AbstractIntegrationTest() {
         @JvmStatic
         fun methodsWithLang(): ArgumentSets {
             val allMethods =
-                getAllMethods(
-                    IMessageProvider::class.java,
-                    withParametersAssignableTo(OfficialLanguage::class.java),
-                    withReturnType(String::class.java),
-                )
+                IMessageProvider::class
+                    .functions
+                    .filter { it.valueParameters.map { param -> param.type.classifier } == listOf(OfficialLanguage::class) }
+                    .filter { it.returnType.classifier == String::class }
+                    .map { it.javaMethod }
             return ArgumentSets
                 .create()
                 .argumentsForNextParameter(allMethods)
-                .argumentsForNextParameter(OfficialLanguage.values().toList())
+                .argumentsForNextParameter(OfficialLanguage.entries)
         }
     }
 }

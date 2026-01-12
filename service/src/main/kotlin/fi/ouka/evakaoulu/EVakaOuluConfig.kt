@@ -34,7 +34,7 @@ import fi.ouka.evakaoulu.payment.service.ProEPaymentGenerator
 import fi.ouka.evakaoulu.security.EvakaOuluActionRuleMapping
 import io.opentelemetry.api.trace.Tracer
 import org.jdbi.v3.core.Jdbi
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
+import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory
 import org.springframework.boot.web.server.WebServerFactoryCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

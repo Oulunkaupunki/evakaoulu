@@ -57,6 +57,14 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                     )
             }
 
+            Action.DaycareAssistance.READ -> {
+                @Suppress("UNCHECKED_CAST")
+                action.defaultRules.asSequence() +
+                    sequenceOf(
+                        HasGlobalRole(UserRole.SERVICE_WORKER) as ScopedActionRule<in T>,
+                    )
+            }
+
             Action.Person.ADD_SSN,
             Action.Person.UPDATE_FROM_VTJ,
             -> {

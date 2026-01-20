@@ -9,7 +9,6 @@ import fi.espoo.evaka.assistance.DaycareAssistanceLevel
 import fi.espoo.evaka.assistance.OtherAssistanceMeasureType
 import fi.espoo.evaka.assistance.PreschoolAssistanceLevel
 import fi.espoo.evaka.assistanceaction.AssistanceActionOptionCategory
-import fi.espoo.evaka.assistanceneed.decision.AssistanceNeedDecisionStatus
 import fi.espoo.evaka.daycare.CareType
 import fi.espoo.evaka.daycare.domain.ProviderType
 import fi.espoo.evaka.invoicing.domain.FeeDecisionStatus
@@ -74,7 +73,7 @@ data class DwAssistanceNeedDecision(
     val tulkitsemisJaAvustamispalvelut: Boolean,
     val apuvälineet: Boolean,
     val tuenTaso: List<String>,
-    val tila: AssistanceNeedDecisionStatus,
+    val tila: String,
 )
 
 data class DwChildReservations(

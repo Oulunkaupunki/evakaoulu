@@ -63,7 +63,6 @@ class EVakaOuluConfig {
             unplannedAbsencesAreContractSurplusDays = false,
             maxContractDaySurplusThreshold = 13,
             useContractDaysAsDailyFeeDivisor = false,
-            assistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
             preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
             requestedStartUpperLimit = 7,
             preferredStartRelativeApplicationDueDate = true,
@@ -93,20 +92,6 @@ class EVakaOuluConfig {
                         ArchiveProcessConfig(
                             processDefinitionNumber = "12.06.01",
                             archiveDurationMonths = 10 * 12,
-                        )
-                    }
-
-                    ArchiveProcessType.ASSISTANCE_NEED_DECISION_DAYCARE -> {
-                        ArchiveProcessConfig(
-                            processDefinitionNumber = "12.06.01",
-                            archiveDurationMonths = 120 * 12,
-                        )
-                    }
-
-                    ArchiveProcessType.ASSISTANCE_NEED_DECISION_PRESCHOOL -> {
-                        ArchiveProcessConfig(
-                            processDefinitionNumber = "12.06.01",
-                            archiveDurationMonths = 120 * 12,
                         )
                     }
 

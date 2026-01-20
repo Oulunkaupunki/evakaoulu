@@ -3,3 +3,6 @@ dist/
 junit.xml
 screenshots/
 traces/
+
+.idea/
+*.iml

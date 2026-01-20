@@ -43,7 +43,6 @@ internal class EmailMessageProvider(
     val subjectForClubApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForDaycareApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
     val subjectForPreschoolApplicationReceivedEmail: String = "Hakemus vastaanotettu / Application received"
-    val subjectForDecisionEmail: String = "Päätös eVakassa / Decision in eVaka"
 
     private val securityFi =
         """
@@ -97,9 +96,6 @@ internal class EmailMessageProvider(
                 """.trimIndent(),
         )
     }
-
-    override fun assistanceNeedPreschoolDecisionNotification(language: Language): EmailContent =
-        assistanceNeedDecisionNotification(language) // currently same content
 
     override fun messageNotification(
         language: Language,
@@ -155,50 +151,6 @@ internal class EmailMessageProvider(
                 """.trimIndent(),
         )
     }
-
-    fun getDecisionEmailHtml(): String =
-        """
-        <p>Hei!</p>
-        
-        <p>Lapsellenne on tehty päätös.</p>
-        
-        <p>Päätös on nähtävissä eVakassa.</p>
-        
-        <p>Tähän viestiin ei voi vastata.</p>
-        
-        <hr>
-        
-        <p>Hello!</p>
-        
-        <p>A decision has been made for you by the Oulu early childhood education and care services.</p>
-        
-        <p>The decision can be seen online in eVaka.</p>
-        
-        <p>You may not reply to this message.</p>
-        
-        """.trimIndent()
-
-    fun getDecisionEmailText(): String =
-        """
-        Hei!
-        
-        Lapsellenne on tehty päätös.
-        
-        Päätös on nähtävissä eVakassa.
-        
-        Tähän viestiin ei voi vastata.
-        
-        ------------------------------------------------------------------------------
-        
-        Hello!
-        
-        A decision has been made for you by the Oulu early childhood education and care services. 
-        
-        The decision can be seen online in eVaka.
-        
-        You may not reply to this message.
-        
-        """.trimIndent()
 
     override fun missingReservationsNotification(
         language: Language,
@@ -548,9 +500,6 @@ internal class EmailMessageProvider(
         You may not reply to this message. 
         
         """.trimIndent()
-
-    override fun assistanceNeedDecisionNotification(language: Language): EmailContent =
-        EmailContent(subjectForDecisionEmail, getDecisionEmailText(), getDecisionEmailHtml())
 
     override fun pendingDecisionNotification(language: Language): EmailContent =
         EmailContent(

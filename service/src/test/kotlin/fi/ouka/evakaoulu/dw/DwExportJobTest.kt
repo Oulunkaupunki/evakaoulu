@@ -6,7 +6,6 @@ import fi.espoo.evaka.shared.EvakaUserId
 import fi.espoo.evaka.shared.ServiceNeedOptionId
 import fi.espoo.evaka.shared.db.QuerySql
 import fi.espoo.evaka.shared.dev.DevAbsence
-import fi.espoo.evaka.shared.dev.DevAssistanceNeedDecision
 import fi.espoo.evaka.shared.dev.DevDaycare
 import fi.espoo.evaka.shared.dev.DevDaycareGroup
 import fi.espoo.evaka.shared.dev.DevDaycareGroupPlacement
@@ -124,12 +123,6 @@ class DwExportJobTest : AbstractIntegrationTest() {
                     date = LocalDate.of(2019, 7, 15),
                     modifiedBy = EvakaUserId(employeeId.raw),
                     absenceCategory = AbsenceCategory.BILLABLE,
-                ),
-            )
-            tx.insert(
-                DevAssistanceNeedDecision(
-                    childId = childId,
-                    validityPeriod = DateRange(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31)),
                 ),
             )
             tx.insert(

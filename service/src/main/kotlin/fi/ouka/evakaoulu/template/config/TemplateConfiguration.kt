@@ -33,10 +33,6 @@ internal class EVakaOuluTemplateProvider : ITemplateProvider {
 
     override fun getPreparatoryDecisionPath(): String = "oulu/preparatory/decision"
 
-    override fun getAssistanceNeedDecisionPath(): String = "oulu/assistance-need/decision"
-
-    override fun getAssistanceNeedPreschoolDecisionPath(): String = "oulu/assistance-need-preschool/decision"
-
     override fun getLocalizedFilename(
         type: DecisionType,
         lang: OfficialLanguage,

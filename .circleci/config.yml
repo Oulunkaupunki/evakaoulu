@@ -152,6 +152,7 @@ commands:
         type: boolean
         default: false
     steps:
+      - run: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - setup_remote_docker:
           docker_layer_caching: << parameters.docker_layer_caching >>
       #- login_docker_hub

@@ -63,7 +63,6 @@ class EVakaOuluConfig {
             unplannedAbsencesAreContractSurplusDays = false,
             maxContractDaySurplusThreshold = 13,
             useContractDaysAsDailyFeeDivisor = false,
-            preschoolAssistanceDecisionMakerRoles = setOf(UserRole.DIRECTOR, UserRole.SPECIAL_EDUCATION_TEACHER),
             requestedStartUpperLimit = 7,
             preferredStartRelativeApplicationDueDate = true,
             postOffice = "OULU",

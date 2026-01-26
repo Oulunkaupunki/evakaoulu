@@ -57,7 +57,12 @@ class EvakaOuluActionRuleMapping : ActionRuleMapping {
                     )
             }
 
-            Action.DaycareAssistance.READ -> {
+            Action.AssistanceAction.READ,
+            Action.AssistanceFactor.READ,
+            Action.DaycareAssistance.READ,
+            Action.PreschoolAssistance.READ,
+            Action.OtherAssistanceMeasure.READ,
+            -> {
                 @Suppress("UNCHECKED_CAST")
                 action.defaultRules.asSequence() +
                     sequenceOf(

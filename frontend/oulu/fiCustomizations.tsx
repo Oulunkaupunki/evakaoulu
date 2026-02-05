@@ -630,9 +630,7 @@ const fi: DeepPartial<Translations> = {
         PREPARATORY_EDUCATION: 'valmistavasta opetuksesta'
       }
     },
-    summary: (
-      <P width="800px">Tälle sivulle saapuvat kaikki lapsen päätökset.</P>
-    ),
+    summary: 'Tälle sivulle saapuvat kaikki lapsen päätökset.',
     assistanceDecisions: {
       title: 'Päätös tuesta varhaiskasvatuksessa',
       decision: {

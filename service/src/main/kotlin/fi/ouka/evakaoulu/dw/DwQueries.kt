@@ -42,7 +42,7 @@ WITH application_infos AS (
         ap.child_id                                                       AS lapsen_id,
         pe.date_of_birth                                                  AS syntymaaika,
         jsonb_array_elements_text(ap.document->'apply'->'preferredUnits') AS yksikot,
-        ap.document->'preferredStartDate'                                 AS haluttu_aloituspaiva
+        (ap.document->>'preferredStartDate')::date                        AS haluttu_aloituspaiva
     FROM application ap, person pe
     WHERE current_date - INTERVAL '12 months' <= ap.created_at
     AND ap.child_id = pe.id

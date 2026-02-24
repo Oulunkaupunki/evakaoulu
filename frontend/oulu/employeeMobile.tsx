@@ -46,7 +46,8 @@ const customizations: EmployeeMobileCustomizations = {
         confirmDelete: 'Haluatko poistaa tämän poissaolon?',
         futureAbsence: 'Tulevat poissaolot'
       }
-    }
+    },
+    sv: {}
   },
   featureFlags,
   additionalStaffAttendanceTypes

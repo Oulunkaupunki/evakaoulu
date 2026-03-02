@@ -233,7 +233,7 @@ const fi: DeepPartial<Translations> = {
                 />
                 .
               </P>
-              <P fitted={true}>
+              <P $fitted={true}>
                 *Fields marked with an asterisk are mandatory.
               </P>
             </>
@@ -267,7 +267,7 @@ const fi: DeepPartial<Translations> = {
                 />
                 .
               </P>
-              <P fitted={true}>
+              <P $fitted={true}>
                 *Fields marked with an asterisk are mandatory.
               </P>
             </>
@@ -300,7 +300,7 @@ const fi: DeepPartial<Translations> = {
                   newTab
                 />
               </P>
-              <P fitted={true}>
+              <P $fitted={true}>
                 *Fields marked with an asterisk are mandatory.
               </P>
             </>
@@ -358,7 +358,7 @@ const fi: DeepPartial<Translations> = {
         urgent: {
           attachmentsMessage: {
             text: (
-              <P fitted={true}>
+              <P $fitted={true}>
                 If your child requires early childhood education and care due to
                 a recent change in your student or employment status, you must
                 send the application no later than two weeks before your child
@@ -580,7 +580,7 @@ const fi: DeepPartial<Translations> = {
     },
     summary: (
       <>
-        <P width="800px">
+        <P $width="800px">
           The child&apos;s guardian can make an application for the child to be
           granted a place in early childhood education and care and in clubs and
           groups organized as a part of open early childhood education, or
@@ -590,7 +590,7 @@ const fi: DeepPartial<Translations> = {
           and care unit. The guardian’s and the children’s address information
           is retrieved from the population information system automatically.
         </P>
-        <P width="800px">
+        <P $width="800px">
           If the child has already been granted a place in an early childhood
           education and care unit in Oulu, and the family wishes to apply for a
           transfer to another unit, they must submit a new application.
@@ -864,7 +864,7 @@ const fi: DeepPartial<Translations> = {
         <P>
           <strong>Please note:</strong>
         </P>
-        <Gap size="xs" />
+        <Gap $size="xs" />
         <UnorderedList data-qa="income-formDescription-ul">
           <li>
             If your income exceeds the income limit determined for your family

@@ -242,7 +242,7 @@ const fi: DeepPartial<Translations> = {
                 />
                 .
               </P>
-              <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
+              <P $fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
           ),
           PRESCHOOL: (
@@ -271,7 +271,7 @@ const fi: DeepPartial<Translations> = {
                   newTab
                 />
               </P>
-              <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
+              <P $fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
           ),
           CLUB: (
@@ -301,7 +301,7 @@ const fi: DeepPartial<Translations> = {
                   newTab
                 />
               </P>
-              <P fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
+              <P $fitted={true}>* Tähdellä merkityt tiedot ovat pakollisia</P>
             </>
           )
         }
@@ -354,7 +354,7 @@ const fi: DeepPartial<Translations> = {
         urgent: {
           attachmentsMessage: {
             text: (
-              <P fitted={true}>
+              <P $fitted={true}>
                 Jos varhaiskasvatuspaikan tarve johtuu äkillisestä
                 työllistymisestä tai opiskelusta, tulee paikkaa hakea
                 viimeistään kaksi viikkoa ennen kuin tarve alkaa. Hakemuksen
@@ -552,7 +552,7 @@ const fi: DeepPartial<Translations> = {
     title: 'Hakeminen varhaiskasvatukseen ja ilmoittautuminen esiopetukseen',
     summary: (
       <>
-        <P width="800px">
+        <P $width="800px">
           Lapsen huoltaja voi tehdä lapselle hakemuksen varhaiskasvatukseen ja
           avoimen varhaiskasvatuksen kerhoihin tai ilmoittaa lapsen
           esiopetukseen. Samalla hakemuksella voi hakea myös varhaiskasvatuksen
@@ -560,7 +560,7 @@ const fi: DeepPartial<Translations> = {
           päiväkodista. Huoltajan ja lasten tiedot haetaan tähän näkymään
           automaattisesti Väestötietojärjestelmästä.
         </P>
-        <P width="800px">
+        <P $width="800px">
           Jos lapsella on jo paikka Oulun varhaiskasvatuksessa ja halutaan hakea
           siirtoa toiseen yksikköön, tehdään lapselle uusi hakemus.
         </P>
@@ -678,7 +678,7 @@ const fi: DeepPartial<Translations> = {
               ensimmäisenä arkipäivänä sen jälkeen.
             </P>
             <H3>Oikaisuvaatimus</H3>
-            <P noMargin>Oikaisuvaatimuksessa on ilmoitettava</P>
+            <P $noMargin={true}>Oikaisuvaatimuksessa on ilmoitettava</P>
             <ul>
               <li>
                 Oikaisuvaatimuksen tekijän nimi, kotikunta, postiosoite ja
@@ -691,7 +691,7 @@ const fi: DeepPartial<Translations> = {
               </li>
               <li>vaatimuksen perusteet</li>
             </ul>
-            <P noMargin>Oikaisuvaatimukseen on liitettävä</P>
+            <P $noMargin={true}>Oikaisuvaatimukseen on liitettävä</P>
             <ul>
               <li>
                 päätös, johon haetaan oikaisua, alkuperäisenä tai jäljennöksenä
@@ -768,7 +768,7 @@ const fi: DeepPartial<Translations> = {
             arkipäivänä sen jälkeen.
           </P>
           <H3>Oikaisuvaatimus</H3>
-          <P noMargin>Oikaisuvaatimuksessa on ilmoitettava</P>
+          <P $noMargin={true}>Oikaisuvaatimuksessa on ilmoitettava</P>
           <ul>
             <li>
               Oikaisuvaatimuksen tekijän nimi, kotikunta, postiosoite ja
@@ -781,7 +781,7 @@ const fi: DeepPartial<Translations> = {
             </li>
             <li>vaatimuksen perusteet</li>
           </ul>
-          <P noMargin>Oikaisuvaatimukseen on liitettävä</P>
+          <P $noMargin={true}>Oikaisuvaatimukseen on liitettävä</P>
           <ul>
             <li>
               päätös, johon haetaan oikaisua, alkuperäisenä tai jäljennöksenä
@@ -1019,7 +1019,7 @@ const fi: DeepPartial<Translations> = {
         <P>
           <strong>Huomioitavaa:</strong>
         </P>
-        <Gap size="xs" />
+        <Gap $size="xs" />
         <UnorderedList data-qa="income-formDescription-ul">
           <li>
             Jos tulosi ylittävät perhekoon mukaisen tulorajan, hyväksy korkein

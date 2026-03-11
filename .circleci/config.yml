@@ -169,7 +169,6 @@ commands:
             git config user.email "97439387+evakaoulu-ci@users.noreply.github.com"
             git config user.name "evakaoulu-ci"
 
-
   setup_git_submodule:
     steps:
       - add_ssh_keys:
@@ -227,7 +226,7 @@ commands:
   slack-notification:
     steps:
       - slack/notify:
-          channel: evaka-oulu-maintenance-ext
+          channel: evaka-infra-ci-oulu
           event: fail
           template: basic_fail_1
 
@@ -362,7 +361,6 @@ jobs:
               --data '{"branch":"main","parameters":{"workflow":"deploy_pipeline","version":"'$CIRCLE_SHA1'"}}'
       - slack-notification
 
-
   e2e_test:
     executor: e2e_executor
     resource_class: large
@@ -425,9 +423,11 @@ workflows:
   build_test_and_deploy:
     when:
       not:
-        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        equal: [scheduled_pipeline, << pipeline.trigger_source >>]
     jobs:
-      - checkout_repo
+      - checkout_repo:
+          context:
+            - slack-secrets
       - check_licenses:
           context:
             - slack-secrets
@@ -477,7 +477,6 @@ workflows:
             - slack-secrets
           requires:
             - checkout_repo
-
 
       - trigger_deploy:
           context:

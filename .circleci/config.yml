@@ -393,9 +393,8 @@ jobs:
           working_directory: *workspace_e2e
           command: yarn e2e-ci-playwright
           environment:
-            HEADLESS: true
+            CI: 'true'
             BASE_URL: http://localhost:9999
-            JEST_JUNIT_OUTPUT_DIR: test-results
       - run:
           name: Collect docker-compose logs
           working_directory: *workspace_compose
@@ -405,11 +404,8 @@ jobs:
           path: /tmp/docker-compose-logs.txt
           destination: docker-compose-logs.txt
       - store_artifacts:
-          path: e2e/screenshots
-          destination: screenshots
-      - store_artifacts:
-          path: e2e/videos
-          destination: videos
+          path: e2e/test-results/artifacts
+          destination: test-artifacts
       - store_test_results:
           path: e2e/test-results
       - run:

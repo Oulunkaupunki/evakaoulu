@@ -59,7 +59,7 @@ class DecisionServiceTest {
     @BeforeEach
     fun setup() {
         templateProvider = TemplateConfiguration().templateProvider()
-        pdfService = PdfGenerator(templateProvider, PDFConfig.templateEngine())
+        pdfService = PdfGenerator(templateProvider, PDFConfig().defaultTemplateEngine())
     }
 
     @ParameterizedTest

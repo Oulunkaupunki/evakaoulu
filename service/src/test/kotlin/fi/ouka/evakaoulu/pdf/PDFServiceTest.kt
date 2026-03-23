@@ -69,7 +69,7 @@ internal class PDFServiceTest {
         pdfService =
             PdfGenerator(
                 TemplateConfiguration().templateProvider(),
-                PDFConfig.templateEngine(),
+                PDFConfig().defaultTemplateEngine(),
             )
     }
 

@@ -12,6 +12,10 @@ version: '3.5'
 services:
   evaka-proxy:
     image: ${EVAKA_FRONTEND_IMAGE}
+    read_only: true
+    tmpfs: # In ECS these are disk-backed via Dockerfile VOLUME (ext4 on ephemeral NVMe)
+      - /nginx:uid=101,gid=101,size=64m
+      - /internal:uid=101,gid=101,size=64m
     ports:
       - "9999:8080"
     environment:
@@ -31,6 +35,9 @@ services:
 
   enduser-gw:
     image: ${EVAKA_GW_IMAGE}
+    read_only: true
+    tmpfs: # In ECS these are disk-backed via Dockerfile VOLUME (ext4 on ephemeral NVMe)
+      - /config:uid=1001,gid=1001,size=64m
     ports:
       - "3010"
     hostname: enduser-gw
@@ -58,6 +65,9 @@ services:
 
   internal-gw:
     image: ${EVAKA_GW_IMAGE}
+    read_only: true
+    tmpfs: # In ECS these are disk-backed via Dockerfile VOLUME (ext4 on ephemeral NVMe)
+      - /config:uid=1001,gid=1001,size=64m
     ports:
       - "3020"
     hostname: internal-gw

@@ -70,6 +70,10 @@ services:
 
   evakaoulu-srv:
     image: ${EVAKA_SRV_IMAGE}
+    read_only: true
+    tmpfs: # In ECS these are disk-backed via Dockerfile VOLUME (ext4 on ephemeral NVMe)
+      - /config:uid=1000,gid=1000,size=64m
+      - /tmp:exec,mode=1777,size=128m
     ports:
       - "8888:8888"
     hostname: evakaoulu-srv

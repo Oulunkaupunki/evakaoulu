@@ -34,7 +34,13 @@ ENV HOME_DIR /home/${USERNAME}
 ENV USER_ID 1000
 
 # Create a new user named evaka which should be used to run any software.
-RUN adduser ${USERNAME} --gecos "" -q --home ${HOME_DIR} --uid ${USER_ID} --disabled-password
+RUN adduser ${USERNAME} --gecos "" -q --home ${HOME_DIR} --uid ${USER_ID} --disabled-password \
+ && mkdir -p /config \
+ && chown ${USERNAME}:${USERNAME} /config \
+ && ln -s /config ${HOME_DIR}/s3 # old config path for backwards compatibility
+
+VOLUME /config
+VOLUME /tmp
 
 # Used for downloading keys from S3
 ADD --chown=evaka:evaka --chmod=0700 \

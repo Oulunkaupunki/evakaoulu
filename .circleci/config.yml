@@ -11,10 +11,9 @@ orbs:
 
 aliases:
   - &workspace_root /home/circleci/repo
-  - &workspace_apigw /home/circleci/repo/evaka/apigw
+  - &workspace_evaka /home/circleci/repo/evaka
+  - &workspace_evaka_apigw /home/circleci/repo/evaka/apigw
   - &workspace_evaka_frontend /home/circleci/repo/evaka/frontend
-  - &workspace_frontend /home/circleci/repo/frontend
-  - &workspace_service /home/circleci/repo/service
   - &workspace_compose /home/circleci/repo/compose
   - &workspace_e2e /home/circleci/repo/e2e
 
@@ -22,9 +21,7 @@ aliases:
   - &aws_image cimg/aws:2024.03
   - &reuse_image fsfe/reuse:5.0.2 # NOTE: Update bin/add-license-headers.sh to match
   - &openjdk_image cimg/openjdk:25.0
-  - &postgres_image cimg/postgres:16.3
-  - &s3mock_image adobe/s3mock:4.1.1
-  - &ubuntu_machine ubuntu-2404:current
+  - &ubuntu_machine_image ubuntu-2404:current
 
   - &default_config
     working_directory: *workspace_root
@@ -52,18 +49,12 @@ executors:
     <<: *jvm_config
     docker:
       - image: *openjdk_image
-      - image: *postgres_image
-        environment:
-          POSTGRES_USER: evaka_it
-          POSTGRES_PASSWORD: evaka_it
-          POSTGRES_DB: evaka_it
-      - image: *s3mock_image
   e2e_executor:
     <<: *default_config
     machine:
-      image: *ubuntu_machine
+      image: *ubuntu_machine_image
     environment:
-      BUILD_PROGRESS: plain
+      BUILDKIT_PROGRESS: plain
 
 commands:
   store_repo:
@@ -83,7 +74,7 @@ commands:
     steps:
       - save_cache:
           name: Store gradle wrapper
-          key: gradle-wrapper-service-v1-{{ checksum "service/gradle/wrapper/gradle-wrapper.properties" }}
+          key: gradle-wrapper-service-v1-{{ checksum "evaka/service/gradle/wrapper/gradle-wrapper.properties" }}
           paths:
             - ~/.gradle/wrapper
             - ~/.gradle/notifications
@@ -92,13 +83,13 @@ commands:
       - restore_cache:
           name: Restore gradle wrapper
           keys:
-            - gradle-wrapper-service-v1-{{ checksum "service/gradle/wrapper/gradle-wrapper.properties" }}
+            - gradle-wrapper-service-v1-{{ checksum "evaka/service/gradle/wrapper/gradle-wrapper.properties" }}
 
   store_service_gradle_dependencies:
     steps:
       - save_cache:
           name: Store gradle dependencies
-          key: gradle-dependencies-service-v1-{{ checksum "service/build.gradle.kts" }}-{{ checksum "evaka/service/gradle/libs.versions.toml" }}-{{ checksum "evaka/service/evaka-bom/build.gradle.kts" }}
+          key: gradle-dependencies-service-v1-{{ checksum "evaka/service/build.gradle.kts" }}-{{ checksum "evaka/service/gradle/libs.versions.toml" }}-{{ checksum "evaka/service/evaka-bom/build.gradle.kts" }}
           paths:
             - ~/.gradle/caches/jars-9
             - ~/.gradle/caches/journal-1
@@ -109,9 +100,9 @@ commands:
       - restore_cache:
           name: Restore gradle dependencies
           keys:
-            - gradle-dependencies-service-v1-{{ checksum "service/build.gradle.kts" }}-{{ checksum "evaka/service/gradle/libs.versions.toml" }}-{{ checksum "evaka/service/evaka-bom/build.gradle.kts" }}
-            - gradle-dependencies-service-v1-{{ checksum "service/build.gradle.kts" }}-{{ checksum "evaka/service/gradle/libs.versions.toml" }}-
-            - gradle-dependencies-service-v1-{{ checksum "service/build.gradle.kts" }}-
+            - gradle-dependencies-service-v1-{{ checksum "evaka/service/build.gradle.kts" }}-{{ checksum "evaka/service/gradle/libs.versions.toml" }}-{{ checksum "evaka/service/evaka-bom/build.gradle.kts" }}
+            - gradle-dependencies-service-v1-{{ checksum "evaka/service/build.gradle.kts" }}-{{ checksum "evaka/service/gradle/libs.versions.toml" }}-
+            - gradle-dependencies-service-v1-{{ checksum "evaka/service/build.gradle.kts" }}-
             - gradle-dependencies-service-v1-
 
   store_service_gradle_build_cache:
@@ -271,7 +262,7 @@ jobs:
           docker_layer_caching: true
       - build_docker_image:
           image: evakaoulu/api-gateway
-          dir: *workspace_apigw
+          dir: *workspace_evaka_apigw
       - slack-notification
 
   frontend_build_image:
@@ -289,7 +280,7 @@ jobs:
       - build_docker_image:
           image: evakaoulu/frontend
           dir: *workspace_evaka_frontend
-          extra_build_args: --build-arg EVAKA_CUSTOMIZATIONS=oulu --build-arg ICONS=free --build-context customizations=../../frontend/oulu
+          extra_build_args: --build-arg EVAKA_CUSTOMIZATIONS=oulu --build-arg ICONS=free --build-context customizations=src/lib-customizations/oulu
       - slack-notification
 
   service_build_image:
@@ -297,30 +288,13 @@ jobs:
     resource_class: medium+
     steps:
       - restore_repo
-      - restore_service_gradle_wrapper
-      - restore_service_gradle_dependencies
-      - restore_service_gradle_build_cache
-      - run:
-          name: gradle build
-          working_directory: *workspace_service
-          command: |
-            ./gradlew resolveDependencies service:copyDownloadOnlyDeps
-            ./gradlew --build-cache build
-            java -Djarmode=layertools -jar build/libs/evakaoulu-service.jar extract --destination target
-            cp -r ../evaka/service/build/download-only target
-      - store_service_gradle_build_cache
-      - store_service_gradle_dependencies
-      - store_service_gradle_wrapper
-      - store_test_results:
-          path: /home/circleci/repo/service/build/test-results/
-      - store_artifacts:
-          path: /home/circleci/repo/service/build/reports/
+      - aws-cli/install
       - setup_authenticated_remote_docker:
           docker_layer_caching: true
-      - aws-cli/install
       - build_docker_image:
           image: evakaoulu/service
-          dir: *workspace_service
+          dir: *workspace_evaka
+          extra_build_args: -f service/Dockerfile
       - slack-notification
 
   scheduled_tasks_logs_build_image:
@@ -408,10 +382,6 @@ jobs:
           destination: test-artifacts
       - store_test_results:
           path: e2e/test-results
-      - run:
-          name: Lint customizations
-          working_directory: *workspace_frontend
-          command: ./link.sh && ./lint.sh
       - slack-notification
 
 workflows:

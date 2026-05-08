@@ -443,17 +443,3 @@ workflows:
             - slack-secrets
           requires:
             - checkout_repo
-
-      - trigger_deploy:
-          context:
-            - evakaoulu-infra
-            - slack-secrets
-          requires:
-            - check_licenses
-            - scheduled_tasks_logs_build_image
-            - scheduled_tasks_certificate_check_build_image
-            - e2e_test
-          filters:
-            branches:
-              only:
-                - main
